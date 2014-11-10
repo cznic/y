@@ -13,6 +13,7 @@
 //  [1]: http://people.via.ecp.fr/~stilgar/doc/compilo/parser/Generating%20LR%20Syntax%20Error%20Messages.pdf
 //  [2]: http://dinosaur.compilertools.net/yacc/
 //  [3]: http://dinosaur.compilertools.net/lex/index.html
+//  [4]: https://www.gnu.org/software/bison/manual/html_node/Using-Mid_002dRule-Actions.html
 package y
 
 import (
@@ -192,18 +193,52 @@ func ProcessSource(fset *token.FileSet, fname string, src []byte, opts *Options)
 }
 
 // Rule describes a single yacc rule, for example (in source form)
+//
 //	Start:
 //		Prologue Body Epilogue
 //		{
 //			$$ = &ast{$1, $2, $3}
 //		}
+//
+// Inner rule actions
+//
+// A rule can presribe semantic actions not only at the end. For example
+//
+//	Foo:
+//		Bar
+//		{
+//			initBar($1)
+//		}
+//		Qux
+//		{
+//			handleQux($3)
+//		}
+//
+// Such constructs are rewritten as
+//
+//	$@1:
+//		{
+//			initBar($1)
+//		}
+//
+//	Foo:
+//		Bar $@1 Qux
+//		{
+//			handleQux($3)
+//		}
+//
+// The $@1 and similar is a synthetic rule and such have non nil Parent.
+// MaxParentDlr is used to check that the semantic action does not access
+// parent values not yet shifted to the parse stack as well as to compute the
+// position of the $n thing on the parse stack. See also [4].
 type Rule struct {
 	Action        []*yparser.Act // Parts of the semantic action associated with the rule, if any.
 	Components    []string       // Textual forms of the rule components, for example []string{"IDENT", "';'"}
+	MaxParentDlr  int            // See the Rule type docs for details.
+	Parent        *Rule          // Non nil if a synthetic rule.
 	Sym           *Symbol        // LHS of the rule.
 	associativity int
 	maxDlr        int
-	maxParentDlr  int
 	pos           token.Pos
 	precSym       *Symbol
 	precedence    int

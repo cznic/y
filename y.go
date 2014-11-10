@@ -1383,8 +1383,8 @@ func (y *y) rules0() error {
 		}
 		ruleSym.Type = y.symTypes[ruleSym.Name].typeName
 		r := &Rule{
+			MaxParentDlr: -1,
 			Sym:          ruleSym,
-			maxParentDlr: -1,
 			pos:          prule.Pos,
 			precedence:   -1,
 		}
@@ -1466,9 +1466,10 @@ func (y *y) rules0() error {
 				y.Syms[s.Name] = s
 				y.addRule(&Rule{
 					Action:       x,
+					MaxParentDlr: i - 1,
+					Parent:       r,
 					Sym:          s,
 					maxDlr:       -1,
-					maxParentDlr: i - 1,
 					precedence:   -1,
 				})
 				components = append(components, s.Name)
