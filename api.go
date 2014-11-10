@@ -202,7 +202,7 @@ func ProcessSource(fset *token.FileSet, fname string, src []byte, opts *Options)
 //
 // Inner rule actions
 //
-// A rule can presribe semantic actions not only at the end. For example
+// A rule can prescribe semantic actions not only at the end. For example
 //
 //	Foo:
 //		Bar
