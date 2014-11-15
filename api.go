@@ -121,6 +121,8 @@ type Options struct {
 	XErrorsName    string    // Name used to report errors in XErrorsSrc, defaults to <xerrors>.
 	XErrorsSrc     []byte    // Used to produce errors by example[1].
 
+	debugSyms bool
+
 	// In conflict with xerrors processing.
 	noDefault bool // Disable collapsing largest reduce lookahead set to $default.
 }

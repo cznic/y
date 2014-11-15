@@ -59,11 +59,12 @@ func use(...interface{}) {}
 // ============================================================================
 
 var (
-	oClosures = flag.Bool("cls", false, "Report non kernel items.")
-	oDev      = flag.String("dev", "", "Process _testdata/dev/regex file(s).")
-	oLA       = flag.Bool("la", false, "Report all lookahead sets.")
 	//oNoDefault = flag.Bool("nodefault", false, "Disable $default")
-	oNoErr = flag.Bool("noerr", false, "Disable errors for 'make cpu'.")
+	oClosures  = flag.Bool("cls", false, "Report non kernel items.")
+	oDebugSyms = flag.Bool("ds", false, "Debug symbols.")
+	oDev       = flag.String("dev", "", "Process _testdata/dev/regex file(s).")
+	oLA        = flag.Bool("la", false, "Report all lookahead sets.")
+	oNoErr     = flag.Bool("noerr", false, "Disable errors for 'make cpu'.")
 )
 
 func (s itemSet) dump(y *y) string {
@@ -185,11 +186,12 @@ func TestDev(t *testing.T) {
 			return re.MatchString(pth)
 		},
 		&Options{
-			Closures: *oClosures,
-			LA:       *oLA,
 			//noDefault: *oNoDefault,
-			Report:   os.Stderr,
-			Resolved: true,
+			Closures:  *oClosures,
+			LA:        *oLA,
+			Report:    os.Stderr,
+			Resolved:  true,
+			debugSyms: *oDebugSyms,
 		},
 	)
 }

@@ -1182,6 +1182,22 @@ func (y *y) reductions() {
 
 func (y *y) report(w io.Writer) {
 	f := strutil.IndentFormatter(w, "  ")
+	if y.opts.debugSyms {
+		var a []string
+		max := 0
+		for _, v := range y.syms {
+			max = mathutil.Max(max, len(v.Name))
+		}
+		for _, v := range y.syms {
+			a = append(a, fmt.Sprintf("%[2]*[1]s val %6[3]d, id %3[5]d, type %[4]q",
+				v.Name, -max-1, v.Value, v.Type, v.id),
+			)
+		}
+		sort.Strings(a)
+		for _, v := range a {
+			f.Format("%s\n", v)
+		}
+	}
 	for si, state := range y.states {
 		f.Format("state %d //", si)
 
@@ -1430,6 +1446,12 @@ func (y *y) rules0() error {
 			case string:
 				y.useSym(x, prule.Pos)
 				components = append(components, x)
+				sym := y.Syms[x]
+				if sym == nil || sym.Type != "" {
+					break
+				}
+
+				sym.Type = y.symTypes[x].typeName
 			case []*yparser.Act:
 				for _, v := range x {
 					n := v.Num
