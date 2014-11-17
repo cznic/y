@@ -62,7 +62,7 @@ var (
 	//oNoDefault = flag.Bool("nodefault", false, "Disable $default")
 	oClosures  = flag.Bool("cls", false, "Report non kernel items.")
 	oDebugSyms = flag.Bool("ds", false, "Debug symbols.")
-	oDev       = flag.String("dev", "", "Process _testdata/dev/regex file(s).")
+	oDev       = flag.String("dev", "", "Process testdata/dev/regex file(s).")
 	oLA        = flag.Bool("la", false, "Report all lookahead sets.")
 	oNoErr     = flag.Bool("noerr", false, "Disable errors for 'make cpu'.")
 )

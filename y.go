@@ -1541,7 +1541,7 @@ func (y *y) rules0() error {
 		}
 
 		for i := len(components) - 1; i >= 0; i-- {
-			if sym := y.Syms[components[i]]; sym.IsTerminal {
+			if sym := y.Syms[components[i]]; sym != nil && sym.IsTerminal {
 				rule.associativity, rule.precedence = sym.associativity, sym.precedence
 				rule.precSym = sym
 				break
