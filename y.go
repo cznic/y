@@ -449,7 +449,13 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 	}
 
 	m := map[int]*Symbol{}
-	for nm, sym := range y.Syms {
+	a := make([]string, 0, len(y.Syms))
+	for nm := range y.Syms {
+		a = append(a, nm)
+	}
+	sort.Strings(a)
+	for _, nm := range a {
+		sym := y.Syms[nm]
 		if nm == "" || nm == "#" || nm[0] == '$' && nm[1] != '@' && sym != y.noSym { // internal symbols
 			continue
 		}
