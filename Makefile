@@ -9,7 +9,6 @@ grep=--include=*.go
 all: editor
 	go tool vet -printfuncs "Log:0,Logf:1" *.go
 	golint .
-	go install
 	make todo
 
 bison:
@@ -30,6 +29,7 @@ editor:
 	go fmt
 	go test -i
 	go test
+	go install
 
 internalError:
 	egrep -ho '"internal error.*"' *.go | sort | cat -n

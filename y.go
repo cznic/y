@@ -1338,7 +1338,7 @@ func (y *y) resolve(s *state, si int, sym *Symbol, conflict [2]action) (resolved
 
 		var explain string
 		defer func() {
-			if y.opts.Resolved {
+			if y.opts.Resolved && resolved {
 				s.resolved = append(s.resolved, explain)
 			}
 		}()
@@ -1374,8 +1374,6 @@ func (y *y) resolve(s *state, si int, sym *Symbol, conflict [2]action) (resolved
 			return true, true
 		case sym.associativity == assocNone:
 			y.err(sym.pos, "%nonassoc symbol %s conflict in state %d", sym, si)
-		default:
-			panic("internal error 010")
 		}
 	case 'r':
 		// nop
