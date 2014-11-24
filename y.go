@@ -1389,6 +1389,7 @@ func (y *y) rules0() error {
 		precedence: -1,
 		Sym:        y.acceptSym,
 	})
+	post := map[string]token.Pos{}
 
 	for _, prule := range y.ast.Rules {
 		if prule.Name == "error" {
@@ -1464,12 +1465,16 @@ func (y *y) rules0() error {
 						y.err(v.Pos, "$$ of %s has no declared type", ruleSym)
 					}
 					if v.Tok == yscanner.DLR_NUM || v.Tok == yscanner.DLR_TAG_NUM {
-						if n < 1 || n >= len(pcomponents) {
+						switch {
+						case n < 1 || n >= len(pcomponents):
 							y.err(v.Pos, "undefined: $%d", n)
-						}
-
-						if n >= i {
+						case n >= i:
 							y.err(v.Pos, "not accessible here: $%d", n)
+						case v.Tok == yscanner.DLR_NUM:
+							csym := components[n-1]
+							if _, ok := post[csym]; !ok {
+								post[csym] = v.Pos
+							}
 						}
 					}
 					if v.Tok == yscanner.DLR_TAG_DLR || v.Tok == yscanner.DLR_TAG_NUM {
@@ -1556,6 +1561,13 @@ func (y *y) rules0() error {
 	for nm, pos := range y.typesUsed {
 		if _, ok := y.types[nm]; !ok {
 			y.err(pos, "undefined type %s", nm)
+		}
+	}
+
+	for nm, pos := range post {
+		sym := y.Syms[nm]
+		if sym == nil || sym.Type == "" {
+			y.err(pos, "%s has no declared type", nm)
 		}
 	}
 
