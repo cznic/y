@@ -387,7 +387,6 @@ type y struct {
 	opts           *Options
 	precedence     int
 	ssPool         []symSet
-	start          string
 	states         []*state
 	symSetCap      int
 	symTypes       map[string]typeDecl
@@ -745,7 +744,7 @@ func (y *y) defs() error {
 			y.ErrorVerbose = true
 		case yparser.Start:
 			nm := def.Tag
-			y.start = nm
+			y.Start = nm
 			y.nonTerminals[nm] = def.Pos
 			y.useSym(nm, def.Pos)
 		case yparser.Left, yparser.Right, yparser.Nonassoc:
@@ -1532,11 +1531,11 @@ func (y *y) rules0() error {
 		}
 	}
 
-	if y.start == "" {
-		y.start = y.Rules[y.firstRule].Sym.Name
+	if y.Start == "" {
+		y.Start = y.Rules[y.firstRule].Sym.Name
 	}
-	y.useSym(y.start, y.ast.Rules[0].Pos)
-	y.Rules[0].Components[0] = y.start
+	y.useSym(y.Start, y.ast.Rules[0].Pos)
+	y.Rules[0].Components[0] = y.Start
 
 	for _, rule := range y.Rules {
 		if rule.precedence >= 0 {

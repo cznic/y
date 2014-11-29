@@ -145,6 +145,7 @@ type Parser struct {
 	ErrorVerbose bool               // %error-verbose is present.
 	Prologue     string             // Collected prologue between the %{ and %} marks.
 	Rules        []*Rule            // Rules indexed by rule number.
+	Start        string             // Name of the start production.
 	Syms         map[string]*Symbol // Symbols indexed by name, eg. "IDENT", "Expression" or "';'".
 	Table        [][]Action         // Indexed by state number.
 	Tail         string             // Everyting after the second %%, if present.
