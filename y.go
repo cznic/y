@@ -24,13 +24,6 @@ import (
 )
 
 const (
-	assocNotSpecified = iota
-	assocLeft
-	assocRight
-	assocNone
-)
-
-const (
 	intBits  = mathutil.IntBits
 	bitShift = intBits>>6 + 5
 	bitMask  = intBits - 1
@@ -38,9 +31,9 @@ const (
 
 var (
 	assocStr = map[int]string{
-		assocLeft:  "%left",
-		assocRight: "%right",
-		assocNone:  "%nonassoc",
+		AssocLeft:  "%left",
+		AssocRight: "%right",
+		AssocNone:  "%nonassoc",
 	}
 	empty     = "ε"
 	isTesting bool
@@ -407,7 +400,7 @@ func newY(fset *token.FileSet, ast *yparser.AST, opts *Options) *y {
 		clsCache:     map[item]map[item]symSet{},
 		dummySym:     &Symbol{Name: "#", IsTerminal: true},
 		emptySym:     &Symbol{Name: empty, IsTerminal: true},
-		endSym:       &Symbol{Name: "$end", IsTerminal: true, precedence: -1, Value: -1},
+		endSym:       &Symbol{Name: "$end", IsTerminal: true, Precedence: -1, Value: -1},
 		errSym:       &Symbol{Name: "error", IsTerminal: true},
 		fset:         fset,
 		itemSets:     map[string]int{},
@@ -737,6 +730,7 @@ func (y *y) defs() error {
 	}()
 
 	for _, def := range y.ast.Defs {
+		isAssoc := false
 		switch def.Rword {
 		case yparser.Copy:
 			buf.WriteString(def.Tag)
@@ -749,19 +743,22 @@ func (y *y) defs() error {
 			y.useSym(nm, def.Pos)
 		case yparser.Left, yparser.Right, yparser.Nonassoc:
 			y.precedence++
+			isAssoc = true
 			fallthrough
 		case yparser.Token:
 			typ := def.Tag
 			y.useType(def.Pos, typ)
-			assoc := assocNotSpecified
+			assoc := AssocNotSpecified
 			switch def.Rword {
 			case yparser.Left:
-				assoc = assocLeft
+				assoc = AssocLeft
 			case yparser.Right:
-				assoc = assocRight
+				assoc = AssocRight
 			case yparser.Nonassoc:
-				assoc = assocNone
+				assoc = AssocNone
 			}
+			var assocDef AssocDef
+			assocDef.Associativity = assoc
 			for _, nmno := range def.Nlist {
 				var name string
 				num := nmno.Number
@@ -779,18 +776,21 @@ func (y *y) defs() error {
 				}
 
 				t := &Symbol{
-					associativity: assoc,
+					Associativity: assoc,
 					IsTerminal:    true,
 					Name:          name,
 					pos:           nmno.Pos,
-					precedence:    -1,
+					Precedence:    -1,
 					Type:          typ,
 					Value:         num,
+				}
+				if isAssoc {
+					assocDef.Syms = append(assocDef.Syms, t)
 				}
 
 				switch def.Rword {
 				case yparser.Left, yparser.Right, yparser.Nonassoc:
-					t.precedence = y.precedence
+					t.Precedence = y.precedence
 				}
 
 				ex, ok := y.Syms[name]
@@ -803,10 +803,10 @@ func (y *y) defs() error {
 				}
 
 				// Merge the declarations, if possible.
-				if n := t.associativity; n != assocNotSpecified {
-					switch o := ex.associativity; {
-					case o == assocNotSpecified:
-						ex.associativity = n
+				if n := t.Associativity; n != AssocNotSpecified {
+					switch o := ex.Associativity; {
+					case o == AssocNotSpecified:
+						ex.Associativity = n
 					case n != o:
 						y.err(
 							t.pos,
@@ -816,10 +816,10 @@ func (y *y) defs() error {
 					}
 				}
 
-				if n := t.precedence; n >= 0 {
-					switch o := ex.precedence; {
+				if n := t.Precedence; n >= 0 {
+					switch o := ex.Precedence; {
 					case o < 0:
-						ex.precedence = n
+						ex.Precedence = n
 					case n != o:
 						y.err(
 							t.pos,
@@ -854,6 +854,9 @@ func (y *y) defs() error {
 						)
 					}
 				}
+			}
+			if isAssoc {
+				y.AssocDefs = append(y.AssocDefs, &assocDef)
 			}
 		case yparser.Type:
 			typ := def.Tag
@@ -1233,8 +1236,8 @@ func (y *y) report(w io.Writer) {
 						}
 					}
 				}
-				if as := assocStr[rule.associativity]; as != "" || rule.precedence >= 0 {
-					f.Format("  // assoc %s, prec %d", as, rule.precedence)
+				if as := assocStr[rule.Associativity]; as != "" || rule.Precedence >= 0 {
+					f.Format("  // assoc %s, prec %d", as, rule.Precedence)
 				}
 				f.Format("\n")
 			}
@@ -1245,16 +1248,16 @@ func (y *y) report(w io.Writer) {
 				if item.dot() == len(rule.Components) {
 					f.Format("  [%s]", state.lookahead[i].dump(y))
 				}
-				if as := assocStr[rule.associativity]; as != "" || rule.precedence >= 0 {
-					f.Format("  // assoc %s, prec %d", as, rule.precedence)
+				if as := assocStr[rule.Associativity]; as != "" || rule.Precedence >= 0 {
+					f.Format("  // assoc %s, prec %d", as, rule.Precedence)
 				}
 				f.Format("\n")
 			}
 			for i, item := range state.xitems {
 				rule := y.Rules[item.rule()]
 				f.Format("%v  [%s]", item.dump(y), state.xla[i].dump(y))
-				if as := assocStr[rule.associativity]; as != "" || rule.precedence >= 0 {
-					f.Format(" // assoc %s, prec %d", as, rule.precedence)
+				if as := assocStr[rule.Associativity]; as != "" || rule.Precedence >= 0 {
+					f.Format(" // assoc %s, prec %d", as, rule.Precedence)
 				}
 				f.Format("\n")
 			}
@@ -1311,8 +1314,8 @@ func (y *y) report(w io.Writer) {
 			for _, act := range conflict.acts {
 				f.Format(", %s", act.String())
 			}
-			if as := assocStr[sym.associativity]; as != "" || sym.precedence >= 0 {
-				f.Format(" // %v: assoc %s, prec %d", nm, assocStr[sym.associativity], sym.precedence)
+			if as := assocStr[sym.Associativity]; as != "" || sym.Precedence >= 0 {
+				f.Format(" // %v: assoc %s, prec %d", nm, assocStr[sym.Associativity], sym.Precedence)
 			}
 			f.Format("\n")
 		}
@@ -1330,7 +1333,7 @@ func (y *y) resolve(s *state, si int, sym *Symbol, conflict [2]action) (resolved
 	switch conflict[0].kind {
 	case 's':
 		rrule := y.Rules[conflict[1].arg]
-		sprec, rprec := sym.precedence, rrule.precedence
+		sprec, rprec := sym.Precedence, rrule.Precedence
 		if sprec < 0 || rprec < 0 {
 			break
 		}
@@ -1346,32 +1349,32 @@ func (y *y) resolve(s *state, si int, sym *Symbol, conflict [2]action) (resolved
 		case sprec > rprec:
 			explain = fmt.Sprintf(
 				"Conflict between rule %d and token %s resolved as shift (%s < %s).",
-				rrule.ruleNum, sym, rrule.precSym, sym,
+				rrule.ruleNum, sym, rrule.PrecSym, sym,
 			)
 			s.actions[sym] = append(s.actions[sym], conflict[0])
 			return true, true
 		case sprec < rprec:
 			explain = fmt.Sprintf(
 				"Conflict between rule %d and token %s resolved as reduce (%s < %s).",
-				rrule.ruleNum, sym, sym, rrule.precSym,
+				rrule.ruleNum, sym, sym, rrule.PrecSym,
 			)
 			s.actions[sym] = append(s.actions[sym], conflict[1])
 			return true, false
-		case sym.associativity == assocLeft:
+		case sym.Associativity == AssocLeft:
 			explain = fmt.Sprintf(
 				"Conflict between rule %d and token %s resolved as reduce (%%left %s).",
 				rrule.ruleNum, sym, sym,
 			)
 			s.actions[sym] = append(s.actions[sym], conflict[1])
 			return true, false
-		case sym.associativity == assocRight:
+		case sym.Associativity == AssocRight:
 			explain = fmt.Sprintf(
 				"Conflict between rule %d and token %s resolved as shift (%%right %s).",
 				rrule.ruleNum, sym, sym,
 			)
 			s.actions[sym] = append(s.actions[sym], conflict[0])
 			return true, true
-		case sym.associativity == assocNone:
+		case sym.Associativity == AssocNone:
 			y.err(sym.pos, "%nonassoc symbol %s conflict in state %d", sym, si)
 		}
 	case 'r':
@@ -1385,7 +1388,7 @@ func (y *y) resolve(s *state, si int, sym *Symbol, conflict [2]action) (resolved
 func (y *y) rules0() error {
 	y.addRule(&Rule{
 		Components: []string{""},
-		precedence: -1,
+		Precedence: -1,
 		Sym:        y.acceptSym,
 	})
 	post := map[string]token.Pos{}
@@ -1406,7 +1409,7 @@ func (y *y) rules0() error {
 			MaxParentDlr: -1,
 			Sym:          ruleSym,
 			pos:          prule.Pos,
-			precedence:   -1,
+			Precedence:   -1,
 		}
 
 		// Make $n have index n.
@@ -1434,8 +1437,8 @@ func (y *y) rules0() error {
 				continue
 			}
 
-			r.associativity, r.precedence = s.associativity, s.precedence
-			r.precSym = s
+			r.Associativity, r.Precedence = s.Associativity, s.Precedence
+			r.PrecSym = s
 			if len(pr.Act) != 0 {
 				pcomponents = append(pcomponents, pr.Act)
 			}
@@ -1500,7 +1503,7 @@ func (y *y) rules0() error {
 					Parent:       r,
 					Sym:          s,
 					maxDlr:       -1,
-					precedence:   -1,
+					Precedence:   -1,
 				})
 				components = append(components, s.Name)
 			case int: // literal
@@ -1512,7 +1515,7 @@ func (y *y) rules0() error {
 					break
 				}
 
-				s = &Symbol{Name: nm, IsTerminal: true, precedence: -1, Value: x}
+				s = &Symbol{Name: nm, IsTerminal: true, Precedence: -1, Value: x}
 				y.Syms[nm] = s
 			default:
 				panic("internal error 004")
@@ -1538,7 +1541,7 @@ func (y *y) rules0() error {
 	y.Rules[0].Components[0] = y.Start
 
 	for _, rule := range y.Rules {
-		if rule.precedence >= 0 {
+		if rule.Precedence >= 0 {
 			continue
 		}
 
@@ -1550,8 +1553,8 @@ func (y *y) rules0() error {
 
 		for i := len(components) - 1; i >= 0; i-- {
 			if sym := y.Syms[components[i]]; sym != nil && sym.IsTerminal {
-				rule.associativity, rule.precedence = sym.associativity, sym.precedence
-				rule.precSym = sym
+				rule.Associativity, rule.Precedence = sym.Associativity, sym.Precedence
+				rule.PrecSym = sym
 				break
 			}
 		}
@@ -1745,7 +1748,7 @@ examples:
 
 			nm := fmt.Sprintf("%q", []rune(t)[0])
 			if _, ok := y.Syms[nm]; !ok {
-				y.Syms[nm] = &Symbol{Name: nm, IsTerminal: true, precedence: -1, Value: int([]rune(lit)[0])}
+				y.Syms[nm] = &Symbol{Name: nm, IsTerminal: true, Precedence: -1, Value: int([]rune(lit)[0])}
 			}
 			example = append(example, nm)
 		case token.OR: // '|'

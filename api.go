@@ -25,6 +25,14 @@ import (
 	yparser "github.com/cznic/parser/yacc"
 )
 
+// Values of {AssocDef,Rule,Sym}.Associativity
+const (
+	AssocNotSpecified = iota
+	AssocLeft         // %left
+	AssocRight        // %right
+	AssocNone         // %nonassoc
+)
+
 // Action describes one cell of the parser table, ie. the action to be taken when
 // the lookahead is Sym.
 type Action struct {
@@ -51,6 +59,20 @@ func (a Action) Kind() (typ, arg int) {
 	}
 
 	return 'a', -1
+}
+
+// AssocDef describes one association definition of the .y source code. For
+// example:
+//
+//	%left '+', '-'
+//	%left '*', '/'
+//
+// The above will produce two items in Parser.AssocDefs with the particular
+// values of the associativity and precendce recorded in the Associativity and
+// Precedence fields of the respective Syms element.
+type AssocDef struct {
+	Associativity int       // One of the nonzero Assoc* constant values.
+	Syms          []*Symbol // Symbols present for this association definition in the order of appearance.
 }
 
 // Options amend the behavior of the various Process* functions.
@@ -140,6 +162,7 @@ func (o *Options) boot(fset *token.FileSet) (*Options, error) {
 // Parser describes the resulting parser. The intended client is a parser
 // generator (like eg. [0]) producing the final Go source code.
 type Parser struct {
+	AssocDefs    []*AssocDef        // %left, %right, %nonassoc definitions in the order of appearance in the source code.
 	ConflictsRR  int                // Number of reduce/reduce conflicts.
 	ConflictsSR  int                // Number of shift/reduce conflicts.
 	ErrorVerbose bool               // %error-verbose is present.
@@ -236,15 +259,15 @@ func ProcessSource(fset *token.FileSet, fname string, src []byte, opts *Options)
 // position of the $n thing on the parse stack. See also [4].
 type Rule struct {
 	Action        []*yparser.Act // Parts of the semantic action associated with the rule, if any.
+	Associativity int            // One of the assoc* constants.
 	Components    []string       // Textual forms of the rule components, for example []string{"IDENT", "';'"}
 	MaxParentDlr  int            // See the Rule type docs for details.
 	Parent        *Rule          // Non nil if a synthetic rule.
+	PrecSym       *Symbol        // Symbol used in the optional %prec sym clause, if present.
+	Precedence    int            // -1 of no precedence assigned.
 	Sym           *Symbol        // LHS of the rule.
-	associativity int
 	maxDlr        int
 	pos           token.Pos
-	precSym       *Symbol
-	precedence    int
 	ruleNum       int
 	syms          []*Symbol
 }
@@ -255,12 +278,13 @@ type Rule struct {
 // Symbol represents a terminal or non terminal symbol. A special end symbol
 // has Name "$end" and represents the EOF token.
 type Symbol struct {
+	Associativity int    // One of the assoc* constants.
 	IsTerminal    bool   // Whether this is a terminal symbol.
 	Name          string // Textual value of the symbol, for example "IDENT" or "';'".
+	Precedence    int    // -1 of no precedence assigned.
 	Type          string // For example "int", "float64" or "foo", but possibly also "".
 	Value         int    // Numeric value of the symbol.
-	associativity int
-	derivesE      bool // Non terminal sym derives ε.
+	derivesE      bool   // Non terminal sym derives ε.
 	first1        symSet
 	firstValid    bool
 	follow        symSet
@@ -268,7 +292,6 @@ type Symbol struct {
 	minx          int // Index into rules for shortest string of terminals reducing sym.
 	minxValid     bool
 	pos           token.Pos
-	precedence    int
 	rules         []*Rule
 }
 
