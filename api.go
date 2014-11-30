@@ -258,18 +258,19 @@ func ProcessSource(fset *token.FileSet, fname string, src []byte, opts *Options)
 // parent values not yet shifted to the parse stack as well as to compute the
 // position of the $n thing on the parse stack. See also [4].
 type Rule struct {
-	Action        []*yparser.Act // Parts of the semantic action associated with the rule, if any.
-	Associativity int            // One of the assoc* constants.
-	Components    []string       // Textual forms of the rule components, for example []string{"IDENT", "';'"}
-	MaxParentDlr  int            // See the Rule type docs for details.
-	Parent        *Rule          // Non nil if a synthetic rule.
-	PrecSym       *Symbol        // Symbol used in the optional %prec sym clause, if present.
-	Precedence    int            // -1 of no precedence assigned.
-	Sym           *Symbol        // LHS of the rule.
-	maxDlr        int
-	pos           token.Pos
-	ruleNum       int
-	syms          []*Symbol
+	Action          []*yparser.Act // Parts of the semantic action associated with the rule, if any.
+	Associativity   int            // One of the assoc* constants.
+	Components      []string       // Textual forms of the rule components, for example []string{"IDENT", "';'"}
+	ExplicitPrecSym *Symbol        // Symbol used in the optional %prec sym clause, if present.
+	MaxParentDlr    int            // See the Rule type docs for details.
+	Parent          *Rule          // Non nil if a synthetic rule.
+	PrecSym         *Symbol        // Effective %prec symbol used, if any.
+	Precedence      int            // -1 if no precedence assigned.
+	Sym             *Symbol        // LHS of the rule.
+	maxDlr          int
+	pos             token.Pos
+	ruleNum         int
+	syms            []*Symbol
 }
 
 // A special default symbol has Name "$default" and represents the default

@@ -1439,6 +1439,7 @@ func (y *y) rules0() error {
 
 			r.Associativity, r.Precedence = s.Associativity, s.Precedence
 			r.PrecSym = s
+			r.ExplicitPrecSym = s
 			if len(pr.Act) != 0 {
 				pcomponents = append(pcomponents, pr.Act)
 			}
