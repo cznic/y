@@ -144,7 +144,7 @@ func (s itemSet) closure(y *y) (r itemSet) { // dragon 4.7, Fig. 4.33
 		}
 
 		for _, rule := range nx.rules {
-			s := newItem(rule.ruleNum, 0)
+			s := newItem(rule.RuleNum, 0)
 			var ok bool
 			r, ok = r.add(s)
 			if !ok {
@@ -501,7 +501,7 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 
 func (y *y) addRule(r *Rule) *Rule {
 	r.Sym.rules = append(r.Sym.rules, r)
-	r.ruleNum = len(y.Rules)
+	r.RuleNum = len(y.Rules)
 	y.Rules = append(y.Rules, r)
 	return r
 }
@@ -554,7 +554,7 @@ func (y *y) closure0(j map[item]symSet, q []item1) map[item]symSet { // dragon 4
 				}
 
 				for _, p := range rules {
-					nii := newItem(p.ruleNum, 0)
+					nii := newItem(p.RuleNum, 0)
 					ni := item1{nii, y.syms[x<<bitShift+bit]}
 					switch v, ok := j[nii]; {
 					case !ok:
@@ -1349,28 +1349,28 @@ func (y *y) resolve(s *state, si int, sym *Symbol, conflict [2]action) (resolved
 		case sprec > rprec:
 			explain = fmt.Sprintf(
 				"Conflict between rule %d and token %s resolved as shift (%s < %s).",
-				rrule.ruleNum, sym, rrule.PrecSym, sym,
+				rrule.RuleNum, sym, rrule.PrecSym, sym,
 			)
 			s.actions[sym] = append(s.actions[sym], conflict[0])
 			return true, true
 		case sprec < rprec:
 			explain = fmt.Sprintf(
 				"Conflict between rule %d and token %s resolved as reduce (%s < %s).",
-				rrule.ruleNum, sym, sym, rrule.PrecSym,
+				rrule.RuleNum, sym, sym, rrule.PrecSym,
 			)
 			s.actions[sym] = append(s.actions[sym], conflict[1])
 			return true, false
 		case sym.Associativity == AssocLeft:
 			explain = fmt.Sprintf(
 				"Conflict between rule %d and token %s resolved as reduce (%%left %s).",
-				rrule.ruleNum, sym, sym,
+				rrule.RuleNum, sym, sym,
 			)
 			s.actions[sym] = append(s.actions[sym], conflict[1])
 			return true, false
 		case sym.Associativity == AssocRight:
 			explain = fmt.Sprintf(
 				"Conflict between rule %d and token %s resolved as shift (%%right %s).",
-				rrule.ruleNum, sym, sym,
+				rrule.RuleNum, sym, sym,
 			)
 			s.actions[sym] = append(s.actions[sym], conflict[0])
 			return true, true
@@ -1531,7 +1531,7 @@ func (y *y) rules0() error {
 		}
 
 		if y.firstRule == 0 {
-			y.firstRule = r.ruleNum
+			y.firstRule = r.RuleNum
 		}
 	}
 

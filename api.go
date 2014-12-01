@@ -266,10 +266,10 @@ type Rule struct {
 	Parent          *Rule          // Non nil if a synthetic rule.
 	PrecSym         *Symbol        // Effective %prec symbol used, if any.
 	Precedence      int            // -1 if no precedence assigned.
+	RuleNum         int            // Zero based rule number. Rule #0 is synthetic.
 	Sym             *Symbol        // LHS of the rule.
 	maxDlr          int
 	pos             token.Pos
-	ruleNum         int
 	syms            []*Symbol
 }
 
