@@ -328,6 +328,16 @@ loop:
 	return s.first1
 }
 
+// MinString returns an example of the shortest string of symbols which can be
+// reduced to s.  If s is a terminal symbol the result is s.
+func (s *Symbol) MinString() []*Symbol {
+	if s.IsTerminal {
+		return []*Symbol{s}
+	}
+
+	return s.minString(nil)
+}
+
 func (s *Symbol) minString(m map[*Symbol]int) (r []*Symbol) {
 	if s.IsTerminal {
 		return []*Symbol{s}
