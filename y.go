@@ -202,7 +202,7 @@ func (s itemSet) state(y *y) (int, bool) {
 		y.itemSets[id] = n
 		ns := newState(y, s)
 		ns.id = n
-		y.states = append(y.states, ns)
+		y.States = append(y.States, ns)
 	}
 	return n, ok
 }
@@ -220,47 +220,6 @@ func (s itemSet1) add(i item1) bool { // true: s already has i
 
 	s[i] = true
 	return false
-}
-
-type state struct {
-	actions   map[*Symbol][]action //
-	distance  int                  // On path to state 0.
-	gotos     map[*Symbol]action   //
-	id        int                  // Numeric id of the state.
-	kernel    itemSet              //
-	lookahead []symSet             // kernel LA.
-	parent    *state               // On path to state 0.
-	psym      *Symbol              // Label for the edge parent -> state.
-	resolved  []string             //TODO non string data.
-	sym       *Symbol              // Sym transfering from parent to state.
-	trans     map[trans]stateItem  // sym.i -> stateItem
-	xitems    itemSet              // {x ∈ closure(kernel) | x.rule -> ε }.
-	xla       []symSet             // xitems LA.
-}
-
-func newState(y *y, s itemSet) *state {
-	return &state{
-		actions:   map[*Symbol][]action{},
-		gotos:     map[*Symbol]action{},
-		kernel:    s,
-		lookahead: make([]symSet, len(s)),
-		trans:     map[trans]stateItem{},
-	}
-}
-
-// Symbols required to get from state 0 to s.
-func (s *state) syms0(y *y) (r []*Symbol) {
-	y.zeroPaths()
-	if s.parent == nil {
-		return nil
-	}
-
-	sym := s.psym
-	if sym.IsTerminal {
-		return append(s.parent.syms0(y), sym)
-	}
-
-	return append(s.parent.syms0(y), sym.minString(nil)...)
 }
 
 type stateItem struct {
@@ -380,7 +339,6 @@ type y struct {
 	opts           *Options
 	precedence     int
 	ssPool         []symSet
-	states         []*state
 	symSetCap      int
 	symTypes       map[string]typeDecl
 	syms           []*Symbol
@@ -475,8 +433,8 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 	if w := opts.Report; w != nil {
 		y.report(w)
 	}
-	y.Table = make([][]Action, len(y.states))
-	for i, state := range y.states {
+	y.Table = make([][]Action, len(y.States))
+	for i, state := range y.States {
 		a := make([]Action, 0, len(state.actions)+len(state.gotos))
 		for sym, acts := range state.actions {
 			act := acts[0]
@@ -579,7 +537,7 @@ func (y *y) closure0(j map[item]symSet, q []item1) map[item]symSet { // dragon 4
 }
 
 func (y *y) conflicts() error {
-	for si, state := range y.states {
+	for si, state := range y.States {
 		for sym, acts := range state.actions {
 			if len(acts) < 2 {
 				continue
@@ -669,7 +627,7 @@ func (y *y) conflicts() error {
 		return y.error()
 	}
 
-	for si, state := range y.states {
+	for si, state := range y.States {
 		var valid bool
 		var la symSet
 		max := 0
@@ -1016,10 +974,10 @@ func (y *y) id(s itemSet) string { // Not reentrant.
 func (y *y) lookaheads() {
 	di := y.dummySym.id
 	dx, dm := di>>bitShift, 1<<uint(di&bitMask) //TODO static const
-	y.states[0].lookahead[0] = y.newSymSet(y.endSym.id)
-	q := make([]stateItem, 0, len(y.states))
-	m := make(map[stateItem]bool, len(y.states))
-	for s, state := range y.states {
+	y.States[0].lookahead[0] = y.newSymSet(y.endSym.id)
+	q := make([]stateItem, 0, len(y.States))
+	m := make(map[stateItem]bool, len(y.States))
+	for s, state := range y.States {
 		for i := range state.kernel {
 			si := stateItem{s, i}
 			q = append(q, si)
@@ -1030,7 +988,7 @@ func (y *y) lookaheads() {
 		j := q[len(q)-1]
 		q = q[:len(q)-1]
 		delete(m, j)
-		state, i := y.states[j.state], j.i
+		state, i := y.States[j.state], j.i
 		item := state.kernel[i]
 		if item.dot() == 0 && item.rule() != 0 {
 			continue
@@ -1043,7 +1001,7 @@ func (y *y) lookaheads() {
 			}
 
 			j := state.trans[trans{item, sym}]
-			gs := y.states[j.state]
+			gs := y.States[j.state]
 			v := gs.lookahead[j.i]
 			if v == nil {
 				v = y.newSymSet(-1)
@@ -1082,7 +1040,7 @@ func (y *y) pos(po token.Pos) token.Position { return y.fset.Position(po) }
 
 func (y *y) reductions() {
 	defaultLA := y.newSymSet(y.noSym.id)
-	for _, state := range y.states {
+	for _, state := range y.States {
 		for i, item := range state.kernel {
 			if item.next(y) != nil {
 				continue
@@ -1206,10 +1164,10 @@ func (y *y) report(w io.Writer) {
 			f.Format("%s\n", v)
 		}
 	}
-	for si, state := range y.states {
+	for si, state := range y.States {
 		f.Format("state %d //", si)
 
-		for _, s := range state.syms0(y) {
+		for _, s := range state.Syms0() {
 			switch {
 			case s == nil:
 				f.Format(" <?>")
@@ -1329,7 +1287,7 @@ func (y *y) report(w io.Writer) {
 	}
 }
 
-func (y *y) resolve(s *state, si int, sym *Symbol, conflict [2]action) (resolved, asShift bool) {
+func (y *y) resolve(s *State, si int, sym *Symbol, conflict [2]action) (resolved, asShift bool) {
 	switch conflict[0].kind {
 	case 's':
 		rrule := y.Rules[conflict[1].arg]
@@ -1642,7 +1600,7 @@ func (y *y) states0() {
 	q := []int{0}
 	for len(q) != 0 {
 		s := q[len(q)-1]
-		state := y.states[s]
+		state := y.States[s]
 		q = q[:len(q)-1]
 		cls := state.kernel.closure(y)
 		syms.clear()
@@ -1774,7 +1732,7 @@ examples:
 
 				stack = []int{0}
 				for {
-					state := y.states[stack[len(stack)-1]]
+					state := y.States[stack[len(stack)-1]]
 					tok := lex()
 					var action action
 					actions, ok := state.actions[tok]
@@ -1792,7 +1750,7 @@ examples:
 					case 'r':
 						rule := y.Rules[action.arg]
 						stack = stack[:len(stack)-len(rule.Components)]
-						stack = append(stack, y.states[stack[len(stack)-1]].gotos[rule.Sym].arg)
+						stack = append(stack, y.States[stack[len(stack)-1]].gotos[rule.Sym].arg)
 					default:
 						panic("internal error 013")
 					}
@@ -1835,11 +1793,11 @@ func (y *y) zeroPaths() {
 	}
 
 	var h zpHeap
-	s0 := y.states[0]
-	m := make([]bool, len(y.states))
+	s0 := y.States[0]
+	m := make([]bool, len(y.States))
 	h.add(y, s0)
 	m[0] = true
-	for n := len(y.states) - 1; n != 0; {
+	for n := len(y.States) - 1; n != 0; {
 		e := heap.Pop(&h).(*zpElem)
 		d := e.dest
 		if d.psym == nil {
@@ -1857,7 +1815,7 @@ func (y *y) zeroPaths() {
 }
 
 type zpElem struct {
-	src, dest *state
+	src, dest *State
 	sym       *Symbol
 	distance  int
 }
@@ -1896,14 +1854,14 @@ func (z *zpHeap) Pop() interface{} {
 	return r
 }
 
-func (z *zpHeap) add(y *y, s *state) {
+func (z *zpHeap) add(y *y, s *State) {
 	for sym, actions := range s.actions {
 		action := actions[0]
 		if action.kind == 's' {
-			heap.Push(z, &zpElem{s, y.states[action.arg], sym, s.distance + len(sym.minString(nil))})
+			heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.minString(nil))})
 		}
 	}
 	for sym, action := range s.gotos {
-		heap.Push(z, &zpElem{s, y.states[action.arg], sym, s.distance + len(sym.minString(nil))})
+		heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.minString(nil))})
 	}
 }

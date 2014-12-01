@@ -169,6 +169,7 @@ type Parser struct {
 	Prologue     string             // Collected prologue between the %{ and %} marks.
 	Rules        []*Rule            // Rules indexed by rule number.
 	Start        string             // Name of the start production.
+	States       []*State           // Parser states indexed by state number.
 	Syms         map[string]*Symbol // Symbols indexed by name, eg. "IDENT", "Expression" or "';'".
 	Table        [][]Action         // Indexed by state number.
 	Tail         string             // Everyting after the second %%, if present.
@@ -273,27 +274,71 @@ type Rule struct {
 	syms            []*Symbol
 }
 
+// State represents one state of the parser.
+type State struct {
+	actions   map[*Symbol][]action //
+	distance  int                  // On path to state 0.
+	gotos     map[*Symbol]action   //
+	id        int                  // Numeric id of the state.
+	kernel    itemSet              //
+	lookahead []symSet             // kernel LA.
+	parent    *State               // On path to state 0.
+	psym      *Symbol              // Label for the edge parent -> state.
+	resolved  []string             //TODO non string data.
+	sym       *Symbol              // Sym transfering from parent to state.
+	trans     map[trans]stateItem  // sym.i -> stateItem
+	xitems    itemSet              // {x ∈ closure(kernel) | x.rule -> ε }.
+	xla       []symSet             // xitems LA.
+	y         *y                   //
+}
+
+func newState(y *y, s itemSet) *State {
+	return &State{
+		actions:   map[*Symbol][]action{},
+		gotos:     map[*Symbol]action{},
+		kernel:    s,
+		lookahead: make([]symSet, len(s)),
+		trans:     map[trans]stateItem{},
+		y:         y,
+	}
+}
+
+// Syms0 returns an example of a string required to get from state 0
+// to state s.
+func (s *State) Syms0() []*Symbol {
+	s.y.zeroPaths()
+	if s.parent == nil {
+		return nil
+	}
+
+	sym := s.psym
+	if sym.IsTerminal {
+		return append(s.parent.Syms0(), sym)
+	}
+
+	return append(s.parent.Syms0(), sym.minString(nil)...)
+}
+
 // A special default symbol has Name "$default" and represents the default
 // action.
 
 // Symbol represents a terminal or non terminal symbol. A special end symbol
 // has Name "$end" and represents the EOF token.
 type Symbol struct {
-	Associativity int    // One of the assoc* constants.
-	IsTerminal    bool   // Whether this is a terminal symbol.
-	Name          string // Textual value of the symbol, for example "IDENT" or "';'".
-	Precedence    int    // -1 of no precedence assigned.
-	Type          string // For example "int", "float64" or "foo", but possibly also "".
-	Value         int    // Numeric value of the symbol.
-	derivesE      bool   // Non terminal sym derives ε.
-	first1        symSet
-	firstValid    bool
-	follow        symSet
-	id            int // Index into y.syms
-	minx          int // Index into rules for shortest string of terminals reducing sym.
-	minxValid     bool
-	pos           token.Pos
-	rules         []*Rule
+	Associativity int       // One of the assoc* constants.
+	IsTerminal    bool      // Whether this is a terminal symbol.
+	Name          string    // Textual value of the symbol, for example "IDENT" or "';'".
+	Precedence    int       // -1 of no precedence assigned.
+	Type          string    // For example "int", "float64" or "foo", but possibly also "".
+	Value         int       // Numeric value of the symbol.
+	derivesE      bool      // Non terminal sym derives ε.
+	first1        symSet    //
+	firstValid    bool      //
+	follow        symSet    //
+	id            int       // Index into y.syms
+	minStr        []*Symbol //
+	pos           token.Pos //
+	rules         []*Rule   //
 }
 
 func (s *Symbol) first(y *y) symSet { // dragon, 4.4
@@ -328,89 +373,55 @@ loop:
 	return s.first1
 }
 
-// MinString returns an example of the shortest string of symbols which can be
-// reduced to s.  If s is a terminal symbol the result is s.
+// MinString returns an example of a string of symbols which can be reduced to
+// s.  If s is a terminal symbol the result is s. If the only way to express
+// some non terminal s includes s itself then nil is returned (the grammar is
+// invalid then).
 func (s *Symbol) MinString() []*Symbol {
-	if s.IsTerminal {
-		return []*Symbol{s}
-	}
-
 	return s.minString(nil)
 }
 
-func (s *Symbol) minString(m map[*Symbol]int) (r []*Symbol) {
+func (s *Symbol) minString(m map[*Symbol]bool) (r []*Symbol) {
+	if s := s.minStr; s != nil {
+		return s
+	}
+
+	defer func() {
+		s.minStr = r
+	}()
+
 	if s.IsTerminal {
 		return []*Symbol{s}
 	}
 
 	if s.derivesE {
+		return []*Symbol{}
+	}
+
+	if m[s] {
 		return nil
 	}
 
 	if m == nil {
-		m = map[*Symbol]int{}
+		m = map[*Symbol]bool{}
 	}
-
-	m[s]++
-	if s.minxValid {
-		for _, v := range s.rules[s.minx].syms {
-			if m[v] > 0 {
-				r = append(r, v)
-				continue
-			}
-
-			r = append(r, v.minString(m)...)
-		}
-		m[s]--
-		return r
-	}
-
-	var rss [][]*Symbol
-	var ok []bool
+	m[s] = true
+	var best []*Symbol
+nextRule:
 	for _, rule := range s.rules {
-		var rs []*Symbol
-		ok0 := true
-		for _, v := range rule.syms {
-			if m[v] > 0 {
-				ok0 = false
-				rs = append(rs, v)
-				continue
+		var current []*Symbol
+		for _, sym := range rule.syms {
+			if m[sym] { // No recursion.
+				continue nextRule
 			}
 
-			rs = append(rs, v.minString(m)...)
+			current = append(current, sym.minString(m)...)
 		}
-		for _, v := range rs {
-			if !v.IsTerminal {
-				ok0 = false
-				break
-			}
-		}
-		rss = append(rss, rs)
-		ok = append(ok, ok0)
-	}
-	m[s]--
-	valid := false
-	for i, v := range rss {
-		if !ok[i] {
-			continue
-		}
-
-		if !valid || len(v) < len(r) {
-			s.minx, s.minxValid = i, true
-			r, valid = v, true
+		if best == nil || len(current) < len(best) {
+			best = current
 		}
 	}
-	if valid {
-		return r
-	}
-
-	for i, v := range rss {
-		if !valid || len(v) < len(r) {
-			s.minx, s.minxValid = i, true
-			r = v
-		}
-	}
-	return r
+	return best
 }
 
 // String implements fmt.Stringer.

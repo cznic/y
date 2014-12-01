@@ -143,7 +143,7 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 		}
 
 		y := p.y
-		t.Logf("\tstates %d, parse table entries %d", len(y.states), y.entries)
+		t.Logf("\tstates %d, parse table entries %d", len(y.States), y.entries)
 		if _, err = newBison(pth+".bison", y); err != nil {
 			if !os.IsNotExist(err) {
 				switch x := err.(type) {
@@ -357,7 +357,7 @@ states:
 					continue
 				}
 
-				ys := y.states[s]
+				ys := y.States[s]
 				i, ok := ys.kernel.find(item)
 				if ok {
 					if g, e := ys.lookahead[i].dump(y), la; g != e {
@@ -418,7 +418,7 @@ states:
 		bisonState++
 	}
 
-	if g, e := len(b.xlat), len(y.states); g != e {
+	if g, e := len(b.xlat), len(y.States); g != e {
 		return nil, fmt.Errorf("seen %d bison states, expected %d", g, e)
 	}
 	//TODO more processing
