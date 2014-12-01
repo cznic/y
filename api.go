@@ -417,8 +417,22 @@ nextRule:
 
 			current = append(current, sym.minString(m)...)
 		}
-		if best == nil || len(current) < len(best) {
+		switch {
+		case best == nil:
 			best = current
+		case len(current) < len(best):
+			best = current
+		case len(current) == len(best):
+			for i, a := range current {
+				b := best[i]
+				if a.Name > b.Name {
+					break
+				}
+				if a.Name < b.Name {
+					best = current
+					break
+				}
+			}
 		}
 	}
 	return best
