@@ -329,6 +329,7 @@ type Symbol struct {
 	IsTerminal    bool      // Whether this is a terminal symbol.
 	Name          string    // Textual value of the symbol, for example "IDENT" or "';'".
 	Precedence    int       // -1 of no precedence assigned.
+	Rules         []*Rule   // Productions associated with this symbol.
 	Type          string    // For example "int", "float64" or "foo", but possibly also "".
 	Value         int       // Numeric value of the symbol.
 	derivesE      bool      // Non terminal sym derives ε.
@@ -338,7 +339,6 @@ type Symbol struct {
 	id            int       // Index into y.syms
 	minStr        []*Symbol //
 	pos           token.Pos //
-	rules         []*Rule   //
 }
 
 func (s *Symbol) first(y *y) symSet { // dragon, 4.4
@@ -354,7 +354,7 @@ func (s *Symbol) first(y *y) symSet { // dragon, 4.4
 
 	s.first1 = y.newSymSet(-1)
 loop:
-	for _, rule := range s.rules {
+	for _, rule := range s.Rules {
 		syms := rule.syms
 		if len(syms) == 0 {
 			s.first1.addEmpty()
@@ -408,7 +408,7 @@ func (s *Symbol) minString(m map[*Symbol]bool) (r []*Symbol) {
 	m[s] = true
 	var best []*Symbol
 nextRule:
-	for _, rule := range s.rules {
+	for _, rule := range s.Rules {
 		var current []*Symbol
 		for _, sym := range rule.syms {
 			if m[sym] { // No recursion.

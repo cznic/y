@@ -143,7 +143,7 @@ func (s itemSet) closure(y *y) (r itemSet) { // dragon 4.7, Fig. 4.33
 			continue
 		}
 
-		for _, rule := range nx.rules {
+		for _, rule := range nx.Rules {
 			s := newItem(rule.RuleNum, 0)
 			var ok bool
 			r, ok = r.add(s)
@@ -458,7 +458,7 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 }
 
 func (y *y) addRule(r *Rule) *Rule {
-	r.Sym.rules = append(r.Sym.rules, r)
+	r.Sym.Rules = append(r.Sym.Rules, r)
 	r.RuleNum = len(y.Rules)
 	y.Rules = append(y.Rules, r)
 	return r
@@ -501,7 +501,7 @@ func (y *y) closure0(j map[item]symSet, q []item1) map[item]symSet { // dragon 4
 			continue
 		}
 
-		rules := bb[0].rules
+		rules := bb[0].Rules
 		ySyms = append(ySyms[:0], bb[1:]...)
 		ySyms = append(ySyms, i.sym)
 		symSet := y.first(ySyms)
@@ -913,7 +913,7 @@ func (y *y) follows() { // dragon, 4.4
 				continue
 			}
 
-			for _, rule := range sym.rules {
+			for _, rule := range sym.Rules {
 				a := rule.Sym
 				if len(a.follow) == 0 {
 					a.follow = y.newSymSet(-1)
