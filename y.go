@@ -1855,13 +1855,29 @@ func (z *zpHeap) Pop() interface{} {
 }
 
 func (z *zpHeap) add(y *y, s *State) {
-	for sym, actions := range s.actions {
+	var a []string
+	for sym := range s.actions {
+		a = append(a, sym.Name)
+	}
+	sort.Strings(a)
+	for _, nm := range a {
+		sym := y.Syms[nm]
+		actions := s.actions[sym]
+		//TODO- for sym, actions := range s.actions {
 		action := actions[0]
 		if action.kind == 's' {
 			heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.minString(nil))})
 		}
 	}
-	for sym, action := range s.gotos {
+	a = a[:0]
+	for sym := range s.gotos {
+		a = append(a, sym.Name)
+	}
+	sort.Strings(a)
+	for _, nm := range a {
+		sym := y.Syms[nm]
+		action := s.gotos[sym]
+		//TODO- for sym, action := range s.gotos {
 		heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.minString(nil))})
 	}
 }
