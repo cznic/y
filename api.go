@@ -325,20 +325,22 @@ func (s *State) Syms0() []*Symbol {
 // Symbol represents a terminal or non terminal symbol. A special end symbol
 // has Name "$end" and represents the EOF token.
 type Symbol struct {
-	Associativity int       // One of the assoc* constants.
-	IsTerminal    bool      // Whether this is a terminal symbol.
-	Name          string    // Textual value of the symbol, for example "IDENT" or "';'".
-	Precedence    int       // -1 of no precedence assigned.
-	Rules         []*Rule   // Productions associated with this symbol.
-	Type          string    // For example "int", "float64" or "foo", but possibly also "".
-	Value         int       // Numeric value of the symbol.
-	derivesE      bool      // Non terminal sym derives ε.
-	first1        symSet    //
-	firstValid    bool      //
-	follow        symSet    //
-	id            int       // Index into y.syms
-	minStr        []*Symbol //
-	pos           token.Pos //
+	Associativity    int       // One of the assoc* constants.
+	IsLeftRecursive  bool      // S: S ... ;
+	IsRightRecursive bool      // S: ... S ;
+	IsTerminal       bool      // Whether this is a terminal symbol.
+	Name             string    // Textual value of the symbol, for example "IDENT" or "';'".
+	Precedence       int       // -1 of no precedence assigned.
+	Rules            []*Rule   // Productions associated with this symbol.
+	Type             string    // For example "int", "float64" or "foo", but possibly also "".
+	Value            int       // Numeric value of the symbol.
+	derivesE         bool      // Non terminal sym derives ε.
+	first1           symSet    //
+	firstValid       bool      //
+	follow           symSet    //
+	id               int       // Index into y.syms
+	minStr           []*Symbol //
+	pos              token.Pos //
 }
 
 func (s *Symbol) first(y *y) symSet { // dragon, 4.4

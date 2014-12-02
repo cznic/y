@@ -1411,6 +1411,9 @@ func (y *y) rules0() error {
 				// no $0 component
 			case string:
 				y.useSym(x, prule.Pos)
+				if len(components) == 0 && x == r.Sym.Name {
+					r.Sym.IsLeftRecursive = true
+				}
 				components = append(components, x)
 				sym := y.Syms[x]
 				if sym == nil || sym.Type != "" {
@@ -1483,6 +1486,9 @@ func (y *y) rules0() error {
 		r.Action = finalAct
 		r.maxDlr = len(pcomponents) - 1
 		r.Components = components
+		if len(components) != 0 && components[len(components)-1] == r.Sym.Name {
+			r.Sym.IsRightRecursive = true
+		}
 		y.addRule(r)
 		if r.Sym.Type != "" && len(r.Action) == 0 && len(components) == 0 {
 			y.err(prule.Pos, "empty rule for typed nonterminal, and no action")
