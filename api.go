@@ -21,6 +21,7 @@ import (
 	"go/token"
 	"io"
 	"io/ioutil"
+	"sort"
 
 	yparser "github.com/cznic/parser/yacc"
 )
@@ -193,6 +194,11 @@ func ProcessAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*Parser, 
 
 	if isTesting {
 		y.Parser.y = y
+	}
+
+	for i, row := range y.Parser.Table {
+		sort.Sort(actions(row))
+		y.Parser.Table[i] = row
 	}
 	return y.Parser, err
 }

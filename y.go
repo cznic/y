@@ -44,6 +44,36 @@ type action struct {
 	arg  int // a: N/A, r: rule#, g, s: state#
 }
 
+type actions []Action
+
+func (a actions) Len() int { return len(a) }
+
+func (a actions) Less(i, j int) bool {
+	ni := a[i].Sym.Name
+	nj := a[j].Sym.Name
+	if ni < nj {
+		return true
+	}
+
+	if ni > nj {
+		return false
+	}
+
+	ti, ki := a[i].Kind()
+	tj, kj := a[i].Kind()
+	if ti < tj {
+		return true
+	}
+
+	if ti > tj {
+		return false
+	}
+
+	return ki < kj
+}
+
+func (a actions) Swap(i, j int) { a[i], a[j] = a[j], a[i] }
+
 func newReduction(arg int) action {
 	if arg == 0 {
 		return action{'a', 0}
