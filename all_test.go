@@ -143,6 +143,33 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 		}
 
 		y := p.y
+
+		//TODO if err == nil {
+		//TODO 	for si, state := range y.States {
+		//TODO 		syms := state.Syms0()
+		//TODO 		//dbg("\n\n==============")
+		//TODO 		//dbg("state %d, syms0 %v", si, syms)
+		//TODO 		stop, err := y.Parser.parse(si, func() *Symbol {
+		//TODO 			if len(syms) == 0 {
+		//TODO 				return nil
+		//TODO 			}
+
+		//TODO 			r := syms[0]
+		//TODO 			syms = syms[1:]
+		//TODO 			return r
+		//TODO 		})
+
+		//TODO 		if err != nil {
+		//TODO 			t.Error(err)
+		//TODO 			continue
+		//TODO 		}
+
+		//TODO 		if g, e := stop, si; g != e {
+		//TODO 			t.Errorf("state %d not reached (final state %d)", si, stop)
+		//TODO 		}
+		//TODO 	}
+		//TODO }
+
 		t.Logf("\tstates %d, parse table entries %d", len(y.States), y.entries)
 		if _, err = newBison(pth+".bison", y); err != nil {
 			if !os.IsNotExist(err) {

@@ -21,6 +21,7 @@
 package y
 
 import (
+	"fmt"
 	"go/ast"
 	"go/token"
 	"io"
@@ -188,6 +189,50 @@ func newParser() *Parser {
 	return &Parser{}
 }
 
+func (p *Parser) parse(stopState int, lex func() *Symbol) (int, error) {
+	eof := p.Syms["$end"]
+	yystate := 0
+	var yyS []int
+	var yychar *Symbol
+	for {
+		if yystate == stopState {
+			return yystate, nil
+		}
+
+		yyS = append(yyS, yystate)
+		//dbg("yyS %v", yyS)
+		if yychar == nil {
+			yychar = lex()
+			if yychar == nil {
+				yychar = eof
+			}
+			//dbg("lex %s", yychar)
+		}
+		actions := p.States[yystate].actions[yychar]
+		if len(actions) == 0 {
+			return yystate, fmt.Errorf("no action for %s in state %d", yychar, yystate)
+		}
+		switch act := actions[0]; act.kind {
+		case 'a':
+			//dbg("accept")
+			return yystate, nil
+		case 's':
+			yychar = nil
+			yystate = act.arg
+			//dbg("shift and goto state %d", yystate)
+		case 'r':
+			rule := p.Rules[act.arg]
+			n := len(yyS)
+			m := len(rule.Components)
+			yyS = yyS[:n-m]
+			n -= m
+			tos := yyS[n-1]
+			yystate = p.States[tos].gotos[rule.Sym].arg
+			//dbg("reduce rule %d and goto state %d", rule.RuleNum, yystate)
+		}
+	}
+}
+
 // ProcessAST processes yacc source code parsed in ast. It returns a *Parser or
 // an error, if any.
 func ProcessAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*Parser, error) {
@@ -313,8 +358,9 @@ func newState(y *y, s itemSet) *State {
 	}
 }
 
-// Syms0 returns an example of a string required to get from state 0
-// to state s.
+// Syms0 returns an example of a string required to get from state 0 to state
+// s. Actually reaching state s may also depend on the next (lookahead) symbol
+// which is not part of the returned symbol string.
 func (s *State) Syms0() []*Symbol {
 	s.y.zeroPaths()
 	if s.parent == nil {
