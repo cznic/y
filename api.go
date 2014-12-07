@@ -2,6 +2,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//TODO +Reducibility tests (all productions can be reduced using Syms0).
+//TODO Minimize parser0.y
+//TODO +Engine, and export it.
+
 // Package y converts .y (yacc[2]) source files to data suitable for a parser
 // generator.
 //
@@ -341,12 +345,55 @@ type Symbol struct {
 	Type             string    // For example "int", "float64" or "foo", but possibly also "".
 	Value            int       // Numeric value of the symbol.
 	derivesE         bool      // Non terminal sym derives ε.
+	derivesEValid    bool      //
 	first1           symSet    //
 	firstValid       bool      //
 	follow           symSet    //
 	id               int       // Index into y.syms
 	minStr           []*Symbol //
 	pos              token.Pos //
+}
+
+func (s *Symbol) derivesEmpty(m map[*Symbol]bool) bool {
+	if m[s] {
+		return false
+	}
+
+	m[s] = true
+	if s.IsTerminal {
+		return false
+	}
+
+	if s.derivesEValid {
+		return s.derivesE
+	}
+
+nextRule:
+	for _, rule := range s.Rules {
+		if len(rule.Components) == 0 {
+			s.derivesE = true
+			s.derivesEValid = true
+			return true
+		}
+
+		for _, sym := range rule.syms {
+			if !sym.derivesEmpty(m) {
+				continue nextRule
+			}
+		}
+
+		s.derivesE = true
+		s.derivesEValid = true
+		return true
+	}
+	s.derivesE = false
+	s.derivesEValid = true
+	return false
+}
+
+// DerivesEmpty returns whether s derives ε.
+func (s *Symbol) DerivesEmpty() bool {
+	return s.derivesEmpty(map[*Symbol]bool{})
 }
 
 func (s *Symbol) first(y *y) symSet { // dragon, 4.4
@@ -402,7 +449,7 @@ func (s *Symbol) minString(m map[*Symbol]bool) (r []*Symbol) {
 		return []*Symbol{s}
 	}
 
-	if s.derivesE {
+	if s.DerivesEmpty() {
 		return []*Symbol{}
 	}
 

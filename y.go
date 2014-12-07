@@ -484,6 +484,7 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 		}
 		y.Table[i] = a
 	}
+	y.reducible()
 	return y, y.xerrors()
 }
 
@@ -1068,6 +1069,36 @@ func (y *y) newSymSet(sym int) symSet {
 
 func (y *y) pos(po token.Pos) token.Position { return y.fset.Position(po) }
 
+func (y *y) reducible() error {
+	for si, state := range y.States {
+		for _, actions := range state.actions {
+			action := actions[0]
+			arg := 0
+			switch action.kind {
+			case 'r':
+				arg = action.arg
+			case 'a':
+			default:
+				continue
+			}
+
+			syms := state.Syms0()
+			ok := true
+			for _, sym := range syms {
+				if sym == nil || !sym.IsTerminal {
+					ok = false
+					break
+				}
+			}
+			rule := y.Rules[arg]
+			if len(syms) == 0 && !rule.Sym.DerivesEmpty() || !ok {
+				y.errp(y.pos(rule.Sym.pos), "no token string reduces %s in state %d", rule.Sym, si)
+			}
+		}
+	}
+	return y.error()
+}
+
 func (y *y) reductions() {
 	defaultLA := y.newSymSet(y.noSym.id)
 	for _, state := range y.States {
@@ -1543,6 +1574,7 @@ func (y *y) rules0() error {
 		components := rule.Components
 		if len(components) == 0 {
 			rule.Sym.derivesE = true
+			rule.Sym.derivesEValid = true
 			continue
 		}
 
@@ -1899,7 +1931,6 @@ func (z *zpHeap) add(y *y, s *State) {
 	for _, nm := range a {
 		sym := y.Syms[nm]
 		actions := s.actions[sym]
-		//TODO- for sym, actions := range s.actions {
 		action := actions[0]
 		if action.kind == 's' {
 			heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.minString(nil))})
@@ -1913,7 +1944,6 @@ func (z *zpHeap) add(y *y, s *State) {
 	for _, nm := range a {
 		sym := y.Syms[nm]
 		action := s.gotos[sym]
-		//TODO- for sym, action := range s.gotos {
 		heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.minString(nil))})
 	}
 }

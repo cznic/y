@@ -1,6 +1,3 @@
-State 97 conflicts: 1 shift/reduce
-
-
 Grammar
 
     0 $accept: program $end
@@ -1439,13 +1436,14 @@ state 96
 
 state 97
 
-   29 selection_stmt: IF '(' expression ')' statement .  [ELSE, IF, RETURN, WHILE, ID, NUM, ';', '(', '{', '}']
+   29 selection_stmt: IF '(' expression ')' statement .  [IF, RETURN, WHILE, ID, NUM, ';', '(', '{', '}']
    30               | IF '(' expression ')' statement . ELSE statement
 
     ELSE  shift, and go to state 100
 
-    ELSE      [reduce using rule 29 (selection_stmt)]
     $default  reduce using rule 29 (selection_stmt)
+
+    Conflict between rule 29 and token ELSE resolved as shift (LOWER_THAN_ELSE < ELSE).
 
 
 state 98
