@@ -31,12 +31,12 @@ func init() {
 
 func caller(s string, va ...interface{}) {
 	_, fn, fl, _ := runtime.Caller(2)
-	fmt.Printf("caller: %s:%d: ", path.Base(fn), fl)
-	fmt.Printf(s, va...)
-	fmt.Println()
+	fmt.Fprintf(os.Stderr, "caller: %s:%d: ", path.Base(fn), fl)
+	fmt.Fprintf(os.Stderr, s, va...)
+	fmt.Fprintln(os.Stderr)
 	_, fn, fl, _ = runtime.Caller(1)
-	fmt.Printf("\tcallee: %s:%d: ", path.Base(fn), fl)
-	fmt.Println()
+	fmt.Fprintf(os.Stderr, "\tcallee: %s:%d: ", path.Base(fn), fl)
+	fmt.Fprintln(os.Stderr)
 }
 
 func dbg(s string, va ...interface{}) {
@@ -44,9 +44,9 @@ func dbg(s string, va ...interface{}) {
 		s = strings.Repeat("%v ", len(va))
 	}
 	_, fn, fl, _ := runtime.Caller(1)
-	fmt.Printf("dbg %s:%d: ", path.Base(fn), fl)
-	fmt.Printf(s, va...)
-	fmt.Println()
+	fmt.Fprintf(os.Stderr, "dbg %s:%d: ", path.Base(fn), fl)
+	fmt.Fprintf(os.Stderr, s, va...)
+	fmt.Fprintln(os.Stderr)
 }
 
 func TODO(...interface{}) string {
@@ -144,31 +144,40 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 
 		y := p.y
 
-		//TODO if err == nil {
-		//TODO 	for si, state := range y.States {
-		//TODO 		syms := state.Syms0()
-		//TODO 		//dbg("\n\n==============")
-		//TODO 		//dbg("state %d, syms0 %v", si, syms)
-		//TODO 		stop, err := y.Parser.parse(si, func() *Symbol {
-		//TODO 			if len(syms) == 0 {
-		//TODO 				return nil
-		//TODO 			}
+		if err == nil {
+			for si, state := range y.States {
+				use(si, state)
+				//TODO syms, la := state.Syms0()
+				//TODO if la != nil {
+				//TODO 	syms = append(syms, la)
+				//TODO }
+				//TODO //dbg("\n\n==============")
+				//TODO //dbg("state %d, syms0 %v, zpath %v", si, syms, state.zpath())
+				//TODO stop, err := y.Parser.parse(si, func() *Symbol {
+				//TODO 	if len(syms) == 0 {
+				//TODO 		return nil
+				//TODO 	}
 
-		//TODO 			r := syms[0]
-		//TODO 			syms = syms[1:]
-		//TODO 			return r
-		//TODO 		})
+				//TODO 	r := syms[0]
+				//TODO 	syms = syms[1:]
+				//TODO 	return r
+				//TODO })
 
-		//TODO 		if err != nil {
-		//TODO 			t.Error(err)
-		//TODO 			continue
-		//TODO 		}
+				//TODO if stop == si {
+				//TODO 	//dbg("OK")
+				//TODO 	continue
+				//TODO }
 
-		//TODO 		if g, e := stop, si; g != e {
-		//TODO 			t.Errorf("state %d not reached (final state %d)", si, stop)
-		//TODO 		}
-		//TODO 	}
-		//TODO }
+				//TODO if err != nil {
+				//TODO 	//dbg("", err)
+				//TODO 	t.Error(err)
+				//TODO }
+
+				//TODO if g, e := stop, si; g != e {
+				//TODO 	t.Errorf("state %d not reached (final state %d)", si, stop)
+				//TODO }
+			}
+		}
 
 		t.Logf("\tstates %d, parse table entries %d", len(y.States), y.entries)
 		if _, err = newBison(pth+".bison", y); err != nil {

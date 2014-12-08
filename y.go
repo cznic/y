@@ -1082,7 +1082,7 @@ func (y *y) reducible() error {
 				continue
 			}
 
-			syms := state.Syms0()
+			syms := state.syms0()
 			ok := true
 			for _, sym := range syms {
 				if sym == nil || !sym.IsTerminal {
@@ -1228,7 +1228,11 @@ func (y *y) report(w io.Writer) {
 	for si, state := range y.States {
 		f.Format("state %d //", si)
 
-		for _, s := range state.Syms0() {
+		syms, la := state.Syms0()
+		if la != nil {
+			syms = append(syms, la)
+		}
+		for _, s := range syms {
 			switch {
 			case s == nil:
 				f.Format(" <?>")

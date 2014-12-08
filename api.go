@@ -358,10 +358,15 @@ func newState(y *y, s itemSet) *State {
 	}
 }
 
-// Syms0 returns an example of a string required to get from state 0 to state
-// s. Actually reaching state s may also depend on the next (lookahead) symbol
-// which is not part of the returned symbol string.
-func (s *State) Syms0() []*Symbol {
+func (s *State) zpath() []int {
+	if s == nil {
+		return nil
+	}
+
+	return append(s.parent.zpath(), s.id)
+}
+
+func (s *State) syms0() []*Symbol {
 	s.y.zeroPaths()
 	if s.parent == nil {
 		return nil
@@ -369,10 +374,125 @@ func (s *State) Syms0() []*Symbol {
 
 	sym := s.psym
 	if sym.IsTerminal {
-		return append(s.parent.Syms0(), sym)
+		return append(s.parent.syms0(), sym)
 	}
 
-	return append(s.parent.Syms0(), sym.minString(nil)...)
+	return append(s.parent.syms0(), sym.minString(nil)...)
+}
+
+// Syms0 returns an example of a string and a lookahead, if any, required to
+// get from state 0 to state s. To construct an example of a string which
+// during parse enters state s:
+//
+//	syms, la := s.Syms0()
+//	if la != nil {
+//		syms = append(syms, la)
+//	}
+//
+//BUG The lookahead symbol is not yet really computed.
+func (s *State) Syms0() ([]*Symbol, *Symbol) {
+	//dbg("\n\n\n")
+	str := s.syms0()
+	return str, nil //TODO
+
+	//TODO if s.parent == nil {
+	//TODO 	return str, nil
+	//TODO }
+
+	//TODO if s.psym.IsTerminal {
+	//TODO 	return str, nil
+	//TODO }
+
+	//TODO // Find the goto symbol.
+	//TODO var gsym *Symbol
+	//TODO for sym, act := range s.parent.gotos {
+	//TODO 	if act.arg == s.id {
+	//TODO 		gsym = sym
+	//TODO 		break
+	//TODO 	}
+	//TODO }
+
+	//TODO //dbg("state %d, gsym %v, zpath %v", s.id, gsym, s.zpath())
+	//TODO //dbg("DerivesEmpty() %v", gsym.DerivesEmpty())
+	//TODO from := s.parent
+	//TODO //dbg("from state %d", from.id)
+	//TODO for _, tok := range str[len(str)-len(gsym.MinString()):] {
+	//TODO 	//dbg("shift tok %s", tok)
+	//TODO 	for _, act := range from.actions[tok] {
+	//TODO 		if act.kind != 's' {
+	//TODO 			continue
+	//TODO 		}
+
+	//TODO 		//dbg("shfit to state %d", act.arg)
+	//TODO 		from = s.y.States[act.arg]
+	//TODO 		break
+	//TODO 	}
+	//TODO }
+	//TODO set := from.reduce0(gsym, false, nil)
+	//TODO for x, w := range set {
+	//TODO 	for bit := 0; bit < intBits && w != 0; bit, w = bit+1, w>>1 {
+	//TODO 		if w&1 != 0 {
+	//TODO 			la := s.y.syms[x<<bitShift+bit]
+	//TODO 			//dbg("lookahead: %s", la)
+	//TODO 			return str, la
+	//TODO 		}
+	//TODO 	}
+	//TODO }
+	//TODO //TODO panic("int. err 0xx")
+	//TODO return str, nil
+}
+
+func (s *State) reduce0(sym *Symbol, restrict bool, to symSet) symSet {
+	//dbg("(state %d).reduce0(%s)", s.id, sym)
+	set := s.y.newSymSet(-1)
+	found := false
+	for la, actions := range s.actions {
+		act := actions[0]
+		if act.kind != 'r' {
+			continue
+		}
+
+		if s.y.Rules[act.arg].Sym == sym {
+			if !restrict || to.has(la.id) {
+				set.add1(la.id)
+				found = true
+			}
+		}
+	}
+	if found {
+		return set
+	}
+
+	//TODO
+	//dbg("must dig deeper")
+	m := map[*Symbol]symSet{}
+	for la, actions := range s.actions {
+		act := actions[0]
+		if act.kind != 'r' {
+			continue
+		}
+
+		if !restrict || to.has(la.id) {
+			rsym := s.y.Rules[act.arg].Sym
+			if m[rsym] == nil {
+				m[rsym] = s.y.newSymSet(-1)
+			}
+			m[rsym].add1(la.id)
+		}
+	}
+	for rsym, set := range m {
+		g, ok := s.gotos[rsym]
+		if !ok {
+			return set
+		}
+
+		x := s.y.States[g.arg].reduce0(sym, true, set)
+		if x.len() != 0 {
+			return x
+		}
+	}
+	//dbg("fail")
+	return set
 }
 
 // A special default symbol has Name "$default" and represents the default
