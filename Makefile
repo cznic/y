@@ -29,7 +29,7 @@ editor:
 	go fmt
 	go test -i
 	go test
-	go install
+	go install ./...
 
 internalError:
 	egrep -ho '"internal error.*"' *.go | sort | cat -n
@@ -49,7 +49,7 @@ todo:
 	@grep -nr $(grep) ^[[:space:]]*_[[:space:]]*=[[:space:]][[:alpha:]][[:alnum:]]* * || true
 	@grep -nr $(grep) TODO * || true
 	@grep -nr $(grep) BUG * || true
-	@grep -nr $(grep) println * || true
+	@grep -nr $(grep) [^[:alpha:]]println * || true
 
 y.test:
 	go test -c

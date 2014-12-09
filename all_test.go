@@ -146,11 +146,11 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 
 		if err == nil {
 			for si, state := range y.States {
-				use(si, state)
 				syms, la := state.Syms0()
 				if la != nil {
 					syms = append(syms, la)
 				}
+				//dbg("\n\n====\n\nparse state %d // syms0: %v, la: %v, zpath %v ", si, syms, la, state.zpath())
 				stop, err := y.Parser.parse(si, func() *Symbol {
 					if len(syms) == 0 {
 						return nil
@@ -162,14 +162,17 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 				})
 
 				if stop == si {
+					//dbg("OK")
 					continue
 				}
 
 				if err != nil {
+					//dbg("err: %v", err)
 					t.Error(err)
 				}
 
 				if g, e := stop, si; g != e {
+					//dbg("state %d not reached (final state %d)", si, stop)
 					t.Errorf("state %d not reached (final state %d)", si, stop)
 				}
 			}
@@ -593,7 +596,7 @@ error "expected number"
 	//
 	//     E  goto state 1
 	//
-	// state 1 // NUM ['*']
+	// state 1 // NUM [$end]
 	//
 	//     0 $accept: E .  [$end]
 	//     1 E: E . '*' E  // assoc %left, prec 2
@@ -633,7 +636,7 @@ error "expected number"
 	//
 	//     E  goto state 5
 	//
-	// state 5 // NUM '+' NUM ['*']
+	// state 5 // NUM '+' NUM [$end]
 	//
 	//     1 E: E . '*' E  // assoc %left, prec 2
 	//     2 E: E . '+' E  // assoc %left, prec 1

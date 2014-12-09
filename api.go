@@ -205,7 +205,7 @@ func (p *Parser) parse(stopState int, lex func() *Symbol) (int, error) {
 			if yychar == nil {
 				yychar = eof
 			}
-			//dbg("lex %s", yychar)
+			//dbg("--------> LEX %s", yychar)
 		}
 		actions := p.States[yystate].actions[yychar]
 		if len(actions) == 0 {
@@ -380,8 +380,9 @@ func (s *State) syms0() []*Symbol {
 }
 
 // Syms0 returns an example of a string and a lookahead, if any, required to
-// get from state 0 to state s, if possible, which might be not for invalid
-// grammars. To construct an example of a string which during parse enters
+// get to state s starting at state 0. If s is shifted into the lookahead is
+// nil.  Invalid grammars and grammars with conflict may have not all states
+// reachable. To construct an example of a string which during parse enters
 // state s:
 //
 //	syms, la := s.Syms0()
@@ -399,115 +400,29 @@ func (s *State) Syms0() ([]*Symbol, *Symbol) {
 		return str, nil
 	}
 
-	// Try a shift.
+	str0 := str
 	var a []string
-	for sym, actions := range s.actions {
-		act := actions[0]
-		if act.kind == 's' {
+	for sym := range s.actions {
+		str = append(str0, sym)
+		if stop, _ := s.y.parse(s.id, func() *Symbol {
+			if len(str) == 0 {
+				return nil
+			}
+
+			r := str[0]
+			str = str[1:]
+			return r
+		}); stop == s.id {
 			a = append(a, sym.Name)
 		}
 	}
-	if len(a) != 0 {
-		sort.Strings(a)
-		return str, s.y.Syms[a[0]]
+	if len(a) == 0 {
+		//dbg("state %d.Syms0: failed to determine lookahead", s.id)
+		return str0, nil
 	}
 
-	// Try a reduction.
-	rset := s.y.newSymSet(-1)
-	for _, la := range s.lookahead {
-		rset.add(la, false)
-	}
-	for _, la := range s.xla {
-		rset.add(la, false)
-	}
-	for x, w := range rset {
-		for bit := 0; bit < intBits && w != 0; bit, w = bit+1, w>>1 {
-			if w&1 != 0 {
-				return str, s.y.syms[x<<bitShift+bit]
-			}
-		}
-	}
-
-	// Try goto.
-	var gsym *Symbol
-	for sym, act := range s.parent.gotos {
-		if act.arg == s.id {
-			gsym = sym
-			break
-		}
-	}
-
-	from := s.parent
-	for _, tok := range str[len(str)-len(gsym.MinString()):] {
-		for _, act := range from.actions[tok] {
-			if act.kind != 's' {
-				continue
-			}
-
-			from = s.y.States[act.arg]
-			break
-		}
-	}
-	set := from.reduce0(gsym, false, nil)
-	for x, w := range set {
-		for bit := 0; bit < intBits && w != 0; bit, w = bit+1, w>>1 {
-			if w&1 != 0 {
-				la := s.y.syms[x<<bitShift+bit]
-				return str, la
-			}
-		}
-	}
-	return str, nil
-}
-
-func (s *State) reduce0(sym *Symbol, restrict bool, to symSet) symSet {
-	set := s.y.newSymSet(-1)
-	found := false
-	for la, actions := range s.actions {
-		act := actions[0]
-		if act.kind != 'r' {
-			continue
-		}
-
-		if s.y.Rules[act.arg].Sym == sym {
-			if !restrict || to.has(la.id) {
-				set.add1(la.id)
-				found = true
-			}
-		}
-	}
-	if found {
-		return set
-	}
-
-	m := map[*Symbol]symSet{}
-	for la, actions := range s.actions {
-		act := actions[0]
-		if act.kind != 'r' {
-			continue
-		}
-
-		if !restrict || to.has(la.id) {
-			rsym := s.y.Rules[act.arg].Sym
-			if m[rsym] == nil {
-				m[rsym] = s.y.newSymSet(-1)
-			}
-			m[rsym].add1(la.id)
-		}
-	}
-	for rsym, set := range m {
-		g, ok := s.gotos[rsym]
-		if !ok {
-			continue
-		}
-
-		x := s.y.States[g.arg].reduce0(sym, true, set)
-		if x.len() != 0 {
-			return x
-		}
-	}
-	//dbg("state %d.reduce0 fail", s.id)
-	return set
+	sort.Strings(a)
+	return str0, s.y.Syms[a[0]]
 }
 
 // A special default symbol has Name "$default" and represents the default
