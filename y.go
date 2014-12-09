@@ -1937,7 +1937,7 @@ func (z *zpHeap) add(y *y, s *State) {
 		actions := s.actions[sym]
 		action := actions[0]
 		if action.kind == 's' {
-			heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.minString(nil))})
+			heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.MinString())})
 		}
 	}
 	a = a[:0]
@@ -1948,6 +1948,6 @@ func (z *zpHeap) add(y *y, s *State) {
 	for _, nm := range a {
 		sym := y.Syms[nm]
 		action := s.gotos[sym]
-		heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.minString(nil))})
+		heap.Push(z, &zpElem{s, y.States[action.arg], sym, s.distance + len(sym.MinString())})
 	}
 }

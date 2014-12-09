@@ -200,13 +200,13 @@ func (p *Parser) parse(stopState int, lex func() *Symbol) (int, error) {
 		}
 
 		yyS = append(yyS, yystate)
-		//dbg("yyS %v", yyS)
+		dbg("yyS %v", yyS)
 		if yychar == nil {
 			yychar = lex()
 			if yychar == nil {
 				yychar = eof
 			}
-			//dbg("lex %s", yychar)
+			dbg("lex %s", yychar)
 		}
 		actions := p.States[yystate].actions[yychar]
 		if len(actions) == 0 {
@@ -214,12 +214,12 @@ func (p *Parser) parse(stopState int, lex func() *Symbol) (int, error) {
 		}
 		switch act := actions[0]; act.kind {
 		case 'a':
-			//dbg("accept")
+			dbg("accept")
 			return yystate, nil
 		case 's':
 			yychar = nil
 			yystate = act.arg
-			//dbg("shift and goto state %d", yystate)
+			dbg("shift and goto state %d", yystate)
 		case 'r':
 			rule := p.Rules[act.arg]
 			n := len(yyS)
@@ -228,7 +228,7 @@ func (p *Parser) parse(stopState int, lex func() *Symbol) (int, error) {
 			n -= m
 			tos := yyS[n-1]
 			yystate = p.States[tos].gotos[rule.Sym].arg
-			//dbg("reduce rule %d and goto state %d", rule.RuleNum, yystate)
+			dbg("reduce rule %d and goto state %d", rule.RuleNum, yystate)
 		}
 	}
 }
@@ -377,12 +377,13 @@ func (s *State) syms0() []*Symbol {
 		return append(s.parent.syms0(), sym)
 	}
 
-	return append(s.parent.syms0(), sym.minString(nil)...)
+	return append(s.parent.syms0(), sym.MinString()...)
 }
 
 // Syms0 returns an example of a string and a lookahead, if any, required to
-// get from state 0 to state s. To construct an example of a string which
-// during parse enters state s:
+// get from state 0 to state s, if possible, which might be not for invalid
+// grammars. To construct an example of a string which during parse enters
+// state s:
 //
 //	syms, la := s.Syms0()
 //	if la != nil {
@@ -391,59 +392,183 @@ func (s *State) syms0() []*Symbol {
 //
 //BUG The lookahead symbol is not yet really computed.
 func (s *State) Syms0() ([]*Symbol, *Symbol) {
-	//dbg("\n\n\n")
+	dbg("\n\n\n")
 	str := s.syms0()
-	return str, nil //TODO
+	dbg("state %d.Syms0 str %v", s.id, str)
+	if s.parent == nil {
+		return str, nil
+	}
 
-	//TODO if s.parent == nil {
-	//TODO 	return str, nil
-	//TODO }
+	if s.psym.IsTerminal {
+		return str, nil
+	}
 
-	//TODO if s.psym.IsTerminal {
-	//TODO 	return str, nil
-	//TODO }
+	// Find the goto symbol.
+	var gsym *Symbol
+	for sym, act := range s.parent.gotos {
+		if act.arg == s.id {
+			gsym = sym
+			break
+		}
+	}
 
-	//TODO // Find the goto symbol.
-	//TODO var gsym *Symbol
-	//TODO for sym, act := range s.parent.gotos {
-	//TODO 	if act.arg == s.id {
-	//TODO 		gsym = sym
-	//TODO 		break
-	//TODO 	}
-	//TODO }
+	dbg("state %d, gsym %v, zpath %v", s.id, gsym, s.zpath())
+	dbg("DerivesEmpty() %v", gsym.DerivesEmpty())
+	from := s.parent
+	dbg("from state %d", from.id)
+	for _, tok := range str[len(str)-len(gsym.MinString()):] {
+		dbg("shift tok %s", tok)
+		for _, act := range from.actions[tok] {
+			if act.kind != 's' {
+				continue
+			}
 
-	//TODO //dbg("state %d, gsym %v, zpath %v", s.id, gsym, s.zpath())
-	//TODO //dbg("DerivesEmpty() %v", gsym.DerivesEmpty())
-	//TODO from := s.parent
-	//TODO //dbg("from state %d", from.id)
-	//TODO for _, tok := range str[len(str)-len(gsym.MinString()):] {
-	//TODO 	//dbg("shift tok %s", tok)
-	//TODO 	for _, act := range from.actions[tok] {
-	//TODO 		if act.kind != 's' {
-	//TODO 			continue
-	//TODO 		}
-
-	//TODO 		//dbg("shfit to state %d", act.arg)
-	//TODO 		from = s.y.States[act.arg]
-	//TODO 		break
-	//TODO 	}
-	//TODO }
-	//TODO set := from.reduce0(gsym, false, nil)
-	//TODO for x, w := range set {
-	//TODO 	for bit := 0; bit < intBits && w != 0; bit, w = bit+1, w>>1 {
-	//TODO 		if w&1 != 0 {
-	//TODO 			la := s.y.syms[x<<bitShift+bit]
-	//TODO 			//dbg("lookahead: %s", la)
-	//TODO 			return str, la
-	//TODO 		}
-	//TODO 	}
-	//TODO }
-	//TODO //TODO panic("int. err 0xx")
-	//TODO return str, nil
+			dbg("shfit to state %d", act.arg)
+			from = s.y.States[act.arg]
+			break
+		}
+	}
+	set := from.reduce0(gsym, false, nil)
+	for x, w := range set {
+		for bit := 0; bit < intBits && w != 0; bit, w = bit+1, w>>1 {
+			if w&1 != 0 {
+				la := s.y.syms[x<<bitShift+bit]
+				dbg("lookahead: %s", la)
+				return str, la
+			}
+		}
+	}
+	//TODO panic("int. err 0xx")
+	return str, nil
 }
 
+/*
+dbg api.go:396: state 8.Syms0 str [LTYPE4]
+dbg api.go:414: state 8, gsym inst, zpath [0 1 2 8]
+dbg api.go:415: DerivesEmpty() false
+dbg api.go:417: from state 2
+dbg api.go:419: shift tok LTYPE4
+dbg api.go:425: shfit to state 13
+dbg api.go:447: (state 13).reduce0(inst)
+dbg api.go:468: must dig deeper
+dbg api.go:447: (state 299).reduce0(inst)
+dbg api.go:468: must dig deeper
+dbg api.go:447: (state 300).reduce0(inst)
+dbg api.go:468: must dig deeper
+dbg api.go:495: state 300.reduce0 fail
+dbg api.go:495: state 299.reduce0 fail
+dbg api.go:495: state 13.reduce0 fail
+dbg all_test.go:154:
+
+==============
+dbg all_test.go:155: state 8, syms0 [LTYPE4], zpath [0 1 2 8]
+dbg api.go:203: yyS [0]
+dbg api.go:209: lex LTYPE4
+dbg api.go:231: reduce rule 1 and goto state 1
+dbg api.go:203: yyS [0 1]
+dbg api.go:231: reduce rule 2 and goto state 2
+dbg api.go:203: yyS [0 1 2]
+dbg api.go:222: shift and goto state 13
+dbg api.go:203: yyS [0 1 2 13]
+dbg api.go:209: lex $end
+dbg all_test.go:172: no action for $end in state 13
+
+
+state 0 //
+
+    0 $accept: . prog
+    1 prog: .  [$end, ';', LLAB, LNAME, LTYPE1, LTYPE2, LTYPE3, LTYPE4, LTYPE5, LTYPE6, LTYPE7, LTYPE8, LTYPE9, LTYPEA, LTYPEB, LTYPEBX, LTYPEC, LTYPED, LTYPEE, LTYPEF, LTYPEH, LTYPEI, LTYPEJ, LTYPEK, LTYPEL, LTYPEM, LTYPEN, LTYPEPC, LTYPEPLD, LVAR, error]
+
+    LTYPE4    reduce using rule 1 (prog)
+
+    prog  goto state 1
+
+state 1 //
+
+    0 $accept: prog .  [$end]
+    3 prog: prog . $@1 line
+    2 $@1: .  [';', LLAB, LNAME, LTYPE1, LTYPE2, LTYPE3, LTYPE4, LTYPE5, LTYPE6, LTYPE7, LTYPE8, LTYPE9, LTYPEA, LTYPEB, LTYPEBX, LTYPEC, LTYPED, LTYPEE, LTYPEF, LTYPEH, LTYPEI, LTYPEJ, LTYPEK, LTYPEL, LTYPEM, LTYPEN, LTYPEPC, LTYPEPLD, LVAR, error]
+
+    LTYPE4    reduce using rule 2 ($@1)
+
+    $@1  goto state 2
+
+state 2 //
+
+    3 prog: prog $@1 . line
+
+    LTYPE4    shift, and goto state 13
+
+    inst  goto state 8
+    line  goto state 3
+
+
+state 13 // LTYPE4
+
+   18 inst: LTYPE4 . cond comma rel
+   19 inst: LTYPE4 . cond comma nireg
+   47 cond: .  ['(', '+', ',', '-', '~', LCOND, LCONST, LLAB, LNAME, LS, LVAR]
+
+    '('     reduce using rule 47 (cond)
+    '+'     reduce using rule 47 (cond)
+    ','     reduce using rule 47 (cond)
+    '-'     reduce using rule 47 (cond)
+    '~'     reduce using rule 47 (cond)
+    LCOND   reduce using rule 47 (cond)
+    LCONST  reduce using rule 47 (cond)
+    LLAB    reduce using rule 47 (cond)
+    LNAME   reduce using rule 47 (cond)
+    LS      reduce using rule 47 (cond)
+    LVAR    reduce using rule 47 (cond)
+
+    cond  goto state 299
+
+
+state 299 // LTYPE4
+
+   18 inst: LTYPE4 cond . comma rel
+   19 inst: LTYPE4 cond . comma nireg
+   48 cond: cond . LCOND
+   49 cond: cond . LS
+   50 comma: .  ['(', '+', '-', '~', LCONST, LLAB, LNAME, LVAR]
+
+    '('     reduce using rule 50 (comma)
+    '+'     reduce using rule 50 (comma)
+    ','     shift, and goto state 36
+    '-'     reduce using rule 50 (comma)
+    '~'     reduce using rule 50 (comma)
+    LCOND   shift, and goto state 164
+    LCONST  reduce using rule 50 (comma)
+    LLAB    reduce using rule 50 (comma)
+    LNAME   reduce using rule 50 (comma)
+    LS      shift, and goto state 165
+    LVAR    reduce using rule 50 (comma)
+
+    comma  goto state 300
+
+state 300 // LTYPE4
+
+   18 inst: LTYPE4 cond comma . rel
+   19 inst: LTYPE4 cond comma . nireg
+
+    '('     shift, and goto state 49
+    '+'     shift, and goto state 65
+    '-'     shift, and goto state 64
+    '~'     shift, and goto state 66
+    LCONST  shift, and goto state 62
+    LLAB    shift, and goto state 291
+    LNAME   shift, and goto state 304
+    LVAR    shift, and goto state 63
+
+    con    goto state 303
+    ireg   goto state 305
+    name   goto state 306
+    nireg  goto state 302
+    rel    goto state 301
+
+*/
 func (s *State) reduce0(sym *Symbol, restrict bool, to symSet) symSet {
-	//dbg("(state %d).reduce0(%s)", s.id, sym)
+	dbg("(state %d).reduce0(%s) MinStr %s", s.id, sym, sym.MinString())
 	set := s.y.newSymSet(-1)
 	found := false
 	for la, actions := range s.actions {
@@ -464,7 +589,7 @@ func (s *State) reduce0(sym *Symbol, restrict bool, to symSet) symSet {
 	}
 
 	//TODO
-	//dbg("must dig deeper")
+	dbg("must dig deeper")
 	m := map[*Symbol]symSet{}
 	for la, actions := range s.actions {
 		act := actions[0]
@@ -491,7 +616,7 @@ func (s *State) reduce0(sym *Symbol, restrict bool, to symSet) symSet {
 			return x
 		}
 	}
-	//dbg("fail")
+	dbg("state %d.reduce0 fail", s.id)
 	return set
 }
 
@@ -517,6 +642,7 @@ type Symbol struct {
 	follow           symSet    //
 	id               int       // Index into y.syms
 	minStr           []*Symbol //
+	minStrOk         bool      //
 	pos              token.Pos //
 }
 
@@ -596,48 +722,55 @@ loop:
 
 // MinString returns an example of a string of symbols which can be reduced to
 // s.  If s is a terminal symbol the result is s. If the only way to express
-// some non terminal s includes s itself then nil is returned (the grammar is
-// invalid then).
-func (s *Symbol) MinString() []*Symbol {
-	return s.minString(nil)
+// some non terminal s includes s itself then nil is returned (and the grammar
+// is invalid).
+func (s *Symbol) MinString() (r []*Symbol) {
+	r, _ = s.minString(nil)
+	return r
 }
 
-func (s *Symbol) minString(m map[*Symbol]bool) (r []*Symbol) {
-	if s := s.minStr; s != nil {
-		return s
+func (s *Symbol) minString(m map[*Symbol]int) (r []*Symbol, ok bool) {
+	dbg("%s.minString ENTER", s)
+	defer func() { dbg("--------------> %s.minString returns %v, %v", s, r, ok) }()
+	if str := s.minStr; str != nil {
+		return str, s.minStrOk
 	}
 
 	defer func() {
 		s.minStr = r
+		s.minStrOk = ok
 	}()
 
 	if s.IsTerminal {
-		return []*Symbol{s}
+		return []*Symbol{s}, true
 	}
 
 	if s.DerivesEmpty() {
-		return []*Symbol{}
+		return []*Symbol{}, true
 	}
 
-	if m[s] {
-		return nil
+	if m[s] != 0 {
+		return nil, false
 	}
 
 	if m == nil {
-		m = map[*Symbol]bool{}
+		m = map[*Symbol]int{}
 	}
-	m[s] = true
+	m[s]++
+	defer func() { m[s]-- }()
 	var best []*Symbol
 nextRule:
 	for _, rule := range s.Rules {
 		var current []*Symbol
 		for _, sym := range rule.syms {
-			if m[sym] { // No recursion.
+			str, ok := sym.minString(m)
+			if !ok {
 				continue nextRule
 			}
 
-			current = append(current, sym.minString(m)...)
+			current = append(current, str...)
 		}
+		ok = true
 		switch {
 		case best == nil:
 			best = current
@@ -656,7 +789,7 @@ nextRule:
 			}
 		}
 	}
-	return best
+	return best, ok
 }
 
 // String implements fmt.Stringer.

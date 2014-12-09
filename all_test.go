@@ -147,36 +147,39 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 		if err == nil {
 			for si, state := range y.States {
 				use(si, state)
-				//TODO syms, la := state.Syms0()
-				//TODO if la != nil {
-				//TODO 	syms = append(syms, la)
-				//TODO }
-				//TODO //dbg("\n\n==============")
-				//TODO //dbg("state %d, syms0 %v, zpath %v", si, syms, state.zpath())
-				//TODO stop, err := y.Parser.parse(si, func() *Symbol {
-				//TODO 	if len(syms) == 0 {
-				//TODO 		return nil
-				//TODO 	}
+				syms, la := state.Syms0()
+				if la != nil {
+					syms = append(syms, la)
+				}
+				dbg("\n\n==============")
+				dbg("state %d, syms0 %v, zpath %v", si, syms, state.zpath())
+				stop, err := y.Parser.parse(si, func() *Symbol {
+					if len(syms) == 0 {
+						return nil
+					}
 
-				//TODO 	r := syms[0]
-				//TODO 	syms = syms[1:]
-				//TODO 	return r
-				//TODO })
+					r := syms[0]
+					syms = syms[1:]
+					return r
+				})
 
-				//TODO if stop == si {
-				//TODO 	//dbg("OK")
-				//TODO 	continue
-				//TODO }
+				if stop == si {
+					dbg("OK")
+					continue
+				}
 
-				//TODO if err != nil {
-				//TODO 	//dbg("", err)
-				//TODO 	t.Error(err)
-				//TODO }
+				if err != nil {
+					dbg("", err)
+					t.Error(err)
+				}
 
-				//TODO if g, e := stop, si; g != e {
-				//TODO 	t.Errorf("state %d not reached (final state %d)", si, stop)
-				//TODO }
+				if g, e := stop, si; g != e {
+					t.Errorf("state %d not reached (final state %d)", si, stop)
+				}
 			}
+
+			dbg("====================== inst.MinString()")
+			dbg("\n----\nResult: %v", y.Syms["inst"].MinString())
 		}
 
 		t.Logf("\tstates %d, parse table entries %d", len(y.States), y.entries)
@@ -377,11 +380,11 @@ states:
 			switch {
 			case len(state) == 1 && state[0].rule() == 0 && state[0].dot() == 2:
 			default:
-				dbg("---- %d", bisonState)
-				for _, item := range state {
-					dbg("rule %d dot %d", item.rule(), item.dot())
-					dbg("not found: %s", item.dump(y))
-				}
+				// dbg("---- %d", bisonState)
+				// for _, item := range state {
+				// 	dbg("rule %d dot %d", item.rule(), item.dot())
+				// 	dbg("not found: %s", item.dump(y))
+				// }
 				return nil, fmt.Errorf("bison report: state %d not found", bisonState)
 			}
 		}
