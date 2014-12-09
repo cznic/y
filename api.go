@@ -381,7 +381,7 @@ func (s *State) syms0() []*Symbol {
 
 // Syms0 returns an example of a string and a lookahead, if any, required to
 // get to state s starting at state 0. If s is shifted into the lookahead is
-// nil.  Invalid grammars and grammars with conflict may have not all states
+// nil.  Invalid grammars and grammars with conflict(s) may have not all states
 // reachable. To construct an example of a string which during parse enters
 // state s:
 //
