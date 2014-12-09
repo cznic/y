@@ -151,8 +151,6 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 				if la != nil {
 					syms = append(syms, la)
 				}
-				dbg("\n\n==============")
-				dbg("state %d, syms0 %v, zpath %v", si, syms, state.zpath())
 				stop, err := y.Parser.parse(si, func() *Symbol {
 					if len(syms) == 0 {
 						return nil
@@ -164,12 +162,10 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 				})
 
 				if stop == si {
-					dbg("OK")
 					continue
 				}
 
 				if err != nil {
-					dbg("", err)
 					t.Error(err)
 				}
 
@@ -177,9 +173,6 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 					t.Errorf("state %d not reached (final state %d)", si, stop)
 				}
 			}
-
-			dbg("====================== inst.MinString()")
-			dbg("\n----\nResult: %v", y.Syms["inst"].MinString())
 		}
 
 		t.Logf("\tstates %d, parse table entries %d", len(y.States), y.entries)
@@ -600,7 +593,7 @@ error "expected number"
 	//
 	//     E  goto state 1
 	//
-	// state 1 // NUM
+	// state 1 // NUM ['*']
 	//
 	//     0 $accept: E .  [$end]
 	//     1 E: E . '*' E  // assoc %left, prec 2
@@ -640,7 +633,7 @@ error "expected number"
 	//
 	//     E  goto state 5
 	//
-	// state 5 // NUM '+' NUM
+	// state 5 // NUM '+' NUM ['*']
 	//
 	//     1 E: E . '*' E  // assoc %left, prec 2
 	//     2 E: E . '+' E  // assoc %left, prec 1
@@ -653,7 +646,7 @@ error "expected number"
 	//     Conflict between rule 2 and token '*' resolved as shift ('+' < '*').
 	//     Conflict between rule 2 and token '+' resolved as reduce (%left '+').
 	//
-	// state 6 // NUM '*' NUM
+	// state 6 // NUM '*' NUM [$end]
 	//
 	//     1 E: E . '*' E  // assoc %left, prec 2
 	//     1 E: E '*' E .  [$end, '*', '+']  // assoc %left, prec 2

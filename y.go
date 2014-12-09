@@ -1229,18 +1229,18 @@ func (y *y) report(w io.Writer) {
 		f.Format("state %d //", si)
 
 		syms, la := state.Syms0()
-		if la != nil {
-			syms = append(syms, la)
-		}
 		for _, s := range syms {
 			switch {
 			case s == nil:
 				f.Format(" <?>")
 			case !s.IsTerminal:
-				f.Format(" <%s>", s.Name)
+				f.Format(" <%s>", s)
 			default:
-				f.Format(" %s", s.Name)
+				f.Format(" %s", s)
 			}
+		}
+		if la != nil {
+			f.Format(" [%s]", la)
 		}
 		f.Format("%i\n\n")
 
@@ -1268,7 +1268,7 @@ func (y *y) report(w io.Writer) {
 			for i, item := range state.kernel {
 				rule := y.Rules[item.rule()]
 				f.Format("%v", item.dump(y))
-				if item.dot() == len(rule.Components) {
+				if y.opts.LA || item.dot() == len(rule.Components) {
 					f.Format("  [%s]", state.lookahead[i].dump(y))
 				}
 				if as := assocStr[rule.Associativity]; as != "" || rule.Precedence >= 0 {
