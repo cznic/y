@@ -460,9 +460,6 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 	y.lookaheads()
 	y.reductions()
 	y.conflicts()
-	if w := opts.Report; w != nil {
-		y.report(w)
-	}
 	y.Table = make([][]Action, len(y.States))
 	for i, state := range y.States {
 		a := make([]Action, 0, len(state.actions)+len(state.gotos))
@@ -483,6 +480,9 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 			a = append(a, Action{sym, act.arg})
 		}
 		y.Table[i] = a
+	}
+	if w := opts.Report; w != nil {
+		y.report(w)
 	}
 	y.reducible()
 	return y, y.xerrors()

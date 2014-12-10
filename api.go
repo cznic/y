@@ -193,7 +193,8 @@ func (p *Parser) parse(stopState int, lex func() *Symbol) (int, error) {
 	yystate := 0
 	var yyS []int
 	var yychar *Symbol
-	for {
+stack:
+	for i := 0; i < 100; i++ {
 		if yystate == stopState {
 			return yystate, nil
 		}
@@ -207,29 +208,34 @@ func (p *Parser) parse(stopState int, lex func() *Symbol) (int, error) {
 			}
 			//dbg("--------> LEX %s", yychar)
 		}
-		actions := p.States[yystate].actions[yychar]
-		if len(actions) == 0 {
-			return yystate, fmt.Errorf("no action for %s in state %d", yychar, yystate)
+		for _, act := range p.Table[yystate] {
+			if act.Sym != yychar {
+				continue
+			}
+
+			switch typ, arg := act.Kind(); typ {
+			case 'a':
+				//dbg("accept")
+				return yystate, nil
+			case 's':
+				yychar = nil
+				yystate = arg
+				//dbg("shift and goto state %d", yystate)
+			case 'r':
+				rule := p.Rules[arg]
+				n := len(yyS)
+				m := len(rule.Components)
+				yyS = yyS[:n-m]
+				n -= m
+				tos := yyS[n-1]
+				yystate = p.States[tos].gotos[rule.Sym].arg
+				//dbg("reduce rule %d and goto state %d", rule.RuleNum, yystate)
+			}
+			continue stack
 		}
-		switch act := actions[0]; act.kind {
-		case 'a':
-			//dbg("accept")
-			return yystate, nil
-		case 's':
-			yychar = nil
-			yystate = act.arg
-			//dbg("shift and goto state %d", yystate)
-		case 'r':
-			rule := p.Rules[act.arg]
-			n := len(yyS)
-			m := len(rule.Components)
-			yyS = yyS[:n-m]
-			n -= m
-			tos := yyS[n-1]
-			yystate = p.States[tos].gotos[rule.Sym].arg
-			//dbg("reduce rule %d and goto state %d", rule.RuleNum, yystate)
-		}
+		return yystate, fmt.Errorf("no action for %s in state %d", yychar, yystate)
 	}
+	return yystate, fmt.Errorf("parser stall in state %d", yystate)
 }
 
 // ProcessAST processes yacc source code parsed in ast. It returns a *Parser or
