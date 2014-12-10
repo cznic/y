@@ -493,36 +493,46 @@ func (s *Symbol) DerivesEmpty() bool {
 	return s.derivesEmpty(map[*Symbol]bool{})
 }
 
-func (s *Symbol) first(y *y) symSet { // dragon, 4.4
+// - dragon 4.4
+// - http://www.cs.virginia.edu/~cs415/reading/FirstFollowLL.pdf
+func (s *Symbol) first(y *y) (r symSet) {
 	if s.firstValid {
 		return s.first1
 	}
 
 	s.firstValid = true
+	r = y.newSymSet(-1)
+	for _, rule := range s.Rules {
+		if len(rule.Components) == 0 {
+			r.addEmpty()
+			break
+		}
+	}
+	s.first1 = r
+	defer func() {
+		s.first1 = r
+	}()
+
 	if s.IsTerminal {
-		s.first1 = y.newSymSet(s.id)
-		return s.first1
+		return y.newSymSet(s.id)
 	}
 
-	s.first1 = y.newSymSet(-1)
-loop:
-	for _, rule := range s.Rules {
-		syms := rule.syms
-		if len(syms) == 0 {
-			s.first1.addEmpty()
-			continue
-		}
+	if s == y.emptySym {
+		return y.newSymSet(s.id)
+	}
 
-		for _, sym := range syms {
-			f1 := sym.first(y)
-			s.first1.add(f1, true)
-			if !f1.hasEmpty() {
-				continue loop
+nextRule:
+	for _, rule := range s.Rules {
+		for _, sym := range rule.syms {
+			t := sym.first(y)
+			r.add(t, false)
+			if !t.hasEmpty() {
+				continue nextRule
 			}
 		}
-		s.first1.addEmpty()
+		r.addEmpty()
 	}
-	return s.first1
+	return r
 }
 
 // MinString returns an example of a string of symbols which can be reduced to
