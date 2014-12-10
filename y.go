@@ -476,7 +476,7 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 			case 'r':
 				a = append(a, Action{sym, -act.arg})
 			default:
-				panic("internal error 014")
+				panic("internal error 005")
 			}
 		}
 		for sym, act := range state.gotos {
@@ -1643,7 +1643,7 @@ func (y *y) rules0() error {
 	for nm := range y.nonTerminals {
 		nt, ok := y.Syms[nm]
 		if !ok {
-			panic("internal error 005")
+			continue
 		}
 
 		if nt.IsTerminal {
@@ -1824,7 +1824,7 @@ examples:
 						stack = stack[:len(stack)-len(rule.Components)]
 						stack = append(stack, y.States[stack[len(stack)-1]].gotos[rule.Sym].arg)
 					default:
-						panic("internal error 013")
+						panic("internal error 010")
 					}
 				}
 			}
