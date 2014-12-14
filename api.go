@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//TODO Minimize parser0.y
 //TODO +Engine, and export it.
 
 // Package y converts .y (yacc[2]) source files to data suitable for a parser

@@ -623,13 +623,22 @@ func (y *y) conflicts() error {
 				}
 			}
 			ret := map[action]bool{}
+			var sr, rr bool
 			for _, conflict := range out {
 				ret[conflict[0]], ret[conflict[1]] = true, true
 				if conflict[0].kind == 's' {
-					y.ConflictsSR++
+					//TODO- y.ConflictsSR++
+					sr = true
 					continue
 				}
 
+				//TODO- y.ConflictsRR++
+				rr = true
+			}
+			if sr {
+				y.ConflictsSR++
+			}
+			if rr {
 				y.ConflictsRR++
 			}
 			var sa, ra []action
