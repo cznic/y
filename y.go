@@ -627,12 +627,10 @@ func (y *y) conflicts() error {
 			for _, conflict := range out {
 				ret[conflict[0]], ret[conflict[1]] = true, true
 				if conflict[0].kind == 's' {
-					//TODO- y.ConflictsSR++
 					sr = true
 					continue
 				}
 
-				//TODO- y.ConflictsRR++
 				rr = true
 			}
 			if sr {
