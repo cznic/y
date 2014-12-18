@@ -40,6 +40,7 @@ const (
 	AssocLeft         // %left
 	AssocRight        // %right
 	AssocNone         // %nonassoc
+	AssocPrecedence   // %precedence
 )
 
 // Action describes one cell of the parser table, ie. the action to be taken when

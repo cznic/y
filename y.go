@@ -31,9 +31,10 @@ const (
 
 var (
 	assocStr = map[int]string{
-		AssocLeft:  "%left",
-		AssocRight: "%right",
-		AssocNone:  "%nonassoc",
+		AssocLeft:       "%left",
+		AssocRight:      "%right",
+		AssocNone:       "%nonassoc",
+		AssocPrecedence: "%precedence",
 	}
 	empty     = "ε"
 	isTesting bool
@@ -752,6 +753,8 @@ func (y *y) defs() error {
 				assoc = AssocRight
 			case yparser.Nonassoc:
 				assoc = AssocNone
+			case yparser.Precedence:
+				assoc = AssocPrecedence
 			}
 			var assocDef AssocDef
 			assocDef.Associativity = assoc
