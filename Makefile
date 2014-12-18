@@ -29,7 +29,7 @@ editor:
 	go fmt
 	go test -i
 	go test
-	go install ./...
+	go install
 
 internalError:
 	egrep -ho '"internal error.*"' *.go | sort | cat -n

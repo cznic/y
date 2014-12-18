@@ -737,7 +737,7 @@ func (y *y) defs() error {
 			y.Start = nm
 			y.nonTerminals[nm] = def.Pos
 			y.useSym(nm, def.Pos)
-		case yparser.Left, yparser.Right, yparser.Nonassoc:
+		case yparser.Left, yparser.Right, yparser.Nonassoc, yparser.Precedence:
 			y.precedence++
 			isAssoc = true
 			fallthrough
@@ -785,7 +785,7 @@ func (y *y) defs() error {
 				}
 
 				switch def.Rword {
-				case yparser.Left, yparser.Right, yparser.Nonassoc:
+				case yparser.Left, yparser.Right, yparser.Nonassoc, yparser.Precedence:
 					t.Precedence = y.precedence
 				}
 

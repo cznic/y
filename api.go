@@ -7,6 +7,10 @@
 // Package y converts .y (yacc[2]) source files to data suitable for a parser
 // generator.
 //
+// Changelog
+//
+// 2014-12-18: Support %precedence for better bison compatibility[5].
+//
 // Links
 //
 // Referenced from elsewhere:
@@ -16,6 +20,7 @@
 //  [2]: http://dinosaur.compilertools.net/yacc/
 //  [3]: http://dinosaur.compilertools.net/lex/index.html
 //  [4]: https://www.gnu.org/software/bison/manual/html_node/Using-Mid_002dRule-Actions.html
+//  [5]: http://www.gnu.org/software/bison/manual/html_node/Precedence-Only.html#Precedence-Only
 package y
 
 import (
