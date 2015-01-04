@@ -447,6 +447,7 @@ type Symbol struct {
 	IsRightRecursive bool      // S: ... S ;
 	IsTerminal       bool      // Whether this is a terminal symbol.
 	Name             string    // Textual value of the symbol, for example "IDENT" or "';'".
+	Pos              token.Pos // Position where the symbol was firstly introduced.
 	Precedence       int       // -1 of no precedence assigned.
 	Rules            []*Rule   // Productions associated with this symbol.
 	Type             string    // For example "int", "float64" or "foo", but possibly also "".
@@ -459,7 +460,6 @@ type Symbol struct {
 	id               int       // Index into y.syms
 	minStr           []*Symbol //
 	minStrOk         bool      //
-	pos              token.Pos //
 }
 
 func (s *Symbol) derivesEmpty(m map[*Symbol]bool) bool {

@@ -447,7 +447,7 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 
 		ex, ok := m[sym.Value]
 		if ok {
-			y.err(sym.pos, "symbol %s has the same value (%d) as symbol %s at %s.", sym, sym.Value, ex, y.pos(ex.pos))
+			y.err(sym.Pos, "symbol %s has the same value (%d) as symbol %s at %s.", sym, sym.Value, ex, y.pos(ex.Pos))
 		}
 
 		m[sym.Value] = sym
@@ -778,7 +778,7 @@ func (y *y) defs() error {
 					Associativity: assoc,
 					IsTerminal:    true,
 					Name:          name,
-					pos:           nmno.Pos,
+					Pos:           nmno.Pos,
 					Precedence:    -1,
 					Type:          typ,
 					Value:         num,
@@ -808,9 +808,9 @@ func (y *y) defs() error {
 						ex.Associativity = n
 					case n != o:
 						y.err(
-							t.pos,
+							t.Pos,
 							"%s: conflict with previous associativity declaration at %v",
-							name, y.pos(ex.pos),
+							name, y.pos(ex.Pos),
 						)
 					}
 				}
@@ -821,9 +821,9 @@ func (y *y) defs() error {
 						ex.Precedence = n
 					case n != o:
 						y.err(
-							t.pos,
+							t.Pos,
 							"%s: conflict with previous precedence declaration at %v",
-							name, y.pos(ex.pos),
+							name, y.pos(ex.Pos),
 						)
 					}
 				}
@@ -834,9 +834,9 @@ func (y *y) defs() error {
 						ex.Type = n
 					case n != o:
 						y.err(
-							t.pos,
+							t.Pos,
 							"%s: conflict with previous type declaration at %v",
-							name, y.pos(ex.pos),
+							name, y.pos(ex.Pos),
 						)
 					}
 				}
@@ -847,9 +847,9 @@ func (y *y) defs() error {
 						ex.Value = n
 					case n != o:
 						y.err(
-							t.pos,
+							t.Pos,
 							"%s: conflict with previous value declaration at %v",
-							name, y.pos(ex.pos),
+							name, y.pos(ex.Pos),
 						)
 					}
 				}
@@ -1102,7 +1102,7 @@ func (y *y) reducible() error {
 			}
 			rule := y.Rules[arg]
 			if len(syms) == 0 && !rule.Sym.DerivesEmpty() || !ok {
-				y.errp(y.pos(rule.Sym.pos), "no token string reduces %s in state %d", rule.Sym, si)
+				y.errp(y.pos(rule.Sym.Pos), "no token string reduces %s in state %d", rule.Sym, si)
 			}
 		}
 	}
@@ -1408,7 +1408,7 @@ func (y *y) resolve(s *State, si int, sym *Symbol, conflict [2]action) (resolved
 			s.actions[sym] = append(s.actions[sym], conflict[0])
 			return true, true
 		case sym.Associativity == AssocNone:
-			y.err(sym.pos, "%nonassoc symbol %s conflict in state %d", sym, si)
+			y.err(sym.Pos, "%nonassoc symbol %s conflict in state %d", sym, si)
 		}
 	case 'r':
 		// nop
@@ -1434,7 +1434,7 @@ func (y *y) rules0() error {
 
 		ruleSym := y.Syms[prule.Name]
 		if ruleSym == nil {
-			ruleSym = &Symbol{Name: prule.Name, pos: prule.Pos, Value: -1}
+			ruleSym = &Symbol{Name: prule.Name, Pos: prule.Pos, Value: -1}
 			y.Syms[prule.Name] = ruleSym
 		}
 		ruleSym.Type = y.symTypes[ruleSym.Name].typeName
@@ -1646,7 +1646,7 @@ func (y *y) rules0() error {
 		}
 
 		if _, ok := y.symsUsed[nm]; !ok {
-			y.err(s.pos, "non terminal declared and not used: %s", nm)
+			y.err(s.Pos, "non terminal declared and not used: %s", nm)
 		}
 	}
 	y.symSetCap = (len(y.syms) + intBits - 1) / intBits
@@ -1657,7 +1657,7 @@ func (y *y) rules0() error {
 		}
 
 		if nt.IsTerminal {
-			y.err(nt.pos, "expected %s to be a non terminal", nt)
+			y.err(nt.Pos, "expected %s to be a non terminal", nt)
 		}
 
 	}
