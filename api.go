@@ -24,6 +24,7 @@
 package y
 
 import (
+	"bytes"
 	"fmt"
 	"go/ast"
 	"go/token"
@@ -32,6 +33,7 @@ import (
 	"sort"
 
 	yparser "github.com/cznic/parser/yacc"
+	yscanner "github.com/cznic/scanner/yacc"
 )
 
 // Values of {AssocDef,Rule,Sym}.Associativity
@@ -337,6 +339,25 @@ type Rule struct {
 	maxDlr          int
 	pos             token.Pos
 	syms            []*Symbol
+}
+
+// Actions returns the textual representation of r.Actions combined.
+func (r *Rule) Actions() string {
+	var buf bytes.Buffer
+	for _, v := range r.Action {
+		buf.WriteString(v.Src)
+		switch v.Tok {
+		case yscanner.DLR_DLR:
+			buf.WriteString("$$")
+		case yscanner.DLR_NUM:
+			buf.WriteString(fmt.Sprintf("$%d", v.Num))
+		case yscanner.DLR_TAG_DLR:
+			buf.WriteString(fmt.Sprintf("$<%s>", v.Tag))
+		case yscanner.DLR_TAG_NUM:
+			buf.WriteString(fmt.Sprintf("$<%s>%d", v.Tag, v.Num))
+		}
+	}
+	return buf.String()
 }
 
 // State represents one state of the parser.
