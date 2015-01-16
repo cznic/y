@@ -433,9 +433,12 @@ func (s *State) syms0() []*Symbol {
 
 // Syms0 returns an example of a string and a lookahead, if any, required to
 // get to state s starting at state 0. If s is shifted into the lookahead is
-// nil.  Invalid grammars and grammars with conflict(s) may have not all states
-// reachable. To construct an example of a string which during parse enters
-// state s:
+// nil.
+//
+// Note: Invalid grammars and grammars with conflicts may have not all states
+// reachable.
+//
+// To construct an example of a string for which the parser enters state s:
 //
 //	syms, la := s.Syms0()
 //	if la != nil {
@@ -475,6 +478,29 @@ func (s *State) Syms0() ([]*Symbol, *Symbol) {
 
 	sort.Strings(a)
 	return str0, s.y.Syms[a[0]]
+}
+
+// Reduce0 returns an example of a string required to reduce rule r in state s
+// starting at state 0. If states s does not reduce rule r the string is empty.
+//
+// Note: Invalid grammars and grammars with conflicts may have not all states
+// reachable and/or not all productions reducible.
+func (s *State) Reduce0(r *Rule) []*Symbol {
+	rn := r.RuleNum
+	var sym *Symbol
+	for s, acts := range s.actions {
+		act := acts[0]
+		if act.kind == 'r' && act.arg == rn {
+			sym = s
+			break
+		}
+	}
+	if sym == nil {
+		return nil
+	}
+
+	syms, _ := s.Syms0()
+	return append(syms, sym)
 }
 
 // A special default symbol has Name "$default" and represents the default
