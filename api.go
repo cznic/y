@@ -9,6 +9,8 @@
 //
 // Changelog
 //
+// 2015-01-16: Added Parser.Reductions.
+//
 // 2014-12-18: Support %precedence for better bison compatibility[5].
 //
 // Links
@@ -243,6 +245,24 @@ stack:
 		return yystate, fmt.Errorf("no action for %s in state %d", yychar, yystate)
 	}
 	return yystate, fmt.Errorf("parser stall in state %d", yystate)
+}
+
+// Reductions returns a mapping rule# -> []state#. The slice is a sorted set of
+// states in which the corresponding rule is reduced.
+func (p *Parser) Reductions() map[int][]int {
+	m := map[int][]int{}
+	for state, actions := range p.Table {
+		for _, act := range actions {
+			if typ, arg := act.Kind(); typ == 'r' {
+				m[arg] = append(m[arg], state)
+			}
+		}
+	}
+	for k, v := range m {
+		sort.Ints(v)
+		m[k] = v
+	}
+	return m
 }
 
 // ProcessAST processes yacc source code parsed in ast. It returns a *Parser or
