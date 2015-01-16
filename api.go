@@ -9,7 +9,7 @@
 //
 // Changelog
 //
-// 2015-01-16: Added Parser.Reductions.
+// 2015-01-16: Added Parser.Reductions and State.Reduce0 methods.
 //
 // 2014-12-18: Support %precedence for better bison compatibility[5].
 //
@@ -487,20 +487,20 @@ func (s *State) Syms0() ([]*Symbol, *Symbol) {
 // reachable and/or not all productions reducible.
 func (s *State) Reduce0(r *Rule) []*Symbol {
 	rn := r.RuleNum
-	var sym *Symbol
-	for s, acts := range s.actions {
+	las := []string{}
+	for la, acts := range s.actions {
 		act := acts[0]
 		if act.kind == 'r' && act.arg == rn {
-			sym = s
-			break
+			las = append(las, la.Name)
 		}
 	}
-	if sym == nil {
+	if len(las) == 0 {
 		return nil
 	}
 
 	syms, _ := s.Syms0()
-	return append(syms, sym)
+	sort.Strings(las)
+	return append(syms, s.y.Syms[las[0]])
 }
 
 // A special default symbol has Name "$default" and represents the default
