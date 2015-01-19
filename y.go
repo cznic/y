@@ -389,7 +389,7 @@ func newY(fset *token.FileSet, ast *yparser.AST, opts *Options) *y {
 		clsCache:     map[item]map[item]symSet{},
 		dummySym:     &Symbol{Name: "#", IsTerminal: true},
 		emptySym:     &Symbol{Name: empty, IsTerminal: true},
-		endSym:       &Symbol{Name: "$end", IsTerminal: true, Precedence: -1, Value: -1},
+		endSym:       &Symbol{Name: "$end", IsTerminal: true, Precedence: -1},
 		errSym:       &Symbol{Name: "error", IsTerminal: true},
 		fset:         fset,
 		itemSets:     map[string]int{},
@@ -401,6 +401,7 @@ func newY(fset *token.FileSet, ast *yparser.AST, opts *Options) *y {
 		idBuf:        make([]byte, 1024),
 	}
 	r.symsUsed = map[string]token.Pos{r.errSym.Name: 0, r.noSym.Name: 0}
+	r.endSym.Value = r.allocValue()
 	r.errSym.Value = r.allocValue()
 	r.Syms = map[string]*Symbol{
 		r.acceptSym.Name: r.acceptSym,
