@@ -26,7 +26,7 @@ cpu: y.test
 	go tool pprof --lines $< cpu.out
 
 editor:
-	go fmt
+	gofmt -l -s -w .
 	go test -i
 	go test
 	go install

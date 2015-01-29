@@ -714,7 +714,7 @@ func (y *y) conflicts() error {
 			}
 
 		}
-		state.actions[y.noSym] = []action{action{'r', redn}}
+		state.actions[y.noSym] = []action{{'r', redn}}
 	}
 	return y.error()
 }
@@ -1084,25 +1084,12 @@ func (y *y) reducible() error {
 	for si, state := range y.States {
 		for _, actions := range state.actions {
 			action := actions[0]
-			arg := 0
-			switch action.kind {
-			case 'r':
-				arg = action.arg
-			case 'a':
-			default:
+			if action.kind != 'r' {
 				continue
 			}
 
-			syms := state.syms0()
-			ok := true
-			for _, sym := range syms {
-				if sym == nil || !sym.IsTerminal {
-					ok = false
-					break
-				}
-			}
-			rule := y.Rules[arg]
-			if len(syms) == 0 && !rule.Sym.DerivesEmpty() || !ok {
+			rule := y.Rules[action.arg]
+			if len(state.Reduce0(rule)) == 0 {
 				y.errp(y.pos(rule.Sym.Pos), "no token string reduces %s in state %d", rule.Sym, si)
 			}
 		}
