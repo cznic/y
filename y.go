@@ -1488,7 +1488,7 @@ func (y *y) rules0() error {
 				for _, v := range x {
 					n := v.Num
 					tag := v.Tag
-					if v.Tok == yscanner.DLR_DLR && ruleSym.Type == "" {
+					if v.Tok == yscanner.DLR_DLR && ruleSym.Type == "" && !y.opts.AllowTypeErrors {
 						y.err(v.Pos, "$$ of %s has no declared type", ruleSym)
 					}
 					if v.Tok == yscanner.DLR_NUM || v.Tok == yscanner.DLR_TAG_NUM {
@@ -1597,7 +1597,7 @@ func (y *y) rules0() error {
 
 	for nm, pos := range post {
 		sym := y.Syms[nm]
-		if sym == nil || sym.Type == "" {
+		if (sym == nil || sym.Type == "") && !y.opts.AllowTypeErrors {
 			y.err(pos, "%s has no declared type", nm)
 		}
 	}

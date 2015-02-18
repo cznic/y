@@ -149,13 +149,14 @@ type AssocDef struct {
 // It's an error if the example token sequence is accepted by the parser, ie.
 // if it does not produce an error.
 type Options struct {
-	AllowConflicts bool      // Do not report unresolved conflicts as errors.
-	Closures       bool      // Report non kernel items.
-	LA             bool      // Report all lookahead sets.
-	Report         io.Writer // If non nil, write a grammar report to Report.
-	Resolved       bool      // Explain how conflicts were resolved.
-	XErrorsName    string    // Name used to report errors in XErrorsSrc, defaults to <xerrors>.
-	XErrorsSrc     []byte    // Used to produce errors by example[1].
+	AllowConflicts  bool      // Do not report unresolved conflicts as errors.
+	AllowTypeErrors bool      // Continue even if type checks fail.
+	Closures        bool      // Report non kernel items.
+	LA              bool      // Report all lookahead sets.
+	Report          io.Writer // If non nil, write a grammar report to Report.
+	Resolved        bool      // Explain how conflicts were resolved.
+	XErrorsName     string    // Name used to report errors in XErrorsSrc, defaults to <xerrors>.
+	XErrorsSrc      []byte    // Used to produce errors by example[1].
 
 	debugSyms bool
 
