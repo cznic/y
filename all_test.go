@@ -288,7 +288,7 @@ func newBison(pth string, y *y) (*bison, error) {
 			return nil, fmt.Errorf("bison report: no states found")
 		}
 
-		if strings.HasPrefix(peek, "state ") {
+		if strings.HasPrefix(peek, "state ") || strings.HasPrefix(peek, "State ") {
 			break
 		}
 
@@ -436,7 +436,7 @@ states:
 				break states
 			}
 
-			if strings.HasPrefix(l, "state ") {
+			if strings.HasPrefix(l, "state ") || strings.HasPrefix(l, "State ") {
 				break
 			}
 
