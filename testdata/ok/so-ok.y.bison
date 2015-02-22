@@ -1,4 +1,4 @@
-Grammar
+Gramatika
 
     0 $accept: program $end
 
@@ -30,9 +30,9 @@ Grammar
    17 compound_stmt: '{' local_declarations statement_list '}'
 
    18 local_declarations: local_declarations var_declaration
-   19                   | /* empty */
+   19                   | %empty
 
-   20 statement_list: /* empty */
+   20 statement_list: %empty
    21               | statement_list statement
 
    22 statement: expression_stmt
@@ -88,13 +88,13 @@ Grammar
    58 call: ID '(' args ')'
 
    59 args: arg_list
-   60     | /* empty */
+   60     | %empty
 
    61 arg_list: arg_list ',' expression
    62         | expression
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '(' (40) 10 29 30 31 54 58
@@ -128,71 +128,71 @@ NOTEQUAL (269) 45
 LOWER_THAN_ELSE (270)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (31)
-    on left: 0
+    vlevo: 0
 program (32)
-    on left: 1, on right: 0
+    vlevo: 1, vpravo: 0
 declaration_list (33)
-    on left: 2 3, on right: 1 2
+    vlevo: 2 3, vpravo: 1 2
 declaration (34)
-    on left: 4 5, on right: 2 3
+    vlevo: 4 5, vpravo: 2 3
 var_declaration (35)
-    on left: 6 7, on right: 4 18
+    vlevo: 6 7, vpravo: 4 18
 type_specifier (36)
-    on left: 8 9, on right: 6 7 10 15 16
+    vlevo: 8 9, vpravo: 6 7 10 15 16
 fun_declaration (37)
-    on left: 10, on right: 5
+    vlevo: 10, vpravo: 5
 params (38)
-    on left: 11 12, on right: 10
+    vlevo: 11 12, vpravo: 10
 param_list (39)
-    on left: 13 14, on right: 11 13
+    vlevo: 13 14, vpravo: 11 13
 param (40)
-    on left: 15 16, on right: 13 14
+    vlevo: 15 16, vpravo: 13 14
 compound_stmt (41)
-    on left: 17, on right: 10 23
+    vlevo: 17, vpravo: 10 23
 local_declarations (42)
-    on left: 18 19, on right: 17 18
+    vlevo: 18 19, vpravo: 17 18
 statement_list (43)
-    on left: 20 21, on right: 17 21
+    vlevo: 20 21, vpravo: 17 21
 statement (44)
-    on left: 22 23 24 25 26, on right: 21 29 30 31
+    vlevo: 22 23 24 25 26, vpravo: 21 29 30 31
 expression_stmt (45)
-    on left: 27 28, on right: 22
+    vlevo: 27 28, vpravo: 22
 selection_stmt (46)
-    on left: 29 30, on right: 24
+    vlevo: 29 30, vpravo: 24
 iteration_stmt (47)
-    on left: 31, on right: 25
+    vlevo: 31, vpravo: 25
 return_stmt (48)
-    on left: 32 33, on right: 26
+    vlevo: 32 33, vpravo: 26
 expression (49)
-    on left: 34 35, on right: 27 29 30 31 33 34 37 54 61 62
+    vlevo: 34 35, vpravo: 27 29 30 31 33 34 37 54 61 62
 var (50)
-    on left: 36 37, on right: 34 55
+    vlevo: 36 37, vpravo: 34 55
 simple_expression (51)
-    on left: 38 39, on right: 35
+    vlevo: 38 39, vpravo: 35
 relop (52)
-    on left: 40 41 42 43 44 45, on right: 38
+    vlevo: 40 41 42 43 44 45, vpravo: 38
 additive_expression (53)
-    on left: 46 47, on right: 38 39 46
+    vlevo: 46 47, vpravo: 38 39 46
 addop (54)
-    on left: 48 49, on right: 46
+    vlevo: 48 49, vpravo: 46
 term (55)
-    on left: 50 51, on right: 46 47 50
+    vlevo: 50 51, vpravo: 46 47 50
 mulop (56)
-    on left: 52 53, on right: 50
+    vlevo: 52 53, vpravo: 50
 factor (57)
-    on left: 54 55 56 57, on right: 50 51
+    vlevo: 54 55 56 57, vpravo: 50 51
 call (58)
-    on left: 58, on right: 56
+    vlevo: 58, vpravo: 56
 args (59)
-    on left: 59 60, on right: 58
+    vlevo: 59 60, vpravo: 58
 arg_list (60)
-    on left: 61 62, on right: 59 61
+    vlevo: 61 62, vpravo: 59 61
 
 
-state 0
+State 0
 
     0 $accept: . program $end
     1 program: . declaration_list
@@ -206,39 +206,39 @@ state 0
     9               | . VOID
    10 fun_declaration: . type_specifier ID '(' params ')' compound_stmt
 
-    INT   shift, and go to state 1
-    VOID  shift, and go to state 2
+    INT   posunout a přejít do stavu 1
+    VOID  posunout a přejít do stavu 2
 
-    program           go to state 3
-    declaration_list  go to state 4
-    declaration       go to state 5
-    var_declaration   go to state 6
-    type_specifier    go to state 7
-    fun_declaration   go to state 8
+    program           přejít do stavu 3
+    declaration_list  přejít do stavu 4
+    declaration       přejít do stavu 5
+    var_declaration   přejít do stavu 6
+    type_specifier    přejít do stavu 7
+    fun_declaration   přejít do stavu 8
 
 
-state 1
+State 1
 
     8 type_specifier: INT .
 
-    $default  reduce using rule 8 (type_specifier)
+    $výchozí  reduce using rule 8 (type_specifier)
 
 
-state 2
+State 2
 
     9 type_specifier: VOID .
 
-    $default  reduce using rule 9 (type_specifier)
+    $výchozí  reduce using rule 9 (type_specifier)
 
 
-state 3
+State 3
 
     0 $accept: program . $end
 
-    $end  shift, and go to state 9
+    $end  posunout a přejít do stavu 9
 
 
-state 4
+State 4
 
     1 program: declaration_list .  [$end]
     2 declaration_list: declaration_list . declaration
@@ -250,87 +250,87 @@ state 4
     9               | . VOID
    10 fun_declaration: . type_specifier ID '(' params ')' compound_stmt
 
-    INT   shift, and go to state 1
-    VOID  shift, and go to state 2
+    INT   posunout a přejít do stavu 1
+    VOID  posunout a přejít do stavu 2
 
-    $default  reduce using rule 1 (program)
+    $výchozí  reduce using rule 1 (program)
 
-    declaration      go to state 10
-    var_declaration  go to state 6
-    type_specifier   go to state 7
-    fun_declaration  go to state 8
+    declaration      přejít do stavu 10
+    var_declaration  přejít do stavu 6
+    type_specifier   přejít do stavu 7
+    fun_declaration  přejít do stavu 8
 
 
-state 5
+State 5
 
     3 declaration_list: declaration .
 
-    $default  reduce using rule 3 (declaration_list)
+    $výchozí  reduce using rule 3 (declaration_list)
 
 
-state 6
+State 6
 
     4 declaration: var_declaration .
 
-    $default  reduce using rule 4 (declaration)
+    $výchozí  reduce using rule 4 (declaration)
 
 
-state 7
+State 7
 
     6 var_declaration: type_specifier . ID ';'
     7                | type_specifier . ID '[' NUM ']' ';'
    10 fun_declaration: type_specifier . ID '(' params ')' compound_stmt
 
-    ID  shift, and go to state 11
+    ID  posunout a přejít do stavu 11
 
 
-state 8
+State 8
 
     5 declaration: fun_declaration .
 
-    $default  reduce using rule 5 (declaration)
+    $výchozí  reduce using rule 5 (declaration)
 
 
-state 9
+State 9
 
     0 $accept: program $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 10
+State 10
 
     2 declaration_list: declaration_list declaration .
 
-    $default  reduce using rule 2 (declaration_list)
+    $výchozí  reduce using rule 2 (declaration_list)
 
 
-state 11
+State 11
 
     6 var_declaration: type_specifier ID . ';'
     7                | type_specifier ID . '[' NUM ']' ';'
    10 fun_declaration: type_specifier ID . '(' params ')' compound_stmt
 
-    ';'  shift, and go to state 12
-    '['  shift, and go to state 13
-    '('  shift, and go to state 14
+    ';'  posunout a přejít do stavu 12
+    '['  posunout a přejít do stavu 13
+    '('  posunout a přejít do stavu 14
 
 
-state 12
+State 12
 
     6 var_declaration: type_specifier ID ';' .
 
-    $default  reduce using rule 6 (var_declaration)
+    $výchozí  reduce using rule 6 (var_declaration)
 
 
-state 13
+State 13
 
     7 var_declaration: type_specifier ID '[' . NUM ']' ';'
 
-    NUM  shift, and go to state 15
+    NUM  posunout a přejít do stavu 15
 
 
-state 14
+State 14
 
     8 type_specifier: . INT
     9               | . VOID
@@ -342,91 +342,91 @@ state 14
    15 param: . type_specifier ID
    16      | . type_specifier ID '[' ']'
 
-    INT   shift, and go to state 1
-    VOID  shift, and go to state 16
+    INT   posunout a přejít do stavu 1
+    VOID  posunout a přejít do stavu 16
 
-    type_specifier  go to state 17
-    params          go to state 18
-    param_list      go to state 19
-    param           go to state 20
+    type_specifier  přejít do stavu 17
+    params          přejít do stavu 18
+    param_list      přejít do stavu 19
+    param           přejít do stavu 20
 
 
-state 15
+State 15
 
     7 var_declaration: type_specifier ID '[' NUM . ']' ';'
 
-    ']'  shift, and go to state 21
+    ']'  posunout a přejít do stavu 21
 
 
-state 16
+State 16
 
     9 type_specifier: VOID .  [ID]
    12 params: VOID .  [')']
 
-    ')'       reduce using rule 12 (params)
-    $default  reduce using rule 9 (type_specifier)
+    ')'         reduce using rule 12 (params)
+    $výchozí  reduce using rule 9 (type_specifier)
 
 
-state 17
+State 17
 
    15 param: type_specifier . ID
    16      | type_specifier . ID '[' ']'
 
-    ID  shift, and go to state 22
+    ID  posunout a přejít do stavu 22
 
 
-state 18
+State 18
 
    10 fun_declaration: type_specifier ID '(' params . ')' compound_stmt
 
-    ')'  shift, and go to state 23
+    ')'  posunout a přejít do stavu 23
 
 
-state 19
+State 19
 
    11 params: param_list .  [')']
    13 param_list: param_list . ',' param
 
-    ','  shift, and go to state 24
+    ','  posunout a přejít do stavu 24
 
-    $default  reduce using rule 11 (params)
+    $výchozí  reduce using rule 11 (params)
 
 
-state 20
+State 20
 
    14 param_list: param .
 
-    $default  reduce using rule 14 (param_list)
+    $výchozí  reduce using rule 14 (param_list)
 
 
-state 21
+State 21
 
     7 var_declaration: type_specifier ID '[' NUM ']' . ';'
 
-    ';'  shift, and go to state 25
+    ';'  posunout a přejít do stavu 25
 
 
-state 22
+State 22
 
    15 param: type_specifier ID .  [')', ',']
    16      | type_specifier ID . '[' ']'
 
-    '['  shift, and go to state 26
+    '['  posunout a přejít do stavu 26
 
-    $default  reduce using rule 15 (param)
+    $výchozí  reduce using rule 15 (param)
 
 
-state 23
+State 23
 
    10 fun_declaration: type_specifier ID '(' params ')' . compound_stmt
    17 compound_stmt: . '{' local_declarations statement_list '}'
 
-    '{'  shift, and go to state 27
+    '{'  posunout a přejít do stavu 27
 
-    compound_stmt  go to state 28
+    compound_stmt  přejít do stavu 28
 
 
-state 24
+State 24
 
     8 type_specifier: . INT
     9               | . VOID
@@ -434,60 +434,60 @@ state 24
    15 param: . type_specifier ID
    16      | . type_specifier ID '[' ']'
 
-    INT   shift, and go to state 1
-    VOID  shift, and go to state 2
+    INT   posunout a přejít do stavu 1
+    VOID  posunout a přejít do stavu 2
 
-    type_specifier  go to state 17
-    param           go to state 29
+    type_specifier  přejít do stavu 17
+    param           přejít do stavu 29
 
 
-state 25
+State 25
 
     7 var_declaration: type_specifier ID '[' NUM ']' ';' .
 
-    $default  reduce using rule 7 (var_declaration)
+    $výchozí  reduce using rule 7 (var_declaration)
 
 
-state 26
+State 26
 
    16 param: type_specifier ID '[' . ']'
 
-    ']'  shift, and go to state 30
+    ']'  posunout a přejít do stavu 30
 
 
-state 27
+State 27
 
    17 compound_stmt: '{' . local_declarations statement_list '}'
    18 local_declarations: . local_declarations var_declaration
-   19                   | .
+   19                   | . %empty
 
-    $default  reduce using rule 19 (local_declarations)
+    $výchozí  reduce using rule 19 (local_declarations)
 
-    local_declarations  go to state 31
+    local_declarations  přejít do stavu 31
 
 
-state 28
+State 28
 
    10 fun_declaration: type_specifier ID '(' params ')' compound_stmt .
 
-    $default  reduce using rule 10 (fun_declaration)
+    $výchozí  reduce using rule 10 (fun_declaration)
 
 
-state 29
+State 29
 
    13 param_list: param_list ',' param .
 
-    $default  reduce using rule 13 (param_list)
+    $výchozí  reduce using rule 13 (param_list)
 
 
-state 30
+State 30
 
    16 param: type_specifier ID '[' ']' .
 
-    $default  reduce using rule 16 (param)
+    $výchozí  reduce using rule 16 (param)
 
 
-state 31
+State 31
 
     6 var_declaration: . type_specifier ID ';'
     7                | . type_specifier ID '[' NUM ']' ';'
@@ -495,35 +495,35 @@ state 31
     9               | . VOID
    17 compound_stmt: '{' local_declarations . statement_list '}'
    18 local_declarations: local_declarations . var_declaration
-   20 statement_list: .  [IF, RETURN, WHILE, ID, NUM, ';', '(', '{', '}']
+   20 statement_list: . %empty  [IF, RETURN, WHILE, ID, NUM, ';', '(', '{', '}']
    21               | . statement_list statement
 
-    INT   shift, and go to state 1
-    VOID  shift, and go to state 2
+    INT   posunout a přejít do stavu 1
+    VOID  posunout a přejít do stavu 2
 
-    $default  reduce using rule 20 (statement_list)
+    $výchozí  reduce using rule 20 (statement_list)
 
-    var_declaration  go to state 32
-    type_specifier   go to state 33
-    statement_list   go to state 34
+    var_declaration  přejít do stavu 32
+    type_specifier   přejít do stavu 33
+    statement_list   přejít do stavu 34
 
 
-state 32
+State 32
 
    18 local_declarations: local_declarations var_declaration .
 
-    $default  reduce using rule 18 (local_declarations)
+    $výchozí  reduce using rule 18 (local_declarations)
 
 
-state 33
+State 33
 
     6 var_declaration: type_specifier . ID ';'
     7                | type_specifier . ID '[' NUM ']' ';'
 
-    ID  shift, and go to state 35
+    ID  posunout a přejít do stavu 35
 
 
-state 34
+State 34
 
    17 compound_stmt: . '{' local_declarations statement_list '}'
    17              | '{' local_declarations statement_list . '}'
@@ -556,49 +556,49 @@ state 34
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    IF      shift, and go to state 36
-    RETURN  shift, and go to state 37
-    WHILE   shift, and go to state 38
-    ID      shift, and go to state 39
-    NUM     shift, and go to state 40
-    ';'     shift, and go to state 41
-    '('     shift, and go to state 42
-    '{'     shift, and go to state 27
-    '}'     shift, and go to state 43
+    IF      posunout a přejít do stavu 36
+    RETURN  posunout a přejít do stavu 37
+    WHILE   posunout a přejít do stavu 38
+    ID      posunout a přejít do stavu 39
+    NUM     posunout a přejít do stavu 40
+    ';'     posunout a přejít do stavu 41
+    '('     posunout a přejít do stavu 42
+    '{'     posunout a přejít do stavu 27
+    '}'     posunout a přejít do stavu 43
 
-    compound_stmt        go to state 44
-    statement            go to state 45
-    expression_stmt      go to state 46
-    selection_stmt       go to state 47
-    iteration_stmt       go to state 48
-    return_stmt          go to state 49
-    expression           go to state 50
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    compound_stmt        přejít do stavu 44
+    statement            přejít do stavu 45
+    expression_stmt      přejít do stavu 46
+    selection_stmt       přejít do stavu 47
+    iteration_stmt       přejít do stavu 48
+    return_stmt          přejít do stavu 49
+    expression           přejít do stavu 50
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 35
+State 35
 
     6 var_declaration: type_specifier ID . ';'
     7                | type_specifier ID . '[' NUM ']' ';'
 
-    ';'  shift, and go to state 12
-    '['  shift, and go to state 13
+    ';'  posunout a přejít do stavu 12
+    '['  posunout a přejít do stavu 13
 
 
-state 36
+State 36
 
    29 selection_stmt: IF . '(' expression ')' statement
    30               | IF . '(' expression ')' statement ELSE statement
 
-    '('  shift, and go to state 57
+    '('  posunout a přejít do stavu 57
 
 
-state 37
+State 37
 
    32 return_stmt: RETURN . ';'
    33            | RETURN . expression ';'
@@ -618,54 +618,54 @@ state 37
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    ';'  shift, and go to state 58
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    ';'  posunout a přejít do stavu 58
+    '('  posunout a přejít do stavu 42
 
-    expression           go to state 59
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    expression           přejít do stavu 59
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 38
+State 38
 
    31 iteration_stmt: WHILE . '(' expression ')' statement
 
-    '('  shift, and go to state 60
+    '('  posunout a přejít do stavu 60
 
 
-state 39
+State 39
 
    36 var: ID .  [LTE, GTE, EQUAL, NOTEQUAL, ';', ']', ')', ',', '=', '<', '>', '+', '-', '*', '/']
    37    | ID . '[' expression ']'
    58 call: ID . '(' args ')'
 
-    '['  shift, and go to state 61
-    '('  shift, and go to state 62
+    '['  posunout a přejít do stavu 61
+    '('  posunout a přejít do stavu 62
 
-    $default  reduce using rule 36 (var)
+    $výchozí  reduce using rule 36 (var)
 
 
-state 40
+State 40
 
    57 factor: NUM .
 
-    $default  reduce using rule 57 (factor)
+    $výchozí  reduce using rule 57 (factor)
 
 
-state 41
+State 41
 
    28 expression_stmt: ';' .
 
-    $default  reduce using rule 28 (expression_stmt)
+    $výchozí  reduce using rule 28 (expression_stmt)
 
 
-state 42
+State 42
 
    34 expression: . var '=' expression
    35           | . simple_expression
@@ -684,93 +684,93 @@ state 42
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    expression           go to state 63
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    expression           přejít do stavu 63
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 43
+State 43
 
    17 compound_stmt: '{' local_declarations statement_list '}' .
 
-    $default  reduce using rule 17 (compound_stmt)
+    $výchozí  reduce using rule 17 (compound_stmt)
 
 
-state 44
+State 44
 
    23 statement: compound_stmt .
 
-    $default  reduce using rule 23 (statement)
+    $výchozí  reduce using rule 23 (statement)
 
 
-state 45
+State 45
 
    21 statement_list: statement_list statement .
 
-    $default  reduce using rule 21 (statement_list)
+    $výchozí  reduce using rule 21 (statement_list)
 
 
-state 46
+State 46
 
    22 statement: expression_stmt .
 
-    $default  reduce using rule 22 (statement)
+    $výchozí  reduce using rule 22 (statement)
 
 
-state 47
+State 47
 
    24 statement: selection_stmt .
 
-    $default  reduce using rule 24 (statement)
+    $výchozí  reduce using rule 24 (statement)
 
 
-state 48
+State 48
 
    25 statement: iteration_stmt .
 
-    $default  reduce using rule 25 (statement)
+    $výchozí  reduce using rule 25 (statement)
 
 
-state 49
+State 49
 
    26 statement: return_stmt .
 
-    $default  reduce using rule 26 (statement)
+    $výchozí  reduce using rule 26 (statement)
 
 
-state 50
+State 50
 
    27 expression_stmt: expression . ';'
 
-    ';'  shift, and go to state 64
+    ';'  posunout a přejít do stavu 64
 
 
-state 51
+State 51
 
    34 expression: var . '=' expression
    55 factor: var .  [LTE, GTE, EQUAL, NOTEQUAL, ';', ']', ')', ',', '<', '>', '+', '-', '*', '/']
 
-    '='  shift, and go to state 65
+    '='  posunout a přejít do stavu 65
 
-    $default  reduce using rule 55 (factor)
+    $výchozí  reduce using rule 55 (factor)
 
 
-state 52
+State 52
 
    35 expression: simple_expression .
 
-    $default  reduce using rule 35 (expression)
+    $výchozí  reduce using rule 35 (expression)
 
 
-state 53
+State 53
 
    38 simple_expression: additive_expression . relop additive_expression
    39                  | additive_expression .  [';', ']', ')', ',']
@@ -784,51 +784,51 @@ state 53
    48 addop: . '+'
    49      | . '-'
 
-    LTE       shift, and go to state 66
-    GTE       shift, and go to state 67
-    EQUAL     shift, and go to state 68
-    NOTEQUAL  shift, and go to state 69
-    '<'       shift, and go to state 70
-    '>'       shift, and go to state 71
-    '+'       shift, and go to state 72
-    '-'       shift, and go to state 73
+    LTE       posunout a přejít do stavu 66
+    GTE       posunout a přejít do stavu 67
+    EQUAL     posunout a přejít do stavu 68
+    NOTEQUAL  posunout a přejít do stavu 69
+    '<'       posunout a přejít do stavu 70
+    '>'       posunout a přejít do stavu 71
+    '+'       posunout a přejít do stavu 72
+    '-'       posunout a přejít do stavu 73
 
-    $default  reduce using rule 39 (simple_expression)
+    $výchozí  reduce using rule 39 (simple_expression)
 
-    relop  go to state 74
-    addop  go to state 75
+    relop  přejít do stavu 74
+    addop  přejít do stavu 75
 
 
-state 54
+State 54
 
    47 additive_expression: term .  [LTE, GTE, EQUAL, NOTEQUAL, ';', ']', ')', ',', '<', '>', '+', '-']
    50 term: term . mulop factor
    52 mulop: . '*'
    53      | . '/'
 
-    '*'  shift, and go to state 76
-    '/'  shift, and go to state 77
+    '*'  posunout a přejít do stavu 76
+    '/'  posunout a přejít do stavu 77
 
-    $default  reduce using rule 47 (additive_expression)
+    $výchozí  reduce using rule 47 (additive_expression)
 
-    mulop  go to state 78
+    mulop  přejít do stavu 78
 
 
-state 55
+State 55
 
    51 term: factor .
 
-    $default  reduce using rule 51 (term)
+    $výchozí  reduce using rule 51 (term)
 
 
-state 56
+State 56
 
    56 factor: call .
 
-    $default  reduce using rule 56 (factor)
+    $výchozí  reduce using rule 56 (factor)
 
 
-state 57
+State 57
 
    29 selection_stmt: IF '(' . expression ')' statement
    30               | IF '(' . expression ')' statement ELSE statement
@@ -848,34 +848,34 @@ state 57
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    expression           go to state 79
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    expression           přejít do stavu 79
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 58
+State 58
 
    32 return_stmt: RETURN ';' .
 
-    $default  reduce using rule 32 (return_stmt)
+    $výchozí  reduce using rule 32 (return_stmt)
 
 
-state 59
+State 59
 
    33 return_stmt: RETURN expression . ';'
 
-    ';'  shift, and go to state 80
+    ';'  posunout a přejít do stavu 80
 
 
-state 60
+State 60
 
    31 iteration_stmt: WHILE '(' . expression ')' statement
    34 expression: . var '=' expression
@@ -894,20 +894,20 @@ state 60
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    expression           go to state 81
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    expression           přejít do stavu 81
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 61
+State 61
 
    34 expression: . var '=' expression
    35           | . simple_expression
@@ -926,20 +926,20 @@ state 61
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    expression           go to state 82
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    expression           přejít do stavu 82
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 62
+State 62
 
    34 expression: . var '=' expression
    35           | . simple_expression
@@ -958,42 +958,42 @@ state 62
    58 call: . ID '(' args ')'
    58     | ID '(' . args ')'
    59 args: . arg_list
-   60     | .  [')']
+   60     | . %empty  [')']
    61 arg_list: . arg_list ',' expression
    62         | . expression
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    $default  reduce using rule 60 (args)
+    $výchozí  reduce using rule 60 (args)
 
-    expression           go to state 83
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
-    args                 go to state 84
-    arg_list             go to state 85
+    expression           přejít do stavu 83
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
+    args                 přejít do stavu 84
+    arg_list             přejít do stavu 85
 
 
-state 63
+State 63
 
    54 factor: '(' expression . ')'
 
-    ')'  shift, and go to state 86
+    ')'  posunout a přejít do stavu 86
 
 
-state 64
+State 64
 
    27 expression_stmt: expression ';' .
 
-    $default  reduce using rule 27 (expression_stmt)
+    $výchozí  reduce using rule 27 (expression_stmt)
 
 
-state 65
+State 65
 
    34 expression: . var '=' expression
    34           | var '=' . expression
@@ -1012,76 +1012,76 @@ state 65
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    expression           go to state 87
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    expression           přejít do stavu 87
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 66
+State 66
 
    40 relop: LTE .
 
-    $default  reduce using rule 40 (relop)
+    $výchozí  reduce using rule 40 (relop)
 
 
-state 67
+State 67
 
    43 relop: GTE .
 
-    $default  reduce using rule 43 (relop)
+    $výchozí  reduce using rule 43 (relop)
 
 
-state 68
+State 68
 
    44 relop: EQUAL .
 
-    $default  reduce using rule 44 (relop)
+    $výchozí  reduce using rule 44 (relop)
 
 
-state 69
+State 69
 
    45 relop: NOTEQUAL .
 
-    $default  reduce using rule 45 (relop)
+    $výchozí  reduce using rule 45 (relop)
 
 
-state 70
+State 70
 
    41 relop: '<' .
 
-    $default  reduce using rule 41 (relop)
+    $výchozí  reduce using rule 41 (relop)
 
 
-state 71
+State 71
 
    42 relop: '>' .
 
-    $default  reduce using rule 42 (relop)
+    $výchozí  reduce using rule 42 (relop)
 
 
-state 72
+State 72
 
    48 addop: '+' .
 
-    $default  reduce using rule 48 (addop)
+    $výchozí  reduce using rule 48 (addop)
 
 
-state 73
+State 73
 
    49 addop: '-' .
 
-    $default  reduce using rule 49 (addop)
+    $výchozí  reduce using rule 49 (addop)
 
 
-state 74
+State 74
 
    36 var: . ID
    37    | . ID '[' expression ']'
@@ -1096,18 +1096,18 @@ state 74
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    var                  go to state 88
-    additive_expression  go to state 89
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    var                  přejít do stavu 88
+    additive_expression  přejít do stavu 89
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 75
+State 75
 
    36 var: . ID
    37    | . ID '[' expression ']'
@@ -1120,31 +1120,31 @@ state 75
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    var     go to state 88
-    term    go to state 90
-    factor  go to state 55
-    call    go to state 56
+    var     přejít do stavu 88
+    term    přejít do stavu 90
+    factor  přejít do stavu 55
+    call    přejít do stavu 56
 
 
-state 76
+State 76
 
    52 mulop: '*' .
 
-    $default  reduce using rule 52 (mulop)
+    $výchozí  reduce using rule 52 (mulop)
 
 
-state 77
+State 77
 
    53 mulop: '/' .
 
-    $default  reduce using rule 53 (mulop)
+    $výchozí  reduce using rule 53 (mulop)
 
 
-state 78
+State 78
 
    36 var: . ID
    37    | . ID '[' expression ']'
@@ -1155,127 +1155,127 @@ state 78
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    var     go to state 88
-    factor  go to state 91
-    call    go to state 56
+    var     přejít do stavu 88
+    factor  přejít do stavu 91
+    call    přejít do stavu 56
 
 
-state 79
+State 79
 
    29 selection_stmt: IF '(' expression . ')' statement
    30               | IF '(' expression . ')' statement ELSE statement
 
-    ')'  shift, and go to state 92
+    ')'  posunout a přejít do stavu 92
 
 
-state 80
+State 80
 
    33 return_stmt: RETURN expression ';' .
 
-    $default  reduce using rule 33 (return_stmt)
+    $výchozí  reduce using rule 33 (return_stmt)
 
 
-state 81
+State 81
 
    31 iteration_stmt: WHILE '(' expression . ')' statement
 
-    ')'  shift, and go to state 93
+    ')'  posunout a přejít do stavu 93
 
 
-state 82
+State 82
 
    37 var: ID '[' expression . ']'
 
-    ']'  shift, and go to state 94
+    ']'  posunout a přejít do stavu 94
 
 
-state 83
+State 83
 
    62 arg_list: expression .
 
-    $default  reduce using rule 62 (arg_list)
+    $výchozí  reduce using rule 62 (arg_list)
 
 
-state 84
+State 84
 
    58 call: ID '(' args . ')'
 
-    ')'  shift, and go to state 95
+    ')'  posunout a přejít do stavu 95
 
 
-state 85
+State 85
 
    59 args: arg_list .  [')']
    61 arg_list: arg_list . ',' expression
 
-    ','  shift, and go to state 96
+    ','  posunout a přejít do stavu 96
 
-    $default  reduce using rule 59 (args)
+    $výchozí  reduce using rule 59 (args)
 
 
-state 86
+State 86
 
    54 factor: '(' expression ')' .
 
-    $default  reduce using rule 54 (factor)
+    $výchozí  reduce using rule 54 (factor)
 
 
-state 87
+State 87
 
    34 expression: var '=' expression .
 
-    $default  reduce using rule 34 (expression)
+    $výchozí  reduce using rule 34 (expression)
 
 
-state 88
+State 88
 
    55 factor: var .
 
-    $default  reduce using rule 55 (factor)
+    $výchozí  reduce using rule 55 (factor)
 
 
-state 89
+State 89
 
    38 simple_expression: additive_expression relop additive_expression .  [';', ']', ')', ',']
    46 additive_expression: additive_expression . addop term
    48 addop: . '+'
    49      | . '-'
 
-    '+'  shift, and go to state 72
-    '-'  shift, and go to state 73
+    '+'  posunout a přejít do stavu 72
+    '-'  posunout a přejít do stavu 73
 
-    $default  reduce using rule 38 (simple_expression)
+    $výchozí  reduce using rule 38 (simple_expression)
 
-    addop  go to state 75
+    addop  přejít do stavu 75
 
 
-state 90
+State 90
 
    46 additive_expression: additive_expression addop term .  [LTE, GTE, EQUAL, NOTEQUAL, ';', ']', ')', ',', '<', '>', '+', '-']
    50 term: term . mulop factor
    52 mulop: . '*'
    53      | . '/'
 
-    '*'  shift, and go to state 76
-    '/'  shift, and go to state 77
+    '*'  posunout a přejít do stavu 76
+    '/'  posunout a přejít do stavu 77
 
-    $default  reduce using rule 46 (additive_expression)
+    $výchozí  reduce using rule 46 (additive_expression)
 
-    mulop  go to state 78
+    mulop  přejít do stavu 78
 
 
-state 91
+State 91
 
    50 term: term mulop factor .
 
-    $default  reduce using rule 50 (term)
+    $výchozí  reduce using rule 50 (term)
 
 
-state 92
+State 92
 
    17 compound_stmt: . '{' local_declarations statement_list '}'
    22 statement: . expression_stmt
@@ -1308,31 +1308,31 @@ state 92
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    IF      shift, and go to state 36
-    RETURN  shift, and go to state 37
-    WHILE   shift, and go to state 38
-    ID      shift, and go to state 39
-    NUM     shift, and go to state 40
-    ';'     shift, and go to state 41
-    '('     shift, and go to state 42
-    '{'     shift, and go to state 27
+    IF      posunout a přejít do stavu 36
+    RETURN  posunout a přejít do stavu 37
+    WHILE   posunout a přejít do stavu 38
+    ID      posunout a přejít do stavu 39
+    NUM     posunout a přejít do stavu 40
+    ';'     posunout a přejít do stavu 41
+    '('     posunout a přejít do stavu 42
+    '{'     posunout a přejít do stavu 27
 
-    compound_stmt        go to state 44
-    statement            go to state 97
-    expression_stmt      go to state 46
-    selection_stmt       go to state 47
-    iteration_stmt       go to state 48
-    return_stmt          go to state 49
-    expression           go to state 50
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    compound_stmt        přejít do stavu 44
+    statement            přejít do stavu 97
+    expression_stmt      přejít do stavu 46
+    selection_stmt       přejít do stavu 47
+    iteration_stmt       přejít do stavu 48
+    return_stmt          přejít do stavu 49
+    expression           přejít do stavu 50
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 93
+State 93
 
    17 compound_stmt: . '{' local_declarations statement_list '}'
    22 statement: . expression_stmt
@@ -1364,45 +1364,45 @@ state 93
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    IF      shift, and go to state 36
-    RETURN  shift, and go to state 37
-    WHILE   shift, and go to state 38
-    ID      shift, and go to state 39
-    NUM     shift, and go to state 40
-    ';'     shift, and go to state 41
-    '('     shift, and go to state 42
-    '{'     shift, and go to state 27
+    IF      posunout a přejít do stavu 36
+    RETURN  posunout a přejít do stavu 37
+    WHILE   posunout a přejít do stavu 38
+    ID      posunout a přejít do stavu 39
+    NUM     posunout a přejít do stavu 40
+    ';'     posunout a přejít do stavu 41
+    '('     posunout a přejít do stavu 42
+    '{'     posunout a přejít do stavu 27
 
-    compound_stmt        go to state 44
-    statement            go to state 98
-    expression_stmt      go to state 46
-    selection_stmt       go to state 47
-    iteration_stmt       go to state 48
-    return_stmt          go to state 49
-    expression           go to state 50
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    compound_stmt        přejít do stavu 44
+    statement            přejít do stavu 98
+    expression_stmt      přejít do stavu 46
+    selection_stmt       přejít do stavu 47
+    iteration_stmt       přejít do stavu 48
+    return_stmt          přejít do stavu 49
+    expression           přejít do stavu 50
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 94
+State 94
 
    37 var: ID '[' expression ']' .
 
-    $default  reduce using rule 37 (var)
+    $výchozí  reduce using rule 37 (var)
 
 
-state 95
+State 95
 
    58 call: ID '(' args ')' .
 
-    $default  reduce using rule 58 (call)
+    $výchozí  reduce using rule 58 (call)
 
 
-state 96
+State 96
 
    34 expression: . var '=' expression
    35           | . simple_expression
@@ -1421,46 +1421,46 @@ state 96
    58 call: . ID '(' args ')'
    61 arg_list: arg_list ',' . expression
 
-    ID   shift, and go to state 39
-    NUM  shift, and go to state 40
-    '('  shift, and go to state 42
+    ID   posunout a přejít do stavu 39
+    NUM  posunout a přejít do stavu 40
+    '('  posunout a přejít do stavu 42
 
-    expression           go to state 99
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    expression           přejít do stavu 99
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 97
+State 97
 
    29 selection_stmt: IF '(' expression ')' statement .  [IF, RETURN, WHILE, ID, NUM, ';', '(', '{', '}']
    30               | IF '(' expression ')' statement . ELSE statement
 
-    ELSE  shift, and go to state 100
+    ELSE  posunout a přejít do stavu 100
 
-    $default  reduce using rule 29 (selection_stmt)
+    $výchozí  reduce using rule 29 (selection_stmt)
 
     Conflict between rule 29 and token ELSE resolved as shift (LOWER_THAN_ELSE < ELSE).
 
 
-state 98
+State 98
 
    31 iteration_stmt: WHILE '(' expression ')' statement .
 
-    $default  reduce using rule 31 (iteration_stmt)
+    $výchozí  reduce using rule 31 (iteration_stmt)
 
 
-state 99
+State 99
 
    61 arg_list: arg_list ',' expression .
 
-    $default  reduce using rule 61 (arg_list)
+    $výchozí  reduce using rule 61 (arg_list)
 
 
-state 100
+State 100
 
    17 compound_stmt: . '{' local_declarations statement_list '}'
    22 statement: . expression_stmt
@@ -1492,32 +1492,32 @@ state 100
    57       | . NUM
    58 call: . ID '(' args ')'
 
-    IF      shift, and go to state 36
-    RETURN  shift, and go to state 37
-    WHILE   shift, and go to state 38
-    ID      shift, and go to state 39
-    NUM     shift, and go to state 40
-    ';'     shift, and go to state 41
-    '('     shift, and go to state 42
-    '{'     shift, and go to state 27
+    IF      posunout a přejít do stavu 36
+    RETURN  posunout a přejít do stavu 37
+    WHILE   posunout a přejít do stavu 38
+    ID      posunout a přejít do stavu 39
+    NUM     posunout a přejít do stavu 40
+    ';'     posunout a přejít do stavu 41
+    '('     posunout a přejít do stavu 42
+    '{'     posunout a přejít do stavu 27
 
-    compound_stmt        go to state 44
-    statement            go to state 101
-    expression_stmt      go to state 46
-    selection_stmt       go to state 47
-    iteration_stmt       go to state 48
-    return_stmt          go to state 49
-    expression           go to state 50
-    var                  go to state 51
-    simple_expression    go to state 52
-    additive_expression  go to state 53
-    term                 go to state 54
-    factor               go to state 55
-    call                 go to state 56
+    compound_stmt        přejít do stavu 44
+    statement            přejít do stavu 101
+    expression_stmt      přejít do stavu 46
+    selection_stmt       přejít do stavu 47
+    iteration_stmt       přejít do stavu 48
+    return_stmt          přejít do stavu 49
+    expression           přejít do stavu 50
+    var                  přejít do stavu 51
+    simple_expression    přejít do stavu 52
+    additive_expression  přejít do stavu 53
+    term                 přejít do stavu 54
+    factor               přejít do stavu 55
+    call                 přejít do stavu 56
 
 
-state 101
+State 101
 
    30 selection_stmt: IF '(' expression ')' statement ELSE statement .
 
-    $default  reduce using rule 30 (selection_stmt)
+    $výchozí  reduce using rule 30 (selection_stmt)

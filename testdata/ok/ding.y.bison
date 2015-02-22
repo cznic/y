@@ -1,4 +1,4 @@
-Grammar
+Gramatika
 
     0 $accept: rhyme $end
 
@@ -9,7 +9,7 @@ Grammar
     3 place: DELL
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 error (256)
@@ -18,77 +18,77 @@ DONG (259) 2
 DELL (260) 3
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (6)
-    on left: 0
+    vlevo: 0
 rhyme (7)
-    on left: 1, on right: 0
+    vlevo: 1, vpravo: 0
 sound (8)
-    on left: 2, on right: 1
+    vlevo: 2, vpravo: 1
 place (9)
-    on left: 3, on right: 1
+    vlevo: 3, vpravo: 1
 
 
-state 0
+State 0
 
     0 $accept: . rhyme $end
     1 rhyme: . sound place
     2 sound: . DING DONG
 
-    DING  shift, and go to state 1
+    DING  posunout a přejít do stavu 1
 
-    rhyme  go to state 2
-    sound  go to state 3
+    rhyme  přejít do stavu 2
+    sound  přejít do stavu 3
 
 
-state 1
+State 1
 
     2 sound: DING . DONG
 
-    DONG  shift, and go to state 4
+    DONG  posunout a přejít do stavu 4
 
 
-state 2
+State 2
 
     0 $accept: rhyme . $end
 
-    $end  shift, and go to state 5
+    $end  posunout a přejít do stavu 5
 
 
-state 3
+State 3
 
     1 rhyme: sound . place
     3 place: . DELL
 
-    DELL  shift, and go to state 6
+    DELL  posunout a přejít do stavu 6
 
-    place  go to state 7
+    place  přejít do stavu 7
 
 
-state 4
+State 4
 
     2 sound: DING DONG .
 
-    $default  reduce using rule 2 (sound)
+    $výchozí  reduce using rule 2 (sound)
 
 
-state 5
+State 5
 
     0 $accept: rhyme $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 6
+State 6
 
     3 place: DELL .
 
-    $default  reduce using rule 3 (place)
+    $výchozí  reduce using rule 3 (place)
 
 
-state 7
+State 7
 
     1 rhyme: sound place .
 
-    $default  reduce using rule 1 (rhyme)
+    $výchozí  reduce using rule 1 (rhyme)

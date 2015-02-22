@@ -1,4 +1,4 @@
-Grammar
+Gramatika
 
     0 $accept: top $end
 
@@ -20,7 +20,7 @@ Grammar
    12      | '(' expr ')'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '(' (40) 12
@@ -33,23 +33,23 @@ error (256)
 NUM (258) 11
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (10)
-    on left: 0
+    vlevo: 0
 top (11)
-    on left: 1, on right: 0
+    vlevo: 1, vpravo: 0
 expr (12)
-    on left: 2 3 4, on right: 1 3 4 12
+    vlevo: 2 3 4, vpravo: 1 3 4 12
 expr1 (13)
-    on left: 5 6 7, on right: 2 6 7
+    vlevo: 5 6 7, vpravo: 2 6 7
 expr2 (14)
-    on left: 8 9 10, on right: 5 6 7 9 10
+    vlevo: 8 9 10, vpravo: 5 6 7 9 10
 expr3 (15)
-    on left: 11 12, on right: 8 9 10
+    vlevo: 11 12, vpravo: 8 9 10
 
 
-state 0
+State 0
 
     0 $accept: . top $end
     1 top: . expr
@@ -65,26 +65,26 @@ state 0
    11 expr3: . NUM
    12      | . '(' expr ')'
 
-    NUM  shift, and go to state 1
-    '+'  shift, and go to state 2
-    '-'  shift, and go to state 3
-    '('  shift, and go to state 4
+    NUM  posunout a přejít do stavu 1
+    '+'  posunout a přejít do stavu 2
+    '-'  posunout a přejít do stavu 3
+    '('  posunout a přejít do stavu 4
 
-    top    go to state 5
-    expr   go to state 6
-    expr1  go to state 7
-    expr2  go to state 8
-    expr3  go to state 9
+    top    přejít do stavu 5
+    expr   přejít do stavu 6
+    expr1  přejít do stavu 7
+    expr2  přejít do stavu 8
+    expr3  přejít do stavu 9
 
 
-state 1
+State 1
 
    11 expr3: NUM .
 
-    $default  reduce using rule 11 (expr3)
+    $výchozí  reduce using rule 11 (expr3)
 
 
-state 2
+State 2
 
     2 expr: . expr1
     3     | . '+' expr
@@ -99,18 +99,18 @@ state 2
    11 expr3: . NUM
    12      | . '(' expr ')'
 
-    NUM  shift, and go to state 1
-    '+'  shift, and go to state 2
-    '-'  shift, and go to state 3
-    '('  shift, and go to state 4
+    NUM  posunout a přejít do stavu 1
+    '+'  posunout a přejít do stavu 2
+    '-'  posunout a přejít do stavu 3
+    '('  posunout a přejít do stavu 4
 
-    expr   go to state 10
-    expr1  go to state 7
-    expr2  go to state 8
-    expr3  go to state 9
+    expr   přejít do stavu 10
+    expr1  přejít do stavu 7
+    expr2  přejít do stavu 8
+    expr3  přejít do stavu 9
 
 
-state 3
+State 3
 
     2 expr: . expr1
     3     | . '+' expr
@@ -125,18 +125,18 @@ state 3
    11 expr3: . NUM
    12      | . '(' expr ')'
 
-    NUM  shift, and go to state 1
-    '+'  shift, and go to state 2
-    '-'  shift, and go to state 3
-    '('  shift, and go to state 4
+    NUM  posunout a přejít do stavu 1
+    '+'  posunout a přejít do stavu 2
+    '-'  posunout a přejít do stavu 3
+    '('  posunout a přejít do stavu 4
 
-    expr   go to state 11
-    expr1  go to state 7
-    expr2  go to state 8
-    expr3  go to state 9
+    expr   přejít do stavu 11
+    expr1  přejít do stavu 7
+    expr2  přejít do stavu 8
+    expr3  přejít do stavu 9
 
 
-state 4
+State 4
 
     2 expr: . expr1
     3     | . '+' expr
@@ -151,91 +151,91 @@ state 4
    12      | . '(' expr ')'
    12      | '(' . expr ')'
 
-    NUM  shift, and go to state 1
-    '+'  shift, and go to state 2
-    '-'  shift, and go to state 3
-    '('  shift, and go to state 4
+    NUM  posunout a přejít do stavu 1
+    '+'  posunout a přejít do stavu 2
+    '-'  posunout a přejít do stavu 3
+    '('  posunout a přejít do stavu 4
 
-    expr   go to state 12
-    expr1  go to state 7
-    expr2  go to state 8
-    expr3  go to state 9
+    expr   přejít do stavu 12
+    expr1  přejít do stavu 7
+    expr2  přejít do stavu 8
+    expr3  přejít do stavu 9
 
 
-state 5
+State 5
 
     0 $accept: top . $end
 
-    $end  shift, and go to state 13
+    $end  posunout a přejít do stavu 13
 
 
-state 6
+State 6
 
     1 top: expr .
 
-    $default  reduce using rule 1 (top)
+    $výchozí  reduce using rule 1 (top)
 
 
-state 7
+State 7
 
     2 expr: expr1 .  [$end, ')']
     6 expr1: expr1 . '+' expr2
     7      | expr1 . '-' expr2
 
-    '+'  shift, and go to state 14
-    '-'  shift, and go to state 15
+    '+'  posunout a přejít do stavu 14
+    '-'  posunout a přejít do stavu 15
 
-    $default  reduce using rule 2 (expr)
+    $výchozí  reduce using rule 2 (expr)
 
 
-state 8
+State 8
 
     5 expr1: expr2 .  [$end, '+', '-', ')']
     9 expr2: expr2 . '*' expr3
    10      | expr2 . '/' expr3
 
-    '*'  shift, and go to state 16
-    '/'  shift, and go to state 17
+    '*'  posunout a přejít do stavu 16
+    '/'  posunout a přejít do stavu 17
 
-    $default  reduce using rule 5 (expr1)
+    $výchozí  reduce using rule 5 (expr1)
 
 
-state 9
+State 9
 
     8 expr2: expr3 .
 
-    $default  reduce using rule 8 (expr2)
+    $výchozí  reduce using rule 8 (expr2)
 
 
-state 10
+State 10
 
     3 expr: '+' expr .
 
-    $default  reduce using rule 3 (expr)
+    $výchozí  reduce using rule 3 (expr)
 
 
-state 11
+State 11
 
     4 expr: '-' expr .
 
-    $default  reduce using rule 4 (expr)
+    $výchozí  reduce using rule 4 (expr)
 
 
-state 12
+State 12
 
    12 expr3: '(' expr . ')'
 
-    ')'  shift, and go to state 18
+    ')'  posunout a přejít do stavu 18
 
 
-state 13
+State 13
 
     0 $accept: top $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 14
+State 14
 
     6 expr1: expr1 '+' . expr2
     8 expr2: . expr3
@@ -244,14 +244,14 @@ state 14
    11 expr3: . NUM
    12      | . '(' expr ')'
 
-    NUM  shift, and go to state 1
-    '('  shift, and go to state 4
+    NUM  posunout a přejít do stavu 1
+    '('  posunout a přejít do stavu 4
 
-    expr2  go to state 19
-    expr3  go to state 9
+    expr2  přejít do stavu 19
+    expr3  přejít do stavu 9
 
 
-state 15
+State 15
 
     7 expr1: expr1 '-' . expr2
     8 expr2: . expr3
@@ -260,77 +260,77 @@ state 15
    11 expr3: . NUM
    12      | . '(' expr ')'
 
-    NUM  shift, and go to state 1
-    '('  shift, and go to state 4
+    NUM  posunout a přejít do stavu 1
+    '('  posunout a přejít do stavu 4
 
-    expr2  go to state 20
-    expr3  go to state 9
+    expr2  přejít do stavu 20
+    expr3  přejít do stavu 9
 
 
-state 16
+State 16
 
     9 expr2: expr2 '*' . expr3
    11 expr3: . NUM
    12      | . '(' expr ')'
 
-    NUM  shift, and go to state 1
-    '('  shift, and go to state 4
+    NUM  posunout a přejít do stavu 1
+    '('  posunout a přejít do stavu 4
 
-    expr3  go to state 21
+    expr3  přejít do stavu 21
 
 
-state 17
+State 17
 
    10 expr2: expr2 '/' . expr3
    11 expr3: . NUM
    12      | . '(' expr ')'
 
-    NUM  shift, and go to state 1
-    '('  shift, and go to state 4
+    NUM  posunout a přejít do stavu 1
+    '('  posunout a přejít do stavu 4
 
-    expr3  go to state 22
+    expr3  přejít do stavu 22
 
 
-state 18
+State 18
 
    12 expr3: '(' expr ')' .
 
-    $default  reduce using rule 12 (expr3)
+    $výchozí  reduce using rule 12 (expr3)
 
 
-state 19
+State 19
 
     6 expr1: expr1 '+' expr2 .  [$end, '+', '-', ')']
     9 expr2: expr2 . '*' expr3
    10      | expr2 . '/' expr3
 
-    '*'  shift, and go to state 16
-    '/'  shift, and go to state 17
+    '*'  posunout a přejít do stavu 16
+    '/'  posunout a přejít do stavu 17
 
-    $default  reduce using rule 6 (expr1)
+    $výchozí  reduce using rule 6 (expr1)
 
 
-state 20
+State 20
 
     7 expr1: expr1 '-' expr2 .  [$end, '+', '-', ')']
     9 expr2: expr2 . '*' expr3
    10      | expr2 . '/' expr3
 
-    '*'  shift, and go to state 16
-    '/'  shift, and go to state 17
+    '*'  posunout a přejít do stavu 16
+    '/'  posunout a přejít do stavu 17
 
-    $default  reduce using rule 7 (expr1)
+    $výchozí  reduce using rule 7 (expr1)
 
 
-state 21
+State 21
 
     9 expr2: expr2 '*' expr3 .
 
-    $default  reduce using rule 9 (expr2)
+    $výchozí  reduce using rule 9 (expr2)
 
 
-state 22
+State 22
 
    10 expr2: expr2 '/' expr3 .
 
-    $default  reduce using rule 10 (expr2)
+    $výchozí  reduce using rule 10 (expr2)

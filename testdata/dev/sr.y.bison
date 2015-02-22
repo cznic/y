@@ -1,7 +1,7 @@
-State 5 conflicts: 1 shift/reduce
+Stav 5 conflicts: 1 shift/reduce
 
 
-Grammar
+Gramatika
 
     0 $accept: expr $end
 
@@ -9,7 +9,7 @@ Grammar
     2     | '1'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '-' (45) 1
@@ -17,65 +17,65 @@ $end (0) 0
 error (256)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (5)
-    on left: 0
+    vlevo: 0
 expr (6)
-    on left: 1 2, on right: 0 1
+    vlevo: 1 2, vpravo: 0 1
 
 
-state 0
+State 0
 
     0 $accept: . expr $end
     1 expr: . expr '-' expr
     2     | . '1'
 
-    '1'  shift, and go to state 1
+    '1'  posunout a přejít do stavu 1
 
-    expr  go to state 2
+    expr  přejít do stavu 2
 
 
-state 1
+State 1
 
     2 expr: '1' .
 
-    $default  reduce using rule 2 (expr)
+    $výchozí  reduce using rule 2 (expr)
 
 
-state 2
+State 2
 
     0 $accept: expr . $end
     1 expr: expr . '-' expr
 
-    $end  shift, and go to state 3
-    '-'   shift, and go to state 4
+    $end  posunout a přejít do stavu 3
+    '-'   posunout a přejít do stavu 4
 
 
-state 3
+State 3
 
     0 $accept: expr $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 4
+State 4
 
     1 expr: . expr '-' expr
     1     | expr '-' . expr
     2     | . '1'
 
-    '1'  shift, and go to state 1
+    '1'  posunout a přejít do stavu 1
 
-    expr  go to state 5
+    expr  přejít do stavu 5
 
 
-state 5
+State 5
 
     1 expr: expr . '-' expr
     1     | expr '-' expr .  [$end, '-']
 
-    '-'  shift, and go to state 4
+    '-'  posunout a přejít do stavu 4
 
-    '-'       [reduce using rule 1 (expr)]
-    $default  reduce using rule 1 (expr)
+    '-'         [reduce using rule 1 (expr)]
+    $výchozí  reduce using rule 1 (expr)

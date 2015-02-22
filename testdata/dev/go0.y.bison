@@ -1,8 +1,8 @@
-Grammar
+Gramatika
 
     0 $accept: File $end
 
-    1 $@1: /* empty */
+    1 $@1: %empty
 
     2 File: PackageDecl $@1 Imports
 
@@ -13,7 +13,7 @@ Grammar
     5 Symbol: 'S'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 ';' (59) 3
@@ -23,108 +23,108 @@ $end (0) 0
 error (256)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (7)
-    on left: 0
+    vlevo: 0
 File (8)
-    on left: 2, on right: 0
+    vlevo: 2, vpravo: 0
 $@1 (9)
-    on left: 1, on right: 2
+    vlevo: 1, vpravo: 2
 PackageDecl (10)
-    on left: 3, on right: 2
+    vlevo: 3, vpravo: 2
 Imports (11)
-    on left: 4, on right: 2
+    vlevo: 4, vpravo: 2
 Symbol (12)
-    on left: 5, on right: 3
+    vlevo: 5, vpravo: 3
 
 
-state 0
+State 0
 
     0 $accept: . File $end
     2 File: . PackageDecl $@1 Imports
     3 PackageDecl: . 'P' Symbol ';'
 
-    'P'  shift, and go to state 1
+    'P'  posunout a přejít do stavu 1
 
-    File         go to state 2
-    PackageDecl  go to state 3
+    File         přejít do stavu 2
+    PackageDecl  přejít do stavu 3
 
 
-state 1
+State 1
 
     3 PackageDecl: 'P' . Symbol ';'
     5 Symbol: . 'S'
 
-    'S'  shift, and go to state 4
+    'S'  posunout a přejít do stavu 4
 
-    Symbol  go to state 5
+    Symbol  přejít do stavu 5
 
 
-state 2
+State 2
 
     0 $accept: File . $end
 
-    $end  shift, and go to state 6
+    $end  posunout a přejít do stavu 6
 
 
-state 3
+State 3
 
-    1 $@1: .
+    1 $@1: . %empty
     2 File: PackageDecl . $@1 Imports
 
-    $default  reduce using rule 1 ($@1)
+    $výchozí  reduce using rule 1 ($@1)
 
-    $@1  go to state 7
+    $@1  přejít do stavu 7
 
 
-state 4
+State 4
 
     5 Symbol: 'S' .
 
-    $default  reduce using rule 5 (Symbol)
+    $výchozí  reduce using rule 5 (Symbol)
 
 
-state 5
+State 5
 
     3 PackageDecl: 'P' Symbol . ';'
 
-    ';'  shift, and go to state 8
+    ';'  posunout a přejít do stavu 8
 
 
-state 6
+State 6
 
     0 $accept: File $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 7
+State 7
 
     2 File: PackageDecl $@1 . Imports
     4 Imports: . 'I'
 
-    'I'  shift, and go to state 9
+    'I'  posunout a přejít do stavu 9
 
-    Imports  go to state 10
+    Imports  přejít do stavu 10
 
 
-state 8
+State 8
 
     3 PackageDecl: 'P' Symbol ';' .
 
-    $default  reduce using rule 3 (PackageDecl)
+    $výchozí  reduce using rule 3 (PackageDecl)
 
 
-state 9
+State 9
 
     4 Imports: 'I' .
 
-    $default  reduce using rule 4 (Imports)
+    $výchozí  reduce using rule 4 (Imports)
 
 
-state 10
+State 10
 
     2 File: PackageDecl $@1 Imports .
 
-    $default  reduce using rule 2 (File)
+    $výchozí  reduce using rule 2 (File)

@@ -1,27 +1,27 @@
-State 1 conflicts: 1 shift/reduce
-State 31 conflicts: 1 shift/reduce
-State 399 conflicts: 1 shift/reduce
+Stav 1 conflicts: 1 shift/reduce
+Stav 31 conflicts: 1 shift/reduce
+Stav 399 conflicts: 1 shift/reduce
 
 
-Grammar
+Gramatika
 
     0 $accept: prog $end
 
-    1 prog: /* empty */
+    1 prog: %empty
     2     | prog xdecl
 
     3 xdecl: zctlist ';'
     4      | zctlist xdlist ';'
 
-    5 $@1: /* empty */
+    5 $@1: %empty
 
-    6 $@2: /* empty */
+    6 $@2: %empty
 
     7 xdecl: zctlist xdecor $@1 pdecl $@2 block
 
     8 xdlist: xdecor
 
-    9 $@3: /* empty */
+    9 $@3: %empty
 
    10 xdlist: xdecor $@3 '=' init
    11       | xdlist ',' xdlist
@@ -39,26 +39,26 @@ Grammar
 
    20 adlist: xdecor
 
-   21 $@4: /* empty */
+   21 $@4: %empty
 
    22 adlist: xdecor $@4 '=' init
    23       | adlist ',' adlist
 
-   24 pdecl: /* empty */
+   24 pdecl: %empty
    25      | pdecl ctlist pdlist ';'
 
    26 pdlist: xdecor
    27       | pdlist ',' pdlist
 
-   28 $@5: /* empty */
+   28 $@5: %empty
 
    29 edecl: tlist $@5 zedlist ';'
 
-   30 $@6: /* empty */
+   30 $@6: %empty
 
    31 edecl: edecl tlist $@6 zedlist ';'
 
-   32 zedlist: /* empty */
+   32 zedlist: %empty
    33        | edlist
 
    34 edlist: edecor
@@ -68,7 +68,7 @@ Grammar
    37       | tag ':' lexpr
    38       | ':' lexpr
 
-   39 abdecor: /* empty */
+   39 abdecor: %empty
    40        | abdecor1
 
    41 abdecor1: '*' zgnlist
@@ -99,7 +99,7 @@ Grammar
    60      | init
    61      | qlist init
 
-   62 zarglist: /* empty */
+   62 zarglist: %empty
    63         | arglist
 
    64 arglist: name
@@ -110,7 +110,7 @@ Grammar
 
    69 block: '{' slist '}'
 
-   70 slist: /* empty */
+   70 slist: %empty
    71      | slist adecl
    72      | slist stmnt
 
@@ -130,13 +130,13 @@ Grammar
 
    83 ulstmnt: zcexpr ';'
 
-   84 $@7: /* empty */
+   84 $@7: %empty
 
    85 ulstmnt: $@7 block
    86        | LIF '(' cexpr ')' stmnt
    87        | LIF '(' cexpr ')' stmnt LELSE stmnt
 
-   88 $@8: /* empty */
+   88 $@8: %empty
 
    89 ulstmnt: $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    90        | LWHILE '(' cexpr ')' stmnt
@@ -150,10 +150,10 @@ Grammar
    98        | LPREFETCH '(' zelist ')' ';'
    99        | LSET '(' zelist ')' ';'
 
-  100 zcexpr: /* empty */
+  100 zcexpr: %empty
   101       | cexpr
 
-  102 zexpr: /* empty */
+  102 zexpr: %empty
   103      | lexpr
 
   104 lexpr: expr
@@ -236,17 +236,17 @@ Grammar
   174 lstring: LLSTRING
   175        | lstring LLSTRING
 
-  176 zelist: /* empty */
+  176 zelist: %empty
   177       | elist
 
   178 elist: expr
   179      | elist ',' elist
 
-  180 @9: /* empty */
+  180 @9: %empty
 
   181 sbody: '{' @9 edecl '}'
 
-  182 zctlist: /* empty */
+  182 zctlist: %empty
   183        | ctlist
 
   184 types: complex
@@ -264,25 +264,25 @@ Grammar
 
   194 complex: LSTRUCT ltag
 
-  195 $@10: /* empty */
+  195 $@10: %empty
 
   196 complex: LSTRUCT ltag $@10 sbody
   197        | LSTRUCT sbody
   198        | LUNION ltag
 
-  199 $@11: /* empty */
+  199 $@11: %empty
 
   200 complex: LUNION ltag $@11 sbody
   201        | LUNION sbody
   202        | LENUM ltag
 
-  203 $@12: /* empty */
+  203 $@12: %empty
 
-  204 $@13: /* empty */
+  204 $@13: %empty
 
   205 complex: LENUM ltag $@12 '{' $@13 enum '}'
 
-  206 $@14: /* empty */
+  206 $@14: %empty
 
   207 complex: LENUM '{' $@14 enum '}'
   208        | LTYPE
@@ -290,7 +290,7 @@ Grammar
   209 gctnlist: gctname
   210         | gctnlist gctname
 
-  211 zgnlist: /* empty */
+  211 zgnlist: %empty
   212        | zgnlist gname
 
   213 gctname: tname
@@ -338,7 +338,7 @@ Grammar
   246     | LTYPE
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '!' (33) 146
@@ -368,27 +368,27 @@ $end (0) 0
 '}' (125) 51 69 140 181 205 207
 '~' (126) 147
 error (256) 78
-LORE (258) 137
-LXORE (259) 136
-LANDE (260) 135
-LLSHE (261) 133
-LRSHE (262) 134
-LMDE (263) 132
-LDVE (264) 131
-LMLE (265) 130
-LME (266) 129
-LPE (267) 128
+LPE (258) 128
+LME (259) 129
+LMLE (260) 130
+LDVE (261) 131
+LMDE (262) 132
+LRSHE (263) 134
+LLSHE (264) 133
+LANDE (265) 135
+LXORE (266) 136
+LORE (267) 137
 LOROR (268) 125
 LANDAND (269) 124
-LNE (270) 120
-LEQ (271) 119
-LGE (272) 118
-LLE (273) 117
-LRSH (274) 113
-LLSH (275) 114
-LMG (276) 157
+LEQ (270) 119
+LNE (271) 120
+LLE (272) 117
+LGE (273) 118
+LLSH (274) 114
+LRSH (275) 113
+LMM (276) 149 160
 LPP (277) 148 159
-LMM (278) 149 160
+LMG (278) 157
 LNAME (279) 77 220 221 243 245
 LTYPE (280) 208 246
 LFCONST (281) 167
@@ -442,190 +442,189 @@ LRESTRICT (328) 242
 LINLINE (329) 239
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (99)
-    on left: 0
+    vlevo: 0
 prog (100)
-    on left: 1 2, on right: 0 2
+    vlevo: 1 2, vpravo: 0 2
 xdecl (101)
-    on left: 3 4 7, on right: 2
+    vlevo: 3 4 7, vpravo: 2
 $@1 (102)
-    on left: 5, on right: 7
+    vlevo: 5, vpravo: 7
 $@2 (103)
-    on left: 6, on right: 7
+    vlevo: 6, vpravo: 7
 xdlist (104)
-    on left: 8 10 11, on right: 4 11
+    vlevo: 8 10 11, vpravo: 4 11
 $@3 (105)
-    on left: 9, on right: 10
+    vlevo: 9, vpravo: 10
 xdecor (106)
-    on left: 12 13, on right: 7 8 10 13 15 20 22 26 36 66
+    vlevo: 12 13, vpravo: 7 8 10 13 15 20 22 26 36 66
 xdecor2 (107)
-    on left: 14 15 16 17, on right: 12 16 17
+    vlevo: 14 15 16 17, vpravo: 12 16 17
 adecl (108)
-    on left: 18 19, on right: 71
+    vlevo: 18 19, vpravo: 71
 adlist (109)
-    on left: 20 22 23, on right: 19 23 82
+    vlevo: 20 22 23, vpravo: 19 23 82
 $@4 (110)
-    on left: 21, on right: 22
+    vlevo: 21, vpravo: 22
 pdecl (111)
-    on left: 24 25, on right: 7 25
+    vlevo: 24 25, vpravo: 7 25
 pdlist (112)
-    on left: 26 27, on right: 25 27
+    vlevo: 26 27, vpravo: 25 27
 edecl (113)
-    on left: 29 31, on right: 31 181
+    vlevo: 29 31, vpravo: 31 181
 $@5 (114)
-    on left: 28, on right: 29
+    vlevo: 28, vpravo: 29
 $@6 (115)
-    on left: 30, on right: 31
+    vlevo: 30, vpravo: 31
 zedlist (116)
-    on left: 32 33, on right: 29 31
+    vlevo: 32 33, vpravo: 29 31
 edlist (117)
-    on left: 34 35, on right: 33 35
+    vlevo: 34 35, vpravo: 33 35
 edecor (118)
-    on left: 36 37 38, on right: 34
+    vlevo: 36 37 38, vpravo: 34
 abdecor (119)
-    on left: 39 40, on right: 65 139 140 153 154
+    vlevo: 39 40, vpravo: 65 139 140 153 154
 abdecor1 (120)
-    on left: 41 42 43, on right: 40 42 49
+    vlevo: 41 42 43, vpravo: 40 42 49
 abdecor2 (121)
-    on left: 44 45 46, on right: 43 45 46
+    vlevo: 44 45 46, vpravo: 43 45 46
 abdecor3 (122)
-    on left: 47 48 49, on right: 44
+    vlevo: 47 48 49, vpravo: 44
 init (123)
-    on left: 50 51, on right: 10 22 55 56 60 61
+    vlevo: 50 51, vpravo: 10 22 55 56 60 61
 qual (124)
-    on left: 52 53 54, on right: 54 57 58
+    vlevo: 52 53 54, vpravo: 54 57 58
 qlist (125)
-    on left: 55 56 57 58, on right: 56 58 59 61
+    vlevo: 55 56 57 58, vpravo: 56 58 59 61
 ilist (126)
-    on left: 59 60 61, on right: 51 140
+    vlevo: 59 60 61, vpravo: 51 140
 zarglist (127)
-    on left: 62 63, on right: 16 45
+    vlevo: 62 63, vpravo: 16 45
 arglist (128)
-    on left: 64 65 66 67 68, on right: 63 68
+    vlevo: 64 65 66 67 68, vpravo: 63 68
 block (129)
-    on left: 69, on right: 7 85
+    vlevo: 69, vpravo: 7 85
 slist (130)
-    on left: 70 71 72, on right: 69 71 72
+    vlevo: 70 71 72, vpravo: 69 71 72
 labels (131)
-    on left: 73 74, on right: 74 80
+    vlevo: 73 74, vpravo: 74 80
 label (132)
-    on left: 75 76 77, on right: 73 74
+    vlevo: 75 76 77, vpravo: 73 74
 stmnt (133)
-    on left: 78 79 80, on right: 72 86 87 89 90 91 93
+    vlevo: 78 79 80, vpravo: 72 86 87 89 90 91 93
 forexpr (134)
-    on left: 81 82, on right: 89
+    vlevo: 81 82, vpravo: 89
 ulstmnt (135)
-    on left: 83 85 86 87 89 90 91 92 93 94 95 96 97 98 99, on right:
-    79 80
+    vlevo: 83 85 86 87 89 90 91 92 93 94 95 96 97 98 99, vpravo: 79
+    80
 $@7 (136)
-    on left: 84, on right: 85
+    vlevo: 84, vpravo: 85
 $@8 (137)
-    on left: 88, on right: 89
+    vlevo: 88, vpravo: 89
 zcexpr (138)
-    on left: 100 101, on right: 81 83 89 92
+    vlevo: 100 101, vpravo: 81 83 89 92
 zexpr (139)
-    on left: 102 103, on right: 17 46 48
+    vlevo: 102 103, vpravo: 17 46 48
 lexpr (140)
-    on left: 104, on right: 37 38 52 103
+    vlevo: 104, vpravo: 37 38 52 103
 cexpr (141)
-    on left: 105 106, on right: 86 87 90 91 93 101 106 126 152 156
+    vlevo: 105 106, vpravo: 86 87 90 91 93 101 106 126 152 156
 expr (142)
-    on left: 107 108 109 110 111 112 113 114 115 116 117 118 119 120
+    vlevo: 107 108 109 110 111 112 113 114 115 116 117 118 119 120
     121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136
-    137, on right: 50 75 104 105 108 109 110 111 112 113 114 115 116
+    137, vpravo: 50 75 104 105 108 109 110 111 112 113 114 115 116
     117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132
     133 134 135 136 137 178 221
 xuexpr (143)
-    on left: 138 139 140, on right: 107 139 142 143 144 145 146 147
-    148 149
+    vlevo: 138 139 140, vpravo: 107 139 142 143 144 145 146 147 148
+    149
 uexpr (144)
-    on left: 141 142 143 144 145 146 147 148 149 150 151, on right:
-    138 150 151
+    vlevo: 141 142 143 144 145 146 147 148 149 150 151, vpravo: 138
+    150 151
 pexpr (145)
-    on left: 152 153 154 155 156 157 158 159 160 161 162 163 164 165
-    166 167 168 169 170 171, on right: 141 155 156 157 158 159 160
+    vlevo: 152 153 154 155 156 157 158 159 160 161 162 163 164 165
+    166 167 168 169 170 171, vpravo: 141 155 156 157 158 159 160
 string (146)
-    on left: 172 173, on right: 170 173
+    vlevo: 172 173, vpravo: 170 173
 lstring (147)
-    on left: 174 175, on right: 171 175
+    vlevo: 174 175, vpravo: 171 175
 zelist (148)
-    on left: 176 177, on right: 97 98 99 155
+    vlevo: 176 177, vpravo: 97 98 99 155
 elist (149)
-    on left: 178 179, on right: 177 179
+    vlevo: 178 179, vpravo: 177 179
 sbody (150)
-    on left: 181, on right: 196 197 200 201
+    vlevo: 181, vpravo: 196 197 200 201
 @9 (151)
-    on left: 180, on right: 181
+    vlevo: 180, vpravo: 181
 zctlist (152)
-    on left: 182 183, on right: 3 4 7
+    vlevo: 182 183, vpravo: 3 4 7
 types (153)
-    on left: 184 185 186 187 188 189 190 191, on right: 192 193
+    vlevo: 184 185 186 187 188 189 190 191, vpravo: 192 193
 tlist (154)
-    on left: 192, on right: 29 31 65 66 139 140 153 154
+    vlevo: 192, vpravo: 29 31 65 66 139 140 153 154
 ctlist (155)
-    on left: 193, on right: 18 19 25 82 183
+    vlevo: 193, vpravo: 18 19 25 82 183
 complex (156)
-    on left: 194 196 197 198 200 201 202 205 207 208, on right: 184
-    187 189
+    vlevo: 194 196 197 198 200 201 202 205 207 208, vpravo: 184 187
+    189
 $@10 (157)
-    on left: 195, on right: 196
+    vlevo: 195, vpravo: 196
 $@11 (158)
-    on left: 199, on right: 200
+    vlevo: 199, vpravo: 200
 $@12 (159)
-    on left: 203, on right: 205
+    vlevo: 203, vpravo: 205
 $@13 (160)
-    on left: 204, on right: 205
+    vlevo: 204, vpravo: 205
 $@14 (161)
-    on left: 206, on right: 207
+    vlevo: 206, vpravo: 207
 gctnlist (162)
-    on left: 209 210, on right: 187 188 191 210
+    vlevo: 209 210, vpravo: 187 188 191 210
 zgnlist (163)
-    on left: 211 212, on right: 13 41 42 189 212
+    vlevo: 211 212, vpravo: 13 41 42 189 212
 gctname (164)
-    on left: 213 214 215, on right: 209 210
+    vlevo: 213 214 215, vpravo: 209 210
 gcnlist (165)
-    on left: 216 217, on right: 186 189 190 191 217
+    vlevo: 216 217, vpravo: 186 189 190 191 217
 gcname (166)
-    on left: 218 219, on right: 216 217
+    vlevo: 218 219, vpravo: 216 217
 enum (167)
-    on left: 220 221 222 223, on right: 205 207 222 223
+    vlevo: 220 221 222 223, vpravo: 205 207 222 223
 tname (168)
-    on left: 224 225 226 227 228 229 230 231 232, on right: 185 188
-    190 191 213
+    vlevo: 224 225 226 227 228 229 230 231 232, vpravo: 185 188 190
+    191 213
 cname (169)
-    on left: 233 234 235 236 237 238 239, on right: 215 219
+    vlevo: 233 234 235 236 237 238 239, vpravo: 215 219
 gname (170)
-    on left: 240 241 242, on right: 212 214 218
+    vlevo: 240 241 242, vpravo: 212 214 218
 name (171)
-    on left: 243, on right: 64 161
+    vlevo: 243, vpravo: 64 161
 tag (172)
-    on left: 244, on right: 14 37
+    vlevo: 244, vpravo: 14 37
 ltag (173)
-    on left: 245 246, on right: 53 96 157 158 194 196 198 200 202 205
-    244
+    vlevo: 245 246, vpravo: 53 96 157 158 194 196 198 200 202 205 244
 
 
-state 0
+State 0
 
     0 $accept: . prog $end
-    1 prog: .
+    1 prog: . %empty
     2     | . prog xdecl
 
-    $default  reduce using rule 1 (prog)
+    $výchozí  reduce using rule 1 (prog)
 
-    prog  go to state 1
+    prog  přejít do stavu 1
 
 
-state 1
+State 1
 
     0 $accept: prog . $end
     2 prog: prog . xdecl
     3 xdecl: . zctlist ';'
     4      | . zctlist xdlist ';'
     7      | . zctlist xdecor $@1 pdecl $@2 block
-  182 zctlist: .  [';', '*', '(', LNAME, LTYPE]
+  182 zctlist: . %empty  [';', '*', '(', LNAME, LTYPE]
   183        | . ctlist
   184 types: . complex
   185      | . tname
@@ -670,131 +669,131 @@ state 1
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    $end       shift, and go to state 2
-    LTYPE      shift, and go to state 3
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    $end       posunout a přejít do stavu 2
+    LTYPE      posunout a přejít do stavu 3
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    LTYPE     [reduce using rule 182 (zctlist)]
-    $default  reduce using rule 182 (zctlist)
+    LTYPE       [reduce using rule 182 (zctlist)]
+    $výchozí  reduce using rule 182 (zctlist)
 
-    xdecl    go to state 26
-    zctlist  go to state 27
-    types    go to state 28
-    ctlist   go to state 29
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
+    xdecl    přejít do stavu 26
+    zctlist  přejít do stavu 27
+    types    přejít do stavu 28
+    ctlist   přejít do stavu 29
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
 
 
-state 2
+State 2
 
     0 $accept: prog $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 3
+State 3
 
   208 complex: LTYPE .
 
-    $default  reduce using rule 208 (complex)
+    $výchozí  reduce using rule 208 (complex)
 
 
-state 4
+State 4
 
   233 cname: LAUTO .
 
-    $default  reduce using rule 233 (cname)
+    $výchozí  reduce using rule 233 (cname)
 
 
-state 5
+State 5
 
   224 tname: LCHAR .
 
-    $default  reduce using rule 224 (tname)
+    $výchozí  reduce using rule 224 (tname)
 
 
-state 6
+State 6
 
   231 tname: LDOUBLE .
 
-    $default  reduce using rule 231 (tname)
+    $výchozí  reduce using rule 231 (tname)
 
 
-state 7
+State 7
 
   235 cname: LEXTERN .
 
-    $default  reduce using rule 235 (cname)
+    $výchozí  reduce using rule 235 (cname)
 
 
-state 8
+State 8
 
   230 tname: LFLOAT .
 
-    $default  reduce using rule 230 (tname)
+    $výchozí  reduce using rule 230 (tname)
 
 
-state 9
+State 9
 
   226 tname: LINT .
 
-    $default  reduce using rule 226 (tname)
+    $výchozí  reduce using rule 226 (tname)
 
 
-state 10
+State 10
 
   227 tname: LLONG .
 
-    $default  reduce using rule 227 (tname)
+    $výchozí  reduce using rule 227 (tname)
 
 
-state 11
+State 11
 
   238 cname: LREGISTER .
 
-    $default  reduce using rule 238 (cname)
+    $výchozí  reduce using rule 238 (cname)
 
 
-state 12
+State 12
 
   225 tname: LSHORT .
 
-    $default  reduce using rule 225 (tname)
+    $výchozí  reduce using rule 225 (tname)
 
 
-state 13
+State 13
 
   234 cname: LSTATIC .
 
-    $default  reduce using rule 234 (cname)
+    $výchozí  reduce using rule 234 (cname)
 
 
-state 14
+State 14
 
   181 sbody: . '{' @9 edecl '}'
   194 complex: LSTRUCT . ltag
@@ -803,29 +802,29 @@ state 14
   245 ltag: . LNAME
   246     | . LTYPE
 
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
-    '{'    shift, and go to state 38
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
+    '{'    posunout a přejít do stavu 38
 
-    sbody  go to state 39
-    ltag   go to state 40
+    sbody  přejít do stavu 39
+    ltag   přejít do stavu 40
 
 
-state 15
+State 15
 
   236 cname: LTYPEDEF .
 
-    $default  reduce using rule 236 (cname)
+    $výchozí  reduce using rule 236 (cname)
 
 
-state 16
+State 16
 
   237 cname: LTYPESTR .
 
-    $default  reduce using rule 237 (cname)
+    $výchozí  reduce using rule 237 (cname)
 
 
-state 17
+State 17
 
   181 sbody: . '{' @9 edecl '}'
   198 complex: LUNION . ltag
@@ -834,29 +833,29 @@ state 17
   245 ltag: . LNAME
   246     | . LTYPE
 
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
-    '{'    shift, and go to state 38
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
+    '{'    posunout a přejít do stavu 38
 
-    sbody  go to state 41
-    ltag   go to state 42
+    sbody  přejít do stavu 41
+    ltag   přejít do stavu 42
 
 
-state 18
+State 18
 
   229 tname: LUNSIGNED .
 
-    $default  reduce using rule 229 (tname)
+    $výchozí  reduce using rule 229 (tname)
 
 
-state 19
+State 19
 
   232 tname: LVOID .
 
-    $default  reduce using rule 232 (tname)
+    $výchozí  reduce using rule 232 (tname)
 
 
-state 20
+State 20
 
   202 complex: LENUM . ltag
   205        | LENUM . ltag $@12 '{' $@13 enum '}'
@@ -864,56 +863,56 @@ state 20
   245 ltag: . LNAME
   246     | . LTYPE
 
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
-    '{'    shift, and go to state 43
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
+    '{'    posunout a přejít do stavu 43
 
-    ltag  go to state 44
+    ltag  přejít do stavu 44
 
 
-state 21
+State 21
 
   228 tname: LSIGNED .
 
-    $default  reduce using rule 228 (tname)
+    $výchozí  reduce using rule 228 (tname)
 
 
-state 22
+State 22
 
   240 gname: LCONSTNT .
 
-    $default  reduce using rule 240 (gname)
+    $výchozí  reduce using rule 240 (gname)
 
 
-state 23
+State 23
 
   241 gname: LVOLATILE .
 
-    $default  reduce using rule 241 (gname)
+    $výchozí  reduce using rule 241 (gname)
 
 
-state 24
+State 24
 
   242 gname: LRESTRICT .
 
-    $default  reduce using rule 242 (gname)
+    $výchozí  reduce using rule 242 (gname)
 
 
-state 25
+State 25
 
   239 cname: LINLINE .
 
-    $default  reduce using rule 239 (cname)
+    $výchozí  reduce using rule 239 (cname)
 
 
-state 26
+State 26
 
     2 prog: prog xdecl .
 
-    $default  reduce using rule 2 (prog)
+    $výchozí  reduce using rule 2 (prog)
 
 
-state 27
+State 27
 
     3 xdecl: zctlist . ';'
     4      | zctlist . xdlist ';'
@@ -931,34 +930,34 @@ state 27
   245 ltag: . LNAME
   246     | . LTYPE
 
-    ';'    shift, and go to state 45
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    ';'    posunout a přejít do stavu 45
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdlist   go to state 48
-    xdecor   go to state 49
-    xdecor2  go to state 50
-    tag      go to state 51
-    ltag     go to state 52
+    xdlist   přejít do stavu 48
+    xdecor   přejít do stavu 49
+    xdecor2  přejít do stavu 50
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 28
+State 28
 
   193 ctlist: types .
 
-    $default  reduce using rule 193 (ctlist)
+    $výchozí  reduce using rule 193 (ctlist)
 
 
-state 29
+State 29
 
   183 zctlist: ctlist .
 
-    $default  reduce using rule 183 (zctlist)
+    $výchozí  reduce using rule 183 (zctlist)
 
 
-state 30
+State 30
 
   184 types: complex .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, ')']
   187      | complex . gctnlist
@@ -987,36 +986,36 @@ state 30
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 184 (types)
+    $výchozí  reduce using rule 184 (types)
 
-    gctnlist  go to state 53
-    gctname   go to state 54
-    tname     go to state 55
-    cname     go to state 56
-    gname     go to state 57
+    gctnlist  přejít do stavu 53
+    gctname   přejít do stavu 54
+    tname     přejít do stavu 55
+    cname     přejít do stavu 56
+    gname     přejít do stavu 57
 
 
-state 31
+State 31
 
   186 types: gcnlist .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, ')']
   189      | gcnlist . complex zgnlist
@@ -1055,48 +1054,48 @@ state 31
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LTYPE      shift, and go to state 3
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LTYPE      posunout a přejít do stavu 3
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    LTYPE     [reduce using rule 186 (types)]
-    $default  reduce using rule 186 (types)
+    LTYPE       [reduce using rule 186 (types)]
+    $výchozí  reduce using rule 186 (types)
 
-    complex  go to state 58
-    gcname   go to state 59
-    tname    go to state 60
-    cname    go to state 34
-    gname    go to state 35
+    complex  přejít do stavu 58
+    gcname   přejít do stavu 59
+    tname    přejít do stavu 60
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
 
 
-state 32
+State 32
 
   216 gcnlist: gcname .
 
-    $default  reduce using rule 216 (gcnlist)
+    $výchozí  reduce using rule 216 (gcnlist)
 
 
-state 33
+State 33
 
   185 types: tname .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, ')']
   188      | tname . gctnlist
@@ -1125,152 +1124,152 @@ state 33
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 185 (types)
+    $výchozí  reduce using rule 185 (types)
 
-    gctnlist  go to state 61
-    gctname   go to state 54
-    tname     go to state 55
-    cname     go to state 56
-    gname     go to state 57
+    gctnlist  přejít do stavu 61
+    gctname   přejít do stavu 54
+    tname     přejít do stavu 55
+    cname     přejít do stavu 56
+    gname     přejít do stavu 57
 
 
-state 34
+State 34
 
   219 gcname: cname .
 
-    $default  reduce using rule 219 (gcname)
+    $výchozí  reduce using rule 219 (gcname)
 
 
-state 35
+State 35
 
   218 gcname: gname .
 
-    $default  reduce using rule 218 (gcname)
+    $výchozí  reduce using rule 218 (gcname)
 
 
-state 36
+State 36
 
   245 ltag: LNAME .
 
-    $default  reduce using rule 245 (ltag)
+    $výchozí  reduce using rule 245 (ltag)
 
 
-state 37
+State 37
 
   246 ltag: LTYPE .
 
-    $default  reduce using rule 246 (ltag)
+    $výchozí  reduce using rule 246 (ltag)
 
 
-state 38
+State 38
 
-  180 @9: .
+  180 @9: . %empty
   181 sbody: '{' . @9 edecl '}'
 
-    $default  reduce using rule 180 (@9)
+    $výchozí  reduce using rule 180 (@9)
 
-    @9  go to state 62
+    @9  přejít do stavu 62
 
 
-state 39
+State 39
 
   197 complex: LSTRUCT sbody .
 
-    $default  reduce using rule 197 (complex)
+    $výchozí  reduce using rule 197 (complex)
 
 
-state 40
+State 40
 
   194 complex: LSTRUCT ltag .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, LAUTO, LCHAR, LDOUBLE, LEXTERN, LFLOAT, LINT, LLONG, LREGISTER, LSHORT, LSTATIC, LTYPEDEF, LTYPESTR, LUNSIGNED, LVOID, LSIGNED, LCONSTNT, LVOLATILE, LRESTRICT, LINLINE, ')']
-  195 $@10: .  ['{']
+  195 $@10: . %empty  ['{']
   196 complex: LSTRUCT ltag . $@10 sbody
 
-    '{'       reduce using rule 195 ($@10)
-    $default  reduce using rule 194 (complex)
+    '{'         reduce using rule 195 ($@10)
+    $výchozí  reduce using rule 194 (complex)
 
-    $@10  go to state 63
+    $@10  přejít do stavu 63
 
 
-state 41
+State 41
 
   201 complex: LUNION sbody .
 
-    $default  reduce using rule 201 (complex)
+    $výchozí  reduce using rule 201 (complex)
 
 
-state 42
+State 42
 
   198 complex: LUNION ltag .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, LAUTO, LCHAR, LDOUBLE, LEXTERN, LFLOAT, LINT, LLONG, LREGISTER, LSHORT, LSTATIC, LTYPEDEF, LTYPESTR, LUNSIGNED, LVOID, LSIGNED, LCONSTNT, LVOLATILE, LRESTRICT, LINLINE, ')']
-  199 $@11: .  ['{']
+  199 $@11: . %empty  ['{']
   200 complex: LUNION ltag . $@11 sbody
 
-    '{'       reduce using rule 199 ($@11)
-    $default  reduce using rule 198 (complex)
+    '{'         reduce using rule 199 ($@11)
+    $výchozí  reduce using rule 198 (complex)
 
-    $@11  go to state 64
+    $@11  přejít do stavu 64
 
 
-state 43
+State 43
 
-  206 $@14: .
+  206 $@14: . %empty
   207 complex: LENUM '{' . $@14 enum '}'
 
-    $default  reduce using rule 206 ($@14)
+    $výchozí  reduce using rule 206 ($@14)
 
-    $@14  go to state 65
+    $@14  přejít do stavu 65
 
 
-state 44
+State 44
 
   202 complex: LENUM ltag .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, LAUTO, LCHAR, LDOUBLE, LEXTERN, LFLOAT, LINT, LLONG, LREGISTER, LSHORT, LSTATIC, LTYPEDEF, LTYPESTR, LUNSIGNED, LVOID, LSIGNED, LCONSTNT, LVOLATILE, LRESTRICT, LINLINE, ')']
-  203 $@12: .  ['{']
+  203 $@12: . %empty  ['{']
   205 complex: LENUM ltag . $@12 '{' $@13 enum '}'
 
-    '{'       reduce using rule 203 ($@12)
-    $default  reduce using rule 202 (complex)
+    '{'         reduce using rule 203 ($@12)
+    $výchozí  reduce using rule 202 (complex)
 
-    $@12  go to state 66
+    $@12  přejít do stavu 66
 
 
-state 45
+State 45
 
     3 xdecl: zctlist ';' .
 
-    $default  reduce using rule 3 (xdecl)
+    $výchozí  reduce using rule 3 (xdecl)
 
 
-state 46
+State 46
 
    13 xdecor: '*' . zgnlist xdecor
-  211 zgnlist: .
+  211 zgnlist: . %empty
   212        | . zgnlist gname
 
-    $default  reduce using rule 211 (zgnlist)
+    $výchozí  reduce using rule 211 (zgnlist)
 
-    zgnlist  go to state 67
+    zgnlist  přejít do stavu 67
 
 
-state 47
+State 47
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -1283,70 +1282,70 @@ state 47
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdecor   go to state 68
-    xdecor2  go to state 50
-    tag      go to state 51
-    ltag     go to state 52
+    xdecor   přejít do stavu 68
+    xdecor2  přejít do stavu 50
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 48
+State 48
 
     4 xdecl: zctlist xdlist . ';'
    11 xdlist: xdlist . ',' xdlist
 
-    ';'  shift, and go to state 69
-    ','  shift, and go to state 70
+    ';'  posunout a přejít do stavu 69
+    ','  posunout a přejít do stavu 70
 
 
-state 49
+State 49
 
-    5 $@1: .  [LTYPE, LAUTO, LCHAR, LDOUBLE, LEXTERN, LFLOAT, LINT, LLONG, LREGISTER, LSHORT, LSTATIC, LSTRUCT, LTYPEDEF, LTYPESTR, LUNION, LUNSIGNED, LVOID, LENUM, LSIGNED, LCONSTNT, LVOLATILE, LRESTRICT, LINLINE, '{']
+    5 $@1: . %empty  [LTYPE, LAUTO, LCHAR, LDOUBLE, LEXTERN, LFLOAT, LINT, LLONG, LREGISTER, LSHORT, LSTATIC, LSTRUCT, LTYPEDEF, LTYPESTR, LUNION, LUNSIGNED, LVOID, LENUM, LSIGNED, LCONSTNT, LVOLATILE, LRESTRICT, LINLINE, '{']
     7 xdecl: zctlist xdecor . $@1 pdecl $@2 block
     8 xdlist: xdecor .  [';', ',']
-    9 $@3: .  ['=']
+    9 $@3: . %empty  ['=']
    10 xdlist: xdecor . $@3 '=' init
 
-    ';'       reduce using rule 8 (xdlist)
-    ','       reduce using rule 8 (xdlist)
-    '='       reduce using rule 9 ($@3)
-    $default  reduce using rule 5 ($@1)
+    ';'         reduce using rule 8 (xdlist)
+    ','         reduce using rule 8 (xdlist)
+    '='         reduce using rule 9 ($@3)
+    $výchozí  reduce using rule 5 ($@1)
 
-    $@1  go to state 71
-    $@3  go to state 72
+    $@1  přejít do stavu 71
+    $@3  přejít do stavu 72
 
 
-state 50
+State 50
 
    12 xdecor: xdecor2 .  [';', ',', '=', LTYPE, LAUTO, LCHAR, LDOUBLE, LEXTERN, LFLOAT, LINT, LLONG, LREGISTER, LSHORT, LSTATIC, LSTRUCT, LTYPEDEF, LTYPESTR, LUNION, LUNSIGNED, LVOID, LENUM, LSIGNED, LCONSTNT, LVOLATILE, LRESTRICT, LINLINE, ')', '{']
    16 xdecor2: xdecor2 . '(' zarglist ')'
    17        | xdecor2 . '[' zexpr ']'
 
-    '['  shift, and go to state 73
-    '('  shift, and go to state 74
+    '['  posunout a přejít do stavu 73
+    '('  posunout a přejít do stavu 74
 
-    $default  reduce using rule 12 (xdecor)
+    $výchozí  reduce using rule 12 (xdecor)
 
 
-state 51
+State 51
 
    14 xdecor2: tag .
 
-    $default  reduce using rule 14 (xdecor2)
+    $výchozí  reduce using rule 14 (xdecor2)
 
 
-state 52
+State 52
 
   244 tag: ltag .
 
-    $default  reduce using rule 244 (tag)
+    $výchozí  reduce using rule 244 (tag)
 
 
-state 53
+State 53
 
   187 types: complex gctnlist .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, ')']
   210 gctnlist: gctnlist . gctname
@@ -1373,81 +1372,81 @@ state 53
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 187 (types)
+    $výchozí  reduce using rule 187 (types)
 
-    gctname  go to state 75
-    tname    go to state 55
-    cname    go to state 56
-    gname    go to state 57
+    gctname  přejít do stavu 75
+    tname    přejít do stavu 55
+    cname    přejít do stavu 56
+    gname    přejít do stavu 57
 
 
-state 54
+State 54
 
   209 gctnlist: gctname .
 
-    $default  reduce using rule 209 (gctnlist)
+    $výchozí  reduce using rule 209 (gctnlist)
 
 
-state 55
+State 55
 
   213 gctname: tname .
 
-    $default  reduce using rule 213 (gctname)
+    $výchozí  reduce using rule 213 (gctname)
 
 
-state 56
+State 56
 
   215 gctname: cname .
 
-    $default  reduce using rule 215 (gctname)
+    $výchozí  reduce using rule 215 (gctname)
 
 
-state 57
+State 57
 
   214 gctname: gname .
 
-    $default  reduce using rule 214 (gctname)
+    $výchozí  reduce using rule 214 (gctname)
 
 
-state 58
+State 58
 
   189 types: gcnlist complex . zgnlist
-  211 zgnlist: .
+  211 zgnlist: . %empty
   212        | . zgnlist gname
 
-    $default  reduce using rule 211 (zgnlist)
+    $výchozí  reduce using rule 211 (zgnlist)
 
-    zgnlist  go to state 76
+    zgnlist  přejít do stavu 76
 
 
-state 59
+State 59
 
   217 gcnlist: gcnlist gcname .
 
-    $default  reduce using rule 217 (gcnlist)
+    $výchozí  reduce using rule 217 (gcnlist)
 
 
-state 60
+State 60
 
   190 types: gcnlist tname .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, ')']
   191      | gcnlist tname . gctnlist
@@ -1476,36 +1475,36 @@ state 60
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 190 (types)
+    $výchozí  reduce using rule 190 (types)
 
-    gctnlist  go to state 77
-    gctname   go to state 54
-    tname     go to state 55
-    cname     go to state 56
-    gname     go to state 57
+    gctnlist  přejít do stavu 77
+    gctname   přejít do stavu 54
+    tname     přejít do stavu 55
+    cname     přejít do stavu 56
+    gname     přejít do stavu 57
 
 
-state 61
+State 61
 
   188 types: tname gctnlist .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, ')']
   210 gctnlist: gctnlist . gctname
@@ -1532,35 +1531,35 @@ state 61
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 188 (types)
+    $výchozí  reduce using rule 188 (types)
 
-    gctname  go to state 75
-    tname    go to state 55
-    cname    go to state 56
-    gname    go to state 57
+    gctname  přejít do stavu 75
+    tname    přejít do stavu 55
+    cname    přejít do stavu 56
+    gname    přejít do stavu 57
 
 
-state 62
+State 62
 
    29 edecl: . tlist $@5 zedlist ';'
    31      | . edecl tlist $@6 zedlist ';'
@@ -1608,62 +1607,62 @@ state 62
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LTYPE      shift, and go to state 3
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LTYPE      posunout a přejít do stavu 3
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    edecl    go to state 78
-    types    go to state 79
-    tlist    go to state 80
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
+    edecl    přejít do stavu 78
+    types    přejít do stavu 79
+    tlist    přejít do stavu 80
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
 
 
-state 63
+State 63
 
   181 sbody: . '{' @9 edecl '}'
   196 complex: LSTRUCT ltag $@10 . sbody
 
-    '{'  shift, and go to state 38
+    '{'  posunout a přejít do stavu 38
 
-    sbody  go to state 81
+    sbody  přejít do stavu 81
 
 
-state 64
+State 64
 
   181 sbody: . '{' @9 edecl '}'
   200 complex: LUNION ltag $@11 . sbody
 
-    '{'  shift, and go to state 38
+    '{'  posunout a přejít do stavu 38
 
-    sbody  go to state 82
+    sbody  přejít do stavu 82
 
 
-state 65
+State 65
 
   207 complex: LENUM '{' $@14 . enum '}'
   220 enum: . LNAME
@@ -1671,19 +1670,19 @@ state 65
   222     | . enum ','
   223     | . enum ',' enum
 
-    LNAME  shift, and go to state 83
+    LNAME  posunout a přejít do stavu 83
 
-    enum  go to state 84
+    enum  přejít do stavu 84
 
 
-state 66
+State 66
 
   205 complex: LENUM ltag $@12 . '{' $@13 enum '}'
 
-    '{'  shift, and go to state 85
+    '{'  posunout a přejít do stavu 85
 
 
-state 67
+State 67
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -1700,36 +1699,36 @@ state 67
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'        shift, and go to state 46
-    '('        shift, and go to state 47
-    LNAME      shift, and go to state 36
-    LTYPE      shift, and go to state 37
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
+    '*'        posunout a přejít do stavu 46
+    '('        posunout a přejít do stavu 47
+    LNAME      posunout a přejít do stavu 36
+    LTYPE      posunout a přejít do stavu 37
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
 
-    xdecor   go to state 86
-    xdecor2  go to state 50
-    gname    go to state 87
-    tag      go to state 51
-    ltag     go to state 52
+    xdecor   přejít do stavu 86
+    xdecor2  přejít do stavu 50
+    gname    přejít do stavu 87
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 68
+State 68
 
    15 xdecor2: '(' xdecor . ')'
 
-    ')'  shift, and go to state 88
+    ')'  posunout a přejít do stavu 88
 
 
-state 69
+State 69
 
     4 xdecl: zctlist xdlist ';' .
 
-    $default  reduce using rule 4 (xdecl)
+    $výchozí  reduce using rule 4 (xdecl)
 
 
-state 70
+State 70
 
     8 xdlist: . xdecor
    10       | . xdecor $@3 '=' init
@@ -1745,40 +1744,40 @@ state 70
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdlist   go to state 89
-    xdecor   go to state 90
-    xdecor2  go to state 50
-    tag      go to state 51
-    ltag     go to state 52
+    xdlist   přejít do stavu 89
+    xdecor   přejít do stavu 90
+    xdecor2  přejít do stavu 50
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 71
+State 71
 
     7 xdecl: zctlist xdecor $@1 . pdecl $@2 block
-   24 pdecl: .
+   24 pdecl: . %empty
    25      | . pdecl ctlist pdlist ';'
 
-    $default  reduce using rule 24 (pdecl)
+    $výchozí  reduce using rule 24 (pdecl)
 
-    pdecl  go to state 91
+    pdecl  přejít do stavu 91
 
 
-state 72
+State 72
 
    10 xdlist: xdecor $@3 . '=' init
 
-    '='  shift, and go to state 92
+    '='  posunout a přejít do stavu 92
 
 
-state 73
+State 73
 
    17 xdecor2: xdecor2 '[' . zexpr ']'
-  102 zexpr: .  [']']
+  102 zexpr: . %empty  [']']
   103      | . lexpr
   104 lexpr: . expr
   107 expr: . xuexpr
@@ -1852,46 +1851,46 @@ state 73
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 102 (zexpr)
+    $výchozí  reduce using rule 102 (zexpr)
 
-    zexpr    go to state 115
-    lexpr    go to state 116
-    expr     go to state 117
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    zexpr    přejít do stavu 115
+    lexpr    přejít do stavu 116
+    expr     přejít do stavu 117
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 74
+State 74
 
    16 xdecor2: xdecor2 '(' . zarglist ')'
-   62 zarglist: .  [')']
+   62 zarglist: . %empty  [')']
    63         | . arglist
    64 arglist: . name
    65        | . tlist abdecor
@@ -1942,55 +1941,55 @@ state 74
   242      | . LRESTRICT
   243 name: . LNAME
 
-    '.'        shift, and go to state 124
-    LNAME      shift, and go to state 100
-    LTYPE      shift, and go to state 3
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    '.'        posunout a přejít do stavu 124
+    LNAME      posunout a přejít do stavu 100
+    LTYPE      posunout a přejít do stavu 3
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 62 (zarglist)
+    $výchozí  reduce using rule 62 (zarglist)
 
-    zarglist  go to state 125
-    arglist   go to state 126
-    types     go to state 79
-    tlist     go to state 127
-    complex   go to state 30
-    gcnlist   go to state 31
-    gcname    go to state 32
-    tname     go to state 33
-    cname     go to state 34
-    gname     go to state 35
-    name      go to state 128
+    zarglist  přejít do stavu 125
+    arglist   přejít do stavu 126
+    types     přejít do stavu 79
+    tlist     přejít do stavu 127
+    complex   přejít do stavu 30
+    gcnlist   přejít do stavu 31
+    gcname    přejít do stavu 32
+    tname     přejít do stavu 33
+    cname     přejít do stavu 34
+    gname     přejít do stavu 35
+    name      přejít do stavu 128
 
 
-state 75
+State 75
 
   210 gctnlist: gctnlist gctname .
 
-    $default  reduce using rule 210 (gctnlist)
+    $výchozí  reduce using rule 210 (gctnlist)
 
 
-state 76
+State 76
 
   189 types: gcnlist complex zgnlist .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, ')']
   212 zgnlist: zgnlist . gname
@@ -1998,16 +1997,16 @@ state 76
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
 
-    $default  reduce using rule 189 (types)
+    $výchozí  reduce using rule 189 (types)
 
-    gname  go to state 87
+    gname  přejít do stavu 87
 
 
-state 77
+State 77
 
   191 types: gcnlist tname gctnlist .  [';', ',', ':', '*', '[', '(', LNAME, LTYPE, ')']
   210 gctnlist: gctnlist . gctname
@@ -2034,35 +2033,35 @@ state 77
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 191 (types)
+    $výchozí  reduce using rule 191 (types)
 
-    gctname  go to state 75
-    tname    go to state 55
-    cname    go to state 56
-    gname    go to state 57
+    gctname  přejít do stavu 75
+    tname    přejít do stavu 55
+    cname    přejít do stavu 56
+    gname    přejít do stavu 57
 
 
-state 78
+State 78
 
    31 edecl: edecl . tlist $@6 zedlist ';'
   181 sbody: '{' @9 edecl . '}'
@@ -2109,148 +2108,148 @@ state 78
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LTYPE      shift, and go to state 3
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
-    '}'        shift, and go to state 129
+    LTYPE      posunout a přejít do stavu 3
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
+    '}'        posunout a přejít do stavu 129
 
-    types    go to state 79
-    tlist    go to state 130
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
+    types    přejít do stavu 79
+    tlist    přejít do stavu 130
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
 
 
-state 79
+State 79
 
   192 tlist: types .
 
-    $default  reduce using rule 192 (tlist)
+    $výchozí  reduce using rule 192 (tlist)
 
 
-state 80
+State 80
 
-   28 $@5: .
+   28 $@5: . %empty
    29 edecl: tlist . $@5 zedlist ';'
 
-    $default  reduce using rule 28 ($@5)
+    $výchozí  reduce using rule 28 ($@5)
 
-    $@5  go to state 131
+    $@5  přejít do stavu 131
 
 
-state 81
+State 81
 
   196 complex: LSTRUCT ltag $@10 sbody .
 
-    $default  reduce using rule 196 (complex)
+    $výchozí  reduce using rule 196 (complex)
 
 
-state 82
+State 82
 
   200 complex: LUNION ltag $@11 sbody .
 
-    $default  reduce using rule 200 (complex)
+    $výchozí  reduce using rule 200 (complex)
 
 
-state 83
+State 83
 
   220 enum: LNAME .  [',', '}']
   221     | LNAME . '=' expr
 
-    '='  shift, and go to state 132
+    '='  posunout a přejít do stavu 132
 
-    $default  reduce using rule 220 (enum)
+    $výchozí  reduce using rule 220 (enum)
 
 
-state 84
+State 84
 
   207 complex: LENUM '{' $@14 enum . '}'
   222 enum: enum . ','
   223     | enum . ',' enum
 
-    ','  shift, and go to state 133
-    '}'  shift, and go to state 134
+    ','  posunout a přejít do stavu 133
+    '}'  posunout a přejít do stavu 134
 
 
-state 85
+State 85
 
-  204 $@13: .
+  204 $@13: . %empty
   205 complex: LENUM ltag $@12 '{' . $@13 enum '}'
 
-    $default  reduce using rule 204 ($@13)
+    $výchozí  reduce using rule 204 ($@13)
 
-    $@13  go to state 135
+    $@13  přejít do stavu 135
 
 
-state 86
+State 86
 
    13 xdecor: '*' zgnlist xdecor .
 
-    $default  reduce using rule 13 (xdecor)
+    $výchozí  reduce using rule 13 (xdecor)
 
 
-state 87
+State 87
 
   212 zgnlist: zgnlist gname .
 
-    $default  reduce using rule 212 (zgnlist)
+    $výchozí  reduce using rule 212 (zgnlist)
 
 
-state 88
+State 88
 
    15 xdecor2: '(' xdecor ')' .
 
-    $default  reduce using rule 15 (xdecor2)
+    $výchozí  reduce using rule 15 (xdecor2)
 
 
-state 89
+State 89
 
    11 xdlist: xdlist . ',' xdlist
    11       | xdlist ',' xdlist .  [';', ',']
 
-    $default  reduce using rule 11 (xdlist)
+    $výchozí  reduce using rule 11 (xdlist)
 
     Conflict between rule 11 and token ',' resolved as reduce (%left ',').
 
 
-state 90
+State 90
 
     8 xdlist: xdecor .  [';', ',']
-    9 $@3: .  ['=']
+    9 $@3: . %empty  ['=']
    10 xdlist: xdecor . $@3 '=' init
 
-    '='       reduce using rule 9 ($@3)
-    $default  reduce using rule 8 (xdlist)
+    '='         reduce using rule 9 ($@3)
+    $výchozí  reduce using rule 8 (xdlist)
 
-    $@3  go to state 72
+    $@3  přejít do stavu 72
 
 
-state 91
+State 91
 
-    6 $@2: .  ['{']
+    6 $@2: . %empty  ['{']
     7 xdecl: zctlist xdecor $@1 pdecl . $@2 block
    25 pdecl: pdecl . ctlist pdlist ';'
   184 types: . complex
@@ -2296,44 +2295,44 @@ state 91
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    LTYPE      shift, and go to state 3
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    LTYPE      posunout a přejít do stavu 3
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 6 ($@2)
+    $výchozí  reduce using rule 6 ($@2)
 
-    $@2      go to state 136
-    types    go to state 28
-    ctlist   go to state 137
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
+    $@2      přejít do stavu 136
+    types    přejít do stavu 28
+    ctlist   přejít do stavu 137
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
 
 
-state 92
+State 92
 
    10 xdlist: xdecor $@3 '=' . init
    50 init: . expr
@@ -2409,41 +2408,41 @@ state 92
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '{'        shift, and go to state 138
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '{'        posunout a přejít do stavu 138
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    init     go to state 139
-    expr     go to state 140
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    init     přejít do stavu 139
+    expr     přejít do stavu 140
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 93
+State 93
 
   138 xuexpr: . uexpr
   139       | . '(' tlist abdecor ')' xuexpr
@@ -2486,38 +2485,38 @@ state 93
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    xuexpr   go to state 141
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    xuexpr   přejít do stavu 141
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 94
+State 94
 
   138 xuexpr: . uexpr
   139       | . '(' tlist abdecor ')' xuexpr
@@ -2560,38 +2559,38 @@ state 94
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    xuexpr   go to state 142
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    xuexpr   přejít do stavu 142
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 95
+State 95
 
   138 xuexpr: . uexpr
   139       | . '(' tlist abdecor ')' xuexpr
@@ -2634,38 +2633,38 @@ state 95
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    xuexpr   go to state 143
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    xuexpr   přejít do stavu 143
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 96
+State 96
 
   138 xuexpr: . uexpr
   139       | . '(' tlist abdecor ')' xuexpr
@@ -2708,38 +2707,186 @@ state 96
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    xuexpr   go to state 144
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    xuexpr   přejít do stavu 144
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 97
+State 97
+
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  149      | LMM . xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    xuexpr   přejít do stavu 145
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 98
+
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  148      | LPP . xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    xuexpr   přejít do stavu 146
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 99
 
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -2859,296 +3006,148 @@ state 97
   242      | . LRESTRICT
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LTYPE      shift, and go to state 3
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSIZEOF    shift, and go to state 111
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LSIGNOF    shift, and go to state 112
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LTYPE      posunout a přejít do stavu 3
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSIZEOF    posunout a přejít do stavu 111
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LSIGNOF    posunout a přejít do stavu 112
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 145
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    types    go to state 79
-    tlist    go to state 147
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
-    name     go to state 123
-
-
-state 98
-
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  148      | LPP . xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    xuexpr   go to state 148
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    cexpr    přejít do stavu 147
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    types    přejít do stavu 79
+    tlist    přejít do stavu 149
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
+    name     přejít do stavu 123
 
 
-state 99
-
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  149      | LMM . xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    xuexpr   go to state 149
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 100
+State 100
 
   243 name: LNAME .
 
-    $default  reduce using rule 243 (name)
+    $výchozí  reduce using rule 243 (name)
 
 
-state 101
+State 101
 
   167 pexpr: LFCONST .
 
-    $default  reduce using rule 167 (pexpr)
+    $výchozí  reduce using rule 167 (pexpr)
 
 
-state 102
+State 102
 
   166 pexpr: LDCONST .
 
-    $default  reduce using rule 166 (pexpr)
+    $výchozí  reduce using rule 166 (pexpr)
 
 
-state 103
+State 103
 
   162 pexpr: LCONST .
 
-    $default  reduce using rule 162 (pexpr)
+    $výchozí  reduce using rule 162 (pexpr)
 
 
-state 104
+State 104
 
   163 pexpr: LLCONST .
 
-    $default  reduce using rule 163 (pexpr)
+    $výchozí  reduce using rule 163 (pexpr)
 
 
-state 105
+State 105
 
   164 pexpr: LUCONST .
 
-    $default  reduce using rule 164 (pexpr)
+    $výchozí  reduce using rule 164 (pexpr)
 
 
-state 106
+State 106
 
   165 pexpr: LULCONST .
 
-    $default  reduce using rule 165 (pexpr)
+    $výchozí  reduce using rule 165 (pexpr)
 
 
-state 107
+State 107
 
   168 pexpr: LVLCONST .
 
-    $default  reduce using rule 168 (pexpr)
+    $výchozí  reduce using rule 168 (pexpr)
 
 
-state 108
+State 108
 
   169 pexpr: LUVLCONST .
 
-    $default  reduce using rule 169 (pexpr)
+    $výchozí  reduce using rule 169 (pexpr)
 
 
-state 109
+State 109
 
   172 string: LSTRING .
 
-    $default  reduce using rule 172 (string)
+    $výchozí  reduce using rule 172 (string)
 
 
-state 110
+State 110
 
   174 lstring: LLSTRING .
 
-    $default  reduce using rule 174 (lstring)
+    $výchozí  reduce using rule 174 (lstring)
 
 
-state 111
+State 111
 
   141 uexpr: . pexpr
   142      | . '*' xuexpr
@@ -3189,37 +3188,37 @@ state 111
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 150
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 150
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    uexpr    go to state 151
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    uexpr    přejít do stavu 151
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 112
+State 112
 
   141 uexpr: . pexpr
   142      | . '*' xuexpr
@@ -3260,37 +3259,37 @@ state 112
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 152
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 152
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    uexpr    go to state 153
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    uexpr    přejít do stavu 153
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 113
+State 113
 
   138 xuexpr: . uexpr
   139       | . '(' tlist abdecor ')' xuexpr
@@ -3333,38 +3332,38 @@ state 113
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    xuexpr   go to state 154
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    xuexpr   přejít do stavu 154
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 114
+State 114
 
   138 xuexpr: . uexpr
   139       | . '(' tlist abdecor ')' xuexpr
@@ -3407,52 +3406,52 @@ state 114
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    xuexpr   go to state 155
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    xuexpr   přejít do stavu 155
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 115
+State 115
 
    17 xdecor2: xdecor2 '[' zexpr . ']'
 
-    ']'  shift, and go to state 156
+    ']'  posunout a přejít do stavu 156
 
 
-state 116
+State 116
 
   103 zexpr: lexpr .
 
-    $default  reduce using rule 103 (zexpr)
+    $výchozí  reduce using rule 103 (zexpr)
 
 
-state 117
+State 117
 
   104 lexpr: expr .  [';', ',', ']']
   108 expr: expr . '*' expr
@@ -3486,57 +3485,57 @@ state 117
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 104 (lexpr)
+    $výchozí  reduce using rule 104 (lexpr)
 
 
-state 118
+State 118
 
   107 expr: xuexpr .
 
-    $default  reduce using rule 107 (expr)
+    $výchozí  reduce using rule 107 (expr)
 
 
-state 119
+State 119
 
   138 xuexpr: uexpr .
 
-    $default  reduce using rule 138 (xuexpr)
+    $výchozí  reduce using rule 138 (xuexpr)
 
 
-state 120
+State 120
 
-  141 uexpr: pexpr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', '*', '/', '%', ')', ']', '}']
+  141 uexpr: pexpr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', '*', '/', '%', ')', ']', '}']
   155 pexpr: pexpr . '(' zelist ')'
   156      | pexpr . '[' cexpr ']'
   157      | pexpr . LMG ltag
@@ -3544,68 +3543,68 @@ state 120
   159      | pexpr . LPP
   160      | pexpr . LMM
 
-    '.'  shift, and go to state 187
-    '['  shift, and go to state 188
-    '('  shift, and go to state 189
-    LMG  shift, and go to state 190
-    LPP  shift, and go to state 191
-    LMM  shift, and go to state 192
+    LMM  posunout a přejít do stavu 187
+    LPP  posunout a přejít do stavu 188
+    LMG  posunout a přejít do stavu 189
+    '.'  posunout a přejít do stavu 190
+    '['  posunout a přejít do stavu 191
+    '('  posunout a přejít do stavu 192
 
-    $default  reduce using rule 141 (uexpr)
+    $výchozí  reduce using rule 141 (uexpr)
 
 
-state 121
+State 121
 
-  170 pexpr: string .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', '*', '/', '%', '.', '[', '(', LMG, LPP, LMM, ')', ']', '}']
+  170 pexpr: string .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', '*', '/', '%', LMM, LPP, LMG, '.', '[', '(', ')', ']', '}']
   173 string: string . LSTRING
 
-    LSTRING  shift, and go to state 193
+    LSTRING  posunout a přejít do stavu 193
 
-    $default  reduce using rule 170 (pexpr)
+    $výchozí  reduce using rule 170 (pexpr)
 
 
-state 122
+State 122
 
-  171 pexpr: lstring .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', '*', '/', '%', '.', '[', '(', LMG, LPP, LMM, ')', ']', '}']
+  171 pexpr: lstring .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', '*', '/', '%', LMM, LPP, LMG, '.', '[', '(', ')', ']', '}']
   175 lstring: lstring . LLSTRING
 
-    LLSTRING  shift, and go to state 194
+    LLSTRING  posunout a přejít do stavu 194
 
-    $default  reduce using rule 171 (pexpr)
+    $výchozí  reduce using rule 171 (pexpr)
 
 
-state 123
+State 123
 
   161 pexpr: name .
 
-    $default  reduce using rule 161 (pexpr)
+    $výchozí  reduce using rule 161 (pexpr)
 
 
-state 124
+State 124
 
    67 arglist: '.' . '.' '.'
 
-    '.'  shift, and go to state 195
+    '.'  posunout a přejít do stavu 195
 
 
-state 125
+State 125
 
    16 xdecor2: xdecor2 '(' zarglist . ')'
 
-    ')'  shift, and go to state 196
+    ')'  posunout a přejít do stavu 196
 
 
-state 126
+State 126
 
    63 zarglist: arglist .  [')']
    68 arglist: arglist . ',' arglist
 
-    ','  shift, and go to state 197
+    ','  posunout a přejít do stavu 197
 
-    $default  reduce using rule 63 (zarglist)
+    $výchozí  reduce using rule 63 (zarglist)
 
 
-state 127
+State 127
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -3613,7 +3612,7 @@ state 127
    15        | . '(' xdecor ')'
    16        | . xdecor2 '(' zarglist ')'
    17        | . xdecor2 '[' zexpr ']'
-   39 abdecor: .  [',', ')']
+   39 abdecor: . %empty  [',', ')']
    40        | . abdecor1
    41 abdecor1: . '*' zgnlist
    42         | . '*' zgnlist abdecor1
@@ -3630,49 +3629,49 @@ state 127
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'    shift, and go to state 198
-    '['    shift, and go to state 199
-    '('    shift, and go to state 200
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    '*'    posunout a přejít do stavu 198
+    '['    posunout a přejít do stavu 199
+    '('    posunout a přejít do stavu 200
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    $default  reduce using rule 39 (abdecor)
+    $výchozí  reduce using rule 39 (abdecor)
 
-    xdecor    go to state 201
-    xdecor2   go to state 50
-    abdecor   go to state 202
-    abdecor1  go to state 203
-    abdecor2  go to state 204
-    abdecor3  go to state 205
-    tag       go to state 51
-    ltag      go to state 52
+    xdecor    přejít do stavu 201
+    xdecor2   přejít do stavu 50
+    abdecor   přejít do stavu 202
+    abdecor1  přejít do stavu 203
+    abdecor2  přejít do stavu 204
+    abdecor3  přejít do stavu 205
+    tag       přejít do stavu 51
+    ltag      přejít do stavu 52
 
 
-state 128
+State 128
 
    64 arglist: name .
 
-    $default  reduce using rule 64 (arglist)
+    $výchozí  reduce using rule 64 (arglist)
 
 
-state 129
+State 129
 
   181 sbody: '{' @9 edecl '}' .
 
-    $default  reduce using rule 181 (sbody)
+    $výchozí  reduce using rule 181 (sbody)
 
 
-state 130
+State 130
 
-   30 $@6: .
+   30 $@6: . %empty
    31 edecl: edecl tlist . $@6 zedlist ';'
 
-    $default  reduce using rule 30 ($@6)
+    $výchozí  reduce using rule 30 ($@6)
 
-    $@6  go to state 206
+    $@6  přejít do stavu 206
 
 
-state 131
+State 131
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -3681,7 +3680,7 @@ state 131
    16        | . xdecor2 '(' zarglist ')'
    17        | . xdecor2 '[' zexpr ']'
    29 edecl: tlist $@5 . zedlist ';'
-   32 zedlist: .  [';']
+   32 zedlist: . %empty  [';']
    33        | . edlist
    34 edlist: . edecor
    35       | . edlist ',' edlist
@@ -3692,24 +3691,24 @@ state 131
   245 ltag: . LNAME
   246     | . LTYPE
 
-    ':'    shift, and go to state 207
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    ':'    posunout a přejít do stavu 207
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    $default  reduce using rule 32 (zedlist)
+    $výchozí  reduce using rule 32 (zedlist)
 
-    xdecor   go to state 208
-    xdecor2  go to state 50
-    zedlist  go to state 209
-    edlist   go to state 210
-    edecor   go to state 211
-    tag      go to state 212
-    ltag     go to state 52
+    xdecor   přejít do stavu 208
+    xdecor2  přejít do stavu 50
+    zedlist  přejít do stavu 209
+    edlist   přejít do stavu 210
+    edecor   přejít do stavu 211
+    tag      přejít do stavu 212
+    ltag     přejít do stavu 52
 
 
-state 132
+State 132
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -3783,39 +3782,39 @@ state 132
   221 enum: LNAME '=' . expr
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 213
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 213
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 133
+State 133
 
   220 enum: . LNAME
   221     | . LNAME '=' expr
@@ -3824,21 +3823,21 @@ state 133
   223     | . enum ',' enum
   223     | enum ',' . enum
 
-    LNAME  shift, and go to state 83
+    LNAME  posunout a přejít do stavu 83
 
-    $default  reduce using rule 222 (enum)
+    $výchozí  reduce using rule 222 (enum)
 
-    enum  go to state 214
+    enum  přejít do stavu 214
 
 
-state 134
+State 134
 
   207 complex: LENUM '{' $@14 enum '}' .
 
-    $default  reduce using rule 207 (complex)
+    $výchozí  reduce using rule 207 (complex)
 
 
-state 135
+State 135
 
   205 complex: LENUM ltag $@12 '{' $@13 . enum '}'
   220 enum: . LNAME
@@ -3846,22 +3845,22 @@ state 135
   222     | . enum ','
   223     | . enum ',' enum
 
-    LNAME  shift, and go to state 83
+    LNAME  posunout a přejít do stavu 83
 
-    enum  go to state 215
+    enum  přejít do stavu 215
 
 
-state 136
+State 136
 
     7 xdecl: zctlist xdecor $@1 pdecl $@2 . block
    69 block: . '{' slist '}'
 
-    '{'  shift, and go to state 216
+    '{'  posunout a přejít do stavu 216
 
-    block  go to state 217
+    block  přejít do stavu 217
 
 
-state 137
+State 137
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -3876,19 +3875,19 @@ state 137
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdecor   go to state 218
-    xdecor2  go to state 50
-    pdlist   go to state 219
-    tag      go to state 51
-    ltag     go to state 52
+    xdecor   přejít do stavu 218
+    xdecor2  přejít do stavu 50
+    pdlist   přejít do stavu 219
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 138
+State 138
 
    50 init: . expr
    51     | . '{' ilist '}'
@@ -3974,53 +3973,53 @@ state 138
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '.'        shift, and go to state 220
-    '['        shift, and go to state 221
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '{'        shift, and go to state 138
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '.'        posunout a přejít do stavu 220
+    '['        posunout a přejít do stavu 221
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '{'        posunout a přejít do stavu 138
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    init     go to state 222
-    qual     go to state 223
-    qlist    go to state 224
-    ilist    go to state 225
-    expr     go to state 140
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    init     přejít do stavu 222
+    qual     přejít do stavu 223
+    qlist    přejít do stavu 224
+    ilist    přejít do stavu 225
+    expr     přejít do stavu 140
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 139
+State 139
 
    10 xdlist: xdecor $@3 '=' init .
 
-    $default  reduce using rule 10 (xdlist)
+    $výchozí  reduce using rule 10 (xdlist)
 
 
-state 140
+State 140
 
    50 init: expr .  [';', ',', '}']
   108 expr: expr . '*' expr
@@ -4054,78 +4053,92 @@ state 140
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 50 (init)
+    $výchozí  reduce using rule 50 (init)
 
 
-state 141
+State 141
 
   143 uexpr: '&' xuexpr .
 
-    $default  reduce using rule 143 (uexpr)
+    $výchozí  reduce using rule 143 (uexpr)
 
 
-state 142
+State 142
 
   144 uexpr: '+' xuexpr .
 
-    $default  reduce using rule 144 (uexpr)
+    $výchozí  reduce using rule 144 (uexpr)
 
 
-state 143
+State 143
 
   145 uexpr: '-' xuexpr .
 
-    $default  reduce using rule 145 (uexpr)
+    $výchozí  reduce using rule 145 (uexpr)
 
 
-state 144
+State 144
 
   142 uexpr: '*' xuexpr .
 
-    $default  reduce using rule 142 (uexpr)
+    $výchozí  reduce using rule 142 (uexpr)
 
 
-state 145
+State 145
+
+  149 uexpr: LMM xuexpr .
+
+    $výchozí  reduce using rule 149 (uexpr)
+
+
+State 146
+
+  148 uexpr: LPP xuexpr .
+
+    $výchozí  reduce using rule 148 (uexpr)
+
+
+State 147
 
   106 cexpr: cexpr . ',' cexpr
   152 pexpr: '(' cexpr . ')'
 
-    ','  shift, and go to state 226
-    ')'  shift, and go to state 227
+    ','  posunout a přejít do stavu 226
+    ')'  posunout a přejít do stavu 227
 
 
-state 146
+State 148
 
   105 cexpr: expr .  [';', ',', ':', ')', ']']
   108 expr: expr . '*' expr
@@ -4159,43 +4172,43 @@ state 146
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 105 (cexpr)
+    $výchozí  reduce using rule 105 (cexpr)
 
 
-state 147
+State 149
 
-   39 abdecor: .  [')']
+   39 abdecor: . %empty  [')']
    40        | . abdecor1
    41 abdecor1: . '*' zgnlist
    42         | . '*' zgnlist abdecor1
@@ -4209,33 +4222,19 @@ state 147
   139 xuexpr: '(' tlist . abdecor ')' xuexpr
   140       | '(' tlist . abdecor ')' '{' ilist '}'
 
-    '*'  shift, and go to state 228
-    '['  shift, and go to state 199
-    '('  shift, and go to state 229
+    '*'  posunout a přejít do stavu 228
+    '['  posunout a přejít do stavu 199
+    '('  posunout a přejít do stavu 229
 
-    $default  reduce using rule 39 (abdecor)
+    $výchozí  reduce using rule 39 (abdecor)
 
-    abdecor   go to state 230
-    abdecor1  go to state 203
-    abdecor2  go to state 204
-    abdecor3  go to state 205
-
-
-state 148
-
-  148 uexpr: LPP xuexpr .
-
-    $default  reduce using rule 148 (uexpr)
+    abdecor   přejít do stavu 230
+    abdecor1  přejít do stavu 203
+    abdecor2  přejít do stavu 204
+    abdecor3  přejít do stavu 205
 
 
-state 149
-
-  149 uexpr: LMM xuexpr .
-
-    $default  reduce using rule 149 (uexpr)
-
-
-state 150
+State 150
 
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -4354,78 +4353,78 @@ state 150
   242      | . LRESTRICT
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LTYPE      shift, and go to state 3
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSIZEOF    shift, and go to state 111
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LSIGNOF    shift, and go to state 112
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LTYPE      posunout a přejít do stavu 3
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSIZEOF    posunout a přejít do stavu 111
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LSIGNOF    posunout a přejít do stavu 112
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 145
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    types    go to state 79
-    tlist    go to state 231
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
-    name     go to state 123
+    cexpr    přejít do stavu 147
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    types    přejít do stavu 79
+    tlist    přejít do stavu 231
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
+    name     přejít do stavu 123
 
 
-state 151
+State 151
 
   150 uexpr: LSIZEOF uexpr .
 
-    $default  reduce using rule 150 (uexpr)
+    $výchozí  reduce using rule 150 (uexpr)
 
 
-state 152
+State 152
 
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -4544,99 +4543,99 @@ state 152
   242      | . LRESTRICT
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LTYPE      shift, and go to state 3
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSIZEOF    shift, and go to state 111
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LSIGNOF    shift, and go to state 112
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LTYPE      posunout a přejít do stavu 3
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSIZEOF    posunout a přejít do stavu 111
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LSIGNOF    posunout a přejít do stavu 112
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 145
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    types    go to state 79
-    tlist    go to state 232
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
-    name     go to state 123
+    cexpr    přejít do stavu 147
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    types    přejít do stavu 79
+    tlist    přejít do stavu 232
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
+    name     přejít do stavu 123
 
 
-state 153
+State 153
 
   151 uexpr: LSIGNOF uexpr .
 
-    $default  reduce using rule 151 (uexpr)
+    $výchozí  reduce using rule 151 (uexpr)
 
 
-state 154
+State 154
 
   146 uexpr: '!' xuexpr .
 
-    $default  reduce using rule 146 (uexpr)
+    $výchozí  reduce using rule 146 (uexpr)
 
 
-state 155
+State 155
 
   147 uexpr: '~' xuexpr .
 
-    $default  reduce using rule 147 (uexpr)
+    $výchozí  reduce using rule 147 (uexpr)
 
 
-state 156
+State 156
 
    17 xdecor2: xdecor2 '[' zexpr ']' .
 
-    $default  reduce using rule 17 (xdecor2)
+    $výchozí  reduce using rule 17 (xdecor2)
 
 
-state 157
+State 157
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -4710,993 +4709,39 @@ state 157
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 233
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 158
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  137     | expr LORE . expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 234
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 233
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 159
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  136     | expr LXORE . expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 235
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 160
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  135     | expr LANDE . expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 236
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 161
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  133     | expr LLSHE . expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 237
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 162
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  134     | expr LRSHE . expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 238
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 163
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  132     | expr LMDE . expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 239
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 164
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  131     | expr LDVE . expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 240
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 165
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  130     | expr LMLE . expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 241
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 166
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  129     | expr LME . expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 242
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 167
+State 158
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -5770,39 +4815,993 @@ state 167
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 243
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 234
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 168
+State 159
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  129     | expr LME . expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 235
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 160
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  130     | expr LMLE . expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 236
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 161
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  131     | expr LDVE . expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 237
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 162
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  132     | expr LMDE . expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 238
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 163
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  134     | expr LRSHE . expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 239
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 164
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  133     | expr LLSHE . expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 240
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 165
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  135     | expr LANDE . expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 241
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 166
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  136     | expr LXORE . expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 242
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 167
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  137     | expr LORE . expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 243
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 168
 
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -5878,40 +5877,40 @@ state 168
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 244
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    cexpr    přejít do stavu 244
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 169
+State 169
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -5985,39 +5984,39 @@ state 169
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 245
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 245
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 170
+State 170
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -6091,39 +6090,39 @@ state 170
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 246
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 246
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 171
+State 171
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -6197,39 +6196,39 @@ state 171
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 247
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 247
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 172
+State 172
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -6303,39 +6302,39 @@ state 172
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 248
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 248
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 173
+State 173
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -6409,145 +6408,39 @@ state 173
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 249
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 174
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  120     | expr LNE . expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 250
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 249
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 175
+State 174
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -6621,39 +6514,145 @@ state 175
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 251
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 250
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 176
+State 175
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  120     | expr LNE . expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 251
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 176
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -6727,39 +6726,39 @@ state 176
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 252
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 252
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 177
+State 177
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -6833,145 +6832,39 @@ state 177
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 253
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
-
-
-state 178
-
-  107 expr: . xuexpr
-  108     | . expr '*' expr
-  109     | . expr '/' expr
-  110     | . expr '%' expr
-  111     | . expr '+' expr
-  112     | . expr '-' expr
-  113     | . expr LRSH expr
-  114     | . expr LLSH expr
-  115     | . expr '<' expr
-  116     | . expr '>' expr
-  117     | . expr LLE expr
-  118     | . expr LGE expr
-  118     | expr LGE . expr
-  119     | . expr LEQ expr
-  120     | . expr LNE expr
-  121     | . expr '&' expr
-  122     | . expr '^' expr
-  123     | . expr '|' expr
-  124     | . expr LANDAND expr
-  125     | . expr LOROR expr
-  126     | . expr '?' cexpr ':' expr
-  127     | . expr '=' expr
-  128     | . expr LPE expr
-  129     | . expr LME expr
-  130     | . expr LMLE expr
-  131     | . expr LDVE expr
-  132     | . expr LMDE expr
-  133     | . expr LLSHE expr
-  134     | . expr LRSHE expr
-  135     | . expr LANDE expr
-  136     | . expr LXORE expr
-  137     | . expr LORE expr
-  138 xuexpr: . uexpr
-  139       | . '(' tlist abdecor ')' xuexpr
-  140       | . '(' tlist abdecor ')' '{' ilist '}'
-  141 uexpr: . pexpr
-  142      | . '*' xuexpr
-  143      | . '&' xuexpr
-  144      | . '+' xuexpr
-  145      | . '-' xuexpr
-  146      | . '!' xuexpr
-  147      | . '~' xuexpr
-  148      | . LPP xuexpr
-  149      | . LMM xuexpr
-  150      | . LSIZEOF uexpr
-  151      | . LSIGNOF uexpr
-  152 pexpr: . '(' cexpr ')'
-  153      | . LSIZEOF '(' tlist abdecor ')'
-  154      | . LSIGNOF '(' tlist abdecor ')'
-  155      | . pexpr '(' zelist ')'
-  156      | . pexpr '[' cexpr ']'
-  157      | . pexpr LMG ltag
-  158      | . pexpr '.' ltag
-  159      | . pexpr LPP
-  160      | . pexpr LMM
-  161      | . name
-  162      | . LCONST
-  163      | . LLCONST
-  164      | . LUCONST
-  165      | . LULCONST
-  166      | . LDCONST
-  167      | . LFCONST
-  168      | . LVLCONST
-  169      | . LUVLCONST
-  170      | . string
-  171      | . lstring
-  172 string: . LSTRING
-  173       | . string LSTRING
-  174 lstring: . LLSTRING
-  175        | . lstring LLSTRING
-  243 name: . LNAME
-
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
-
-    expr     go to state 254
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 253
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 179
+State 178
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -7045,39 +6938,39 @@ state 179
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 255
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 254
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 180
+State 179
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -7086,12 +6979,12 @@ state 180
   111     | . expr '+' expr
   112     | . expr '-' expr
   113     | . expr LRSH expr
-  113     | expr LRSH . expr
   114     | . expr LLSH expr
   115     | . expr '<' expr
   116     | . expr '>' expr
   117     | . expr LLE expr
   118     | . expr LGE expr
+  118     | expr LGE . expr
   119     | . expr LEQ expr
   120     | . expr LNE expr
   121     | . expr '&' expr
@@ -7151,39 +7044,39 @@ state 180
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 256
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 255
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 181
+State 180
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -7257,39 +7150,145 @@ state 181
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 257
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 256
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 182
+State 181
+
+  107 expr: . xuexpr
+  108     | . expr '*' expr
+  109     | . expr '/' expr
+  110     | . expr '%' expr
+  111     | . expr '+' expr
+  112     | . expr '-' expr
+  113     | . expr LRSH expr
+  113     | expr LRSH . expr
+  114     | . expr LLSH expr
+  115     | . expr '<' expr
+  116     | . expr '>' expr
+  117     | . expr LLE expr
+  118     | . expr LGE expr
+  119     | . expr LEQ expr
+  120     | . expr LNE expr
+  121     | . expr '&' expr
+  122     | . expr '^' expr
+  123     | . expr '|' expr
+  124     | . expr LANDAND expr
+  125     | . expr LOROR expr
+  126     | . expr '?' cexpr ':' expr
+  127     | . expr '=' expr
+  128     | . expr LPE expr
+  129     | . expr LME expr
+  130     | . expr LMLE expr
+  131     | . expr LDVE expr
+  132     | . expr LMDE expr
+  133     | . expr LLSHE expr
+  134     | . expr LRSHE expr
+  135     | . expr LANDE expr
+  136     | . expr LXORE expr
+  137     | . expr LORE expr
+  138 xuexpr: . uexpr
+  139       | . '(' tlist abdecor ')' xuexpr
+  140       | . '(' tlist abdecor ')' '{' ilist '}'
+  141 uexpr: . pexpr
+  142      | . '*' xuexpr
+  143      | . '&' xuexpr
+  144      | . '+' xuexpr
+  145      | . '-' xuexpr
+  146      | . '!' xuexpr
+  147      | . '~' xuexpr
+  148      | . LPP xuexpr
+  149      | . LMM xuexpr
+  150      | . LSIZEOF uexpr
+  151      | . LSIGNOF uexpr
+  152 pexpr: . '(' cexpr ')'
+  153      | . LSIZEOF '(' tlist abdecor ')'
+  154      | . LSIGNOF '(' tlist abdecor ')'
+  155      | . pexpr '(' zelist ')'
+  156      | . pexpr '[' cexpr ']'
+  157      | . pexpr LMG ltag
+  158      | . pexpr '.' ltag
+  159      | . pexpr LPP
+  160      | . pexpr LMM
+  161      | . name
+  162      | . LCONST
+  163      | . LLCONST
+  164      | . LUCONST
+  165      | . LULCONST
+  166      | . LDCONST
+  167      | . LFCONST
+  168      | . LVLCONST
+  169      | . LUVLCONST
+  170      | . string
+  171      | . lstring
+  172 string: . LSTRING
+  173       | . string LSTRING
+  174 lstring: . LLSTRING
+  175        | . lstring LLSTRING
+  243 name: . LNAME
+
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
+
+    expr     přejít do stavu 257
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
+
+
+State 182
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -7363,39 +7362,39 @@ state 182
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 258
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 258
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 183
+State 183
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -7469,39 +7468,39 @@ state 183
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 259
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 259
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 184
+State 184
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -7575,39 +7574,39 @@ state 184
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 260
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 260
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 185
+State 185
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -7681,39 +7680,39 @@ state 185
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 261
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 261
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 186
+State 186
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -7787,51 +7786,77 @@ state 186
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 262
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 262
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 187
+State 187
+
+  160 pexpr: pexpr LMM .
+
+    $výchozí  reduce using rule 160 (pexpr)
+
+
+State 188
+
+  159 pexpr: pexpr LPP .
+
+    $výchozí  reduce using rule 159 (pexpr)
+
+
+State 189
+
+  157 pexpr: pexpr LMG . ltag
+  245 ltag: . LNAME
+  246     | . LTYPE
+
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
+
+    ltag  přejít do stavu 263
+
+
+State 190
 
   158 pexpr: pexpr '.' . ltag
   245 ltag: . LNAME
   246     | . LTYPE
 
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    ltag  go to state 263
+    ltag  přejít do stavu 264
 
 
-state 188
+State 191
 
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -7907,40 +7932,40 @@ state 188
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 264
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    cexpr    přejít do stavu 265
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 189
+State 192
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -8012,103 +8037,77 @@ state 189
   173       | . string LSTRING
   174 lstring: . LLSTRING
   175        | . lstring LLSTRING
-  176 zelist: .  [')']
+  176 zelist: . %empty  [')']
   177       | . elist
   178 elist: . expr
   179      | . elist ',' elist
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 176 (zelist)
+    $výchozí  reduce using rule 176 (zelist)
 
-    expr     go to state 265
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    zelist   go to state 266
-    elist    go to state 267
-    name     go to state 123
-
-
-state 190
-
-  157 pexpr: pexpr LMG . ltag
-  245 ltag: . LNAME
-  246     | . LTYPE
-
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
-
-    ltag  go to state 268
+    expr     přejít do stavu 266
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    zelist   přejít do stavu 267
+    elist    přejít do stavu 268
+    name     přejít do stavu 123
 
 
-state 191
-
-  159 pexpr: pexpr LPP .
-
-    $default  reduce using rule 159 (pexpr)
-
-
-state 192
-
-  160 pexpr: pexpr LMM .
-
-    $default  reduce using rule 160 (pexpr)
-
-
-state 193
+State 193
 
   173 string: string LSTRING .
 
-    $default  reduce using rule 173 (string)
+    $výchozí  reduce using rule 173 (string)
 
 
-state 194
+State 194
 
   175 lstring: lstring LLSTRING .
 
-    $default  reduce using rule 175 (lstring)
+    $výchozí  reduce using rule 175 (lstring)
 
 
-state 195
+State 195
 
    67 arglist: '.' '.' . '.'
 
-    '.'  shift, and go to state 269
+    '.'  posunout a přejít do stavu 269
 
 
-state 196
+State 196
 
    16 xdecor2: xdecor2 '(' zarglist ')' .
 
-    $default  reduce using rule 16 (xdecor2)
+    $výchozí  reduce using rule 16 (xdecor2)
 
 
-state 197
+State 197
 
    64 arglist: . name
    65        | . tlist abdecor
@@ -8160,61 +8159,61 @@ state 197
   242      | . LRESTRICT
   243 name: . LNAME
 
-    '.'        shift, and go to state 124
-    LNAME      shift, and go to state 100
-    LTYPE      shift, and go to state 3
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    '.'        posunout a přejít do stavu 124
+    LNAME      posunout a přejít do stavu 100
+    LTYPE      posunout a přejít do stavu 3
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    arglist  go to state 270
-    types    go to state 79
-    tlist    go to state 127
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
-    name     go to state 128
+    arglist  přejít do stavu 270
+    types    přejít do stavu 79
+    tlist    přejít do stavu 127
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
+    name     přejít do stavu 128
 
 
-state 198
+State 198
 
    13 xdecor: '*' . zgnlist xdecor
    41 abdecor1: '*' . zgnlist
    42         | '*' . zgnlist abdecor1
-  211 zgnlist: .
+  211 zgnlist: . %empty
   212        | . zgnlist gname
 
-    $default  reduce using rule 211 (zgnlist)
+    $výchozí  reduce using rule 211 (zgnlist)
 
-    zgnlist  go to state 271
+    zgnlist  přejít do stavu 271
 
 
-state 199
+State 199
 
    48 abdecor3: '[' . zexpr ']'
-  102 zexpr: .  [']']
+  102 zexpr: . %empty  [']']
   103      | . lexpr
   104 lexpr: . expr
   107 expr: . xuexpr
@@ -8288,43 +8287,43 @@ state 199
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 102 (zexpr)
+    $výchozí  reduce using rule 102 (zexpr)
 
-    zexpr    go to state 272
-    lexpr    go to state 116
-    expr     go to state 117
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    zexpr    přejít do stavu 272
+    lexpr    přejít do stavu 116
+    expr     přejít do stavu 117
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 200
+State 200
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -8348,63 +8347,63 @@ state 200
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'    shift, and go to state 198
-    '['    shift, and go to state 199
-    '('    shift, and go to state 200
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
-    ')'    shift, and go to state 273
+    '*'    posunout a přejít do stavu 198
+    '['    posunout a přejít do stavu 199
+    '('    posunout a přejít do stavu 200
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
+    ')'    posunout a přejít do stavu 273
 
-    xdecor    go to state 68
-    xdecor2   go to state 50
-    abdecor1  go to state 274
-    abdecor2  go to state 204
-    abdecor3  go to state 205
-    tag       go to state 51
-    ltag      go to state 52
+    xdecor    přejít do stavu 68
+    xdecor2   přejít do stavu 50
+    abdecor1  přejít do stavu 274
+    abdecor2  přejít do stavu 204
+    abdecor3  přejít do stavu 205
+    tag       přejít do stavu 51
+    ltag      přejít do stavu 52
 
 
-state 201
+State 201
 
    66 arglist: tlist xdecor .
 
-    $default  reduce using rule 66 (arglist)
+    $výchozí  reduce using rule 66 (arglist)
 
 
-state 202
+State 202
 
    65 arglist: tlist abdecor .
 
-    $default  reduce using rule 65 (arglist)
+    $výchozí  reduce using rule 65 (arglist)
 
 
-state 203
+State 203
 
    40 abdecor: abdecor1 .
 
-    $default  reduce using rule 40 (abdecor)
+    $výchozí  reduce using rule 40 (abdecor)
 
 
-state 204
+State 204
 
    43 abdecor1: abdecor2 .  [',', ')']
    45 abdecor2: abdecor2 . '(' zarglist ')'
    46         | abdecor2 . '[' zexpr ']'
 
-    '['  shift, and go to state 275
-    '('  shift, and go to state 276
+    '['  posunout a přejít do stavu 275
+    '('  posunout a přejít do stavu 276
 
-    $default  reduce using rule 43 (abdecor1)
+    $výchozí  reduce using rule 43 (abdecor1)
 
 
-state 205
+State 205
 
    44 abdecor2: abdecor3 .
 
-    $default  reduce using rule 44 (abdecor2)
+    $výchozí  reduce using rule 44 (abdecor2)
 
 
-state 206
+State 206
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -8413,7 +8412,7 @@ state 206
    16        | . xdecor2 '(' zarglist ')'
    17        | . xdecor2 '[' zexpr ']'
    31 edecl: edecl tlist $@6 . zedlist ';'
-   32 zedlist: .  [';']
+   32 zedlist: . %empty  [';']
    33        | . edlist
    34 edlist: . edecor
    35       | . edlist ',' edlist
@@ -8424,24 +8423,24 @@ state 206
   245 ltag: . LNAME
   246     | . LTYPE
 
-    ':'    shift, and go to state 207
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    ':'    posunout a přejít do stavu 207
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    $default  reduce using rule 32 (zedlist)
+    $výchozí  reduce using rule 32 (zedlist)
 
-    xdecor   go to state 208
-    xdecor2  go to state 50
-    zedlist  go to state 277
-    edlist   go to state 210
-    edecor   go to state 211
-    tag      go to state 212
-    ltag     go to state 52
+    xdecor   přejít do stavu 208
+    xdecor2  přejít do stavu 50
+    zedlist  přejít do stavu 277
+    edlist   přejít do stavu 210
+    edecor   přejít do stavu 211
+    tag      přejít do stavu 212
+    ltag     přejít do stavu 52
 
 
-state 207
+State 207
 
    38 edecor: ':' . lexpr
   104 lexpr: . expr
@@ -8516,81 +8515,81 @@ state 207
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    lexpr    go to state 278
-    expr     go to state 117
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    lexpr    přejít do stavu 278
+    expr     přejít do stavu 117
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 208
+State 208
 
    36 edecor: xdecor .
 
-    $default  reduce using rule 36 (edecor)
+    $výchozí  reduce using rule 36 (edecor)
 
 
-state 209
+State 209
 
    29 edecl: tlist $@5 zedlist . ';'
 
-    ';'  shift, and go to state 279
+    ';'  posunout a přejít do stavu 279
 
 
-state 210
+State 210
 
    33 zedlist: edlist .  [';']
    35 edlist: edlist . ',' edlist
 
-    ','  shift, and go to state 280
+    ','  posunout a přejít do stavu 280
 
-    $default  reduce using rule 33 (zedlist)
+    $výchozí  reduce using rule 33 (zedlist)
 
 
-state 211
+State 211
 
    34 edlist: edecor .
 
-    $default  reduce using rule 34 (edlist)
+    $výchozí  reduce using rule 34 (edlist)
 
 
-state 212
+State 212
 
    14 xdecor2: tag .  [';', ',', '[', '(']
    37 edecor: tag . ':' lexpr
 
-    ':'  shift, and go to state 281
+    ':'  posunout a přejít do stavu 281
 
-    $default  reduce using rule 14 (xdecor2)
+    $výchozí  reduce using rule 14 (xdecor2)
 
 
-state 213
+State 213
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -8624,109 +8623,109 @@ state 213
   137     | expr . LORE expr
   221 enum: LNAME '=' expr .  [',', '}']
 
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 221 (enum)
+    $výchozí  reduce using rule 221 (enum)
 
 
-state 214
+State 214
 
   222 enum: enum . ','
   223     | enum . ',' enum
   223     | enum ',' enum .  [',', '}']
 
-    $default  reduce using rule 223 (enum)
+    $výchozí  reduce using rule 223 (enum)
 
     Conflict between rule 223 and token ',' resolved as reduce (%left ',').
 
 
-state 215
+State 215
 
   205 complex: LENUM ltag $@12 '{' $@13 enum . '}'
   222 enum: enum . ','
   223     | enum . ',' enum
 
-    ','  shift, and go to state 133
-    '}'  shift, and go to state 282
+    ','  posunout a přejít do stavu 133
+    '}'  posunout a přejít do stavu 282
 
 
-state 216
+State 216
 
    69 block: '{' . slist '}'
-   70 slist: .
+   70 slist: . %empty
    71      | . slist adecl
    72      | . slist stmnt
 
-    $default  reduce using rule 70 (slist)
+    $výchozí  reduce using rule 70 (slist)
 
-    slist  go to state 283
+    slist  přejít do stavu 283
 
 
-state 217
+State 217
 
     7 xdecl: zctlist xdecor $@1 pdecl $@2 block .
 
-    $default  reduce using rule 7 (xdecl)
+    $výchozí  reduce using rule 7 (xdecl)
 
 
-state 218
+State 218
 
    26 pdlist: xdecor .
 
-    $default  reduce using rule 26 (pdlist)
+    $výchozí  reduce using rule 26 (pdlist)
 
 
-state 219
+State 219
 
    25 pdecl: pdecl ctlist pdlist . ';'
    27 pdlist: pdlist . ',' pdlist
 
-    ';'  shift, and go to state 284
-    ','  shift, and go to state 285
+    ';'  posunout a přejít do stavu 284
+    ','  posunout a přejít do stavu 285
 
 
-state 220
+State 220
 
    53 qual: '.' . ltag
   245 ltag: . LNAME
   246     | . LTYPE
 
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    ltag  go to state 286
+    ltag  přejít do stavu 286
 
 
-state 221
+State 221
 
    52 qual: '[' . lexpr ']'
   104 lexpr: . expr
@@ -8801,60 +8800,60 @@ state 221
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    lexpr    go to state 287
-    expr     go to state 117
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    lexpr    přejít do stavu 287
+    expr     přejít do stavu 117
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 222
+State 222
 
    55 qlist: init . ','
    60 ilist: init .  ['}']
 
-    ','  shift, and go to state 288
+    ','  posunout a přejít do stavu 288
 
-    $default  reduce using rule 60 (ilist)
+    $výchozí  reduce using rule 60 (ilist)
 
 
-state 223
+State 223
 
    54 qual: qual . '='
-   57 qlist: qual .  ['&', '+', '-', '*', '.', '[', '(', LPP, LMM, LNAME, LFCONST, LDCONST, LCONST, LLCONST, LUCONST, LULCONST, LVLCONST, LUVLCONST, LSTRING, LLSTRING, LSIZEOF, LSIGNOF, '{', '}', '!', '~']
+   57 qlist: qual .  ['&', '+', '-', '*', LMM, LPP, '.', '[', '(', LNAME, LFCONST, LDCONST, LCONST, LLCONST, LUCONST, LULCONST, LVLCONST, LUVLCONST, LSTRING, LLSTRING, LSIZEOF, LSIGNOF, '{', '}', '!', '~']
 
-    '='  shift, and go to state 289
+    '='  posunout a přejít do stavu 289
 
-    $default  reduce using rule 57 (qlist)
+    $výchozí  reduce using rule 57 (qlist)
 
 
-state 224
+State 224
 
    50 init: . expr
    51     | . '{' ilist '}'
@@ -8936,53 +8935,53 @@ state 224
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '.'        shift, and go to state 220
-    '['        shift, and go to state 221
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '{'        shift, and go to state 138
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '.'        posunout a přejít do stavu 220
+    '['        posunout a přejít do stavu 221
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '{'        posunout a přejít do stavu 138
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 59 (ilist)
+    $výchozí  reduce using rule 59 (ilist)
 
-    init     go to state 290
-    qual     go to state 291
-    expr     go to state 140
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    init     přejít do stavu 290
+    qual     přejít do stavu 291
+    expr     přejít do stavu 140
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 225
+State 225
 
    51 init: '{' ilist . '}'
 
-    '}'  shift, and go to state 292
+    '}'  posunout a přejít do stavu 292
 
 
-state 226
+State 226
 
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -9058,59 +9057,59 @@ state 226
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 293
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    cexpr    přejít do stavu 293
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 227
+State 227
 
   152 pexpr: '(' cexpr ')' .
 
-    $default  reduce using rule 152 (pexpr)
+    $výchozí  reduce using rule 152 (pexpr)
 
 
-state 228
+State 228
 
    41 abdecor1: '*' . zgnlist
    42         | '*' . zgnlist abdecor1
-  211 zgnlist: .
+  211 zgnlist: . %empty
   212        | . zgnlist gname
 
-    $default  reduce using rule 211 (zgnlist)
+    $výchozí  reduce using rule 211 (zgnlist)
 
-    zgnlist  go to state 294
+    zgnlist  přejít do stavu 294
 
 
-state 229
+State 229
 
    41 abdecor1: . '*' zgnlist
    42         | . '*' zgnlist abdecor1
@@ -9124,27 +9123,27 @@ state 229
    49         | . '(' abdecor1 ')'
    49         | '(' . abdecor1 ')'
 
-    '*'  shift, and go to state 228
-    '['  shift, and go to state 199
-    '('  shift, and go to state 229
-    ')'  shift, and go to state 273
+    '*'  posunout a přejít do stavu 228
+    '['  posunout a přejít do stavu 199
+    '('  posunout a přejít do stavu 229
+    ')'  posunout a přejít do stavu 273
 
-    abdecor1  go to state 274
-    abdecor2  go to state 204
-    abdecor3  go to state 205
+    abdecor1  přejít do stavu 274
+    abdecor2  přejít do stavu 204
+    abdecor3  přejít do stavu 205
 
 
-state 230
+State 230
 
   139 xuexpr: '(' tlist abdecor . ')' xuexpr
   140       | '(' tlist abdecor . ')' '{' ilist '}'
 
-    ')'  shift, and go to state 295
+    ')'  posunout a přejít do stavu 295
 
 
-state 231
+State 231
 
-   39 abdecor: .  [')']
+   39 abdecor: . %empty  [')']
    40        | . abdecor1
    41 abdecor1: . '*' zgnlist
    42         | . '*' zgnlist abdecor1
@@ -9157,21 +9156,21 @@ state 231
    49         | . '(' abdecor1 ')'
   153 pexpr: LSIZEOF '(' tlist . abdecor ')'
 
-    '*'  shift, and go to state 228
-    '['  shift, and go to state 199
-    '('  shift, and go to state 229
+    '*'  posunout a přejít do stavu 228
+    '['  posunout a přejít do stavu 199
+    '('  posunout a přejít do stavu 229
 
-    $default  reduce using rule 39 (abdecor)
+    $výchozí  reduce using rule 39 (abdecor)
 
-    abdecor   go to state 296
-    abdecor1  go to state 203
-    abdecor2  go to state 204
-    abdecor3  go to state 205
+    abdecor   přejít do stavu 296
+    abdecor1  přejít do stavu 203
+    abdecor2  přejít do stavu 204
+    abdecor3  přejít do stavu 205
 
 
-state 232
+State 232
 
-   39 abdecor: .  [')']
+   39 abdecor: . %empty  [')']
    40        | . abdecor1
    41 abdecor1: . '*' zgnlist
    42         | . '*' zgnlist abdecor1
@@ -9184,19 +9183,19 @@ state 232
    49         | . '(' abdecor1 ')'
   154 pexpr: LSIGNOF '(' tlist . abdecor ')'
 
-    '*'  shift, and go to state 228
-    '['  shift, and go to state 199
-    '('  shift, and go to state 229
+    '*'  posunout a přejít do stavu 228
+    '['  posunout a přejít do stavu 199
+    '('  posunout a přejít do stavu 229
 
-    $default  reduce using rule 39 (abdecor)
+    $výchozí  reduce using rule 39 (abdecor)
 
-    abdecor   go to state 297
-    abdecor1  go to state 203
-    abdecor2  go to state 204
-    abdecor3  go to state 205
+    abdecor   přejít do stavu 297
+    abdecor1  přejít do stavu 203
+    abdecor2  přejít do stavu 204
+    abdecor3  přejít do stavu 205
 
 
-state 233
+State 233
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -9230,64 +9229,64 @@ state 233
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 127 (expr)
+    $výchozí  reduce using rule 127 (expr)
 
     Conflict between rule 127 and token '=' resolved as shift (%right '=').
-    Conflict between rule 127 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 127 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 127 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 127 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 127 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 127 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 127 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 127 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 127 and token LME resolved as shift (%right LME).
     Conflict between rule 127 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 127 and token LME resolved as shift (%right LME).
+    Conflict between rule 127 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 127 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 127 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 127 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 127 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 127 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 127 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 127 and token LORE resolved as shift (%right LORE).
     Conflict between rule 127 and token '?' resolved as shift ('=' < '?').
     Conflict between rule 127 and token LOROR resolved as shift ('=' < LOROR).
     Conflict between rule 127 and token LANDAND resolved as shift ('=' < LANDAND).
     Conflict between rule 127 and token '|' resolved as shift ('=' < '|').
     Conflict between rule 127 and token '^' resolved as shift ('=' < '^').
     Conflict between rule 127 and token '&' resolved as shift ('=' < '&').
-    Conflict between rule 127 and token LNE resolved as shift ('=' < LNE).
     Conflict between rule 127 and token LEQ resolved as shift ('=' < LEQ).
+    Conflict between rule 127 and token LNE resolved as shift ('=' < LNE).
     Conflict between rule 127 and token '<' resolved as shift ('=' < '<').
     Conflict between rule 127 and token '>' resolved as shift ('=' < '>').
-    Conflict between rule 127 and token LGE resolved as shift ('=' < LGE).
     Conflict between rule 127 and token LLE resolved as shift ('=' < LLE).
-    Conflict between rule 127 and token LRSH resolved as shift ('=' < LRSH).
+    Conflict between rule 127 and token LGE resolved as shift ('=' < LGE).
     Conflict between rule 127 and token LLSH resolved as shift ('=' < LLSH).
+    Conflict between rule 127 and token LRSH resolved as shift ('=' < LRSH).
     Conflict between rule 127 and token '+' resolved as shift ('=' < '+').
     Conflict between rule 127 and token '-' resolved as shift ('=' < '-').
     Conflict between rule 127 and token '*' resolved as shift ('=' < '*').
@@ -9295,898 +9294,7 @@ state 233
     Conflict between rule 127 and token '%' resolved as shift ('=' < '%').
 
 
-state 234
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-  137     | expr LORE expr .  [';', ',', ':', ')', ']', '}']
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 137 (expr)
-
-    Conflict between rule 137 and token '=' resolved as shift (%right '=').
-    Conflict between rule 137 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 137 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 137 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 137 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 137 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 137 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 137 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 137 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 137 and token LME resolved as shift (%right LME).
-    Conflict between rule 137 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 137 and token '?' resolved as shift (LORE < '?').
-    Conflict between rule 137 and token LOROR resolved as shift (LORE < LOROR).
-    Conflict between rule 137 and token LANDAND resolved as shift (LORE < LANDAND).
-    Conflict between rule 137 and token '|' resolved as shift (LORE < '|').
-    Conflict between rule 137 and token '^' resolved as shift (LORE < '^').
-    Conflict between rule 137 and token '&' resolved as shift (LORE < '&').
-    Conflict between rule 137 and token LNE resolved as shift (LORE < LNE).
-    Conflict between rule 137 and token LEQ resolved as shift (LORE < LEQ).
-    Conflict between rule 137 and token '<' resolved as shift (LORE < '<').
-    Conflict between rule 137 and token '>' resolved as shift (LORE < '>').
-    Conflict between rule 137 and token LGE resolved as shift (LORE < LGE).
-    Conflict between rule 137 and token LLE resolved as shift (LORE < LLE).
-    Conflict between rule 137 and token LRSH resolved as shift (LORE < LRSH).
-    Conflict between rule 137 and token LLSH resolved as shift (LORE < LLSH).
-    Conflict between rule 137 and token '+' resolved as shift (LORE < '+').
-    Conflict between rule 137 and token '-' resolved as shift (LORE < '-').
-    Conflict between rule 137 and token '*' resolved as shift (LORE < '*').
-    Conflict between rule 137 and token '/' resolved as shift (LORE < '/').
-    Conflict between rule 137 and token '%' resolved as shift (LORE < '%').
-
-
-state 235
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  136     | expr LXORE expr .  [';', ',', ':', ')', ']', '}']
-  137     | expr . LORE expr
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 136 (expr)
-
-    Conflict between rule 136 and token '=' resolved as shift (%right '=').
-    Conflict between rule 136 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 136 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 136 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 136 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 136 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 136 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 136 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 136 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 136 and token LME resolved as shift (%right LME).
-    Conflict between rule 136 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 136 and token '?' resolved as shift (LXORE < '?').
-    Conflict between rule 136 and token LOROR resolved as shift (LXORE < LOROR).
-    Conflict between rule 136 and token LANDAND resolved as shift (LXORE < LANDAND).
-    Conflict between rule 136 and token '|' resolved as shift (LXORE < '|').
-    Conflict between rule 136 and token '^' resolved as shift (LXORE < '^').
-    Conflict between rule 136 and token '&' resolved as shift (LXORE < '&').
-    Conflict between rule 136 and token LNE resolved as shift (LXORE < LNE).
-    Conflict between rule 136 and token LEQ resolved as shift (LXORE < LEQ).
-    Conflict between rule 136 and token '<' resolved as shift (LXORE < '<').
-    Conflict between rule 136 and token '>' resolved as shift (LXORE < '>').
-    Conflict between rule 136 and token LGE resolved as shift (LXORE < LGE).
-    Conflict between rule 136 and token LLE resolved as shift (LXORE < LLE).
-    Conflict between rule 136 and token LRSH resolved as shift (LXORE < LRSH).
-    Conflict between rule 136 and token LLSH resolved as shift (LXORE < LLSH).
-    Conflict between rule 136 and token '+' resolved as shift (LXORE < '+').
-    Conflict between rule 136 and token '-' resolved as shift (LXORE < '-').
-    Conflict between rule 136 and token '*' resolved as shift (LXORE < '*').
-    Conflict between rule 136 and token '/' resolved as shift (LXORE < '/').
-    Conflict between rule 136 and token '%' resolved as shift (LXORE < '%').
-
-
-state 236
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  135     | expr LANDE expr .  [';', ',', ':', ')', ']', '}']
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 135 (expr)
-
-    Conflict between rule 135 and token '=' resolved as shift (%right '=').
-    Conflict between rule 135 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 135 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 135 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 135 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 135 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 135 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 135 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 135 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 135 and token LME resolved as shift (%right LME).
-    Conflict between rule 135 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 135 and token '?' resolved as shift (LANDE < '?').
-    Conflict between rule 135 and token LOROR resolved as shift (LANDE < LOROR).
-    Conflict between rule 135 and token LANDAND resolved as shift (LANDE < LANDAND).
-    Conflict between rule 135 and token '|' resolved as shift (LANDE < '|').
-    Conflict between rule 135 and token '^' resolved as shift (LANDE < '^').
-    Conflict between rule 135 and token '&' resolved as shift (LANDE < '&').
-    Conflict between rule 135 and token LNE resolved as shift (LANDE < LNE).
-    Conflict between rule 135 and token LEQ resolved as shift (LANDE < LEQ).
-    Conflict between rule 135 and token '<' resolved as shift (LANDE < '<').
-    Conflict between rule 135 and token '>' resolved as shift (LANDE < '>').
-    Conflict between rule 135 and token LGE resolved as shift (LANDE < LGE).
-    Conflict between rule 135 and token LLE resolved as shift (LANDE < LLE).
-    Conflict between rule 135 and token LRSH resolved as shift (LANDE < LRSH).
-    Conflict between rule 135 and token LLSH resolved as shift (LANDE < LLSH).
-    Conflict between rule 135 and token '+' resolved as shift (LANDE < '+').
-    Conflict between rule 135 and token '-' resolved as shift (LANDE < '-').
-    Conflict between rule 135 and token '*' resolved as shift (LANDE < '*').
-    Conflict between rule 135 and token '/' resolved as shift (LANDE < '/').
-    Conflict between rule 135 and token '%' resolved as shift (LANDE < '%').
-
-
-state 237
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  133     | expr LLSHE expr .  [';', ',', ':', ')', ']', '}']
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 133 (expr)
-
-    Conflict between rule 133 and token '=' resolved as shift (%right '=').
-    Conflict between rule 133 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 133 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 133 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 133 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 133 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 133 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 133 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 133 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 133 and token LME resolved as shift (%right LME).
-    Conflict between rule 133 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 133 and token '?' resolved as shift (LLSHE < '?').
-    Conflict between rule 133 and token LOROR resolved as shift (LLSHE < LOROR).
-    Conflict between rule 133 and token LANDAND resolved as shift (LLSHE < LANDAND).
-    Conflict between rule 133 and token '|' resolved as shift (LLSHE < '|').
-    Conflict between rule 133 and token '^' resolved as shift (LLSHE < '^').
-    Conflict between rule 133 and token '&' resolved as shift (LLSHE < '&').
-    Conflict between rule 133 and token LNE resolved as shift (LLSHE < LNE).
-    Conflict between rule 133 and token LEQ resolved as shift (LLSHE < LEQ).
-    Conflict between rule 133 and token '<' resolved as shift (LLSHE < '<').
-    Conflict between rule 133 and token '>' resolved as shift (LLSHE < '>').
-    Conflict between rule 133 and token LGE resolved as shift (LLSHE < LGE).
-    Conflict between rule 133 and token LLE resolved as shift (LLSHE < LLE).
-    Conflict between rule 133 and token LRSH resolved as shift (LLSHE < LRSH).
-    Conflict between rule 133 and token LLSH resolved as shift (LLSHE < LLSH).
-    Conflict between rule 133 and token '+' resolved as shift (LLSHE < '+').
-    Conflict between rule 133 and token '-' resolved as shift (LLSHE < '-').
-    Conflict between rule 133 and token '*' resolved as shift (LLSHE < '*').
-    Conflict between rule 133 and token '/' resolved as shift (LLSHE < '/').
-    Conflict between rule 133 and token '%' resolved as shift (LLSHE < '%').
-
-
-state 238
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  134     | expr LRSHE expr .  [';', ',', ':', ')', ']', '}']
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 134 (expr)
-
-    Conflict between rule 134 and token '=' resolved as shift (%right '=').
-    Conflict between rule 134 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 134 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 134 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 134 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 134 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 134 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 134 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 134 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 134 and token LME resolved as shift (%right LME).
-    Conflict between rule 134 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 134 and token '?' resolved as shift (LRSHE < '?').
-    Conflict between rule 134 and token LOROR resolved as shift (LRSHE < LOROR).
-    Conflict between rule 134 and token LANDAND resolved as shift (LRSHE < LANDAND).
-    Conflict between rule 134 and token '|' resolved as shift (LRSHE < '|').
-    Conflict between rule 134 and token '^' resolved as shift (LRSHE < '^').
-    Conflict between rule 134 and token '&' resolved as shift (LRSHE < '&').
-    Conflict between rule 134 and token LNE resolved as shift (LRSHE < LNE).
-    Conflict between rule 134 and token LEQ resolved as shift (LRSHE < LEQ).
-    Conflict between rule 134 and token '<' resolved as shift (LRSHE < '<').
-    Conflict between rule 134 and token '>' resolved as shift (LRSHE < '>').
-    Conflict between rule 134 and token LGE resolved as shift (LRSHE < LGE).
-    Conflict between rule 134 and token LLE resolved as shift (LRSHE < LLE).
-    Conflict between rule 134 and token LRSH resolved as shift (LRSHE < LRSH).
-    Conflict between rule 134 and token LLSH resolved as shift (LRSHE < LLSH).
-    Conflict between rule 134 and token '+' resolved as shift (LRSHE < '+').
-    Conflict between rule 134 and token '-' resolved as shift (LRSHE < '-').
-    Conflict between rule 134 and token '*' resolved as shift (LRSHE < '*').
-    Conflict between rule 134 and token '/' resolved as shift (LRSHE < '/').
-    Conflict between rule 134 and token '%' resolved as shift (LRSHE < '%').
-
-
-state 239
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  132     | expr LMDE expr .  [';', ',', ':', ')', ']', '}']
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 132 (expr)
-
-    Conflict between rule 132 and token '=' resolved as shift (%right '=').
-    Conflict between rule 132 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 132 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 132 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 132 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 132 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 132 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 132 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 132 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 132 and token LME resolved as shift (%right LME).
-    Conflict between rule 132 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 132 and token '?' resolved as shift (LMDE < '?').
-    Conflict between rule 132 and token LOROR resolved as shift (LMDE < LOROR).
-    Conflict between rule 132 and token LANDAND resolved as shift (LMDE < LANDAND).
-    Conflict between rule 132 and token '|' resolved as shift (LMDE < '|').
-    Conflict between rule 132 and token '^' resolved as shift (LMDE < '^').
-    Conflict between rule 132 and token '&' resolved as shift (LMDE < '&').
-    Conflict between rule 132 and token LNE resolved as shift (LMDE < LNE).
-    Conflict between rule 132 and token LEQ resolved as shift (LMDE < LEQ).
-    Conflict between rule 132 and token '<' resolved as shift (LMDE < '<').
-    Conflict between rule 132 and token '>' resolved as shift (LMDE < '>').
-    Conflict between rule 132 and token LGE resolved as shift (LMDE < LGE).
-    Conflict between rule 132 and token LLE resolved as shift (LMDE < LLE).
-    Conflict between rule 132 and token LRSH resolved as shift (LMDE < LRSH).
-    Conflict between rule 132 and token LLSH resolved as shift (LMDE < LLSH).
-    Conflict between rule 132 and token '+' resolved as shift (LMDE < '+').
-    Conflict between rule 132 and token '-' resolved as shift (LMDE < '-').
-    Conflict between rule 132 and token '*' resolved as shift (LMDE < '*').
-    Conflict between rule 132 and token '/' resolved as shift (LMDE < '/').
-    Conflict between rule 132 and token '%' resolved as shift (LMDE < '%').
-
-
-state 240
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  131     | expr LDVE expr .  [';', ',', ':', ')', ']', '}']
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 131 (expr)
-
-    Conflict between rule 131 and token '=' resolved as shift (%right '=').
-    Conflict between rule 131 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 131 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 131 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 131 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 131 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 131 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 131 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 131 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 131 and token LME resolved as shift (%right LME).
-    Conflict between rule 131 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 131 and token '?' resolved as shift (LDVE < '?').
-    Conflict between rule 131 and token LOROR resolved as shift (LDVE < LOROR).
-    Conflict between rule 131 and token LANDAND resolved as shift (LDVE < LANDAND).
-    Conflict between rule 131 and token '|' resolved as shift (LDVE < '|').
-    Conflict between rule 131 and token '^' resolved as shift (LDVE < '^').
-    Conflict between rule 131 and token '&' resolved as shift (LDVE < '&').
-    Conflict between rule 131 and token LNE resolved as shift (LDVE < LNE).
-    Conflict between rule 131 and token LEQ resolved as shift (LDVE < LEQ).
-    Conflict between rule 131 and token '<' resolved as shift (LDVE < '<').
-    Conflict between rule 131 and token '>' resolved as shift (LDVE < '>').
-    Conflict between rule 131 and token LGE resolved as shift (LDVE < LGE).
-    Conflict between rule 131 and token LLE resolved as shift (LDVE < LLE).
-    Conflict between rule 131 and token LRSH resolved as shift (LDVE < LRSH).
-    Conflict between rule 131 and token LLSH resolved as shift (LDVE < LLSH).
-    Conflict between rule 131 and token '+' resolved as shift (LDVE < '+').
-    Conflict between rule 131 and token '-' resolved as shift (LDVE < '-').
-    Conflict between rule 131 and token '*' resolved as shift (LDVE < '*').
-    Conflict between rule 131 and token '/' resolved as shift (LDVE < '/').
-    Conflict between rule 131 and token '%' resolved as shift (LDVE < '%').
-
-
-state 241
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  130     | expr LMLE expr .  [';', ',', ':', ')', ']', '}']
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 130 (expr)
-
-    Conflict between rule 130 and token '=' resolved as shift (%right '=').
-    Conflict between rule 130 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 130 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 130 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 130 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 130 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 130 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 130 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 130 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 130 and token LME resolved as shift (%right LME).
-    Conflict between rule 130 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 130 and token '?' resolved as shift (LMLE < '?').
-    Conflict between rule 130 and token LOROR resolved as shift (LMLE < LOROR).
-    Conflict between rule 130 and token LANDAND resolved as shift (LMLE < LANDAND).
-    Conflict between rule 130 and token '|' resolved as shift (LMLE < '|').
-    Conflict between rule 130 and token '^' resolved as shift (LMLE < '^').
-    Conflict between rule 130 and token '&' resolved as shift (LMLE < '&').
-    Conflict between rule 130 and token LNE resolved as shift (LMLE < LNE).
-    Conflict between rule 130 and token LEQ resolved as shift (LMLE < LEQ).
-    Conflict between rule 130 and token '<' resolved as shift (LMLE < '<').
-    Conflict between rule 130 and token '>' resolved as shift (LMLE < '>').
-    Conflict between rule 130 and token LGE resolved as shift (LMLE < LGE).
-    Conflict between rule 130 and token LLE resolved as shift (LMLE < LLE).
-    Conflict between rule 130 and token LRSH resolved as shift (LMLE < LRSH).
-    Conflict between rule 130 and token LLSH resolved as shift (LMLE < LLSH).
-    Conflict between rule 130 and token '+' resolved as shift (LMLE < '+').
-    Conflict between rule 130 and token '-' resolved as shift (LMLE < '-').
-    Conflict between rule 130 and token '*' resolved as shift (LMLE < '*').
-    Conflict between rule 130 and token '/' resolved as shift (LMLE < '/').
-    Conflict between rule 130 and token '%' resolved as shift (LMLE < '%').
-
-
-state 242
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  129     | expr LME expr .  [';', ',', ':', ')', ']', '}']
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
-
-    $default  reduce using rule 129 (expr)
-
-    Conflict between rule 129 and token '=' resolved as shift (%right '=').
-    Conflict between rule 129 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 129 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 129 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 129 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 129 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 129 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 129 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 129 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 129 and token LME resolved as shift (%right LME).
-    Conflict between rule 129 and token LPE resolved as shift (%right LPE).
-    Conflict between rule 129 and token '?' resolved as shift (LME < '?').
-    Conflict between rule 129 and token LOROR resolved as shift (LME < LOROR).
-    Conflict between rule 129 and token LANDAND resolved as shift (LME < LANDAND).
-    Conflict between rule 129 and token '|' resolved as shift (LME < '|').
-    Conflict between rule 129 and token '^' resolved as shift (LME < '^').
-    Conflict between rule 129 and token '&' resolved as shift (LME < '&').
-    Conflict between rule 129 and token LNE resolved as shift (LME < LNE).
-    Conflict between rule 129 and token LEQ resolved as shift (LME < LEQ).
-    Conflict between rule 129 and token '<' resolved as shift (LME < '<').
-    Conflict between rule 129 and token '>' resolved as shift (LME < '>').
-    Conflict between rule 129 and token LGE resolved as shift (LME < LGE).
-    Conflict between rule 129 and token LLE resolved as shift (LME < LLE).
-    Conflict between rule 129 and token LRSH resolved as shift (LME < LRSH).
-    Conflict between rule 129 and token LLSH resolved as shift (LME < LLSH).
-    Conflict between rule 129 and token '+' resolved as shift (LME < '+').
-    Conflict between rule 129 and token '-' resolved as shift (LME < '-').
-    Conflict between rule 129 and token '*' resolved as shift (LME < '*').
-    Conflict between rule 129 and token '/' resolved as shift (LME < '/').
-    Conflict between rule 129 and token '%' resolved as shift (LME < '%').
-
-
-state 243
+State 234
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10220,64 +9328,64 @@ state 243
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 128 (expr)
+    $výchozí  reduce using rule 128 (expr)
 
     Conflict between rule 128 and token '=' resolved as shift (%right '=').
-    Conflict between rule 128 and token LORE resolved as shift (%right LORE).
-    Conflict between rule 128 and token LXORE resolved as shift (%right LXORE).
-    Conflict between rule 128 and token LANDE resolved as shift (%right LANDE).
-    Conflict between rule 128 and token LLSHE resolved as shift (%right LLSHE).
-    Conflict between rule 128 and token LRSHE resolved as shift (%right LRSHE).
-    Conflict between rule 128 and token LMDE resolved as shift (%right LMDE).
-    Conflict between rule 128 and token LDVE resolved as shift (%right LDVE).
-    Conflict between rule 128 and token LMLE resolved as shift (%right LMLE).
-    Conflict between rule 128 and token LME resolved as shift (%right LME).
     Conflict between rule 128 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 128 and token LME resolved as shift (%right LME).
+    Conflict between rule 128 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 128 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 128 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 128 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 128 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 128 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 128 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 128 and token LORE resolved as shift (%right LORE).
     Conflict between rule 128 and token '?' resolved as shift (LPE < '?').
     Conflict between rule 128 and token LOROR resolved as shift (LPE < LOROR).
     Conflict between rule 128 and token LANDAND resolved as shift (LPE < LANDAND).
     Conflict between rule 128 and token '|' resolved as shift (LPE < '|').
     Conflict between rule 128 and token '^' resolved as shift (LPE < '^').
     Conflict between rule 128 and token '&' resolved as shift (LPE < '&').
-    Conflict between rule 128 and token LNE resolved as shift (LPE < LNE).
     Conflict between rule 128 and token LEQ resolved as shift (LPE < LEQ).
+    Conflict between rule 128 and token LNE resolved as shift (LPE < LNE).
     Conflict between rule 128 and token '<' resolved as shift (LPE < '<').
     Conflict between rule 128 and token '>' resolved as shift (LPE < '>').
-    Conflict between rule 128 and token LGE resolved as shift (LPE < LGE).
     Conflict between rule 128 and token LLE resolved as shift (LPE < LLE).
-    Conflict between rule 128 and token LRSH resolved as shift (LPE < LRSH).
+    Conflict between rule 128 and token LGE resolved as shift (LPE < LGE).
     Conflict between rule 128 and token LLSH resolved as shift (LPE < LLSH).
+    Conflict between rule 128 and token LRSH resolved as shift (LPE < LRSH).
     Conflict between rule 128 and token '+' resolved as shift (LPE < '+').
     Conflict between rule 128 and token '-' resolved as shift (LPE < '-').
     Conflict between rule 128 and token '*' resolved as shift (LPE < '*').
@@ -10285,16 +9393,7 @@ state 243
     Conflict between rule 128 and token '%' resolved as shift (LPE < '%').
 
 
-state 244
-
-  106 cexpr: cexpr . ',' cexpr
-  126 expr: expr '?' cexpr . ':' expr
-
-    ','  shift, and go to state 226
-    ':'  shift, and go to state 298
-
-
-state 245
+State 235
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10314,7 +9413,907 @@ state 245
   123     | expr . '|' expr
   124     | expr . LANDAND expr
   125     | expr . LOROR expr
-  125     | expr LOROR expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, ')', ']', '}']
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  129     | expr LME expr .  [';', ',', ':', ')', ']', '}']
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 129 (expr)
+
+    Conflict between rule 129 and token '=' resolved as shift (%right '=').
+    Conflict between rule 129 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 129 and token LME resolved as shift (%right LME).
+    Conflict between rule 129 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 129 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 129 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 129 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 129 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 129 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 129 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 129 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 129 and token '?' resolved as shift (LME < '?').
+    Conflict between rule 129 and token LOROR resolved as shift (LME < LOROR).
+    Conflict between rule 129 and token LANDAND resolved as shift (LME < LANDAND).
+    Conflict between rule 129 and token '|' resolved as shift (LME < '|').
+    Conflict between rule 129 and token '^' resolved as shift (LME < '^').
+    Conflict between rule 129 and token '&' resolved as shift (LME < '&').
+    Conflict between rule 129 and token LEQ resolved as shift (LME < LEQ).
+    Conflict between rule 129 and token LNE resolved as shift (LME < LNE).
+    Conflict between rule 129 and token '<' resolved as shift (LME < '<').
+    Conflict between rule 129 and token '>' resolved as shift (LME < '>').
+    Conflict between rule 129 and token LLE resolved as shift (LME < LLE).
+    Conflict between rule 129 and token LGE resolved as shift (LME < LGE).
+    Conflict between rule 129 and token LLSH resolved as shift (LME < LLSH).
+    Conflict between rule 129 and token LRSH resolved as shift (LME < LRSH).
+    Conflict between rule 129 and token '+' resolved as shift (LME < '+').
+    Conflict between rule 129 and token '-' resolved as shift (LME < '-').
+    Conflict between rule 129 and token '*' resolved as shift (LME < '*').
+    Conflict between rule 129 and token '/' resolved as shift (LME < '/').
+    Conflict between rule 129 and token '%' resolved as shift (LME < '%').
+
+
+State 236
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  130     | expr LMLE expr .  [';', ',', ':', ')', ']', '}']
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 130 (expr)
+
+    Conflict between rule 130 and token '=' resolved as shift (%right '=').
+    Conflict between rule 130 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 130 and token LME resolved as shift (%right LME).
+    Conflict between rule 130 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 130 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 130 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 130 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 130 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 130 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 130 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 130 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 130 and token '?' resolved as shift (LMLE < '?').
+    Conflict between rule 130 and token LOROR resolved as shift (LMLE < LOROR).
+    Conflict between rule 130 and token LANDAND resolved as shift (LMLE < LANDAND).
+    Conflict between rule 130 and token '|' resolved as shift (LMLE < '|').
+    Conflict between rule 130 and token '^' resolved as shift (LMLE < '^').
+    Conflict between rule 130 and token '&' resolved as shift (LMLE < '&').
+    Conflict between rule 130 and token LEQ resolved as shift (LMLE < LEQ).
+    Conflict between rule 130 and token LNE resolved as shift (LMLE < LNE).
+    Conflict between rule 130 and token '<' resolved as shift (LMLE < '<').
+    Conflict between rule 130 and token '>' resolved as shift (LMLE < '>').
+    Conflict between rule 130 and token LLE resolved as shift (LMLE < LLE).
+    Conflict between rule 130 and token LGE resolved as shift (LMLE < LGE).
+    Conflict between rule 130 and token LLSH resolved as shift (LMLE < LLSH).
+    Conflict between rule 130 and token LRSH resolved as shift (LMLE < LRSH).
+    Conflict between rule 130 and token '+' resolved as shift (LMLE < '+').
+    Conflict between rule 130 and token '-' resolved as shift (LMLE < '-').
+    Conflict between rule 130 and token '*' resolved as shift (LMLE < '*').
+    Conflict between rule 130 and token '/' resolved as shift (LMLE < '/').
+    Conflict between rule 130 and token '%' resolved as shift (LMLE < '%').
+
+
+State 237
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  131     | expr LDVE expr .  [';', ',', ':', ')', ']', '}']
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 131 (expr)
+
+    Conflict between rule 131 and token '=' resolved as shift (%right '=').
+    Conflict between rule 131 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 131 and token LME resolved as shift (%right LME).
+    Conflict between rule 131 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 131 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 131 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 131 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 131 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 131 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 131 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 131 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 131 and token '?' resolved as shift (LDVE < '?').
+    Conflict between rule 131 and token LOROR resolved as shift (LDVE < LOROR).
+    Conflict between rule 131 and token LANDAND resolved as shift (LDVE < LANDAND).
+    Conflict between rule 131 and token '|' resolved as shift (LDVE < '|').
+    Conflict between rule 131 and token '^' resolved as shift (LDVE < '^').
+    Conflict between rule 131 and token '&' resolved as shift (LDVE < '&').
+    Conflict between rule 131 and token LEQ resolved as shift (LDVE < LEQ).
+    Conflict between rule 131 and token LNE resolved as shift (LDVE < LNE).
+    Conflict between rule 131 and token '<' resolved as shift (LDVE < '<').
+    Conflict between rule 131 and token '>' resolved as shift (LDVE < '>').
+    Conflict between rule 131 and token LLE resolved as shift (LDVE < LLE).
+    Conflict between rule 131 and token LGE resolved as shift (LDVE < LGE).
+    Conflict between rule 131 and token LLSH resolved as shift (LDVE < LLSH).
+    Conflict between rule 131 and token LRSH resolved as shift (LDVE < LRSH).
+    Conflict between rule 131 and token '+' resolved as shift (LDVE < '+').
+    Conflict between rule 131 and token '-' resolved as shift (LDVE < '-').
+    Conflict between rule 131 and token '*' resolved as shift (LDVE < '*').
+    Conflict between rule 131 and token '/' resolved as shift (LDVE < '/').
+    Conflict between rule 131 and token '%' resolved as shift (LDVE < '%').
+
+
+State 238
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  132     | expr LMDE expr .  [';', ',', ':', ')', ']', '}']
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 132 (expr)
+
+    Conflict between rule 132 and token '=' resolved as shift (%right '=').
+    Conflict between rule 132 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 132 and token LME resolved as shift (%right LME).
+    Conflict between rule 132 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 132 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 132 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 132 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 132 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 132 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 132 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 132 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 132 and token '?' resolved as shift (LMDE < '?').
+    Conflict between rule 132 and token LOROR resolved as shift (LMDE < LOROR).
+    Conflict between rule 132 and token LANDAND resolved as shift (LMDE < LANDAND).
+    Conflict between rule 132 and token '|' resolved as shift (LMDE < '|').
+    Conflict between rule 132 and token '^' resolved as shift (LMDE < '^').
+    Conflict between rule 132 and token '&' resolved as shift (LMDE < '&').
+    Conflict between rule 132 and token LEQ resolved as shift (LMDE < LEQ).
+    Conflict between rule 132 and token LNE resolved as shift (LMDE < LNE).
+    Conflict between rule 132 and token '<' resolved as shift (LMDE < '<').
+    Conflict between rule 132 and token '>' resolved as shift (LMDE < '>').
+    Conflict between rule 132 and token LLE resolved as shift (LMDE < LLE).
+    Conflict between rule 132 and token LGE resolved as shift (LMDE < LGE).
+    Conflict between rule 132 and token LLSH resolved as shift (LMDE < LLSH).
+    Conflict between rule 132 and token LRSH resolved as shift (LMDE < LRSH).
+    Conflict between rule 132 and token '+' resolved as shift (LMDE < '+').
+    Conflict between rule 132 and token '-' resolved as shift (LMDE < '-').
+    Conflict between rule 132 and token '*' resolved as shift (LMDE < '*').
+    Conflict between rule 132 and token '/' resolved as shift (LMDE < '/').
+    Conflict between rule 132 and token '%' resolved as shift (LMDE < '%').
+
+
+State 239
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  134     | expr LRSHE expr .  [';', ',', ':', ')', ']', '}']
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 134 (expr)
+
+    Conflict between rule 134 and token '=' resolved as shift (%right '=').
+    Conflict between rule 134 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 134 and token LME resolved as shift (%right LME).
+    Conflict between rule 134 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 134 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 134 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 134 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 134 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 134 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 134 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 134 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 134 and token '?' resolved as shift (LRSHE < '?').
+    Conflict between rule 134 and token LOROR resolved as shift (LRSHE < LOROR).
+    Conflict between rule 134 and token LANDAND resolved as shift (LRSHE < LANDAND).
+    Conflict between rule 134 and token '|' resolved as shift (LRSHE < '|').
+    Conflict between rule 134 and token '^' resolved as shift (LRSHE < '^').
+    Conflict between rule 134 and token '&' resolved as shift (LRSHE < '&').
+    Conflict between rule 134 and token LEQ resolved as shift (LRSHE < LEQ).
+    Conflict between rule 134 and token LNE resolved as shift (LRSHE < LNE).
+    Conflict between rule 134 and token '<' resolved as shift (LRSHE < '<').
+    Conflict between rule 134 and token '>' resolved as shift (LRSHE < '>').
+    Conflict between rule 134 and token LLE resolved as shift (LRSHE < LLE).
+    Conflict between rule 134 and token LGE resolved as shift (LRSHE < LGE).
+    Conflict between rule 134 and token LLSH resolved as shift (LRSHE < LLSH).
+    Conflict between rule 134 and token LRSH resolved as shift (LRSHE < LRSH).
+    Conflict between rule 134 and token '+' resolved as shift (LRSHE < '+').
+    Conflict between rule 134 and token '-' resolved as shift (LRSHE < '-').
+    Conflict between rule 134 and token '*' resolved as shift (LRSHE < '*').
+    Conflict between rule 134 and token '/' resolved as shift (LRSHE < '/').
+    Conflict between rule 134 and token '%' resolved as shift (LRSHE < '%').
+
+
+State 240
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  133     | expr LLSHE expr .  [';', ',', ':', ')', ']', '}']
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 133 (expr)
+
+    Conflict between rule 133 and token '=' resolved as shift (%right '=').
+    Conflict between rule 133 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 133 and token LME resolved as shift (%right LME).
+    Conflict between rule 133 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 133 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 133 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 133 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 133 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 133 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 133 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 133 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 133 and token '?' resolved as shift (LLSHE < '?').
+    Conflict between rule 133 and token LOROR resolved as shift (LLSHE < LOROR).
+    Conflict between rule 133 and token LANDAND resolved as shift (LLSHE < LANDAND).
+    Conflict between rule 133 and token '|' resolved as shift (LLSHE < '|').
+    Conflict between rule 133 and token '^' resolved as shift (LLSHE < '^').
+    Conflict between rule 133 and token '&' resolved as shift (LLSHE < '&').
+    Conflict between rule 133 and token LEQ resolved as shift (LLSHE < LEQ).
+    Conflict between rule 133 and token LNE resolved as shift (LLSHE < LNE).
+    Conflict between rule 133 and token '<' resolved as shift (LLSHE < '<').
+    Conflict between rule 133 and token '>' resolved as shift (LLSHE < '>').
+    Conflict between rule 133 and token LLE resolved as shift (LLSHE < LLE).
+    Conflict between rule 133 and token LGE resolved as shift (LLSHE < LGE).
+    Conflict between rule 133 and token LLSH resolved as shift (LLSHE < LLSH).
+    Conflict between rule 133 and token LRSH resolved as shift (LLSHE < LRSH).
+    Conflict between rule 133 and token '+' resolved as shift (LLSHE < '+').
+    Conflict between rule 133 and token '-' resolved as shift (LLSHE < '-').
+    Conflict between rule 133 and token '*' resolved as shift (LLSHE < '*').
+    Conflict between rule 133 and token '/' resolved as shift (LLSHE < '/').
+    Conflict between rule 133 and token '%' resolved as shift (LLSHE < '%').
+
+
+State 241
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  135     | expr LANDE expr .  [';', ',', ':', ')', ']', '}']
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 135 (expr)
+
+    Conflict between rule 135 and token '=' resolved as shift (%right '=').
+    Conflict between rule 135 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 135 and token LME resolved as shift (%right LME).
+    Conflict between rule 135 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 135 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 135 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 135 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 135 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 135 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 135 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 135 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 135 and token '?' resolved as shift (LANDE < '?').
+    Conflict between rule 135 and token LOROR resolved as shift (LANDE < LOROR).
+    Conflict between rule 135 and token LANDAND resolved as shift (LANDE < LANDAND).
+    Conflict between rule 135 and token '|' resolved as shift (LANDE < '|').
+    Conflict between rule 135 and token '^' resolved as shift (LANDE < '^').
+    Conflict between rule 135 and token '&' resolved as shift (LANDE < '&').
+    Conflict between rule 135 and token LEQ resolved as shift (LANDE < LEQ).
+    Conflict between rule 135 and token LNE resolved as shift (LANDE < LNE).
+    Conflict between rule 135 and token '<' resolved as shift (LANDE < '<').
+    Conflict between rule 135 and token '>' resolved as shift (LANDE < '>').
+    Conflict between rule 135 and token LLE resolved as shift (LANDE < LLE).
+    Conflict between rule 135 and token LGE resolved as shift (LANDE < LGE).
+    Conflict between rule 135 and token LLSH resolved as shift (LANDE < LLSH).
+    Conflict between rule 135 and token LRSH resolved as shift (LANDE < LRSH).
+    Conflict between rule 135 and token '+' resolved as shift (LANDE < '+').
+    Conflict between rule 135 and token '-' resolved as shift (LANDE < '-').
+    Conflict between rule 135 and token '*' resolved as shift (LANDE < '*').
+    Conflict between rule 135 and token '/' resolved as shift (LANDE < '/').
+    Conflict between rule 135 and token '%' resolved as shift (LANDE < '%').
+
+
+State 242
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  136     | expr LXORE expr .  [';', ',', ':', ')', ']', '}']
+  137     | expr . LORE expr
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 136 (expr)
+
+    Conflict between rule 136 and token '=' resolved as shift (%right '=').
+    Conflict between rule 136 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 136 and token LME resolved as shift (%right LME).
+    Conflict between rule 136 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 136 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 136 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 136 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 136 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 136 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 136 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 136 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 136 and token '?' resolved as shift (LXORE < '?').
+    Conflict between rule 136 and token LOROR resolved as shift (LXORE < LOROR).
+    Conflict between rule 136 and token LANDAND resolved as shift (LXORE < LANDAND).
+    Conflict between rule 136 and token '|' resolved as shift (LXORE < '|').
+    Conflict between rule 136 and token '^' resolved as shift (LXORE < '^').
+    Conflict between rule 136 and token '&' resolved as shift (LXORE < '&').
+    Conflict between rule 136 and token LEQ resolved as shift (LXORE < LEQ).
+    Conflict between rule 136 and token LNE resolved as shift (LXORE < LNE).
+    Conflict between rule 136 and token '<' resolved as shift (LXORE < '<').
+    Conflict between rule 136 and token '>' resolved as shift (LXORE < '>').
+    Conflict between rule 136 and token LLE resolved as shift (LXORE < LLE).
+    Conflict between rule 136 and token LGE resolved as shift (LXORE < LGE).
+    Conflict between rule 136 and token LLSH resolved as shift (LXORE < LLSH).
+    Conflict between rule 136 and token LRSH resolved as shift (LXORE < LRSH).
+    Conflict between rule 136 and token '+' resolved as shift (LXORE < '+').
+    Conflict between rule 136 and token '-' resolved as shift (LXORE < '-').
+    Conflict between rule 136 and token '*' resolved as shift (LXORE < '*').
+    Conflict between rule 136 and token '/' resolved as shift (LXORE < '/').
+    Conflict between rule 136 and token '%' resolved as shift (LXORE < '%').
+
+
+State 243
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+  137     | expr LORE expr .  [';', ',', ':', ')', ']', '}']
+
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 137 (expr)
+
+    Conflict between rule 137 and token '=' resolved as shift (%right '=').
+    Conflict between rule 137 and token LPE resolved as shift (%right LPE).
+    Conflict between rule 137 and token LME resolved as shift (%right LME).
+    Conflict between rule 137 and token LMLE resolved as shift (%right LMLE).
+    Conflict between rule 137 and token LDVE resolved as shift (%right LDVE).
+    Conflict between rule 137 and token LMDE resolved as shift (%right LMDE).
+    Conflict between rule 137 and token LRSHE resolved as shift (%right LRSHE).
+    Conflict between rule 137 and token LLSHE resolved as shift (%right LLSHE).
+    Conflict between rule 137 and token LANDE resolved as shift (%right LANDE).
+    Conflict between rule 137 and token LXORE resolved as shift (%right LXORE).
+    Conflict between rule 137 and token LORE resolved as shift (%right LORE).
+    Conflict between rule 137 and token '?' resolved as shift (LORE < '?').
+    Conflict between rule 137 and token LOROR resolved as shift (LORE < LOROR).
+    Conflict between rule 137 and token LANDAND resolved as shift (LORE < LANDAND).
+    Conflict between rule 137 and token '|' resolved as shift (LORE < '|').
+    Conflict between rule 137 and token '^' resolved as shift (LORE < '^').
+    Conflict between rule 137 and token '&' resolved as shift (LORE < '&').
+    Conflict between rule 137 and token LEQ resolved as shift (LORE < LEQ).
+    Conflict between rule 137 and token LNE resolved as shift (LORE < LNE).
+    Conflict between rule 137 and token '<' resolved as shift (LORE < '<').
+    Conflict between rule 137 and token '>' resolved as shift (LORE < '>').
+    Conflict between rule 137 and token LLE resolved as shift (LORE < LLE).
+    Conflict between rule 137 and token LGE resolved as shift (LORE < LGE).
+    Conflict between rule 137 and token LLSH resolved as shift (LORE < LLSH).
+    Conflict between rule 137 and token LRSH resolved as shift (LORE < LRSH).
+    Conflict between rule 137 and token '+' resolved as shift (LORE < '+').
+    Conflict between rule 137 and token '-' resolved as shift (LORE < '-').
+    Conflict between rule 137 and token '*' resolved as shift (LORE < '*').
+    Conflict between rule 137 and token '/' resolved as shift (LORE < '/').
+    Conflict between rule 137 and token '%' resolved as shift (LORE < '%').
+
+
+State 244
+
+  106 cexpr: cexpr . ',' cexpr
+  126 expr: expr '?' cexpr . ':' expr
+
+    ','  posunout a přejít do stavu 226
+    ':'  posunout a přejít do stavu 298
+
+
+State 245
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  125     | expr LOROR expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, ')', ']', '}']
   126     | expr . '?' cexpr ':' expr
   127     | expr . '=' expr
   128     | expr . LPE expr
@@ -10328,51 +10327,51 @@ state 245
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 125 (expr)
+    $výchozí  reduce using rule 125 (expr)
 
     Conflict between rule 125 and token '=' resolved as reduce ('=' < LOROR).
-    Conflict between rule 125 and token LORE resolved as reduce (LORE < LOROR).
-    Conflict between rule 125 and token LXORE resolved as reduce (LXORE < LOROR).
-    Conflict between rule 125 and token LANDE resolved as reduce (LANDE < LOROR).
-    Conflict between rule 125 and token LLSHE resolved as reduce (LLSHE < LOROR).
-    Conflict between rule 125 and token LRSHE resolved as reduce (LRSHE < LOROR).
-    Conflict between rule 125 and token LMDE resolved as reduce (LMDE < LOROR).
-    Conflict between rule 125 and token LDVE resolved as reduce (LDVE < LOROR).
-    Conflict between rule 125 and token LMLE resolved as reduce (LMLE < LOROR).
-    Conflict between rule 125 and token LME resolved as reduce (LME < LOROR).
     Conflict between rule 125 and token LPE resolved as reduce (LPE < LOROR).
+    Conflict between rule 125 and token LME resolved as reduce (LME < LOROR).
+    Conflict between rule 125 and token LMLE resolved as reduce (LMLE < LOROR).
+    Conflict between rule 125 and token LDVE resolved as reduce (LDVE < LOROR).
+    Conflict between rule 125 and token LMDE resolved as reduce (LMDE < LOROR).
+    Conflict between rule 125 and token LRSHE resolved as reduce (LRSHE < LOROR).
+    Conflict between rule 125 and token LLSHE resolved as reduce (LLSHE < LOROR).
+    Conflict between rule 125 and token LANDE resolved as reduce (LANDE < LOROR).
+    Conflict between rule 125 and token LXORE resolved as reduce (LXORE < LOROR).
+    Conflict between rule 125 and token LORE resolved as reduce (LORE < LOROR).
     Conflict between rule 125 and token '?' resolved as reduce ('?' < LOROR).
     Conflict between rule 125 and token LOROR resolved as reduce (%left LOROR).
     Conflict between rule 125 and token LANDAND resolved as shift (LOROR < LANDAND).
     Conflict between rule 125 and token '|' resolved as shift (LOROR < '|').
     Conflict between rule 125 and token '^' resolved as shift (LOROR < '^').
     Conflict between rule 125 and token '&' resolved as shift (LOROR < '&').
-    Conflict between rule 125 and token LNE resolved as shift (LOROR < LNE).
     Conflict between rule 125 and token LEQ resolved as shift (LOROR < LEQ).
+    Conflict between rule 125 and token LNE resolved as shift (LOROR < LNE).
     Conflict between rule 125 and token '<' resolved as shift (LOROR < '<').
     Conflict between rule 125 and token '>' resolved as shift (LOROR < '>').
-    Conflict between rule 125 and token LGE resolved as shift (LOROR < LGE).
     Conflict between rule 125 and token LLE resolved as shift (LOROR < LLE).
-    Conflict between rule 125 and token LRSH resolved as shift (LOROR < LRSH).
+    Conflict between rule 125 and token LGE resolved as shift (LOROR < LGE).
     Conflict between rule 125 and token LLSH resolved as shift (LOROR < LLSH).
+    Conflict between rule 125 and token LRSH resolved as shift (LOROR < LRSH).
     Conflict between rule 125 and token '+' resolved as shift (LOROR < '+').
     Conflict between rule 125 and token '-' resolved as shift (LOROR < '-').
     Conflict between rule 125 and token '*' resolved as shift (LOROR < '*').
@@ -10380,7 +10379,7 @@ state 245
     Conflict between rule 125 and token '%' resolved as shift (LOROR < '%').
 
 
-state 246
+State 246
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10399,7 +10398,7 @@ state 246
   122     | expr . '^' expr
   123     | expr . '|' expr
   124     | expr . LANDAND expr
-  124     | expr LANDAND expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, ')', ']', '}']
+  124     | expr LANDAND expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, ')', ']', '}']
   125     | expr . LOROR expr
   126     | expr . '?' cexpr ':' expr
   127     | expr . '=' expr
@@ -10414,50 +10413,50 @@ state 246
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '|'   shift, and go to state 171
-    '^'   shift, and go to state 172
-    '&'   shift, and go to state 173
-    LNE   shift, and go to state 174
-    LEQ   shift, and go to state 175
-    '<'   shift, and go to state 176
-    '>'   shift, and go to state 177
-    LGE   shift, and go to state 178
-    LLE   shift, and go to state 179
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
+    '|'   posunout a přejít do stavu 171
+    '^'   posunout a přejít do stavu 172
+    '&'   posunout a přejít do stavu 173
+    LEQ   posunout a přejít do stavu 174
+    LNE   posunout a přejít do stavu 175
+    '<'   posunout a přejít do stavu 176
+    '>'   posunout a přejít do stavu 177
+    LLE   posunout a přejít do stavu 178
+    LGE   posunout a přejít do stavu 179
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
 
-    $default  reduce using rule 124 (expr)
+    $výchozí  reduce using rule 124 (expr)
 
     Conflict between rule 124 and token '=' resolved as reduce ('=' < LANDAND).
-    Conflict between rule 124 and token LORE resolved as reduce (LORE < LANDAND).
-    Conflict between rule 124 and token LXORE resolved as reduce (LXORE < LANDAND).
-    Conflict between rule 124 and token LANDE resolved as reduce (LANDE < LANDAND).
-    Conflict between rule 124 and token LLSHE resolved as reduce (LLSHE < LANDAND).
-    Conflict between rule 124 and token LRSHE resolved as reduce (LRSHE < LANDAND).
-    Conflict between rule 124 and token LMDE resolved as reduce (LMDE < LANDAND).
-    Conflict between rule 124 and token LDVE resolved as reduce (LDVE < LANDAND).
-    Conflict between rule 124 and token LMLE resolved as reduce (LMLE < LANDAND).
-    Conflict between rule 124 and token LME resolved as reduce (LME < LANDAND).
     Conflict between rule 124 and token LPE resolved as reduce (LPE < LANDAND).
+    Conflict between rule 124 and token LME resolved as reduce (LME < LANDAND).
+    Conflict between rule 124 and token LMLE resolved as reduce (LMLE < LANDAND).
+    Conflict between rule 124 and token LDVE resolved as reduce (LDVE < LANDAND).
+    Conflict between rule 124 and token LMDE resolved as reduce (LMDE < LANDAND).
+    Conflict between rule 124 and token LRSHE resolved as reduce (LRSHE < LANDAND).
+    Conflict between rule 124 and token LLSHE resolved as reduce (LLSHE < LANDAND).
+    Conflict between rule 124 and token LANDE resolved as reduce (LANDE < LANDAND).
+    Conflict between rule 124 and token LXORE resolved as reduce (LXORE < LANDAND).
+    Conflict between rule 124 and token LORE resolved as reduce (LORE < LANDAND).
     Conflict between rule 124 and token '?' resolved as reduce ('?' < LANDAND).
     Conflict between rule 124 and token LOROR resolved as reduce (LOROR < LANDAND).
     Conflict between rule 124 and token LANDAND resolved as reduce (%left LANDAND).
     Conflict between rule 124 and token '|' resolved as shift (LANDAND < '|').
     Conflict between rule 124 and token '^' resolved as shift (LANDAND < '^').
     Conflict between rule 124 and token '&' resolved as shift (LANDAND < '&').
-    Conflict between rule 124 and token LNE resolved as shift (LANDAND < LNE).
     Conflict between rule 124 and token LEQ resolved as shift (LANDAND < LEQ).
+    Conflict between rule 124 and token LNE resolved as shift (LANDAND < LNE).
     Conflict between rule 124 and token '<' resolved as shift (LANDAND < '<').
     Conflict between rule 124 and token '>' resolved as shift (LANDAND < '>').
-    Conflict between rule 124 and token LGE resolved as shift (LANDAND < LGE).
     Conflict between rule 124 and token LLE resolved as shift (LANDAND < LLE).
-    Conflict between rule 124 and token LRSH resolved as shift (LANDAND < LRSH).
+    Conflict between rule 124 and token LGE resolved as shift (LANDAND < LGE).
     Conflict between rule 124 and token LLSH resolved as shift (LANDAND < LLSH).
+    Conflict between rule 124 and token LRSH resolved as shift (LANDAND < LRSH).
     Conflict between rule 124 and token '+' resolved as shift (LANDAND < '+').
     Conflict between rule 124 and token '-' resolved as shift (LANDAND < '-').
     Conflict between rule 124 and token '*' resolved as shift (LANDAND < '*').
@@ -10465,7 +10464,7 @@ state 246
     Conflict between rule 124 and token '%' resolved as shift (LANDAND < '%').
 
 
-state 247
+State 247
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10483,7 +10482,7 @@ state 247
   121     | expr . '&' expr
   122     | expr . '^' expr
   123     | expr . '|' expr
-  123     | expr '|' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', ')', ']', '}']
+  123     | expr '|' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', ')', ']', '}']
   124     | expr . LANDAND expr
   125     | expr . LOROR expr
   126     | expr . '?' cexpr ':' expr
@@ -10499,49 +10498,49 @@ state 247
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '^'   shift, and go to state 172
-    '&'   shift, and go to state 173
-    LNE   shift, and go to state 174
-    LEQ   shift, and go to state 175
-    '<'   shift, and go to state 176
-    '>'   shift, and go to state 177
-    LGE   shift, and go to state 178
-    LLE   shift, and go to state 179
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
+    '^'   posunout a přejít do stavu 172
+    '&'   posunout a přejít do stavu 173
+    LEQ   posunout a přejít do stavu 174
+    LNE   posunout a přejít do stavu 175
+    '<'   posunout a přejít do stavu 176
+    '>'   posunout a přejít do stavu 177
+    LLE   posunout a přejít do stavu 178
+    LGE   posunout a přejít do stavu 179
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
 
-    $default  reduce using rule 123 (expr)
+    $výchozí  reduce using rule 123 (expr)
 
     Conflict between rule 123 and token '=' resolved as reduce ('=' < '|').
-    Conflict between rule 123 and token LORE resolved as reduce (LORE < '|').
-    Conflict between rule 123 and token LXORE resolved as reduce (LXORE < '|').
-    Conflict between rule 123 and token LANDE resolved as reduce (LANDE < '|').
-    Conflict between rule 123 and token LLSHE resolved as reduce (LLSHE < '|').
-    Conflict between rule 123 and token LRSHE resolved as reduce (LRSHE < '|').
-    Conflict between rule 123 and token LMDE resolved as reduce (LMDE < '|').
-    Conflict between rule 123 and token LDVE resolved as reduce (LDVE < '|').
-    Conflict between rule 123 and token LMLE resolved as reduce (LMLE < '|').
-    Conflict between rule 123 and token LME resolved as reduce (LME < '|').
     Conflict between rule 123 and token LPE resolved as reduce (LPE < '|').
+    Conflict between rule 123 and token LME resolved as reduce (LME < '|').
+    Conflict between rule 123 and token LMLE resolved as reduce (LMLE < '|').
+    Conflict between rule 123 and token LDVE resolved as reduce (LDVE < '|').
+    Conflict between rule 123 and token LMDE resolved as reduce (LMDE < '|').
+    Conflict between rule 123 and token LRSHE resolved as reduce (LRSHE < '|').
+    Conflict between rule 123 and token LLSHE resolved as reduce (LLSHE < '|').
+    Conflict between rule 123 and token LANDE resolved as reduce (LANDE < '|').
+    Conflict between rule 123 and token LXORE resolved as reduce (LXORE < '|').
+    Conflict between rule 123 and token LORE resolved as reduce (LORE < '|').
     Conflict between rule 123 and token '?' resolved as reduce ('?' < '|').
     Conflict between rule 123 and token LOROR resolved as reduce (LOROR < '|').
     Conflict between rule 123 and token LANDAND resolved as reduce (LANDAND < '|').
     Conflict between rule 123 and token '|' resolved as reduce (%left '|').
     Conflict between rule 123 and token '^' resolved as shift ('|' < '^').
     Conflict between rule 123 and token '&' resolved as shift ('|' < '&').
-    Conflict between rule 123 and token LNE resolved as shift ('|' < LNE).
     Conflict between rule 123 and token LEQ resolved as shift ('|' < LEQ).
+    Conflict between rule 123 and token LNE resolved as shift ('|' < LNE).
     Conflict between rule 123 and token '<' resolved as shift ('|' < '<').
     Conflict between rule 123 and token '>' resolved as shift ('|' < '>').
-    Conflict between rule 123 and token LGE resolved as shift ('|' < LGE).
     Conflict between rule 123 and token LLE resolved as shift ('|' < LLE).
-    Conflict between rule 123 and token LRSH resolved as shift ('|' < LRSH).
+    Conflict between rule 123 and token LGE resolved as shift ('|' < LGE).
     Conflict between rule 123 and token LLSH resolved as shift ('|' < LLSH).
+    Conflict between rule 123 and token LRSH resolved as shift ('|' < LRSH).
     Conflict between rule 123 and token '+' resolved as shift ('|' < '+').
     Conflict between rule 123 and token '-' resolved as shift ('|' < '-').
     Conflict between rule 123 and token '*' resolved as shift ('|' < '*').
@@ -10549,7 +10548,7 @@ state 247
     Conflict between rule 123 and token '%' resolved as shift ('|' < '%').
 
 
-state 248
+State 248
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10566,7 +10565,7 @@ state 248
   120     | expr . LNE expr
   121     | expr . '&' expr
   122     | expr . '^' expr
-  122     | expr '^' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', ')', ']', '}']
+  122     | expr '^' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', ')', ']', '}']
   123     | expr . '|' expr
   124     | expr . LANDAND expr
   125     | expr . LOROR expr
@@ -10583,48 +10582,48 @@ state 248
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '&'   shift, and go to state 173
-    LNE   shift, and go to state 174
-    LEQ   shift, and go to state 175
-    '<'   shift, and go to state 176
-    '>'   shift, and go to state 177
-    LGE   shift, and go to state 178
-    LLE   shift, and go to state 179
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
+    '&'   posunout a přejít do stavu 173
+    LEQ   posunout a přejít do stavu 174
+    LNE   posunout a přejít do stavu 175
+    '<'   posunout a přejít do stavu 176
+    '>'   posunout a přejít do stavu 177
+    LLE   posunout a přejít do stavu 178
+    LGE   posunout a přejít do stavu 179
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
 
-    $default  reduce using rule 122 (expr)
+    $výchozí  reduce using rule 122 (expr)
 
     Conflict between rule 122 and token '=' resolved as reduce ('=' < '^').
-    Conflict between rule 122 and token LORE resolved as reduce (LORE < '^').
-    Conflict between rule 122 and token LXORE resolved as reduce (LXORE < '^').
-    Conflict between rule 122 and token LANDE resolved as reduce (LANDE < '^').
-    Conflict between rule 122 and token LLSHE resolved as reduce (LLSHE < '^').
-    Conflict between rule 122 and token LRSHE resolved as reduce (LRSHE < '^').
-    Conflict between rule 122 and token LMDE resolved as reduce (LMDE < '^').
-    Conflict between rule 122 and token LDVE resolved as reduce (LDVE < '^').
-    Conflict between rule 122 and token LMLE resolved as reduce (LMLE < '^').
-    Conflict between rule 122 and token LME resolved as reduce (LME < '^').
     Conflict between rule 122 and token LPE resolved as reduce (LPE < '^').
+    Conflict between rule 122 and token LME resolved as reduce (LME < '^').
+    Conflict between rule 122 and token LMLE resolved as reduce (LMLE < '^').
+    Conflict between rule 122 and token LDVE resolved as reduce (LDVE < '^').
+    Conflict between rule 122 and token LMDE resolved as reduce (LMDE < '^').
+    Conflict between rule 122 and token LRSHE resolved as reduce (LRSHE < '^').
+    Conflict between rule 122 and token LLSHE resolved as reduce (LLSHE < '^').
+    Conflict between rule 122 and token LANDE resolved as reduce (LANDE < '^').
+    Conflict between rule 122 and token LXORE resolved as reduce (LXORE < '^').
+    Conflict between rule 122 and token LORE resolved as reduce (LORE < '^').
     Conflict between rule 122 and token '?' resolved as reduce ('?' < '^').
     Conflict between rule 122 and token LOROR resolved as reduce (LOROR < '^').
     Conflict between rule 122 and token LANDAND resolved as reduce (LANDAND < '^').
     Conflict between rule 122 and token '|' resolved as reduce ('|' < '^').
     Conflict between rule 122 and token '^' resolved as reduce (%left '^').
     Conflict between rule 122 and token '&' resolved as shift ('^' < '&').
-    Conflict between rule 122 and token LNE resolved as shift ('^' < LNE).
     Conflict between rule 122 and token LEQ resolved as shift ('^' < LEQ).
+    Conflict between rule 122 and token LNE resolved as shift ('^' < LNE).
     Conflict between rule 122 and token '<' resolved as shift ('^' < '<').
     Conflict between rule 122 and token '>' resolved as shift ('^' < '>').
-    Conflict between rule 122 and token LGE resolved as shift ('^' < LGE).
     Conflict between rule 122 and token LLE resolved as shift ('^' < LLE).
-    Conflict between rule 122 and token LRSH resolved as shift ('^' < LRSH).
+    Conflict between rule 122 and token LGE resolved as shift ('^' < LGE).
     Conflict between rule 122 and token LLSH resolved as shift ('^' < LLSH).
+    Conflict between rule 122 and token LRSH resolved as shift ('^' < LRSH).
     Conflict between rule 122 and token '+' resolved as shift ('^' < '+').
     Conflict between rule 122 and token '-' resolved as shift ('^' < '-').
     Conflict between rule 122 and token '*' resolved as shift ('^' < '*').
@@ -10632,7 +10631,7 @@ state 248
     Conflict between rule 122 and token '%' resolved as shift ('^' < '%').
 
 
-state 249
+State 249
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10648,7 +10647,7 @@ state 249
   119     | expr . LEQ expr
   120     | expr . LNE expr
   121     | expr . '&' expr
-  121     | expr '&' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', ')', ']', '}']
+  121     | expr '&' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', ')', ']', '}']
   122     | expr . '^' expr
   123     | expr . '|' expr
   124     | expr . LANDAND expr
@@ -10666,47 +10665,47 @@ state 249
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    LNE   shift, and go to state 174
-    LEQ   shift, and go to state 175
-    '<'   shift, and go to state 176
-    '>'   shift, and go to state 177
-    LGE   shift, and go to state 178
-    LLE   shift, and go to state 179
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
+    LEQ   posunout a přejít do stavu 174
+    LNE   posunout a přejít do stavu 175
+    '<'   posunout a přejít do stavu 176
+    '>'   posunout a přejít do stavu 177
+    LLE   posunout a přejít do stavu 178
+    LGE   posunout a přejít do stavu 179
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
 
-    $default  reduce using rule 121 (expr)
+    $výchozí  reduce using rule 121 (expr)
 
     Conflict between rule 121 and token '=' resolved as reduce ('=' < '&').
-    Conflict between rule 121 and token LORE resolved as reduce (LORE < '&').
-    Conflict between rule 121 and token LXORE resolved as reduce (LXORE < '&').
-    Conflict between rule 121 and token LANDE resolved as reduce (LANDE < '&').
-    Conflict between rule 121 and token LLSHE resolved as reduce (LLSHE < '&').
-    Conflict between rule 121 and token LRSHE resolved as reduce (LRSHE < '&').
-    Conflict between rule 121 and token LMDE resolved as reduce (LMDE < '&').
-    Conflict between rule 121 and token LDVE resolved as reduce (LDVE < '&').
-    Conflict between rule 121 and token LMLE resolved as reduce (LMLE < '&').
-    Conflict between rule 121 and token LME resolved as reduce (LME < '&').
     Conflict between rule 121 and token LPE resolved as reduce (LPE < '&').
+    Conflict between rule 121 and token LME resolved as reduce (LME < '&').
+    Conflict between rule 121 and token LMLE resolved as reduce (LMLE < '&').
+    Conflict between rule 121 and token LDVE resolved as reduce (LDVE < '&').
+    Conflict between rule 121 and token LMDE resolved as reduce (LMDE < '&').
+    Conflict between rule 121 and token LRSHE resolved as reduce (LRSHE < '&').
+    Conflict between rule 121 and token LLSHE resolved as reduce (LLSHE < '&').
+    Conflict between rule 121 and token LANDE resolved as reduce (LANDE < '&').
+    Conflict between rule 121 and token LXORE resolved as reduce (LXORE < '&').
+    Conflict between rule 121 and token LORE resolved as reduce (LORE < '&').
     Conflict between rule 121 and token '?' resolved as reduce ('?' < '&').
     Conflict between rule 121 and token LOROR resolved as reduce (LOROR < '&').
     Conflict between rule 121 and token LANDAND resolved as reduce (LANDAND < '&').
     Conflict between rule 121 and token '|' resolved as reduce ('|' < '&').
     Conflict between rule 121 and token '^' resolved as reduce ('^' < '&').
     Conflict between rule 121 and token '&' resolved as reduce (%left '&').
-    Conflict between rule 121 and token LNE resolved as shift ('&' < LNE).
     Conflict between rule 121 and token LEQ resolved as shift ('&' < LEQ).
+    Conflict between rule 121 and token LNE resolved as shift ('&' < LNE).
     Conflict between rule 121 and token '<' resolved as shift ('&' < '<').
     Conflict between rule 121 and token '>' resolved as shift ('&' < '>').
-    Conflict between rule 121 and token LGE resolved as shift ('&' < LGE).
     Conflict between rule 121 and token LLE resolved as shift ('&' < LLE).
-    Conflict between rule 121 and token LRSH resolved as shift ('&' < LRSH).
+    Conflict between rule 121 and token LGE resolved as shift ('&' < LGE).
     Conflict between rule 121 and token LLSH resolved as shift ('&' < LLSH).
+    Conflict between rule 121 and token LRSH resolved as shift ('&' < LRSH).
     Conflict between rule 121 and token '+' resolved as shift ('&' < '+').
     Conflict between rule 121 and token '-' resolved as shift ('&' < '-').
     Conflict between rule 121 and token '*' resolved as shift ('&' < '*').
@@ -10714,7 +10713,7 @@ state 249
     Conflict between rule 121 and token '%' resolved as shift ('&' < '%').
 
 
-state 250
+State 250
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10728,87 +10727,7 @@ state 250
   117     | expr . LLE expr
   118     | expr . LGE expr
   119     | expr . LEQ expr
-  120     | expr . LNE expr
-  120     | expr LNE expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, ')', ']', '}']
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '<'   shift, and go to state 176
-    '>'   shift, and go to state 177
-    LGE   shift, and go to state 178
-    LLE   shift, and go to state 179
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
-
-    $default  reduce using rule 120 (expr)
-
-    Conflict between rule 120 and token '=' resolved as reduce ('=' < LNE).
-    Conflict between rule 120 and token LORE resolved as reduce (LORE < LNE).
-    Conflict between rule 120 and token LXORE resolved as reduce (LXORE < LNE).
-    Conflict between rule 120 and token LANDE resolved as reduce (LANDE < LNE).
-    Conflict between rule 120 and token LLSHE resolved as reduce (LLSHE < LNE).
-    Conflict between rule 120 and token LRSHE resolved as reduce (LRSHE < LNE).
-    Conflict between rule 120 and token LMDE resolved as reduce (LMDE < LNE).
-    Conflict between rule 120 and token LDVE resolved as reduce (LDVE < LNE).
-    Conflict between rule 120 and token LMLE resolved as reduce (LMLE < LNE).
-    Conflict between rule 120 and token LME resolved as reduce (LME < LNE).
-    Conflict between rule 120 and token LPE resolved as reduce (LPE < LNE).
-    Conflict between rule 120 and token '?' resolved as reduce ('?' < LNE).
-    Conflict between rule 120 and token LOROR resolved as reduce (LOROR < LNE).
-    Conflict between rule 120 and token LANDAND resolved as reduce (LANDAND < LNE).
-    Conflict between rule 120 and token '|' resolved as reduce ('|' < LNE).
-    Conflict between rule 120 and token '^' resolved as reduce ('^' < LNE).
-    Conflict between rule 120 and token '&' resolved as reduce ('&' < LNE).
-    Conflict between rule 120 and token LNE resolved as reduce (%left LNE).
-    Conflict between rule 120 and token LEQ resolved as reduce (%left LEQ).
-    Conflict between rule 120 and token '<' resolved as shift (LNE < '<').
-    Conflict between rule 120 and token '>' resolved as shift (LNE < '>').
-    Conflict between rule 120 and token LGE resolved as shift (LNE < LGE).
-    Conflict between rule 120 and token LLE resolved as shift (LNE < LLE).
-    Conflict between rule 120 and token LRSH resolved as shift (LNE < LRSH).
-    Conflict between rule 120 and token LLSH resolved as shift (LNE < LLSH).
-    Conflict between rule 120 and token '+' resolved as shift (LNE < '+').
-    Conflict between rule 120 and token '-' resolved as shift (LNE < '-').
-    Conflict between rule 120 and token '*' resolved as shift (LNE < '*').
-    Conflict between rule 120 and token '/' resolved as shift (LNE < '/').
-    Conflict between rule 120 and token '%' resolved as shift (LNE < '%').
-
-
-state 251
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  119     | expr LEQ expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, ')', ']', '}']
+  119     | expr LEQ expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, ')', ']', '}']
   120     | expr . LNE expr
   121     | expr . '&' expr
   122     | expr . '^' expr
@@ -10828,45 +10747,45 @@ state 251
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '<'   shift, and go to state 176
-    '>'   shift, and go to state 177
-    LGE   shift, and go to state 178
-    LLE   shift, and go to state 179
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
+    '<'   posunout a přejít do stavu 176
+    '>'   posunout a přejít do stavu 177
+    LLE   posunout a přejít do stavu 178
+    LGE   posunout a přejít do stavu 179
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
 
-    $default  reduce using rule 119 (expr)
+    $výchozí  reduce using rule 119 (expr)
 
     Conflict between rule 119 and token '=' resolved as reduce ('=' < LEQ).
-    Conflict between rule 119 and token LORE resolved as reduce (LORE < LEQ).
-    Conflict between rule 119 and token LXORE resolved as reduce (LXORE < LEQ).
-    Conflict between rule 119 and token LANDE resolved as reduce (LANDE < LEQ).
-    Conflict between rule 119 and token LLSHE resolved as reduce (LLSHE < LEQ).
-    Conflict between rule 119 and token LRSHE resolved as reduce (LRSHE < LEQ).
-    Conflict between rule 119 and token LMDE resolved as reduce (LMDE < LEQ).
-    Conflict between rule 119 and token LDVE resolved as reduce (LDVE < LEQ).
-    Conflict between rule 119 and token LMLE resolved as reduce (LMLE < LEQ).
-    Conflict between rule 119 and token LME resolved as reduce (LME < LEQ).
     Conflict between rule 119 and token LPE resolved as reduce (LPE < LEQ).
+    Conflict between rule 119 and token LME resolved as reduce (LME < LEQ).
+    Conflict between rule 119 and token LMLE resolved as reduce (LMLE < LEQ).
+    Conflict between rule 119 and token LDVE resolved as reduce (LDVE < LEQ).
+    Conflict between rule 119 and token LMDE resolved as reduce (LMDE < LEQ).
+    Conflict between rule 119 and token LRSHE resolved as reduce (LRSHE < LEQ).
+    Conflict between rule 119 and token LLSHE resolved as reduce (LLSHE < LEQ).
+    Conflict between rule 119 and token LANDE resolved as reduce (LANDE < LEQ).
+    Conflict between rule 119 and token LXORE resolved as reduce (LXORE < LEQ).
+    Conflict between rule 119 and token LORE resolved as reduce (LORE < LEQ).
     Conflict between rule 119 and token '?' resolved as reduce ('?' < LEQ).
     Conflict between rule 119 and token LOROR resolved as reduce (LOROR < LEQ).
     Conflict between rule 119 and token LANDAND resolved as reduce (LANDAND < LEQ).
     Conflict between rule 119 and token '|' resolved as reduce ('|' < LEQ).
     Conflict between rule 119 and token '^' resolved as reduce ('^' < LEQ).
     Conflict between rule 119 and token '&' resolved as reduce ('&' < LEQ).
-    Conflict between rule 119 and token LNE resolved as reduce (%left LNE).
     Conflict between rule 119 and token LEQ resolved as reduce (%left LEQ).
+    Conflict between rule 119 and token LNE resolved as reduce (%left LNE).
     Conflict between rule 119 and token '<' resolved as shift (LEQ < '<').
     Conflict between rule 119 and token '>' resolved as shift (LEQ < '>').
-    Conflict between rule 119 and token LGE resolved as shift (LEQ < LGE).
     Conflict between rule 119 and token LLE resolved as shift (LEQ < LLE).
-    Conflict between rule 119 and token LRSH resolved as shift (LEQ < LRSH).
+    Conflict between rule 119 and token LGE resolved as shift (LEQ < LGE).
     Conflict between rule 119 and token LLSH resolved as shift (LEQ < LLSH).
+    Conflict between rule 119 and token LRSH resolved as shift (LEQ < LRSH).
     Conflict between rule 119 and token '+' resolved as shift (LEQ < '+').
     Conflict between rule 119 and token '-' resolved as shift (LEQ < '-').
     Conflict between rule 119 and token '*' resolved as shift (LEQ < '*').
@@ -10874,7 +10793,7 @@ state 251
     Conflict between rule 119 and token '%' resolved as shift (LEQ < '%').
 
 
-state 252
+State 251
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10884,7 +10803,87 @@ state 252
   113     | expr . LRSH expr
   114     | expr . LLSH expr
   115     | expr . '<' expr
-  115     | expr '<' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, ')', ']', '}']
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  120     | expr LNE expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, ')', ']', '}']
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '<'   posunout a přejít do stavu 176
+    '>'   posunout a přejít do stavu 177
+    LLE   posunout a přejít do stavu 178
+    LGE   posunout a přejít do stavu 179
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 120 (expr)
+
+    Conflict between rule 120 and token '=' resolved as reduce ('=' < LNE).
+    Conflict between rule 120 and token LPE resolved as reduce (LPE < LNE).
+    Conflict between rule 120 and token LME resolved as reduce (LME < LNE).
+    Conflict between rule 120 and token LMLE resolved as reduce (LMLE < LNE).
+    Conflict between rule 120 and token LDVE resolved as reduce (LDVE < LNE).
+    Conflict between rule 120 and token LMDE resolved as reduce (LMDE < LNE).
+    Conflict between rule 120 and token LRSHE resolved as reduce (LRSHE < LNE).
+    Conflict between rule 120 and token LLSHE resolved as reduce (LLSHE < LNE).
+    Conflict between rule 120 and token LANDE resolved as reduce (LANDE < LNE).
+    Conflict between rule 120 and token LXORE resolved as reduce (LXORE < LNE).
+    Conflict between rule 120 and token LORE resolved as reduce (LORE < LNE).
+    Conflict between rule 120 and token '?' resolved as reduce ('?' < LNE).
+    Conflict between rule 120 and token LOROR resolved as reduce (LOROR < LNE).
+    Conflict between rule 120 and token LANDAND resolved as reduce (LANDAND < LNE).
+    Conflict between rule 120 and token '|' resolved as reduce ('|' < LNE).
+    Conflict between rule 120 and token '^' resolved as reduce ('^' < LNE).
+    Conflict between rule 120 and token '&' resolved as reduce ('&' < LNE).
+    Conflict between rule 120 and token LEQ resolved as reduce (%left LEQ).
+    Conflict between rule 120 and token LNE resolved as reduce (%left LNE).
+    Conflict between rule 120 and token '<' resolved as shift (LNE < '<').
+    Conflict between rule 120 and token '>' resolved as shift (LNE < '>').
+    Conflict between rule 120 and token LLE resolved as shift (LNE < LLE).
+    Conflict between rule 120 and token LGE resolved as shift (LNE < LGE).
+    Conflict between rule 120 and token LLSH resolved as shift (LNE < LLSH).
+    Conflict between rule 120 and token LRSH resolved as shift (LNE < LRSH).
+    Conflict between rule 120 and token '+' resolved as shift (LNE < '+').
+    Conflict between rule 120 and token '-' resolved as shift (LNE < '-').
+    Conflict between rule 120 and token '*' resolved as shift (LNE < '*').
+    Conflict between rule 120 and token '/' resolved as shift (LNE < '/').
+    Conflict between rule 120 and token '%' resolved as shift (LNE < '%').
+
+
+State 252
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  115     | expr '<' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, ')', ']', '}']
   116     | expr . '>' expr
   117     | expr . LLE expr
   118     | expr . LGE expr
@@ -10908,41 +10907,41 @@ state 252
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
 
-    $default  reduce using rule 115 (expr)
+    $výchozí  reduce using rule 115 (expr)
 
     Conflict between rule 115 and token '=' resolved as reduce ('=' < '<').
-    Conflict between rule 115 and token LORE resolved as reduce (LORE < '<').
-    Conflict between rule 115 and token LXORE resolved as reduce (LXORE < '<').
-    Conflict between rule 115 and token LANDE resolved as reduce (LANDE < '<').
-    Conflict between rule 115 and token LLSHE resolved as reduce (LLSHE < '<').
-    Conflict between rule 115 and token LRSHE resolved as reduce (LRSHE < '<').
-    Conflict between rule 115 and token LMDE resolved as reduce (LMDE < '<').
-    Conflict between rule 115 and token LDVE resolved as reduce (LDVE < '<').
-    Conflict between rule 115 and token LMLE resolved as reduce (LMLE < '<').
-    Conflict between rule 115 and token LME resolved as reduce (LME < '<').
     Conflict between rule 115 and token LPE resolved as reduce (LPE < '<').
+    Conflict between rule 115 and token LME resolved as reduce (LME < '<').
+    Conflict between rule 115 and token LMLE resolved as reduce (LMLE < '<').
+    Conflict between rule 115 and token LDVE resolved as reduce (LDVE < '<').
+    Conflict between rule 115 and token LMDE resolved as reduce (LMDE < '<').
+    Conflict between rule 115 and token LRSHE resolved as reduce (LRSHE < '<').
+    Conflict between rule 115 and token LLSHE resolved as reduce (LLSHE < '<').
+    Conflict between rule 115 and token LANDE resolved as reduce (LANDE < '<').
+    Conflict between rule 115 and token LXORE resolved as reduce (LXORE < '<').
+    Conflict between rule 115 and token LORE resolved as reduce (LORE < '<').
     Conflict between rule 115 and token '?' resolved as reduce ('?' < '<').
     Conflict between rule 115 and token LOROR resolved as reduce (LOROR < '<').
     Conflict between rule 115 and token LANDAND resolved as reduce (LANDAND < '<').
     Conflict between rule 115 and token '|' resolved as reduce ('|' < '<').
     Conflict between rule 115 and token '^' resolved as reduce ('^' < '<').
     Conflict between rule 115 and token '&' resolved as reduce ('&' < '<').
-    Conflict between rule 115 and token LNE resolved as reduce (LNE < '<').
     Conflict between rule 115 and token LEQ resolved as reduce (LEQ < '<').
+    Conflict between rule 115 and token LNE resolved as reduce (LNE < '<').
     Conflict between rule 115 and token '<' resolved as reduce (%left '<').
     Conflict between rule 115 and token '>' resolved as reduce (%left '>').
-    Conflict between rule 115 and token LGE resolved as reduce (%left LGE).
     Conflict between rule 115 and token LLE resolved as reduce (%left LLE).
-    Conflict between rule 115 and token LRSH resolved as shift ('<' < LRSH).
+    Conflict between rule 115 and token LGE resolved as reduce (%left LGE).
     Conflict between rule 115 and token LLSH resolved as shift ('<' < LLSH).
+    Conflict between rule 115 and token LRSH resolved as shift ('<' < LRSH).
     Conflict between rule 115 and token '+' resolved as shift ('<' < '+').
     Conflict between rule 115 and token '-' resolved as shift ('<' < '-').
     Conflict between rule 115 and token '*' resolved as shift ('<' < '*').
@@ -10950,7 +10949,7 @@ state 252
     Conflict between rule 115 and token '%' resolved as shift ('<' < '%').
 
 
-state 253
+State 253
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -10961,7 +10960,7 @@ state 253
   114     | expr . LLSH expr
   115     | expr . '<' expr
   116     | expr . '>' expr
-  116     | expr '>' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, ')', ']', '}']
+  116     | expr '>' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, ')', ']', '}']
   117     | expr . LLE expr
   118     | expr . LGE expr
   119     | expr . LEQ expr
@@ -10984,41 +10983,41 @@ state 253
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
 
-    $default  reduce using rule 116 (expr)
+    $výchozí  reduce using rule 116 (expr)
 
     Conflict between rule 116 and token '=' resolved as reduce ('=' < '>').
-    Conflict between rule 116 and token LORE resolved as reduce (LORE < '>').
-    Conflict between rule 116 and token LXORE resolved as reduce (LXORE < '>').
-    Conflict between rule 116 and token LANDE resolved as reduce (LANDE < '>').
-    Conflict between rule 116 and token LLSHE resolved as reduce (LLSHE < '>').
-    Conflict between rule 116 and token LRSHE resolved as reduce (LRSHE < '>').
-    Conflict between rule 116 and token LMDE resolved as reduce (LMDE < '>').
-    Conflict between rule 116 and token LDVE resolved as reduce (LDVE < '>').
-    Conflict between rule 116 and token LMLE resolved as reduce (LMLE < '>').
-    Conflict between rule 116 and token LME resolved as reduce (LME < '>').
     Conflict between rule 116 and token LPE resolved as reduce (LPE < '>').
+    Conflict between rule 116 and token LME resolved as reduce (LME < '>').
+    Conflict between rule 116 and token LMLE resolved as reduce (LMLE < '>').
+    Conflict between rule 116 and token LDVE resolved as reduce (LDVE < '>').
+    Conflict between rule 116 and token LMDE resolved as reduce (LMDE < '>').
+    Conflict between rule 116 and token LRSHE resolved as reduce (LRSHE < '>').
+    Conflict between rule 116 and token LLSHE resolved as reduce (LLSHE < '>').
+    Conflict between rule 116 and token LANDE resolved as reduce (LANDE < '>').
+    Conflict between rule 116 and token LXORE resolved as reduce (LXORE < '>').
+    Conflict between rule 116 and token LORE resolved as reduce (LORE < '>').
     Conflict between rule 116 and token '?' resolved as reduce ('?' < '>').
     Conflict between rule 116 and token LOROR resolved as reduce (LOROR < '>').
     Conflict between rule 116 and token LANDAND resolved as reduce (LANDAND < '>').
     Conflict between rule 116 and token '|' resolved as reduce ('|' < '>').
     Conflict between rule 116 and token '^' resolved as reduce ('^' < '>').
     Conflict between rule 116 and token '&' resolved as reduce ('&' < '>').
-    Conflict between rule 116 and token LNE resolved as reduce (LNE < '>').
     Conflict between rule 116 and token LEQ resolved as reduce (LEQ < '>').
+    Conflict between rule 116 and token LNE resolved as reduce (LNE < '>').
     Conflict between rule 116 and token '<' resolved as reduce (%left '<').
     Conflict between rule 116 and token '>' resolved as reduce (%left '>').
-    Conflict between rule 116 and token LGE resolved as reduce (%left LGE).
     Conflict between rule 116 and token LLE resolved as reduce (%left LLE).
-    Conflict between rule 116 and token LRSH resolved as shift ('>' < LRSH).
+    Conflict between rule 116 and token LGE resolved as reduce (%left LGE).
     Conflict between rule 116 and token LLSH resolved as shift ('>' < LLSH).
+    Conflict between rule 116 and token LRSH resolved as shift ('>' < LRSH).
     Conflict between rule 116 and token '+' resolved as shift ('>' < '+').
     Conflict between rule 116 and token '-' resolved as shift ('>' < '-').
     Conflict between rule 116 and token '*' resolved as shift ('>' < '*').
@@ -11026,7 +11025,7 @@ state 253
     Conflict between rule 116 and token '%' resolved as shift ('>' < '%').
 
 
-state 254
+State 254
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -11038,83 +11037,7 @@ state 254
   115     | expr . '<' expr
   116     | expr . '>' expr
   117     | expr . LLE expr
-  118     | expr . LGE expr
-  118     | expr LGE expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, ')', ']', '}']
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
-
-    $default  reduce using rule 118 (expr)
-
-    Conflict between rule 118 and token '=' resolved as reduce ('=' < LGE).
-    Conflict between rule 118 and token LORE resolved as reduce (LORE < LGE).
-    Conflict between rule 118 and token LXORE resolved as reduce (LXORE < LGE).
-    Conflict between rule 118 and token LANDE resolved as reduce (LANDE < LGE).
-    Conflict between rule 118 and token LLSHE resolved as reduce (LLSHE < LGE).
-    Conflict between rule 118 and token LRSHE resolved as reduce (LRSHE < LGE).
-    Conflict between rule 118 and token LMDE resolved as reduce (LMDE < LGE).
-    Conflict between rule 118 and token LDVE resolved as reduce (LDVE < LGE).
-    Conflict between rule 118 and token LMLE resolved as reduce (LMLE < LGE).
-    Conflict between rule 118 and token LME resolved as reduce (LME < LGE).
-    Conflict between rule 118 and token LPE resolved as reduce (LPE < LGE).
-    Conflict between rule 118 and token '?' resolved as reduce ('?' < LGE).
-    Conflict between rule 118 and token LOROR resolved as reduce (LOROR < LGE).
-    Conflict between rule 118 and token LANDAND resolved as reduce (LANDAND < LGE).
-    Conflict between rule 118 and token '|' resolved as reduce ('|' < LGE).
-    Conflict between rule 118 and token '^' resolved as reduce ('^' < LGE).
-    Conflict between rule 118 and token '&' resolved as reduce ('&' < LGE).
-    Conflict between rule 118 and token LNE resolved as reduce (LNE < LGE).
-    Conflict between rule 118 and token LEQ resolved as reduce (LEQ < LGE).
-    Conflict between rule 118 and token '<' resolved as reduce (%left '<').
-    Conflict between rule 118 and token '>' resolved as reduce (%left '>').
-    Conflict between rule 118 and token LGE resolved as reduce (%left LGE).
-    Conflict between rule 118 and token LLE resolved as reduce (%left LLE).
-    Conflict between rule 118 and token LRSH resolved as shift (LGE < LRSH).
-    Conflict between rule 118 and token LLSH resolved as shift (LGE < LLSH).
-    Conflict between rule 118 and token '+' resolved as shift (LGE < '+').
-    Conflict between rule 118 and token '-' resolved as shift (LGE < '-').
-    Conflict between rule 118 and token '*' resolved as shift (LGE < '*').
-    Conflict between rule 118 and token '/' resolved as shift (LGE < '/').
-    Conflict between rule 118 and token '%' resolved as shift (LGE < '%').
-
-
-state 255
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  117     | expr LLE expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, ')', ']', '}']
+  117     | expr LLE expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, ')', ']', '}']
   118     | expr . LGE expr
   119     | expr . LEQ expr
   120     | expr . LNE expr
@@ -11136,41 +11059,41 @@ state 255
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    LRSH  shift, and go to state 180
-    LLSH  shift, and go to state 181
-    '+'   shift, and go to state 182
-    '-'   shift, and go to state 183
-    '*'   shift, and go to state 184
-    '/'   shift, and go to state 185
-    '%'   shift, and go to state 186
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
 
-    $default  reduce using rule 117 (expr)
+    $výchozí  reduce using rule 117 (expr)
 
     Conflict between rule 117 and token '=' resolved as reduce ('=' < LLE).
-    Conflict between rule 117 and token LORE resolved as reduce (LORE < LLE).
-    Conflict between rule 117 and token LXORE resolved as reduce (LXORE < LLE).
-    Conflict between rule 117 and token LANDE resolved as reduce (LANDE < LLE).
-    Conflict between rule 117 and token LLSHE resolved as reduce (LLSHE < LLE).
-    Conflict between rule 117 and token LRSHE resolved as reduce (LRSHE < LLE).
-    Conflict between rule 117 and token LMDE resolved as reduce (LMDE < LLE).
-    Conflict between rule 117 and token LDVE resolved as reduce (LDVE < LLE).
-    Conflict between rule 117 and token LMLE resolved as reduce (LMLE < LLE).
-    Conflict between rule 117 and token LME resolved as reduce (LME < LLE).
     Conflict between rule 117 and token LPE resolved as reduce (LPE < LLE).
+    Conflict between rule 117 and token LME resolved as reduce (LME < LLE).
+    Conflict between rule 117 and token LMLE resolved as reduce (LMLE < LLE).
+    Conflict between rule 117 and token LDVE resolved as reduce (LDVE < LLE).
+    Conflict between rule 117 and token LMDE resolved as reduce (LMDE < LLE).
+    Conflict between rule 117 and token LRSHE resolved as reduce (LRSHE < LLE).
+    Conflict between rule 117 and token LLSHE resolved as reduce (LLSHE < LLE).
+    Conflict between rule 117 and token LANDE resolved as reduce (LANDE < LLE).
+    Conflict between rule 117 and token LXORE resolved as reduce (LXORE < LLE).
+    Conflict between rule 117 and token LORE resolved as reduce (LORE < LLE).
     Conflict between rule 117 and token '?' resolved as reduce ('?' < LLE).
     Conflict between rule 117 and token LOROR resolved as reduce (LOROR < LLE).
     Conflict between rule 117 and token LANDAND resolved as reduce (LANDAND < LLE).
     Conflict between rule 117 and token '|' resolved as reduce ('|' < LLE).
     Conflict between rule 117 and token '^' resolved as reduce ('^' < LLE).
     Conflict between rule 117 and token '&' resolved as reduce ('&' < LLE).
-    Conflict between rule 117 and token LNE resolved as reduce (LNE < LLE).
     Conflict between rule 117 and token LEQ resolved as reduce (LEQ < LLE).
+    Conflict between rule 117 and token LNE resolved as reduce (LNE < LLE).
     Conflict between rule 117 and token '<' resolved as reduce (%left '<').
     Conflict between rule 117 and token '>' resolved as reduce (%left '>').
-    Conflict between rule 117 and token LGE resolved as reduce (%left LGE).
     Conflict between rule 117 and token LLE resolved as reduce (%left LLE).
-    Conflict between rule 117 and token LRSH resolved as shift (LLE < LRSH).
+    Conflict between rule 117 and token LGE resolved as reduce (%left LGE).
     Conflict between rule 117 and token LLSH resolved as shift (LLE < LLSH).
+    Conflict between rule 117 and token LRSH resolved as shift (LLE < LRSH).
     Conflict between rule 117 and token '+' resolved as shift (LLE < '+').
     Conflict between rule 117 and token '-' resolved as shift (LLE < '-').
     Conflict between rule 117 and token '*' resolved as shift (LLE < '*').
@@ -11178,7 +11101,7 @@ state 255
     Conflict between rule 117 and token '%' resolved as shift (LLE < '%').
 
 
-state 256
+State 255
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -11186,8 +11109,84 @@ state 256
   111     | expr . '+' expr
   112     | expr . '-' expr
   113     | expr . LRSH expr
-  113     | expr LRSH expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, ')', ']', '}']
   114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  118     | expr LGE expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, ')', ']', '}']
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    LLSH  posunout a přejít do stavu 180
+    LRSH  posunout a přejít do stavu 181
+    '+'   posunout a přejít do stavu 182
+    '-'   posunout a přejít do stavu 183
+    '*'   posunout a přejít do stavu 184
+    '/'   posunout a přejít do stavu 185
+    '%'   posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 118 (expr)
+
+    Conflict between rule 118 and token '=' resolved as reduce ('=' < LGE).
+    Conflict between rule 118 and token LPE resolved as reduce (LPE < LGE).
+    Conflict between rule 118 and token LME resolved as reduce (LME < LGE).
+    Conflict between rule 118 and token LMLE resolved as reduce (LMLE < LGE).
+    Conflict between rule 118 and token LDVE resolved as reduce (LDVE < LGE).
+    Conflict between rule 118 and token LMDE resolved as reduce (LMDE < LGE).
+    Conflict between rule 118 and token LRSHE resolved as reduce (LRSHE < LGE).
+    Conflict between rule 118 and token LLSHE resolved as reduce (LLSHE < LGE).
+    Conflict between rule 118 and token LANDE resolved as reduce (LANDE < LGE).
+    Conflict between rule 118 and token LXORE resolved as reduce (LXORE < LGE).
+    Conflict between rule 118 and token LORE resolved as reduce (LORE < LGE).
+    Conflict between rule 118 and token '?' resolved as reduce ('?' < LGE).
+    Conflict between rule 118 and token LOROR resolved as reduce (LOROR < LGE).
+    Conflict between rule 118 and token LANDAND resolved as reduce (LANDAND < LGE).
+    Conflict between rule 118 and token '|' resolved as reduce ('|' < LGE).
+    Conflict between rule 118 and token '^' resolved as reduce ('^' < LGE).
+    Conflict between rule 118 and token '&' resolved as reduce ('&' < LGE).
+    Conflict between rule 118 and token LEQ resolved as reduce (LEQ < LGE).
+    Conflict between rule 118 and token LNE resolved as reduce (LNE < LGE).
+    Conflict between rule 118 and token '<' resolved as reduce (%left '<').
+    Conflict between rule 118 and token '>' resolved as reduce (%left '>').
+    Conflict between rule 118 and token LLE resolved as reduce (%left LLE).
+    Conflict between rule 118 and token LGE resolved as reduce (%left LGE).
+    Conflict between rule 118 and token LLSH resolved as shift (LGE < LLSH).
+    Conflict between rule 118 and token LRSH resolved as shift (LGE < LRSH).
+    Conflict between rule 118 and token '+' resolved as shift (LGE < '+').
+    Conflict between rule 118 and token '-' resolved as shift (LGE < '-').
+    Conflict between rule 118 and token '*' resolved as shift (LGE < '*').
+    Conflict between rule 118 and token '/' resolved as shift (LGE < '/').
+    Conflict between rule 118 and token '%' resolved as shift (LGE < '%').
+
+
+State 256
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  114     | expr . LLSH expr
+  114     | expr LLSH expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, ')', ']', '}']
   115     | expr . '<' expr
   116     | expr . '>' expr
   117     | expr . LLE expr
@@ -11212,113 +11211,39 @@ state 256
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '+'  shift, and go to state 182
-    '-'  shift, and go to state 183
-    '*'  shift, and go to state 184
-    '/'  shift, and go to state 185
-    '%'  shift, and go to state 186
+    '+'  posunout a přejít do stavu 182
+    '-'  posunout a přejít do stavu 183
+    '*'  posunout a přejít do stavu 184
+    '/'  posunout a přejít do stavu 185
+    '%'  posunout a přejít do stavu 186
 
-    $default  reduce using rule 113 (expr)
-
-    Conflict between rule 113 and token '=' resolved as reduce ('=' < LRSH).
-    Conflict between rule 113 and token LORE resolved as reduce (LORE < LRSH).
-    Conflict between rule 113 and token LXORE resolved as reduce (LXORE < LRSH).
-    Conflict between rule 113 and token LANDE resolved as reduce (LANDE < LRSH).
-    Conflict between rule 113 and token LLSHE resolved as reduce (LLSHE < LRSH).
-    Conflict between rule 113 and token LRSHE resolved as reduce (LRSHE < LRSH).
-    Conflict between rule 113 and token LMDE resolved as reduce (LMDE < LRSH).
-    Conflict between rule 113 and token LDVE resolved as reduce (LDVE < LRSH).
-    Conflict between rule 113 and token LMLE resolved as reduce (LMLE < LRSH).
-    Conflict between rule 113 and token LME resolved as reduce (LME < LRSH).
-    Conflict between rule 113 and token LPE resolved as reduce (LPE < LRSH).
-    Conflict between rule 113 and token '?' resolved as reduce ('?' < LRSH).
-    Conflict between rule 113 and token LOROR resolved as reduce (LOROR < LRSH).
-    Conflict between rule 113 and token LANDAND resolved as reduce (LANDAND < LRSH).
-    Conflict between rule 113 and token '|' resolved as reduce ('|' < LRSH).
-    Conflict between rule 113 and token '^' resolved as reduce ('^' < LRSH).
-    Conflict between rule 113 and token '&' resolved as reduce ('&' < LRSH).
-    Conflict between rule 113 and token LNE resolved as reduce (LNE < LRSH).
-    Conflict between rule 113 and token LEQ resolved as reduce (LEQ < LRSH).
-    Conflict between rule 113 and token '<' resolved as reduce ('<' < LRSH).
-    Conflict between rule 113 and token '>' resolved as reduce ('>' < LRSH).
-    Conflict between rule 113 and token LGE resolved as reduce (LGE < LRSH).
-    Conflict between rule 113 and token LLE resolved as reduce (LLE < LRSH).
-    Conflict between rule 113 and token LRSH resolved as reduce (%left LRSH).
-    Conflict between rule 113 and token LLSH resolved as reduce (%left LLSH).
-    Conflict between rule 113 and token '+' resolved as shift (LRSH < '+').
-    Conflict between rule 113 and token '-' resolved as shift (LRSH < '-').
-    Conflict between rule 113 and token '*' resolved as shift (LRSH < '*').
-    Conflict between rule 113 and token '/' resolved as shift (LRSH < '/').
-    Conflict between rule 113 and token '%' resolved as shift (LRSH < '%').
-
-
-state 257
-
-  108 expr: expr . '*' expr
-  109     | expr . '/' expr
-  110     | expr . '%' expr
-  111     | expr . '+' expr
-  112     | expr . '-' expr
-  113     | expr . LRSH expr
-  114     | expr . LLSH expr
-  114     | expr LLSH expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, ')', ']', '}']
-  115     | expr . '<' expr
-  116     | expr . '>' expr
-  117     | expr . LLE expr
-  118     | expr . LGE expr
-  119     | expr . LEQ expr
-  120     | expr . LNE expr
-  121     | expr . '&' expr
-  122     | expr . '^' expr
-  123     | expr . '|' expr
-  124     | expr . LANDAND expr
-  125     | expr . LOROR expr
-  126     | expr . '?' cexpr ':' expr
-  127     | expr . '=' expr
-  128     | expr . LPE expr
-  129     | expr . LME expr
-  130     | expr . LMLE expr
-  131     | expr . LDVE expr
-  132     | expr . LMDE expr
-  133     | expr . LLSHE expr
-  134     | expr . LRSHE expr
-  135     | expr . LANDE expr
-  136     | expr . LXORE expr
-  137     | expr . LORE expr
-
-    '+'  shift, and go to state 182
-    '-'  shift, and go to state 183
-    '*'  shift, and go to state 184
-    '/'  shift, and go to state 185
-    '%'  shift, and go to state 186
-
-    $default  reduce using rule 114 (expr)
+    $výchozí  reduce using rule 114 (expr)
 
     Conflict between rule 114 and token '=' resolved as reduce ('=' < LLSH).
-    Conflict between rule 114 and token LORE resolved as reduce (LORE < LLSH).
-    Conflict between rule 114 and token LXORE resolved as reduce (LXORE < LLSH).
-    Conflict between rule 114 and token LANDE resolved as reduce (LANDE < LLSH).
-    Conflict between rule 114 and token LLSHE resolved as reduce (LLSHE < LLSH).
-    Conflict between rule 114 and token LRSHE resolved as reduce (LRSHE < LLSH).
-    Conflict between rule 114 and token LMDE resolved as reduce (LMDE < LLSH).
-    Conflict between rule 114 and token LDVE resolved as reduce (LDVE < LLSH).
-    Conflict between rule 114 and token LMLE resolved as reduce (LMLE < LLSH).
-    Conflict between rule 114 and token LME resolved as reduce (LME < LLSH).
     Conflict between rule 114 and token LPE resolved as reduce (LPE < LLSH).
+    Conflict between rule 114 and token LME resolved as reduce (LME < LLSH).
+    Conflict between rule 114 and token LMLE resolved as reduce (LMLE < LLSH).
+    Conflict between rule 114 and token LDVE resolved as reduce (LDVE < LLSH).
+    Conflict between rule 114 and token LMDE resolved as reduce (LMDE < LLSH).
+    Conflict between rule 114 and token LRSHE resolved as reduce (LRSHE < LLSH).
+    Conflict between rule 114 and token LLSHE resolved as reduce (LLSHE < LLSH).
+    Conflict between rule 114 and token LANDE resolved as reduce (LANDE < LLSH).
+    Conflict between rule 114 and token LXORE resolved as reduce (LXORE < LLSH).
+    Conflict between rule 114 and token LORE resolved as reduce (LORE < LLSH).
     Conflict between rule 114 and token '?' resolved as reduce ('?' < LLSH).
     Conflict between rule 114 and token LOROR resolved as reduce (LOROR < LLSH).
     Conflict between rule 114 and token LANDAND resolved as reduce (LANDAND < LLSH).
     Conflict between rule 114 and token '|' resolved as reduce ('|' < LLSH).
     Conflict between rule 114 and token '^' resolved as reduce ('^' < LLSH).
     Conflict between rule 114 and token '&' resolved as reduce ('&' < LLSH).
-    Conflict between rule 114 and token LNE resolved as reduce (LNE < LLSH).
     Conflict between rule 114 and token LEQ resolved as reduce (LEQ < LLSH).
+    Conflict between rule 114 and token LNE resolved as reduce (LNE < LLSH).
     Conflict between rule 114 and token '<' resolved as reduce ('<' < LLSH).
     Conflict between rule 114 and token '>' resolved as reduce ('>' < LLSH).
-    Conflict between rule 114 and token LGE resolved as reduce (LGE < LLSH).
     Conflict between rule 114 and token LLE resolved as reduce (LLE < LLSH).
-    Conflict between rule 114 and token LRSH resolved as reduce (%left LRSH).
+    Conflict between rule 114 and token LGE resolved as reduce (LGE < LLSH).
     Conflict between rule 114 and token LLSH resolved as reduce (%left LLSH).
+    Conflict between rule 114 and token LRSH resolved as reduce (%left LRSH).
     Conflict between rule 114 and token '+' resolved as shift (LLSH < '+').
     Conflict between rule 114 and token '-' resolved as shift (LLSH < '-').
     Conflict between rule 114 and token '*' resolved as shift (LLSH < '*').
@@ -11326,13 +11251,87 @@ state 257
     Conflict between rule 114 and token '%' resolved as shift (LLSH < '%').
 
 
-state 258
+State 257
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
   110     | expr . '%' expr
   111     | expr . '+' expr
-  111     | expr '+' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', ')', ']', '}']
+  112     | expr . '-' expr
+  113     | expr . LRSH expr
+  113     | expr LRSH expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, ')', ']', '}']
+  114     | expr . LLSH expr
+  115     | expr . '<' expr
+  116     | expr . '>' expr
+  117     | expr . LLE expr
+  118     | expr . LGE expr
+  119     | expr . LEQ expr
+  120     | expr . LNE expr
+  121     | expr . '&' expr
+  122     | expr . '^' expr
+  123     | expr . '|' expr
+  124     | expr . LANDAND expr
+  125     | expr . LOROR expr
+  126     | expr . '?' cexpr ':' expr
+  127     | expr . '=' expr
+  128     | expr . LPE expr
+  129     | expr . LME expr
+  130     | expr . LMLE expr
+  131     | expr . LDVE expr
+  132     | expr . LMDE expr
+  133     | expr . LLSHE expr
+  134     | expr . LRSHE expr
+  135     | expr . LANDE expr
+  136     | expr . LXORE expr
+  137     | expr . LORE expr
+
+    '+'  posunout a přejít do stavu 182
+    '-'  posunout a přejít do stavu 183
+    '*'  posunout a přejít do stavu 184
+    '/'  posunout a přejít do stavu 185
+    '%'  posunout a přejít do stavu 186
+
+    $výchozí  reduce using rule 113 (expr)
+
+    Conflict between rule 113 and token '=' resolved as reduce ('=' < LRSH).
+    Conflict between rule 113 and token LPE resolved as reduce (LPE < LRSH).
+    Conflict between rule 113 and token LME resolved as reduce (LME < LRSH).
+    Conflict between rule 113 and token LMLE resolved as reduce (LMLE < LRSH).
+    Conflict between rule 113 and token LDVE resolved as reduce (LDVE < LRSH).
+    Conflict between rule 113 and token LMDE resolved as reduce (LMDE < LRSH).
+    Conflict between rule 113 and token LRSHE resolved as reduce (LRSHE < LRSH).
+    Conflict between rule 113 and token LLSHE resolved as reduce (LLSHE < LRSH).
+    Conflict between rule 113 and token LANDE resolved as reduce (LANDE < LRSH).
+    Conflict between rule 113 and token LXORE resolved as reduce (LXORE < LRSH).
+    Conflict between rule 113 and token LORE resolved as reduce (LORE < LRSH).
+    Conflict between rule 113 and token '?' resolved as reduce ('?' < LRSH).
+    Conflict between rule 113 and token LOROR resolved as reduce (LOROR < LRSH).
+    Conflict between rule 113 and token LANDAND resolved as reduce (LANDAND < LRSH).
+    Conflict between rule 113 and token '|' resolved as reduce ('|' < LRSH).
+    Conflict between rule 113 and token '^' resolved as reduce ('^' < LRSH).
+    Conflict between rule 113 and token '&' resolved as reduce ('&' < LRSH).
+    Conflict between rule 113 and token LEQ resolved as reduce (LEQ < LRSH).
+    Conflict between rule 113 and token LNE resolved as reduce (LNE < LRSH).
+    Conflict between rule 113 and token '<' resolved as reduce ('<' < LRSH).
+    Conflict between rule 113 and token '>' resolved as reduce ('>' < LRSH).
+    Conflict between rule 113 and token LLE resolved as reduce (LLE < LRSH).
+    Conflict between rule 113 and token LGE resolved as reduce (LGE < LRSH).
+    Conflict between rule 113 and token LLSH resolved as reduce (%left LLSH).
+    Conflict between rule 113 and token LRSH resolved as reduce (%left LRSH).
+    Conflict between rule 113 and token '+' resolved as shift (LRSH < '+').
+    Conflict between rule 113 and token '-' resolved as shift (LRSH < '-').
+    Conflict between rule 113 and token '*' resolved as shift (LRSH < '*').
+    Conflict between rule 113 and token '/' resolved as shift (LRSH < '/').
+    Conflict between rule 113 and token '%' resolved as shift (LRSH < '%').
+
+
+State 258
+
+  108 expr: expr . '*' expr
+  109     | expr . '/' expr
+  110     | expr . '%' expr
+  111     | expr . '+' expr
+  111     | expr '+' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', ')', ']', '}']
   112     | expr . '-' expr
   113     | expr . LRSH expr
   114     | expr . LLSH expr
@@ -11360,37 +11359,37 @@ state 258
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '*'  shift, and go to state 184
-    '/'  shift, and go to state 185
-    '%'  shift, and go to state 186
+    '*'  posunout a přejít do stavu 184
+    '/'  posunout a přejít do stavu 185
+    '%'  posunout a přejít do stavu 186
 
-    $default  reduce using rule 111 (expr)
+    $výchozí  reduce using rule 111 (expr)
 
     Conflict between rule 111 and token '=' resolved as reduce ('=' < '+').
-    Conflict between rule 111 and token LORE resolved as reduce (LORE < '+').
-    Conflict between rule 111 and token LXORE resolved as reduce (LXORE < '+').
-    Conflict between rule 111 and token LANDE resolved as reduce (LANDE < '+').
-    Conflict between rule 111 and token LLSHE resolved as reduce (LLSHE < '+').
-    Conflict between rule 111 and token LRSHE resolved as reduce (LRSHE < '+').
-    Conflict between rule 111 and token LMDE resolved as reduce (LMDE < '+').
-    Conflict between rule 111 and token LDVE resolved as reduce (LDVE < '+').
-    Conflict between rule 111 and token LMLE resolved as reduce (LMLE < '+').
-    Conflict between rule 111 and token LME resolved as reduce (LME < '+').
     Conflict between rule 111 and token LPE resolved as reduce (LPE < '+').
+    Conflict between rule 111 and token LME resolved as reduce (LME < '+').
+    Conflict between rule 111 and token LMLE resolved as reduce (LMLE < '+').
+    Conflict between rule 111 and token LDVE resolved as reduce (LDVE < '+').
+    Conflict between rule 111 and token LMDE resolved as reduce (LMDE < '+').
+    Conflict between rule 111 and token LRSHE resolved as reduce (LRSHE < '+').
+    Conflict between rule 111 and token LLSHE resolved as reduce (LLSHE < '+').
+    Conflict between rule 111 and token LANDE resolved as reduce (LANDE < '+').
+    Conflict between rule 111 and token LXORE resolved as reduce (LXORE < '+').
+    Conflict between rule 111 and token LORE resolved as reduce (LORE < '+').
     Conflict between rule 111 and token '?' resolved as reduce ('?' < '+').
     Conflict between rule 111 and token LOROR resolved as reduce (LOROR < '+').
     Conflict between rule 111 and token LANDAND resolved as reduce (LANDAND < '+').
     Conflict between rule 111 and token '|' resolved as reduce ('|' < '+').
     Conflict between rule 111 and token '^' resolved as reduce ('^' < '+').
     Conflict between rule 111 and token '&' resolved as reduce ('&' < '+').
-    Conflict between rule 111 and token LNE resolved as reduce (LNE < '+').
     Conflict between rule 111 and token LEQ resolved as reduce (LEQ < '+').
+    Conflict between rule 111 and token LNE resolved as reduce (LNE < '+').
     Conflict between rule 111 and token '<' resolved as reduce ('<' < '+').
     Conflict between rule 111 and token '>' resolved as reduce ('>' < '+').
-    Conflict between rule 111 and token LGE resolved as reduce (LGE < '+').
     Conflict between rule 111 and token LLE resolved as reduce (LLE < '+').
-    Conflict between rule 111 and token LRSH resolved as reduce (LRSH < '+').
+    Conflict between rule 111 and token LGE resolved as reduce (LGE < '+').
     Conflict between rule 111 and token LLSH resolved as reduce (LLSH < '+').
+    Conflict between rule 111 and token LRSH resolved as reduce (LRSH < '+').
     Conflict between rule 111 and token '+' resolved as reduce (%left '+').
     Conflict between rule 111 and token '-' resolved as reduce (%left '-').
     Conflict between rule 111 and token '*' resolved as shift ('+' < '*').
@@ -11398,14 +11397,14 @@ state 258
     Conflict between rule 111 and token '%' resolved as shift ('+' < '%').
 
 
-state 259
+State 259
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
   110     | expr . '%' expr
   111     | expr . '+' expr
   112     | expr . '-' expr
-  112     | expr '-' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', ')', ']', '}']
+  112     | expr '-' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', ')', ']', '}']
   113     | expr . LRSH expr
   114     | expr . LLSH expr
   115     | expr . '<' expr
@@ -11432,37 +11431,37 @@ state 259
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '*'  shift, and go to state 184
-    '/'  shift, and go to state 185
-    '%'  shift, and go to state 186
+    '*'  posunout a přejít do stavu 184
+    '/'  posunout a přejít do stavu 185
+    '%'  posunout a přejít do stavu 186
 
-    $default  reduce using rule 112 (expr)
+    $výchozí  reduce using rule 112 (expr)
 
     Conflict between rule 112 and token '=' resolved as reduce ('=' < '-').
-    Conflict between rule 112 and token LORE resolved as reduce (LORE < '-').
-    Conflict between rule 112 and token LXORE resolved as reduce (LXORE < '-').
-    Conflict between rule 112 and token LANDE resolved as reduce (LANDE < '-').
-    Conflict between rule 112 and token LLSHE resolved as reduce (LLSHE < '-').
-    Conflict between rule 112 and token LRSHE resolved as reduce (LRSHE < '-').
-    Conflict between rule 112 and token LMDE resolved as reduce (LMDE < '-').
-    Conflict between rule 112 and token LDVE resolved as reduce (LDVE < '-').
-    Conflict between rule 112 and token LMLE resolved as reduce (LMLE < '-').
-    Conflict between rule 112 and token LME resolved as reduce (LME < '-').
     Conflict between rule 112 and token LPE resolved as reduce (LPE < '-').
+    Conflict between rule 112 and token LME resolved as reduce (LME < '-').
+    Conflict between rule 112 and token LMLE resolved as reduce (LMLE < '-').
+    Conflict between rule 112 and token LDVE resolved as reduce (LDVE < '-').
+    Conflict between rule 112 and token LMDE resolved as reduce (LMDE < '-').
+    Conflict between rule 112 and token LRSHE resolved as reduce (LRSHE < '-').
+    Conflict between rule 112 and token LLSHE resolved as reduce (LLSHE < '-').
+    Conflict between rule 112 and token LANDE resolved as reduce (LANDE < '-').
+    Conflict between rule 112 and token LXORE resolved as reduce (LXORE < '-').
+    Conflict between rule 112 and token LORE resolved as reduce (LORE < '-').
     Conflict between rule 112 and token '?' resolved as reduce ('?' < '-').
     Conflict between rule 112 and token LOROR resolved as reduce (LOROR < '-').
     Conflict between rule 112 and token LANDAND resolved as reduce (LANDAND < '-').
     Conflict between rule 112 and token '|' resolved as reduce ('|' < '-').
     Conflict between rule 112 and token '^' resolved as reduce ('^' < '-').
     Conflict between rule 112 and token '&' resolved as reduce ('&' < '-').
-    Conflict between rule 112 and token LNE resolved as reduce (LNE < '-').
     Conflict between rule 112 and token LEQ resolved as reduce (LEQ < '-').
+    Conflict between rule 112 and token LNE resolved as reduce (LNE < '-').
     Conflict between rule 112 and token '<' resolved as reduce ('<' < '-').
     Conflict between rule 112 and token '>' resolved as reduce ('>' < '-').
-    Conflict between rule 112 and token LGE resolved as reduce (LGE < '-').
     Conflict between rule 112 and token LLE resolved as reduce (LLE < '-').
-    Conflict between rule 112 and token LRSH resolved as reduce (LRSH < '-').
+    Conflict between rule 112 and token LGE resolved as reduce (LGE < '-').
     Conflict between rule 112 and token LLSH resolved as reduce (LLSH < '-').
+    Conflict between rule 112 and token LRSH resolved as reduce (LRSH < '-').
     Conflict between rule 112 and token '+' resolved as reduce (%left '+').
     Conflict between rule 112 and token '-' resolved as reduce (%left '-').
     Conflict between rule 112 and token '*' resolved as shift ('-' < '*').
@@ -11470,10 +11469,10 @@ state 259
     Conflict between rule 112 and token '%' resolved as shift ('-' < '%').
 
 
-state 260
+State 260
 
   108 expr: expr . '*' expr
-  108     | expr '*' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', '*', '/', '%', ')', ']', '}']
+  108     | expr '*' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', '*', '/', '%', ')', ']', '}']
   109     | expr . '/' expr
   110     | expr . '%' expr
   111     | expr . '+' expr
@@ -11504,33 +11503,33 @@ state 260
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    $default  reduce using rule 108 (expr)
+    $výchozí  reduce using rule 108 (expr)
 
     Conflict between rule 108 and token '=' resolved as reduce ('=' < '*').
-    Conflict between rule 108 and token LORE resolved as reduce (LORE < '*').
-    Conflict between rule 108 and token LXORE resolved as reduce (LXORE < '*').
-    Conflict between rule 108 and token LANDE resolved as reduce (LANDE < '*').
-    Conflict between rule 108 and token LLSHE resolved as reduce (LLSHE < '*').
-    Conflict between rule 108 and token LRSHE resolved as reduce (LRSHE < '*').
-    Conflict between rule 108 and token LMDE resolved as reduce (LMDE < '*').
-    Conflict between rule 108 and token LDVE resolved as reduce (LDVE < '*').
-    Conflict between rule 108 and token LMLE resolved as reduce (LMLE < '*').
-    Conflict between rule 108 and token LME resolved as reduce (LME < '*').
     Conflict between rule 108 and token LPE resolved as reduce (LPE < '*').
+    Conflict between rule 108 and token LME resolved as reduce (LME < '*').
+    Conflict between rule 108 and token LMLE resolved as reduce (LMLE < '*').
+    Conflict between rule 108 and token LDVE resolved as reduce (LDVE < '*').
+    Conflict between rule 108 and token LMDE resolved as reduce (LMDE < '*').
+    Conflict between rule 108 and token LRSHE resolved as reduce (LRSHE < '*').
+    Conflict between rule 108 and token LLSHE resolved as reduce (LLSHE < '*').
+    Conflict between rule 108 and token LANDE resolved as reduce (LANDE < '*').
+    Conflict between rule 108 and token LXORE resolved as reduce (LXORE < '*').
+    Conflict between rule 108 and token LORE resolved as reduce (LORE < '*').
     Conflict between rule 108 and token '?' resolved as reduce ('?' < '*').
     Conflict between rule 108 and token LOROR resolved as reduce (LOROR < '*').
     Conflict between rule 108 and token LANDAND resolved as reduce (LANDAND < '*').
     Conflict between rule 108 and token '|' resolved as reduce ('|' < '*').
     Conflict between rule 108 and token '^' resolved as reduce ('^' < '*').
     Conflict between rule 108 and token '&' resolved as reduce ('&' < '*').
-    Conflict between rule 108 and token LNE resolved as reduce (LNE < '*').
     Conflict between rule 108 and token LEQ resolved as reduce (LEQ < '*').
+    Conflict between rule 108 and token LNE resolved as reduce (LNE < '*').
     Conflict between rule 108 and token '<' resolved as reduce ('<' < '*').
     Conflict between rule 108 and token '>' resolved as reduce ('>' < '*').
-    Conflict between rule 108 and token LGE resolved as reduce (LGE < '*').
     Conflict between rule 108 and token LLE resolved as reduce (LLE < '*').
-    Conflict between rule 108 and token LRSH resolved as reduce (LRSH < '*').
+    Conflict between rule 108 and token LGE resolved as reduce (LGE < '*').
     Conflict between rule 108 and token LLSH resolved as reduce (LLSH < '*').
+    Conflict between rule 108 and token LRSH resolved as reduce (LRSH < '*').
     Conflict between rule 108 and token '+' resolved as reduce ('+' < '*').
     Conflict between rule 108 and token '-' resolved as reduce ('-' < '*').
     Conflict between rule 108 and token '*' resolved as reduce (%left '*').
@@ -11538,11 +11537,11 @@ state 260
     Conflict between rule 108 and token '%' resolved as reduce (%left '%').
 
 
-state 261
+State 261
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
-  109     | expr '/' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', '*', '/', '%', ')', ']', '}']
+  109     | expr '/' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', '*', '/', '%', ')', ']', '}']
   110     | expr . '%' expr
   111     | expr . '+' expr
   112     | expr . '-' expr
@@ -11572,33 +11571,33 @@ state 261
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    $default  reduce using rule 109 (expr)
+    $výchozí  reduce using rule 109 (expr)
 
     Conflict between rule 109 and token '=' resolved as reduce ('=' < '/').
-    Conflict between rule 109 and token LORE resolved as reduce (LORE < '/').
-    Conflict between rule 109 and token LXORE resolved as reduce (LXORE < '/').
-    Conflict between rule 109 and token LANDE resolved as reduce (LANDE < '/').
-    Conflict between rule 109 and token LLSHE resolved as reduce (LLSHE < '/').
-    Conflict between rule 109 and token LRSHE resolved as reduce (LRSHE < '/').
-    Conflict between rule 109 and token LMDE resolved as reduce (LMDE < '/').
-    Conflict between rule 109 and token LDVE resolved as reduce (LDVE < '/').
-    Conflict between rule 109 and token LMLE resolved as reduce (LMLE < '/').
-    Conflict between rule 109 and token LME resolved as reduce (LME < '/').
     Conflict between rule 109 and token LPE resolved as reduce (LPE < '/').
+    Conflict between rule 109 and token LME resolved as reduce (LME < '/').
+    Conflict between rule 109 and token LMLE resolved as reduce (LMLE < '/').
+    Conflict between rule 109 and token LDVE resolved as reduce (LDVE < '/').
+    Conflict between rule 109 and token LMDE resolved as reduce (LMDE < '/').
+    Conflict between rule 109 and token LRSHE resolved as reduce (LRSHE < '/').
+    Conflict between rule 109 and token LLSHE resolved as reduce (LLSHE < '/').
+    Conflict between rule 109 and token LANDE resolved as reduce (LANDE < '/').
+    Conflict between rule 109 and token LXORE resolved as reduce (LXORE < '/').
+    Conflict between rule 109 and token LORE resolved as reduce (LORE < '/').
     Conflict between rule 109 and token '?' resolved as reduce ('?' < '/').
     Conflict between rule 109 and token LOROR resolved as reduce (LOROR < '/').
     Conflict between rule 109 and token LANDAND resolved as reduce (LANDAND < '/').
     Conflict between rule 109 and token '|' resolved as reduce ('|' < '/').
     Conflict between rule 109 and token '^' resolved as reduce ('^' < '/').
     Conflict between rule 109 and token '&' resolved as reduce ('&' < '/').
-    Conflict between rule 109 and token LNE resolved as reduce (LNE < '/').
     Conflict between rule 109 and token LEQ resolved as reduce (LEQ < '/').
+    Conflict between rule 109 and token LNE resolved as reduce (LNE < '/').
     Conflict between rule 109 and token '<' resolved as reduce ('<' < '/').
     Conflict between rule 109 and token '>' resolved as reduce ('>' < '/').
-    Conflict between rule 109 and token LGE resolved as reduce (LGE < '/').
     Conflict between rule 109 and token LLE resolved as reduce (LLE < '/').
-    Conflict between rule 109 and token LRSH resolved as reduce (LRSH < '/').
+    Conflict between rule 109 and token LGE resolved as reduce (LGE < '/').
     Conflict between rule 109 and token LLSH resolved as reduce (LLSH < '/').
+    Conflict between rule 109 and token LRSH resolved as reduce (LRSH < '/').
     Conflict between rule 109 and token '+' resolved as reduce ('+' < '/').
     Conflict between rule 109 and token '-' resolved as reduce ('-' < '/').
     Conflict between rule 109 and token '*' resolved as reduce (%left '*').
@@ -11606,12 +11605,12 @@ state 261
     Conflict between rule 109 and token '%' resolved as reduce (%left '%').
 
 
-state 262
+State 262
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
   110     | expr . '%' expr
-  110     | expr '%' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', ':', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', '*', '/', '%', ')', ']', '}']
+  110     | expr '%' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', ':', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', '*', '/', '%', ')', ']', '}']
   111     | expr . '+' expr
   112     | expr . '-' expr
   113     | expr . LRSH expr
@@ -11640,33 +11639,33 @@ state 262
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    $default  reduce using rule 110 (expr)
+    $výchozí  reduce using rule 110 (expr)
 
     Conflict between rule 110 and token '=' resolved as reduce ('=' < '%').
-    Conflict between rule 110 and token LORE resolved as reduce (LORE < '%').
-    Conflict between rule 110 and token LXORE resolved as reduce (LXORE < '%').
-    Conflict between rule 110 and token LANDE resolved as reduce (LANDE < '%').
-    Conflict between rule 110 and token LLSHE resolved as reduce (LLSHE < '%').
-    Conflict between rule 110 and token LRSHE resolved as reduce (LRSHE < '%').
-    Conflict between rule 110 and token LMDE resolved as reduce (LMDE < '%').
-    Conflict between rule 110 and token LDVE resolved as reduce (LDVE < '%').
-    Conflict between rule 110 and token LMLE resolved as reduce (LMLE < '%').
-    Conflict between rule 110 and token LME resolved as reduce (LME < '%').
     Conflict between rule 110 and token LPE resolved as reduce (LPE < '%').
+    Conflict between rule 110 and token LME resolved as reduce (LME < '%').
+    Conflict between rule 110 and token LMLE resolved as reduce (LMLE < '%').
+    Conflict between rule 110 and token LDVE resolved as reduce (LDVE < '%').
+    Conflict between rule 110 and token LMDE resolved as reduce (LMDE < '%').
+    Conflict between rule 110 and token LRSHE resolved as reduce (LRSHE < '%').
+    Conflict between rule 110 and token LLSHE resolved as reduce (LLSHE < '%').
+    Conflict between rule 110 and token LANDE resolved as reduce (LANDE < '%').
+    Conflict between rule 110 and token LXORE resolved as reduce (LXORE < '%').
+    Conflict between rule 110 and token LORE resolved as reduce (LORE < '%').
     Conflict between rule 110 and token '?' resolved as reduce ('?' < '%').
     Conflict between rule 110 and token LOROR resolved as reduce (LOROR < '%').
     Conflict between rule 110 and token LANDAND resolved as reduce (LANDAND < '%').
     Conflict between rule 110 and token '|' resolved as reduce ('|' < '%').
     Conflict between rule 110 and token '^' resolved as reduce ('^' < '%').
     Conflict between rule 110 and token '&' resolved as reduce ('&' < '%').
-    Conflict between rule 110 and token LNE resolved as reduce (LNE < '%').
     Conflict between rule 110 and token LEQ resolved as reduce (LEQ < '%').
+    Conflict between rule 110 and token LNE resolved as reduce (LNE < '%').
     Conflict between rule 110 and token '<' resolved as reduce ('<' < '%').
     Conflict between rule 110 and token '>' resolved as reduce ('>' < '%').
-    Conflict between rule 110 and token LGE resolved as reduce (LGE < '%').
     Conflict between rule 110 and token LLE resolved as reduce (LLE < '%').
-    Conflict between rule 110 and token LRSH resolved as reduce (LRSH < '%').
+    Conflict between rule 110 and token LGE resolved as reduce (LGE < '%').
     Conflict between rule 110 and token LLSH resolved as reduce (LLSH < '%').
+    Conflict between rule 110 and token LRSH resolved as reduce (LRSH < '%').
     Conflict between rule 110 and token '+' resolved as reduce ('+' < '%').
     Conflict between rule 110 and token '-' resolved as reduce ('-' < '%').
     Conflict between rule 110 and token '*' resolved as reduce (%left '*').
@@ -11674,23 +11673,30 @@ state 262
     Conflict between rule 110 and token '%' resolved as reduce (%left '%').
 
 
-state 263
+State 263
+
+  157 pexpr: pexpr LMG ltag .
+
+    $výchozí  reduce using rule 157 (pexpr)
+
+
+State 264
 
   158 pexpr: pexpr '.' ltag .
 
-    $default  reduce using rule 158 (pexpr)
+    $výchozí  reduce using rule 158 (pexpr)
 
 
-state 264
+State 265
 
   106 cexpr: cexpr . ',' cexpr
   156 pexpr: pexpr '[' cexpr . ']'
 
-    ','  shift, and go to state 226
-    ']'  shift, and go to state 299
+    ','  posunout a přejít do stavu 226
+    ']'  posunout a přejít do stavu 299
 
 
-state 265
+State 266
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -11724,82 +11730,75 @@ state 265
   137     | expr . LORE expr
   178 elist: expr .  [',', ')']
 
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 178 (elist)
+    $výchozí  reduce using rule 178 (elist)
 
 
-state 266
+State 267
 
   155 pexpr: pexpr '(' zelist . ')'
 
-    ')'  shift, and go to state 300
+    ')'  posunout a přejít do stavu 300
 
 
-state 267
+State 268
 
   177 zelist: elist .  [')']
   179 elist: elist . ',' elist
 
-    ','  shift, and go to state 301
+    ','  posunout a přejít do stavu 301
 
-    $default  reduce using rule 177 (zelist)
-
-
-state 268
-
-  157 pexpr: pexpr LMG ltag .
-
-    $default  reduce using rule 157 (pexpr)
+    $výchozí  reduce using rule 177 (zelist)
 
 
-state 269
+State 269
 
    67 arglist: '.' '.' '.' .
 
-    $default  reduce using rule 67 (arglist)
+    $výchozí  reduce using rule 67 (arglist)
 
 
-state 270
+State 270
 
    68 arglist: arglist . ',' arglist
    68        | arglist ',' arglist .  [',', ')']
 
-    $default  reduce using rule 68 (arglist)
+    $výchozí  reduce using rule 68 (arglist)
 
     Conflict between rule 68 and token ',' resolved as reduce (%left ',').
 
 
-state 271
+State 271
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -11827,52 +11826,52 @@ state 271
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'        shift, and go to state 198
-    '['        shift, and go to state 199
-    '('        shift, and go to state 200
-    LNAME      shift, and go to state 36
-    LTYPE      shift, and go to state 37
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
+    '*'        posunout a přejít do stavu 198
+    '['        posunout a přejít do stavu 199
+    '('        posunout a přejít do stavu 200
+    LNAME      posunout a přejít do stavu 36
+    LTYPE      posunout a přejít do stavu 37
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
 
-    $default  reduce using rule 41 (abdecor1)
+    $výchozí  reduce using rule 41 (abdecor1)
 
-    xdecor    go to state 86
-    xdecor2   go to state 50
-    abdecor1  go to state 302
-    abdecor2  go to state 204
-    abdecor3  go to state 205
-    gname     go to state 87
-    tag       go to state 51
-    ltag      go to state 52
+    xdecor    přejít do stavu 86
+    xdecor2   přejít do stavu 50
+    abdecor1  přejít do stavu 302
+    abdecor2  přejít do stavu 204
+    abdecor3  přejít do stavu 205
+    gname     přejít do stavu 87
+    tag       přejít do stavu 51
+    ltag      přejít do stavu 52
 
 
-state 272
+State 272
 
    48 abdecor3: '[' zexpr . ']'
 
-    ']'  shift, and go to state 303
+    ']'  posunout a přejít do stavu 303
 
 
-state 273
+State 273
 
    47 abdecor3: '(' ')' .
 
-    $default  reduce using rule 47 (abdecor3)
+    $výchozí  reduce using rule 47 (abdecor3)
 
 
-state 274
+State 274
 
    49 abdecor3: '(' abdecor1 . ')'
 
-    ')'  shift, and go to state 304
+    ')'  posunout a přejít do stavu 304
 
 
-state 275
+State 275
 
    46 abdecor2: abdecor2 '[' . zexpr ']'
-  102 zexpr: .  [']']
+  102 zexpr: . %empty  [']']
   103      | . lexpr
   104 lexpr: . expr
   107 expr: . xuexpr
@@ -11946,46 +11945,46 @@ state 275
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 102 (zexpr)
+    $výchozí  reduce using rule 102 (zexpr)
 
-    zexpr    go to state 305
-    lexpr    go to state 116
-    expr     go to state 117
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    zexpr    přejít do stavu 305
+    lexpr    přejít do stavu 116
+    expr     přejít do stavu 117
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 276
+State 276
 
    45 abdecor2: abdecor2 '(' . zarglist ')'
-   62 zarglist: .  [')']
+   62 zarglist: . %empty  [')']
    63         | . arglist
    64 arglist: . name
    65        | . tlist abdecor
@@ -12036,69 +12035,69 @@ state 276
   242      | . LRESTRICT
   243 name: . LNAME
 
-    '.'        shift, and go to state 124
-    LNAME      shift, and go to state 100
-    LTYPE      shift, and go to state 3
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
+    '.'        posunout a přejít do stavu 124
+    LNAME      posunout a přejít do stavu 100
+    LTYPE      posunout a přejít do stavu 3
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
 
-    $default  reduce using rule 62 (zarglist)
+    $výchozí  reduce using rule 62 (zarglist)
 
-    zarglist  go to state 306
-    arglist   go to state 126
-    types     go to state 79
-    tlist     go to state 127
-    complex   go to state 30
-    gcnlist   go to state 31
-    gcname    go to state 32
-    tname     go to state 33
-    cname     go to state 34
-    gname     go to state 35
-    name      go to state 128
+    zarglist  přejít do stavu 306
+    arglist   přejít do stavu 126
+    types     přejít do stavu 79
+    tlist     přejít do stavu 127
+    complex   přejít do stavu 30
+    gcnlist   přejít do stavu 31
+    gcname    přejít do stavu 32
+    tname     přejít do stavu 33
+    cname     přejít do stavu 34
+    gname     přejít do stavu 35
+    name      přejít do stavu 128
 
 
-state 277
+State 277
 
    31 edecl: edecl tlist $@6 zedlist . ';'
 
-    ';'  shift, and go to state 307
+    ';'  posunout a přejít do stavu 307
 
 
-state 278
+State 278
 
    38 edecor: ':' lexpr .
 
-    $default  reduce using rule 38 (edecor)
+    $výchozí  reduce using rule 38 (edecor)
 
 
-state 279
+State 279
 
    29 edecl: tlist $@5 zedlist ';' .
 
-    $default  reduce using rule 29 (edecl)
+    $výchozí  reduce using rule 29 (edecl)
 
 
-state 280
+State 280
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -12116,21 +12115,21 @@ state 280
   245 ltag: . LNAME
   246     | . LTYPE
 
-    ':'    shift, and go to state 207
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    ':'    posunout a přejít do stavu 207
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdecor   go to state 208
-    xdecor2  go to state 50
-    edlist   go to state 308
-    edecor   go to state 211
-    tag      go to state 212
-    ltag     go to state 52
+    xdecor   přejít do stavu 208
+    xdecor2  přejít do stavu 50
+    edlist   přejít do stavu 308
+    edecor   přejít do stavu 211
+    tag      přejít do stavu 212
+    ltag     přejít do stavu 52
 
 
-state 281
+State 281
 
    37 edecor: tag ':' . lexpr
   104 lexpr: . expr
@@ -12205,47 +12204,47 @@ state 281
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    lexpr    go to state 309
-    expr     go to state 117
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    lexpr    přejít do stavu 309
+    expr     přejít do stavu 117
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 282
+State 282
 
   205 complex: LENUM ltag $@12 '{' $@13 enum '}' .
 
-    $default  reduce using rule 205 (complex)
+    $výchozí  reduce using rule 205 (complex)
 
 
-state 283
+State 283
 
    18 adecl: . ctlist ';'
    19      | . ctlist adlist ';'
@@ -12261,11 +12260,11 @@ state 283
    79      | . ulstmnt
    80      | . labels ulstmnt
    83 ulstmnt: . zcexpr ';'
-   84 $@7: .  ['{']
+   84 $@7: . %empty  ['{']
    85 ulstmnt: . $@7 block
    86        | . LIF '(' cexpr ')' stmnt
    87        | . LIF '(' cexpr ')' stmnt LELSE stmnt
-   88 $@8: .  [LFOR]
+   88 $@8: . %empty  [LFOR]
    89 ulstmnt: . $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    90        | . LWHILE '(' cexpr ')' stmnt
    91        | . LDO stmnt LWHILE '(' cexpr ')' ';'
@@ -12277,7 +12276,7 @@ state 283
    97        | . LUSED '(' zelist ')' ';'
    98        | . LPREFETCH '(' zelist ')' ';'
    99        | . LSET '(' zelist ')' ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -12394,105 +12393,105 @@ state 283
   242      | . LRESTRICT
   243 name: . LNAME
 
-    error      shift, and go to state 310
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 311
-    LTYPE      shift, and go to state 3
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LAUTO      shift, and go to state 4
-    LBREAK     shift, and go to state 312
-    LCASE      shift, and go to state 313
-    LCHAR      shift, and go to state 5
-    LCONTINUE  shift, and go to state 314
-    LDEFAULT   shift, and go to state 315
-    LDO        shift, and go to state 316
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LGOTO      shift, and go to state 317
-    LIF        shift, and go to state 318
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LPREFETCH  shift, and go to state 319
-    LREGISTER  shift, and go to state 11
-    LRETURN    shift, and go to state 320
-    LSHORT     shift, and go to state 12
-    LSIZEOF    shift, and go to state 111
-    LUSED      shift, and go to state 321
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LSWITCH    shift, and go to state 322
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LWHILE     shift, and go to state 323
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LSET       shift, and go to state 324
-    LSIGNOF    shift, and go to state 112
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
-    '}'        shift, and go to state 325
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    error      posunout a přejít do stavu 310
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 311
+    LTYPE      posunout a přejít do stavu 3
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LAUTO      posunout a přejít do stavu 4
+    LBREAK     posunout a přejít do stavu 312
+    LCASE      posunout a přejít do stavu 313
+    LCHAR      posunout a přejít do stavu 5
+    LCONTINUE  posunout a přejít do stavu 314
+    LDEFAULT   posunout a přejít do stavu 315
+    LDO        posunout a přejít do stavu 316
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LGOTO      posunout a přejít do stavu 317
+    LIF        posunout a přejít do stavu 318
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LPREFETCH  posunout a přejít do stavu 319
+    LREGISTER  posunout a přejít do stavu 11
+    LRETURN    posunout a přejít do stavu 320
+    LSHORT     posunout a přejít do stavu 12
+    LSIZEOF    posunout a přejít do stavu 111
+    LUSED      posunout a přejít do stavu 321
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LSWITCH    posunout a přejít do stavu 322
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LWHILE     posunout a přejít do stavu 323
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LSET       posunout a přejít do stavu 324
+    LSIGNOF    posunout a přejít do stavu 112
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
+    '}'        posunout a přejít do stavu 325
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
     ';'   reduce using rule 100 (zcexpr)
     LFOR  reduce using rule 88 ($@8)
     '{'   reduce using rule 84 ($@7)
 
-    adecl    go to state 326
-    labels   go to state 327
-    label    go to state 328
-    stmnt    go to state 329
-    ulstmnt  go to state 330
-    $@7      go to state 331
-    $@8      go to state 332
-    zcexpr   go to state 333
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    types    go to state 28
-    ctlist   go to state 335
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
-    name     go to state 123
+    adecl    přejít do stavu 326
+    labels   přejít do stavu 327
+    label    přejít do stavu 328
+    stmnt    přejít do stavu 329
+    ulstmnt  přejít do stavu 330
+    $@7      přejít do stavu 331
+    $@8      přejít do stavu 332
+    zcexpr   přejít do stavu 333
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    types    přejít do stavu 28
+    ctlist   přejít do stavu 335
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
+    name     přejít do stavu 123
 
 
-state 284
+State 284
 
    25 pdecl: pdecl ctlist pdlist ';' .
 
-    $default  reduce using rule 25 (pdecl)
+    $výchozí  reduce using rule 25 (pdecl)
 
 
-state 285
+State 285
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -12507,84 +12506,84 @@ state 285
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdecor   go to state 218
-    xdecor2  go to state 50
-    pdlist   go to state 336
-    tag      go to state 51
-    ltag     go to state 52
+    xdecor   přejít do stavu 218
+    xdecor2  přejít do stavu 50
+    pdlist   přejít do stavu 336
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 286
+State 286
 
    53 qual: '.' ltag .
 
-    $default  reduce using rule 53 (qual)
+    $výchozí  reduce using rule 53 (qual)
 
 
-state 287
+State 287
 
    52 qual: '[' lexpr . ']'
 
-    ']'  shift, and go to state 337
+    ']'  posunout a přejít do stavu 337
 
 
-state 288
+State 288
 
    55 qlist: init ',' .
 
-    $default  reduce using rule 55 (qlist)
+    $výchozí  reduce using rule 55 (qlist)
 
 
-state 289
+State 289
 
    54 qual: qual '=' .
 
-    $default  reduce using rule 54 (qual)
+    $výchozí  reduce using rule 54 (qual)
 
 
-state 290
+State 290
 
    56 qlist: qlist init . ','
    61 ilist: qlist init .  ['}']
 
-    ','  shift, and go to state 338
+    ','  posunout a přejít do stavu 338
 
-    $default  reduce using rule 61 (ilist)
+    $výchozí  reduce using rule 61 (ilist)
 
 
-state 291
+State 291
 
    54 qual: qual . '='
-   58 qlist: qlist qual .  ['&', '+', '-', '*', '.', '[', '(', LPP, LMM, LNAME, LFCONST, LDCONST, LCONST, LLCONST, LUCONST, LULCONST, LVLCONST, LUVLCONST, LSTRING, LLSTRING, LSIZEOF, LSIGNOF, '{', '}', '!', '~']
+   58 qlist: qlist qual .  ['&', '+', '-', '*', LMM, LPP, '.', '[', '(', LNAME, LFCONST, LDCONST, LCONST, LLCONST, LUCONST, LULCONST, LVLCONST, LUVLCONST, LSTRING, LLSTRING, LSIZEOF, LSIGNOF, '{', '}', '!', '~']
 
-    '='  shift, and go to state 289
+    '='  posunout a přejít do stavu 289
 
-    $default  reduce using rule 58 (qlist)
+    $výchozí  reduce using rule 58 (qlist)
 
 
-state 292
+State 292
 
    51 init: '{' ilist '}' .
 
-    $default  reduce using rule 51 (init)
+    $výchozí  reduce using rule 51 (init)
 
 
-state 293
+State 293
 
   106 cexpr: cexpr . ',' cexpr
   106      | cexpr ',' cexpr .  [';', ',', ':', ')', ']']
 
-    $default  reduce using rule 106 (cexpr)
+    $výchozí  reduce using rule 106 (cexpr)
 
     Conflict between rule 106 and token ',' resolved as reduce (%left ',').
 
 
-state 294
+State 294
 
    41 abdecor1: . '*' zgnlist
    41         | '*' zgnlist .  [')']
@@ -12602,22 +12601,22 @@ state 294
   241      | . LVOLATILE
   242      | . LRESTRICT
 
-    '*'        shift, and go to state 228
-    '['        shift, and go to state 199
-    '('        shift, and go to state 229
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LRESTRICT  shift, and go to state 24
+    '*'        posunout a přejít do stavu 228
+    '['        posunout a přejít do stavu 199
+    '('        posunout a přejít do stavu 229
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LRESTRICT  posunout a přejít do stavu 24
 
-    $default  reduce using rule 41 (abdecor1)
+    $výchozí  reduce using rule 41 (abdecor1)
 
-    abdecor1  go to state 302
-    abdecor2  go to state 204
-    abdecor3  go to state 205
-    gname     go to state 87
+    abdecor1  přejít do stavu 302
+    abdecor2  přejít do stavu 204
+    abdecor3  přejít do stavu 205
+    gname     přejít do stavu 87
 
 
-state 295
+State 295
 
   138 xuexpr: . uexpr
   139       | . '(' tlist abdecor ')' xuexpr
@@ -12661,53 +12660,53 @@ state 295
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '{'        shift, and go to state 339
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '{'        posunout a přejít do stavu 339
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    xuexpr   go to state 340
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    xuexpr   přejít do stavu 340
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 296
+State 296
 
   153 pexpr: LSIZEOF '(' tlist abdecor . ')'
 
-    ')'  shift, and go to state 341
+    ')'  posunout a přejít do stavu 341
 
 
-state 297
+State 297
 
   154 pexpr: LSIGNOF '(' tlist abdecor . ')'
 
-    ')'  shift, and go to state 342
+    ')'  posunout a přejít do stavu 342
 
 
-state 298
+State 298
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -12781,53 +12780,53 @@ state 298
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 343
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 343
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 299
+State 299
 
   156 pexpr: pexpr '[' cexpr ']' .
 
-    $default  reduce using rule 156 (pexpr)
+    $výchozí  reduce using rule 156 (pexpr)
 
 
-state 300
+State 300
 
   155 pexpr: pexpr '(' zelist ')' .
 
-    $default  reduce using rule 155 (pexpr)
+    $výchozí  reduce using rule 155 (pexpr)
 
 
-state 301
+State 301
 
   107 expr: . xuexpr
   108     | . expr '*' expr
@@ -12903,123 +12902,123 @@ state 301
   179      | elist ',' . elist
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 265
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    elist    go to state 344
-    name     go to state 123
+    expr     přejít do stavu 266
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    elist    přejít do stavu 344
+    name     přejít do stavu 123
 
 
-state 302
+State 302
 
    42 abdecor1: '*' zgnlist abdecor1 .
 
-    $default  reduce using rule 42 (abdecor1)
+    $výchozí  reduce using rule 42 (abdecor1)
 
 
-state 303
+State 303
 
    48 abdecor3: '[' zexpr ']' .
 
-    $default  reduce using rule 48 (abdecor3)
+    $výchozí  reduce using rule 48 (abdecor3)
 
 
-state 304
+State 304
 
    49 abdecor3: '(' abdecor1 ')' .
 
-    $default  reduce using rule 49 (abdecor3)
+    $výchozí  reduce using rule 49 (abdecor3)
 
 
-state 305
+State 305
 
    46 abdecor2: abdecor2 '[' zexpr . ']'
 
-    ']'  shift, and go to state 345
+    ']'  posunout a přejít do stavu 345
 
 
-state 306
+State 306
 
    45 abdecor2: abdecor2 '(' zarglist . ')'
 
-    ')'  shift, and go to state 346
+    ')'  posunout a přejít do stavu 346
 
 
-state 307
+State 307
 
    31 edecl: edecl tlist $@6 zedlist ';' .
 
-    $default  reduce using rule 31 (edecl)
+    $výchozí  reduce using rule 31 (edecl)
 
 
-state 308
+State 308
 
    35 edlist: edlist . ',' edlist
    35       | edlist ',' edlist .  [';', ',']
 
-    $default  reduce using rule 35 (edlist)
+    $výchozí  reduce using rule 35 (edlist)
 
     Conflict between rule 35 and token ',' resolved as reduce (%left ',').
 
 
-state 309
+State 309
 
    37 edecor: tag ':' lexpr .
 
-    $default  reduce using rule 37 (edecor)
+    $výchozí  reduce using rule 37 (edecor)
 
 
-state 310
+State 310
 
    78 stmnt: error . ';'
 
-    ';'  shift, and go to state 347
+    ';'  posunout a přejít do stavu 347
 
 
-state 311
+State 311
 
    77 label: LNAME . ':'
-  243 name: LNAME .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, '?', LOROR, LANDAND, '|', '^', '&', LNE, LEQ, '<', '>', LGE, LLE, LRSH, LLSH, '+', '-', '*', '/', '%', '.', '[', '(', LMG, LPP, LMM]
+  243 name: LNAME .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, '?', LOROR, LANDAND, '|', '^', '&', LEQ, LNE, '<', '>', LLE, LGE, LLSH, LRSH, '+', '-', '*', '/', '%', LMM, LPP, LMG, '.', '[', '(']
 
-    ':'  shift, and go to state 348
+    ':'  posunout a přejít do stavu 348
 
-    $default  reduce using rule 243 (name)
+    $výchozí  reduce using rule 243 (name)
 
 
-state 312
+State 312
 
    94 ulstmnt: LBREAK . ';'
 
-    ';'  shift, and go to state 349
+    ';'  posunout a přejít do stavu 349
 
 
-state 313
+State 313
 
    75 label: LCASE . expr ':'
   107 expr: . xuexpr
@@ -13093,53 +13092,53 @@ state 313
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    expr     go to state 350
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    expr     přejít do stavu 350
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 314
+State 314
 
    95 ulstmnt: LCONTINUE . ';'
 
-    ';'  shift, and go to state 351
+    ';'  posunout a přejít do stavu 351
 
 
-state 315
+State 315
 
    76 label: LDEFAULT . ':'
 
-    ':'  shift, and go to state 352
+    ':'  posunout a přejít do stavu 352
 
 
-state 316
+State 316
 
    73 labels: . label
    74       | . labels label
@@ -13150,11 +13149,11 @@ state 316
    79      | . ulstmnt
    80      | . labels ulstmnt
    83 ulstmnt: . zcexpr ';'
-   84 $@7: .  ['{']
+   84 $@7: . %empty  ['{']
    85 ulstmnt: . $@7 block
    86        | . LIF '(' cexpr ')' stmnt
    87        | . LIF '(' cexpr ')' stmnt LELSE stmnt
-   88 $@8: .  [LFOR]
+   88 $@8: . %empty  [LFOR]
    89 ulstmnt: . $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    90        | . LWHILE '(' cexpr ')' stmnt
    91        | . LDO stmnt LWHILE '(' cexpr ')' ';'
@@ -13167,7 +13166,7 @@ state 316
    97        | . LUSED '(' zelist ')' ';'
    98        | . LPREFETCH '(' zelist ')' ';'
    99        | . LSET '(' zelist ')' ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -13242,95 +13241,95 @@ state 316
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    error      shift, and go to state 310
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 311
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LBREAK     shift, and go to state 312
-    LCASE      shift, and go to state 313
-    LCONTINUE  shift, and go to state 314
-    LDEFAULT   shift, and go to state 315
-    LDO        shift, and go to state 316
-    LGOTO      shift, and go to state 317
-    LIF        shift, and go to state 318
-    LPREFETCH  shift, and go to state 319
-    LRETURN    shift, and go to state 320
-    LSIZEOF    shift, and go to state 111
-    LUSED      shift, and go to state 321
-    LSWITCH    shift, and go to state 322
-    LWHILE     shift, and go to state 323
-    LSET       shift, and go to state 324
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    error      posunout a přejít do stavu 310
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 311
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LBREAK     posunout a přejít do stavu 312
+    LCASE      posunout a přejít do stavu 313
+    LCONTINUE  posunout a přejít do stavu 314
+    LDEFAULT   posunout a přejít do stavu 315
+    LDO        posunout a přejít do stavu 316
+    LGOTO      posunout a přejít do stavu 317
+    LIF        posunout a přejít do stavu 318
+    LPREFETCH  posunout a přejít do stavu 319
+    LRETURN    posunout a přejít do stavu 320
+    LSIZEOF    posunout a přejít do stavu 111
+    LUSED      posunout a přejít do stavu 321
+    LSWITCH    posunout a přejít do stavu 322
+    LWHILE     posunout a přejít do stavu 323
+    LSET       posunout a přejít do stavu 324
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
     ';'   reduce using rule 100 (zcexpr)
     LFOR  reduce using rule 88 ($@8)
     '{'   reduce using rule 84 ($@7)
 
-    labels   go to state 327
-    label    go to state 328
-    stmnt    go to state 353
-    ulstmnt  go to state 330
-    $@7      go to state 331
-    $@8      go to state 332
-    zcexpr   go to state 333
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    labels   přejít do stavu 327
+    label    přejít do stavu 328
+    stmnt    přejít do stavu 353
+    ulstmnt  přejít do stavu 330
+    $@7      přejít do stavu 331
+    $@8      přejít do stavu 332
+    zcexpr   přejít do stavu 333
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 317
+State 317
 
    96 ulstmnt: LGOTO . ltag ';'
   245 ltag: . LNAME
   246     | . LTYPE
 
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    ltag  go to state 354
+    ltag  přejít do stavu 354
 
 
-state 318
+State 318
 
    86 ulstmnt: LIF . '(' cexpr ')' stmnt
    87        | LIF . '(' cexpr ')' stmnt LELSE stmnt
 
-    '('  shift, and go to state 355
+    '('  posunout a přejít do stavu 355
 
 
-state 319
+State 319
 
    98 ulstmnt: LPREFETCH . '(' zelist ')' ';'
 
-    '('  shift, and go to state 356
+    '('  posunout a přejít do stavu 356
 
 
-state 320
+State 320
 
    92 ulstmnt: LRETURN . zcexpr ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -13405,85 +13404,85 @@ state 320
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 100 (zcexpr)
+    $výchozí  reduce using rule 100 (zcexpr)
 
-    zcexpr   go to state 357
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    zcexpr   přejít do stavu 357
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 321
+State 321
 
    97 ulstmnt: LUSED . '(' zelist ')' ';'
 
-    '('  shift, and go to state 358
+    '('  posunout a přejít do stavu 358
 
 
-state 322
+State 322
 
    93 ulstmnt: LSWITCH . '(' cexpr ')' stmnt
 
-    '('  shift, and go to state 359
+    '('  posunout a přejít do stavu 359
 
 
-state 323
+State 323
 
    90 ulstmnt: LWHILE . '(' cexpr ')' stmnt
 
-    '('  shift, and go to state 360
+    '('  posunout a přejít do stavu 360
 
 
-state 324
+State 324
 
    99 ulstmnt: LSET . '(' zelist ')' ';'
 
-    '('  shift, and go to state 361
+    '('  posunout a přejít do stavu 361
 
 
-state 325
+State 325
 
    69 block: '{' slist '}' .
 
-    $default  reduce using rule 69 (block)
+    $výchozí  reduce using rule 69 (block)
 
 
-state 326
+State 326
 
    71 slist: slist adecl .
 
-    $default  reduce using rule 71 (slist)
+    $výchozí  reduce using rule 71 (slist)
 
 
-state 327
+State 327
 
    74 labels: labels . label
    75 label: . LCASE expr ':'
@@ -13491,11 +13490,11 @@ state 327
    77      | . LNAME ':'
    80 stmnt: labels . ulstmnt
    83 ulstmnt: . zcexpr ';'
-   84 $@7: .  ['{']
+   84 $@7: . %empty  ['{']
    85 ulstmnt: . $@7 block
    86        | . LIF '(' cexpr ')' stmnt
    87        | . LIF '(' cexpr ')' stmnt LELSE stmnt
-   88 $@8: .  [LFOR]
+   88 $@8: . %empty  [LFOR]
    89 ulstmnt: . $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    90        | . LWHILE '(' cexpr ')' stmnt
    91        | . LDO stmnt LWHILE '(' cexpr ')' ';'
@@ -13507,7 +13506,7 @@ state 327
    97        | . LUSED '(' zelist ')' ';'
    98        | . LPREFETCH '(' zelist ')' ';'
    99        | . LSET '(' zelist ')' ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -13582,117 +13581,117 @@ state 327
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 311
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LBREAK     shift, and go to state 312
-    LCASE      shift, and go to state 313
-    LCONTINUE  shift, and go to state 314
-    LDEFAULT   shift, and go to state 315
-    LDO        shift, and go to state 316
-    LGOTO      shift, and go to state 317
-    LIF        shift, and go to state 318
-    LPREFETCH  shift, and go to state 319
-    LRETURN    shift, and go to state 320
-    LSIZEOF    shift, and go to state 111
-    LUSED      shift, and go to state 321
-    LSWITCH    shift, and go to state 322
-    LWHILE     shift, and go to state 323
-    LSET       shift, and go to state 324
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 311
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LBREAK     posunout a přejít do stavu 312
+    LCASE      posunout a přejít do stavu 313
+    LCONTINUE  posunout a přejít do stavu 314
+    LDEFAULT   posunout a přejít do stavu 315
+    LDO        posunout a přejít do stavu 316
+    LGOTO      posunout a přejít do stavu 317
+    LIF        posunout a přejít do stavu 318
+    LPREFETCH  posunout a přejít do stavu 319
+    LRETURN    posunout a přejít do stavu 320
+    LSIZEOF    posunout a přejít do stavu 111
+    LUSED      posunout a přejít do stavu 321
+    LSWITCH    posunout a přejít do stavu 322
+    LWHILE     posunout a přejít do stavu 323
+    LSET       posunout a přejít do stavu 324
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    ';'       reduce using rule 100 (zcexpr)
-    LFOR      reduce using rule 88 ($@8)
-    $default  reduce using rule 84 ($@7)
+    ';'         reduce using rule 100 (zcexpr)
+    LFOR        reduce using rule 88 ($@8)
+    $výchozí  reduce using rule 84 ($@7)
 
-    label    go to state 362
-    ulstmnt  go to state 363
-    $@7      go to state 331
-    $@8      go to state 332
-    zcexpr   go to state 333
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    label    přejít do stavu 362
+    ulstmnt  přejít do stavu 363
+    $@7      přejít do stavu 331
+    $@8      přejít do stavu 332
+    zcexpr   přejít do stavu 333
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 328
+State 328
 
    73 labels: label .
 
-    $default  reduce using rule 73 (labels)
+    $výchozí  reduce using rule 73 (labels)
 
 
-state 329
+State 329
 
    72 slist: slist stmnt .
 
-    $default  reduce using rule 72 (slist)
+    $výchozí  reduce using rule 72 (slist)
 
 
-state 330
+State 330
 
    79 stmnt: ulstmnt .
 
-    $default  reduce using rule 79 (stmnt)
+    $výchozí  reduce using rule 79 (stmnt)
 
 
-state 331
+State 331
 
    69 block: . '{' slist '}'
    85 ulstmnt: $@7 . block
 
-    '{'  shift, and go to state 216
+    '{'  posunout a přejít do stavu 216
 
-    block  go to state 364
+    block  přejít do stavu 364
 
 
-state 332
+State 332
 
    89 ulstmnt: $@8 . LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
 
-    LFOR  shift, and go to state 365
+    LFOR  posunout a přejít do stavu 365
 
 
-state 333
+State 333
 
    83 ulstmnt: zcexpr . ';'
 
-    ';'  shift, and go to state 366
+    ';'  posunout a přejít do stavu 366
 
 
-state 334
+State 334
 
   101 zcexpr: cexpr .  [';', ')']
   106 cexpr: cexpr . ',' cexpr
 
-    ','  shift, and go to state 226
+    ','  posunout a přejít do stavu 226
 
-    $default  reduce using rule 101 (zcexpr)
+    $výchozí  reduce using rule 101 (zcexpr)
 
 
-state 335
+State 335
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -13709,44 +13708,44 @@ state 335
   245 ltag: . LNAME
   246     | . LTYPE
 
-    ';'    shift, and go to state 367
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    ';'    posunout a přejít do stavu 367
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdecor   go to state 368
-    xdecor2  go to state 50
-    adlist   go to state 369
-    tag      go to state 51
-    ltag     go to state 52
+    xdecor   přejít do stavu 368
+    xdecor2  přejít do stavu 50
+    adlist   přejít do stavu 369
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 336
+State 336
 
    27 pdlist: pdlist . ',' pdlist
    27       | pdlist ',' pdlist .  [';', ',']
 
-    $default  reduce using rule 27 (pdlist)
+    $výchozí  reduce using rule 27 (pdlist)
 
     Conflict between rule 27 and token ',' resolved as reduce (%left ',').
 
 
-state 337
+State 337
 
    52 qual: '[' lexpr ']' .
 
-    $default  reduce using rule 52 (qual)
+    $výchozí  reduce using rule 52 (qual)
 
 
-state 338
+State 338
 
    56 qlist: qlist init ',' .
 
-    $default  reduce using rule 56 (qlist)
+    $výchozí  reduce using rule 56 (qlist)
 
 
-state 339
+State 339
 
    50 init: . expr
    51     | . '{' ilist '}'
@@ -13832,67 +13831,67 @@ state 339
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '.'        shift, and go to state 220
-    '['        shift, and go to state 221
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '{'        shift, and go to state 138
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '.'        posunout a přejít do stavu 220
+    '['        posunout a přejít do stavu 221
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '{'        posunout a přejít do stavu 138
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    init     go to state 222
-    qual     go to state 223
-    qlist    go to state 224
-    ilist    go to state 370
-    expr     go to state 140
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    init     přejít do stavu 222
+    qual     přejít do stavu 223
+    qlist    přejít do stavu 224
+    ilist    přejít do stavu 370
+    expr     přejít do stavu 140
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 340
+State 340
 
   139 xuexpr: '(' tlist abdecor ')' xuexpr .
 
-    $default  reduce using rule 139 (xuexpr)
+    $výchozí  reduce using rule 139 (xuexpr)
 
 
-state 341
+State 341
 
   153 pexpr: LSIZEOF '(' tlist abdecor ')' .
 
-    $default  reduce using rule 153 (pexpr)
+    $výchozí  reduce using rule 153 (pexpr)
 
 
-state 342
+State 342
 
   154 pexpr: LSIGNOF '(' tlist abdecor ')' .
 
-    $default  reduce using rule 154 (pexpr)
+    $výchozí  reduce using rule 154 (pexpr)
 
 
-state 343
+State 343
 
   108 expr: expr . '*' expr
   109     | expr . '/' expr
@@ -13913,7 +13912,7 @@ state 343
   124     | expr . LANDAND expr
   125     | expr . LOROR expr
   126     | expr . '?' cexpr ':' expr
-  126     | expr '?' cexpr ':' expr .  [';', ',', '=', LORE, LXORE, LANDE, LLSHE, LRSHE, LMDE, LDVE, LMLE, LME, LPE, ':', ')', ']', '}']
+  126     | expr '?' cexpr ':' expr .  [';', ',', '=', LPE, LME, LMLE, LDVE, LMDE, LRSHE, LLSHE, LANDE, LXORE, LORE, ':', ')', ']', '}']
   127     | expr . '=' expr
   128     | expr . LPE expr
   129     | expr . LME expr
@@ -13926,53 +13925,53 @@ state 343
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '?'      shift, and go to state 168
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '?'      posunout a přejít do stavu 168
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
-    $default  reduce using rule 126 (expr)
+    $výchozí  reduce using rule 126 (expr)
 
     Conflict between rule 126 and token '=' resolved as reduce ('=' < ':').
-    Conflict between rule 126 and token LORE resolved as reduce (LORE < ':').
-    Conflict between rule 126 and token LXORE resolved as reduce (LXORE < ':').
-    Conflict between rule 126 and token LANDE resolved as reduce (LANDE < ':').
-    Conflict between rule 126 and token LLSHE resolved as reduce (LLSHE < ':').
-    Conflict between rule 126 and token LRSHE resolved as reduce (LRSHE < ':').
-    Conflict between rule 126 and token LMDE resolved as reduce (LMDE < ':').
-    Conflict between rule 126 and token LDVE resolved as reduce (LDVE < ':').
-    Conflict between rule 126 and token LMLE resolved as reduce (LMLE < ':').
-    Conflict between rule 126 and token LME resolved as reduce (LME < ':').
     Conflict between rule 126 and token LPE resolved as reduce (LPE < ':').
+    Conflict between rule 126 and token LME resolved as reduce (LME < ':').
+    Conflict between rule 126 and token LMLE resolved as reduce (LMLE < ':').
+    Conflict between rule 126 and token LDVE resolved as reduce (LDVE < ':').
+    Conflict between rule 126 and token LMDE resolved as reduce (LMDE < ':').
+    Conflict between rule 126 and token LRSHE resolved as reduce (LRSHE < ':').
+    Conflict between rule 126 and token LLSHE resolved as reduce (LLSHE < ':').
+    Conflict between rule 126 and token LANDE resolved as reduce (LANDE < ':').
+    Conflict between rule 126 and token LXORE resolved as reduce (LXORE < ':').
+    Conflict between rule 126 and token LORE resolved as reduce (LORE < ':').
     Conflict between rule 126 and token '?' resolved as shift (%right '?').
     Conflict between rule 126 and token LOROR resolved as shift (':' < LOROR).
     Conflict between rule 126 and token LANDAND resolved as shift (':' < LANDAND).
     Conflict between rule 126 and token '|' resolved as shift (':' < '|').
     Conflict between rule 126 and token '^' resolved as shift (':' < '^').
     Conflict between rule 126 and token '&' resolved as shift (':' < '&').
-    Conflict between rule 126 and token LNE resolved as shift (':' < LNE).
     Conflict between rule 126 and token LEQ resolved as shift (':' < LEQ).
+    Conflict between rule 126 and token LNE resolved as shift (':' < LNE).
     Conflict between rule 126 and token '<' resolved as shift (':' < '<').
     Conflict between rule 126 and token '>' resolved as shift (':' < '>').
-    Conflict between rule 126 and token LGE resolved as shift (':' < LGE).
     Conflict between rule 126 and token LLE resolved as shift (':' < LLE).
-    Conflict between rule 126 and token LRSH resolved as shift (':' < LRSH).
+    Conflict between rule 126 and token LGE resolved as shift (':' < LGE).
     Conflict between rule 126 and token LLSH resolved as shift (':' < LLSH).
+    Conflict between rule 126 and token LRSH resolved as shift (':' < LRSH).
     Conflict between rule 126 and token '+' resolved as shift (':' < '+').
     Conflict between rule 126 and token '-' resolved as shift (':' < '-').
     Conflict between rule 126 and token '*' resolved as shift (':' < '*').
@@ -13980,52 +13979,52 @@ state 343
     Conflict between rule 126 and token '%' resolved as shift (':' < '%').
 
 
-state 344
+State 344
 
   179 elist: elist . ',' elist
   179      | elist ',' elist .  [',', ')']
 
-    $default  reduce using rule 179 (elist)
+    $výchozí  reduce using rule 179 (elist)
 
     Conflict between rule 179 and token ',' resolved as reduce (%left ',').
 
 
-state 345
+State 345
 
    46 abdecor2: abdecor2 '[' zexpr ']' .
 
-    $default  reduce using rule 46 (abdecor2)
+    $výchozí  reduce using rule 46 (abdecor2)
 
 
-state 346
+State 346
 
    45 abdecor2: abdecor2 '(' zarglist ')' .
 
-    $default  reduce using rule 45 (abdecor2)
+    $výchozí  reduce using rule 45 (abdecor2)
 
 
-state 347
+State 347
 
    78 stmnt: error ';' .
 
-    $default  reduce using rule 78 (stmnt)
+    $výchozí  reduce using rule 78 (stmnt)
 
 
-state 348
+State 348
 
    77 label: LNAME ':' .
 
-    $default  reduce using rule 77 (label)
+    $výchozí  reduce using rule 77 (label)
 
 
-state 349
+State 349
 
    94 ulstmnt: LBREAK ';' .
 
-    $default  reduce using rule 94 (ulstmnt)
+    $výchozí  reduce using rule 94 (ulstmnt)
 
 
-state 350
+State 350
 
    75 label: LCASE expr . ':'
   108 expr: expr . '*' expr
@@ -14059,68 +14058,68 @@ state 350
   136     | expr . LXORE expr
   137     | expr . LORE expr
 
-    '='      shift, and go to state 157
-    LORE     shift, and go to state 158
-    LXORE    shift, and go to state 159
-    LANDE    shift, and go to state 160
-    LLSHE    shift, and go to state 161
-    LRSHE    shift, and go to state 162
-    LMDE     shift, and go to state 163
-    LDVE     shift, and go to state 164
-    LMLE     shift, and go to state 165
-    LME      shift, and go to state 166
-    LPE      shift, and go to state 167
-    '?'      shift, and go to state 168
-    ':'      shift, and go to state 371
-    LOROR    shift, and go to state 169
-    LANDAND  shift, and go to state 170
-    '|'      shift, and go to state 171
-    '^'      shift, and go to state 172
-    '&'      shift, and go to state 173
-    LNE      shift, and go to state 174
-    LEQ      shift, and go to state 175
-    '<'      shift, and go to state 176
-    '>'      shift, and go to state 177
-    LGE      shift, and go to state 178
-    LLE      shift, and go to state 179
-    LRSH     shift, and go to state 180
-    LLSH     shift, and go to state 181
-    '+'      shift, and go to state 182
-    '-'      shift, and go to state 183
-    '*'      shift, and go to state 184
-    '/'      shift, and go to state 185
-    '%'      shift, and go to state 186
+    '='      posunout a přejít do stavu 157
+    LPE      posunout a přejít do stavu 158
+    LME      posunout a přejít do stavu 159
+    LMLE     posunout a přejít do stavu 160
+    LDVE     posunout a přejít do stavu 161
+    LMDE     posunout a přejít do stavu 162
+    LRSHE    posunout a přejít do stavu 163
+    LLSHE    posunout a přejít do stavu 164
+    LANDE    posunout a přejít do stavu 165
+    LXORE    posunout a přejít do stavu 166
+    LORE     posunout a přejít do stavu 167
+    '?'      posunout a přejít do stavu 168
+    ':'      posunout a přejít do stavu 371
+    LOROR    posunout a přejít do stavu 169
+    LANDAND  posunout a přejít do stavu 170
+    '|'      posunout a přejít do stavu 171
+    '^'      posunout a přejít do stavu 172
+    '&'      posunout a přejít do stavu 173
+    LEQ      posunout a přejít do stavu 174
+    LNE      posunout a přejít do stavu 175
+    '<'      posunout a přejít do stavu 176
+    '>'      posunout a přejít do stavu 177
+    LLE      posunout a přejít do stavu 178
+    LGE      posunout a přejít do stavu 179
+    LLSH     posunout a přejít do stavu 180
+    LRSH     posunout a přejít do stavu 181
+    '+'      posunout a přejít do stavu 182
+    '-'      posunout a přejít do stavu 183
+    '*'      posunout a přejít do stavu 184
+    '/'      posunout a přejít do stavu 185
+    '%'      posunout a přejít do stavu 186
 
 
-state 351
+State 351
 
    95 ulstmnt: LCONTINUE ';' .
 
-    $default  reduce using rule 95 (ulstmnt)
+    $výchozí  reduce using rule 95 (ulstmnt)
 
 
-state 352
+State 352
 
    76 label: LDEFAULT ':' .
 
-    $default  reduce using rule 76 (label)
+    $výchozí  reduce using rule 76 (label)
 
 
-state 353
+State 353
 
    91 ulstmnt: LDO stmnt . LWHILE '(' cexpr ')' ';'
 
-    LWHILE  shift, and go to state 372
+    LWHILE  posunout a přejít do stavu 372
 
 
-state 354
+State 354
 
    96 ulstmnt: LGOTO ltag . ';'
 
-    ';'  shift, and go to state 373
+    ';'  posunout a přejít do stavu 373
 
 
-state 355
+State 355
 
    86 ulstmnt: LIF '(' . cexpr ')' stmnt
    87        | LIF '(' . cexpr ')' stmnt LELSE stmnt
@@ -14197,40 +14196,40 @@ state 355
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 374
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    cexpr    přejít do stavu 374
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 356
+State 356
 
    98 ulstmnt: LPREFETCH '(' . zelist ')' ';'
   107 expr: . xuexpr
@@ -14302,56 +14301,56 @@ state 356
   173       | . string LSTRING
   174 lstring: . LLSTRING
   175        | . lstring LLSTRING
-  176 zelist: .  [')']
+  176 zelist: . %empty  [')']
   177       | . elist
   178 elist: . expr
   179      | . elist ',' elist
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 176 (zelist)
+    $výchozí  reduce using rule 176 (zelist)
 
-    expr     go to state 265
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    zelist   go to state 375
-    elist    go to state 267
-    name     go to state 123
+    expr     přejít do stavu 266
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    zelist   přejít do stavu 375
+    elist    přejít do stavu 268
+    name     přejít do stavu 123
 
 
-state 357
+State 357
 
    92 ulstmnt: LRETURN zcexpr . ';'
 
-    ';'  shift, and go to state 376
+    ';'  posunout a přejít do stavu 376
 
 
-state 358
+State 358
 
    97 ulstmnt: LUSED '(' . zelist ')' ';'
   107 expr: . xuexpr
@@ -14423,49 +14422,49 @@ state 358
   173       | . string LSTRING
   174 lstring: . LLSTRING
   175        | . lstring LLSTRING
-  176 zelist: .  [')']
+  176 zelist: . %empty  [')']
   177       | . elist
   178 elist: . expr
   179      | . elist ',' elist
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 176 (zelist)
+    $výchozí  reduce using rule 176 (zelist)
 
-    expr     go to state 265
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    zelist   go to state 377
-    elist    go to state 267
-    name     go to state 123
+    expr     přejít do stavu 266
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    zelist   přejít do stavu 377
+    elist    přejít do stavu 268
+    name     přejít do stavu 123
 
 
-state 359
+State 359
 
    93 ulstmnt: LSWITCH '(' . cexpr ')' stmnt
   105 cexpr: . expr
@@ -14541,40 +14540,40 @@ state 359
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 378
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    cexpr    přejít do stavu 378
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 360
+State 360
 
    90 ulstmnt: LWHILE '(' . cexpr ')' stmnt
   105 cexpr: . expr
@@ -14650,40 +14649,40 @@ state 360
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 379
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    cexpr    přejít do stavu 379
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 361
+State 361
 
    99 ulstmnt: LSET '(' . zelist ')' ';'
   107 expr: . xuexpr
@@ -14755,201 +14754,201 @@ state 361
   173       | . string LSTRING
   174 lstring: . LLSTRING
   175        | . lstring LLSTRING
-  176 zelist: .  [')']
+  176 zelist: . %empty  [')']
   177       | . elist
   178 elist: . expr
   179      | . elist ',' elist
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 176 (zelist)
+    $výchozí  reduce using rule 176 (zelist)
 
-    expr     go to state 265
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    zelist   go to state 380
-    elist    go to state 267
-    name     go to state 123
+    expr     přejít do stavu 266
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    zelist   přejít do stavu 380
+    elist    přejít do stavu 268
+    name     přejít do stavu 123
 
 
-state 362
+State 362
 
    74 labels: labels label .
 
-    $default  reduce using rule 74 (labels)
+    $výchozí  reduce using rule 74 (labels)
 
 
-state 363
+State 363
 
    80 stmnt: labels ulstmnt .
 
-    $default  reduce using rule 80 (stmnt)
+    $výchozí  reduce using rule 80 (stmnt)
 
 
-state 364
+State 364
 
    85 ulstmnt: $@7 block .
 
-    $default  reduce using rule 85 (ulstmnt)
+    $výchozí  reduce using rule 85 (ulstmnt)
 
 
-state 365
+State 365
 
    89 ulstmnt: $@8 LFOR . '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
 
-    '('  shift, and go to state 381
+    '('  posunout a přejít do stavu 381
 
 
-state 366
+State 366
 
    83 ulstmnt: zcexpr ';' .
 
-    $default  reduce using rule 83 (ulstmnt)
+    $výchozí  reduce using rule 83 (ulstmnt)
 
 
-state 367
+State 367
 
    18 adecl: ctlist ';' .
 
-    $default  reduce using rule 18 (adecl)
+    $výchozí  reduce using rule 18 (adecl)
 
 
-state 368
+State 368
 
    20 adlist: xdecor .  [';', ',']
-   21 $@4: .  ['=']
+   21 $@4: . %empty  ['=']
    22 adlist: xdecor . $@4 '=' init
 
-    '='       reduce using rule 21 ($@4)
-    $default  reduce using rule 20 (adlist)
+    '='         reduce using rule 21 ($@4)
+    $výchozí  reduce using rule 20 (adlist)
 
-    $@4  go to state 382
+    $@4  přejít do stavu 382
 
 
-state 369
+State 369
 
    19 adecl: ctlist adlist . ';'
    23 adlist: adlist . ',' adlist
 
-    ';'  shift, and go to state 383
-    ','  shift, and go to state 384
+    ';'  posunout a přejít do stavu 383
+    ','  posunout a přejít do stavu 384
 
 
-state 370
+State 370
 
   140 xuexpr: '(' tlist abdecor ')' '{' ilist . '}'
 
-    '}'  shift, and go to state 385
+    '}'  posunout a přejít do stavu 385
 
 
-state 371
+State 371
 
    75 label: LCASE expr ':' .
 
-    $default  reduce using rule 75 (label)
+    $výchozí  reduce using rule 75 (label)
 
 
-state 372
+State 372
 
    91 ulstmnt: LDO stmnt LWHILE . '(' cexpr ')' ';'
 
-    '('  shift, and go to state 386
+    '('  posunout a přejít do stavu 386
 
 
-state 373
+State 373
 
    96 ulstmnt: LGOTO ltag ';' .
 
-    $default  reduce using rule 96 (ulstmnt)
+    $výchozí  reduce using rule 96 (ulstmnt)
 
 
-state 374
+State 374
 
    86 ulstmnt: LIF '(' cexpr . ')' stmnt
    87        | LIF '(' cexpr . ')' stmnt LELSE stmnt
   106 cexpr: cexpr . ',' cexpr
 
-    ','  shift, and go to state 226
-    ')'  shift, and go to state 387
+    ','  posunout a přejít do stavu 226
+    ')'  posunout a přejít do stavu 387
 
 
-state 375
+State 375
 
    98 ulstmnt: LPREFETCH '(' zelist . ')' ';'
 
-    ')'  shift, and go to state 388
+    ')'  posunout a přejít do stavu 388
 
 
-state 376
+State 376
 
    92 ulstmnt: LRETURN zcexpr ';' .
 
-    $default  reduce using rule 92 (ulstmnt)
+    $výchozí  reduce using rule 92 (ulstmnt)
 
 
-state 377
+State 377
 
    97 ulstmnt: LUSED '(' zelist . ')' ';'
 
-    ')'  shift, and go to state 389
+    ')'  posunout a přejít do stavu 389
 
 
-state 378
+State 378
 
    93 ulstmnt: LSWITCH '(' cexpr . ')' stmnt
   106 cexpr: cexpr . ',' cexpr
 
-    ','  shift, and go to state 226
-    ')'  shift, and go to state 390
+    ','  posunout a přejít do stavu 226
+    ')'  posunout a přejít do stavu 390
 
 
-state 379
+State 379
 
    90 ulstmnt: LWHILE '(' cexpr . ')' stmnt
   106 cexpr: cexpr . ',' cexpr
 
-    ','  shift, and go to state 226
-    ')'  shift, and go to state 391
+    ','  posunout a přejít do stavu 226
+    ')'  posunout a přejít do stavu 391
 
 
-state 380
+State 380
 
    99 ulstmnt: LSET '(' zelist . ')' ';'
 
-    ')'  shift, and go to state 392
+    ')'  posunout a přejít do stavu 392
 
 
-state 381
+State 381
 
    81 forexpr: . zcexpr
    82        | . ctlist adlist
    89 ulstmnt: $@8 LFOR '(' . forexpr ';' zcexpr ';' zcexpr ')' stmnt
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -15066,89 +15065,89 @@ state 381
   242      | . LRESTRICT
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LTYPE      shift, and go to state 3
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LAUTO      shift, and go to state 4
-    LCHAR      shift, and go to state 5
-    LDOUBLE    shift, and go to state 6
-    LEXTERN    shift, and go to state 7
-    LFLOAT     shift, and go to state 8
-    LINT       shift, and go to state 9
-    LLONG      shift, and go to state 10
-    LREGISTER  shift, and go to state 11
-    LSHORT     shift, and go to state 12
-    LSIZEOF    shift, and go to state 111
-    LSTATIC    shift, and go to state 13
-    LSTRUCT    shift, and go to state 14
-    LTYPEDEF   shift, and go to state 15
-    LTYPESTR   shift, and go to state 16
-    LUNION     shift, and go to state 17
-    LUNSIGNED  shift, and go to state 18
-    LVOID      shift, and go to state 19
-    LENUM      shift, and go to state 20
-    LSIGNED    shift, and go to state 21
-    LCONSTNT   shift, and go to state 22
-    LVOLATILE  shift, and go to state 23
-    LSIGNOF    shift, and go to state 112
-    LRESTRICT  shift, and go to state 24
-    LINLINE    shift, and go to state 25
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LTYPE      posunout a přejít do stavu 3
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LAUTO      posunout a přejít do stavu 4
+    LCHAR      posunout a přejít do stavu 5
+    LDOUBLE    posunout a přejít do stavu 6
+    LEXTERN    posunout a přejít do stavu 7
+    LFLOAT     posunout a přejít do stavu 8
+    LINT       posunout a přejít do stavu 9
+    LLONG      posunout a přejít do stavu 10
+    LREGISTER  posunout a přejít do stavu 11
+    LSHORT     posunout a přejít do stavu 12
+    LSIZEOF    posunout a přejít do stavu 111
+    LSTATIC    posunout a přejít do stavu 13
+    LSTRUCT    posunout a přejít do stavu 14
+    LTYPEDEF   posunout a přejít do stavu 15
+    LTYPESTR   posunout a přejít do stavu 16
+    LUNION     posunout a přejít do stavu 17
+    LUNSIGNED  posunout a přejít do stavu 18
+    LVOID      posunout a přejít do stavu 19
+    LENUM      posunout a přejít do stavu 20
+    LSIGNED    posunout a přejít do stavu 21
+    LCONSTNT   posunout a přejít do stavu 22
+    LVOLATILE  posunout a přejít do stavu 23
+    LSIGNOF    posunout a přejít do stavu 112
+    LRESTRICT  posunout a přejít do stavu 24
+    LINLINE    posunout a přejít do stavu 25
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 100 (zcexpr)
+    $výchozí  reduce using rule 100 (zcexpr)
 
-    forexpr  go to state 393
-    zcexpr   go to state 394
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    types    go to state 28
-    ctlist   go to state 395
-    complex  go to state 30
-    gcnlist  go to state 31
-    gcname   go to state 32
-    tname    go to state 33
-    cname    go to state 34
-    gname    go to state 35
-    name     go to state 123
+    forexpr  přejít do stavu 393
+    zcexpr   přejít do stavu 394
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    types    přejít do stavu 28
+    ctlist   přejít do stavu 395
+    complex  přejít do stavu 30
+    gcnlist  přejít do stavu 31
+    gcname   přejít do stavu 32
+    tname    přejít do stavu 33
+    cname    přejít do stavu 34
+    gname    přejít do stavu 35
+    name     přejít do stavu 123
 
 
-state 382
+State 382
 
    22 adlist: xdecor $@4 . '=' init
 
-    '='  shift, and go to state 396
+    '='  posunout a přejít do stavu 396
 
 
-state 383
+State 383
 
    19 adecl: ctlist adlist ';' .
 
-    $default  reduce using rule 19 (adecl)
+    $výchozí  reduce using rule 19 (adecl)
 
 
-state 384
+State 384
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -15164,26 +15163,26 @@ state 384
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdecor   go to state 368
-    xdecor2  go to state 50
-    adlist   go to state 397
-    tag      go to state 51
-    ltag     go to state 52
+    xdecor   přejít do stavu 368
+    xdecor2  přejít do stavu 50
+    adlist   přejít do stavu 397
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 385
+State 385
 
   140 xuexpr: '(' tlist abdecor ')' '{' ilist '}' .
 
-    $default  reduce using rule 140 (xuexpr)
+    $výchozí  reduce using rule 140 (xuexpr)
 
 
-state 386
+State 386
 
    91 ulstmnt: LDO stmnt LWHILE '(' . cexpr ')' ';'
   105 cexpr: . expr
@@ -15259,40 +15258,40 @@ state 386
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    cexpr    go to state 398
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    cexpr    přejít do stavu 398
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 387
+State 387
 
    73 labels: . label
    74       | . labels label
@@ -15303,13 +15302,13 @@ state 387
    79      | . ulstmnt
    80      | . labels ulstmnt
    83 ulstmnt: . zcexpr ';'
-   84 $@7: .  ['{']
+   84 $@7: . %empty  ['{']
    85 ulstmnt: . $@7 block
    86        | . LIF '(' cexpr ')' stmnt
    86        | LIF '(' cexpr ')' . stmnt
    87        | . LIF '(' cexpr ')' stmnt LELSE stmnt
    87        | LIF '(' cexpr ')' . stmnt LELSE stmnt
-   88 $@8: .  [LFOR]
+   88 $@8: . %empty  [LFOR]
    89 ulstmnt: . $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    90        | . LWHILE '(' cexpr ')' stmnt
    91        | . LDO stmnt LWHILE '(' cexpr ')' ';'
@@ -15321,7 +15320,7 @@ state 387
    97        | . LUSED '(' zelist ')' ';'
    98        | . LPREFETCH '(' zelist ')' ';'
    99        | . LSET '(' zelist ')' ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -15396,79 +15395,79 @@ state 387
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    error      shift, and go to state 310
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 311
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LBREAK     shift, and go to state 312
-    LCASE      shift, and go to state 313
-    LCONTINUE  shift, and go to state 314
-    LDEFAULT   shift, and go to state 315
-    LDO        shift, and go to state 316
-    LGOTO      shift, and go to state 317
-    LIF        shift, and go to state 318
-    LPREFETCH  shift, and go to state 319
-    LRETURN    shift, and go to state 320
-    LSIZEOF    shift, and go to state 111
-    LUSED      shift, and go to state 321
-    LSWITCH    shift, and go to state 322
-    LWHILE     shift, and go to state 323
-    LSET       shift, and go to state 324
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    error      posunout a přejít do stavu 310
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 311
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LBREAK     posunout a přejít do stavu 312
+    LCASE      posunout a přejít do stavu 313
+    LCONTINUE  posunout a přejít do stavu 314
+    LDEFAULT   posunout a přejít do stavu 315
+    LDO        posunout a přejít do stavu 316
+    LGOTO      posunout a přejít do stavu 317
+    LIF        posunout a přejít do stavu 318
+    LPREFETCH  posunout a přejít do stavu 319
+    LRETURN    posunout a přejít do stavu 320
+    LSIZEOF    posunout a přejít do stavu 111
+    LUSED      posunout a přejít do stavu 321
+    LSWITCH    posunout a přejít do stavu 322
+    LWHILE     posunout a přejít do stavu 323
+    LSET       posunout a přejít do stavu 324
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
     ';'   reduce using rule 100 (zcexpr)
     LFOR  reduce using rule 88 ($@8)
     '{'   reduce using rule 84 ($@7)
 
-    labels   go to state 327
-    label    go to state 328
-    stmnt    go to state 399
-    ulstmnt  go to state 330
-    $@7      go to state 331
-    $@8      go to state 332
-    zcexpr   go to state 333
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    labels   přejít do stavu 327
+    label    přejít do stavu 328
+    stmnt    přejít do stavu 399
+    ulstmnt  přejít do stavu 330
+    $@7      přejít do stavu 331
+    $@8      přejít do stavu 332
+    zcexpr   přejít do stavu 333
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 388
+State 388
 
    98 ulstmnt: LPREFETCH '(' zelist ')' . ';'
 
-    ';'  shift, and go to state 400
+    ';'  posunout a přejít do stavu 400
 
 
-state 389
+State 389
 
    97 ulstmnt: LUSED '(' zelist ')' . ';'
 
-    ';'  shift, and go to state 401
+    ';'  posunout a přejít do stavu 401
 
 
-state 390
+State 390
 
    73 labels: . label
    74       | . labels label
@@ -15479,11 +15478,11 @@ state 390
    79      | . ulstmnt
    80      | . labels ulstmnt
    83 ulstmnt: . zcexpr ';'
-   84 $@7: .  ['{']
+   84 $@7: . %empty  ['{']
    85 ulstmnt: . $@7 block
    86        | . LIF '(' cexpr ')' stmnt
    87        | . LIF '(' cexpr ')' stmnt LELSE stmnt
-   88 $@8: .  [LFOR]
+   88 $@8: . %empty  [LFOR]
    89 ulstmnt: . $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    90        | . LWHILE '(' cexpr ')' stmnt
    91        | . LDO stmnt LWHILE '(' cexpr ')' ';'
@@ -15496,7 +15495,7 @@ state 390
    97        | . LUSED '(' zelist ')' ';'
    98        | . LPREFETCH '(' zelist ')' ';'
    99        | . LSET '(' zelist ')' ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -15571,65 +15570,65 @@ state 390
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    error      shift, and go to state 310
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 311
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LBREAK     shift, and go to state 312
-    LCASE      shift, and go to state 313
-    LCONTINUE  shift, and go to state 314
-    LDEFAULT   shift, and go to state 315
-    LDO        shift, and go to state 316
-    LGOTO      shift, and go to state 317
-    LIF        shift, and go to state 318
-    LPREFETCH  shift, and go to state 319
-    LRETURN    shift, and go to state 320
-    LSIZEOF    shift, and go to state 111
-    LUSED      shift, and go to state 321
-    LSWITCH    shift, and go to state 322
-    LWHILE     shift, and go to state 323
-    LSET       shift, and go to state 324
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    error      posunout a přejít do stavu 310
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 311
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LBREAK     posunout a přejít do stavu 312
+    LCASE      posunout a přejít do stavu 313
+    LCONTINUE  posunout a přejít do stavu 314
+    LDEFAULT   posunout a přejít do stavu 315
+    LDO        posunout a přejít do stavu 316
+    LGOTO      posunout a přejít do stavu 317
+    LIF        posunout a přejít do stavu 318
+    LPREFETCH  posunout a přejít do stavu 319
+    LRETURN    posunout a přejít do stavu 320
+    LSIZEOF    posunout a přejít do stavu 111
+    LUSED      posunout a přejít do stavu 321
+    LSWITCH    posunout a přejít do stavu 322
+    LWHILE     posunout a přejít do stavu 323
+    LSET       posunout a přejít do stavu 324
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
     ';'   reduce using rule 100 (zcexpr)
     LFOR  reduce using rule 88 ($@8)
     '{'   reduce using rule 84 ($@7)
 
-    labels   go to state 327
-    label    go to state 328
-    stmnt    go to state 402
-    ulstmnt  go to state 330
-    $@7      go to state 331
-    $@8      go to state 332
-    zcexpr   go to state 333
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    labels   přejít do stavu 327
+    label    přejít do stavu 328
+    stmnt    přejít do stavu 402
+    ulstmnt  přejít do stavu 330
+    $@7      přejít do stavu 331
+    $@8      přejít do stavu 332
+    zcexpr   přejít do stavu 333
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 391
+State 391
 
    73 labels: . label
    74       | . labels label
@@ -15640,11 +15639,11 @@ state 391
    79      | . ulstmnt
    80      | . labels ulstmnt
    83 ulstmnt: . zcexpr ';'
-   84 $@7: .  ['{']
+   84 $@7: . %empty  ['{']
    85 ulstmnt: . $@7 block
    86        | . LIF '(' cexpr ')' stmnt
    87        | . LIF '(' cexpr ')' stmnt LELSE stmnt
-   88 $@8: .  [LFOR]
+   88 $@8: . %empty  [LFOR]
    89 ulstmnt: . $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    90        | . LWHILE '(' cexpr ')' stmnt
    90        | LWHILE '(' cexpr ')' . stmnt
@@ -15657,7 +15656,7 @@ state 391
    97        | . LUSED '(' zelist ')' ';'
    98        | . LPREFETCH '(' zelist ')' ';'
    99        | . LSET '(' zelist ')' ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -15732,86 +15731,86 @@ state 391
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    error      shift, and go to state 310
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 311
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LBREAK     shift, and go to state 312
-    LCASE      shift, and go to state 313
-    LCONTINUE  shift, and go to state 314
-    LDEFAULT   shift, and go to state 315
-    LDO        shift, and go to state 316
-    LGOTO      shift, and go to state 317
-    LIF        shift, and go to state 318
-    LPREFETCH  shift, and go to state 319
-    LRETURN    shift, and go to state 320
-    LSIZEOF    shift, and go to state 111
-    LUSED      shift, and go to state 321
-    LSWITCH    shift, and go to state 322
-    LWHILE     shift, and go to state 323
-    LSET       shift, and go to state 324
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    error      posunout a přejít do stavu 310
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 311
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LBREAK     posunout a přejít do stavu 312
+    LCASE      posunout a přejít do stavu 313
+    LCONTINUE  posunout a přejít do stavu 314
+    LDEFAULT   posunout a přejít do stavu 315
+    LDO        posunout a přejít do stavu 316
+    LGOTO      posunout a přejít do stavu 317
+    LIF        posunout a přejít do stavu 318
+    LPREFETCH  posunout a přejít do stavu 319
+    LRETURN    posunout a přejít do stavu 320
+    LSIZEOF    posunout a přejít do stavu 111
+    LUSED      posunout a přejít do stavu 321
+    LSWITCH    posunout a přejít do stavu 322
+    LWHILE     posunout a přejít do stavu 323
+    LSET       posunout a přejít do stavu 324
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
     ';'   reduce using rule 100 (zcexpr)
     LFOR  reduce using rule 88 ($@8)
     '{'   reduce using rule 84 ($@7)
 
-    labels   go to state 327
-    label    go to state 328
-    stmnt    go to state 403
-    ulstmnt  go to state 330
-    $@7      go to state 331
-    $@8      go to state 332
-    zcexpr   go to state 333
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    labels   přejít do stavu 327
+    label    přejít do stavu 328
+    stmnt    přejít do stavu 403
+    ulstmnt  přejít do stavu 330
+    $@7      přejít do stavu 331
+    $@8      přejít do stavu 332
+    zcexpr   přejít do stavu 333
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 392
+State 392
 
    99 ulstmnt: LSET '(' zelist ')' . ';'
 
-    ';'  shift, and go to state 404
+    ';'  posunout a přejít do stavu 404
 
 
-state 393
+State 393
 
    89 ulstmnt: $@8 LFOR '(' forexpr . ';' zcexpr ';' zcexpr ')' stmnt
 
-    ';'  shift, and go to state 405
+    ';'  posunout a přejít do stavu 405
 
 
-state 394
+State 394
 
    81 forexpr: zcexpr .
 
-    $default  reduce using rule 81 (forexpr)
+    $výchozí  reduce using rule 81 (forexpr)
 
 
-state 395
+State 395
 
    12 xdecor: . xdecor2
    13       | . '*' zgnlist xdecor
@@ -15827,19 +15826,19 @@ state 395
   245 ltag: . LNAME
   246     | . LTYPE
 
-    '*'    shift, and go to state 46
-    '('    shift, and go to state 47
-    LNAME  shift, and go to state 36
-    LTYPE  shift, and go to state 37
+    '*'    posunout a přejít do stavu 46
+    '('    posunout a přejít do stavu 47
+    LNAME  posunout a přejít do stavu 36
+    LTYPE  posunout a přejít do stavu 37
 
-    xdecor   go to state 368
-    xdecor2  go to state 50
-    adlist   go to state 406
-    tag      go to state 51
-    ltag     go to state 52
+    xdecor   přejít do stavu 368
+    xdecor2  přejít do stavu 50
+    adlist   přejít do stavu 406
+    tag      přejít do stavu 51
+    ltag     přejít do stavu 52
 
 
-state 396
+State 396
 
    22 adlist: xdecor $@4 '=' . init
    50 init: . expr
@@ -15915,109 +15914,109 @@ state 396
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '{'        shift, and go to state 138
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '{'        posunout a přejít do stavu 138
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    init     go to state 407
-    expr     go to state 140
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    init     přejít do stavu 407
+    expr     přejít do stavu 140
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 397
+State 397
 
    23 adlist: adlist . ',' adlist
    23       | adlist ',' adlist .  [';', ',']
 
-    $default  reduce using rule 23 (adlist)
+    $výchozí  reduce using rule 23 (adlist)
 
     Conflict between rule 23 and token ',' resolved as reduce (%left ',').
 
 
-state 398
+State 398
 
    91 ulstmnt: LDO stmnt LWHILE '(' cexpr . ')' ';'
   106 cexpr: cexpr . ',' cexpr
 
-    ','  shift, and go to state 226
-    ')'  shift, and go to state 408
+    ','  posunout a přejít do stavu 226
+    ')'  posunout a přejít do stavu 408
 
 
-state 399
+State 399
 
-   86 ulstmnt: LIF '(' cexpr ')' stmnt .  [error, ';', '&', '+', '-', '*', '(', LPP, LMM, LNAME, LTYPE, LFCONST, LDCONST, LCONST, LLCONST, LUCONST, LULCONST, LVLCONST, LUVLCONST, LSTRING, LLSTRING, LAUTO, LBREAK, LCASE, LCHAR, LCONTINUE, LDEFAULT, LDO, LDOUBLE, LELSE, LEXTERN, LFLOAT, LFOR, LGOTO, LIF, LINT, LLONG, LPREFETCH, LREGISTER, LRETURN, LSHORT, LSIZEOF, LUSED, LSTATIC, LSTRUCT, LSWITCH, LTYPEDEF, LTYPESTR, LUNION, LUNSIGNED, LWHILE, LVOID, LENUM, LSIGNED, LCONSTNT, LVOLATILE, LSET, LSIGNOF, LRESTRICT, LINLINE, '{', '}', '!', '~']
+   86 ulstmnt: LIF '(' cexpr ')' stmnt .  [error, ';', '&', '+', '-', '*', LMM, LPP, '(', LNAME, LTYPE, LFCONST, LDCONST, LCONST, LLCONST, LUCONST, LULCONST, LVLCONST, LUVLCONST, LSTRING, LLSTRING, LAUTO, LBREAK, LCASE, LCHAR, LCONTINUE, LDEFAULT, LDO, LDOUBLE, LELSE, LEXTERN, LFLOAT, LFOR, LGOTO, LIF, LINT, LLONG, LPREFETCH, LREGISTER, LRETURN, LSHORT, LSIZEOF, LUSED, LSTATIC, LSTRUCT, LSWITCH, LTYPEDEF, LTYPESTR, LUNION, LUNSIGNED, LWHILE, LVOID, LENUM, LSIGNED, LCONSTNT, LVOLATILE, LSET, LSIGNOF, LRESTRICT, LINLINE, '{', '}', '!', '~']
    87        | LIF '(' cexpr ')' stmnt . LELSE stmnt
 
-    LELSE  shift, and go to state 409
+    LELSE  posunout a přejít do stavu 409
 
-    LELSE     [reduce using rule 86 (ulstmnt)]
-    $default  reduce using rule 86 (ulstmnt)
+    LELSE       [reduce using rule 86 (ulstmnt)]
+    $výchozí  reduce using rule 86 (ulstmnt)
 
 
-state 400
+State 400
 
    98 ulstmnt: LPREFETCH '(' zelist ')' ';' .
 
-    $default  reduce using rule 98 (ulstmnt)
+    $výchozí  reduce using rule 98 (ulstmnt)
 
 
-state 401
+State 401
 
    97 ulstmnt: LUSED '(' zelist ')' ';' .
 
-    $default  reduce using rule 97 (ulstmnt)
+    $výchozí  reduce using rule 97 (ulstmnt)
 
 
-state 402
+State 402
 
    93 ulstmnt: LSWITCH '(' cexpr ')' stmnt .
 
-    $default  reduce using rule 93 (ulstmnt)
+    $výchozí  reduce using rule 93 (ulstmnt)
 
 
-state 403
+State 403
 
    90 ulstmnt: LWHILE '(' cexpr ')' stmnt .
 
-    $default  reduce using rule 90 (ulstmnt)
+    $výchozí  reduce using rule 90 (ulstmnt)
 
 
-state 404
+State 404
 
    99 ulstmnt: LSET '(' zelist ')' ';' .
 
-    $default  reduce using rule 99 (ulstmnt)
+    $výchozí  reduce using rule 99 (ulstmnt)
 
 
-state 405
+State 405
 
    89 ulstmnt: $@8 LFOR '(' forexpr ';' . zcexpr ';' zcexpr ')' stmnt
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -16092,67 +16091,67 @@ state 405
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 100 (zcexpr)
+    $výchozí  reduce using rule 100 (zcexpr)
 
-    zcexpr   go to state 410
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    zcexpr   přejít do stavu 410
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 406
+State 406
 
    23 adlist: adlist . ',' adlist
    82 forexpr: ctlist adlist .  [';']
 
-    ','  shift, and go to state 384
+    ','  posunout a přejít do stavu 384
 
-    $default  reduce using rule 82 (forexpr)
+    $výchozí  reduce using rule 82 (forexpr)
 
 
-state 407
+State 407
 
    22 adlist: xdecor $@4 '=' init .
 
-    $default  reduce using rule 22 (adlist)
+    $výchozí  reduce using rule 22 (adlist)
 
 
-state 408
+State 408
 
    91 ulstmnt: LDO stmnt LWHILE '(' cexpr ')' . ';'
 
-    ';'  shift, and go to state 411
+    ';'  posunout a přejít do stavu 411
 
 
-state 409
+State 409
 
    73 labels: . label
    74       | . labels label
@@ -16163,12 +16162,12 @@ state 409
    79      | . ulstmnt
    80      | . labels ulstmnt
    83 ulstmnt: . zcexpr ';'
-   84 $@7: .  ['{']
+   84 $@7: . %empty  ['{']
    85 ulstmnt: . $@7 block
    86        | . LIF '(' cexpr ')' stmnt
    87        | . LIF '(' cexpr ')' stmnt LELSE stmnt
    87        | LIF '(' cexpr ')' stmnt LELSE . stmnt
-   88 $@8: .  [LFOR]
+   88 $@8: . %empty  [LFOR]
    89 ulstmnt: . $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    90        | . LWHILE '(' cexpr ')' stmnt
    91        | . LDO stmnt LWHILE '(' cexpr ')' ';'
@@ -16180,7 +16179,7 @@ state 409
    97        | . LUSED '(' zelist ')' ';'
    98        | . LPREFETCH '(' zelist ')' ';'
    99        | . LSET '(' zelist ')' ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -16255,89 +16254,89 @@ state 409
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    error      shift, and go to state 310
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 311
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LBREAK     shift, and go to state 312
-    LCASE      shift, and go to state 313
-    LCONTINUE  shift, and go to state 314
-    LDEFAULT   shift, and go to state 315
-    LDO        shift, and go to state 316
-    LGOTO      shift, and go to state 317
-    LIF        shift, and go to state 318
-    LPREFETCH  shift, and go to state 319
-    LRETURN    shift, and go to state 320
-    LSIZEOF    shift, and go to state 111
-    LUSED      shift, and go to state 321
-    LSWITCH    shift, and go to state 322
-    LWHILE     shift, and go to state 323
-    LSET       shift, and go to state 324
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    error      posunout a přejít do stavu 310
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 311
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LBREAK     posunout a přejít do stavu 312
+    LCASE      posunout a přejít do stavu 313
+    LCONTINUE  posunout a přejít do stavu 314
+    LDEFAULT   posunout a přejít do stavu 315
+    LDO        posunout a přejít do stavu 316
+    LGOTO      posunout a přejít do stavu 317
+    LIF        posunout a přejít do stavu 318
+    LPREFETCH  posunout a přejít do stavu 319
+    LRETURN    posunout a přejít do stavu 320
+    LSIZEOF    posunout a přejít do stavu 111
+    LUSED      posunout a přejít do stavu 321
+    LSWITCH    posunout a přejít do stavu 322
+    LWHILE     posunout a přejít do stavu 323
+    LSET       posunout a přejít do stavu 324
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
     ';'   reduce using rule 100 (zcexpr)
     LFOR  reduce using rule 88 ($@8)
     '{'   reduce using rule 84 ($@7)
 
-    labels   go to state 327
-    label    go to state 328
-    stmnt    go to state 412
-    ulstmnt  go to state 330
-    $@7      go to state 331
-    $@8      go to state 332
-    zcexpr   go to state 333
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    labels   přejít do stavu 327
+    label    přejít do stavu 328
+    stmnt    přejít do stavu 412
+    ulstmnt  přejít do stavu 330
+    $@7      přejít do stavu 331
+    $@8      přejít do stavu 332
+    zcexpr   přejít do stavu 333
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 410
+State 410
 
    89 ulstmnt: $@8 LFOR '(' forexpr ';' zcexpr . ';' zcexpr ')' stmnt
 
-    ';'  shift, and go to state 413
+    ';'  posunout a přejít do stavu 413
 
 
-state 411
+State 411
 
    91 ulstmnt: LDO stmnt LWHILE '(' cexpr ')' ';' .
 
-    $default  reduce using rule 91 (ulstmnt)
+    $výchozí  reduce using rule 91 (ulstmnt)
 
 
-state 412
+State 412
 
    87 ulstmnt: LIF '(' cexpr ')' stmnt LELSE stmnt .
 
-    $default  reduce using rule 87 (ulstmnt)
+    $výchozí  reduce using rule 87 (ulstmnt)
 
 
-state 413
+State 413
 
    89 ulstmnt: $@8 LFOR '(' forexpr ';' zcexpr ';' . zcexpr ')' stmnt
-  100 zcexpr: .  [')']
+  100 zcexpr: . %empty  [')']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -16412,50 +16411,50 @@ state 413
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 100
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LSIZEOF    shift, and go to state 111
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 100
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LSIZEOF    posunout a přejít do stavu 111
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
-    $default  reduce using rule 100 (zcexpr)
+    $výchozí  reduce using rule 100 (zcexpr)
 
-    zcexpr   go to state 414
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    zcexpr   přejít do stavu 414
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 414
+State 414
 
    89 ulstmnt: $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr . ')' stmnt
 
-    ')'  shift, and go to state 415
+    ')'  posunout a přejít do stavu 415
 
 
-state 415
+State 415
 
    73 labels: . label
    74       | . labels label
@@ -16466,11 +16465,11 @@ state 415
    79      | . ulstmnt
    80      | . labels ulstmnt
    83 ulstmnt: . zcexpr ';'
-   84 $@7: .  ['{']
+   84 $@7: . %empty  ['{']
    85 ulstmnt: . $@7 block
    86        | . LIF '(' cexpr ')' stmnt
    87        | . LIF '(' cexpr ')' stmnt LELSE stmnt
-   88 $@8: .  [LFOR]
+   88 $@8: . %empty  [LFOR]
    89 ulstmnt: . $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt
    89        | $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' . stmnt
    90        | . LWHILE '(' cexpr ')' stmnt
@@ -16483,7 +16482,7 @@ state 415
    97        | . LUSED '(' zelist ')' ';'
    98        | . LPREFETCH '(' zelist ')' ';'
    99        | . LSET '(' zelist ')' ';'
-  100 zcexpr: .  [';']
+  100 zcexpr: . %empty  [';']
   101       | . cexpr
   105 cexpr: . expr
   106      | . cexpr ',' cexpr
@@ -16558,66 +16557,66 @@ state 415
   175        | . lstring LLSTRING
   243 name: . LNAME
 
-    error      shift, and go to state 310
-    '&'        shift, and go to state 93
-    '+'        shift, and go to state 94
-    '-'        shift, and go to state 95
-    '*'        shift, and go to state 96
-    '('        shift, and go to state 97
-    LPP        shift, and go to state 98
-    LMM        shift, and go to state 99
-    LNAME      shift, and go to state 311
-    LFCONST    shift, and go to state 101
-    LDCONST    shift, and go to state 102
-    LCONST     shift, and go to state 103
-    LLCONST    shift, and go to state 104
-    LUCONST    shift, and go to state 105
-    LULCONST   shift, and go to state 106
-    LVLCONST   shift, and go to state 107
-    LUVLCONST  shift, and go to state 108
-    LSTRING    shift, and go to state 109
-    LLSTRING   shift, and go to state 110
-    LBREAK     shift, and go to state 312
-    LCASE      shift, and go to state 313
-    LCONTINUE  shift, and go to state 314
-    LDEFAULT   shift, and go to state 315
-    LDO        shift, and go to state 316
-    LGOTO      shift, and go to state 317
-    LIF        shift, and go to state 318
-    LPREFETCH  shift, and go to state 319
-    LRETURN    shift, and go to state 320
-    LSIZEOF    shift, and go to state 111
-    LUSED      shift, and go to state 321
-    LSWITCH    shift, and go to state 322
-    LWHILE     shift, and go to state 323
-    LSET       shift, and go to state 324
-    LSIGNOF    shift, and go to state 112
-    '!'        shift, and go to state 113
-    '~'        shift, and go to state 114
+    error      posunout a přejít do stavu 310
+    '&'        posunout a přejít do stavu 93
+    '+'        posunout a přejít do stavu 94
+    '-'        posunout a přejít do stavu 95
+    '*'        posunout a přejít do stavu 96
+    LMM        posunout a přejít do stavu 97
+    LPP        posunout a přejít do stavu 98
+    '('        posunout a přejít do stavu 99
+    LNAME      posunout a přejít do stavu 311
+    LFCONST    posunout a přejít do stavu 101
+    LDCONST    posunout a přejít do stavu 102
+    LCONST     posunout a přejít do stavu 103
+    LLCONST    posunout a přejít do stavu 104
+    LUCONST    posunout a přejít do stavu 105
+    LULCONST   posunout a přejít do stavu 106
+    LVLCONST   posunout a přejít do stavu 107
+    LUVLCONST  posunout a přejít do stavu 108
+    LSTRING    posunout a přejít do stavu 109
+    LLSTRING   posunout a přejít do stavu 110
+    LBREAK     posunout a přejít do stavu 312
+    LCASE      posunout a přejít do stavu 313
+    LCONTINUE  posunout a přejít do stavu 314
+    LDEFAULT   posunout a přejít do stavu 315
+    LDO        posunout a přejít do stavu 316
+    LGOTO      posunout a přejít do stavu 317
+    LIF        posunout a přejít do stavu 318
+    LPREFETCH  posunout a přejít do stavu 319
+    LRETURN    posunout a přejít do stavu 320
+    LSIZEOF    posunout a přejít do stavu 111
+    LUSED      posunout a přejít do stavu 321
+    LSWITCH    posunout a přejít do stavu 322
+    LWHILE     posunout a přejít do stavu 323
+    LSET       posunout a přejít do stavu 324
+    LSIGNOF    posunout a přejít do stavu 112
+    '!'        posunout a přejít do stavu 113
+    '~'        posunout a přejít do stavu 114
 
     ';'   reduce using rule 100 (zcexpr)
     LFOR  reduce using rule 88 ($@8)
     '{'   reduce using rule 84 ($@7)
 
-    labels   go to state 327
-    label    go to state 328
-    stmnt    go to state 416
-    ulstmnt  go to state 330
-    $@7      go to state 331
-    $@8      go to state 332
-    zcexpr   go to state 333
-    cexpr    go to state 334
-    expr     go to state 146
-    xuexpr   go to state 118
-    uexpr    go to state 119
-    pexpr    go to state 120
-    string   go to state 121
-    lstring  go to state 122
-    name     go to state 123
+    labels   přejít do stavu 327
+    label    přejít do stavu 328
+    stmnt    přejít do stavu 416
+    ulstmnt  přejít do stavu 330
+    $@7      přejít do stavu 331
+    $@8      přejít do stavu 332
+    zcexpr   přejít do stavu 333
+    cexpr    přejít do stavu 334
+    expr     přejít do stavu 148
+    xuexpr   přejít do stavu 118
+    uexpr    přejít do stavu 119
+    pexpr    přejít do stavu 120
+    string   přejít do stavu 121
+    lstring  přejít do stavu 122
+    name     přejít do stavu 123
 
 
-state 416
+State 416
 
    89 ulstmnt: $@8 LFOR '(' forexpr ';' zcexpr ';' zcexpr ')' stmnt .
 
-    $default  reduce using rule 89 (ulstmnt)
+    $výchozí  reduce using rule 89 (ulstmnt)

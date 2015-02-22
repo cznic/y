@@ -1,22 +1,22 @@
-Grammar
+Gramatika
 
     0 $accept: E $end
 
     1 E: T E2
 
     2 E2: '+' T E2
-    3   | /* empty */
+    3   | %empty
 
     4 T: F T2
 
     5 T2: '*' F T2
-    6   | /* empty */
+    6   | %empty
 
     7 F: '(' E ')'
     8  | id
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '(' (40) 7
@@ -27,23 +27,23 @@ error (256)
 id (258) 8
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (8)
-    on left: 0
+    vlevo: 0
 E (9)
-    on left: 1, on right: 0 7
+    vlevo: 1, vpravo: 0 7
 E2 (10)
-    on left: 2 3, on right: 1 2
+    vlevo: 2 3, vpravo: 1 2
 T (11)
-    on left: 4, on right: 1 2
+    vlevo: 4, vpravo: 1 2
 T2 (12)
-    on left: 5 6, on right: 4 5
+    vlevo: 5 6, vpravo: 4 5
 F (13)
-    on left: 7 8, on right: 4 5
+    vlevo: 7 8, vpravo: 4 5
 
 
-state 0
+State 0
 
     0 $accept: . E $end
     1 E: . T E2
@@ -51,22 +51,22 @@ state 0
     7 F: . '(' E ')'
     8  | . id
 
-    id   shift, and go to state 1
-    '('  shift, and go to state 2
+    id   posunout a přejít do stavu 1
+    '('  posunout a přejít do stavu 2
 
-    E  go to state 3
-    T  go to state 4
-    F  go to state 5
+    E  přejít do stavu 3
+    T  přejít do stavu 4
+    F  přejít do stavu 5
 
 
-state 1
+State 1
 
     8 F: id .
 
-    $default  reduce using rule 8 (F)
+    $výchozí  reduce using rule 8 (F)
 
 
-state 2
+State 2
 
     1 E: . T E2
     4 T: . F T2
@@ -74,143 +74,143 @@ state 2
     7  | '(' . E ')'
     8  | . id
 
-    id   shift, and go to state 1
-    '('  shift, and go to state 2
+    id   posunout a přejít do stavu 1
+    '('  posunout a přejít do stavu 2
 
-    E  go to state 6
-    T  go to state 4
-    F  go to state 5
+    E  přejít do stavu 6
+    T  přejít do stavu 4
+    F  přejít do stavu 5
 
 
-state 3
+State 3
 
     0 $accept: E . $end
 
-    $end  shift, and go to state 7
+    $end  posunout a přejít do stavu 7
 
 
-state 4
+State 4
 
     1 E: T . E2
     2 E2: . '+' T E2
-    3   | .  [$end, ')']
+    3   | . %empty  [$end, ')']
 
-    '+'  shift, and go to state 8
+    '+'  posunout a přejít do stavu 8
 
-    $default  reduce using rule 3 (E2)
+    $výchozí  reduce using rule 3 (E2)
 
-    E2  go to state 9
+    E2  přejít do stavu 9
 
 
-state 5
+State 5
 
     4 T: F . T2
     5 T2: . '*' F T2
-    6   | .  [$end, '+', ')']
+    6   | . %empty  [$end, '+', ')']
 
-    '*'  shift, and go to state 10
+    '*'  posunout a přejít do stavu 10
 
-    $default  reduce using rule 6 (T2)
+    $výchozí  reduce using rule 6 (T2)
 
-    T2  go to state 11
+    T2  přejít do stavu 11
 
 
-state 6
+State 6
 
     7 F: '(' E . ')'
 
-    ')'  shift, and go to state 12
+    ')'  posunout a přejít do stavu 12
 
 
-state 7
+State 7
 
     0 $accept: E $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 8
+State 8
 
     2 E2: '+' . T E2
     4 T: . F T2
     7 F: . '(' E ')'
     8  | . id
 
-    id   shift, and go to state 1
-    '('  shift, and go to state 2
+    id   posunout a přejít do stavu 1
+    '('  posunout a přejít do stavu 2
 
-    T  go to state 13
-    F  go to state 5
+    T  přejít do stavu 13
+    F  přejít do stavu 5
 
 
-state 9
+State 9
 
     1 E: T E2 .
 
-    $default  reduce using rule 1 (E)
+    $výchozí  reduce using rule 1 (E)
 
 
-state 10
+State 10
 
     5 T2: '*' . F T2
     7 F: . '(' E ')'
     8  | . id
 
-    id   shift, and go to state 1
-    '('  shift, and go to state 2
+    id   posunout a přejít do stavu 1
+    '('  posunout a přejít do stavu 2
 
-    F  go to state 14
+    F  přejít do stavu 14
 
 
-state 11
+State 11
 
     4 T: F T2 .
 
-    $default  reduce using rule 4 (T)
+    $výchozí  reduce using rule 4 (T)
 
 
-state 12
+State 12
 
     7 F: '(' E ')' .
 
-    $default  reduce using rule 7 (F)
+    $výchozí  reduce using rule 7 (F)
 
 
-state 13
+State 13
 
     2 E2: . '+' T E2
     2   | '+' T . E2
-    3   | .  [$end, ')']
+    3   | . %empty  [$end, ')']
 
-    '+'  shift, and go to state 8
+    '+'  posunout a přejít do stavu 8
 
-    $default  reduce using rule 3 (E2)
+    $výchozí  reduce using rule 3 (E2)
 
-    E2  go to state 15
+    E2  přejít do stavu 15
 
 
-state 14
+State 14
 
     5 T2: . '*' F T2
     5   | '*' F . T2
-    6   | .  [$end, '+', ')']
+    6   | . %empty  [$end, '+', ')']
 
-    '*'  shift, and go to state 10
+    '*'  posunout a přejít do stavu 10
 
-    $default  reduce using rule 6 (T2)
+    $výchozí  reduce using rule 6 (T2)
 
-    T2  go to state 16
+    T2  přejít do stavu 16
 
 
-state 15
+State 15
 
     2 E2: '+' T E2 .
 
-    $default  reduce using rule 2 (E2)
+    $výchozí  reduce using rule 2 (E2)
 
 
-state 16
+State 16
 
     5 T2: '*' F T2 .
 
-    $default  reduce using rule 5 (T2)
+    $výchozí  reduce using rule 5 (T2)

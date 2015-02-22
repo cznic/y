@@ -1,55 +1,55 @@
-Grammar
+Gramatika
 
     0 $accept: S $end
 
-    1 S: /* empty */
+    1 S: %empty
     2  | S 'z'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 'z' (122) 2
 error (256)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (4)
-    on left: 0
+    vlevo: 0
 S (5)
-    on left: 1 2, on right: 0 2
+    vlevo: 1 2, vpravo: 0 2
 
 
-state 0
+State 0
 
     0 $accept: . S $end
-    1 S: .
+    1 S: . %empty
     2  | . S 'z'
 
-    $default  reduce using rule 1 (S)
+    $výchozí  reduce using rule 1 (S)
 
-    S  go to state 1
+    S  přejít do stavu 1
 
 
-state 1
+State 1
 
     0 $accept: S . $end
     2 S: S . 'z'
 
-    $end  shift, and go to state 2
-    'z'   shift, and go to state 3
+    $end  posunout a přejít do stavu 2
+    'z'   posunout a přejít do stavu 3
 
 
-state 2
+State 2
 
     0 $accept: S $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 3
+State 3
 
     2 S: S 'z' .
 
-    $default  reduce using rule 2 (S)
+    $výchozí  reduce using rule 2 (S)

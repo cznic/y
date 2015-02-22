@@ -1,18 +1,18 @@
-Grammar
+Gramatika
 
     0 $accept: prog $end
 
-    1 prog: /* empty */
+    1 prog: %empty
 
-    2 $@1: /* empty */
+    2 $@1: %empty
 
     3 prog: prog $@1 line
 
-    4 $@2: /* empty */
+    4 $@2: %empty
 
     5 line: LLAB ':' $@2 line
 
-    6 $@3: /* empty */
+    6 $@3: %empty
 
     7 line: LNAME ':' $@3 line
     8     | ';'
@@ -41,7 +41,7 @@ Grammar
    30     | LTYPEPC spec12
    31     | LTYPEF spec13
 
-   32 nonnon: /* empty */
+   32 nonnon: %empty
    33       | ','
 
    34 rimrem: rim ',' rem
@@ -83,7 +83,7 @@ Grammar
 
    58 spec9: imm ',' rem ',' reg
 
-   59 spec10: /* empty */
+   59 spec10: %empty
    60       | imm
 
    61 spec11: mem ',' imm
@@ -149,7 +149,7 @@ Grammar
   108 nam: LNAME offset '(' pointer ')'
   109    | LNAME '<' '>' offset '(' LSB ')'
 
-  110 offset: /* empty */
+  110 offset: %empty
   111       | '+' con
   112       | '-' con
 
@@ -182,7 +182,7 @@ Grammar
   136     | expr '|' expr
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '$' (36) 85 86 87 88 89 90 91 92
@@ -242,130 +242,129 @@ LLAB (291) 5 77
 LVAR (292) 12 117
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (56)
-    on left: 0
+    vlevo: 0
 prog (57)
-    on left: 1 3, on right: 0 3
+    vlevo: 1 3, vpravo: 0 3
 $@1 (58)
-    on left: 2, on right: 3
+    vlevo: 2, vpravo: 3
 line (59)
-    on left: 5 7 8 9 10, on right: 3 5 7
+    vlevo: 5 7 8 9 10, vpravo: 3 5 7
 $@2 (60)
-    on left: 4, on right: 5
+    vlevo: 4, vpravo: 5
 $@3 (61)
-    on left: 6, on right: 7
+    vlevo: 6, vpravo: 7
 inst (62)
-    on left: 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28
-    29 30 31, on right: 9
+    vlevo: 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+    30 31, vpravo: 9
 nonnon (63)
-    on left: 32 33, on right: 13 48
+    vlevo: 32 33, vpravo: 13 48
 rimrem (64)
-    on left: 34, on right: 16
+    vlevo: 34, vpravo: 16
 remrim (65)
-    on left: 35, on right: 17
+    vlevo: 35, vpravo: 17
 rimnon (66)
-    on left: 36 37, on right: 15
+    vlevo: 36 37, vpravo: 15
 nonrem (67)
-    on left: 38 39, on right: 14 49
+    vlevo: 38 39, vpravo: 14 49
 nonrel (68)
-    on left: 40 41 42, on right: 18
+    vlevo: 40 41 42, vpravo: 18
 spec1 (69)
-    on left: 43, on right: 19
+    vlevo: 43, vpravo: 19
 spec2 (70)
-    on left: 44 45, on right: 20
+    vlevo: 44 45, vpravo: 20
 spec3 (71)
-    on left: 46 47, on right: 21
+    vlevo: 46 47, vpravo: 21
 spec4 (72)
-    on left: 48 49, on right: 22
+    vlevo: 48 49, vpravo: 22
 spec5 (73)
-    on left: 50 51, on right: 23
+    vlevo: 50 51, vpravo: 23
 spec6 (74)
-    on left: 52 53, on right: 24
+    vlevo: 52 53, vpravo: 24
 spec7 (75)
-    on left: 54 55 56, on right: 25
+    vlevo: 54 55 56, vpravo: 25
 spec8 (76)
-    on left: 57, on right: 26
+    vlevo: 57, vpravo: 26
 spec9 (77)
-    on left: 58, on right: 27
+    vlevo: 58, vpravo: 27
 spec10 (78)
-    on left: 59 60, on right: 28
+    vlevo: 59 60, vpravo: 28
 spec11 (79)
-    on left: 61 62, on right: 29
+    vlevo: 61 62, vpravo: 29
 spec12 (80)
-    on left: 63, on right: 30
+    vlevo: 63, vpravo: 30
 spec13 (81)
-    on left: 64, on right: 31
+    vlevo: 64, vpravo: 31
 rem (82)
-    on left: 65 66, on right: 34 35 38 39 50 51 52 53 56 57 58 73
+    vlevo: 65 66, vpravo: 34 35 38 39 50 51 52 53 56 57 58 73
 rom (83)
-    on left: 67 68 69 70 71 72, on right: 46 47
+    vlevo: 67 68 69 70 71 72, vpravo: 46 47
 rim (84)
-    on left: 73 74, on right: 34 35 36 37 50 51 52 53 54 55 56 63 64
+    vlevo: 73 74, vpravo: 34 35 36 37 50 51 52 53 54 55 56 63 64
 rel (85)
-    on left: 75 76 77, on right: 40 41 42 67
+    vlevo: 75 76 77, vpravo: 40 41 42 67
 reg (86)
-    on left: 78 79 80 81 82 83 84, on right: 57 58 65 69 71
+    vlevo: 78 79 80 81 82 83 84, vpravo: 57 58 65 69 71
 imm2 (87)
-    on left: 85, on right: 44 45
+    vlevo: 85, vpravo: 44 45
 imm (88)
-    on left: 86 87 88 89 90 91 92, on right: 42 43 58 60 61 62 74
+    vlevo: 86 87 88 89 90 91 92, vpravo: 42 43 58 60 61 62 74
 mem (89)
-    on left: 93 94, on right: 44 45 61 62 66
+    vlevo: 93 94, vpravo: 44 45 61 62 66
 omem (90)
-    on left: 95 96 97 98 99 100 101 102 103 104 105, on right: 70 72
-    93
+    vlevo: 95 96 97 98 99 100 101 102 103 104 105, vpravo: 70 72 93
 nmem (91)
-    on left: 106 107, on right: 68 94
+    vlevo: 106 107, vpravo: 68 94
 nam (92)
-    on left: 108 109, on right: 43 87 106 107
+    vlevo: 108 109, vpravo: 43 87 106 107
 offset (93)
-    on left: 110 111 112, on right: 76 77 108 109
+    vlevo: 110 111 112, vpravo: 76 77 108 109
 pointer (94)
-    on left: 113 114 115, on right: 108
+    vlevo: 113 114 115, vpravo: 108
 con (95)
-    on left: 116 117 118 119 120 121, on right: 43 45 57 62 75 86 95
-    96 97 98 99 100 101 104 105 107 111 112 118 119 120 126
+    vlevo: 116 117 118 119 120 121, vpravo: 43 45 57 62 75 86 95 96
+    97 98 99 100 101 104 105 107 111 112 118 119 120 126
 con2 (96)
-    on left: 122 123 124 125, on right: 85
+    vlevo: 122 123 124 125, vpravo: 85
 expr (97)
-    on left: 126 127 128 129 130 131 132 133 134 135 136, on right:
-    11 12 121 127 128 129 130 131 132 133 134 135 136
+    vlevo: 126 127 128 129 130 131 132 133 134 135 136, vpravo: 11
+    12 121 127 128 129 130 131 132 133 134 135 136
 
 
-state 0
+State 0
 
     0 $accept: . prog $end
-    1 prog: .
+    1 prog: . %empty
     3     | . prog $@1 line
 
-    $default  reduce using rule 1 (prog)
+    $výchozí  reduce using rule 1 (prog)
 
-    prog  go to state 1
+    prog  přejít do stavu 1
 
 
-state 1
+State 1
 
     0 $accept: prog . $end
-    2 $@1: .  [error, LTYPE0, LTYPE1, LTYPE2, LTYPE3, LTYPE4, LTYPEC, LTYPED, LTYPEN, LTYPER, LTYPET, LTYPEG, LTYPEPC, LTYPES, LTYPEM, LTYPEI, LTYPEXC, LTYPEX, LTYPERT, LTYPEF, LNAME, LLAB, LVAR, ';']
+    2 $@1: . %empty  [error, LTYPE0, LTYPE1, LTYPE2, LTYPE3, LTYPE4, LTYPEC, LTYPED, LTYPEN, LTYPER, LTYPET, LTYPEG, LTYPEPC, LTYPES, LTYPEM, LTYPEI, LTYPEXC, LTYPEX, LTYPERT, LTYPEF, LNAME, LLAB, LVAR, ';']
     3 prog: prog . $@1 line
 
-    $end  shift, and go to state 2
+    $end  posunout a přejít do stavu 2
 
-    $default  reduce using rule 2 ($@1)
+    $výchozí  reduce using rule 2 ($@1)
 
-    $@1  go to state 3
+    $@1  přejít do stavu 3
 
 
-state 2
+State 2
 
     0 $accept: prog $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 3
+State 3
 
     3 prog: prog $@1 . line
     5 line: . LLAB ':' $@2 line
@@ -395,56 +394,56 @@ state 3
    30     | . LTYPEPC spec12
    31     | . LTYPEF spec13
 
-    error    shift, and go to state 4
-    LTYPE0   shift, and go to state 5
-    LTYPE1   shift, and go to state 6
-    LTYPE2   shift, and go to state 7
-    LTYPE3   shift, and go to state 8
-    LTYPE4   shift, and go to state 9
-    LTYPEC   shift, and go to state 10
-    LTYPED   shift, and go to state 11
-    LTYPEN   shift, and go to state 12
-    LTYPER   shift, and go to state 13
-    LTYPET   shift, and go to state 14
-    LTYPEG   shift, and go to state 15
-    LTYPEPC  shift, and go to state 16
-    LTYPES   shift, and go to state 17
-    LTYPEM   shift, and go to state 18
-    LTYPEI   shift, and go to state 19
-    LTYPEXC  shift, and go to state 20
-    LTYPEX   shift, and go to state 21
-    LTYPERT  shift, and go to state 22
-    LTYPEF   shift, and go to state 23
-    LNAME    shift, and go to state 24
-    LLAB     shift, and go to state 25
-    LVAR     shift, and go to state 26
-    ';'      shift, and go to state 27
+    error    posunout a přejít do stavu 4
+    LTYPE0   posunout a přejít do stavu 5
+    LTYPE1   posunout a přejít do stavu 6
+    LTYPE2   posunout a přejít do stavu 7
+    LTYPE3   posunout a přejít do stavu 8
+    LTYPE4   posunout a přejít do stavu 9
+    LTYPEC   posunout a přejít do stavu 10
+    LTYPED   posunout a přejít do stavu 11
+    LTYPEN   posunout a přejít do stavu 12
+    LTYPER   posunout a přejít do stavu 13
+    LTYPET   posunout a přejít do stavu 14
+    LTYPEG   posunout a přejít do stavu 15
+    LTYPEPC  posunout a přejít do stavu 16
+    LTYPES   posunout a přejít do stavu 17
+    LTYPEM   posunout a přejít do stavu 18
+    LTYPEI   posunout a přejít do stavu 19
+    LTYPEXC  posunout a přejít do stavu 20
+    LTYPEX   posunout a přejít do stavu 21
+    LTYPERT  posunout a přejít do stavu 22
+    LTYPEF   posunout a přejít do stavu 23
+    LNAME    posunout a přejít do stavu 24
+    LLAB     posunout a přejít do stavu 25
+    LVAR     posunout a přejít do stavu 26
+    ';'      posunout a přejít do stavu 27
 
-    line  go to state 28
-    inst  go to state 29
+    line  přejít do stavu 28
+    inst  přejít do stavu 29
 
 
-state 4
+State 4
 
    10 line: error . ';'
 
-    ';'  shift, and go to state 30
+    ';'  posunout a přejít do stavu 30
 
 
-state 5
+State 5
 
    13 inst: LTYPE0 . nonnon
-   32 nonnon: .  [';']
+   32 nonnon: . %empty  [';']
    33       | . ','
 
-    ','  shift, and go to state 31
+    ','  posunout a přejít do stavu 31
 
-    $default  reduce using rule 32 (nonnon)
+    $výchozí  reduce using rule 32 (nonnon)
 
-    nonnon  go to state 32
+    nonnon  přejít do stavu 32
 
 
-state 6
+State 6
 
    14 inst: LTYPE1 . nonrem
    38 nonrem: . ',' rem
@@ -482,33 +481,33 @@ state 6
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    ','     shift, and go to state 45
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    ','     posunout a přejít do stavu 45
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    nonrem  go to state 48
-    rem     go to state 49
-    reg     go to state 50
-    mem     go to state 51
-    omem    go to state 52
-    nmem    go to state 53
-    nam     go to state 54
-    con     go to state 55
+    nonrem  přejít do stavu 48
+    rem     přejít do stavu 49
+    reg     přejít do stavu 50
+    mem     přejít do stavu 51
+    omem    přejít do stavu 52
+    nmem    přejít do stavu 53
+    nam     přejít do stavu 54
+    con     přejít do stavu 55
 
 
-state 7
+State 7
 
    15 inst: LTYPE2 . rimnon
    36 rimnon: . rim ','
@@ -555,35 +554,35 @@ state 7
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    rimnon  go to state 57
-    rem     go to state 58
-    rim     go to state 59
-    reg     go to state 50
-    imm     go to state 60
-    mem     go to state 51
-    omem    go to state 52
-    nmem    go to state 53
-    nam     go to state 54
-    con     go to state 55
+    rimnon  přejít do stavu 57
+    rem     přejít do stavu 58
+    rim     přejít do stavu 59
+    reg     přejít do stavu 50
+    imm     přejít do stavu 60
+    mem     přejít do stavu 51
+    omem    přejít do stavu 52
+    nmem    přejít do stavu 53
+    nam     přejít do stavu 54
+    con     přejít do stavu 55
 
 
-state 8
+State 8
 
    16 inst: LTYPE3 . rimrem
    34 rimrem: . rim ',' rem
@@ -629,35 +628,35 @@ state 8
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    rimrem  go to state 61
-    rem     go to state 58
-    rim     go to state 62
-    reg     go to state 50
-    imm     go to state 60
-    mem     go to state 51
-    omem    go to state 52
-    nmem    go to state 53
-    nam     go to state 54
-    con     go to state 55
+    rimrem  přejít do stavu 61
+    rem     přejít do stavu 58
+    rim     přejít do stavu 62
+    reg     přejít do stavu 50
+    imm     přejít do stavu 60
+    mem     přejít do stavu 51
+    omem    přejít do stavu 52
+    nmem    přejít do stavu 53
+    nam     přejít do stavu 54
+    con     přejít do stavu 55
 
 
-state 9
+State 9
 
    17 inst: LTYPE4 . remrim
    35 remrim: . rem ',' rim
@@ -694,32 +693,32 @@ state 9
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    remrim  go to state 63
-    rem     go to state 64
-    reg     go to state 50
-    mem     go to state 51
-    omem    go to state 52
-    nmem    go to state 53
-    nam     go to state 54
-    con     go to state 55
+    remrim  přejít do stavu 63
+    rem     přejít do stavu 64
+    reg     přejít do stavu 50
+    mem     přejít do stavu 51
+    omem    přejít do stavu 52
+    nmem    přejít do stavu 53
+    nam     přejít do stavu 54
+    con     přejít do stavu 55
 
 
-state 10
+State 10
 
    21 inst: LTYPEC . spec3
    46 spec3: . ',' rom
@@ -762,51 +761,51 @@ state 10
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    '*'     shift, and go to state 65
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 66
-    LLAB    shift, and go to state 67
-    LVAR    shift, and go to state 44
-    ','     shift, and go to state 68
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    '*'     posunout a přejít do stavu 65
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 66
+    LLAB    posunout a přejít do stavu 67
+    LVAR    posunout a přejít do stavu 44
+    ','     posunout a přejít do stavu 68
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    spec3  go to state 69
-    rom    go to state 70
-    rel    go to state 71
-    reg    go to state 72
-    omem   go to state 73
-    nmem   go to state 74
-    nam    go to state 54
-    con    go to state 75
+    spec3  přejít do stavu 69
+    rom    přejít do stavu 70
+    rel    přejít do stavu 71
+    reg    přejít do stavu 72
+    omem   přejít do stavu 73
+    nmem   přejít do stavu 74
+    nam    přejít do stavu 54
+    con    přejít do stavu 75
 
 
-state 11
+State 11
 
    19 inst: LTYPED . spec1
    43 spec1: . nam '/' con ',' imm
   108 nam: . LNAME offset '(' pointer ')'
   109    | . LNAME '<' '>' offset '(' LSB ')'
 
-    LNAME  shift, and go to state 43
+    LNAME  posunout a přejít do stavu 43
 
-    spec1  go to state 76
-    nam    go to state 77
+    spec1  přejít do stavu 76
+    nam    přejít do stavu 77
 
 
-state 12
+State 12
 
    22 inst: LTYPEN . spec4
-   32 nonnon: .  [';']
+   32 nonnon: . %empty  [';']
    33       | . ','
    38 nonrem: . ',' rem
    39       | . rem
@@ -845,37 +844,37 @@ state 12
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    ','     shift, and go to state 78
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    ','     posunout a přejít do stavu 78
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    $default  reduce using rule 32 (nonnon)
+    $výchozí  reduce using rule 32 (nonnon)
 
-    nonnon  go to state 79
-    nonrem  go to state 80
-    spec4   go to state 81
-    rem     go to state 49
-    reg     go to state 50
-    mem     go to state 51
-    omem    go to state 52
-    nmem    go to state 53
-    nam     go to state 54
-    con     go to state 55
+    nonnon  přejít do stavu 79
+    nonrem  přejít do stavu 80
+    spec4   přejít do stavu 81
+    rem     přejít do stavu 49
+    reg     přejít do stavu 50
+    mem     přejít do stavu 51
+    omem    přejít do stavu 52
+    nmem    přejít do stavu 53
+    nam     přejít do stavu 54
+    con     přejít do stavu 55
 
 
-state 13
+State 13
 
    18 inst: LTYPER . nonrel
    40 nonrel: . ',' rel
@@ -898,24 +897,24 @@ state 13
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LNAME   shift, and go to state 82
-    LLAB    shift, and go to state 67
-    LVAR    shift, and go to state 44
-    ','     shift, and go to state 83
-    '('     shift, and go to state 84
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LNAME   posunout a přejít do stavu 82
+    LLAB    posunout a přejít do stavu 67
+    LVAR    posunout a přejít do stavu 44
+    ','     posunout a přejít do stavu 83
+    '('     posunout a přejít do stavu 84
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    nonrel  go to state 85
-    rel     go to state 86
-    imm     go to state 87
-    con     go to state 88
+    nonrel  přejít do stavu 85
+    rel     přejít do stavu 86
+    imm     přejít do stavu 87
+    con     přejít do stavu 88
 
 
-state 14
+State 14
 
    20 inst: LTYPET . spec2
    44 spec2: . mem ',' imm2
@@ -944,23 +943,23 @@ state 14
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    spec2  go to state 89
-    mem    go to state 90
-    omem   go to state 52
-    nmem   go to state 53
-    nam    go to state 54
-    con    go to state 55
+    spec2  přejít do stavu 89
+    mem    přejít do stavu 90
+    omem   přejít do stavu 52
+    nmem   přejít do stavu 53
+    nam    přejít do stavu 54
+    con    přejít do stavu 55
 
 
-state 15
+State 15
 
    29 inst: LTYPEG . spec11
    61 spec11: . mem ',' imm
@@ -989,23 +988,23 @@ state 15
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    spec11  go to state 91
-    mem     go to state 92
-    omem    go to state 52
-    nmem    go to state 53
-    nam     go to state 54
-    con     go to state 55
+    spec11  přejít do stavu 91
+    mem     přejít do stavu 92
+    omem    přejít do stavu 52
+    nmem    přejít do stavu 53
+    nam     přejít do stavu 54
+    con     přejít do stavu 55
 
 
-state 16
+State 16
 
    30 inst: LTYPEPC . spec12
    63 spec12: . rim ',' rim
@@ -1051,35 +1050,35 @@ state 16
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    spec12  go to state 93
-    rem     go to state 58
-    rim     go to state 94
-    reg     go to state 50
-    imm     go to state 60
-    mem     go to state 51
-    omem    go to state 52
-    nmem    go to state 53
-    nam     go to state 54
-    con     go to state 55
+    spec12  přejít do stavu 93
+    rem     přejít do stavu 58
+    rim     přejít do stavu 94
+    reg     přejít do stavu 50
+    imm     přejít do stavu 60
+    mem     přejít do stavu 51
+    omem    přejít do stavu 52
+    nmem    přejít do stavu 53
+    nam     přejít do stavu 54
+    con     přejít do stavu 55
 
 
-state 17
+State 17
 
    23 inst: LTYPES . spec5
    50 spec5: . rim ',' rem
@@ -1126,35 +1125,35 @@ state 17
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    spec5  go to state 95
-    rem    go to state 58
-    rim    go to state 96
-    reg    go to state 50
-    imm    go to state 60
-    mem    go to state 51
-    omem   go to state 52
-    nmem   go to state 53
-    nam    go to state 54
-    con    go to state 55
+    spec5  přejít do stavu 95
+    rem    přejít do stavu 58
+    rim    přejít do stavu 96
+    reg    přejít do stavu 50
+    imm    přejít do stavu 60
+    mem    přejít do stavu 51
+    omem   přejít do stavu 52
+    nmem   přejít do stavu 53
+    nam    přejít do stavu 54
+    con    přejít do stavu 55
 
 
-state 18
+State 18
 
    24 inst: LTYPEM . spec6
    52 spec6: . rim ',' rem
@@ -1201,35 +1200,35 @@ state 18
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    spec6  go to state 97
-    rem    go to state 58
-    rim    go to state 98
-    reg    go to state 50
-    imm    go to state 60
-    mem    go to state 51
-    omem   go to state 52
-    nmem   go to state 53
-    nam    go to state 54
-    con    go to state 55
+    spec6  přejít do stavu 97
+    rem    přejít do stavu 58
+    rim    přejít do stavu 98
+    reg    přejít do stavu 50
+    imm    přejít do stavu 60
+    mem    přejít do stavu 51
+    omem   přejít do stavu 52
+    nmem   přejít do stavu 53
+    nam    přejít do stavu 54
+    con    přejít do stavu 55
 
 
-state 19
+State 19
 
    25 inst: LTYPEI . spec7
    54 spec7: . rim ','
@@ -1277,35 +1276,35 @@ state 19
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    spec7  go to state 99
-    rem    go to state 58
-    rim    go to state 100
-    reg    go to state 50
-    imm    go to state 60
-    mem    go to state 51
-    omem   go to state 52
-    nmem   go to state 53
-    nam    go to state 54
-    con    go to state 55
+    spec7  přejít do stavu 99
+    rem    přejít do stavu 58
+    rim    přejít do stavu 100
+    reg    přejít do stavu 50
+    imm    přejít do stavu 60
+    mem    přejít do stavu 51
+    omem   přejít do stavu 52
+    nmem   přejít do stavu 53
+    nam    přejít do stavu 54
+    con    přejít do stavu 55
 
 
-state 20
+State 20
 
    26 inst: LTYPEXC . spec8
    57 spec8: . reg ',' rem ',' con
@@ -1317,19 +1316,19 @@ state 20
    83    | . LSREG
    84    | . LXREG
 
-    LBREG  shift, and go to state 36
-    LLREG  shift, and go to state 37
-    LSREG  shift, and go to state 38
-    LFREG  shift, and go to state 39
-    LMREG  shift, and go to state 40
-    LXREG  shift, and go to state 41
-    LSP    shift, and go to state 42
+    LBREG  posunout a přejít do stavu 36
+    LLREG  posunout a přejít do stavu 37
+    LSREG  posunout a přejít do stavu 38
+    LFREG  posunout a přejít do stavu 39
+    LMREG  posunout a přejít do stavu 40
+    LXREG  posunout a přejít do stavu 41
+    LSP    posunout a přejít do stavu 42
 
-    spec8  go to state 101
-    reg    go to state 102
+    spec8  přejít do stavu 101
+    reg    přejít do stavu 102
 
 
-state 21
+State 21
 
    27 inst: LTYPEX . spec9
    58 spec9: . imm ',' rem ',' reg
@@ -1341,16 +1340,16 @@ state 21
    91    | . '$' '(' '-' LFCONST ')'
    92    | . '$' '-' LFCONST
 
-    '$'  shift, and go to state 56
+    '$'  posunout a přejít do stavu 56
 
-    spec9  go to state 103
-    imm    go to state 104
+    spec9  přejít do stavu 103
+    imm    přejít do stavu 104
 
 
-state 22
+State 22
 
    28 inst: LTYPERT . spec10
-   59 spec10: .  [';']
+   59 spec10: . %empty  [';']
    60       | . imm
    86 imm: . '$' con
    87    | . '$' nam
@@ -1360,15 +1359,15 @@ state 22
    91    | . '$' '(' '-' LFCONST ')'
    92    | . '$' '-' LFCONST
 
-    '$'  shift, and go to state 56
+    '$'  posunout a přejít do stavu 56
 
-    $default  reduce using rule 59 (spec10)
+    $výchozí  reduce using rule 59 (spec10)
 
-    spec10  go to state 105
-    imm     go to state 106
+    spec10  přejít do stavu 105
+    imm     přejít do stavu 106
 
 
-state 23
+State 23
 
    31 inst: LTYPEF . spec13
    64 spec13: . rim ',' rim
@@ -1414,100 +1413,100 @@ state 23
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    spec13  go to state 107
-    rem     go to state 58
-    rim     go to state 108
-    reg     go to state 50
-    imm     go to state 60
-    mem     go to state 51
-    omem    go to state 52
-    nmem    go to state 53
-    nam     go to state 54
-    con     go to state 55
+    spec13  přejít do stavu 107
+    rem     přejít do stavu 58
+    rim     přejít do stavu 108
+    reg     přejít do stavu 50
+    imm     přejít do stavu 60
+    mem     přejít do stavu 51
+    omem    přejít do stavu 52
+    nmem    přejít do stavu 53
+    nam     přejít do stavu 54
+    con     přejít do stavu 55
 
 
-state 24
+State 24
 
     7 line: LNAME . ':' $@3 line
    11 inst: LNAME . '=' expr
 
-    ':'  shift, and go to state 109
-    '='  shift, and go to state 110
+    ':'  posunout a přejít do stavu 109
+    '='  posunout a přejít do stavu 110
 
 
-state 25
+State 25
 
     5 line: LLAB . ':' $@2 line
 
-    ':'  shift, and go to state 111
+    ':'  posunout a přejít do stavu 111
 
 
-state 26
+State 26
 
    12 inst: LVAR . '=' expr
 
-    '='  shift, and go to state 112
+    '='  posunout a přejít do stavu 112
 
 
-state 27
+State 27
 
     8 line: ';' .
 
-    $default  reduce using rule 8 (line)
+    $výchozí  reduce using rule 8 (line)
 
 
-state 28
+State 28
 
     3 prog: prog $@1 line .
 
-    $default  reduce using rule 3 (prog)
+    $výchozí  reduce using rule 3 (prog)
 
 
-state 29
+State 29
 
     9 line: inst . ';'
 
-    ';'  shift, and go to state 113
+    ';'  posunout a přejít do stavu 113
 
 
-state 30
+State 30
 
    10 line: error ';' .
 
-    $default  reduce using rule 10 (line)
+    $výchozí  reduce using rule 10 (line)
 
 
-state 31
+State 31
 
    33 nonnon: ',' .
 
-    $default  reduce using rule 33 (nonnon)
+    $výchozí  reduce using rule 33 (nonnon)
 
 
-state 32
+State 32
 
    13 inst: LTYPE0 nonnon .
 
-    $default  reduce using rule 13 (inst)
+    $výchozí  reduce using rule 13 (inst)
 
 
-state 33
+State 33
 
   116 con: . LCONST
   117    | . LVAR
@@ -1517,17 +1516,17 @@ state 33
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 114
+    con  přejít do stavu 114
 
 
-state 34
+State 34
 
   116 con: . LCONST
   117    | . LVAR
@@ -1537,97 +1536,97 @@ state 34
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 115
+    con  přejít do stavu 115
 
 
-state 35
+State 35
 
   116 con: LCONST .
 
-    $default  reduce using rule 116 (con)
+    $výchozí  reduce using rule 116 (con)
 
 
-state 36
+State 36
 
    78 reg: LBREG .
 
-    $default  reduce using rule 78 (reg)
+    $výchozí  reduce using rule 78 (reg)
 
 
-state 37
+State 37
 
    80 reg: LLREG .
 
-    $default  reduce using rule 80 (reg)
+    $výchozí  reduce using rule 80 (reg)
 
 
-state 38
+State 38
 
    83 reg: LSREG .
 
-    $default  reduce using rule 83 (reg)
+    $výchozí  reduce using rule 83 (reg)
 
 
-state 39
+State 39
 
    79 reg: LFREG .
 
-    $default  reduce using rule 79 (reg)
+    $výchozí  reduce using rule 79 (reg)
 
 
-state 40
+State 40
 
    81 reg: LMREG .
 
-    $default  reduce using rule 81 (reg)
+    $výchozí  reduce using rule 81 (reg)
 
 
-state 41
+State 41
 
    84 reg: LXREG .
 
-    $default  reduce using rule 84 (reg)
+    $výchozí  reduce using rule 84 (reg)
 
 
-state 42
+State 42
 
    82 reg: LSP .
 
-    $default  reduce using rule 82 (reg)
+    $výchozí  reduce using rule 82 (reg)
 
 
-state 43
+State 43
 
   108 nam: LNAME . offset '(' pointer ')'
   109    | LNAME . '<' '>' offset '(' LSB ')'
-  110 offset: .  ['(']
+  110 offset: . %empty  ['(']
   111       | . '+' con
   112       | . '-' con
 
-    '<'  shift, and go to state 116
-    '+'  shift, and go to state 117
-    '-'  shift, and go to state 118
+    '<'  posunout a přejít do stavu 116
+    '+'  posunout a přejít do stavu 117
+    '-'  posunout a přejít do stavu 118
 
-    $default  reduce using rule 110 (offset)
+    $výchozí  reduce using rule 110 (offset)
 
-    offset  go to state 119
+    offset  přejít do stavu 119
 
 
-state 44
+State 44
 
   117 con: LVAR .
 
-    $default  reduce using rule 117 (con)
+    $výchozí  reduce using rule 117 (con)
 
 
-state 45
+State 45
 
    38 nonrem: ',' . rem
    65 rem: . reg
@@ -1663,31 +1662,31 @@ state 45
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 120
-    reg   go to state 50
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 120
+    reg   přejít do stavu 50
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 46
+State 46
 
   102 omem: '(' . LLREG ')'
   103     | '(' . LSP ')'
@@ -1712,20 +1711,20 @@ state 46
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LLREG   shift, and go to state 121
-    LSP     shift, and go to state 122
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LLREG   posunout a přejít do stavu 121
+    LSP     posunout a přejít do stavu 122
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 124
+    con   přejít do stavu 123
+    expr  přejít do stavu 124
 
 
-state 47
+State 47
 
   116 con: . LCONST
   117    | . LVAR
@@ -1735,69 +1734,69 @@ state 47
   120    | '~' . con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 125
+    con  přejít do stavu 125
 
 
-state 48
+State 48
 
    14 inst: LTYPE1 nonrem .
 
-    $default  reduce using rule 14 (inst)
+    $výchozí  reduce using rule 14 (inst)
 
 
-state 49
+State 49
 
    39 nonrem: rem .
 
-    $default  reduce using rule 39 (nonrem)
+    $výchozí  reduce using rule 39 (nonrem)
 
 
-state 50
+State 50
 
    65 rem: reg .
 
-    $default  reduce using rule 65 (rem)
+    $výchozí  reduce using rule 65 (rem)
 
 
-state 51
+State 51
 
    66 rem: mem .
 
-    $default  reduce using rule 66 (rem)
+    $výchozí  reduce using rule 66 (rem)
 
 
-state 52
+State 52
 
    93 mem: omem .
 
-    $default  reduce using rule 93 (mem)
+    $výchozí  reduce using rule 93 (mem)
 
 
-state 53
+State 53
 
    94 mem: nmem .
 
-    $default  reduce using rule 94 (mem)
+    $výchozí  reduce using rule 94 (mem)
 
 
-state 54
+State 54
 
   106 nmem: nam .  [':', ';', ',']
   107     | nam . '(' LLREG '*' con ')'
 
-    '('  shift, and go to state 126
+    '('  posunout a přejít do stavu 126
 
-    $default  reduce using rule 106 (nmem)
+    $výchozí  reduce using rule 106 (nmem)
 
 
-state 55
+State 55
 
    95 omem: con .  [':', ';', ',']
    96     | con . '(' LLREG ')'
@@ -1807,12 +1806,12 @@ state 55
   100     | con . '(' LLREG ')' '(' LLREG '*' con ')'
   101     | con . '(' LLREG ')' '(' LSREG '*' con ')'
 
-    '('  shift, and go to state 127
+    '('  posunout a přejít do stavu 127
 
-    $default  reduce using rule 95 (omem)
+    $výchozí  reduce using rule 95 (omem)
 
 
-state 56
+State 56
 
    86 imm: '$' . con
    87    | '$' . nam
@@ -1830,80 +1829,80 @@ state 56
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'      shift, and go to state 33
-    '-'      shift, and go to state 128
-    LCONST   shift, and go to state 35
-    LFCONST  shift, and go to state 129
-    LSCONST  shift, and go to state 130
-    LNAME    shift, and go to state 43
-    LVAR     shift, and go to state 44
-    '('      shift, and go to state 131
-    '~'      shift, and go to state 47
+    '+'      posunout a přejít do stavu 33
+    '-'      posunout a přejít do stavu 128
+    LCONST   posunout a přejít do stavu 35
+    LFCONST  posunout a přejít do stavu 129
+    LSCONST  posunout a přejít do stavu 130
+    LNAME    posunout a přejít do stavu 43
+    LVAR     posunout a přejít do stavu 44
+    '('      posunout a přejít do stavu 131
+    '~'      posunout a přejít do stavu 47
 
-    nam  go to state 132
-    con  go to state 133
+    nam  přejít do stavu 132
+    con  přejít do stavu 133
 
 
-state 57
+State 57
 
    15 inst: LTYPE2 rimnon .
 
-    $default  reduce using rule 15 (inst)
+    $výchozí  reduce using rule 15 (inst)
 
 
-state 58
+State 58
 
    73 rim: rem .
 
-    $default  reduce using rule 73 (rim)
+    $výchozí  reduce using rule 73 (rim)
 
 
-state 59
+State 59
 
    36 rimnon: rim . ','
    37       | rim .  [';']
 
-    ','  shift, and go to state 134
+    ','  posunout a přejít do stavu 134
 
-    $default  reduce using rule 37 (rimnon)
+    $výchozí  reduce using rule 37 (rimnon)
 
 
-state 60
+State 60
 
    74 rim: imm .
 
-    $default  reduce using rule 74 (rim)
+    $výchozí  reduce using rule 74 (rim)
 
 
-state 61
+State 61
 
    16 inst: LTYPE3 rimrem .
 
-    $default  reduce using rule 16 (inst)
+    $výchozí  reduce using rule 16 (inst)
 
 
-state 62
+State 62
 
    34 rimrem: rim . ',' rem
 
-    ','  shift, and go to state 135
+    ','  posunout a přejít do stavu 135
 
 
-state 63
+State 63
 
    17 inst: LTYPE4 remrim .
 
-    $default  reduce using rule 17 (inst)
+    $výchozí  reduce using rule 17 (inst)
 
 
-state 64
+State 64
 
    35 remrim: rem . ',' rim
 
-    ','  shift, and go to state 136
+    ','  posunout a přejít do stavu 136
 
 
-state 65
+State 65
 
    69 rom: '*' . reg
    70    | '*' . omem
@@ -1932,59 +1931,59 @@ state 65
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    reg   go to state 137
-    omem  go to state 138
-    con   go to state 55
+    reg   přejít do stavu 137
+    omem  přejít do stavu 138
+    con   přejít do stavu 55
 
 
-state 66
+State 66
 
    76 rel: LNAME . offset
   108 nam: LNAME . offset '(' pointer ')'
   109    | LNAME . '<' '>' offset '(' LSB ')'
-  110 offset: .  [';', '(']
+  110 offset: . %empty  [';', '(']
   111       | . '+' con
   112       | . '-' con
 
-    '<'  shift, and go to state 116
-    '+'  shift, and go to state 117
-    '-'  shift, and go to state 118
+    '<'  posunout a přejít do stavu 116
+    '+'  posunout a přejít do stavu 117
+    '-'  posunout a přejít do stavu 118
 
-    $default  reduce using rule 110 (offset)
+    $výchozí  reduce using rule 110 (offset)
 
-    offset  go to state 139
+    offset  přejít do stavu 139
 
 
-state 67
+State 67
 
    77 rel: LLAB . offset
-  110 offset: .  [';']
+  110 offset: . %empty  [';']
   111       | . '+' con
   112       | . '-' con
 
-    '+'  shift, and go to state 117
-    '-'  shift, and go to state 118
+    '+'  posunout a přejít do stavu 117
+    '-'  posunout a přejít do stavu 118
 
-    $default  reduce using rule 110 (offset)
+    $výchozí  reduce using rule 110 (offset)
 
-    offset  go to state 140
+    offset  přejít do stavu 140
 
 
-state 68
+State 68
 
    46 spec3: ',' . rom
    67 rom: . rel
@@ -2025,75 +2024,75 @@ state 68
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    '*'     shift, and go to state 65
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 66
-    LLAB    shift, and go to state 67
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    '*'     posunout a přejít do stavu 65
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 66
+    LLAB    posunout a přejít do stavu 67
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    rom   go to state 141
-    rel   go to state 71
-    reg   go to state 72
-    omem  go to state 73
-    nmem  go to state 74
-    nam   go to state 54
-    con   go to state 75
+    rom   přejít do stavu 141
+    rel   přejít do stavu 71
+    reg   přejít do stavu 72
+    omem  přejít do stavu 73
+    nmem  přejít do stavu 74
+    nam   přejít do stavu 54
+    con   přejít do stavu 75
 
 
-state 69
+State 69
 
    21 inst: LTYPEC spec3 .
 
-    $default  reduce using rule 21 (inst)
+    $výchozí  reduce using rule 21 (inst)
 
 
-state 70
+State 70
 
    47 spec3: rom .
 
-    $default  reduce using rule 47 (spec3)
+    $výchozí  reduce using rule 47 (spec3)
 
 
-state 71
+State 71
 
    67 rom: rel .
 
-    $default  reduce using rule 67 (rom)
+    $výchozí  reduce using rule 67 (rom)
 
 
-state 72
+State 72
 
    71 rom: reg .
 
-    $default  reduce using rule 71 (rom)
+    $výchozí  reduce using rule 71 (rom)
 
 
-state 73
+State 73
 
    72 rom: omem .
 
-    $default  reduce using rule 72 (rom)
+    $výchozí  reduce using rule 72 (rom)
 
 
-state 74
+State 74
 
    68 rom: nmem .
 
-    $default  reduce using rule 68 (rom)
+    $výchozí  reduce using rule 68 (rom)
 
 
-state 75
+State 75
 
    75 rel: con . '(' LPC ')'
    95 omem: con .  [';']
@@ -2104,26 +2103,26 @@ state 75
   100     | con . '(' LLREG ')' '(' LLREG '*' con ')'
   101     | con . '(' LLREG ')' '(' LSREG '*' con ')'
 
-    '('  shift, and go to state 142
+    '('  posunout a přejít do stavu 142
 
-    $default  reduce using rule 95 (omem)
+    $výchozí  reduce using rule 95 (omem)
 
 
-state 76
+State 76
 
    19 inst: LTYPED spec1 .
 
-    $default  reduce using rule 19 (inst)
+    $výchozí  reduce using rule 19 (inst)
 
 
-state 77
+State 77
 
    43 spec1: nam . '/' con ',' imm
 
-    '/'  shift, and go to state 143
+    '/'  posunout a přejít do stavu 143
 
 
-state 78
+State 78
 
    33 nonnon: ',' .  [';']
    38 nonrem: ',' . rem
@@ -2160,69 +2159,69 @@ state 78
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    $default  reduce using rule 33 (nonnon)
+    $výchozí  reduce using rule 33 (nonnon)
 
-    rem   go to state 120
-    reg   go to state 50
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 120
+    reg   přejít do stavu 50
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 79
+State 79
 
    48 spec4: nonnon .
 
-    $default  reduce using rule 48 (spec4)
+    $výchozí  reduce using rule 48 (spec4)
 
 
-state 80
+State 80
 
    49 spec4: nonrem .
 
-    $default  reduce using rule 49 (spec4)
+    $výchozí  reduce using rule 49 (spec4)
 
 
-state 81
+State 81
 
    22 inst: LTYPEN spec4 .
 
-    $default  reduce using rule 22 (inst)
+    $výchozí  reduce using rule 22 (inst)
 
 
-state 82
+State 82
 
    76 rel: LNAME . offset
-  110 offset: .  [';']
+  110 offset: . %empty  [';']
   111       | . '+' con
   112       | . '-' con
 
-    '+'  shift, and go to state 117
-    '-'  shift, and go to state 118
+    '+'  posunout a přejít do stavu 117
+    '-'  posunout a přejít do stavu 118
 
-    $default  reduce using rule 110 (offset)
+    $výchozí  reduce using rule 110 (offset)
 
-    offset  go to state 144
+    offset  přejít do stavu 144
 
 
-state 83
+State 83
 
    40 nonrel: ',' . rel
    75 rel: . con '(' LPC ')'
@@ -2235,20 +2234,20 @@ state 83
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LNAME   shift, and go to state 82
-    LLAB    shift, and go to state 67
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LNAME   posunout a přejít do stavu 82
+    LLAB    posunout a přejít do stavu 67
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    rel  go to state 145
-    con  go to state 88
+    rel  přejít do stavu 145
+    con  přejít do stavu 88
 
 
-state 84
+State 84
 
   116 con: . LCONST
   117    | . LVAR
@@ -2269,204 +2268,204 @@ state 84
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 124
+    con   přejít do stavu 123
+    expr  přejít do stavu 124
 
 
-state 85
+State 85
 
    18 inst: LTYPER nonrel .
 
-    $default  reduce using rule 18 (inst)
+    $výchozí  reduce using rule 18 (inst)
 
 
-state 86
+State 86
 
    41 nonrel: rel .
 
-    $default  reduce using rule 41 (nonrel)
+    $výchozí  reduce using rule 41 (nonrel)
 
 
-state 87
+State 87
 
    42 nonrel: imm . ',' rel
 
-    ','  shift, and go to state 146
+    ','  posunout a přejít do stavu 146
 
 
-state 88
+State 88
 
    75 rel: con . '(' LPC ')'
 
-    '('  shift, and go to state 147
+    '('  posunout a přejít do stavu 147
 
 
-state 89
+State 89
 
    20 inst: LTYPET spec2 .
 
-    $default  reduce using rule 20 (inst)
+    $výchozí  reduce using rule 20 (inst)
 
 
-state 90
+State 90
 
    44 spec2: mem . ',' imm2
    45      | mem . ',' con ',' imm2
 
-    ','  shift, and go to state 148
+    ','  posunout a přejít do stavu 148
 
 
-state 91
+State 91
 
    29 inst: LTYPEG spec11 .
 
-    $default  reduce using rule 29 (inst)
+    $výchozí  reduce using rule 29 (inst)
 
 
-state 92
+State 92
 
    61 spec11: mem . ',' imm
    62       | mem . ',' con ',' imm
 
-    ','  shift, and go to state 149
+    ','  posunout a přejít do stavu 149
 
 
-state 93
+State 93
 
    30 inst: LTYPEPC spec12 .
 
-    $default  reduce using rule 30 (inst)
+    $výchozí  reduce using rule 30 (inst)
 
 
-state 94
+State 94
 
    63 spec12: rim . ',' rim
 
-    ','  shift, and go to state 150
+    ','  posunout a přejít do stavu 150
 
 
-state 95
+State 95
 
    23 inst: LTYPES spec5 .
 
-    $default  reduce using rule 23 (inst)
+    $výchozí  reduce using rule 23 (inst)
 
 
-state 96
+State 96
 
    50 spec5: rim . ',' rem
    51      | rim . ',' rem ':' LLREG
 
-    ','  shift, and go to state 151
+    ','  posunout a přejít do stavu 151
 
 
-state 97
+State 97
 
    24 inst: LTYPEM spec6 .
 
-    $default  reduce using rule 24 (inst)
+    $výchozí  reduce using rule 24 (inst)
 
 
-state 98
+State 98
 
    52 spec6: rim . ',' rem
    53      | rim . ',' rem ':' LSREG
 
-    ','  shift, and go to state 152
+    ','  posunout a přejít do stavu 152
 
 
-state 99
+State 99
 
    25 inst: LTYPEI spec7 .
 
-    $default  reduce using rule 25 (inst)
+    $výchozí  reduce using rule 25 (inst)
 
 
-state 100
+State 100
 
    54 spec7: rim . ','
    55      | rim .  [';']
    56      | rim . ',' rem
 
-    ','  shift, and go to state 153
+    ','  posunout a přejít do stavu 153
 
-    $default  reduce using rule 55 (spec7)
+    $výchozí  reduce using rule 55 (spec7)
 
 
-state 101
+State 101
 
    26 inst: LTYPEXC spec8 .
 
-    $default  reduce using rule 26 (inst)
+    $výchozí  reduce using rule 26 (inst)
 
 
-state 102
+State 102
 
    57 spec8: reg . ',' rem ',' con
 
-    ','  shift, and go to state 154
+    ','  posunout a přejít do stavu 154
 
 
-state 103
+State 103
 
    27 inst: LTYPEX spec9 .
 
-    $default  reduce using rule 27 (inst)
+    $výchozí  reduce using rule 27 (inst)
 
 
-state 104
+State 104
 
    58 spec9: imm . ',' rem ',' reg
 
-    ','  shift, and go to state 155
+    ','  posunout a přejít do stavu 155
 
 
-state 105
+State 105
 
    28 inst: LTYPERT spec10 .
 
-    $default  reduce using rule 28 (inst)
+    $výchozí  reduce using rule 28 (inst)
 
 
-state 106
+State 106
 
    60 spec10: imm .
 
-    $default  reduce using rule 60 (spec10)
+    $výchozí  reduce using rule 60 (spec10)
 
 
-state 107
+State 107
 
    31 inst: LTYPEF spec13 .
 
-    $default  reduce using rule 31 (inst)
+    $výchozí  reduce using rule 31 (inst)
 
 
-state 108
+State 108
 
    64 spec13: rim . ',' rim
 
-    ','  shift, and go to state 156
+    ','  posunout a přejít do stavu 156
 
 
-state 109
+State 109
 
-    6 $@3: .
+    6 $@3: . %empty
     7 line: LNAME ':' . $@3 line
 
-    $default  reduce using rule 6 ($@3)
+    $výchozí  reduce using rule 6 ($@3)
 
-    $@3  go to state 157
+    $@3  přejít do stavu 157
 
 
-state 110
+State 110
 
    11 inst: LNAME '=' . expr
   116 con: . LCONST
@@ -2487,28 +2486,28 @@ state 110
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 158
+    con   přejít do stavu 123
+    expr  přejít do stavu 158
 
 
-state 111
+State 111
 
-    4 $@2: .
+    4 $@2: . %empty
     5 line: LLAB ':' . $@2 line
 
-    $default  reduce using rule 4 ($@2)
+    $výchozí  reduce using rule 4 ($@2)
 
-    $@2  go to state 159
+    $@2  přejít do stavu 159
 
 
-state 112
+State 112
 
    12 inst: LVAR '=' . expr
   116 con: . LCONST
@@ -2529,46 +2528,46 @@ state 112
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 160
+    con   přejít do stavu 123
+    expr  přejít do stavu 160
 
 
-state 113
+State 113
 
     9 line: inst ';' .
 
-    $default  reduce using rule 9 (line)
+    $výchozí  reduce using rule 9 (line)
 
 
-state 114
+State 114
 
   119 con: '+' con .
 
-    $default  reduce using rule 119 (con)
+    $výchozí  reduce using rule 119 (con)
 
 
-state 115
+State 115
 
   118 con: '-' con .
 
-    $default  reduce using rule 118 (con)
+    $výchozí  reduce using rule 118 (con)
 
 
-state 116
+State 116
 
   109 nam: LNAME '<' . '>' offset '(' LSB ')'
 
-    '>'  shift, and go to state 161
+    '>'  posunout a přejít do stavu 161
 
 
-state 117
+State 117
 
   111 offset: '+' . con
   116 con: . LCONST
@@ -2578,17 +2577,17 @@ state 117
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 162
+    con  přejít do stavu 162
 
 
-state 118
+State 118
 
   112 offset: '-' . con
   116 con: . LCONST
@@ -2598,55 +2597,55 @@ state 118
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 163
+    con  přejít do stavu 163
 
 
-state 119
+State 119
 
   108 nam: LNAME offset . '(' pointer ')'
 
-    '('  shift, and go to state 164
+    '('  posunout a přejít do stavu 164
 
 
-state 120
+State 120
 
    38 nonrem: ',' rem .
 
-    $default  reduce using rule 38 (nonrem)
+    $výchozí  reduce using rule 38 (nonrem)
 
 
-state 121
+State 121
 
   102 omem: '(' LLREG . ')'
   104     | '(' LLREG . '*' con ')'
   105     | '(' LLREG . ')' '(' LLREG '*' con ')'
 
-    '*'  shift, and go to state 165
-    ')'  shift, and go to state 166
+    '*'  posunout a přejít do stavu 165
+    ')'  posunout a přejít do stavu 166
 
 
-state 122
+State 122
 
   103 omem: '(' LSP . ')'
 
-    ')'  shift, and go to state 167
+    ')'  posunout a přejít do stavu 167
 
 
-state 123
+State 123
 
   126 expr: con .
 
-    $default  reduce using rule 126 (expr)
+    $výchozí  reduce using rule 126 (expr)
 
 
-state 124
+State 124
 
   121 con: '(' expr . ')'
   127 expr: expr . '+' expr
@@ -2660,34 +2659,34 @@ state 124
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    '|'  shift, and go to state 168
-    '^'  shift, and go to state 169
-    '&'  shift, and go to state 170
-    '<'  shift, and go to state 171
-    '>'  shift, and go to state 172
-    '+'  shift, and go to state 173
-    '-'  shift, and go to state 174
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
-    ')'  shift, and go to state 178
+    '|'  posunout a přejít do stavu 168
+    '^'  posunout a přejít do stavu 169
+    '&'  posunout a přejít do stavu 170
+    '<'  posunout a přejít do stavu 171
+    '>'  posunout a přejít do stavu 172
+    '+'  posunout a přejít do stavu 173
+    '-'  posunout a přejít do stavu 174
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
+    ')'  posunout a přejít do stavu 178
 
 
-state 125
+State 125
 
   120 con: '~' con .
 
-    $default  reduce using rule 120 (con)
+    $výchozí  reduce using rule 120 (con)
 
 
-state 126
+State 126
 
   107 nmem: nam '(' . LLREG '*' con ')'
 
-    LLREG  shift, and go to state 179
+    LLREG  posunout a přejít do stavu 179
 
 
-state 127
+State 127
 
    96 omem: con '(' . LLREG ')'
    97     | con '(' . LSP ')'
@@ -2696,12 +2695,12 @@ state 127
   100     | con '(' . LLREG ')' '(' LLREG '*' con ')'
   101     | con '(' . LLREG ')' '(' LSREG '*' con ')'
 
-    LLREG  shift, and go to state 180
-    LSREG  shift, and go to state 181
-    LSP    shift, and go to state 182
+    LLREG  posunout a přejít do stavu 180
+    LSREG  posunout a přejít do stavu 181
+    LSP    posunout a přejít do stavu 182
 
 
-state 128
+State 128
 
    92 imm: '$' '-' . LFCONST
   116 con: . LCONST
@@ -2712,32 +2711,32 @@ state 128
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'      shift, and go to state 33
-    '-'      shift, and go to state 34
-    LCONST   shift, and go to state 35
-    LFCONST  shift, and go to state 183
-    LVAR     shift, and go to state 44
-    '('      shift, and go to state 84
-    '~'      shift, and go to state 47
+    '+'      posunout a přejít do stavu 33
+    '-'      posunout a přejít do stavu 34
+    LCONST   posunout a přejít do stavu 35
+    LFCONST  posunout a přejít do stavu 183
+    LVAR     posunout a přejít do stavu 44
+    '('      posunout a přejít do stavu 84
+    '~'      posunout a přejít do stavu 47
 
-    con  go to state 115
+    con  přejít do stavu 115
 
 
-state 129
+State 129
 
    89 imm: '$' LFCONST .
 
-    $default  reduce using rule 89 (imm)
+    $výchozí  reduce using rule 89 (imm)
 
 
-state 130
+State 130
 
    88 imm: '$' LSCONST .
 
-    $default  reduce using rule 88 (imm)
+    $výchozí  reduce using rule 88 (imm)
 
 
-state 131
+State 131
 
    90 imm: '$' '(' . LFCONST ')'
    91    | '$' '(' . '-' LFCONST ')'
@@ -2760,40 +2759,40 @@ state 131
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'      shift, and go to state 33
-    '-'      shift, and go to state 184
-    LCONST   shift, and go to state 35
-    LFCONST  shift, and go to state 185
-    LVAR     shift, and go to state 44
-    '('      shift, and go to state 84
-    '~'      shift, and go to state 47
+    '+'      posunout a přejít do stavu 33
+    '-'      posunout a přejít do stavu 184
+    LCONST   posunout a přejít do stavu 35
+    LFCONST  posunout a přejít do stavu 185
+    LVAR     posunout a přejít do stavu 44
+    '('      posunout a přejít do stavu 84
+    '~'      posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 124
+    con   přejít do stavu 123
+    expr  přejít do stavu 124
 
 
-state 132
+State 132
 
    87 imm: '$' nam .
 
-    $default  reduce using rule 87 (imm)
+    $výchozí  reduce using rule 87 (imm)
 
 
-state 133
+State 133
 
    86 imm: '$' con .
 
-    $default  reduce using rule 86 (imm)
+    $výchozí  reduce using rule 86 (imm)
 
 
-state 134
+State 134
 
    36 rimnon: rim ',' .
 
-    $default  reduce using rule 36 (rimnon)
+    $výchozí  reduce using rule 36 (rimnon)
 
 
-state 135
+State 135
 
    34 rimrem: rim ',' . rem
    65 rem: . reg
@@ -2829,31 +2828,31 @@ state 135
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 186
-    reg   go to state 50
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 186
+    reg   přejít do stavu 50
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 136
+State 136
 
    35 remrim: rem ',' . rim
    65 rem: . reg
@@ -2898,72 +2897,72 @@ state 136
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 58
-    rim   go to state 187
-    reg   go to state 50
-    imm   go to state 60
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 58
+    rim   přejít do stavu 187
+    reg   přejít do stavu 50
+    imm   přejít do stavu 60
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 137
+State 137
 
    69 rom: '*' reg .
 
-    $default  reduce using rule 69 (rom)
+    $výchozí  reduce using rule 69 (rom)
 
 
-state 138
+State 138
 
    70 rom: '*' omem .
 
-    $default  reduce using rule 70 (rom)
+    $výchozí  reduce using rule 70 (rom)
 
 
-state 139
+State 139
 
    76 rel: LNAME offset .  [';']
   108 nam: LNAME offset . '(' pointer ')'
 
-    '('  shift, and go to state 164
+    '('  posunout a přejít do stavu 164
 
-    $default  reduce using rule 76 (rel)
+    $výchozí  reduce using rule 76 (rel)
 
 
-state 140
+State 140
 
    77 rel: LLAB offset .
 
-    $default  reduce using rule 77 (rel)
+    $výchozí  reduce using rule 77 (rel)
 
 
-state 141
+State 141
 
    46 spec3: ',' rom .
 
-    $default  reduce using rule 46 (spec3)
+    $výchozí  reduce using rule 46 (spec3)
 
 
-state 142
+State 142
 
    75 rel: con '(' . LPC ')'
    96 omem: con '(' . LLREG ')'
@@ -2973,13 +2972,13 @@ state 142
   100     | con '(' . LLREG ')' '(' LLREG '*' con ')'
   101     | con '(' . LLREG ')' '(' LSREG '*' con ')'
 
-    LPC    shift, and go to state 188
-    LLREG  shift, and go to state 180
-    LSREG  shift, and go to state 181
-    LSP    shift, and go to state 182
+    LPC    posunout a přejít do stavu 188
+    LLREG  posunout a přejít do stavu 180
+    LSREG  posunout a přejít do stavu 181
+    LSP    posunout a přejít do stavu 182
 
 
-state 143
+State 143
 
    43 spec1: nam '/' . con ',' imm
   116 con: . LCONST
@@ -2989,31 +2988,31 @@ state 143
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 189
+    con  přejít do stavu 189
 
 
-state 144
+State 144
 
    76 rel: LNAME offset .
 
-    $default  reduce using rule 76 (rel)
+    $výchozí  reduce using rule 76 (rel)
 
 
-state 145
+State 145
 
    40 nonrel: ',' rel .
 
-    $default  reduce using rule 40 (nonrel)
+    $výchozí  reduce using rule 40 (nonrel)
 
 
-state 146
+State 146
 
    42 nonrel: imm ',' . rel
    75 rel: . con '(' LPC ')'
@@ -3026,27 +3025,27 @@ state 146
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LNAME   shift, and go to state 82
-    LLAB    shift, and go to state 67
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LNAME   posunout a přejít do stavu 82
+    LLAB    posunout a přejít do stavu 67
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    rel  go to state 190
-    con  go to state 88
+    rel  přejít do stavu 190
+    con  přejít do stavu 88
 
 
-state 147
+State 147
 
    75 rel: con '(' . LPC ')'
 
-    LPC  shift, and go to state 188
+    LPC  posunout a přejít do stavu 188
 
 
-state 148
+State 148
 
    44 spec2: mem ',' . imm2
    45      | mem ',' . con ',' imm2
@@ -3058,19 +3057,19 @@ state 148
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '$'     shift, and go to state 191
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '$'     posunout a přejít do stavu 191
+    '~'     posunout a přejít do stavu 47
 
-    imm2  go to state 192
-    con   go to state 193
+    imm2  přejít do stavu 192
+    con   přejít do stavu 193
 
 
-state 149
+State 149
 
    61 spec11: mem ',' . imm
    62       | mem ',' . con ',' imm
@@ -3088,19 +3087,19 @@ state 149
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    imm  go to state 194
-    con  go to state 195
+    imm  přejít do stavu 194
+    con  přejít do stavu 195
 
 
-state 150
+State 150
 
    63 spec12: rim ',' . rim
    65 rem: . reg
@@ -3145,34 +3144,34 @@ state 150
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 58
-    rim   go to state 196
-    reg   go to state 50
-    imm   go to state 60
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 58
+    rim   přejít do stavu 196
+    reg   přejít do stavu 50
+    imm   přejít do stavu 60
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 151
+State 151
 
    50 spec5: rim ',' . rem
    51      | rim ',' . rem ':' LLREG
@@ -3209,31 +3208,31 @@ state 151
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 197
-    reg   go to state 50
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 197
+    reg   přejít do stavu 50
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 152
+State 152
 
    52 spec6: rim ',' . rem
    53      | rim ',' . rem ':' LSREG
@@ -3270,31 +3269,31 @@ state 152
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 198
-    reg   go to state 50
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 198
+    reg   přejít do stavu 50
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 153
+State 153
 
    54 spec7: rim ',' .  [';']
    56      | rim ',' . rem
@@ -3331,33 +3330,33 @@ state 153
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    $default  reduce using rule 54 (spec7)
+    $výchozí  reduce using rule 54 (spec7)
 
-    rem   go to state 199
-    reg   go to state 50
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 199
+    reg   přejít do stavu 50
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 154
+State 154
 
    57 spec8: reg ',' . rem ',' con
    65 rem: . reg
@@ -3393,31 +3392,31 @@ state 154
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 200
-    reg   go to state 50
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 200
+    reg   přejít do stavu 50
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 155
+State 155
 
    58 spec9: imm ',' . rem ',' reg
    65 rem: . reg
@@ -3453,31 +3452,31 @@ state 155
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 201
-    reg   go to state 50
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 201
+    reg   přejít do stavu 50
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 156
+State 156
 
    64 spec13: rim ',' . rim
    65 rem: . reg
@@ -3522,34 +3521,34 @@ state 156
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LBREG   shift, and go to state 36
-    LLREG   shift, and go to state 37
-    LSREG   shift, and go to state 38
-    LFREG   shift, and go to state 39
-    LMREG   shift, and go to state 40
-    LXREG   shift, and go to state 41
-    LSP     shift, and go to state 42
-    LNAME   shift, and go to state 43
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 46
-    '$'     shift, and go to state 56
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LBREG   posunout a přejít do stavu 36
+    LLREG   posunout a přejít do stavu 37
+    LSREG   posunout a přejít do stavu 38
+    LFREG   posunout a přejít do stavu 39
+    LMREG   posunout a přejít do stavu 40
+    LXREG   posunout a přejít do stavu 41
+    LSP     posunout a přejít do stavu 42
+    LNAME   posunout a přejít do stavu 43
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 46
+    '$'     posunout a přejít do stavu 56
+    '~'     posunout a přejít do stavu 47
 
-    rem   go to state 58
-    rim   go to state 202
-    reg   go to state 50
-    imm   go to state 60
-    mem   go to state 51
-    omem  go to state 52
-    nmem  go to state 53
-    nam   go to state 54
-    con   go to state 55
+    rem   přejít do stavu 58
+    rim   přejít do stavu 202
+    reg   přejít do stavu 50
+    imm   přejít do stavu 60
+    mem   přejít do stavu 51
+    omem  přejít do stavu 52
+    nmem  přejít do stavu 53
+    nam   přejít do stavu 54
+    con   přejít do stavu 55
 
 
-state 157
+State 157
 
     5 line: . LLAB ':' $@2 line
     7     | . LNAME ':' $@3 line
@@ -3579,36 +3578,36 @@ state 157
    30     | . LTYPEPC spec12
    31     | . LTYPEF spec13
 
-    error    shift, and go to state 4
-    LTYPE0   shift, and go to state 5
-    LTYPE1   shift, and go to state 6
-    LTYPE2   shift, and go to state 7
-    LTYPE3   shift, and go to state 8
-    LTYPE4   shift, and go to state 9
-    LTYPEC   shift, and go to state 10
-    LTYPED   shift, and go to state 11
-    LTYPEN   shift, and go to state 12
-    LTYPER   shift, and go to state 13
-    LTYPET   shift, and go to state 14
-    LTYPEG   shift, and go to state 15
-    LTYPEPC  shift, and go to state 16
-    LTYPES   shift, and go to state 17
-    LTYPEM   shift, and go to state 18
-    LTYPEI   shift, and go to state 19
-    LTYPEXC  shift, and go to state 20
-    LTYPEX   shift, and go to state 21
-    LTYPERT  shift, and go to state 22
-    LTYPEF   shift, and go to state 23
-    LNAME    shift, and go to state 24
-    LLAB     shift, and go to state 25
-    LVAR     shift, and go to state 26
-    ';'      shift, and go to state 27
+    error    posunout a přejít do stavu 4
+    LTYPE0   posunout a přejít do stavu 5
+    LTYPE1   posunout a přejít do stavu 6
+    LTYPE2   posunout a přejít do stavu 7
+    LTYPE3   posunout a přejít do stavu 8
+    LTYPE4   posunout a přejít do stavu 9
+    LTYPEC   posunout a přejít do stavu 10
+    LTYPED   posunout a přejít do stavu 11
+    LTYPEN   posunout a přejít do stavu 12
+    LTYPER   posunout a přejít do stavu 13
+    LTYPET   posunout a přejít do stavu 14
+    LTYPEG   posunout a přejít do stavu 15
+    LTYPEPC  posunout a přejít do stavu 16
+    LTYPES   posunout a přejít do stavu 17
+    LTYPEM   posunout a přejít do stavu 18
+    LTYPEI   posunout a přejít do stavu 19
+    LTYPEXC  posunout a přejít do stavu 20
+    LTYPEX   posunout a přejít do stavu 21
+    LTYPERT  posunout a přejít do stavu 22
+    LTYPEF   posunout a přejít do stavu 23
+    LNAME    posunout a přejít do stavu 24
+    LLAB     posunout a přejít do stavu 25
+    LVAR     posunout a přejít do stavu 26
+    ';'      posunout a přejít do stavu 27
 
-    line  go to state 203
-    inst  go to state 29
+    line  přejít do stavu 203
+    inst  přejít do stavu 29
 
 
-state 158
+State 158
 
    11 inst: LNAME '=' expr .  [';']
   127 expr: expr . '+' expr
@@ -3622,21 +3621,21 @@ state 158
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    '|'  shift, and go to state 168
-    '^'  shift, and go to state 169
-    '&'  shift, and go to state 170
-    '<'  shift, and go to state 171
-    '>'  shift, and go to state 172
-    '+'  shift, and go to state 173
-    '-'  shift, and go to state 174
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '|'  posunout a přejít do stavu 168
+    '^'  posunout a přejít do stavu 169
+    '&'  posunout a přejít do stavu 170
+    '<'  posunout a přejít do stavu 171
+    '>'  posunout a přejít do stavu 172
+    '+'  posunout a přejít do stavu 173
+    '-'  posunout a přejít do stavu 174
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 11 (inst)
+    $výchozí  reduce using rule 11 (inst)
 
 
-state 159
+State 159
 
     5 line: . LLAB ':' $@2 line
     5     | LLAB ':' $@2 . line
@@ -3666,36 +3665,36 @@ state 159
    30     | . LTYPEPC spec12
    31     | . LTYPEF spec13
 
-    error    shift, and go to state 4
-    LTYPE0   shift, and go to state 5
-    LTYPE1   shift, and go to state 6
-    LTYPE2   shift, and go to state 7
-    LTYPE3   shift, and go to state 8
-    LTYPE4   shift, and go to state 9
-    LTYPEC   shift, and go to state 10
-    LTYPED   shift, and go to state 11
-    LTYPEN   shift, and go to state 12
-    LTYPER   shift, and go to state 13
-    LTYPET   shift, and go to state 14
-    LTYPEG   shift, and go to state 15
-    LTYPEPC  shift, and go to state 16
-    LTYPES   shift, and go to state 17
-    LTYPEM   shift, and go to state 18
-    LTYPEI   shift, and go to state 19
-    LTYPEXC  shift, and go to state 20
-    LTYPEX   shift, and go to state 21
-    LTYPERT  shift, and go to state 22
-    LTYPEF   shift, and go to state 23
-    LNAME    shift, and go to state 24
-    LLAB     shift, and go to state 25
-    LVAR     shift, and go to state 26
-    ';'      shift, and go to state 27
+    error    posunout a přejít do stavu 4
+    LTYPE0   posunout a přejít do stavu 5
+    LTYPE1   posunout a přejít do stavu 6
+    LTYPE2   posunout a přejít do stavu 7
+    LTYPE3   posunout a přejít do stavu 8
+    LTYPE4   posunout a přejít do stavu 9
+    LTYPEC   posunout a přejít do stavu 10
+    LTYPED   posunout a přejít do stavu 11
+    LTYPEN   posunout a přejít do stavu 12
+    LTYPER   posunout a přejít do stavu 13
+    LTYPET   posunout a přejít do stavu 14
+    LTYPEG   posunout a přejít do stavu 15
+    LTYPEPC  posunout a přejít do stavu 16
+    LTYPES   posunout a přejít do stavu 17
+    LTYPEM   posunout a přejít do stavu 18
+    LTYPEI   posunout a přejít do stavu 19
+    LTYPEXC  posunout a přejít do stavu 20
+    LTYPEX   posunout a přejít do stavu 21
+    LTYPERT  posunout a přejít do stavu 22
+    LTYPEF   posunout a přejít do stavu 23
+    LNAME    posunout a přejít do stavu 24
+    LLAB     posunout a přejít do stavu 25
+    LVAR     posunout a přejít do stavu 26
+    ';'      posunout a přejít do stavu 27
 
-    line  go to state 204
-    inst  go to state 29
+    line  přejít do stavu 204
+    inst  přejít do stavu 29
 
 
-state 160
+State 160
 
    12 inst: LVAR '=' expr .  [';']
   127 expr: expr . '+' expr
@@ -3709,64 +3708,64 @@ state 160
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    '|'  shift, and go to state 168
-    '^'  shift, and go to state 169
-    '&'  shift, and go to state 170
-    '<'  shift, and go to state 171
-    '>'  shift, and go to state 172
-    '+'  shift, and go to state 173
-    '-'  shift, and go to state 174
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '|'  posunout a přejít do stavu 168
+    '^'  posunout a přejít do stavu 169
+    '&'  posunout a přejít do stavu 170
+    '<'  posunout a přejít do stavu 171
+    '>'  posunout a přejít do stavu 172
+    '+'  posunout a přejít do stavu 173
+    '-'  posunout a přejít do stavu 174
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 12 (inst)
+    $výchozí  reduce using rule 12 (inst)
 
 
-state 161
+State 161
 
   109 nam: LNAME '<' '>' . offset '(' LSB ')'
-  110 offset: .  ['(']
+  110 offset: . %empty  ['(']
   111       | . '+' con
   112       | . '-' con
 
-    '+'  shift, and go to state 117
-    '-'  shift, and go to state 118
+    '+'  posunout a přejít do stavu 117
+    '-'  posunout a přejít do stavu 118
 
-    $default  reduce using rule 110 (offset)
+    $výchozí  reduce using rule 110 (offset)
 
-    offset  go to state 205
+    offset  přejít do stavu 205
 
 
-state 162
+State 162
 
   111 offset: '+' con .
 
-    $default  reduce using rule 111 (offset)
+    $výchozí  reduce using rule 111 (offset)
 
 
-state 163
+State 163
 
   112 offset: '-' con .
 
-    $default  reduce using rule 112 (offset)
+    $výchozí  reduce using rule 112 (offset)
 
 
-state 164
+State 164
 
   108 nam: LNAME offset '(' . pointer ')'
   113 pointer: . LSB
   114        | . LSP
   115        | . LFP
 
-    LFP  shift, and go to state 206
-    LSB  shift, and go to state 207
-    LSP  shift, and go to state 208
+    LFP  posunout a přejít do stavu 206
+    LSB  posunout a přejít do stavu 207
+    LSP  posunout a přejít do stavu 208
 
-    pointer  go to state 209
+    pointer  přejít do stavu 209
 
 
-state 165
+State 165
 
   104 omem: '(' LLREG '*' . con ')'
   116 con: . LCONST
@@ -3776,34 +3775,34 @@ state 165
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 210
+    con  přejít do stavu 210
 
 
-state 166
+State 166
 
   102 omem: '(' LLREG ')' .  [':', ';', ',']
   105     | '(' LLREG ')' . '(' LLREG '*' con ')'
 
-    '('  shift, and go to state 211
+    '('  posunout a přejít do stavu 211
 
-    $default  reduce using rule 102 (omem)
+    $výchozí  reduce using rule 102 (omem)
 
 
-state 167
+State 167
 
   103 omem: '(' LSP ')' .
 
-    $default  reduce using rule 103 (omem)
+    $výchozí  reduce using rule 103 (omem)
 
 
-state 168
+State 168
 
   116 con: . LCONST
   117    | . LVAR
@@ -3824,18 +3823,18 @@ state 168
   136     | . expr '|' expr
   136     | expr '|' . expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 212
+    con   přejít do stavu 123
+    expr  přejít do stavu 212
 
 
-state 169
+State 169
 
   116 con: . LCONST
   117    | . LVAR
@@ -3856,18 +3855,18 @@ state 169
   135     | expr '^' . expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 213
+    con   přejít do stavu 123
+    expr  přejít do stavu 213
 
 
-state 170
+State 170
 
   116 con: . LCONST
   117    | . LVAR
@@ -3888,32 +3887,32 @@ state 170
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 214
+    con   přejít do stavu 123
+    expr  přejít do stavu 214
 
 
-state 171
+State 171
 
   132 expr: expr '<' . '<' expr
 
-    '<'  shift, and go to state 215
+    '<'  posunout a přejít do stavu 215
 
 
-state 172
+State 172
 
   133 expr: expr '>' . '>' expr
 
-    '>'  shift, and go to state 216
+    '>'  posunout a přejít do stavu 216
 
 
-state 173
+State 173
 
   116 con: . LCONST
   117    | . LVAR
@@ -3934,18 +3933,18 @@ state 173
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 217
+    con   přejít do stavu 123
+    expr  přejít do stavu 217
 
 
-state 174
+State 174
 
   116 con: . LCONST
   117    | . LVAR
@@ -3966,18 +3965,18 @@ state 174
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 218
+    con   přejít do stavu 123
+    expr  přejít do stavu 218
 
 
-state 175
+State 175
 
   116 con: . LCONST
   117    | . LVAR
@@ -3998,18 +3997,18 @@ state 175
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 219
+    con   přejít do stavu 123
+    expr  přejít do stavu 219
 
 
-state 176
+State 176
 
   116 con: . LCONST
   117    | . LVAR
@@ -4030,18 +4029,18 @@ state 176
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 220
+    con   přejít do stavu 123
+    expr  přejít do stavu 220
 
 
-state 177
+State 177
 
   116 con: . LCONST
   117    | . LVAR
@@ -4062,64 +4061,64 @@ state 177
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 221
+    con   přejít do stavu 123
+    expr  přejít do stavu 221
 
 
-state 178
+State 178
 
   121 con: '(' expr ')' .
 
-    $default  reduce using rule 121 (con)
+    $výchozí  reduce using rule 121 (con)
 
 
-state 179
+State 179
 
   107 nmem: nam '(' LLREG . '*' con ')'
 
-    '*'  shift, and go to state 222
+    '*'  posunout a přejít do stavu 222
 
 
-state 180
+State 180
 
    96 omem: con '(' LLREG . ')'
    99     | con '(' LLREG . '*' con ')'
   100     | con '(' LLREG . ')' '(' LLREG '*' con ')'
   101     | con '(' LLREG . ')' '(' LSREG '*' con ')'
 
-    '*'  shift, and go to state 223
-    ')'  shift, and go to state 224
+    '*'  posunout a přejít do stavu 223
+    ')'  posunout a přejít do stavu 224
 
 
-state 181
+State 181
 
    98 omem: con '(' LSREG . ')'
 
-    ')'  shift, and go to state 225
+    ')'  posunout a přejít do stavu 225
 
 
-state 182
+State 182
 
    97 omem: con '(' LSP . ')'
 
-    ')'  shift, and go to state 226
+    ')'  posunout a přejít do stavu 226
 
 
-state 183
+State 183
 
    92 imm: '$' '-' LFCONST .
 
-    $default  reduce using rule 92 (imm)
+    $výchozí  reduce using rule 92 (imm)
 
 
-state 184
+State 184
 
    91 imm: '$' '(' '-' . LFCONST ')'
   116 con: . LCONST
@@ -4130,60 +4129,60 @@ state 184
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'      shift, and go to state 33
-    '-'      shift, and go to state 34
-    LCONST   shift, and go to state 35
-    LFCONST  shift, and go to state 227
-    LVAR     shift, and go to state 44
-    '('      shift, and go to state 84
-    '~'      shift, and go to state 47
+    '+'      posunout a přejít do stavu 33
+    '-'      posunout a přejít do stavu 34
+    LCONST   posunout a přejít do stavu 35
+    LFCONST  posunout a přejít do stavu 227
+    LVAR     posunout a přejít do stavu 44
+    '('      posunout a přejít do stavu 84
+    '~'      posunout a přejít do stavu 47
 
-    con  go to state 115
+    con  přejít do stavu 115
 
 
-state 185
+State 185
 
    90 imm: '$' '(' LFCONST . ')'
 
-    ')'  shift, and go to state 228
+    ')'  posunout a přejít do stavu 228
 
 
-state 186
+State 186
 
    34 rimrem: rim ',' rem .
 
-    $default  reduce using rule 34 (rimrem)
+    $výchozí  reduce using rule 34 (rimrem)
 
 
-state 187
+State 187
 
    35 remrim: rem ',' rim .
 
-    $default  reduce using rule 35 (remrim)
+    $výchozí  reduce using rule 35 (remrim)
 
 
-state 188
+State 188
 
    75 rel: con '(' LPC . ')'
 
-    ')'  shift, and go to state 229
+    ')'  posunout a přejít do stavu 229
 
 
-state 189
+State 189
 
    43 spec1: nam '/' con . ',' imm
 
-    ','  shift, and go to state 230
+    ','  posunout a přejít do stavu 230
 
 
-state 190
+State 190
 
    42 nonrel: imm ',' rel .
 
-    $default  reduce using rule 42 (nonrel)
+    $výchozí  reduce using rule 42 (nonrel)
 
 
-state 191
+State 191
 
    85 imm2: '$' . con2
   122 con2: . LCONST
@@ -4191,159 +4190,159 @@ state 191
   124     | . LCONST '-' LCONST
   125     | . '-' LCONST '-' LCONST
 
-    '-'     shift, and go to state 231
-    LCONST  shift, and go to state 232
+    '-'     posunout a přejít do stavu 231
+    LCONST  posunout a přejít do stavu 232
 
-    con2  go to state 233
+    con2  přejít do stavu 233
 
 
-state 192
+State 192
 
    44 spec2: mem ',' imm2 .
 
-    $default  reduce using rule 44 (spec2)
+    $výchozí  reduce using rule 44 (spec2)
 
 
-state 193
+State 193
 
    45 spec2: mem ',' con . ',' imm2
 
-    ','  shift, and go to state 234
+    ','  posunout a přejít do stavu 234
 
 
-state 194
+State 194
 
    61 spec11: mem ',' imm .
 
-    $default  reduce using rule 61 (spec11)
+    $výchozí  reduce using rule 61 (spec11)
 
 
-state 195
+State 195
 
    62 spec11: mem ',' con . ',' imm
 
-    ','  shift, and go to state 235
+    ','  posunout a přejít do stavu 235
 
 
-state 196
+State 196
 
    63 spec12: rim ',' rim .
 
-    $default  reduce using rule 63 (spec12)
+    $výchozí  reduce using rule 63 (spec12)
 
 
-state 197
+State 197
 
    50 spec5: rim ',' rem .  [';']
    51      | rim ',' rem . ':' LLREG
 
-    ':'  shift, and go to state 236
+    ':'  posunout a přejít do stavu 236
 
-    $default  reduce using rule 50 (spec5)
+    $výchozí  reduce using rule 50 (spec5)
 
 
-state 198
+State 198
 
    52 spec6: rim ',' rem .  [';']
    53      | rim ',' rem . ':' LSREG
 
-    ':'  shift, and go to state 237
+    ':'  posunout a přejít do stavu 237
 
-    $default  reduce using rule 52 (spec6)
+    $výchozí  reduce using rule 52 (spec6)
 
 
-state 199
+State 199
 
    56 spec7: rim ',' rem .
 
-    $default  reduce using rule 56 (spec7)
+    $výchozí  reduce using rule 56 (spec7)
 
 
-state 200
+State 200
 
    57 spec8: reg ',' rem . ',' con
 
-    ','  shift, and go to state 238
+    ','  posunout a přejít do stavu 238
 
 
-state 201
+State 201
 
    58 spec9: imm ',' rem . ',' reg
 
-    ','  shift, and go to state 239
+    ','  posunout a přejít do stavu 239
 
 
-state 202
+State 202
 
    64 spec13: rim ',' rim .
 
-    $default  reduce using rule 64 (spec13)
+    $výchozí  reduce using rule 64 (spec13)
 
 
-state 203
+State 203
 
     7 line: LNAME ':' $@3 line .
 
-    $default  reduce using rule 7 (line)
+    $výchozí  reduce using rule 7 (line)
 
 
-state 204
+State 204
 
     5 line: LLAB ':' $@2 line .
 
-    $default  reduce using rule 5 (line)
+    $výchozí  reduce using rule 5 (line)
 
 
-state 205
+State 205
 
   109 nam: LNAME '<' '>' offset . '(' LSB ')'
 
-    '('  shift, and go to state 240
+    '('  posunout a přejít do stavu 240
 
 
-state 206
+State 206
 
   115 pointer: LFP .
 
-    $default  reduce using rule 115 (pointer)
+    $výchozí  reduce using rule 115 (pointer)
 
 
-state 207
+State 207
 
   113 pointer: LSB .
 
-    $default  reduce using rule 113 (pointer)
+    $výchozí  reduce using rule 113 (pointer)
 
 
-state 208
+State 208
 
   114 pointer: LSP .
 
-    $default  reduce using rule 114 (pointer)
+    $výchozí  reduce using rule 114 (pointer)
 
 
-state 209
+State 209
 
   108 nam: LNAME offset '(' pointer . ')'
 
-    ')'  shift, and go to state 241
+    ')'  posunout a přejít do stavu 241
 
 
-state 210
+State 210
 
   104 omem: '(' LLREG '*' con . ')'
 
-    ')'  shift, and go to state 242
+    ')'  posunout a přejít do stavu 242
 
 
-state 211
+State 211
 
   105 omem: '(' LLREG ')' '(' . LLREG '*' con ')'
 
-    LLREG  shift, and go to state 243
+    LLREG  posunout a přejít do stavu 243
 
 
-state 212
+State 212
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4357,17 +4356,17 @@ state 212
   136     | expr . '|' expr
   136     | expr '|' expr .  ['|', ';', ')']
 
-    '^'  shift, and go to state 169
-    '&'  shift, and go to state 170
-    '<'  shift, and go to state 171
-    '>'  shift, and go to state 172
-    '+'  shift, and go to state 173
-    '-'  shift, and go to state 174
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '^'  posunout a přejít do stavu 169
+    '&'  posunout a přejít do stavu 170
+    '<'  posunout a přejít do stavu 171
+    '>'  posunout a přejít do stavu 172
+    '+'  posunout a přejít do stavu 173
+    '-'  posunout a přejít do stavu 174
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 136 (expr)
+    $výchozí  reduce using rule 136 (expr)
 
     Conflict between rule 136 and token '|' resolved as reduce (%left '|').
     Conflict between rule 136 and token '^' resolved as shift ('|' < '^').
@@ -4381,7 +4380,7 @@ state 212
     Conflict between rule 136 and token '%' resolved as shift ('|' < '%').
 
 
-state 213
+State 213
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4395,16 +4394,16 @@ state 213
   135     | expr '^' expr .  ['|', '^', ';', ')']
   136     | expr . '|' expr
 
-    '&'  shift, and go to state 170
-    '<'  shift, and go to state 171
-    '>'  shift, and go to state 172
-    '+'  shift, and go to state 173
-    '-'  shift, and go to state 174
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '&'  posunout a přejít do stavu 170
+    '<'  posunout a přejít do stavu 171
+    '>'  posunout a přejít do stavu 172
+    '+'  posunout a přejít do stavu 173
+    '-'  posunout a přejít do stavu 174
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 135 (expr)
+    $výchozí  reduce using rule 135 (expr)
 
     Conflict between rule 135 and token '|' resolved as reduce ('|' < '^').
     Conflict between rule 135 and token '^' resolved as reduce (%left '^').
@@ -4418,7 +4417,7 @@ state 213
     Conflict between rule 135 and token '%' resolved as shift ('^' < '%').
 
 
-state 214
+State 214
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4432,15 +4431,15 @@ state 214
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    '<'  shift, and go to state 171
-    '>'  shift, and go to state 172
-    '+'  shift, and go to state 173
-    '-'  shift, and go to state 174
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '<'  posunout a přejít do stavu 171
+    '>'  posunout a přejít do stavu 172
+    '+'  posunout a přejít do stavu 173
+    '-'  posunout a přejít do stavu 174
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 134 (expr)
+    $výchozí  reduce using rule 134 (expr)
 
     Conflict between rule 134 and token '|' resolved as reduce ('|' < '&').
     Conflict between rule 134 and token '^' resolved as reduce ('^' < '&').
@@ -4454,7 +4453,7 @@ state 214
     Conflict between rule 134 and token '%' resolved as shift ('&' < '%').
 
 
-state 215
+State 215
 
   116 con: . LCONST
   117    | . LVAR
@@ -4475,18 +4474,18 @@ state 215
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 244
+    con   přejít do stavu 123
+    expr  přejít do stavu 244
 
 
-state 216
+State 216
 
   116 con: . LCONST
   117    | . LVAR
@@ -4507,18 +4506,18 @@ state 216
   135     | . expr '^' expr
   136     | . expr '|' expr
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con   go to state 123
-    expr  go to state 245
+    con   přejít do stavu 123
+    expr  přejít do stavu 245
 
 
-state 217
+State 217
 
   127 expr: expr . '+' expr
   127     | expr '+' expr .  ['|', '^', '&', '<', '>', '+', '-', ';', ')']
@@ -4532,11 +4531,11 @@ state 217
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 127 (expr)
+    $výchozí  reduce using rule 127 (expr)
 
     Conflict between rule 127 and token '|' resolved as reduce ('|' < '+').
     Conflict between rule 127 and token '^' resolved as reduce ('^' < '+').
@@ -4550,7 +4549,7 @@ state 217
     Conflict between rule 127 and token '%' resolved as shift ('+' < '%').
 
 
-state 218
+State 218
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4564,11 +4563,11 @@ state 218
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 128 (expr)
+    $výchozí  reduce using rule 128 (expr)
 
     Conflict between rule 128 and token '|' resolved as reduce ('|' < '-').
     Conflict between rule 128 and token '^' resolved as reduce ('^' < '-').
@@ -4582,7 +4581,7 @@ state 218
     Conflict between rule 128 and token '%' resolved as shift ('-' < '%').
 
 
-state 219
+State 219
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4596,7 +4595,7 @@ state 219
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    $default  reduce using rule 129 (expr)
+    $výchozí  reduce using rule 129 (expr)
 
     Conflict between rule 129 and token '|' resolved as reduce ('|' < '*').
     Conflict between rule 129 and token '^' resolved as reduce ('^' < '*').
@@ -4610,7 +4609,7 @@ state 219
     Conflict between rule 129 and token '%' resolved as reduce (%left '%').
 
 
-state 220
+State 220
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4624,7 +4623,7 @@ state 220
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    $default  reduce using rule 130 (expr)
+    $výchozí  reduce using rule 130 (expr)
 
     Conflict between rule 130 and token '|' resolved as reduce ('|' < '/').
     Conflict between rule 130 and token '^' resolved as reduce ('^' < '/').
@@ -4638,7 +4637,7 @@ state 220
     Conflict between rule 130 and token '%' resolved as reduce (%left '%').
 
 
-state 221
+State 221
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4652,7 +4651,7 @@ state 221
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    $default  reduce using rule 131 (expr)
+    $výchozí  reduce using rule 131 (expr)
 
     Conflict between rule 131 and token '|' resolved as reduce ('|' < '%').
     Conflict between rule 131 and token '^' resolved as reduce ('^' < '%').
@@ -4666,7 +4665,7 @@ state 221
     Conflict between rule 131 and token '%' resolved as reduce (%left '%').
 
 
-state 222
+State 222
 
   107 nmem: nam '(' LLREG '*' . con ')'
   116 con: . LCONST
@@ -4676,17 +4675,17 @@ state 222
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 246
+    con  přejít do stavu 246
 
 
-state 223
+State 223
 
    99 omem: con '(' LLREG '*' . con ')'
   116 con: . LCONST
@@ -4696,63 +4695,63 @@ state 223
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 247
+    con  přejít do stavu 247
 
 
-state 224
+State 224
 
    96 omem: con '(' LLREG ')' .  [':', ';', ',']
   100     | con '(' LLREG ')' . '(' LLREG '*' con ')'
   101     | con '(' LLREG ')' . '(' LSREG '*' con ')'
 
-    '('  shift, and go to state 248
+    '('  posunout a přejít do stavu 248
 
-    $default  reduce using rule 96 (omem)
+    $výchozí  reduce using rule 96 (omem)
 
 
-state 225
+State 225
 
    98 omem: con '(' LSREG ')' .
 
-    $default  reduce using rule 98 (omem)
+    $výchozí  reduce using rule 98 (omem)
 
 
-state 226
+State 226
 
    97 omem: con '(' LSP ')' .
 
-    $default  reduce using rule 97 (omem)
+    $výchozí  reduce using rule 97 (omem)
 
 
-state 227
+State 227
 
    91 imm: '$' '(' '-' LFCONST . ')'
 
-    ')'  shift, and go to state 249
+    ')'  posunout a přejít do stavu 249
 
 
-state 228
+State 228
 
    90 imm: '$' '(' LFCONST ')' .
 
-    $default  reduce using rule 90 (imm)
+    $výchozí  reduce using rule 90 (imm)
 
 
-state 229
+State 229
 
    75 rel: con '(' LPC ')' .
 
-    $default  reduce using rule 75 (rel)
+    $výchozí  reduce using rule 75 (rel)
 
 
-state 230
+State 230
 
    43 spec1: nam '/' con ',' . imm
    86 imm: . '$' con
@@ -4763,47 +4762,47 @@ state 230
    91    | . '$' '(' '-' LFCONST ')'
    92    | . '$' '-' LFCONST
 
-    '$'  shift, and go to state 56
+    '$'  posunout a přejít do stavu 56
 
-    imm  go to state 250
+    imm  přejít do stavu 250
 
 
-state 231
+State 231
 
   123 con2: '-' . LCONST
   125     | '-' . LCONST '-' LCONST
 
-    LCONST  shift, and go to state 251
+    LCONST  posunout a přejít do stavu 251
 
 
-state 232
+State 232
 
   122 con2: LCONST .  [';']
   124     | LCONST . '-' LCONST
 
-    '-'  shift, and go to state 252
+    '-'  posunout a přejít do stavu 252
 
-    $default  reduce using rule 122 (con2)
+    $výchozí  reduce using rule 122 (con2)
 
 
-state 233
+State 233
 
    85 imm2: '$' con2 .
 
-    $default  reduce using rule 85 (imm2)
+    $výchozí  reduce using rule 85 (imm2)
 
 
-state 234
+State 234
 
    45 spec2: mem ',' con ',' . imm2
    85 imm2: . '$' con2
 
-    '$'  shift, and go to state 191
+    '$'  posunout a přejít do stavu 191
 
-    imm2  go to state 253
+    imm2  přejít do stavu 253
 
 
-state 235
+State 235
 
    62 spec11: mem ',' con ',' . imm
    86 imm: . '$' con
@@ -4814,26 +4813,26 @@ state 235
    91    | . '$' '(' '-' LFCONST ')'
    92    | . '$' '-' LFCONST
 
-    '$'  shift, and go to state 56
+    '$'  posunout a přejít do stavu 56
 
-    imm  go to state 254
+    imm  přejít do stavu 254
 
 
-state 236
+State 236
 
    51 spec5: rim ',' rem ':' . LLREG
 
-    LLREG  shift, and go to state 255
+    LLREG  posunout a přejít do stavu 255
 
 
-state 237
+State 237
 
    53 spec6: rim ',' rem ':' . LSREG
 
-    LSREG  shift, and go to state 256
+    LSREG  posunout a přejít do stavu 256
 
 
-state 238
+State 238
 
    57 spec8: reg ',' rem ',' . con
   116 con: . LCONST
@@ -4843,17 +4842,17 @@ state 238
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 257
+    con  přejít do stavu 257
 
 
-state 239
+State 239
 
    58 spec9: imm ',' rem ',' . reg
    78 reg: . LBREG
@@ -4864,46 +4863,46 @@ state 239
    83    | . LSREG
    84    | . LXREG
 
-    LBREG  shift, and go to state 36
-    LLREG  shift, and go to state 37
-    LSREG  shift, and go to state 38
-    LFREG  shift, and go to state 39
-    LMREG  shift, and go to state 40
-    LXREG  shift, and go to state 41
-    LSP    shift, and go to state 42
+    LBREG  posunout a přejít do stavu 36
+    LLREG  posunout a přejít do stavu 37
+    LSREG  posunout a přejít do stavu 38
+    LFREG  posunout a přejít do stavu 39
+    LMREG  posunout a přejít do stavu 40
+    LXREG  posunout a přejít do stavu 41
+    LSP    posunout a přejít do stavu 42
 
-    reg  go to state 258
+    reg  přejít do stavu 258
 
 
-state 240
+State 240
 
   109 nam: LNAME '<' '>' offset '(' . LSB ')'
 
-    LSB  shift, and go to state 259
+    LSB  posunout a přejít do stavu 259
 
 
-state 241
+State 241
 
   108 nam: LNAME offset '(' pointer ')' .
 
-    $default  reduce using rule 108 (nam)
+    $výchozí  reduce using rule 108 (nam)
 
 
-state 242
+State 242
 
   104 omem: '(' LLREG '*' con ')' .
 
-    $default  reduce using rule 104 (omem)
+    $výchozí  reduce using rule 104 (omem)
 
 
-state 243
+State 243
 
   105 omem: '(' LLREG ')' '(' LLREG . '*' con ')'
 
-    '*'  shift, and go to state 260
+    '*'  posunout a přejít do stavu 260
 
 
-state 244
+State 244
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4917,13 +4916,13 @@ state 244
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    '+'  shift, and go to state 173
-    '-'  shift, and go to state 174
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '+'  posunout a přejít do stavu 173
+    '-'  posunout a přejít do stavu 174
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 132 (expr)
+    $výchozí  reduce using rule 132 (expr)
 
     Conflict between rule 132 and token '|' resolved as reduce ('|' < '<').
     Conflict between rule 132 and token '^' resolved as reduce ('^' < '<').
@@ -4937,7 +4936,7 @@ state 244
     Conflict between rule 132 and token '%' resolved as shift ('<' < '%').
 
 
-state 245
+State 245
 
   127 expr: expr . '+' expr
   128     | expr . '-' expr
@@ -4951,13 +4950,13 @@ state 245
   135     | expr . '^' expr
   136     | expr . '|' expr
 
-    '+'  shift, and go to state 173
-    '-'  shift, and go to state 174
-    '*'  shift, and go to state 175
-    '/'  shift, and go to state 176
-    '%'  shift, and go to state 177
+    '+'  posunout a přejít do stavu 173
+    '-'  posunout a přejít do stavu 174
+    '*'  posunout a přejít do stavu 175
+    '/'  posunout a přejít do stavu 176
+    '%'  posunout a přejít do stavu 177
 
-    $default  reduce using rule 133 (expr)
+    $výchozí  reduce using rule 133 (expr)
 
     Conflict between rule 133 and token '|' resolved as reduce ('|' < '>').
     Conflict between rule 133 and token '^' resolved as reduce ('^' < '>').
@@ -4971,110 +4970,110 @@ state 245
     Conflict between rule 133 and token '%' resolved as shift ('>' < '%').
 
 
-state 246
+State 246
 
   107 nmem: nam '(' LLREG '*' con . ')'
 
-    ')'  shift, and go to state 261
+    ')'  posunout a přejít do stavu 261
 
 
-state 247
+State 247
 
    99 omem: con '(' LLREG '*' con . ')'
 
-    ')'  shift, and go to state 262
+    ')'  posunout a přejít do stavu 262
 
 
-state 248
+State 248
 
   100 omem: con '(' LLREG ')' '(' . LLREG '*' con ')'
   101     | con '(' LLREG ')' '(' . LSREG '*' con ')'
 
-    LLREG  shift, and go to state 263
-    LSREG  shift, and go to state 264
+    LLREG  posunout a přejít do stavu 263
+    LSREG  posunout a přejít do stavu 264
 
 
-state 249
+State 249
 
    91 imm: '$' '(' '-' LFCONST ')' .
 
-    $default  reduce using rule 91 (imm)
+    $výchozí  reduce using rule 91 (imm)
 
 
-state 250
+State 250
 
    43 spec1: nam '/' con ',' imm .
 
-    $default  reduce using rule 43 (spec1)
+    $výchozí  reduce using rule 43 (spec1)
 
 
-state 251
+State 251
 
   123 con2: '-' LCONST .  [';']
   125     | '-' LCONST . '-' LCONST
 
-    '-'  shift, and go to state 265
+    '-'  posunout a přejít do stavu 265
 
-    $default  reduce using rule 123 (con2)
+    $výchozí  reduce using rule 123 (con2)
 
 
-state 252
+State 252
 
   124 con2: LCONST '-' . LCONST
 
-    LCONST  shift, and go to state 266
+    LCONST  posunout a přejít do stavu 266
 
 
-state 253
+State 253
 
    45 spec2: mem ',' con ',' imm2 .
 
-    $default  reduce using rule 45 (spec2)
+    $výchozí  reduce using rule 45 (spec2)
 
 
-state 254
+State 254
 
    62 spec11: mem ',' con ',' imm .
 
-    $default  reduce using rule 62 (spec11)
+    $výchozí  reduce using rule 62 (spec11)
 
 
-state 255
+State 255
 
    51 spec5: rim ',' rem ':' LLREG .
 
-    $default  reduce using rule 51 (spec5)
+    $výchozí  reduce using rule 51 (spec5)
 
 
-state 256
+State 256
 
    53 spec6: rim ',' rem ':' LSREG .
 
-    $default  reduce using rule 53 (spec6)
+    $výchozí  reduce using rule 53 (spec6)
 
 
-state 257
+State 257
 
    57 spec8: reg ',' rem ',' con .
 
-    $default  reduce using rule 57 (spec8)
+    $výchozí  reduce using rule 57 (spec8)
 
 
-state 258
+State 258
 
    58 spec9: imm ',' rem ',' reg .
 
-    $default  reduce using rule 58 (spec9)
+    $výchozí  reduce using rule 58 (spec9)
 
 
-state 259
+State 259
 
   109 nam: LNAME '<' '>' offset '(' LSB . ')'
 
-    ')'  shift, and go to state 267
+    ')'  posunout a přejít do stavu 267
 
 
-state 260
+State 260
 
   105 omem: '(' LLREG ')' '(' LLREG '*' . con ')'
   116 con: . LCONST
@@ -5084,73 +5083,73 @@ state 260
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 268
+    con  přejít do stavu 268
 
 
-state 261
+State 261
 
   107 nmem: nam '(' LLREG '*' con ')' .
 
-    $default  reduce using rule 107 (nmem)
+    $výchozí  reduce using rule 107 (nmem)
 
 
-state 262
+State 262
 
    99 omem: con '(' LLREG '*' con ')' .
 
-    $default  reduce using rule 99 (omem)
+    $výchozí  reduce using rule 99 (omem)
 
 
-state 263
+State 263
 
   100 omem: con '(' LLREG ')' '(' LLREG . '*' con ')'
 
-    '*'  shift, and go to state 269
+    '*'  posunout a přejít do stavu 269
 
 
-state 264
+State 264
 
   101 omem: con '(' LLREG ')' '(' LSREG . '*' con ')'
 
-    '*'  shift, and go to state 270
+    '*'  posunout a přejít do stavu 270
 
 
-state 265
+State 265
 
   125 con2: '-' LCONST '-' . LCONST
 
-    LCONST  shift, and go to state 271
+    LCONST  posunout a přejít do stavu 271
 
 
-state 266
+State 266
 
   124 con2: LCONST '-' LCONST .
 
-    $default  reduce using rule 124 (con2)
+    $výchozí  reduce using rule 124 (con2)
 
 
-state 267
+State 267
 
   109 nam: LNAME '<' '>' offset '(' LSB ')' .
 
-    $default  reduce using rule 109 (nam)
+    $výchozí  reduce using rule 109 (nam)
 
 
-state 268
+State 268
 
   105 omem: '(' LLREG ')' '(' LLREG '*' con . ')'
 
-    ')'  shift, and go to state 272
+    ')'  posunout a přejít do stavu 272
 
 
-state 269
+State 269
 
   100 omem: con '(' LLREG ')' '(' LLREG '*' . con ')'
   116 con: . LCONST
@@ -5160,17 +5159,17 @@ state 269
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 273
+    con  přejít do stavu 273
 
 
-state 270
+State 270
 
   101 omem: con '(' LLREG ')' '(' LSREG '*' . con ')'
   116 con: . LCONST
@@ -5180,53 +5179,53 @@ state 270
   120    | . '~' con
   121    | . '(' expr ')'
 
-    '+'     shift, and go to state 33
-    '-'     shift, and go to state 34
-    LCONST  shift, and go to state 35
-    LVAR    shift, and go to state 44
-    '('     shift, and go to state 84
-    '~'     shift, and go to state 47
+    '+'     posunout a přejít do stavu 33
+    '-'     posunout a přejít do stavu 34
+    LCONST  posunout a přejít do stavu 35
+    LVAR    posunout a přejít do stavu 44
+    '('     posunout a přejít do stavu 84
+    '~'     posunout a přejít do stavu 47
 
-    con  go to state 274
+    con  přejít do stavu 274
 
 
-state 271
+State 271
 
   125 con2: '-' LCONST '-' LCONST .
 
-    $default  reduce using rule 125 (con2)
+    $výchozí  reduce using rule 125 (con2)
 
 
-state 272
+State 272
 
   105 omem: '(' LLREG ')' '(' LLREG '*' con ')' .
 
-    $default  reduce using rule 105 (omem)
+    $výchozí  reduce using rule 105 (omem)
 
 
-state 273
+State 273
 
   100 omem: con '(' LLREG ')' '(' LLREG '*' con . ')'
 
-    ')'  shift, and go to state 275
+    ')'  posunout a přejít do stavu 275
 
 
-state 274
+State 274
 
   101 omem: con '(' LLREG ')' '(' LSREG '*' con . ')'
 
-    ')'  shift, and go to state 276
+    ')'  posunout a přejít do stavu 276
 
 
-state 275
+State 275
 
   100 omem: con '(' LLREG ')' '(' LLREG '*' con ')' .
 
-    $default  reduce using rule 100 (omem)
+    $výchozí  reduce using rule 100 (omem)
 
 
-state 276
+State 276
 
   101 omem: con '(' LLREG ')' '(' LSREG '*' con ')' .
 
-    $default  reduce using rule 101 (omem)
+    $výchozí  reduce using rule 101 (omem)

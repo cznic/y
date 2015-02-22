@@ -1,12 +1,12 @@
-Grammar
+Gramatika
 
     0 $accept: S $end
 
-    1 S: /* empty */
+    1 S: %empty
     2  | 'a' S 'z'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 'a' (97) 2
@@ -14,63 +14,63 @@ $end (0) 0
 error (256)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (5)
-    on left: 0
+    vlevo: 0
 S (6)
-    on left: 1 2, on right: 0 2
+    vlevo: 1 2, vpravo: 0 2
 
 
-state 0
+State 0
 
     0 $accept: . S $end
-    1 S: .  [$end]
+    1 S: . %empty  [$end]
     2  | . 'a' S 'z'
 
-    'a'  shift, and go to state 1
+    'a'  posunout a přejít do stavu 1
 
-    $default  reduce using rule 1 (S)
+    $výchozí  reduce using rule 1 (S)
 
-    S  go to state 2
+    S  přejít do stavu 2
 
 
-state 1
+State 1
 
-    1 S: .  ['z']
+    1 S: . %empty  ['z']
     2  | . 'a' S 'z'
     2  | 'a' . S 'z'
 
-    'a'  shift, and go to state 1
+    'a'  posunout a přejít do stavu 1
 
-    $default  reduce using rule 1 (S)
+    $výchozí  reduce using rule 1 (S)
 
-    S  go to state 3
+    S  přejít do stavu 3
 
 
-state 2
+State 2
 
     0 $accept: S . $end
 
-    $end  shift, and go to state 4
+    $end  posunout a přejít do stavu 4
 
 
-state 3
+State 3
 
     2 S: 'a' S . 'z'
 
-    'z'  shift, and go to state 5
+    'z'  posunout a přejít do stavu 5
 
 
-state 4
+State 4
 
     0 $accept: S $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 5
+State 5
 
     2 S: 'a' S 'z' .
 
-    $default  reduce using rule 2 (S)
+    $výchozí  reduce using rule 2 (S)

@@ -1,4 +1,4 @@
-Grammar
+Gramatika
 
     0 $accept: StatementList $end
 
@@ -9,17 +9,17 @@ Grammar
 
     4 AssignmentList: Assignment AssignmentList1 AssignmentList2
 
-    5 AssignmentList1: /* empty */
+    5 AssignmentList1: %empty
     6                | AssignmentList1 ',' Assignment
 
-    7 AssignmentList2: /* empty */
+    7 AssignmentList2: %empty
     8                | ','
 
     9 BeginTransactionStmt: begin transaction
 
    10 Call: '(' Call1 ')'
 
-   11 Call1: /* empty */
+   11 Call1: %empty
    12      | ExpressionList
 
    13 ColumnDef: ColumnName Type
@@ -28,10 +28,10 @@ Grammar
 
    15 ColumnNameList: ColumnName ColumnNameList1 ColumnNameList2
 
-   16 ColumnNameList1: /* empty */
+   16 ColumnNameList1: %empty
    17                | ColumnNameList1 ',' ColumnName
 
-   18 ColumnNameList2: /* empty */
+   18 ColumnNameList2: %empty
    19                | ','
 
    20 CommitStmt: commit
@@ -41,19 +41,19 @@ Grammar
    22 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier ')'
    23                | create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier '(' ')' ')'
 
-   24 CreateIndexIfNotExists: /* empty */
+   24 CreateIndexIfNotExists: %empty
    25                       | ifKwd not exists
 
-   26 CreateIndexStmtUnique: /* empty */
+   26 CreateIndexStmtUnique: %empty
    27                      | unique
 
    28 CreateTableStmt: create tableKwd TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
    29                | create tableKwd ifKwd not exists TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
 
-   30 CreateTableStmt1: /* empty */
+   30 CreateTableStmt1: %empty
    31                 | CreateTableStmt1 ',' ColumnDef
 
-   32 CreateTableStmt2: /* empty */
+   32 CreateTableStmt2: %empty
    33                 | ','
 
    34 DeleteFromStmt: deleteKwd from TableName
@@ -61,23 +61,23 @@ Grammar
 
    36 DropIndexStmt: drop index DropIndexIfExists identifier
 
-   37 DropIndexIfExists: /* empty */
+   37 DropIndexIfExists: %empty
    38                  | ifKwd exists
 
    39 DropTableStmt: drop tableKwd TableName
    40              | drop tableKwd ifKwd exists TableName
 
-   41 EmptyStmt: /* empty */
+   41 EmptyStmt: %empty
 
    42 Expression: Term
    43           | Expression oror Term
 
    44 ExpressionList: Expression ExpressionList1 ExpressionList2
 
-   45 ExpressionList1: /* empty */
+   45 ExpressionList1: %empty
    46                | ExpressionList1 ',' Expression
 
-   47 ExpressionList2: /* empty */
+   47 ExpressionList2: %empty
    48                | ','
 
    49 Factor: Factor1
@@ -99,7 +99,7 @@ Grammar
 
    64 Field: Expression Field1
 
-   65 Field1: /* empty */
+   65 Field1: %empty
    66       | as identifier
 
    67 FieldList: Field
@@ -112,13 +112,13 @@ Grammar
    71 InsertIntoStmt: insert into TableName InsertIntoStmt1 values '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3
    72               | insert into TableName InsertIntoStmt1 SelectStmt
 
-   73 InsertIntoStmt1: /* empty */
+   73 InsertIntoStmt1: %empty
    74                | '(' ColumnNameList ')'
 
-   75 InsertIntoStmt2: /* empty */
+   75 InsertIntoStmt2: %empty
    76                | InsertIntoStmt2 ',' '(' ExpressionList ')'
 
-   77 InsertIntoStmt3: /* empty */
+   77 InsertIntoStmt3: %empty
    78                | ','
 
    79 Literal: falseKwd
@@ -136,7 +136,7 @@ Grammar
 
    90 OrderBy: order by ExpressionList OrderBy1
 
-   91 OrderBy1: /* empty */
+   91 OrderBy1: %empty
    92         | asc
    93         | desc
 
@@ -169,10 +169,10 @@ Grammar
   115 RecordSet1: identifier
   116           | '(' SelectStmt RecordSet11 ')'
 
-  117 RecordSet11: /* empty */
+  117 RecordSet11: %empty
   118            | ';'
 
-  119 RecordSet2: /* empty */
+  119 RecordSet2: %empty
   120           | as identifier
 
   121 RecordSetList: RecordSet
@@ -183,26 +183,26 @@ Grammar
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
   125           | selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
 
-  126 SelectStmtLimit: /* empty */
+  126 SelectStmtLimit: %empty
   127                | limit Expression
 
-  128 SelectStmtOffset: /* empty */
+  128 SelectStmtOffset: %empty
   129                 | offset Expression
 
-  130 SelectStmtDistinct: /* empty */
+  130 SelectStmtDistinct: %empty
   131                   | distinct
 
   132 SelectStmtFieldList: '*'
   133                    | FieldList
   134                    | FieldList ','
 
-  135 SelectStmtWhere: /* empty */
+  135 SelectStmtWhere: %empty
   136                | WhereClause
 
-  137 SelectStmtGroup: /* empty */
+  137 SelectStmtGroup: %empty
   138                | GroupByClause
 
-  139 SelectStmtOrder: /* empty */
+  139 SelectStmtOrder: %empty
   140                | OrderBy
 
   141 Slice: '[' ':' ']'
@@ -262,7 +262,7 @@ Grammar
 
   189 UpdateStmt: update TableName oSet AssignmentList UpdateStmt1
 
-  190 UpdateStmt1: /* empty */
+  190 UpdateStmt1: %empty
   191            | WhereClause
 
   192 UnaryExpr: PrimaryExpression
@@ -273,11 +273,11 @@ Grammar
 
   197 WhereClause: where Expression
 
-  198 oSet: /* empty */
+  198 oSet: %empty
   199     | set
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '!' (33) 194
@@ -385,170 +385,170 @@ values (338) 71
 where (339) 197
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (105)
-    on left: 0
+    vlevo: 0
 AlterTableStmt (106)
-    on left: 1 2, on right: 146
+    vlevo: 1 2, vpravo: 146
 Assignment (107)
-    on left: 3, on right: 4 6
+    vlevo: 3, vpravo: 4 6
 AssignmentList (108)
-    on left: 4, on right: 189
+    vlevo: 4, vpravo: 189
 AssignmentList1 (109)
-    on left: 5 6, on right: 4 6
+    vlevo: 5 6, vpravo: 4 6
 AssignmentList2 (110)
-    on left: 7 8, on right: 4
+    vlevo: 7 8, vpravo: 4
 BeginTransactionStmt (111)
-    on left: 9, on right: 147
+    vlevo: 9, vpravo: 147
 Call (112)
-    on left: 10, on right: 98
+    vlevo: 10, vpravo: 98
 Call1 (113)
-    on left: 11 12, on right: 10
+    vlevo: 11 12, vpravo: 10
 ColumnDef (114)
-    on left: 13, on right: 1 28 29 31
+    vlevo: 13, vpravo: 1 28 29 31
 ColumnName (115)
-    on left: 14, on right: 2 3 13 15 17
+    vlevo: 14, vpravo: 2 3 13 15 17
 ColumnNameList (116)
-    on left: 15, on right: 69 74
+    vlevo: 15, vpravo: 69 74
 ColumnNameList1 (117)
-    on left: 16 17, on right: 15 17
+    vlevo: 16 17, vpravo: 15 17
 ColumnNameList2 (118)
-    on left: 18 19, on right: 15
+    vlevo: 18 19, vpravo: 15
 CommitStmt (119)
-    on left: 20, on right: 148
+    vlevo: 20, vpravo: 148
 Conversion (120)
-    on left: 21, on right: 95
+    vlevo: 21, vpravo: 95
 CreateIndexStmt (121)
-    on left: 22 23, on right: 149
+    vlevo: 22 23, vpravo: 149
 CreateIndexIfNotExists (122)
-    on left: 24 25, on right: 22 23
+    vlevo: 24 25, vpravo: 22 23
 CreateIndexStmtUnique (123)
-    on left: 26 27, on right: 22 23
+    vlevo: 26 27, vpravo: 22 23
 CreateTableStmt (124)
-    on left: 28 29, on right: 150
+    vlevo: 28 29, vpravo: 150
 CreateTableStmt1 (125)
-    on left: 30 31, on right: 28 29 31
+    vlevo: 30 31, vpravo: 28 29 31
 CreateTableStmt2 (126)
-    on left: 32 33, on right: 28 29
+    vlevo: 32 33, vpravo: 28 29
 DeleteFromStmt (127)
-    on left: 34 35, on right: 151
+    vlevo: 34 35, vpravo: 151
 DropIndexStmt (128)
-    on left: 36, on right: 152
+    vlevo: 36, vpravo: 152
 DropIndexIfExists (129)
-    on left: 37 38, on right: 36
+    vlevo: 37 38, vpravo: 36
 DropTableStmt (130)
-    on left: 39 40, on right: 153
+    vlevo: 39 40, vpravo: 153
 EmptyStmt (131)
-    on left: 41, on right: 145
+    vlevo: 41, vpravo: 145
 Expression (132)
-    on left: 42 43, on right: 3 21 43 44 46 64 70 89 127 129 142 143
-    144 197
+    vlevo: 42 43, vpravo: 3 21 43 44 46 64 70 89 127 129 142 143 144
+    197
 ExpressionList (133)
-    on left: 44, on right: 12 50 51 71 76 90
+    vlevo: 44, vpravo: 12 50 51 71 76 90
 ExpressionList1 (134)
-    on left: 45 46, on right: 44 46
+    vlevo: 45 46, vpravo: 44 46
 ExpressionList2 (135)
-    on left: 47 48, on right: 44
+    vlevo: 47 48, vpravo: 44
 Factor (136)
-    on left: 49 50 51 52 53 54 55, on right: 162 163
+    vlevo: 49 50 51 52 53 54 55, vpravo: 162 163
 Factor1 (137)
-    on left: 56 57 58 59 60 61 62 63, on right: 49 50 51 52 53 54 55
-    57 58 59 60 61 62 63
+    vlevo: 56 57 58 59 60 61 62 63, vpravo: 49 50 51 52 53 54 55 57
+    58 59 60 61 62 63
 Field (138)
-    on left: 64, on right: 67 68
+    vlevo: 64, vpravo: 67 68
 Field1 (139)
-    on left: 65 66, on right: 64
+    vlevo: 65 66, vpravo: 64
 FieldList (140)
-    on left: 67 68, on right: 68 133 134
+    vlevo: 67 68, vpravo: 68 133 134
 GroupByClause (141)
-    on left: 69, on right: 138
+    vlevo: 69, vpravo: 138
 Index (142)
-    on left: 70, on right: 96
+    vlevo: 70, vpravo: 96
 InsertIntoStmt (143)
-    on left: 71 72, on right: 154
+    vlevo: 71 72, vpravo: 154
 InsertIntoStmt1 (144)
-    on left: 73 74, on right: 71 72
+    vlevo: 73 74, vpravo: 71 72
 InsertIntoStmt2 (145)
-    on left: 75 76, on right: 71 76
+    vlevo: 75 76, vpravo: 71 76
 InsertIntoStmt3 (146)
-    on left: 77 78, on right: 71
+    vlevo: 77 78, vpravo: 71
 Literal (147)
-    on left: 79 80 81 82 83 84 85, on right: 86
+    vlevo: 79 80 81 82 83 84 85, vpravo: 86
 Operand (148)
-    on left: 86 87 88 89, on right: 94
+    vlevo: 86 87 88 89, vpravo: 94
 OrderBy (149)
-    on left: 90, on right: 140
+    vlevo: 90, vpravo: 140
 OrderBy1 (150)
-    on left: 91 92 93, on right: 90
+    vlevo: 91 92 93, vpravo: 90
 PrimaryExpression (151)
-    on left: 94 95 96 97 98, on right: 96 97 98 192 193 194 195 196
+    vlevo: 94 95 96 97 98, vpravo: 96 97 98 192 193 194 195 196
 PrimaryFactor (152)
-    on left: 99 100 101 102 103, on right: 52 53 56 57 58 59 60 61
-    62 63 100 101 102 103
+    vlevo: 99 100 101 102 103, vpravo: 52 53 56 57 58 59 60 61 62 63
+    100 101 102 103
 PrimaryTerm (153)
-    on left: 104 105 106 107 108 109 110 111, on right: 99 100 101
-    102 103 105 106 107 108 109 110 111
+    vlevo: 104 105 106 107 108 109 110 111, vpravo: 99 100 101 102
+    103 105 106 107 108 109 110 111
 QualifiedIdent (154)
-    on left: 112 113, on right: 88
+    vlevo: 112 113, vpravo: 88
 RecordSet (155)
-    on left: 114, on right: 121 122
+    vlevo: 114, vpravo: 121 122
 RecordSet1 (156)
-    on left: 115 116, on right: 114
+    vlevo: 115 116, vpravo: 114
 RecordSet11 (157)
-    on left: 117 118, on right: 116
+    vlevo: 117 118, vpravo: 116
 RecordSet2 (158)
-    on left: 119 120, on right: 114
+    vlevo: 119 120, vpravo: 114
 RecordSetList (159)
-    on left: 121 122, on right: 122 124 125
+    vlevo: 121 122, vpravo: 122 124 125
 RollbackStmt (160)
-    on left: 123, on right: 155
+    vlevo: 123, vpravo: 155
 SelectStmt (161)
-    on left: 124 125, on right: 72 116 156
+    vlevo: 124 125, vpravo: 72 116 156
 SelectStmtLimit (162)
-    on left: 126 127, on right: 124 125
+    vlevo: 126 127, vpravo: 124 125
 SelectStmtOffset (163)
-    on left: 128 129, on right: 124 125
+    vlevo: 128 129, vpravo: 124 125
 SelectStmtDistinct (164)
-    on left: 130 131, on right: 124 125
+    vlevo: 130 131, vpravo: 124 125
 SelectStmtFieldList (165)
-    on left: 132 133 134, on right: 124 125
+    vlevo: 132 133 134, vpravo: 124 125
 SelectStmtWhere (166)
-    on left: 135 136, on right: 124 125
+    vlevo: 135 136, vpravo: 124 125
 SelectStmtGroup (167)
-    on left: 137 138, on right: 124 125
+    vlevo: 137 138, vpravo: 124 125
 SelectStmtOrder (168)
-    on left: 139 140, on right: 124 125
+    vlevo: 139 140, vpravo: 124 125
 Slice (169)
-    on left: 141 142 143 144, on right: 97
+    vlevo: 141 142 143 144, vpravo: 97
 Statement (170)
-    on left: 145 146 147 148 149 150 151 152 153 154 155 156 157 158,
-    on right: 159 160
+    vlevo: 145 146 147 148 149 150 151 152 153 154 155 156 157 158,
+    vpravo: 159 160
 StatementList (171)
-    on left: 159 160, on right: 0 160
+    vlevo: 159 160, vpravo: 0 160
 TableName (172)
-    on left: 161, on right: 1 2 28 29 34 35 39 40 71 72 164 189
+    vlevo: 161, vpravo: 1 2 28 29 34 35 39 40 71 72 164 189
 Term (173)
-    on left: 162 163, on right: 42 43 163
+    vlevo: 162 163, vpravo: 42 43 163
 TruncateTableStmt (174)
-    on left: 164, on right: 157
+    vlevo: 164, vpravo: 157
 Type (175)
-    on left: 165 166 167 168 169 170 171 172 173 174 175 176 177 178
-    179 180 181 182 183 184 185 186 187 188, on right: 13 21
+    vlevo: 165 166 167 168 169 170 171 172 173 174 175 176 177 178
+    179 180 181 182 183 184 185 186 187 188, vpravo: 13 21
 UpdateStmt (176)
-    on left: 189, on right: 158
+    vlevo: 189, vpravo: 158
 UpdateStmt1 (177)
-    on left: 190 191, on right: 189
+    vlevo: 190 191, vpravo: 189
 UnaryExpr (178)
-    on left: 192 193 194 195 196, on right: 104 105 106 107 108 109
-    110 111
+    vlevo: 192 193 194 195 196, vpravo: 104 105 106 107 108 109 110
+    111
 WhereClause (179)
-    on left: 197, on right: 35 136 191
+    vlevo: 197, vpravo: 35 136 191
 oSet (180)
-    on left: 198 199, on right: 189
+    vlevo: 198 199, vpravo: 189
 
 
-state 0
+State 0
 
     0 $accept: . StatementList $end
     1 AlterTableStmt: . alter tableKwd TableName add ColumnDef
@@ -564,7 +564,7 @@ state 0
    36 DropIndexStmt: . drop index DropIndexIfExists identifier
    39 DropTableStmt: . drop tableKwd TableName
    40              | . drop tableKwd ifKwd exists TableName
-   41 EmptyStmt: .  [$end, ';']
+   41 EmptyStmt: . %empty  [$end, ';']
    71 InsertIntoStmt: . insert into TableName InsertIntoStmt1 values '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3
    72               | . insert into TableName InsertIntoStmt1 SelectStmt
   123 RollbackStmt: . rollback
@@ -589,355 +589,355 @@ state 0
   164 TruncateTableStmt: . truncate tableKwd TableName
   189 UpdateStmt: . update TableName oSet AssignmentList UpdateStmt1
 
-    alter      shift, and go to state 1
-    begin      shift, and go to state 2
-    commit     shift, and go to state 3
-    create     shift, and go to state 4
-    deleteKwd  shift, and go to state 5
-    drop       shift, and go to state 6
-    insert     shift, and go to state 7
-    rollback   shift, and go to state 8
-    selectKwd  shift, and go to state 9
-    truncate   shift, and go to state 10
-    update     shift, and go to state 11
+    alter      posunout a přejít do stavu 1
+    begin      posunout a přejít do stavu 2
+    commit     posunout a přejít do stavu 3
+    create     posunout a přejít do stavu 4
+    deleteKwd  posunout a přejít do stavu 5
+    drop       posunout a přejít do stavu 6
+    insert     posunout a přejít do stavu 7
+    rollback   posunout a přejít do stavu 8
+    selectKwd  posunout a přejít do stavu 9
+    truncate   posunout a přejít do stavu 10
+    update     posunout a přejít do stavu 11
 
-    $default  reduce using rule 41 (EmptyStmt)
+    $výchozí  reduce using rule 41 (EmptyStmt)
 
-    AlterTableStmt        go to state 12
-    BeginTransactionStmt  go to state 13
-    CommitStmt            go to state 14
-    CreateIndexStmt       go to state 15
-    CreateTableStmt       go to state 16
-    DeleteFromStmt        go to state 17
-    DropIndexStmt         go to state 18
-    DropTableStmt         go to state 19
-    EmptyStmt             go to state 20
-    InsertIntoStmt        go to state 21
-    RollbackStmt          go to state 22
-    SelectStmt            go to state 23
-    Statement             go to state 24
-    StatementList         go to state 25
-    TruncateTableStmt     go to state 26
-    UpdateStmt            go to state 27
+    AlterTableStmt        přejít do stavu 12
+    BeginTransactionStmt  přejít do stavu 13
+    CommitStmt            přejít do stavu 14
+    CreateIndexStmt       přejít do stavu 15
+    CreateTableStmt       přejít do stavu 16
+    DeleteFromStmt        přejít do stavu 17
+    DropIndexStmt         přejít do stavu 18
+    DropTableStmt         přejít do stavu 19
+    EmptyStmt             přejít do stavu 20
+    InsertIntoStmt        přejít do stavu 21
+    RollbackStmt          přejít do stavu 22
+    SelectStmt            přejít do stavu 23
+    Statement             přejít do stavu 24
+    StatementList         přejít do stavu 25
+    TruncateTableStmt     přejít do stavu 26
+    UpdateStmt            přejít do stavu 27
 
 
-state 1
+State 1
 
     1 AlterTableStmt: alter . tableKwd TableName add ColumnDef
     2               | alter . tableKwd TableName drop column ColumnName
 
-    tableKwd  shift, and go to state 28
+    tableKwd  posunout a přejít do stavu 28
 
 
-state 2
+State 2
 
     9 BeginTransactionStmt: begin . transaction
 
-    transaction  shift, and go to state 29
+    transaction  posunout a přejít do stavu 29
 
 
-state 3
+State 3
 
    20 CommitStmt: commit .
 
-    $default  reduce using rule 20 (CommitStmt)
+    $výchozí  reduce using rule 20 (CommitStmt)
 
 
-state 4
+State 4
 
    22 CreateIndexStmt: create . CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier ')'
    23                | create . CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier '(' ')' ')'
-   26 CreateIndexStmtUnique: .  [index]
+   26 CreateIndexStmtUnique: . %empty  [index]
    27                      | . unique
    28 CreateTableStmt: create . tableKwd TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
    29                | create . tableKwd ifKwd not exists TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
 
-    tableKwd  shift, and go to state 30
-    unique    shift, and go to state 31
+    tableKwd  posunout a přejít do stavu 30
+    unique    posunout a přejít do stavu 31
 
-    $default  reduce using rule 26 (CreateIndexStmtUnique)
+    $výchozí  reduce using rule 26 (CreateIndexStmtUnique)
 
-    CreateIndexStmtUnique  go to state 32
+    CreateIndexStmtUnique  přejít do stavu 32
 
 
-state 5
+State 5
 
    34 DeleteFromStmt: deleteKwd . from TableName
    35               | deleteKwd . from TableName WhereClause
 
-    from  shift, and go to state 33
+    from  posunout a přejít do stavu 33
 
 
-state 6
+State 6
 
    36 DropIndexStmt: drop . index DropIndexIfExists identifier
    39 DropTableStmt: drop . tableKwd TableName
    40              | drop . tableKwd ifKwd exists TableName
 
-    index     shift, and go to state 34
-    tableKwd  shift, and go to state 35
+    index     posunout a přejít do stavu 34
+    tableKwd  posunout a přejít do stavu 35
 
 
-state 7
+State 7
 
    71 InsertIntoStmt: insert . into TableName InsertIntoStmt1 values '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3
    72               | insert . into TableName InsertIntoStmt1 SelectStmt
 
-    into  shift, and go to state 36
+    into  posunout a přejít do stavu 36
 
 
-state 8
+State 8
 
   123 RollbackStmt: rollback .
 
-    $default  reduce using rule 123 (RollbackStmt)
+    $výchozí  reduce using rule 123 (RollbackStmt)
 
 
-state 9
+State 9
 
   124 SelectStmt: selectKwd . SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
   125           | selectKwd . SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
-  130 SelectStmtDistinct: .  [bigIntType, bigRatType, blobType, boolType, byteType, complex128Type, complex64Type, durationType, falseKwd, floatType, float32Type, float64Type, floatLit, identifier, imaginaryLit, intType, int16Type, int32Type, int64Type, int8Type, intLit, null, qlParam, runeType, stringType, stringLit, timeType, trueKwd, uintType, uint16Type, uint32Type, uint64Type, uint8Type, '(', '^', '-', '+', '*', '!']
+  130 SelectStmtDistinct: . %empty  [bigIntType, bigRatType, blobType, boolType, byteType, complex128Type, complex64Type, durationType, falseKwd, floatType, float32Type, float64Type, floatLit, identifier, imaginaryLit, intType, int16Type, int32Type, int64Type, int8Type, intLit, null, qlParam, runeType, stringType, stringLit, timeType, trueKwd, uintType, uint16Type, uint32Type, uint64Type, uint8Type, '(', '^', '-', '+', '*', '!']
   131                   | . distinct
 
-    distinct  shift, and go to state 37
+    distinct  posunout a přejít do stavu 37
 
-    $default  reduce using rule 130 (SelectStmtDistinct)
+    $výchozí  reduce using rule 130 (SelectStmtDistinct)
 
-    SelectStmtDistinct  go to state 38
+    SelectStmtDistinct  přejít do stavu 38
 
 
-state 10
+State 10
 
   164 TruncateTableStmt: truncate . tableKwd TableName
 
-    tableKwd  shift, and go to state 39
+    tableKwd  posunout a přejít do stavu 39
 
 
-state 11
+State 11
 
   161 TableName: . identifier
   189 UpdateStmt: update . TableName oSet AssignmentList UpdateStmt1
 
-    identifier  shift, and go to state 40
+    identifier  posunout a přejít do stavu 40
 
-    TableName  go to state 41
+    TableName  přejít do stavu 41
 
 
-state 12
+State 12
 
   146 Statement: AlterTableStmt .
 
-    $default  reduce using rule 146 (Statement)
+    $výchozí  reduce using rule 146 (Statement)
 
 
-state 13
+State 13
 
   147 Statement: BeginTransactionStmt .
 
-    $default  reduce using rule 147 (Statement)
+    $výchozí  reduce using rule 147 (Statement)
 
 
-state 14
+State 14
 
   148 Statement: CommitStmt .
 
-    $default  reduce using rule 148 (Statement)
+    $výchozí  reduce using rule 148 (Statement)
 
 
-state 15
+State 15
 
   149 Statement: CreateIndexStmt .
 
-    $default  reduce using rule 149 (Statement)
+    $výchozí  reduce using rule 149 (Statement)
 
 
-state 16
+State 16
 
   150 Statement: CreateTableStmt .
 
-    $default  reduce using rule 150 (Statement)
+    $výchozí  reduce using rule 150 (Statement)
 
 
-state 17
+State 17
 
   151 Statement: DeleteFromStmt .
 
-    $default  reduce using rule 151 (Statement)
+    $výchozí  reduce using rule 151 (Statement)
 
 
-state 18
+State 18
 
   152 Statement: DropIndexStmt .
 
-    $default  reduce using rule 152 (Statement)
+    $výchozí  reduce using rule 152 (Statement)
 
 
-state 19
+State 19
 
   153 Statement: DropTableStmt .
 
-    $default  reduce using rule 153 (Statement)
+    $výchozí  reduce using rule 153 (Statement)
 
 
-state 20
+State 20
 
   145 Statement: EmptyStmt .
 
-    $default  reduce using rule 145 (Statement)
+    $výchozí  reduce using rule 145 (Statement)
 
 
-state 21
+State 21
 
   154 Statement: InsertIntoStmt .
 
-    $default  reduce using rule 154 (Statement)
+    $výchozí  reduce using rule 154 (Statement)
 
 
-state 22
+State 22
 
   155 Statement: RollbackStmt .
 
-    $default  reduce using rule 155 (Statement)
+    $výchozí  reduce using rule 155 (Statement)
 
 
-state 23
+State 23
 
   156 Statement: SelectStmt .
 
-    $default  reduce using rule 156 (Statement)
+    $výchozí  reduce using rule 156 (Statement)
 
 
-state 24
+State 24
 
   159 StatementList: Statement .
 
-    $default  reduce using rule 159 (StatementList)
+    $výchozí  reduce using rule 159 (StatementList)
 
 
-state 25
+State 25
 
     0 $accept: StatementList . $end
   160 StatementList: StatementList . ';' Statement
 
-    $end  shift, and go to state 42
-    ';'   shift, and go to state 43
+    $end  posunout a přejít do stavu 42
+    ';'   posunout a přejít do stavu 43
 
 
-state 26
+State 26
 
   157 Statement: TruncateTableStmt .
 
-    $default  reduce using rule 157 (Statement)
+    $výchozí  reduce using rule 157 (Statement)
 
 
-state 27
+State 27
 
   158 Statement: UpdateStmt .
 
-    $default  reduce using rule 158 (Statement)
+    $výchozí  reduce using rule 158 (Statement)
 
 
-state 28
+State 28
 
     1 AlterTableStmt: alter tableKwd . TableName add ColumnDef
     2               | alter tableKwd . TableName drop column ColumnName
   161 TableName: . identifier
 
-    identifier  shift, and go to state 40
+    identifier  posunout a přejít do stavu 40
 
-    TableName  go to state 44
+    TableName  přejít do stavu 44
 
 
-state 29
+State 29
 
     9 BeginTransactionStmt: begin transaction .
 
-    $default  reduce using rule 9 (BeginTransactionStmt)
+    $výchozí  reduce using rule 9 (BeginTransactionStmt)
 
 
-state 30
+State 30
 
    28 CreateTableStmt: create tableKwd . TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
    29                | create tableKwd . ifKwd not exists TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
   161 TableName: . identifier
 
-    identifier  shift, and go to state 40
-    ifKwd       shift, and go to state 45
+    identifier  posunout a přejít do stavu 40
+    ifKwd       posunout a přejít do stavu 45
 
-    TableName  go to state 46
+    TableName  přejít do stavu 46
 
 
-state 31
+State 31
 
    27 CreateIndexStmtUnique: unique .
 
-    $default  reduce using rule 27 (CreateIndexStmtUnique)
+    $výchozí  reduce using rule 27 (CreateIndexStmtUnique)
 
 
-state 32
+State 32
 
    22 CreateIndexStmt: create CreateIndexStmtUnique . index CreateIndexIfNotExists identifier on identifier '(' identifier ')'
    23                | create CreateIndexStmtUnique . index CreateIndexIfNotExists identifier on identifier '(' identifier '(' ')' ')'
 
-    index  shift, and go to state 47
+    index  posunout a přejít do stavu 47
 
 
-state 33
+State 33
 
    34 DeleteFromStmt: deleteKwd from . TableName
    35               | deleteKwd from . TableName WhereClause
   161 TableName: . identifier
 
-    identifier  shift, and go to state 40
+    identifier  posunout a přejít do stavu 40
 
-    TableName  go to state 48
+    TableName  přejít do stavu 48
 
 
-state 34
+State 34
 
    36 DropIndexStmt: drop index . DropIndexIfExists identifier
-   37 DropIndexIfExists: .  [identifier]
+   37 DropIndexIfExists: . %empty  [identifier]
    38                  | . ifKwd exists
 
-    ifKwd  shift, and go to state 49
+    ifKwd  posunout a přejít do stavu 49
 
-    $default  reduce using rule 37 (DropIndexIfExists)
+    $výchozí  reduce using rule 37 (DropIndexIfExists)
 
-    DropIndexIfExists  go to state 50
+    DropIndexIfExists  přejít do stavu 50
 
 
-state 35
+State 35
 
    39 DropTableStmt: drop tableKwd . TableName
    40              | drop tableKwd . ifKwd exists TableName
   161 TableName: . identifier
 
-    identifier  shift, and go to state 40
-    ifKwd       shift, and go to state 51
+    identifier  posunout a přejít do stavu 40
+    ifKwd       posunout a přejít do stavu 51
 
-    TableName  go to state 52
+    TableName  přejít do stavu 52
 
 
-state 36
+State 36
 
    71 InsertIntoStmt: insert into . TableName InsertIntoStmt1 values '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3
    72               | insert into . TableName InsertIntoStmt1 SelectStmt
   161 TableName: . identifier
 
-    identifier  shift, and go to state 40
+    identifier  posunout a přejít do stavu 40
 
-    TableName  go to state 53
+    TableName  přejít do stavu 53
 
 
-state 37
+State 37
 
   131 SelectStmtDistinct: distinct .
 
-    $default  reduce using rule 131 (SelectStmtDistinct)
+    $výchozí  reduce using rule 131 (SelectStmtDistinct)
 
 
-state 38
+State 38
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -1028,102 +1028,102 @@ state 38
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '*'             shift, and go to state 91
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '*'             posunout a přejít do stavu 91
+    '!'             posunout a přejít do stavu 92
 
-    Conversion           go to state 93
-    Expression           go to state 94
-    Factor               go to state 95
-    Factor1              go to state 96
-    Field                go to state 97
-    FieldList            go to state 98
-    Literal              go to state 99
-    Operand              go to state 100
-    PrimaryExpression    go to state 101
-    PrimaryFactor        go to state 102
-    PrimaryTerm          go to state 103
-    QualifiedIdent       go to state 104
-    SelectStmtFieldList  go to state 105
-    Term                 go to state 106
-    Type                 go to state 107
-    UnaryExpr            go to state 108
+    Conversion           přejít do stavu 93
+    Expression           přejít do stavu 94
+    Factor               přejít do stavu 95
+    Factor1              přejít do stavu 96
+    Field                přejít do stavu 97
+    FieldList            přejít do stavu 98
+    Literal              přejít do stavu 99
+    Operand              přejít do stavu 100
+    PrimaryExpression    přejít do stavu 101
+    PrimaryFactor        přejít do stavu 102
+    PrimaryTerm          přejít do stavu 103
+    QualifiedIdent       přejít do stavu 104
+    SelectStmtFieldList  přejít do stavu 105
+    Term                 přejít do stavu 106
+    Type                 přejít do stavu 107
+    UnaryExpr            přejít do stavu 108
 
 
-state 39
+State 39
 
   161 TableName: . identifier
   164 TruncateTableStmt: truncate tableKwd . TableName
 
-    identifier  shift, and go to state 40
+    identifier  posunout a přejít do stavu 40
 
-    TableName  go to state 109
+    TableName  přejít do stavu 109
 
 
-state 40
+State 40
 
   161 TableName: identifier .
 
-    $default  reduce using rule 161 (TableName)
+    $výchozí  reduce using rule 161 (TableName)
 
 
-state 41
+State 41
 
   189 UpdateStmt: update TableName . oSet AssignmentList UpdateStmt1
-  198 oSet: .  [identifier]
+  198 oSet: . %empty  [identifier]
   199     | . set
 
-    set  shift, and go to state 110
+    set  posunout a přejít do stavu 110
 
-    $default  reduce using rule 198 (oSet)
+    $výchozí  reduce using rule 198 (oSet)
 
-    oSet  go to state 111
+    oSet  přejít do stavu 111
 
 
-state 42
+State 42
 
     0 $accept: StatementList $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 43
+State 43
 
     1 AlterTableStmt: . alter tableKwd TableName add ColumnDef
     2               | . alter tableKwd TableName drop column ColumnName
@@ -1138,7 +1138,7 @@ state 43
    36 DropIndexStmt: . drop index DropIndexIfExists identifier
    39 DropTableStmt: . drop tableKwd TableName
    40              | . drop tableKwd ifKwd exists TableName
-   41 EmptyStmt: .  [$end, ';']
+   41 EmptyStmt: . %empty  [$end, ';']
    71 InsertIntoStmt: . insert into TableName InsertIntoStmt1 values '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3
    72               | . insert into TableName InsertIntoStmt1 SelectStmt
   123 RollbackStmt: . rollback
@@ -1162,364 +1162,364 @@ state 43
   164 TruncateTableStmt: . truncate tableKwd TableName
   189 UpdateStmt: . update TableName oSet AssignmentList UpdateStmt1
 
-    alter      shift, and go to state 1
-    begin      shift, and go to state 2
-    commit     shift, and go to state 3
-    create     shift, and go to state 4
-    deleteKwd  shift, and go to state 5
-    drop       shift, and go to state 6
-    insert     shift, and go to state 7
-    rollback   shift, and go to state 8
-    selectKwd  shift, and go to state 9
-    truncate   shift, and go to state 10
-    update     shift, and go to state 11
+    alter      posunout a přejít do stavu 1
+    begin      posunout a přejít do stavu 2
+    commit     posunout a přejít do stavu 3
+    create     posunout a přejít do stavu 4
+    deleteKwd  posunout a přejít do stavu 5
+    drop       posunout a přejít do stavu 6
+    insert     posunout a přejít do stavu 7
+    rollback   posunout a přejít do stavu 8
+    selectKwd  posunout a přejít do stavu 9
+    truncate   posunout a přejít do stavu 10
+    update     posunout a přejít do stavu 11
 
-    $default  reduce using rule 41 (EmptyStmt)
+    $výchozí  reduce using rule 41 (EmptyStmt)
 
-    AlterTableStmt        go to state 12
-    BeginTransactionStmt  go to state 13
-    CommitStmt            go to state 14
-    CreateIndexStmt       go to state 15
-    CreateTableStmt       go to state 16
-    DeleteFromStmt        go to state 17
-    DropIndexStmt         go to state 18
-    DropTableStmt         go to state 19
-    EmptyStmt             go to state 20
-    InsertIntoStmt        go to state 21
-    RollbackStmt          go to state 22
-    SelectStmt            go to state 23
-    Statement             go to state 112
-    TruncateTableStmt     go to state 26
-    UpdateStmt            go to state 27
+    AlterTableStmt        přejít do stavu 12
+    BeginTransactionStmt  přejít do stavu 13
+    CommitStmt            přejít do stavu 14
+    CreateIndexStmt       přejít do stavu 15
+    CreateTableStmt       přejít do stavu 16
+    DeleteFromStmt        přejít do stavu 17
+    DropIndexStmt         přejít do stavu 18
+    DropTableStmt         přejít do stavu 19
+    EmptyStmt             přejít do stavu 20
+    InsertIntoStmt        přejít do stavu 21
+    RollbackStmt          přejít do stavu 22
+    SelectStmt            přejít do stavu 23
+    Statement             přejít do stavu 112
+    TruncateTableStmt     přejít do stavu 26
+    UpdateStmt            přejít do stavu 27
 
 
-state 44
+State 44
 
     1 AlterTableStmt: alter tableKwd TableName . add ColumnDef
     2               | alter tableKwd TableName . drop column ColumnName
 
-    add   shift, and go to state 113
-    drop  shift, and go to state 114
+    add   posunout a přejít do stavu 113
+    drop  posunout a přejít do stavu 114
 
 
-state 45
+State 45
 
    29 CreateTableStmt: create tableKwd ifKwd . not exists TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
 
-    not  shift, and go to state 115
+    not  posunout a přejít do stavu 115
 
 
-state 46
+State 46
 
    28 CreateTableStmt: create tableKwd TableName . '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
 
-    '('  shift, and go to state 116
+    '('  posunout a přejít do stavu 116
 
 
-state 47
+State 47
 
    22 CreateIndexStmt: create CreateIndexStmtUnique index . CreateIndexIfNotExists identifier on identifier '(' identifier ')'
    23                | create CreateIndexStmtUnique index . CreateIndexIfNotExists identifier on identifier '(' identifier '(' ')' ')'
-   24 CreateIndexIfNotExists: .  [identifier]
+   24 CreateIndexIfNotExists: . %empty  [identifier]
    25                       | . ifKwd not exists
 
-    ifKwd  shift, and go to state 117
+    ifKwd  posunout a přejít do stavu 117
 
-    $default  reduce using rule 24 (CreateIndexIfNotExists)
+    $výchozí  reduce using rule 24 (CreateIndexIfNotExists)
 
-    CreateIndexIfNotExists  go to state 118
+    CreateIndexIfNotExists  přejít do stavu 118
 
 
-state 48
+State 48
 
    34 DeleteFromStmt: deleteKwd from TableName .  [$end, ';']
    35               | deleteKwd from TableName . WhereClause
   197 WhereClause: . where Expression
 
-    where  shift, and go to state 119
+    where  posunout a přejít do stavu 119
 
-    $default  reduce using rule 34 (DeleteFromStmt)
+    $výchozí  reduce using rule 34 (DeleteFromStmt)
 
-    WhereClause  go to state 120
+    WhereClause  přejít do stavu 120
 
 
-state 49
+State 49
 
    38 DropIndexIfExists: ifKwd . exists
 
-    exists  shift, and go to state 121
+    exists  posunout a přejít do stavu 121
 
 
-state 50
+State 50
 
    36 DropIndexStmt: drop index DropIndexIfExists . identifier
 
-    identifier  shift, and go to state 122
+    identifier  posunout a přejít do stavu 122
 
 
-state 51
+State 51
 
    40 DropTableStmt: drop tableKwd ifKwd . exists TableName
 
-    exists  shift, and go to state 123
+    exists  posunout a přejít do stavu 123
 
 
-state 52
+State 52
 
    39 DropTableStmt: drop tableKwd TableName .
 
-    $default  reduce using rule 39 (DropTableStmt)
+    $výchozí  reduce using rule 39 (DropTableStmt)
 
 
-state 53
+State 53
 
    71 InsertIntoStmt: insert into TableName . InsertIntoStmt1 values '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3
    72               | insert into TableName . InsertIntoStmt1 SelectStmt
-   73 InsertIntoStmt1: .  [selectKwd, values]
+   73 InsertIntoStmt1: . %empty  [selectKwd, values]
    74                | . '(' ColumnNameList ')'
 
-    '('  shift, and go to state 124
+    '('  posunout a přejít do stavu 124
 
-    $default  reduce using rule 73 (InsertIntoStmt1)
+    $výchozí  reduce using rule 73 (InsertIntoStmt1)
 
-    InsertIntoStmt1  go to state 125
+    InsertIntoStmt1  přejít do stavu 125
 
 
-state 54
+State 54
 
   165 Type: bigIntType .
 
-    $default  reduce using rule 165 (Type)
+    $výchozí  reduce using rule 165 (Type)
 
 
-state 55
+State 55
 
   166 Type: bigRatType .
 
-    $default  reduce using rule 166 (Type)
+    $výchozí  reduce using rule 166 (Type)
 
 
-state 56
+State 56
 
   167 Type: blobType .
 
-    $default  reduce using rule 167 (Type)
+    $výchozí  reduce using rule 167 (Type)
 
 
-state 57
+State 57
 
   168 Type: boolType .
 
-    $default  reduce using rule 168 (Type)
+    $výchozí  reduce using rule 168 (Type)
 
 
-state 58
+State 58
 
   169 Type: byteType .
 
-    $default  reduce using rule 169 (Type)
+    $výchozí  reduce using rule 169 (Type)
 
 
-state 59
+State 59
 
   170 Type: complex128Type .
 
-    $default  reduce using rule 170 (Type)
+    $výchozí  reduce using rule 170 (Type)
 
 
-state 60
+State 60
 
   171 Type: complex64Type .
 
-    $default  reduce using rule 171 (Type)
+    $výchozí  reduce using rule 171 (Type)
 
 
-state 61
+State 61
 
   172 Type: durationType .
 
-    $default  reduce using rule 172 (Type)
+    $výchozí  reduce using rule 172 (Type)
 
 
-state 62
+State 62
 
    79 Literal: falseKwd .
 
-    $default  reduce using rule 79 (Literal)
+    $výchozí  reduce using rule 79 (Literal)
 
 
-state 63
+State 63
 
   173 Type: floatType .
 
-    $default  reduce using rule 173 (Type)
+    $výchozí  reduce using rule 173 (Type)
 
 
-state 64
+State 64
 
   174 Type: float32Type .
 
-    $default  reduce using rule 174 (Type)
+    $výchozí  reduce using rule 174 (Type)
 
 
-state 65
+State 65
 
   175 Type: float64Type .
 
-    $default  reduce using rule 175 (Type)
+    $výchozí  reduce using rule 175 (Type)
 
 
-state 66
+State 66
 
    82 Literal: floatLit .
 
-    $default  reduce using rule 82 (Literal)
+    $výchozí  reduce using rule 82 (Literal)
 
 
-state 67
+State 67
 
   112 QualifiedIdent: identifier .  [$end, and, andand, andnot, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, lsh, neq, not, offset, order, oror, rsh, where, ',', '(', ')', '>', '<', '[', ']', '^', '|', '-', '+', '&', '%', '/', '*', ';', ':']
   113               | identifier . '.' identifier
 
-    '.'  shift, and go to state 126
+    '.'  posunout a přejít do stavu 126
 
-    $default  reduce using rule 112 (QualifiedIdent)
+    $výchozí  reduce using rule 112 (QualifiedIdent)
 
 
-state 68
+State 68
 
    83 Literal: imaginaryLit .
 
-    $default  reduce using rule 83 (Literal)
+    $výchozí  reduce using rule 83 (Literal)
 
 
-state 69
+State 69
 
   176 Type: intType .
 
-    $default  reduce using rule 176 (Type)
+    $výchozí  reduce using rule 176 (Type)
 
 
-state 70
+State 70
 
   177 Type: int16Type .
 
-    $default  reduce using rule 177 (Type)
+    $výchozí  reduce using rule 177 (Type)
 
 
-state 71
+State 71
 
   178 Type: int32Type .
 
-    $default  reduce using rule 178 (Type)
+    $výchozí  reduce using rule 178 (Type)
 
 
-state 72
+State 72
 
   179 Type: int64Type .
 
-    $default  reduce using rule 179 (Type)
+    $výchozí  reduce using rule 179 (Type)
 
 
-state 73
+State 73
 
   180 Type: int8Type .
 
-    $default  reduce using rule 180 (Type)
+    $výchozí  reduce using rule 180 (Type)
 
 
-state 74
+State 74
 
    84 Literal: intLit .
 
-    $default  reduce using rule 84 (Literal)
+    $výchozí  reduce using rule 84 (Literal)
 
 
-state 75
+State 75
 
    80 Literal: null .
 
-    $default  reduce using rule 80 (Literal)
+    $výchozí  reduce using rule 80 (Literal)
 
 
-state 76
+State 76
 
    87 Operand: qlParam .
 
-    $default  reduce using rule 87 (Operand)
+    $výchozí  reduce using rule 87 (Operand)
 
 
-state 77
+State 77
 
   181 Type: runeType .
 
-    $default  reduce using rule 181 (Type)
+    $výchozí  reduce using rule 181 (Type)
 
 
-state 78
+State 78
 
   182 Type: stringType .
 
-    $default  reduce using rule 182 (Type)
+    $výchozí  reduce using rule 182 (Type)
 
 
-state 79
+State 79
 
    85 Literal: stringLit .
 
-    $default  reduce using rule 85 (Literal)
+    $výchozí  reduce using rule 85 (Literal)
 
 
-state 80
+State 80
 
   183 Type: timeType .
 
-    $default  reduce using rule 183 (Type)
+    $výchozí  reduce using rule 183 (Type)
 
 
-state 81
+State 81
 
    81 Literal: trueKwd .
 
-    $default  reduce using rule 81 (Literal)
+    $výchozí  reduce using rule 81 (Literal)
 
 
-state 82
+State 82
 
   184 Type: uintType .
 
-    $default  reduce using rule 184 (Type)
+    $výchozí  reduce using rule 184 (Type)
 
 
-state 83
+State 83
 
   185 Type: uint16Type .
 
-    $default  reduce using rule 185 (Type)
+    $výchozí  reduce using rule 185 (Type)
 
 
-state 84
+State 84
 
   186 Type: uint32Type .
 
-    $default  reduce using rule 186 (Type)
+    $výchozí  reduce using rule 186 (Type)
 
 
-state 85
+State 85
 
   187 Type: uint64Type .
 
-    $default  reduce using rule 187 (Type)
+    $výchozí  reduce using rule 187 (Type)
 
 
-state 86
+State 86
 
   188 Type: uint8Type .
 
-    $default  reduce using rule 188 (Type)
+    $výchozí  reduce using rule 188 (Type)
 
 
-state 87
+State 87
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -1603,61 +1603,61 @@ state 87
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 127
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 127
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 88
+State 88
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -1704,50 +1704,50 @@ state 88
   188     | . uint8Type
   193 UnaryExpr: '^' . PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 128
-    QualifiedIdent     go to state 104
-    Type               go to state 107
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 128
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
 
 
-state 89
+State 89
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -1794,50 +1794,50 @@ state 89
   188     | . uint8Type
   195 UnaryExpr: '-' . PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 129
-    QualifiedIdent     go to state 104
-    Type               go to state 107
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 129
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
 
 
-state 90
+State 90
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -1884,57 +1884,57 @@ state 90
   188     | . uint8Type
   196 UnaryExpr: '+' . PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 130
-    QualifiedIdent     go to state 104
-    Type               go to state 107
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 130
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
 
 
-state 91
+State 91
 
   132 SelectStmtFieldList: '*' .
 
-    $default  reduce using rule 132 (SelectStmtFieldList)
+    $výchozí  reduce using rule 132 (SelectStmtFieldList)
 
 
-state 92
+State 92
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -1981,79 +1981,79 @@ state 92
   188     | . uint8Type
   194 UnaryExpr: '!' . PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 131
-    QualifiedIdent     go to state 104
-    Type               go to state 107
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 131
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
 
 
-state 93
+State 93
 
    95 PrimaryExpression: Conversion .
 
-    $default  reduce using rule 95 (PrimaryExpression)
+    $výchozí  reduce using rule 95 (PrimaryExpression)
 
 
-state 94
+State 94
 
    43 Expression: Expression . oror Term
    64 Field: Expression . Field1
-   65 Field1: .  [from, ',']
+   65 Field1: . %empty  [from, ',']
    66       | . as identifier
 
-    as    shift, and go to state 132
-    oror  shift, and go to state 133
+    as    posunout a přejít do stavu 132
+    oror  posunout a přejít do stavu 133
 
-    $default  reduce using rule 65 (Field1)
+    $výchozí  reduce using rule 65 (Field1)
 
-    Field1  go to state 134
+    Field1  přejít do stavu 134
 
 
-state 95
+State 95
 
   162 Term: Factor .
 
-    $default  reduce using rule 162 (Term)
+    $výchozí  reduce using rule 162 (Term)
 
 
-state 96
+State 96
 
    49 Factor: Factor1 .  [$end, andand, as, asc, desc, from, group, limit, offset, order, oror, where, ',', ')', ']', ';', ':']
    50       | Factor1 . in '(' ExpressionList ')'
@@ -2070,54 +2070,54 @@ state 96
    62        | Factor1 . eq PrimaryFactor
    63        | Factor1 . like PrimaryFactor
 
-    between  shift, and go to state 135
-    eq       shift, and go to state 136
-    ge       shift, and go to state 137
-    in       shift, and go to state 138
-    is       shift, and go to state 139
-    le       shift, and go to state 140
-    like     shift, and go to state 141
-    neq      shift, and go to state 142
-    not      shift, and go to state 143
-    '>'      shift, and go to state 144
-    '<'      shift, and go to state 145
+    between  posunout a přejít do stavu 135
+    eq       posunout a přejít do stavu 136
+    ge       posunout a přejít do stavu 137
+    in       posunout a přejít do stavu 138
+    is       posunout a přejít do stavu 139
+    le       posunout a přejít do stavu 140
+    like     posunout a přejít do stavu 141
+    neq      posunout a přejít do stavu 142
+    not      posunout a přejít do stavu 143
+    '>'      posunout a přejít do stavu 144
+    '<'      posunout a přejít do stavu 145
 
-    $default  reduce using rule 49 (Factor)
+    $výchozí  reduce using rule 49 (Factor)
 
 
-state 97
+State 97
 
    67 FieldList: Field .
 
-    $default  reduce using rule 67 (FieldList)
+    $výchozí  reduce using rule 67 (FieldList)
 
 
-state 98
+State 98
 
    68 FieldList: FieldList . ',' Field
   133 SelectStmtFieldList: FieldList .  [from]
   134                    | FieldList . ','
 
-    ','  shift, and go to state 146
+    ','  posunout a přejít do stavu 146
 
-    $default  reduce using rule 133 (SelectStmtFieldList)
+    $výchozí  reduce using rule 133 (SelectStmtFieldList)
 
 
-state 99
+State 99
 
    86 Operand: Literal .
 
-    $default  reduce using rule 86 (Operand)
+    $výchozí  reduce using rule 86 (Operand)
 
 
-state 100
+State 100
 
    94 PrimaryExpression: Operand .
 
-    $default  reduce using rule 94 (PrimaryExpression)
+    $výchozí  reduce using rule 94 (PrimaryExpression)
 
 
-state 101
+State 101
 
    10 Call: . '(' Call1 ')'
    70 Index: . '[' Expression ']'
@@ -2130,17 +2130,17 @@ state 101
   144      | . '[' Expression ':' Expression ']'
   192 UnaryExpr: PrimaryExpression .  [$end, and, andand, andnot, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, lsh, neq, not, offset, order, oror, rsh, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', '&', '%', '/', '*', ';', ':']
 
-    '('  shift, and go to state 147
-    '['  shift, and go to state 148
+    '('  posunout a přejít do stavu 147
+    '['  posunout a přejít do stavu 148
 
-    $default  reduce using rule 192 (UnaryExpr)
+    $výchozí  reduce using rule 192 (UnaryExpr)
 
-    Call   go to state 149
-    Index  go to state 150
-    Slice  go to state 151
+    Call   přejít do stavu 149
+    Index  přejít do stavu 150
+    Slice  přejít do stavu 151
 
 
-state 102
+State 102
 
    56 Factor1: PrimaryFactor .  [$end, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -2148,15 +2148,15 @@ state 102
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 56 (Factor1)
+    $výchozí  reduce using rule 56 (Factor1)
 
 
-state 103
+State 103
 
    99 PrimaryFactor: PrimaryTerm .  [$end, and, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', ';', ':']
   105 PrimaryTerm: PrimaryTerm . andnot UnaryExpr
@@ -2167,145 +2167,145 @@ state 103
   110            | PrimaryTerm . '/' UnaryExpr
   111            | PrimaryTerm . '*' UnaryExpr
 
-    andnot  shift, and go to state 156
-    lsh     shift, and go to state 157
-    rsh     shift, and go to state 158
-    '&'     shift, and go to state 159
-    '%'     shift, and go to state 160
-    '/'     shift, and go to state 161
-    '*'     shift, and go to state 162
+    andnot  posunout a přejít do stavu 156
+    lsh     posunout a přejít do stavu 157
+    rsh     posunout a přejít do stavu 158
+    '&'     posunout a přejít do stavu 159
+    '%'     posunout a přejít do stavu 160
+    '/'     posunout a přejít do stavu 161
+    '*'     posunout a přejít do stavu 162
 
-    $default  reduce using rule 99 (PrimaryFactor)
+    $výchozí  reduce using rule 99 (PrimaryFactor)
 
 
-state 104
+State 104
 
    88 Operand: QualifiedIdent .
 
-    $default  reduce using rule 88 (Operand)
+    $výchozí  reduce using rule 88 (Operand)
 
 
-state 105
+State 105
 
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList . from RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
   125           | selectKwd SelectStmtDistinct SelectStmtFieldList . from RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
 
-    from  shift, and go to state 163
+    from  posunout a přejít do stavu 163
 
 
-state 106
+State 106
 
    42 Expression: Term .  [$end, as, asc, desc, from, group, limit, offset, order, oror, where, ',', ')', ']', ';', ':']
   163 Term: Term . andand Factor
 
-    andand  shift, and go to state 164
+    andand  posunout a přejít do stavu 164
 
-    $default  reduce using rule 42 (Expression)
+    $výchozí  reduce using rule 42 (Expression)
 
 
-state 107
+State 107
 
    21 Conversion: Type . '(' Expression ')'
 
-    '('  shift, and go to state 165
+    '('  posunout a přejít do stavu 165
 
 
-state 108
+State 108
 
   104 PrimaryTerm: UnaryExpr .
 
-    $default  reduce using rule 104 (PrimaryTerm)
+    $výchozí  reduce using rule 104 (PrimaryTerm)
 
 
-state 109
+State 109
 
   164 TruncateTableStmt: truncate tableKwd TableName .
 
-    $default  reduce using rule 164 (TruncateTableStmt)
+    $výchozí  reduce using rule 164 (TruncateTableStmt)
 
 
-state 110
+State 110
 
   199 oSet: set .
 
-    $default  reduce using rule 199 (oSet)
+    $výchozí  reduce using rule 199 (oSet)
 
 
-state 111
+State 111
 
     3 Assignment: . ColumnName '=' Expression
     4 AssignmentList: . Assignment AssignmentList1 AssignmentList2
    14 ColumnName: . identifier
   189 UpdateStmt: update TableName oSet . AssignmentList UpdateStmt1
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    Assignment      go to state 167
-    AssignmentList  go to state 168
-    ColumnName      go to state 169
+    Assignment      přejít do stavu 167
+    AssignmentList  přejít do stavu 168
+    ColumnName      přejít do stavu 169
 
 
-state 112
+State 112
 
   160 StatementList: StatementList ';' Statement .
 
-    $default  reduce using rule 160 (StatementList)
+    $výchozí  reduce using rule 160 (StatementList)
 
 
-state 113
+State 113
 
     1 AlterTableStmt: alter tableKwd TableName add . ColumnDef
    13 ColumnDef: . ColumnName Type
    14 ColumnName: . identifier
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    ColumnDef   go to state 170
-    ColumnName  go to state 171
+    ColumnDef   přejít do stavu 170
+    ColumnName  přejít do stavu 171
 
 
-state 114
+State 114
 
     2 AlterTableStmt: alter tableKwd TableName drop . column ColumnName
 
-    column  shift, and go to state 172
+    column  posunout a přejít do stavu 172
 
 
-state 115
+State 115
 
    29 CreateTableStmt: create tableKwd ifKwd not . exists TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
 
-    exists  shift, and go to state 173
+    exists  posunout a přejít do stavu 173
 
 
-state 116
+State 116
 
    13 ColumnDef: . ColumnName Type
    14 ColumnName: . identifier
    28 CreateTableStmt: create tableKwd TableName '(' . ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    ColumnDef   go to state 174
-    ColumnName  go to state 171
+    ColumnDef   přejít do stavu 174
+    ColumnName  přejít do stavu 171
 
 
-state 117
+State 117
 
    25 CreateIndexIfNotExists: ifKwd . not exists
 
-    not  shift, and go to state 175
+    not  posunout a přejít do stavu 175
 
 
-state 118
+State 118
 
    22 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists . identifier on identifier '(' identifier ')'
    23                | create CreateIndexStmtUnique index CreateIndexIfNotExists . identifier on identifier '(' identifier '(' ')' ')'
 
-    identifier  shift, and go to state 176
+    identifier  posunout a přejít do stavu 176
 
 
-state 119
+State 119
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -2389,133 +2389,133 @@ state 119
   196          | . '+' PrimaryExpression
   197 WhereClause: where . Expression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 177
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 177
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 120
+State 120
 
    35 DeleteFromStmt: deleteKwd from TableName WhereClause .
 
-    $default  reduce using rule 35 (DeleteFromStmt)
+    $výchozí  reduce using rule 35 (DeleteFromStmt)
 
 
-state 121
+State 121
 
    38 DropIndexIfExists: ifKwd exists .
 
-    $default  reduce using rule 38 (DropIndexIfExists)
+    $výchozí  reduce using rule 38 (DropIndexIfExists)
 
 
-state 122
+State 122
 
    36 DropIndexStmt: drop index DropIndexIfExists identifier .
 
-    $default  reduce using rule 36 (DropIndexStmt)
+    $výchozí  reduce using rule 36 (DropIndexStmt)
 
 
-state 123
+State 123
 
    40 DropTableStmt: drop tableKwd ifKwd exists . TableName
   161 TableName: . identifier
 
-    identifier  shift, and go to state 40
+    identifier  posunout a přejít do stavu 40
 
-    TableName  go to state 178
+    TableName  přejít do stavu 178
 
 
-state 124
+State 124
 
    14 ColumnName: . identifier
    15 ColumnNameList: . ColumnName ColumnNameList1 ColumnNameList2
    74 InsertIntoStmt1: '(' . ColumnNameList ')'
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    ColumnName      go to state 179
-    ColumnNameList  go to state 180
+    ColumnName      přejít do stavu 179
+    ColumnNameList  přejít do stavu 180
 
 
-state 125
+State 125
 
    71 InsertIntoStmt: insert into TableName InsertIntoStmt1 . values '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3
    72               | insert into TableName InsertIntoStmt1 . SelectStmt
   124 SelectStmt: . selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
   125           | . selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
 
-    selectKwd  shift, and go to state 9
-    values     shift, and go to state 181
+    selectKwd  posunout a přejít do stavu 9
+    values     posunout a přejít do stavu 181
 
-    SelectStmt  go to state 182
+    SelectStmt  přejít do stavu 182
 
 
-state 126
+State 126
 
   113 QualifiedIdent: identifier '.' . identifier
 
-    identifier  shift, and go to state 183
+    identifier  posunout a přejít do stavu 183
 
 
-state 127
+State 127
 
    43 Expression: Expression . oror Term
    89 Operand: '(' Expression . ')'
 
-    oror  shift, and go to state 133
-    ')'   shift, and go to state 184
+    oror  posunout a přejít do stavu 133
+    ')'   posunout a přejít do stavu 184
 
 
-state 128
+State 128
 
    10 Call: . '(' Call1 ')'
    70 Index: . '[' Expression ']'
@@ -2528,17 +2528,17 @@ state 128
   144      | . '[' Expression ':' Expression ']'
   193 UnaryExpr: '^' PrimaryExpression .  [$end, and, andand, andnot, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, lsh, neq, not, offset, order, oror, rsh, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', '&', '%', '/', '*', ';', ':']
 
-    '('  shift, and go to state 147
-    '['  shift, and go to state 148
+    '('  posunout a přejít do stavu 147
+    '['  posunout a přejít do stavu 148
 
-    $default  reduce using rule 193 (UnaryExpr)
+    $výchozí  reduce using rule 193 (UnaryExpr)
 
-    Call   go to state 149
-    Index  go to state 150
-    Slice  go to state 151
+    Call   přejít do stavu 149
+    Index  přejít do stavu 150
+    Slice  přejít do stavu 151
 
 
-state 129
+State 129
 
    10 Call: . '(' Call1 ')'
    70 Index: . '[' Expression ']'
@@ -2551,17 +2551,17 @@ state 129
   144      | . '[' Expression ':' Expression ']'
   195 UnaryExpr: '-' PrimaryExpression .  [$end, and, andand, andnot, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, lsh, neq, not, offset, order, oror, rsh, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', '&', '%', '/', '*', ';', ':']
 
-    '('  shift, and go to state 147
-    '['  shift, and go to state 148
+    '('  posunout a přejít do stavu 147
+    '['  posunout a přejít do stavu 148
 
-    $default  reduce using rule 195 (UnaryExpr)
+    $výchozí  reduce using rule 195 (UnaryExpr)
 
-    Call   go to state 149
-    Index  go to state 150
-    Slice  go to state 151
+    Call   přejít do stavu 149
+    Index  přejít do stavu 150
+    Slice  přejít do stavu 151
 
 
-state 130
+State 130
 
    10 Call: . '(' Call1 ')'
    70 Index: . '[' Expression ']'
@@ -2574,17 +2574,17 @@ state 130
   144      | . '[' Expression ':' Expression ']'
   196 UnaryExpr: '+' PrimaryExpression .  [$end, and, andand, andnot, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, lsh, neq, not, offset, order, oror, rsh, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', '&', '%', '/', '*', ';', ':']
 
-    '('  shift, and go to state 147
-    '['  shift, and go to state 148
+    '('  posunout a přejít do stavu 147
+    '['  posunout a přejít do stavu 148
 
-    $default  reduce using rule 196 (UnaryExpr)
+    $výchozí  reduce using rule 196 (UnaryExpr)
 
-    Call   go to state 149
-    Index  go to state 150
-    Slice  go to state 151
+    Call   přejít do stavu 149
+    Index  přejít do stavu 150
+    Slice  přejít do stavu 151
 
 
-state 131
+State 131
 
    10 Call: . '(' Call1 ')'
    70 Index: . '[' Expression ']'
@@ -2597,24 +2597,24 @@ state 131
   144      | . '[' Expression ':' Expression ']'
   194 UnaryExpr: '!' PrimaryExpression .  [$end, and, andand, andnot, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, lsh, neq, not, offset, order, oror, rsh, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', '&', '%', '/', '*', ';', ':']
 
-    '('  shift, and go to state 147
-    '['  shift, and go to state 148
+    '('  posunout a přejít do stavu 147
+    '['  posunout a přejít do stavu 148
 
-    $default  reduce using rule 194 (UnaryExpr)
+    $výchozí  reduce using rule 194 (UnaryExpr)
 
-    Call   go to state 149
-    Index  go to state 150
-    Slice  go to state 151
+    Call   přejít do stavu 149
+    Index  přejít do stavu 150
+    Slice  přejít do stavu 151
 
 
-state 132
+State 132
 
    66 Field1: as . identifier
 
-    identifier  shift, and go to state 185
+    identifier  posunout a přejít do stavu 185
 
 
-state 133
+State 133
 
    21 Conversion: . Type '(' Expression ')'
    43 Expression: Expression oror . Term
@@ -2696,67 +2696,67 @@ state 133
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 186
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 186
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 134
+State 134
 
    64 Field: Expression Field1 .
 
-    $default  reduce using rule 64 (Field)
+    $výchozí  reduce using rule 64 (Field)
 
 
-state 135
+State 135
 
    21 Conversion: . Type '(' Expression ')'
    52 Factor: Factor1 between . PrimaryFactor and PrimaryFactor
@@ -2821,57 +2821,57 @@ state 135
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 187
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 187
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 136
+State 136
 
    21 Conversion: . Type '(' Expression ')'
    62 Factor1: Factor1 eq . PrimaryFactor
@@ -2936,57 +2936,57 @@ state 136
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 188
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 188
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 137
+State 137
 
    21 Conversion: . Type '(' Expression ')'
    57 Factor1: Factor1 ge . PrimaryFactor
@@ -3051,73 +3051,73 @@ state 137
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 189
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 189
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 138
+State 138
 
    50 Factor: Factor1 in . '(' ExpressionList ')'
 
-    '('  shift, and go to state 190
+    '('  posunout a přejít do stavu 190
 
 
-state 139
+State 139
 
    54 Factor: Factor1 is . null
    55       | Factor1 is . not null
 
-    not   shift, and go to state 191
-    null  shift, and go to state 192
+    not   posunout a přejít do stavu 191
+    null  posunout a přejít do stavu 192
 
 
-state 140
+State 140
 
    21 Conversion: . Type '(' Expression ')'
    59 Factor1: Factor1 le . PrimaryFactor
@@ -3182,57 +3182,57 @@ state 140
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 193
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 193
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 141
+State 141
 
    21 Conversion: . Type '(' Expression ')'
    63 Factor1: Factor1 like . PrimaryFactor
@@ -3297,57 +3297,57 @@ state 141
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 194
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 194
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 142
+State 142
 
    21 Conversion: . Type '(' Expression ')'
    61 Factor1: Factor1 neq . PrimaryFactor
@@ -3412,66 +3412,66 @@ state 142
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 195
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 195
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 143
+State 143
 
    51 Factor: Factor1 not . in '(' ExpressionList ')'
    53       | Factor1 not . between PrimaryFactor and PrimaryFactor
 
-    between  shift, and go to state 196
-    in       shift, and go to state 197
+    between  posunout a přejít do stavu 196
+    in       posunout a přejít do stavu 197
 
 
-state 144
+State 144
 
    21 Conversion: . Type '(' Expression ')'
    58 Factor1: Factor1 '>' . PrimaryFactor
@@ -3536,57 +3536,57 @@ state 144
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 198
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 198
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 145
+State 145
 
    21 Conversion: . Type '(' Expression ')'
    60 Factor1: Factor1 '<' . PrimaryFactor
@@ -3651,57 +3651,57 @@ state 145
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 199
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 199
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 146
+State 146
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -3787,67 +3787,67 @@ state 146
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    $default  reduce using rule 134 (SelectStmtFieldList)
+    $výchozí  reduce using rule 134 (SelectStmtFieldList)
 
-    Conversion         go to state 93
-    Expression         go to state 94
-    Factor             go to state 95
-    Factor1            go to state 96
-    Field              go to state 200
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 94
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Field              přejít do stavu 200
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 147
+State 147
 
    10 Call: '(' . Call1 ')'
-   11 Call1: .  [')']
+   11 Call1: . %empty  [')']
    12      | . ExpressionList
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -3931,65 +3931,65 @@ state 147
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    $default  reduce using rule 11 (Call1)
+    $výchozí  reduce using rule 11 (Call1)
 
-    Call1              go to state 201
-    Conversion         go to state 93
-    Expression         go to state 202
-    ExpressionList     go to state 203
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Call1              přejít do stavu 201
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 202
+    ExpressionList     přejít do stavu 203
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 148
+State 148
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -4077,83 +4077,83 @@ state 148
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    ':'             shift, and go to state 204
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    ':'             posunout a přejít do stavu 204
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 205
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 205
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 149
+State 149
 
    98 PrimaryExpression: PrimaryExpression Call .
 
-    $default  reduce using rule 98 (PrimaryExpression)
+    $výchozí  reduce using rule 98 (PrimaryExpression)
 
 
-state 150
+State 150
 
    96 PrimaryExpression: PrimaryExpression Index .
 
-    $default  reduce using rule 96 (PrimaryExpression)
+    $výchozí  reduce using rule 96 (PrimaryExpression)
 
 
-state 151
+State 151
 
    97 PrimaryExpression: PrimaryExpression Slice .
 
-    $default  reduce using rule 97 (PrimaryExpression)
+    $výchozí  reduce using rule 97 (PrimaryExpression)
 
 
-state 152
+State 152
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -4213,56 +4213,56 @@ state 152
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryTerm        go to state 206
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryTerm        přejít do stavu 206
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 153
+State 153
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -4322,56 +4322,56 @@ state 153
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryTerm        go to state 207
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryTerm        přejít do stavu 207
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 154
+State 154
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -4431,56 +4431,56 @@ state 154
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryTerm        go to state 208
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryTerm        přejít do stavu 208
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 155
+State 155
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -4540,56 +4540,56 @@ state 155
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryTerm        go to state 209
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryTerm        přejít do stavu 209
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 156
+State 156
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -4641,55 +4641,55 @@ state 156
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 210
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 210
 
 
-state 157
+State 157
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -4741,55 +4741,55 @@ state 157
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 211
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 211
 
 
-state 158
+State 158
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -4841,55 +4841,55 @@ state 158
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 212
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 212
 
 
-state 159
+State 159
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -4941,55 +4941,55 @@ state 159
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 213
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 213
 
 
-state 160
+State 160
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -5041,55 +5041,55 @@ state 160
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 214
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 214
 
 
-state 161
+State 161
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -5141,55 +5141,55 @@ state 161
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 215
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 215
 
 
-state 162
+State 162
 
    21 Conversion: . Type '(' Expression ')'
    79 Literal: . falseKwd
@@ -5241,55 +5241,55 @@ state 162
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 216
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 216
 
 
-state 163
+State 163
 
   114 RecordSet: . RecordSet1 RecordSet2
   115 RecordSet1: . identifier
@@ -5299,15 +5299,15 @@ state 163
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from . RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
   125           | selectKwd SelectStmtDistinct SelectStmtFieldList from . RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
 
-    identifier  shift, and go to state 217
-    '('         shift, and go to state 218
+    identifier  posunout a přejít do stavu 217
+    '('         posunout a přejít do stavu 218
 
-    RecordSet      go to state 219
-    RecordSet1     go to state 220
-    RecordSetList  go to state 221
+    RecordSet      přejít do stavu 219
+    RecordSet1     přejít do stavu 220
+    RecordSetList  přejít do stavu 221
 
 
-state 164
+State 164
 
    21 Conversion: . Type '(' Expression ')'
    49 Factor: . Factor1
@@ -5387,59 +5387,59 @@ state 164
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Factor             go to state 222
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Factor             přejít do stavu 222
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 165
+State 165
 
    21 Conversion: . Type '(' Expression ')'
    21           | Type '(' . Expression ')'
@@ -5523,108 +5523,108 @@ state 165
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 223
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 223
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 166
+State 166
 
    14 ColumnName: identifier .
 
-    $default  reduce using rule 14 (ColumnName)
+    $výchozí  reduce using rule 14 (ColumnName)
 
 
-state 167
+State 167
 
     4 AssignmentList: Assignment . AssignmentList1 AssignmentList2
-    5 AssignmentList1: .
+    5 AssignmentList1: . %empty
     6                | . AssignmentList1 ',' Assignment
 
-    $default  reduce using rule 5 (AssignmentList1)
+    $výchozí  reduce using rule 5 (AssignmentList1)
 
-    AssignmentList1  go to state 224
+    AssignmentList1  přejít do stavu 224
 
 
-state 168
+State 168
 
   189 UpdateStmt: update TableName oSet AssignmentList . UpdateStmt1
-  190 UpdateStmt1: .  [$end, ';']
+  190 UpdateStmt1: . %empty  [$end, ';']
   191            | . WhereClause
   197 WhereClause: . where Expression
 
-    where  shift, and go to state 119
+    where  posunout a přejít do stavu 119
 
-    $default  reduce using rule 190 (UpdateStmt1)
+    $výchozí  reduce using rule 190 (UpdateStmt1)
 
-    UpdateStmt1  go to state 225
-    WhereClause  go to state 226
+    UpdateStmt1  přejít do stavu 225
+    WhereClause  přejít do stavu 226
 
 
-state 169
+State 169
 
     3 Assignment: ColumnName . '=' Expression
 
-    '='  shift, and go to state 227
+    '='  posunout a přejít do stavu 227
 
 
-state 170
+State 170
 
     1 AlterTableStmt: alter tableKwd TableName add ColumnDef .
 
-    $default  reduce using rule 1 (AlterTableStmt)
+    $výchozí  reduce using rule 1 (AlterTableStmt)
 
 
-state 171
+State 171
 
    13 ColumnDef: ColumnName . Type
   165 Type: . bigIntType
@@ -5652,161 +5652,161 @@ state 171
   187     | . uint64Type
   188     | . uint8Type
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    timeType        shift, and go to state 80
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    timeType        posunout a přejít do stavu 80
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
 
-    Type  go to state 228
+    Type  přejít do stavu 228
 
 
-state 172
+State 172
 
     2 AlterTableStmt: alter tableKwd TableName drop column . ColumnName
    14 ColumnName: . identifier
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    ColumnName  go to state 229
+    ColumnName  přejít do stavu 229
 
 
-state 173
+State 173
 
    29 CreateTableStmt: create tableKwd ifKwd not exists . TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
   161 TableName: . identifier
 
-    identifier  shift, and go to state 40
+    identifier  posunout a přejít do stavu 40
 
-    TableName  go to state 230
+    TableName  přejít do stavu 230
 
 
-state 174
+State 174
 
    28 CreateTableStmt: create tableKwd TableName '(' ColumnDef . CreateTableStmt1 CreateTableStmt2 ')'
-   30 CreateTableStmt1: .
+   30 CreateTableStmt1: . %empty
    31                 | . CreateTableStmt1 ',' ColumnDef
 
-    $default  reduce using rule 30 (CreateTableStmt1)
+    $výchozí  reduce using rule 30 (CreateTableStmt1)
 
-    CreateTableStmt1  go to state 231
+    CreateTableStmt1  přejít do stavu 231
 
 
-state 175
+State 175
 
    25 CreateIndexIfNotExists: ifKwd not . exists
 
-    exists  shift, and go to state 232
+    exists  posunout a přejít do stavu 232
 
 
-state 176
+State 176
 
    22 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier . on identifier '(' identifier ')'
    23                | create CreateIndexStmtUnique index CreateIndexIfNotExists identifier . on identifier '(' identifier '(' ')' ')'
 
-    on  shift, and go to state 233
+    on  posunout a přejít do stavu 233
 
 
-state 177
+State 177
 
    43 Expression: Expression . oror Term
   197 WhereClause: where Expression .  [$end, group, limit, offset, order, ')', ';']
 
-    oror  shift, and go to state 133
+    oror  posunout a přejít do stavu 133
 
-    $default  reduce using rule 197 (WhereClause)
+    $výchozí  reduce using rule 197 (WhereClause)
 
 
-state 178
+State 178
 
    40 DropTableStmt: drop tableKwd ifKwd exists TableName .
 
-    $default  reduce using rule 40 (DropTableStmt)
+    $výchozí  reduce using rule 40 (DropTableStmt)
 
 
-state 179
+State 179
 
    15 ColumnNameList: ColumnName . ColumnNameList1 ColumnNameList2
-   16 ColumnNameList1: .
+   16 ColumnNameList1: . %empty
    17                | . ColumnNameList1 ',' ColumnName
 
-    $default  reduce using rule 16 (ColumnNameList1)
+    $výchozí  reduce using rule 16 (ColumnNameList1)
 
-    ColumnNameList1  go to state 234
+    ColumnNameList1  přejít do stavu 234
 
 
-state 180
+State 180
 
    74 InsertIntoStmt1: '(' ColumnNameList . ')'
 
-    ')'  shift, and go to state 235
+    ')'  posunout a přejít do stavu 235
 
 
-state 181
+State 181
 
    71 InsertIntoStmt: insert into TableName InsertIntoStmt1 values . '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3
 
-    '('  shift, and go to state 236
+    '('  posunout a přejít do stavu 236
 
 
-state 182
+State 182
 
    72 InsertIntoStmt: insert into TableName InsertIntoStmt1 SelectStmt .
 
-    $default  reduce using rule 72 (InsertIntoStmt)
+    $výchozí  reduce using rule 72 (InsertIntoStmt)
 
 
-state 183
+State 183
 
   113 QualifiedIdent: identifier '.' identifier .
 
-    $default  reduce using rule 113 (QualifiedIdent)
+    $výchozí  reduce using rule 113 (QualifiedIdent)
 
 
-state 184
+State 184
 
    89 Operand: '(' Expression ')' .
 
-    $default  reduce using rule 89 (Operand)
+    $výchozí  reduce using rule 89 (Operand)
 
 
-state 185
+State 185
 
    66 Field1: as identifier .
 
-    $default  reduce using rule 66 (Field1)
+    $výchozí  reduce using rule 66 (Field1)
 
 
-state 186
+State 186
 
    43 Expression: Expression oror Term .  [$end, as, asc, desc, from, group, limit, offset, order, oror, where, ',', ')', ']', ';', ':']
   163 Term: Term . andand Factor
 
-    andand  shift, and go to state 164
+    andand  posunout a přejít do stavu 164
 
-    $default  reduce using rule 43 (Expression)
+    $výchozí  reduce using rule 43 (Expression)
 
 
-state 187
+State 187
 
    52 Factor: Factor1 between PrimaryFactor . and PrimaryFactor
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -5814,14 +5814,14 @@ state 187
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    and  shift, and go to state 237
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    and  posunout a přejít do stavu 237
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
 
-state 188
+State 188
 
    62 Factor1: Factor1 eq PrimaryFactor .  [$end, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -5829,15 +5829,15 @@ state 188
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 62 (Factor1)
+    $výchozí  reduce using rule 62 (Factor1)
 
 
-state 189
+State 189
 
    57 Factor1: Factor1 ge PrimaryFactor .  [$end, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -5845,15 +5845,15 @@ state 189
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 57 (Factor1)
+    $výchozí  reduce using rule 57 (Factor1)
 
 
-state 190
+State 190
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -5938,76 +5938,76 @@ state 190
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 202
-    ExpressionList     go to state 238
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 202
+    ExpressionList     přejít do stavu 238
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 191
+State 191
 
    55 Factor: Factor1 is not . null
 
-    null  shift, and go to state 239
+    null  posunout a přejít do stavu 239
 
 
-state 192
+State 192
 
    54 Factor: Factor1 is null .
 
-    $default  reduce using rule 54 (Factor)
+    $výchozí  reduce using rule 54 (Factor)
 
 
-state 193
+State 193
 
    59 Factor1: Factor1 le PrimaryFactor .  [$end, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -6015,15 +6015,15 @@ state 193
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 59 (Factor1)
+    $výchozí  reduce using rule 59 (Factor1)
 
 
-state 194
+State 194
 
    63 Factor1: Factor1 like PrimaryFactor .  [$end, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -6031,15 +6031,15 @@ state 194
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 63 (Factor1)
+    $výchozí  reduce using rule 63 (Factor1)
 
 
-state 195
+State 195
 
    61 Factor1: Factor1 neq PrimaryFactor .  [$end, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -6047,15 +6047,15 @@ state 195
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 61 (Factor1)
+    $výchozí  reduce using rule 61 (Factor1)
 
 
-state 196
+State 196
 
    21 Conversion: . Type '(' Expression ')'
    53 Factor: Factor1 not between . PrimaryFactor and PrimaryFactor
@@ -6120,64 +6120,64 @@ state 196
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 240
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 240
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 197
+State 197
 
    51 Factor: Factor1 not in . '(' ExpressionList ')'
 
-    '('  shift, and go to state 241
+    '('  posunout a přejít do stavu 241
 
 
-state 198
+State 198
 
    58 Factor1: Factor1 '>' PrimaryFactor .  [$end, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -6185,15 +6185,15 @@ state 198
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 58 (Factor1)
+    $výchozí  reduce using rule 58 (Factor1)
 
 
-state 199
+State 199
 
    60 Factor1: Factor1 '<' PrimaryFactor .  [$end, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -6201,50 +6201,50 @@ state 199
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 60 (Factor1)
+    $výchozí  reduce using rule 60 (Factor1)
 
 
-state 200
+State 200
 
    68 FieldList: FieldList ',' Field .
 
-    $default  reduce using rule 68 (FieldList)
+    $výchozí  reduce using rule 68 (FieldList)
 
 
-state 201
+State 201
 
    10 Call: '(' Call1 . ')'
 
-    ')'  shift, and go to state 242
+    ')'  posunout a přejít do stavu 242
 
 
-state 202
+State 202
 
    43 Expression: Expression . oror Term
    44 ExpressionList: Expression . ExpressionList1 ExpressionList2
-   45 ExpressionList1: .  [$end, asc, desc, limit, offset, ',', ')', ';']
+   45 ExpressionList1: . %empty  [$end, asc, desc, limit, offset, ',', ')', ';']
    46                | . ExpressionList1 ',' Expression
 
-    oror  shift, and go to state 133
+    oror  posunout a přejít do stavu 133
 
-    $default  reduce using rule 45 (ExpressionList1)
+    $výchozí  reduce using rule 45 (ExpressionList1)
 
-    ExpressionList1  go to state 243
+    ExpressionList1  přejít do stavu 243
 
 
-state 203
+State 203
 
    12 Call1: ExpressionList .
 
-    $default  reduce using rule 12 (Call1)
+    $výchozí  reduce using rule 12 (Call1)
 
 
-state 204
+State 204
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -6329,74 +6329,74 @@ state 204
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    ']'             shift, and go to state 244
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    ']'             posunout a přejít do stavu 244
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 245
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 245
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 205
+State 205
 
    43 Expression: Expression . oror Term
    70 Index: '[' Expression . ']'
   143 Slice: '[' Expression . ':' ']'
   144      | '[' Expression . ':' Expression ']'
 
-    oror  shift, and go to state 133
-    ']'   shift, and go to state 246
-    ':'   shift, and go to state 247
+    oror  posunout a přejít do stavu 133
+    ']'   posunout a přejít do stavu 246
+    ':'   posunout a přejít do stavu 247
 
 
-state 206
+State 206
 
   100 PrimaryFactor: PrimaryFactor '^' PrimaryTerm .  [$end, and, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', ';', ':']
   105 PrimaryTerm: PrimaryTerm . andnot UnaryExpr
@@ -6407,18 +6407,18 @@ state 206
   110            | PrimaryTerm . '/' UnaryExpr
   111            | PrimaryTerm . '*' UnaryExpr
 
-    andnot  shift, and go to state 156
-    lsh     shift, and go to state 157
-    rsh     shift, and go to state 158
-    '&'     shift, and go to state 159
-    '%'     shift, and go to state 160
-    '/'     shift, and go to state 161
-    '*'     shift, and go to state 162
+    andnot  posunout a přejít do stavu 156
+    lsh     posunout a přejít do stavu 157
+    rsh     posunout a přejít do stavu 158
+    '&'     posunout a přejít do stavu 159
+    '%'     posunout a přejít do stavu 160
+    '/'     posunout a přejít do stavu 161
+    '*'     posunout a přejít do stavu 162
 
-    $default  reduce using rule 100 (PrimaryFactor)
+    $výchozí  reduce using rule 100 (PrimaryFactor)
 
 
-state 207
+State 207
 
   101 PrimaryFactor: PrimaryFactor '|' PrimaryTerm .  [$end, and, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', ';', ':']
   105 PrimaryTerm: PrimaryTerm . andnot UnaryExpr
@@ -6429,18 +6429,18 @@ state 207
   110            | PrimaryTerm . '/' UnaryExpr
   111            | PrimaryTerm . '*' UnaryExpr
 
-    andnot  shift, and go to state 156
-    lsh     shift, and go to state 157
-    rsh     shift, and go to state 158
-    '&'     shift, and go to state 159
-    '%'     shift, and go to state 160
-    '/'     shift, and go to state 161
-    '*'     shift, and go to state 162
+    andnot  posunout a přejít do stavu 156
+    lsh     posunout a přejít do stavu 157
+    rsh     posunout a přejít do stavu 158
+    '&'     posunout a přejít do stavu 159
+    '%'     posunout a přejít do stavu 160
+    '/'     posunout a přejít do stavu 161
+    '*'     posunout a přejít do stavu 162
 
-    $default  reduce using rule 101 (PrimaryFactor)
+    $výchozí  reduce using rule 101 (PrimaryFactor)
 
 
-state 208
+State 208
 
   102 PrimaryFactor: PrimaryFactor '-' PrimaryTerm .  [$end, and, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', ';', ':']
   105 PrimaryTerm: PrimaryTerm . andnot UnaryExpr
@@ -6451,18 +6451,18 @@ state 208
   110            | PrimaryTerm . '/' UnaryExpr
   111            | PrimaryTerm . '*' UnaryExpr
 
-    andnot  shift, and go to state 156
-    lsh     shift, and go to state 157
-    rsh     shift, and go to state 158
-    '&'     shift, and go to state 159
-    '%'     shift, and go to state 160
-    '/'     shift, and go to state 161
-    '*'     shift, and go to state 162
+    andnot  posunout a přejít do stavu 156
+    lsh     posunout a přejít do stavu 157
+    rsh     posunout a přejít do stavu 158
+    '&'     posunout a přejít do stavu 159
+    '%'     posunout a přejít do stavu 160
+    '/'     posunout a přejít do stavu 161
+    '*'     posunout a přejít do stavu 162
 
-    $default  reduce using rule 102 (PrimaryFactor)
+    $výchozí  reduce using rule 102 (PrimaryFactor)
 
 
-state 209
+State 209
 
   103 PrimaryFactor: PrimaryFactor '+' PrimaryTerm .  [$end, and, andand, as, asc, between, desc, eq, from, ge, group, in, is, le, like, limit, neq, not, offset, order, oror, where, ',', ')', '>', '<', ']', '^', '|', '-', '+', ';', ':']
   105 PrimaryTerm: PrimaryTerm . andnot UnaryExpr
@@ -6473,167 +6473,167 @@ state 209
   110            | PrimaryTerm . '/' UnaryExpr
   111            | PrimaryTerm . '*' UnaryExpr
 
-    andnot  shift, and go to state 156
-    lsh     shift, and go to state 157
-    rsh     shift, and go to state 158
-    '&'     shift, and go to state 159
-    '%'     shift, and go to state 160
-    '/'     shift, and go to state 161
-    '*'     shift, and go to state 162
+    andnot  posunout a přejít do stavu 156
+    lsh     posunout a přejít do stavu 157
+    rsh     posunout a přejít do stavu 158
+    '&'     posunout a přejít do stavu 159
+    '%'     posunout a přejít do stavu 160
+    '/'     posunout a přejít do stavu 161
+    '*'     posunout a přejít do stavu 162
 
-    $default  reduce using rule 103 (PrimaryFactor)
+    $výchozí  reduce using rule 103 (PrimaryFactor)
 
 
-state 210
+State 210
 
   105 PrimaryTerm: PrimaryTerm andnot UnaryExpr .
 
-    $default  reduce using rule 105 (PrimaryTerm)
+    $výchozí  reduce using rule 105 (PrimaryTerm)
 
 
-state 211
+State 211
 
   107 PrimaryTerm: PrimaryTerm lsh UnaryExpr .
 
-    $default  reduce using rule 107 (PrimaryTerm)
+    $výchozí  reduce using rule 107 (PrimaryTerm)
 
 
-state 212
+State 212
 
   108 PrimaryTerm: PrimaryTerm rsh UnaryExpr .
 
-    $default  reduce using rule 108 (PrimaryTerm)
+    $výchozí  reduce using rule 108 (PrimaryTerm)
 
 
-state 213
+State 213
 
   106 PrimaryTerm: PrimaryTerm '&' UnaryExpr .
 
-    $default  reduce using rule 106 (PrimaryTerm)
+    $výchozí  reduce using rule 106 (PrimaryTerm)
 
 
-state 214
+State 214
 
   109 PrimaryTerm: PrimaryTerm '%' UnaryExpr .
 
-    $default  reduce using rule 109 (PrimaryTerm)
+    $výchozí  reduce using rule 109 (PrimaryTerm)
 
 
-state 215
+State 215
 
   110 PrimaryTerm: PrimaryTerm '/' UnaryExpr .
 
-    $default  reduce using rule 110 (PrimaryTerm)
+    $výchozí  reduce using rule 110 (PrimaryTerm)
 
 
-state 216
+State 216
 
   111 PrimaryTerm: PrimaryTerm '*' UnaryExpr .
 
-    $default  reduce using rule 111 (PrimaryTerm)
+    $výchozí  reduce using rule 111 (PrimaryTerm)
 
 
-state 217
+State 217
 
   115 RecordSet1: identifier .
 
-    $default  reduce using rule 115 (RecordSet1)
+    $výchozí  reduce using rule 115 (RecordSet1)
 
 
-state 218
+State 218
 
   116 RecordSet1: '(' . SelectStmt RecordSet11 ')'
   124 SelectStmt: . selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
   125           | . selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
 
-    selectKwd  shift, and go to state 9
+    selectKwd  posunout a přejít do stavu 9
 
-    SelectStmt  go to state 248
+    SelectStmt  přejít do stavu 248
 
 
-state 219
+State 219
 
   121 RecordSetList: RecordSet .
 
-    $default  reduce using rule 121 (RecordSetList)
+    $výchozí  reduce using rule 121 (RecordSetList)
 
 
-state 220
+State 220
 
   114 RecordSet: RecordSet1 . RecordSet2
-  119 RecordSet2: .  [$end, group, limit, offset, order, where, ',', ')', ';']
+  119 RecordSet2: . %empty  [$end, group, limit, offset, order, where, ',', ')', ';']
   120           | . as identifier
 
-    as  shift, and go to state 249
+    as  posunout a přejít do stavu 249
 
-    $default  reduce using rule 119 (RecordSet2)
+    $výchozí  reduce using rule 119 (RecordSet2)
 
-    RecordSet2  go to state 250
+    RecordSet2  přejít do stavu 250
 
 
-state 221
+State 221
 
   122 RecordSetList: RecordSetList . ',' RecordSet
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList . SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
   125           | selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList . ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
-  135 SelectStmtWhere: .  [$end, group, limit, offset, order, ')', ';']
+  135 SelectStmtWhere: . %empty  [$end, group, limit, offset, order, ')', ';']
   136                | . WhereClause
   197 WhereClause: . where Expression
 
-    where  shift, and go to state 119
-    ','    shift, and go to state 251
+    where  posunout a přejít do stavu 119
+    ','    posunout a přejít do stavu 251
 
-    $default  reduce using rule 135 (SelectStmtWhere)
+    $výchozí  reduce using rule 135 (SelectStmtWhere)
 
-    SelectStmtWhere  go to state 252
-    WhereClause      go to state 253
+    SelectStmtWhere  přejít do stavu 252
+    WhereClause      přejít do stavu 253
 
 
-state 222
+State 222
 
   163 Term: Term andand Factor .
 
-    $default  reduce using rule 163 (Term)
+    $výchozí  reduce using rule 163 (Term)
 
 
-state 223
+State 223
 
    21 Conversion: Type '(' Expression . ')'
    43 Expression: Expression . oror Term
 
-    oror  shift, and go to state 133
-    ')'   shift, and go to state 254
+    oror  posunout a přejít do stavu 133
+    ')'   posunout a přejít do stavu 254
 
 
-state 224
+State 224
 
     4 AssignmentList: Assignment AssignmentList1 . AssignmentList2
     6 AssignmentList1: AssignmentList1 . ',' Assignment
-    7 AssignmentList2: .  [$end, where, ';']
+    7 AssignmentList2: . %empty  [$end, where, ';']
     8                | . ','
 
-    ','  shift, and go to state 255
+    ','  posunout a přejít do stavu 255
 
-    $default  reduce using rule 7 (AssignmentList2)
+    $výchozí  reduce using rule 7 (AssignmentList2)
 
-    AssignmentList2  go to state 256
+    AssignmentList2  přejít do stavu 256
 
 
-state 225
+State 225
 
   189 UpdateStmt: update TableName oSet AssignmentList UpdateStmt1 .
 
-    $default  reduce using rule 189 (UpdateStmt)
+    $výchozí  reduce using rule 189 (UpdateStmt)
 
 
-state 226
+State 226
 
   191 UpdateStmt1: WhereClause .
 
-    $default  reduce using rule 191 (UpdateStmt1)
+    $výchozí  reduce using rule 191 (UpdateStmt1)
 
 
-state 227
+State 227
 
     3 Assignment: ColumnName '=' . Expression
    21 Conversion: . Type '(' Expression ')'
@@ -6717,132 +6717,132 @@ state 227
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 257
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 257
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 228
+State 228
 
    13 ColumnDef: ColumnName Type .
 
-    $default  reduce using rule 13 (ColumnDef)
+    $výchozí  reduce using rule 13 (ColumnDef)
 
 
-state 229
+State 229
 
     2 AlterTableStmt: alter tableKwd TableName drop column ColumnName .
 
-    $default  reduce using rule 2 (AlterTableStmt)
+    $výchozí  reduce using rule 2 (AlterTableStmt)
 
 
-state 230
+State 230
 
    29 CreateTableStmt: create tableKwd ifKwd not exists TableName . '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
 
-    '('  shift, and go to state 258
+    '('  posunout a přejít do stavu 258
 
 
-state 231
+State 231
 
    28 CreateTableStmt: create tableKwd TableName '(' ColumnDef CreateTableStmt1 . CreateTableStmt2 ')'
    31 CreateTableStmt1: CreateTableStmt1 . ',' ColumnDef
-   32 CreateTableStmt2: .  [')']
+   32 CreateTableStmt2: . %empty  [')']
    33                 | . ','
 
-    ','  shift, and go to state 259
+    ','  posunout a přejít do stavu 259
 
-    $default  reduce using rule 32 (CreateTableStmt2)
+    $výchozí  reduce using rule 32 (CreateTableStmt2)
 
-    CreateTableStmt2  go to state 260
+    CreateTableStmt2  přejít do stavu 260
 
 
-state 232
+State 232
 
    25 CreateIndexIfNotExists: ifKwd not exists .
 
-    $default  reduce using rule 25 (CreateIndexIfNotExists)
+    $výchozí  reduce using rule 25 (CreateIndexIfNotExists)
 
 
-state 233
+State 233
 
    22 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on . identifier '(' identifier ')'
    23                | create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on . identifier '(' identifier '(' ')' ')'
 
-    identifier  shift, and go to state 261
+    identifier  posunout a přejít do stavu 261
 
 
-state 234
+State 234
 
    15 ColumnNameList: ColumnName ColumnNameList1 . ColumnNameList2
    17 ColumnNameList1: ColumnNameList1 . ',' ColumnName
-   18 ColumnNameList2: .  [$end, limit, offset, order, ')', ';']
+   18 ColumnNameList2: . %empty  [$end, limit, offset, order, ')', ';']
    19                | . ','
 
-    ','  shift, and go to state 262
+    ','  posunout a přejít do stavu 262
 
-    $default  reduce using rule 18 (ColumnNameList2)
+    $výchozí  reduce using rule 18 (ColumnNameList2)
 
-    ColumnNameList2  go to state 263
+    ColumnNameList2  přejít do stavu 263
 
 
-state 235
+State 235
 
    74 InsertIntoStmt1: '(' ColumnNameList ')' .
 
-    $default  reduce using rule 74 (InsertIntoStmt1)
+    $výchozí  reduce using rule 74 (InsertIntoStmt1)
 
 
-state 236
+State 236
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -6927,62 +6927,62 @@ state 236
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 202
-    ExpressionList     go to state 264
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 202
+    ExpressionList     přejít do stavu 264
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 237
+State 237
 
    21 Conversion: . Type '(' Expression ')'
    52 Factor: Factor1 between PrimaryFactor and . PrimaryFactor
@@ -7047,71 +7047,71 @@ state 237
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 265
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 265
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 238
+State 238
 
    50 Factor: Factor1 in '(' ExpressionList . ')'
 
-    ')'  shift, and go to state 266
+    ')'  posunout a přejít do stavu 266
 
 
-state 239
+State 239
 
    55 Factor: Factor1 is not null .
 
-    $default  reduce using rule 55 (Factor)
+    $výchozí  reduce using rule 55 (Factor)
 
 
-state 240
+State 240
 
    53 Factor: Factor1 not between PrimaryFactor . and PrimaryFactor
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -7119,14 +7119,14 @@ state 240
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    and  shift, and go to state 267
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    and  posunout a přejít do stavu 267
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
 
-state 241
+State 241
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -7211,106 +7211,106 @@ state 241
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 202
-    ExpressionList     go to state 268
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 202
+    ExpressionList     přejít do stavu 268
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 242
+State 242
 
    10 Call: '(' Call1 ')' .
 
-    $default  reduce using rule 10 (Call)
+    $výchozí  reduce using rule 10 (Call)
 
 
-state 243
+State 243
 
    44 ExpressionList: Expression ExpressionList1 . ExpressionList2
    46 ExpressionList1: ExpressionList1 . ',' Expression
-   47 ExpressionList2: .  [$end, asc, desc, limit, offset, ')', ';']
+   47 ExpressionList2: . %empty  [$end, asc, desc, limit, offset, ')', ';']
    48                | . ','
 
-    ','  shift, and go to state 269
+    ','  posunout a přejít do stavu 269
 
-    $default  reduce using rule 47 (ExpressionList2)
+    $výchozí  reduce using rule 47 (ExpressionList2)
 
-    ExpressionList2  go to state 270
+    ExpressionList2  přejít do stavu 270
 
 
-state 244
+State 244
 
   141 Slice: '[' ':' ']' .
 
-    $default  reduce using rule 141 (Slice)
+    $výchozí  reduce using rule 141 (Slice)
 
 
-state 245
+State 245
 
    43 Expression: Expression . oror Term
   142 Slice: '[' ':' Expression . ']'
 
-    oror  shift, and go to state 133
-    ']'   shift, and go to state 271
+    oror  posunout a přejít do stavu 133
+    ']'   posunout a přejít do stavu 271
 
 
-state 246
+State 246
 
    70 Index: '[' Expression ']' .
 
-    $default  reduce using rule 70 (Index)
+    $výchozí  reduce using rule 70 (Index)
 
 
-state 247
+State 247
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -7395,242 +7395,242 @@ state 247
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    ']'             shift, and go to state 272
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    ']'             posunout a přejít do stavu 272
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 273
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 273
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 248
+State 248
 
   116 RecordSet1: '(' SelectStmt . RecordSet11 ')'
-  117 RecordSet11: .  [')']
+  117 RecordSet11: . %empty  [')']
   118            | . ';'
 
-    ';'  shift, and go to state 274
+    ';'  posunout a přejít do stavu 274
 
-    $default  reduce using rule 117 (RecordSet11)
+    $výchozí  reduce using rule 117 (RecordSet11)
 
-    RecordSet11  go to state 275
+    RecordSet11  přejít do stavu 275
 
 
-state 249
+State 249
 
   120 RecordSet2: as . identifier
 
-    identifier  shift, and go to state 276
+    identifier  posunout a přejít do stavu 276
 
 
-state 250
+State 250
 
   114 RecordSet: RecordSet1 RecordSet2 .
 
-    $default  reduce using rule 114 (RecordSet)
+    $výchozí  reduce using rule 114 (RecordSet)
 
 
-state 251
+State 251
 
   114 RecordSet: . RecordSet1 RecordSet2
   115 RecordSet1: . identifier
   116           | . '(' SelectStmt RecordSet11 ')'
   122 RecordSetList: RecordSetList ',' . RecordSet
   125 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' . SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
-  135 SelectStmtWhere: .  [$end, group, limit, offset, order, ')', ';']
+  135 SelectStmtWhere: . %empty  [$end, group, limit, offset, order, ')', ';']
   136                | . WhereClause
   197 WhereClause: . where Expression
 
-    identifier  shift, and go to state 217
-    where       shift, and go to state 119
-    '('         shift, and go to state 218
+    identifier  posunout a přejít do stavu 217
+    where       posunout a přejít do stavu 119
+    '('         posunout a přejít do stavu 218
 
-    $default  reduce using rule 135 (SelectStmtWhere)
+    $výchozí  reduce using rule 135 (SelectStmtWhere)
 
-    RecordSet        go to state 277
-    RecordSet1       go to state 220
-    SelectStmtWhere  go to state 278
-    WhereClause      go to state 253
+    RecordSet        přejít do stavu 277
+    RecordSet1       přejít do stavu 220
+    SelectStmtWhere  přejít do stavu 278
+    WhereClause      přejít do stavu 253
 
 
-state 252
+State 252
 
    69 GroupByClause: . group by ColumnNameList
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere . SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
-  137 SelectStmtGroup: .  [$end, limit, offset, order, ')', ';']
+  137 SelectStmtGroup: . %empty  [$end, limit, offset, order, ')', ';']
   138                | . GroupByClause
 
-    group  shift, and go to state 279
+    group  posunout a přejít do stavu 279
 
-    $default  reduce using rule 137 (SelectStmtGroup)
+    $výchozí  reduce using rule 137 (SelectStmtGroup)
 
-    GroupByClause    go to state 280
-    SelectStmtGroup  go to state 281
+    GroupByClause    přejít do stavu 280
+    SelectStmtGroup  přejít do stavu 281
 
 
-state 253
+State 253
 
   136 SelectStmtWhere: WhereClause .
 
-    $default  reduce using rule 136 (SelectStmtWhere)
+    $výchozí  reduce using rule 136 (SelectStmtWhere)
 
 
-state 254
+State 254
 
    21 Conversion: Type '(' Expression ')' .
 
-    $default  reduce using rule 21 (Conversion)
+    $výchozí  reduce using rule 21 (Conversion)
 
 
-state 255
+State 255
 
     3 Assignment: . ColumnName '=' Expression
     6 AssignmentList1: AssignmentList1 ',' . Assignment
     8 AssignmentList2: ',' .  [$end, where, ';']
    14 ColumnName: . identifier
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    $default  reduce using rule 8 (AssignmentList2)
+    $výchozí  reduce using rule 8 (AssignmentList2)
 
-    Assignment  go to state 282
-    ColumnName  go to state 169
+    Assignment  přejít do stavu 282
+    ColumnName  přejít do stavu 169
 
 
-state 256
+State 256
 
     4 AssignmentList: Assignment AssignmentList1 AssignmentList2 .
 
-    $default  reduce using rule 4 (AssignmentList)
+    $výchozí  reduce using rule 4 (AssignmentList)
 
 
-state 257
+State 257
 
     3 Assignment: ColumnName '=' Expression .  [$end, where, ',', ';']
    43 Expression: Expression . oror Term
 
-    oror  shift, and go to state 133
+    oror  posunout a přejít do stavu 133
 
-    $default  reduce using rule 3 (Assignment)
+    $výchozí  reduce using rule 3 (Assignment)
 
 
-state 258
+State 258
 
    13 ColumnDef: . ColumnName Type
    14 ColumnName: . identifier
    29 CreateTableStmt: create tableKwd ifKwd not exists TableName '(' . ColumnDef CreateTableStmt1 CreateTableStmt2 ')'
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    ColumnDef   go to state 283
-    ColumnName  go to state 171
+    ColumnDef   přejít do stavu 283
+    ColumnName  přejít do stavu 171
 
 
-state 259
+State 259
 
    13 ColumnDef: . ColumnName Type
    14 ColumnName: . identifier
    31 CreateTableStmt1: CreateTableStmt1 ',' . ColumnDef
    33 CreateTableStmt2: ',' .  [')']
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    $default  reduce using rule 33 (CreateTableStmt2)
+    $výchozí  reduce using rule 33 (CreateTableStmt2)
 
-    ColumnDef   go to state 284
-    ColumnName  go to state 171
+    ColumnDef   přejít do stavu 284
+    ColumnName  přejít do stavu 171
 
 
-state 260
+State 260
 
    28 CreateTableStmt: create tableKwd TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 . ')'
 
-    ')'  shift, and go to state 285
+    ')'  posunout a přejít do stavu 285
 
 
-state 261
+State 261
 
    22 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier . '(' identifier ')'
    23                | create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier . '(' identifier '(' ')' ')'
 
-    '('  shift, and go to state 286
+    '('  posunout a přejít do stavu 286
 
 
-state 262
+State 262
 
    14 ColumnName: . identifier
    17 ColumnNameList1: ColumnNameList1 ',' . ColumnName
    19 ColumnNameList2: ',' .  [$end, limit, offset, order, ')', ';']
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    $default  reduce using rule 19 (ColumnNameList2)
+    $výchozí  reduce using rule 19 (ColumnNameList2)
 
-    ColumnName  go to state 287
+    ColumnName  přejít do stavu 287
 
 
-state 263
+State 263
 
    15 ColumnNameList: ColumnName ColumnNameList1 ColumnNameList2 .
 
-    $default  reduce using rule 15 (ColumnNameList)
+    $výchozí  reduce using rule 15 (ColumnNameList)
 
 
-state 264
+State 264
 
    71 InsertIntoStmt: insert into TableName InsertIntoStmt1 values '(' ExpressionList . ')' InsertIntoStmt2 InsertIntoStmt3
 
-    ')'  shift, and go to state 288
+    ')'  posunout a přejít do stavu 288
 
 
-state 265
+State 265
 
    52 Factor: Factor1 between PrimaryFactor and PrimaryFactor .  [$end, andand, as, asc, desc, from, group, limit, offset, order, oror, where, ',', ')', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -7638,22 +7638,22 @@ state 265
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 52 (Factor)
+    $výchozí  reduce using rule 52 (Factor)
 
 
-state 266
+State 266
 
    50 Factor: Factor1 in '(' ExpressionList ')' .
 
-    $default  reduce using rule 50 (Factor)
+    $výchozí  reduce using rule 50 (Factor)
 
 
-state 267
+State 267
 
    21 Conversion: . Type '(' Expression ')'
    53 Factor: Factor1 not between PrimaryFactor and . PrimaryFactor
@@ -7718,64 +7718,64 @@ state 267
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 289
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 289
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 268
+State 268
 
    51 Factor: Factor1 not in '(' ExpressionList . ')'
 
-    ')'  shift, and go to state 290
+    ')'  posunout a přejít do stavu 290
 
 
-state 269
+State 269
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -7860,223 +7860,223 @@ state 269
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    $default  reduce using rule 48 (ExpressionList2)
+    $výchozí  reduce using rule 48 (ExpressionList2)
 
-    Conversion         go to state 93
-    Expression         go to state 291
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 291
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 270
+State 270
 
    44 ExpressionList: Expression ExpressionList1 ExpressionList2 .
 
-    $default  reduce using rule 44 (ExpressionList)
+    $výchozí  reduce using rule 44 (ExpressionList)
 
 
-state 271
+State 271
 
   142 Slice: '[' ':' Expression ']' .
 
-    $default  reduce using rule 142 (Slice)
+    $výchozí  reduce using rule 142 (Slice)
 
 
-state 272
+State 272
 
   143 Slice: '[' Expression ':' ']' .
 
-    $default  reduce using rule 143 (Slice)
+    $výchozí  reduce using rule 143 (Slice)
 
 
-state 273
+State 273
 
    43 Expression: Expression . oror Term
   144 Slice: '[' Expression ':' Expression . ']'
 
-    oror  shift, and go to state 133
-    ']'   shift, and go to state 292
+    oror  posunout a přejít do stavu 133
+    ']'   posunout a přejít do stavu 292
 
 
-state 274
+State 274
 
   118 RecordSet11: ';' .
 
-    $default  reduce using rule 118 (RecordSet11)
+    $výchozí  reduce using rule 118 (RecordSet11)
 
 
-state 275
+State 275
 
   116 RecordSet1: '(' SelectStmt RecordSet11 . ')'
 
-    ')'  shift, and go to state 293
+    ')'  posunout a přejít do stavu 293
 
 
-state 276
+State 276
 
   120 RecordSet2: as identifier .
 
-    $default  reduce using rule 120 (RecordSet2)
+    $výchozí  reduce using rule 120 (RecordSet2)
 
 
-state 277
+State 277
 
   122 RecordSetList: RecordSetList ',' RecordSet .
 
-    $default  reduce using rule 122 (RecordSetList)
+    $výchozí  reduce using rule 122 (RecordSetList)
 
 
-state 278
+State 278
 
    69 GroupByClause: . group by ColumnNameList
   125 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere . SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset
-  137 SelectStmtGroup: .  [$end, limit, offset, order, ')', ';']
+  137 SelectStmtGroup: . %empty  [$end, limit, offset, order, ')', ';']
   138                | . GroupByClause
 
-    group  shift, and go to state 279
+    group  posunout a přejít do stavu 279
 
-    $default  reduce using rule 137 (SelectStmtGroup)
+    $výchozí  reduce using rule 137 (SelectStmtGroup)
 
-    GroupByClause    go to state 280
-    SelectStmtGroup  go to state 294
+    GroupByClause    přejít do stavu 280
+    SelectStmtGroup  přejít do stavu 294
 
 
-state 279
+State 279
 
    69 GroupByClause: group . by ColumnNameList
 
-    by  shift, and go to state 295
+    by  posunout a přejít do stavu 295
 
 
-state 280
+State 280
 
   138 SelectStmtGroup: GroupByClause .
 
-    $default  reduce using rule 138 (SelectStmtGroup)
+    $výchozí  reduce using rule 138 (SelectStmtGroup)
 
 
-state 281
+State 281
 
    90 OrderBy: . order by ExpressionList OrderBy1
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere SelectStmtGroup . SelectStmtOrder SelectStmtLimit SelectStmtOffset
-  139 SelectStmtOrder: .  [$end, limit, offset, ')', ';']
+  139 SelectStmtOrder: . %empty  [$end, limit, offset, ')', ';']
   140                | . OrderBy
 
-    order  shift, and go to state 296
+    order  posunout a přejít do stavu 296
 
-    $default  reduce using rule 139 (SelectStmtOrder)
+    $výchozí  reduce using rule 139 (SelectStmtOrder)
 
-    OrderBy          go to state 297
-    SelectStmtOrder  go to state 298
+    OrderBy          přejít do stavu 297
+    SelectStmtOrder  přejít do stavu 298
 
 
-state 282
+State 282
 
     6 AssignmentList1: AssignmentList1 ',' Assignment .
 
-    $default  reduce using rule 6 (AssignmentList1)
+    $výchozí  reduce using rule 6 (AssignmentList1)
 
 
-state 283
+State 283
 
    29 CreateTableStmt: create tableKwd ifKwd not exists TableName '(' ColumnDef . CreateTableStmt1 CreateTableStmt2 ')'
-   30 CreateTableStmt1: .
+   30 CreateTableStmt1: . %empty
    31                 | . CreateTableStmt1 ',' ColumnDef
 
-    $default  reduce using rule 30 (CreateTableStmt1)
+    $výchozí  reduce using rule 30 (CreateTableStmt1)
 
-    CreateTableStmt1  go to state 299
+    CreateTableStmt1  přejít do stavu 299
 
 
-state 284
+State 284
 
    31 CreateTableStmt1: CreateTableStmt1 ',' ColumnDef .
 
-    $default  reduce using rule 31 (CreateTableStmt1)
+    $výchozí  reduce using rule 31 (CreateTableStmt1)
 
 
-state 285
+State 285
 
    28 CreateTableStmt: create tableKwd TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')' .
 
-    $default  reduce using rule 28 (CreateTableStmt)
+    $výchozí  reduce using rule 28 (CreateTableStmt)
 
 
-state 286
+State 286
 
    22 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' . identifier ')'
    23                | create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' . identifier '(' ')' ')'
 
-    identifier  shift, and go to state 300
+    identifier  posunout a přejít do stavu 300
 
 
-state 287
+State 287
 
    17 ColumnNameList1: ColumnNameList1 ',' ColumnName .
 
-    $default  reduce using rule 17 (ColumnNameList1)
+    $výchozí  reduce using rule 17 (ColumnNameList1)
 
 
-state 288
+State 288
 
    71 InsertIntoStmt: insert into TableName InsertIntoStmt1 values '(' ExpressionList ')' . InsertIntoStmt2 InsertIntoStmt3
-   75 InsertIntoStmt2: .
+   75 InsertIntoStmt2: . %empty
    76                | . InsertIntoStmt2 ',' '(' ExpressionList ')'
 
-    $default  reduce using rule 75 (InsertIntoStmt2)
+    $výchozí  reduce using rule 75 (InsertIntoStmt2)
 
-    InsertIntoStmt2  go to state 301
+    InsertIntoStmt2  přejít do stavu 301
 
 
-state 289
+State 289
 
    53 Factor: Factor1 not between PrimaryFactor and PrimaryFactor .  [$end, andand, as, asc, desc, from, group, limit, offset, order, oror, where, ',', ')', ']', ';', ':']
   100 PrimaryFactor: PrimaryFactor . '^' PrimaryTerm
@@ -8084,157 +8084,157 @@ state 289
   102              | PrimaryFactor . '-' PrimaryTerm
   103              | PrimaryFactor . '+' PrimaryTerm
 
-    '^'  shift, and go to state 152
-    '|'  shift, and go to state 153
-    '-'  shift, and go to state 154
-    '+'  shift, and go to state 155
+    '^'  posunout a přejít do stavu 152
+    '|'  posunout a přejít do stavu 153
+    '-'  posunout a přejít do stavu 154
+    '+'  posunout a přejít do stavu 155
 
-    $default  reduce using rule 53 (Factor)
+    $výchozí  reduce using rule 53 (Factor)
 
 
-state 290
+State 290
 
    51 Factor: Factor1 not in '(' ExpressionList ')' .
 
-    $default  reduce using rule 51 (Factor)
+    $výchozí  reduce using rule 51 (Factor)
 
 
-state 291
+State 291
 
    43 Expression: Expression . oror Term
    46 ExpressionList1: ExpressionList1 ',' Expression .  [$end, asc, desc, limit, offset, ',', ')', ';']
 
-    oror  shift, and go to state 133
+    oror  posunout a přejít do stavu 133
 
-    $default  reduce using rule 46 (ExpressionList1)
+    $výchozí  reduce using rule 46 (ExpressionList1)
 
 
-state 292
+State 292
 
   144 Slice: '[' Expression ':' Expression ']' .
 
-    $default  reduce using rule 144 (Slice)
+    $výchozí  reduce using rule 144 (Slice)
 
 
-state 293
+State 293
 
   116 RecordSet1: '(' SelectStmt RecordSet11 ')' .
 
-    $default  reduce using rule 116 (RecordSet1)
+    $výchozí  reduce using rule 116 (RecordSet1)
 
 
-state 294
+State 294
 
    90 OrderBy: . order by ExpressionList OrderBy1
   125 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere SelectStmtGroup . SelectStmtOrder SelectStmtLimit SelectStmtOffset
-  139 SelectStmtOrder: .  [$end, limit, offset, ')', ';']
+  139 SelectStmtOrder: . %empty  [$end, limit, offset, ')', ';']
   140                | . OrderBy
 
-    order  shift, and go to state 296
+    order  posunout a přejít do stavu 296
 
-    $default  reduce using rule 139 (SelectStmtOrder)
+    $výchozí  reduce using rule 139 (SelectStmtOrder)
 
-    OrderBy          go to state 297
-    SelectStmtOrder  go to state 302
+    OrderBy          přejít do stavu 297
+    SelectStmtOrder  přejít do stavu 302
 
 
-state 295
+State 295
 
    14 ColumnName: . identifier
    15 ColumnNameList: . ColumnName ColumnNameList1 ColumnNameList2
    69 GroupByClause: group by . ColumnNameList
 
-    identifier  shift, and go to state 166
+    identifier  posunout a přejít do stavu 166
 
-    ColumnName      go to state 179
-    ColumnNameList  go to state 303
+    ColumnName      přejít do stavu 179
+    ColumnNameList  přejít do stavu 303
 
 
-state 296
+State 296
 
    90 OrderBy: order . by ExpressionList OrderBy1
 
-    by  shift, and go to state 304
+    by  posunout a přejít do stavu 304
 
 
-state 297
+State 297
 
   140 SelectStmtOrder: OrderBy .
 
-    $default  reduce using rule 140 (SelectStmtOrder)
+    $výchozí  reduce using rule 140 (SelectStmtOrder)
 
 
-state 298
+State 298
 
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder . SelectStmtLimit SelectStmtOffset
-  126 SelectStmtLimit: .  [$end, offset, ')', ';']
+  126 SelectStmtLimit: . %empty  [$end, offset, ')', ';']
   127                | . limit Expression
 
-    limit  shift, and go to state 305
+    limit  posunout a přejít do stavu 305
 
-    $default  reduce using rule 126 (SelectStmtLimit)
+    $výchozí  reduce using rule 126 (SelectStmtLimit)
 
-    SelectStmtLimit  go to state 306
+    SelectStmtLimit  přejít do stavu 306
 
 
-state 299
+State 299
 
    29 CreateTableStmt: create tableKwd ifKwd not exists TableName '(' ColumnDef CreateTableStmt1 . CreateTableStmt2 ')'
    31 CreateTableStmt1: CreateTableStmt1 . ',' ColumnDef
-   32 CreateTableStmt2: .  [')']
+   32 CreateTableStmt2: . %empty  [')']
    33                 | . ','
 
-    ','  shift, and go to state 259
+    ','  posunout a přejít do stavu 259
 
-    $default  reduce using rule 32 (CreateTableStmt2)
+    $výchozí  reduce using rule 32 (CreateTableStmt2)
 
-    CreateTableStmt2  go to state 307
+    CreateTableStmt2  přejít do stavu 307
 
 
-state 300
+State 300
 
    22 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier . ')'
    23                | create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier . '(' ')' ')'
 
-    '('  shift, and go to state 308
-    ')'  shift, and go to state 309
+    '('  posunout a přejít do stavu 308
+    ')'  posunout a přejít do stavu 309
 
 
-state 301
+State 301
 
    71 InsertIntoStmt: insert into TableName InsertIntoStmt1 values '(' ExpressionList ')' InsertIntoStmt2 . InsertIntoStmt3
    76 InsertIntoStmt2: InsertIntoStmt2 . ',' '(' ExpressionList ')'
-   77 InsertIntoStmt3: .  [$end, ';']
+   77 InsertIntoStmt3: . %empty  [$end, ';']
    78                | . ','
 
-    ','  shift, and go to state 310
+    ','  posunout a přejít do stavu 310
 
-    $default  reduce using rule 77 (InsertIntoStmt3)
+    $výchozí  reduce using rule 77 (InsertIntoStmt3)
 
-    InsertIntoStmt3  go to state 311
+    InsertIntoStmt3  přejít do stavu 311
 
 
-state 302
+State 302
 
   125 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder . SelectStmtLimit SelectStmtOffset
-  126 SelectStmtLimit: .  [$end, offset, ')', ';']
+  126 SelectStmtLimit: . %empty  [$end, offset, ')', ';']
   127                | . limit Expression
 
-    limit  shift, and go to state 305
+    limit  posunout a přejít do stavu 305
 
-    $default  reduce using rule 126 (SelectStmtLimit)
+    $výchozí  reduce using rule 126 (SelectStmtLimit)
 
-    SelectStmtLimit  go to state 312
+    SelectStmtLimit  přejít do stavu 312
 
 
-state 303
+State 303
 
    69 GroupByClause: group by ColumnNameList .
 
-    $default  reduce using rule 69 (GroupByClause)
+    $výchozí  reduce using rule 69 (GroupByClause)
 
 
-state 304
+State 304
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -8319,62 +8319,62 @@ state 304
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 202
-    ExpressionList     go to state 313
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 202
+    ExpressionList     přejít do stavu 313
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 305
+State 305
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -8458,150 +8458,150 @@ state 305
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 314
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 314
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 306
+State 306
 
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit . SelectStmtOffset
-  128 SelectStmtOffset: .  [$end, ')', ';']
+  128 SelectStmtOffset: . %empty  [$end, ')', ';']
   129                 | . offset Expression
 
-    offset  shift, and go to state 315
+    offset  posunout a přejít do stavu 315
 
-    $default  reduce using rule 128 (SelectStmtOffset)
+    $výchozí  reduce using rule 128 (SelectStmtOffset)
 
-    SelectStmtOffset  go to state 316
+    SelectStmtOffset  přejít do stavu 316
 
 
-state 307
+State 307
 
    29 CreateTableStmt: create tableKwd ifKwd not exists TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 . ')'
 
-    ')'  shift, and go to state 317
+    ')'  posunout a přejít do stavu 317
 
 
-state 308
+State 308
 
    23 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier '(' . ')' ')'
 
-    ')'  shift, and go to state 318
+    ')'  posunout a přejít do stavu 318
 
 
-state 309
+State 309
 
    22 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier ')' .
 
-    $default  reduce using rule 22 (CreateIndexStmt)
+    $výchozí  reduce using rule 22 (CreateIndexStmt)
 
 
-state 310
+State 310
 
    76 InsertIntoStmt2: InsertIntoStmt2 ',' . '(' ExpressionList ')'
    78 InsertIntoStmt3: ',' .  [$end, ';']
 
-    '('  shift, and go to state 319
+    '('  posunout a přejít do stavu 319
 
-    $default  reduce using rule 78 (InsertIntoStmt3)
+    $výchozí  reduce using rule 78 (InsertIntoStmt3)
 
 
-state 311
+State 311
 
    71 InsertIntoStmt: insert into TableName InsertIntoStmt1 values '(' ExpressionList ')' InsertIntoStmt2 InsertIntoStmt3 .
 
-    $default  reduce using rule 71 (InsertIntoStmt)
+    $výchozí  reduce using rule 71 (InsertIntoStmt)
 
 
-state 312
+State 312
 
   125 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit . SelectStmtOffset
-  128 SelectStmtOffset: .  [$end, ')', ';']
+  128 SelectStmtOffset: . %empty  [$end, ')', ';']
   129                 | . offset Expression
 
-    offset  shift, and go to state 315
+    offset  posunout a přejít do stavu 315
 
-    $default  reduce using rule 128 (SelectStmtOffset)
+    $výchozí  reduce using rule 128 (SelectStmtOffset)
 
-    SelectStmtOffset  go to state 320
+    SelectStmtOffset  přejít do stavu 320
 
 
-state 313
+State 313
 
    90 OrderBy: order by ExpressionList . OrderBy1
-   91 OrderBy1: .  [$end, limit, offset, ')', ';']
+   91 OrderBy1: . %empty  [$end, limit, offset, ')', ';']
    92         | . asc
    93         | . desc
 
-    asc   shift, and go to state 321
-    desc  shift, and go to state 322
+    asc   posunout a přejít do stavu 321
+    desc  posunout a přejít do stavu 322
 
-    $default  reduce using rule 91 (OrderBy1)
+    $výchozí  reduce using rule 91 (OrderBy1)
 
-    OrderBy1  go to state 323
+    OrderBy1  přejít do stavu 323
 
 
-state 314
+State 314
 
    43 Expression: Expression . oror Term
   127 SelectStmtLimit: limit Expression .  [$end, offset, ')', ';']
 
-    oror  shift, and go to state 133
+    oror  posunout a přejít do stavu 133
 
-    $default  reduce using rule 127 (SelectStmtLimit)
+    $výchozí  reduce using rule 127 (SelectStmtLimit)
 
 
-state 315
+State 315
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -8685,82 +8685,82 @@ state 315
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 324
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 324
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 316
+State 316
 
   124 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset .
 
-    $default  reduce using rule 124 (SelectStmt)
+    $výchozí  reduce using rule 124 (SelectStmt)
 
 
-state 317
+State 317
 
    29 CreateTableStmt: create tableKwd ifKwd not exists TableName '(' ColumnDef CreateTableStmt1 CreateTableStmt2 ')' .
 
-    $default  reduce using rule 29 (CreateTableStmt)
+    $výchozí  reduce using rule 29 (CreateTableStmt)
 
 
-state 318
+State 318
 
    23 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier '(' ')' . ')'
 
-    ')'  shift, and go to state 325
+    ')'  posunout a přejít do stavu 325
 
 
-state 319
+State 319
 
    21 Conversion: . Type '(' Expression ')'
    42 Expression: . Term
@@ -8845,115 +8845,115 @@ state 319
   195          | . '-' PrimaryExpression
   196          | . '+' PrimaryExpression
 
-    bigIntType      shift, and go to state 54
-    bigRatType      shift, and go to state 55
-    blobType        shift, and go to state 56
-    boolType        shift, and go to state 57
-    byteType        shift, and go to state 58
-    complex128Type  shift, and go to state 59
-    complex64Type   shift, and go to state 60
-    durationType    shift, and go to state 61
-    falseKwd        shift, and go to state 62
-    floatType       shift, and go to state 63
-    float32Type     shift, and go to state 64
-    float64Type     shift, and go to state 65
-    floatLit        shift, and go to state 66
-    identifier      shift, and go to state 67
-    imaginaryLit    shift, and go to state 68
-    intType         shift, and go to state 69
-    int16Type       shift, and go to state 70
-    int32Type       shift, and go to state 71
-    int64Type       shift, and go to state 72
-    int8Type        shift, and go to state 73
-    intLit          shift, and go to state 74
-    null            shift, and go to state 75
-    qlParam         shift, and go to state 76
-    runeType        shift, and go to state 77
-    stringType      shift, and go to state 78
-    stringLit       shift, and go to state 79
-    timeType        shift, and go to state 80
-    trueKwd         shift, and go to state 81
-    uintType        shift, and go to state 82
-    uint16Type      shift, and go to state 83
-    uint32Type      shift, and go to state 84
-    uint64Type      shift, and go to state 85
-    uint8Type       shift, and go to state 86
-    '('             shift, and go to state 87
-    '^'             shift, and go to state 88
-    '-'             shift, and go to state 89
-    '+'             shift, and go to state 90
-    '!'             shift, and go to state 92
+    bigIntType      posunout a přejít do stavu 54
+    bigRatType      posunout a přejít do stavu 55
+    blobType        posunout a přejít do stavu 56
+    boolType        posunout a přejít do stavu 57
+    byteType        posunout a přejít do stavu 58
+    complex128Type  posunout a přejít do stavu 59
+    complex64Type   posunout a přejít do stavu 60
+    durationType    posunout a přejít do stavu 61
+    falseKwd        posunout a přejít do stavu 62
+    floatType       posunout a přejít do stavu 63
+    float32Type     posunout a přejít do stavu 64
+    float64Type     posunout a přejít do stavu 65
+    floatLit        posunout a přejít do stavu 66
+    identifier      posunout a přejít do stavu 67
+    imaginaryLit    posunout a přejít do stavu 68
+    intType         posunout a přejít do stavu 69
+    int16Type       posunout a přejít do stavu 70
+    int32Type       posunout a přejít do stavu 71
+    int64Type       posunout a přejít do stavu 72
+    int8Type        posunout a přejít do stavu 73
+    intLit          posunout a přejít do stavu 74
+    null            posunout a přejít do stavu 75
+    qlParam         posunout a přejít do stavu 76
+    runeType        posunout a přejít do stavu 77
+    stringType      posunout a přejít do stavu 78
+    stringLit       posunout a přejít do stavu 79
+    timeType        posunout a přejít do stavu 80
+    trueKwd         posunout a přejít do stavu 81
+    uintType        posunout a přejít do stavu 82
+    uint16Type      posunout a přejít do stavu 83
+    uint32Type      posunout a přejít do stavu 84
+    uint64Type      posunout a přejít do stavu 85
+    uint8Type       posunout a přejít do stavu 86
+    '('             posunout a přejít do stavu 87
+    '^'             posunout a přejít do stavu 88
+    '-'             posunout a přejít do stavu 89
+    '+'             posunout a přejít do stavu 90
+    '!'             posunout a přejít do stavu 92
 
-    Conversion         go to state 93
-    Expression         go to state 202
-    ExpressionList     go to state 326
-    Factor             go to state 95
-    Factor1            go to state 96
-    Literal            go to state 99
-    Operand            go to state 100
-    PrimaryExpression  go to state 101
-    PrimaryFactor      go to state 102
-    PrimaryTerm        go to state 103
-    QualifiedIdent     go to state 104
-    Term               go to state 106
-    Type               go to state 107
-    UnaryExpr          go to state 108
+    Conversion         přejít do stavu 93
+    Expression         přejít do stavu 202
+    ExpressionList     přejít do stavu 326
+    Factor             přejít do stavu 95
+    Factor1            přejít do stavu 96
+    Literal            přejít do stavu 99
+    Operand            přejít do stavu 100
+    PrimaryExpression  přejít do stavu 101
+    PrimaryFactor      přejít do stavu 102
+    PrimaryTerm        přejít do stavu 103
+    QualifiedIdent     přejít do stavu 104
+    Term               přejít do stavu 106
+    Type               přejít do stavu 107
+    UnaryExpr          přejít do stavu 108
 
 
-state 320
+State 320
 
   125 SelectStmt: selectKwd SelectStmtDistinct SelectStmtFieldList from RecordSetList ',' SelectStmtWhere SelectStmtGroup SelectStmtOrder SelectStmtLimit SelectStmtOffset .
 
-    $default  reduce using rule 125 (SelectStmt)
+    $výchozí  reduce using rule 125 (SelectStmt)
 
 
-state 321
+State 321
 
    92 OrderBy1: asc .
 
-    $default  reduce using rule 92 (OrderBy1)
+    $výchozí  reduce using rule 92 (OrderBy1)
 
 
-state 322
+State 322
 
    93 OrderBy1: desc .
 
-    $default  reduce using rule 93 (OrderBy1)
+    $výchozí  reduce using rule 93 (OrderBy1)
 
 
-state 323
+State 323
 
    90 OrderBy: order by ExpressionList OrderBy1 .
 
-    $default  reduce using rule 90 (OrderBy)
+    $výchozí  reduce using rule 90 (OrderBy)
 
 
-state 324
+State 324
 
    43 Expression: Expression . oror Term
   129 SelectStmtOffset: offset Expression .  [$end, ')', ';']
 
-    oror  shift, and go to state 133
+    oror  posunout a přejít do stavu 133
 
-    $default  reduce using rule 129 (SelectStmtOffset)
+    $výchozí  reduce using rule 129 (SelectStmtOffset)
 
 
-state 325
+State 325
 
    23 CreateIndexStmt: create CreateIndexStmtUnique index CreateIndexIfNotExists identifier on identifier '(' identifier '(' ')' ')' .
 
-    $default  reduce using rule 23 (CreateIndexStmt)
+    $výchozí  reduce using rule 23 (CreateIndexStmt)
 
 
-state 326
+State 326
 
    76 InsertIntoStmt2: InsertIntoStmt2 ',' '(' ExpressionList . ')'
 
-    ')'  shift, and go to state 327
+    ')'  posunout a přejít do stavu 327
 
 
-state 327
+State 327
 
    76 InsertIntoStmt2: InsertIntoStmt2 ',' '(' ExpressionList ')' .
 
-    $default  reduce using rule 76 (InsertIntoStmt2)
+    $výchozí  reduce using rule 76 (InsertIntoStmt2)

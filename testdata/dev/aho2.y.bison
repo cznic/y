@@ -1,4 +1,4 @@
-Grammar
+Gramatika
 
     0 $accept: S $end
 
@@ -11,7 +11,7 @@ Grammar
     5 R: L
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '*' (42) 3
@@ -20,19 +20,19 @@ error (256)
 id (258) 4
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (6)
-    on left: 0
+    vlevo: 0
 S (7)
-    on left: 1 2, on right: 0
+    vlevo: 1 2, vpravo: 0
 L (8)
-    on left: 3 4, on right: 1 5
+    vlevo: 3 4, vpravo: 1 5
 R (9)
-    on left: 5, on right: 1 2 3
+    vlevo: 5, vpravo: 1 2 3
 
 
-state 0
+State 0
 
     0 $accept: . S $end
     1 S: . L '=' R
@@ -41,96 +41,96 @@ state 0
     4  | . id
     5 R: . L
 
-    id   shift, and go to state 1
-    '*'  shift, and go to state 2
+    id   posunout a přejít do stavu 1
+    '*'  posunout a přejít do stavu 2
 
-    S  go to state 3
-    L  go to state 4
-    R  go to state 5
+    S  přejít do stavu 3
+    L  přejít do stavu 4
+    R  přejít do stavu 5
 
 
-state 1
+State 1
 
     4 L: id .
 
-    $default  reduce using rule 4 (L)
+    $výchozí  reduce using rule 4 (L)
 
 
-state 2
+State 2
 
     3 L: . '*' R
     3  | '*' . R
     4  | . id
     5 R: . L
 
-    id   shift, and go to state 1
-    '*'  shift, and go to state 2
+    id   posunout a přejít do stavu 1
+    '*'  posunout a přejít do stavu 2
 
-    L  go to state 6
-    R  go to state 7
+    L  přejít do stavu 6
+    R  přejít do stavu 7
 
 
-state 3
+State 3
 
     0 $accept: S . $end
 
-    $end  shift, and go to state 8
+    $end  posunout a přejít do stavu 8
 
 
-state 4
+State 4
 
     1 S: L . '=' R
     5 R: L .  [$end]
 
-    '='  shift, and go to state 9
+    '='  posunout a přejít do stavu 9
 
-    $default  reduce using rule 5 (R)
+    $výchozí  reduce using rule 5 (R)
 
 
-state 5
+State 5
 
     2 S: R .
 
-    $default  reduce using rule 2 (S)
+    $výchozí  reduce using rule 2 (S)
 
 
-state 6
+State 6
 
     5 R: L .
 
-    $default  reduce using rule 5 (R)
+    $výchozí  reduce using rule 5 (R)
 
 
-state 7
+State 7
 
     3 L: '*' R .
 
-    $default  reduce using rule 3 (L)
+    $výchozí  reduce using rule 3 (L)
 
 
-state 8
+State 8
 
     0 $accept: S $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 9
+State 9
 
     1 S: L '=' . R
     3 L: . '*' R
     4  | . id
     5 R: . L
 
-    id   shift, and go to state 1
-    '*'  shift, and go to state 2
+    id   posunout a přejít do stavu 1
+    '*'  posunout a přejít do stavu 2
 
-    L  go to state 6
-    R  go to state 10
+    L  přejít do stavu 6
+    R  přejít do stavu 10
 
 
-state 10
+State 10
 
     1 S: L '=' R .
 
-    $default  reduce using rule 1 (S)
+    $výchozí  reduce using rule 1 (S)

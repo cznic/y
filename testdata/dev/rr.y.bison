@@ -1,4 +1,4 @@
-Grammar
+Gramatika
 
     0 $accept: E $end
 
@@ -10,7 +10,7 @@ Grammar
     4 B: '1'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '1' (49) 1 3 4
@@ -18,19 +18,19 @@ $end (0) 0
 error (256)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (5)
-    on left: 0
+    vlevo: 0
 E (6)
-    on left: 1 2, on right: 0
+    vlevo: 1 2, vpravo: 0
 A (7)
-    on left: 3, on right: 1
+    vlevo: 3, vpravo: 1
 B (8)
-    on left: 4, on right: 2
+    vlevo: 4, vpravo: 2
 
 
-state 0
+State 0
 
     0 $accept: . E $end
     1 E: . A '1'
@@ -38,59 +38,59 @@ state 0
     3 A: . '1'
     4 B: . '1'
 
-    '1'  shift, and go to state 1
+    '1'  posunout a přejít do stavu 1
 
-    E  go to state 2
-    A  go to state 3
-    B  go to state 4
+    E  přejít do stavu 2
+    A  přejít do stavu 3
+    B  přejít do stavu 4
 
 
-state 1
+State 1
 
     3 A: '1' .  ['1']
     4 B: '1' .  ['2']
 
-    '2'       reduce using rule 4 (B)
-    $default  reduce using rule 3 (A)
+    '2'         reduce using rule 4 (B)
+    $výchozí  reduce using rule 3 (A)
 
 
-state 2
+State 2
 
     0 $accept: E . $end
 
-    $end  shift, and go to state 5
+    $end  posunout a přejít do stavu 5
 
 
-state 3
+State 3
 
     1 E: A . '1'
 
-    '1'  shift, and go to state 6
+    '1'  posunout a přejít do stavu 6
 
 
-state 4
+State 4
 
     2 E: B . '2'
 
-    '2'  shift, and go to state 7
+    '2'  posunout a přejít do stavu 7
 
 
-state 5
+State 5
 
     0 $accept: E $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 6
+State 6
 
     1 E: A '1' .
 
-    $default  reduce using rule 1 (E)
+    $výchozí  reduce using rule 1 (E)
 
 
-state 7
+State 7
 
     2 E: B '2' .
 
-    $default  reduce using rule 2 (E)
+    $výchozí  reduce using rule 2 (E)

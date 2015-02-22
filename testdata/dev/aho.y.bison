@@ -3,7 +3,7 @@ Terminals unused in grammar
    id
 
 
-Grammar
+Gramatika
 
     0 $accept: S $end
 
@@ -13,7 +13,7 @@ Grammar
     3  | 'd'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 'c' (99) 2
@@ -22,84 +22,84 @@ error (256)
 id (258)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (6)
-    on left: 0
+    vlevo: 0
 S (7)
-    on left: 1, on right: 0
+    vlevo: 1, vpravo: 0
 C (8)
-    on left: 2 3, on right: 1 2
+    vlevo: 2 3, vpravo: 1 2
 
 
-state 0
+State 0
 
     0 $accept: . S $end
     1 S: . C C
     2 C: . 'c' C
     3  | . 'd'
 
-    'c'  shift, and go to state 1
-    'd'  shift, and go to state 2
+    'c'  posunout a přejít do stavu 1
+    'd'  posunout a přejít do stavu 2
 
-    S  go to state 3
-    C  go to state 4
+    S  přejít do stavu 3
+    C  přejít do stavu 4
 
 
-state 1
+State 1
 
     2 C: . 'c' C
     2  | 'c' . C
     3  | . 'd'
 
-    'c'  shift, and go to state 1
-    'd'  shift, and go to state 2
+    'c'  posunout a přejít do stavu 1
+    'd'  posunout a přejít do stavu 2
 
-    C  go to state 5
+    C  přejít do stavu 5
 
 
-state 2
+State 2
 
     3 C: 'd' .
 
-    $default  reduce using rule 3 (C)
+    $výchozí  reduce using rule 3 (C)
 
 
-state 3
+State 3
 
     0 $accept: S . $end
 
-    $end  shift, and go to state 6
+    $end  posunout a přejít do stavu 6
 
 
-state 4
+State 4
 
     1 S: C . C
     2 C: . 'c' C
     3  | . 'd'
 
-    'c'  shift, and go to state 1
-    'd'  shift, and go to state 2
+    'c'  posunout a přejít do stavu 1
+    'd'  posunout a přejít do stavu 2
 
-    C  go to state 7
+    C  přejít do stavu 7
 
 
-state 5
+State 5
 
     2 C: 'c' C .
 
-    $default  reduce using rule 2 (C)
+    $výchozí  reduce using rule 2 (C)
 
 
-state 6
+State 6
 
     0 $accept: S $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 7
+State 7
 
     1 S: C C .
 
-    $default  reduce using rule 1 (S)
+    $výchozí  reduce using rule 1 (S)

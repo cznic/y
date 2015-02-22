@@ -3,20 +3,20 @@ Terminals unused in grammar
    LIGNORE
 
 
-Grammar
+Gramatika
 
     0 $accept: file $end
 
     1 file: loadsys package imports xdcl_list
 
-    2 package: /* empty */
+    2 package: %empty
     3        | LPACKAGE sym ';'
 
-    4 $@1: /* empty */
+    4 $@1: %empty
 
     5 loadsys: $@1 import_package import_there
 
-    6 imports: /* empty */
+    6 imports: %empty
     7        | imports import ';'
 
     8 import: LIMPORT import_stmt
@@ -35,14 +35,14 @@ Grammar
 
    18 import_package: LPACKAGE LNAME import_safety ';'
 
-   19 import_safety: /* empty */
+   19 import_safety: %empty
    20              | LNAME
 
-   21 $@2: /* empty */
+   21 $@2: %empty
 
    22 import_there: $@2 hidden_import_list '$' '$'
 
-   23 xdcl: /* empty */
+   23 xdcl: %empty
    24     | common_dcl
    25     | xfndcl
    26     | non_dcl_stmt
@@ -88,18 +88,18 @@ Grammar
    57     | LCASE expr_or_type_list LCOLAS expr ':'
    58     | LDEFAULT ':'
 
-   59 $@3: /* empty */
+   59 $@3: %empty
 
    60 compound_stmt: '{' $@3 stmt_list '}'
 
-   61 $@4: /* empty */
+   61 $@4: %empty
 
    62 caseblock: case $@4 stmt_list
 
-   63 caseblock_list: /* empty */
+   63 caseblock_list: %empty
    64               | caseblock_list caseblock
 
-   65 $@5: /* empty */
+   65 $@5: %empty
 
    66 loop_body: LBODY $@5 stmt_list '}'
 
@@ -112,38 +112,38 @@ Grammar
 
    72 for_body: for_header loop_body
 
-   73 $@6: /* empty */
+   73 $@6: %empty
 
    74 for_stmt: LFOR $@6 for_body
 
    75 if_header: osimple_stmt
    76          | osimple_stmt ';' osimple_stmt
 
-   77 $@7: /* empty */
+   77 $@7: %empty
 
-   78 $@8: /* empty */
+   78 $@8: %empty
 
-   79 $@9: /* empty */
+   79 $@9: %empty
 
    80 if_stmt: LIF $@7 if_header $@8 loop_body $@9 elseif_list else
 
-   81 $@10: /* empty */
+   81 $@10: %empty
 
    82 elseif: LELSE LIF $@10 if_header loop_body
 
-   83 elseif_list: /* empty */
+   83 elseif_list: %empty
    84            | elseif_list elseif
 
-   85 else: /* empty */
+   85 else: %empty
    86     | LELSE compound_stmt
 
-   87 $@11: /* empty */
+   87 $@11: %empty
 
-   88 $@12: /* empty */
+   88 $@12: %empty
 
    89 switch_stmt: LSWITCH $@11 if_header $@12 LBODY caseblock_list '}'
 
-   90 $@13: /* empty */
+   90 $@13: %empty
 
    91 select_stmt: LSELECT $@13 LBODY caseblock_list '}'
 
@@ -198,7 +198,7 @@ Grammar
   137               | '(' expr_or_type ')' '{' start_complit braced_keyval_list '}'
   138               | fnliteral
 
-  139 start_complit: /* empty */
+  139 start_complit: %empty
 
   140 keyval: expr ':' complitexpr
 
@@ -223,7 +223,7 @@ Grammar
 
   153 dcl_name: sym
 
-  154 onew_name: /* empty */
+  154 onew_name: %empty
   155          | new_name
 
   156 sym: LNAME
@@ -300,10 +300,10 @@ Grammar
 
   208 fntype: LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-  209 fnbody: /* empty */
+  209 fnbody: %empty
   210       | '{' stmt_list '}'
 
-  211 fnres: /* empty */
+  211 fnres: %empty
   212      | fnret_type
   213      | '(' oarg_type_list_ocomma ')'
 
@@ -312,7 +312,7 @@ Grammar
   215 fnliteral: fnlitdcl lbrace stmt_list '}'
   216          | fnlitdcl error
 
-  217 xdcl_list: /* empty */
+  217 xdcl_list: %empty
   218          | xdcl_list xdcl ';'
 
   219 vardcl_list: vardcl
@@ -356,10 +356,10 @@ Grammar
   246 arg_type_list: arg_type
   247              | arg_type_list ',' arg_type
 
-  248 oarg_type_list_ocomma: /* empty */
+  248 oarg_type_list_ocomma: %empty
   249                      | arg_type_list ocomma
 
-  250 stmt: /* empty */
+  250 stmt: %empty
   251     | compound_stmt
   252     | common_dcl
   253     | non_dcl_stmt
@@ -371,7 +371,7 @@ Grammar
   258             | select_stmt
   259             | if_stmt
 
-  260 $@14: /* empty */
+  260 $@14: %empty
 
   261 non_dcl_stmt: labelname ':' $@14 stmt
   262             | LFALL
@@ -402,34 +402,34 @@ Grammar
   281            | keyval_list ',' keyval
   282            | keyval_list ',' bare_complitexpr
 
-  283 braced_keyval_list: /* empty */
+  283 braced_keyval_list: %empty
   284                   | keyval_list ocomma
 
-  285 osemi: /* empty */
+  285 osemi: %empty
   286      | ';'
 
-  287 ocomma: /* empty */
+  287 ocomma: %empty
   288       | ','
 
-  289 oexpr: /* empty */
+  289 oexpr: %empty
   290      | expr
 
-  291 oexpr_list: /* empty */
+  291 oexpr_list: %empty
   292           | expr_list
 
-  293 osimple_stmt: /* empty */
+  293 osimple_stmt: %empty
   294             | simple_stmt
 
-  295 ohidden_funarg_list: /* empty */
+  295 ohidden_funarg_list: %empty
   296                    | hidden_funarg_list
 
-  297 ohidden_structdcl_list: /* empty */
+  297 ohidden_structdcl_list: %empty
   298                       | hidden_structdcl_list
 
-  299 ohidden_interfacedcl_list: /* empty */
+  299 ohidden_interfacedcl_list: %empty
   300                          | hidden_interfacedcl_list
 
-  301 oliteral: /* empty */
+  301 oliteral: %empty
   302         | LLITERAL
 
   303 hidden_import: LIMPORT LNAME LLITERAL ';'
@@ -474,7 +474,7 @@ Grammar
   332 hidden_interfacedcl: sym '(' ohidden_funarg_list ')' ohidden_funres
   333                    | hidden_type
 
-  334 ohidden_funres: /* empty */
+  334 ohidden_funres: %empty
   335               | hidden_funres
 
   336 hidden_funres: '(' ohidden_funarg_list ')'
@@ -487,7 +487,7 @@ Grammar
   341 hidden_constant: hidden_literal
   342                | '(' hidden_literal '+' hidden_literal ')'
 
-  343 hidden_import_list: /* empty */
+  343 hidden_import_list: %empty
   344                   | hidden_import_list hidden_import
 
   345 hidden_funarg_list: hidden_funarg
@@ -500,7 +500,7 @@ Grammar
   350                         | hidden_interfacedcl_list ';' hidden_interfacedcl
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '!' (33) 118
@@ -585,358 +585,357 @@ NotParen (305)
 PreferToRightParen (306)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (76)
-    on left: 0
+    vlevo: 0
 file (77)
-    on left: 1, on right: 0
+    vlevo: 1, vpravo: 0
 package (78)
-    on left: 2 3, on right: 1
+    vlevo: 2 3, vpravo: 1
 loadsys (79)
-    on left: 5, on right: 1
+    vlevo: 5, vpravo: 1
 $@1 (80)
-    on left: 4, on right: 5
+    vlevo: 4, vpravo: 5
 imports (81)
-    on left: 6 7, on right: 1 7
+    vlevo: 6 7, vpravo: 1 7
 import (82)
-    on left: 8 9 10, on right: 7
+    vlevo: 8 9 10, vpravo: 7
 import_stmt (83)
-    on left: 11 12, on right: 8 13 14
+    vlevo: 11 12, vpravo: 8 13 14
 import_stmt_list (84)
-    on left: 13 14, on right: 9 14
+    vlevo: 13 14, vpravo: 9 14
 import_here (85)
-    on left: 15 16 17, on right: 11 12
+    vlevo: 15 16 17, vpravo: 11 12
 import_package (86)
-    on left: 18, on right: 5 11
+    vlevo: 18, vpravo: 5 11
 import_safety (87)
-    on left: 19 20, on right: 18
+    vlevo: 19 20, vpravo: 18
 import_there (88)
-    on left: 22, on right: 5 11 12
+    vlevo: 22, vpravo: 5 11 12
 $@2 (89)
-    on left: 21, on right: 22
+    vlevo: 21, vpravo: 22
 xdcl (90)
-    on left: 23 24 25 26 27, on right: 218
+    vlevo: 23 24 25 26 27, vpravo: 218
 common_dcl (91)
-    on left: 28 29 30 31 32 33 34 35 36 37, on right: 24 252
+    vlevo: 28 29 30 31 32 33 34 35 36 37, vpravo: 24 252
 lconst (92)
-    on left: 38, on right: 31 32 33 34
+    vlevo: 38, vpravo: 31 32 33 34
 vardcl (93)
-    on left: 39 40 41, on right: 28 219 220
+    vlevo: 39 40 41, vpravo: 28 219 220
 constdcl (94)
-    on left: 42 43, on right: 31 32 33 44
+    vlevo: 42 43, vpravo: 31 32 33 44
 constdcl1 (95)
-    on left: 44 45 46, on right: 221 222
+    vlevo: 44 45 46, vpravo: 221 222
 typedclname (96)
-    on left: 47, on right: 48
+    vlevo: 47, vpravo: 48
 typedcl (97)
-    on left: 48, on right: 35 223 224
+    vlevo: 48, vpravo: 35 223 224
 simple_stmt (98)
-    on left: 49 50 51 52 53 54, on right: 255 294
+    vlevo: 49 50 51 52 53 54, vpravo: 255 294
 case (99)
-    on left: 55 56 57 58, on right: 62
+    vlevo: 55 56 57 58, vpravo: 62
 compound_stmt (100)
-    on left: 60, on right: 86 251
+    vlevo: 60, vpravo: 86 251
 $@3 (101)
-    on left: 59, on right: 60
+    vlevo: 59, vpravo: 60
 caseblock (102)
-    on left: 62, on right: 64
+    vlevo: 62, vpravo: 64
 $@4 (103)
-    on left: 61, on right: 62
+    vlevo: 61, vpravo: 62
 caseblock_list (104)
-    on left: 63 64, on right: 64 89 91
+    vlevo: 63 64, vpravo: 64 89 91
 loop_body (105)
-    on left: 66, on right: 72 80 82
+    vlevo: 66, vpravo: 72 80 82
 $@5 (106)
-    on left: 65, on right: 66
+    vlevo: 65, vpravo: 66
 range_stmt (107)
-    on left: 67 68, on right: 71
+    vlevo: 67 68, vpravo: 71
 for_header (108)
-    on left: 69 70 71, on right: 72
+    vlevo: 69 70 71, vpravo: 72
 for_body (109)
-    on left: 72, on right: 74
+    vlevo: 72, vpravo: 74
 for_stmt (110)
-    on left: 74, on right: 256
+    vlevo: 74, vpravo: 256
 $@6 (111)
-    on left: 73, on right: 74
+    vlevo: 73, vpravo: 74
 if_header (112)
-    on left: 75 76, on right: 80 82 89
+    vlevo: 75 76, vpravo: 80 82 89
 if_stmt (113)
-    on left: 80, on right: 259
+    vlevo: 80, vpravo: 259
 $@7 (114)
-    on left: 77, on right: 80
+    vlevo: 77, vpravo: 80
 $@8 (115)
-    on left: 78, on right: 80
+    vlevo: 78, vpravo: 80
 $@9 (116)
-    on left: 79, on right: 80
+    vlevo: 79, vpravo: 80
 elseif (117)
-    on left: 82, on right: 84
+    vlevo: 82, vpravo: 84
 $@10 (118)
-    on left: 81, on right: 82
+    vlevo: 81, vpravo: 82
 elseif_list (119)
-    on left: 83 84, on right: 80 84
+    vlevo: 83 84, vpravo: 80 84
 else (120)
-    on left: 85 86, on right: 80
+    vlevo: 85 86, vpravo: 80
 switch_stmt (121)
-    on left: 89, on right: 257
+    vlevo: 89, vpravo: 257
 $@11 (122)
-    on left: 87, on right: 89
+    vlevo: 87, vpravo: 89
 $@12 (123)
-    on left: 88, on right: 89
+    vlevo: 88, vpravo: 89
 select_stmt (124)
-    on left: 91, on right: 258
+    vlevo: 91, vpravo: 258
 $@13 (125)
-    on left: 90, on right: 91
+    vlevo: 90, vpravo: 91
 expr (126)
-    on left: 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107
-    108 109 110 111 112, on right: 49 50 53 54 56 57 67 68 93 94 95
-    96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112
-    130 134 140 141 143 147 275 276 290
+    vlevo: 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107
+    108 109 110 111 112, vpravo: 49 50 53 54 56 57 67 68 93 94 95 96
+    97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 130
+    134 140 141 143 147 275 276 290
 uexpr (127)
-    on left: 113 114 115 116 117 118 119 120 121, on right: 92 114
-    115 116 117 118 119 120 121
+    vlevo: 113 114 115 116 117 118 119 120 121, vpravo: 92 114 115
+    116 117 118 119 120 121
 pseudocall (128)
-    on left: 122 123 124, on right: 133 265 266
+    vlevo: 122 123 124, vpravo: 133 265 266
 pexpr_no_paren (129)
-    on left: 125 126 127 128 129 130 131 132 133 134 135 136 137 138,
-    on right: 136 145
+    vlevo: 125 126 127 128 129 130 131 132 133 134 135 136 137 138,
+    vpravo: 136 145
 start_complit (130)
-    on left: 139, on right: 135 136 137 142 144
+    vlevo: 139, vpravo: 135 136 137 142 144
 keyval (131)
-    on left: 140, on right: 279 281
+    vlevo: 140, vpravo: 279 281
 bare_complitexpr (132)
-    on left: 141 142, on right: 280 282
+    vlevo: 141 142, vpravo: 280 282
 complitexpr (133)
-    on left: 143 144, on right: 140
+    vlevo: 143 144, vpravo: 140
 pexpr (134)
-    on left: 145 146, on right: 113 122 123 124 127 128 129 130 131
-    132
+    vlevo: 145 146, vpravo: 113 122 123 124 127 128 129 130 131 132
 expr_or_type (135)
-    on left: 147 148, on right: 128 137 146 277 278
+    vlevo: 147 148, vpravo: 128 137 146 277 278
 name_or_type (136)
-    on left: 149, on right: 242 243
+    vlevo: 149, vpravo: 242 243
 lbrace (137)
-    on left: 150 151, on right: 135 199 200 201 202 215
+    vlevo: 150 151, vpravo: 135 199 200 201 202 215
 new_name (138)
-    on left: 152, on right: 155 162 238 267 271 272
+    vlevo: 152, vpravo: 155 162 238 267 271 272
 dcl_name (139)
-    on left: 153, on right: 273 274
+    vlevo: 153, vpravo: 273 274
 onew_name (140)
-    on left: 154 155, on right: 263 264
+    vlevo: 154 155, vpravo: 263 264
 sym (141)
-    on left: 156 157 158, on right: 3 16 47 127 152 153 161 189 204
-    205 207 236 243 244 329 330 331 332 340
+    vlevo: 156 157 158, vpravo: 3 16 47 127 152 153 161 189 204 205
+    207 236 243 244 329 330 331 332 340
 hidden_importsym (142)
-    on left: 159 160, on right: 157 309 316
+    vlevo: 159 160, vpravo: 157 309 316
 name (143)
-    on left: 161, on right: 126 188 189
+    vlevo: 161, vpravo: 126 188 189
 labelname (144)
-    on left: 162, on right: 261
+    vlevo: 162, vpravo: 261
 dotdotdot (145)
-    on left: 163 164, on right: 244 245
+    vlevo: 163 164, vpravo: 244 245
 ntype (146)
-    on left: 165 166 167 168 169 170, on right: 39 40 42 45 48 149
-    164 170 179 190 191 193 194 197 198 229
+    vlevo: 165 166 167 168 169 170, vpravo: 39 40 42 45 48 149 164
+    170 179 190 191 193 194 197 198 229
 non_expr_type (147)
-    on left: 171 172 173 174, on right: 148 174
+    vlevo: 171 172 173 174, vpravo: 148 174
 non_recvchantype (148)
-    on left: 175 176 177 178 179, on right: 192
+    vlevo: 175 176 177 178 179, vpravo: 192
 convtype (149)
-    on left: 180 181, on right: 134
+    vlevo: 180 181, vpravo: 134
 comptype (150)
-    on left: 182, on right: 135
+    vlevo: 182, vpravo: 135
 fnret_type (151)
-    on left: 183 184 185 186 187, on right: 212
+    vlevo: 183 184 185 186 187, vpravo: 212
 dotname (152)
-    on left: 188 189, on right: 169 178 187
+    vlevo: 188 189, vpravo: 169 178 187
 othertype (153)
-    on left: 190 191 192 193 194 195 196, on right: 167 173 176 181
-    182 185
+    vlevo: 190 191 192 193 194 195 196, vpravo: 167 173 176 181 182
+    185
 ptrtype (154)
-    on left: 197, on right: 168 177 186
+    vlevo: 197, vpravo: 168 177 186
 recvchantype (155)
-    on left: 198, on right: 165 171 183
+    vlevo: 198, vpravo: 165 171 183
 structtype (156)
-    on left: 199 200, on right: 195
+    vlevo: 199 200, vpravo: 195
 interfacetype (157)
-    on left: 201 202, on right: 196
+    vlevo: 201 202, vpravo: 196
 xfndcl (158)
-    on left: 203, on right: 25
+    vlevo: 203, vpravo: 25
 fndcl (159)
-    on left: 204 205, on right: 203
+    vlevo: 204 205, vpravo: 203
 hidden_fndcl (160)
-    on left: 206 207, on right: 308
+    vlevo: 206 207, vpravo: 308
 fntype (161)
-    on left: 208, on right: 166 172 175 180 184 214
+    vlevo: 208, vpravo: 166 172 175 180 184 214
 fnbody (162)
-    on left: 209 210, on right: 203 308
+    vlevo: 209 210, vpravo: 203 308
 fnres (163)
-    on left: 211 212 213, on right: 204 205 208 241
+    vlevo: 211 212 213, vpravo: 204 205 208 241
 fnlitdcl (164)
-    on left: 214, on right: 215 216
+    vlevo: 214, vpravo: 215 216
 fnliteral (165)
-    on left: 215 216, on right: 138
+    vlevo: 215 216, vpravo: 138
 xdcl_list (166)
-    on left: 217 218, on right: 1 218
+    vlevo: 217 218, vpravo: 1 218
 vardcl_list (167)
-    on left: 219 220, on right: 29 220
+    vlevo: 219 220, vpravo: 29 220
 constdcl_list (168)
-    on left: 221 222, on right: 33 222
+    vlevo: 221 222, vpravo: 33 222
 typedcl_list (169)
-    on left: 223 224, on right: 36 224
+    vlevo: 223 224, vpravo: 36 224
 structdcl_list (170)
-    on left: 225 226, on right: 199 226
+    vlevo: 225 226, vpravo: 199 226
 interfacedcl_list (171)
-    on left: 227 228, on right: 201 228
+    vlevo: 227 228, vpravo: 201 228
 structdcl (172)
-    on left: 229 230 231 232 233 234, on right: 225 226
+    vlevo: 229 230 231 232 233 234, vpravo: 225 226
 packname (173)
-    on left: 235 236, on right: 237 239 240
+    vlevo: 235 236, vpravo: 237 239 240
 embed (174)
-    on left: 237, on right: 230 231 232 233 234
+    vlevo: 237, vpravo: 230 231 232 233 234
 interfacedcl (175)
-    on left: 238 239 240, on right: 227 228
+    vlevo: 238 239 240, vpravo: 227 228
 indcl (176)
-    on left: 241, on right: 238
+    vlevo: 241, vpravo: 238
 arg_type (177)
-    on left: 242 243 244 245, on right: 246 247
+    vlevo: 242 243 244 245, vpravo: 246 247
 arg_type_list (178)
-    on left: 246 247, on right: 247 249
+    vlevo: 246 247, vpravo: 247 249
 oarg_type_list_ocomma (179)
-    on left: 248 249, on right: 204 205 208 213 241
+    vlevo: 248 249, vpravo: 204 205 208 213 241
 stmt (180)
-    on left: 250 251 252 253 254, on right: 261 269 270
+    vlevo: 250 251 252 253 254, vpravo: 261 269 270
 non_dcl_stmt (181)
-    on left: 255 256 257 258 259 261 262 263 264 265 266 267 268, on right:
+    vlevo: 255 256 257 258 259 261 262 263 264 265 266 267 268, vpravo:
     26 253
 $@14 (182)
-    on left: 260, on right: 261
+    vlevo: 260, vpravo: 261
 stmt_list (183)
-    on left: 269 270, on right: 60 62 66 210 215 270
+    vlevo: 269 270, vpravo: 60 62 66 210 215 270
 new_name_list (184)
-    on left: 271 272, on right: 229 272
+    vlevo: 271 272, vpravo: 229 272
 dcl_name_list (185)
-    on left: 273 274, on right: 39 40 41 42 43 45 46 274
+    vlevo: 273 274, vpravo: 39 40 41 42 43 45 46 274
 expr_list (186)
-    on left: 275 276, on right: 40 41 42 43 51 52 67 68 276 292
+    vlevo: 275 276, vpravo: 40 41 42 43 51 52 67 68 276 292
 expr_or_type_list (187)
-    on left: 277 278, on right: 55 56 57 123 124 278
+    vlevo: 277 278, vpravo: 55 56 57 123 124 278
 keyval_list (188)
-    on left: 279 280 281 282, on right: 281 282 284
+    vlevo: 279 280 281 282, vpravo: 281 282 284
 braced_keyval_list (189)
-    on left: 283 284, on right: 135 136 137 142 144
+    vlevo: 283 284, vpravo: 135 136 137 142 144
 osemi (190)
-    on left: 285 286, on right: 9 29 32 33 36 199 201
+    vlevo: 285 286, vpravo: 9 29 32 33 36 199 201
 ocomma (191)
-    on left: 287 288, on right: 123 124 134 249 284
+    vlevo: 287 288, vpravo: 123 124 134 249 284
 oexpr (192)
-    on left: 289 290, on right: 131 132 190
+    vlevo: 289 290, vpravo: 131 132 190
 oexpr_list (193)
-    on left: 291 292, on right: 268
+    vlevo: 291 292, vpravo: 268
 osimple_stmt (194)
-    on left: 293 294, on right: 69 70 75 76
+    vlevo: 293 294, vpravo: 69 70 75 76
 ohidden_funarg_list (195)
-    on left: 295 296, on right: 206 207 328 332 336
+    vlevo: 295 296, vpravo: 206 207 328 332 336
 ohidden_structdcl_list (196)
-    on left: 297 298, on right: 321
+    vlevo: 297 298, vpravo: 321
 ohidden_interfacedcl_list (197)
-    on left: 299 300, on right: 322
+    vlevo: 299 300, vpravo: 322
 oliteral (198)
-    on left: 301 302, on right: 229 230 231 232 233 234 329 330 331
+    vlevo: 301 302, vpravo: 229 230 231 232 233 234 329 330 331
 hidden_import (199)
-    on left: 303 304 305 306 307 308, on right: 344
+    vlevo: 303 304 305 306 307 308, vpravo: 344
 hidden_pkg_importsym (200)
-    on left: 309, on right: 206 304 305 306 310
+    vlevo: 309, vpravo: 206 304 305 306 310
 hidden_pkgtype (201)
-    on left: 310, on right: 307
+    vlevo: 310, vpravo: 307
 hidden_type (202)
-    on left: 311 312 313, on right: 304 306 307 318 319 320 323 326
-    327 329 330 331 333 337
+    vlevo: 311 312 313, vpravo: 304 306 307 318 319 320 323 326 327
+    329 330 331 333 337
 hidden_type_non_recv_chan (203)
-    on left: 314 315, on right: 324
+    vlevo: 314 315, vpravo: 324
 hidden_type_misc (204)
-    on left: 316 317 318 319 320 321 322 323 324 325 326, on right:
-    311 314
+    vlevo: 316 317 318 319 320 321 322 323 324 325 326, vpravo: 311
+    314
 hidden_type_recv_chan (205)
-    on left: 327, on right: 312 325
+    vlevo: 327, vpravo: 312 325
 hidden_type_func (206)
-    on left: 328, on right: 313 315
+    vlevo: 328, vpravo: 313 315
 hidden_funarg (207)
-    on left: 329 330, on right: 345 346
+    vlevo: 329 330, vpravo: 345 346
 hidden_structdcl (208)
-    on left: 331, on right: 347 348
+    vlevo: 331, vpravo: 347 348
 hidden_interfacedcl (209)
-    on left: 332 333, on right: 349 350
+    vlevo: 332 333, vpravo: 349 350
 ohidden_funres (210)
-    on left: 334 335, on right: 206 207 328 332
+    vlevo: 334 335, vpravo: 206 207 328 332
 hidden_funres (211)
-    on left: 336 337, on right: 335
+    vlevo: 336 337, vpravo: 335
 hidden_literal (212)
-    on left: 338 339 340, on right: 341 342
+    vlevo: 338 339 340, vpravo: 341 342
 hidden_constant (213)
-    on left: 341 342, on right: 305 306
+    vlevo: 341 342, vpravo: 305 306
 hidden_import_list (214)
-    on left: 343 344, on right: 22 344
+    vlevo: 343 344, vpravo: 22 344
 hidden_funarg_list (215)
-    on left: 345 346, on right: 207 296 346
+    vlevo: 345 346, vpravo: 207 296 346
 hidden_structdcl_list (216)
-    on left: 347 348, on right: 298 348
+    vlevo: 347 348, vpravo: 298 348
 hidden_interfacedcl_list (217)
-    on left: 349 350, on right: 300 350
+    vlevo: 349 350, vpravo: 300 350
 
 
-state 0
+State 0
 
     0 $accept: . file $end
     1 file: . loadsys package imports xdcl_list
-    4 $@1: .
+    4 $@1: . %empty
     5 loadsys: . $@1 import_package import_there
 
-    $default  reduce using rule 4 ($@1)
+    $výchozí  reduce using rule 4 ($@1)
 
-    file     go to state 1
-    loadsys  go to state 2
-    $@1      go to state 3
+    file     přejít do stavu 1
+    loadsys  přejít do stavu 2
+    $@1      přejít do stavu 3
 
 
-state 1
+State 1
 
     0 $accept: file . $end
 
-    $end  shift, and go to state 4
+    $end  posunout a přejít do stavu 4
 
 
-state 2
+State 2
 
     1 file: loadsys . package imports xdcl_list
-    2 package: .  [$end, error, LLITERAL, LBREAK, LCHAN, LCONST, LCONTINUE, LDEFER, LFALL, LFOR, LFUNC, LGO, LGOTO, LIF, LIMPORT, LINTERFACE, LMAP, LNAME, LRETURN, LSELECT, LSTRUCT, LSWITCH, LTYPE, LVAR, LCOMM, '+', '-', '^', '*', '&', '(', ';', '!', '~', '[', '?', '@']
+    2 package: . %empty  [$end, error, LLITERAL, LBREAK, LCHAN, LCONST, LCONTINUE, LDEFER, LFALL, LFOR, LFUNC, LGO, LGOTO, LIF, LIMPORT, LINTERFACE, LMAP, LNAME, LRETURN, LSELECT, LSTRUCT, LSWITCH, LTYPE, LVAR, LCOMM, '+', '-', '^', '*', '&', '(', ';', '!', '~', '[', '?', '@']
     3        | . LPACKAGE sym ';'
 
-    LPACKAGE  shift, and go to state 5
+    LPACKAGE  posunout a přejít do stavu 5
 
-    $default  reduce using rule 2 (package)
+    $výchozí  reduce using rule 2 (package)
 
-    package  go to state 6
+    package  přejít do stavu 6
 
 
-state 3
+State 3
 
     5 loadsys: $@1 . import_package import_there
    18 import_package: . LPACKAGE LNAME import_safety ';'
 
-    LPACKAGE  shift, and go to state 7
+    LPACKAGE  posunout a přejít do stavu 7
 
-    import_package  go to state 8
+    import_package  přejít do stavu 8
 
 
-state 4
+State 4
 
     0 $accept: file $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 5
+State 5
 
     3 package: LPACKAGE . sym ';'
   156 sym: . LNAME
@@ -945,145 +944,145 @@ state 5
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym               go to state 12
-    hidden_importsym  go to state 13
+    sym               přejít do stavu 12
+    hidden_importsym  přejít do stavu 13
 
 
-state 6
+State 6
 
     1 file: loadsys package . imports xdcl_list
-    6 imports: .
+    6 imports: . %empty
     7        | . imports import ';'
 
-    $default  reduce using rule 6 (imports)
+    $výchozí  reduce using rule 6 (imports)
 
-    imports  go to state 14
+    imports  přejít do stavu 14
 
 
-state 7
+State 7
 
    18 import_package: LPACKAGE . LNAME import_safety ';'
 
-    LNAME  shift, and go to state 15
+    LNAME  posunout a přejít do stavu 15
 
 
-state 8
+State 8
 
     5 loadsys: $@1 import_package . import_there
-   21 $@2: .
+   21 $@2: . %empty
    22 import_there: . $@2 hidden_import_list '$' '$'
 
-    $default  reduce using rule 21 ($@2)
+    $výchozí  reduce using rule 21 ($@2)
 
-    import_there  go to state 16
-    $@2           go to state 17
+    import_there  přejít do stavu 16
+    $@2           přejít do stavu 17
 
 
-state 9
+State 9
 
   156 sym: LNAME .
 
-    $default  reduce using rule 156 (sym)
+    $výchozí  reduce using rule 156 (sym)
 
 
-state 10
+State 10
 
   158 sym: '?' .
 
-    $default  reduce using rule 158 (sym)
+    $výchozí  reduce using rule 158 (sym)
 
 
-state 11
+State 11
 
   159 hidden_importsym: '@' . LLITERAL '.' LNAME
   160                 | '@' . LLITERAL '.' '?'
 
-    LLITERAL  shift, and go to state 18
+    LLITERAL  posunout a přejít do stavu 18
 
 
-state 12
+State 12
 
     3 package: LPACKAGE sym . ';'
 
-    ';'  shift, and go to state 19
+    ';'  posunout a přejít do stavu 19
 
 
-state 13
+State 13
 
   157 sym: hidden_importsym .
 
-    $default  reduce using rule 157 (sym)
+    $výchozí  reduce using rule 157 (sym)
 
 
-state 14
+State 14
 
     1 file: loadsys package imports . xdcl_list
     7 imports: imports . import ';'
     8 import: . LIMPORT import_stmt
     9       | . LIMPORT '(' import_stmt_list osemi ')'
    10       | . LIMPORT '(' ')'
-  217 xdcl_list: .  [$end, error, LLITERAL, LBREAK, LCHAN, LCONST, LCONTINUE, LDEFER, LFALL, LFOR, LFUNC, LGO, LGOTO, LIF, LINTERFACE, LMAP, LNAME, LRETURN, LSELECT, LSTRUCT, LSWITCH, LTYPE, LVAR, LCOMM, '+', '-', '^', '*', '&', '(', ';', '!', '~', '[', '?', '@']
+  217 xdcl_list: . %empty  [$end, error, LLITERAL, LBREAK, LCHAN, LCONST, LCONTINUE, LDEFER, LFALL, LFOR, LFUNC, LGO, LGOTO, LIF, LINTERFACE, LMAP, LNAME, LRETURN, LSELECT, LSTRUCT, LSWITCH, LTYPE, LVAR, LCOMM, '+', '-', '^', '*', '&', '(', ';', '!', '~', '[', '?', '@']
   218          | . xdcl_list xdcl ';'
 
-    LIMPORT  shift, and go to state 20
+    LIMPORT  posunout a přejít do stavu 20
 
-    $default  reduce using rule 217 (xdcl_list)
+    $výchozí  reduce using rule 217 (xdcl_list)
 
-    import     go to state 21
-    xdcl_list  go to state 22
+    import     přejít do stavu 21
+    xdcl_list  přejít do stavu 22
 
 
-state 15
+State 15
 
    18 import_package: LPACKAGE LNAME . import_safety ';'
-   19 import_safety: .  [';']
+   19 import_safety: . %empty  [';']
    20              | . LNAME
 
-    LNAME  shift, and go to state 23
+    LNAME  posunout a přejít do stavu 23
 
-    $default  reduce using rule 19 (import_safety)
+    $výchozí  reduce using rule 19 (import_safety)
 
-    import_safety  go to state 24
+    import_safety  přejít do stavu 24
 
 
-state 16
+State 16
 
     5 loadsys: $@1 import_package import_there .
 
-    $default  reduce using rule 5 (loadsys)
+    $výchozí  reduce using rule 5 (loadsys)
 
 
-state 17
+State 17
 
    22 import_there: $@2 . hidden_import_list '$' '$'
-  343 hidden_import_list: .
+  343 hidden_import_list: . %empty
   344                   | . hidden_import_list hidden_import
 
-    $default  reduce using rule 343 (hidden_import_list)
+    $výchozí  reduce using rule 343 (hidden_import_list)
 
-    hidden_import_list  go to state 25
+    hidden_import_list  přejít do stavu 25
 
 
-state 18
+State 18
 
   159 hidden_importsym: '@' LLITERAL . '.' LNAME
   160                 | '@' LLITERAL . '.' '?'
 
-    '.'  shift, and go to state 26
+    '.'  posunout a přejít do stavu 26
 
 
-state 19
+State 19
 
     3 package: LPACKAGE sym ';' .
 
-    $default  reduce using rule 3 (package)
+    $výchozí  reduce using rule 3 (package)
 
 
-state 20
+State 20
 
     8 import: LIMPORT . import_stmt
     9       | LIMPORT . '(' import_stmt_list osemi ')'
@@ -1099,30 +1098,30 @@ state 20
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
 
-    LLITERAL  shift, and go to state 27
-    LNAME     shift, and go to state 9
-    '('       shift, and go to state 28
-    '.'       shift, and go to state 29
-    '?'       shift, and go to state 10
-    '@'       shift, and go to state 11
+    LLITERAL  posunout a přejít do stavu 27
+    LNAME     posunout a přejít do stavu 9
+    '('       posunout a přejít do stavu 28
+    '.'       posunout a přejít do stavu 29
+    '?'       posunout a přejít do stavu 10
+    '@'       posunout a přejít do stavu 11
 
-    import_stmt       go to state 30
-    import_here       go to state 31
-    sym               go to state 32
-    hidden_importsym  go to state 13
+    import_stmt       přejít do stavu 30
+    import_here       přejít do stavu 31
+    sym               přejít do stavu 32
+    hidden_importsym  přejít do stavu 13
 
 
-state 21
+State 21
 
     7 imports: imports import . ';'
 
-    ';'  shift, and go to state 33
+    ';'  posunout a přejít do stavu 33
 
 
-state 22
+State 22
 
     1 file: loadsys package imports xdcl_list .  [$end]
-   23 xdcl: .  [';']
+   23 xdcl: . %empty  [';']
    24     | . common_dcl
    25     | . xfndcl
    26     | . non_dcl_stmt
@@ -1241,90 +1240,90 @@ state 22
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    error       shift, and go to state 34
-    LLITERAL    shift, and go to state 35
-    LBREAK      shift, and go to state 36
-    LCHAN       shift, and go to state 37
-    LCONST      shift, and go to state 38
-    LCONTINUE   shift, and go to state 39
-    LDEFER      shift, and go to state 40
-    LFALL       shift, and go to state 41
-    LFOR        shift, and go to state 42
-    LFUNC       shift, and go to state 43
-    LGO         shift, and go to state 44
-    LGOTO       shift, and go to state 45
-    LIF         shift, and go to state 46
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRETURN     shift, and go to state 49
-    LSELECT     shift, and go to state 50
-    LSTRUCT     shift, and go to state 51
-    LSWITCH     shift, and go to state 52
-    LTYPE       shift, and go to state 53
-    LVAR        shift, and go to state 54
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    error       posunout a přejít do stavu 34
+    LLITERAL    posunout a přejít do stavu 35
+    LBREAK      posunout a přejít do stavu 36
+    LCHAN       posunout a přejít do stavu 37
+    LCONST      posunout a přejít do stavu 38
+    LCONTINUE   posunout a přejít do stavu 39
+    LDEFER      posunout a přejít do stavu 40
+    LFALL       posunout a přejít do stavu 41
+    LFOR        posunout a přejít do stavu 42
+    LFUNC       posunout a přejít do stavu 43
+    LGO         posunout a přejít do stavu 44
+    LGOTO       posunout a přejít do stavu 45
+    LIF         posunout a přejít do stavu 46
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRETURN     posunout a přejít do stavu 49
+    LSELECT     posunout a přejít do stavu 50
+    LSTRUCT     posunout a přejít do stavu 51
+    LSWITCH     posunout a přejít do stavu 52
+    LTYPE       posunout a přejít do stavu 53
+    LVAR        posunout a přejít do stavu 54
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
     $end  reduce using rule 1 (file)
     ';'   reduce using rule 23 (xdcl)
 
-    xdcl              go to state 65
-    common_dcl        go to state 66
-    lconst            go to state 67
-    simple_stmt       go to state 68
-    for_stmt          go to state 69
-    if_stmt           go to state 70
-    switch_stmt       go to state 71
-    select_stmt       go to state 72
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    new_name          go to state 78
-    sym               go to state 79
-    hidden_importsym  go to state 13
-    name              go to state 80
-    labelname         go to state 81
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    xfndcl            go to state 87
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    non_dcl_stmt      go to state 91
-    expr_list         go to state 92
+    xdcl              přejít do stavu 65
+    common_dcl        přejít do stavu 66
+    lconst            přejít do stavu 67
+    simple_stmt       přejít do stavu 68
+    for_stmt          přejít do stavu 69
+    if_stmt           přejít do stavu 70
+    switch_stmt       přejít do stavu 71
+    select_stmt       přejít do stavu 72
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    new_name          přejít do stavu 78
+    sym               přejít do stavu 79
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    labelname         přejít do stavu 81
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    xfndcl            přejít do stavu 87
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    non_dcl_stmt      přejít do stavu 91
+    expr_list         přejít do stavu 92
 
 
-state 23
+State 23
 
    20 import_safety: LNAME .
 
-    $default  reduce using rule 20 (import_safety)
+    $výchozí  reduce using rule 20 (import_safety)
 
 
-state 24
+State 24
 
    18 import_package: LPACKAGE LNAME import_safety . ';'
 
-    ';'  shift, and go to state 93
+    ';'  posunout a přejít do stavu 93
 
 
-state 25
+State 25
 
    22 import_there: $@2 hidden_import_list . '$' '$'
   303 hidden_import: . LIMPORT LNAME LLITERAL ';'
@@ -1335,33 +1334,33 @@ state 25
   308              | . LFUNC hidden_fndcl fnbody ';'
   344 hidden_import_list: hidden_import_list . hidden_import
 
-    LCONST   shift, and go to state 94
-    LFUNC    shift, and go to state 95
-    LIMPORT  shift, and go to state 96
-    LTYPE    shift, and go to state 97
-    LVAR     shift, and go to state 98
-    '$'      shift, and go to state 99
+    LCONST   posunout a přejít do stavu 94
+    LFUNC    posunout a přejít do stavu 95
+    LIMPORT  posunout a přejít do stavu 96
+    LTYPE    posunout a přejít do stavu 97
+    LVAR     posunout a přejít do stavu 98
+    '$'      posunout a přejít do stavu 99
 
-    hidden_import  go to state 100
+    hidden_import  přejít do stavu 100
 
 
-state 26
+State 26
 
   159 hidden_importsym: '@' LLITERAL '.' . LNAME
   160                 | '@' LLITERAL '.' . '?'
 
-    LNAME  shift, and go to state 101
-    '?'    shift, and go to state 102
+    LNAME  posunout a přejít do stavu 101
+    '?'    posunout a přejít do stavu 102
 
 
-state 27
+State 27
 
    15 import_here: LLITERAL .
 
-    $default  reduce using rule 15 (import_here)
+    $výchozí  reduce using rule 15 (import_here)
 
 
-state 28
+State 28
 
     9 import: LIMPORT '(' . import_stmt_list osemi ')'
    10       | LIMPORT '(' . ')'
@@ -1378,83 +1377,83 @@ state 28
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
 
-    LLITERAL  shift, and go to state 27
-    LNAME     shift, and go to state 9
-    ')'       shift, and go to state 103
-    '.'       shift, and go to state 29
-    '?'       shift, and go to state 10
-    '@'       shift, and go to state 11
+    LLITERAL  posunout a přejít do stavu 27
+    LNAME     posunout a přejít do stavu 9
+    ')'       posunout a přejít do stavu 103
+    '.'       posunout a přejít do stavu 29
+    '?'       posunout a přejít do stavu 10
+    '@'       posunout a přejít do stavu 11
 
-    import_stmt       go to state 104
-    import_stmt_list  go to state 105
-    import_here       go to state 31
-    sym               go to state 32
-    hidden_importsym  go to state 13
+    import_stmt       přejít do stavu 104
+    import_stmt_list  přejít do stavu 105
+    import_here       přejít do stavu 31
+    sym               přejít do stavu 32
+    hidden_importsym  přejít do stavu 13
 
 
-state 29
+State 29
 
    17 import_here: '.' . LLITERAL
 
-    LLITERAL  shift, and go to state 106
+    LLITERAL  posunout a přejít do stavu 106
 
 
-state 30
+State 30
 
     8 import: LIMPORT import_stmt .
 
-    $default  reduce using rule 8 (import)
+    $výchozí  reduce using rule 8 (import)
 
 
-state 31
+State 31
 
    11 import_stmt: import_here . import_package import_there
    12            | import_here . import_there
    18 import_package: . LPACKAGE LNAME import_safety ';'
-   21 $@2: .  [LCONST, LFUNC, LIMPORT, LTYPE, LVAR, '$']
+   21 $@2: . %empty  [LCONST, LFUNC, LIMPORT, LTYPE, LVAR, '$']
    22 import_there: . $@2 hidden_import_list '$' '$'
 
-    LPACKAGE  shift, and go to state 7
+    LPACKAGE  posunout a přejít do stavu 7
 
-    $default  reduce using rule 21 ($@2)
+    $výchozí  reduce using rule 21 ($@2)
 
-    import_package  go to state 107
-    import_there    go to state 108
-    $@2             go to state 17
+    import_package  přejít do stavu 107
+    import_there    přejít do stavu 108
+    $@2             přejít do stavu 17
 
 
-state 32
+State 32
 
    16 import_here: sym . LLITERAL
 
-    LLITERAL  shift, and go to state 109
+    LLITERAL  posunout a přejít do stavu 109
 
 
-state 33
+State 33
 
     7 imports: imports import ';' .
 
-    $default  reduce using rule 7 (imports)
+    $výchozí  reduce using rule 7 (imports)
 
 
-state 34
+State 34
 
    27 xdcl: error .
 
-    $default  reduce using rule 27 (xdcl)
+    $výchozí  reduce using rule 27 (xdcl)
 
 
-state 35
+State 35
 
   125 pexpr_no_paren: LLITERAL .
 
-    $default  reduce using rule 125 (pexpr_no_paren)
+    $výchozí  reduce using rule 125 (pexpr_no_paren)
 
 
-state 36
+State 36
 
   152 new_name: . sym
-  154 onew_name: .  [LCASE, LDEFAULT, ';', '}']
+  154 onew_name: . %empty  [LCASE, LDEFAULT, ';', '}']
   155          | . new_name
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -1463,19 +1462,19 @@ state 36
   160                 | . '@' LLITERAL '.' '?'
   263 non_dcl_stmt: LBREAK . onew_name
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 154 (onew_name)
+    $výchozí  reduce using rule 154 (onew_name)
 
-    new_name          go to state 110
-    onew_name         go to state 111
-    sym               go to state 112
-    hidden_importsym  go to state 13
+    new_name          přejít do stavu 110
+    onew_name         přejít do stavu 111
+    sym               přejít do stavu 112
+    hidden_importsym  přejít do stavu 13
 
 
-state 37
+State 37
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -1506,42 +1505,42 @@ state 37
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 114
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 116
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 114
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 116
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    non_recvchantype  go to state 119
-    dotname           go to state 120
-    othertype         go to state 121
-    ptrtype           go to state 122
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 123
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    non_recvchantype  přejít do stavu 119
+    dotname           přejít do stavu 120
+    othertype         přejít do stavu 121
+    ptrtype           přejít do stavu 122
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 123
 
 
-state 38
+State 38
 
    38 lconst: LCONST .
 
-    $default  reduce using rule 38 (lconst)
+    $výchozí  reduce using rule 38 (lconst)
 
 
-state 39
+State 39
 
   152 new_name: . sym
-  154 onew_name: .  [LCASE, LDEFAULT, ';', '}']
+  154 onew_name: . %empty  [LCASE, LDEFAULT, ';', '}']
   155          | . new_name
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -1550,19 +1549,19 @@ state 39
   160                 | . '@' LLITERAL '.' '?'
   264 non_dcl_stmt: LCONTINUE . onew_name
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 154 (onew_name)
+    $výchozí  reduce using rule 154 (onew_name)
 
-    new_name          go to state 110
-    onew_name         go to state 124
-    sym               go to state 112
-    hidden_importsym  go to state 13
+    new_name          přejít do stavu 110
+    onew_name         přejít do stavu 124
+    sym               přejít do stavu 112
+    hidden_importsym  přejít do stavu 13
 
 
-state 40
+State 40
 
   122 pseudocall: . pexpr '(' ')'
   123           | . pexpr '(' expr_or_type_list ocomma ')'
@@ -1609,52 +1608,52 @@ state 40
   216          | . fnlitdcl error
   266 non_dcl_stmt: LDEFER . pseudocall
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    '('         shift, and go to state 61
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    '('         posunout a přejít do stavu 61
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    pseudocall        go to state 125
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 126
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    pseudocall        přejít do stavu 125
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 126
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 41
+State 41
 
   262 non_dcl_stmt: LFALL .
 
-    $default  reduce using rule 262 (non_dcl_stmt)
+    $výchozí  reduce using rule 262 (non_dcl_stmt)
 
 
-state 42
+State 42
 
-   73 $@6: .
+   73 $@6: . %empty
    74 for_stmt: LFOR . $@6 for_body
 
-    $default  reduce using rule 73 ($@6)
+    $výchozí  reduce using rule 73 ($@6)
 
-    $@6  go to state 127
+    $@6  přejít do stavu 127
 
 
-state 43
+State 43
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -1666,17 +1665,17 @@ state 43
   205      | . '(' oarg_type_list_ocomma ')' sym '(' oarg_type_list_ocomma ')' fnres
   208 fntype: LFUNC . '(' oarg_type_list_ocomma ')' fnres
 
-    LNAME  shift, and go to state 9
-    '('    shift, and go to state 128
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '('    posunout a přejít do stavu 128
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym               go to state 129
-    hidden_importsym  go to state 13
-    fndcl             go to state 130
+    sym               přejít do stavu 129
+    hidden_importsym  přejít do stavu 13
+    fndcl             přejít do stavu 130
 
 
-state 44
+State 44
 
   122 pseudocall: . pexpr '(' ')'
   123           | . pexpr '(' expr_or_type_list ocomma ')'
@@ -1723,35 +1722,35 @@ state 44
   216          | . fnlitdcl error
   265 non_dcl_stmt: LGO . pseudocall
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    '('         shift, and go to state 61
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    '('         posunout a přejít do stavu 61
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    pseudocall        go to state 131
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 126
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    pseudocall        přejít do stavu 131
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 126
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 45
+State 45
 
   152 new_name: . sym
   156 sym: . LNAME
@@ -1761,46 +1760,46 @@ state 45
   160                 | . '@' LLITERAL '.' '?'
   267 non_dcl_stmt: LGOTO . new_name
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    new_name          go to state 132
-    sym               go to state 112
-    hidden_importsym  go to state 13
+    new_name          přejít do stavu 132
+    sym               přejít do stavu 112
+    hidden_importsym  přejít do stavu 13
 
 
-state 46
+State 46
 
-   77 $@7: .
+   77 $@7: . %empty
    80 if_stmt: LIF . $@7 if_header $@8 loop_body $@9 elseif_list else
 
-    $default  reduce using rule 77 ($@7)
+    $výchozí  reduce using rule 77 ($@7)
 
-    $@7  go to state 133
+    $@7  přejít do stavu 133
 
 
-state 47
+State 47
 
   150 lbrace: . LBODY
   151       | . '{'
   201 interfacetype: LINTERFACE . lbrace interfacedcl_list osemi '}'
   202              | LINTERFACE . lbrace '}'
 
-    LBODY  shift, and go to state 134
-    '{'    shift, and go to state 135
+    LBODY  posunout a přejít do stavu 134
+    '{'    posunout a přejít do stavu 135
 
-    lbrace  go to state 136
+    lbrace  přejít do stavu 136
 
 
-state 48
+State 48
 
   194 othertype: LMAP . '[' ntype ']' ntype
 
-    '['  shift, and go to state 137
+    '['  posunout a přejít do stavu 137
 
 
-state 49
+State 49
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -1878,85 +1877,85 @@ state 49
   268 non_dcl_stmt: LRETURN . oexpr_list
   275 expr_list: . expr
   276          | . expr_list ',' expr
-  291 oexpr_list: .  [LCASE, LDEFAULT, ';', '}']
+  291 oexpr_list: . %empty  [LCASE, LDEFAULT, ';', '}']
   292           | . expr_list
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 291 (oexpr_list)
+    $výchozí  reduce using rule 291 (oexpr_list)
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 139
-    oexpr_list        go to state 140
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 139
+    oexpr_list        přejít do stavu 140
 
 
-state 50
+State 50
 
-   90 $@13: .
+   90 $@13: . %empty
    91 select_stmt: LSELECT . $@13 LBODY caseblock_list '}'
 
-    $default  reduce using rule 90 ($@13)
+    $výchozí  reduce using rule 90 ($@13)
 
-    $@13  go to state 141
+    $@13  přejít do stavu 141
 
 
-state 51
+State 51
 
   150 lbrace: . LBODY
   151       | . '{'
   199 structtype: LSTRUCT . lbrace structdcl_list osemi '}'
   200           | LSTRUCT . lbrace '}'
 
-    LBODY  shift, and go to state 134
-    '{'    shift, and go to state 135
+    LBODY  posunout a přejít do stavu 134
+    '{'    posunout a přejít do stavu 135
 
-    lbrace  go to state 142
+    lbrace  přejít do stavu 142
 
 
-state 52
+State 52
 
-   87 $@11: .
+   87 $@11: . %empty
    89 switch_stmt: LSWITCH . $@11 if_header $@12 LBODY caseblock_list '}'
 
-    $default  reduce using rule 87 ($@11)
+    $výchozí  reduce using rule 87 ($@11)
 
-    $@11  go to state 143
+    $@11  přejít do stavu 143
 
 
-state 53
+State 53
 
    35 common_dcl: LTYPE . typedcl
    36           | LTYPE . '(' typedcl_list osemi ')'
@@ -1969,18 +1968,18 @@ state 53
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
 
-    LNAME  shift, and go to state 9
-    '('    shift, and go to state 144
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '('    posunout a přejít do stavu 144
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    typedclname       go to state 145
-    typedcl           go to state 146
-    sym               go to state 147
-    hidden_importsym  go to state 13
+    typedclname       přejít do stavu 145
+    typedcl           přejít do stavu 146
+    sym               přejít do stavu 147
+    hidden_importsym  přejít do stavu 13
 
 
-state 54
+State 54
 
    28 common_dcl: LVAR . vardcl
    29           | LVAR . '(' vardcl_list osemi ')'
@@ -1997,19 +1996,19 @@ state 54
   273 dcl_name_list: . dcl_name
   274              | . dcl_name_list ',' dcl_name
 
-    LNAME  shift, and go to state 9
-    '('    shift, and go to state 148
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '('    posunout a přejít do stavu 148
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    vardcl            go to state 149
-    dcl_name          go to state 150
-    sym               go to state 151
-    hidden_importsym  go to state 13
-    dcl_name_list     go to state 152
+    vardcl            přejít do stavu 149
+    dcl_name          přejít do stavu 150
+    sym               přejít do stavu 151
+    hidden_importsym  přejít do stavu 13
+    dcl_name_list     přejít do stavu 152
 
 
-state 55
+State 55
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -2065,44 +2064,44 @@ state 55
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 153
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 153
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 56
+State 56
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -2158,44 +2157,44 @@ state 56
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 154
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 154
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 57
+State 57
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -2251,44 +2250,44 @@ state 57
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 155
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 155
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 58
+State 58
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -2344,44 +2343,44 @@ state 58
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 156
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 156
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 59
+State 59
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -2437,44 +2436,44 @@ state 59
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 157
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 157
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 60
+State 60
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -2530,44 +2529,44 @@ state 60
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 158
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 158
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 61
+State 61
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -2652,48 +2651,48 @@ state 61
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 159
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 160
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 159
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 160
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 161
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    expr_or_type      go to state 162
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    non_expr_type     go to state 163
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 164
-    recvchantype      go to state 165
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 166
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 161
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    expr_or_type      přejít do stavu 162
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    non_expr_type     přejít do stavu 163
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 164
+    recvchantype      přejít do stavu 165
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 166
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 62
+State 62
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -2749,44 +2748,44 @@ state 62
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 167
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 167
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 63
+State 63
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -2842,44 +2841,44 @@ state 63
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 168
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 168
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 64
+State 64
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -2956,66 +2955,66 @@ state 64
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  289 oexpr: .  [']']
+  289 oexpr: . %empty  [']']
   290      | . expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 169
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 169
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 289 (oexpr)
+    $výchozí  reduce using rule 289 (oexpr)
 
-    expr              go to state 170
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    oexpr             go to state 171
+    expr              přejít do stavu 170
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    oexpr             přejít do stavu 171
 
 
-state 65
+State 65
 
   218 xdcl_list: xdcl_list xdcl . ';'
 
-    ';'  shift, and go to state 172
+    ';'  posunout a přejít do stavu 172
 
 
-state 66
+State 66
 
    24 xdcl: common_dcl .
 
-    $default  reduce using rule 24 (xdcl)
+    $výchozí  reduce using rule 24 (xdcl)
 
 
-state 67
+State 67
 
    31 common_dcl: lconst . constdcl
    32           | lconst . '(' constdcl osemi ')'
@@ -3032,54 +3031,54 @@ state 67
   273 dcl_name_list: . dcl_name
   274              | . dcl_name_list ',' dcl_name
 
-    LNAME  shift, and go to state 9
-    '('    shift, and go to state 173
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '('    posunout a přejít do stavu 173
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    constdcl          go to state 174
-    dcl_name          go to state 150
-    sym               go to state 151
-    hidden_importsym  go to state 13
-    dcl_name_list     go to state 175
+    constdcl          přejít do stavu 174
+    dcl_name          přejít do stavu 150
+    sym               přejít do stavu 151
+    hidden_importsym  přejít do stavu 13
+    dcl_name_list     přejít do stavu 175
 
 
-state 68
+State 68
 
   255 non_dcl_stmt: simple_stmt .
 
-    $default  reduce using rule 255 (non_dcl_stmt)
+    $výchozí  reduce using rule 255 (non_dcl_stmt)
 
 
-state 69
+State 69
 
   256 non_dcl_stmt: for_stmt .
 
-    $default  reduce using rule 256 (non_dcl_stmt)
+    $výchozí  reduce using rule 256 (non_dcl_stmt)
 
 
-state 70
+State 70
 
   259 non_dcl_stmt: if_stmt .
 
-    $default  reduce using rule 259 (non_dcl_stmt)
+    $výchozí  reduce using rule 259 (non_dcl_stmt)
 
 
-state 71
+State 71
 
   257 non_dcl_stmt: switch_stmt .
 
-    $default  reduce using rule 257 (non_dcl_stmt)
+    $výchozí  reduce using rule 257 (non_dcl_stmt)
 
 
-state 72
+State 72
 
   258 non_dcl_stmt: select_stmt .
 
-    $default  reduce using rule 258 (non_dcl_stmt)
+    $výchozí  reduce using rule 258 (non_dcl_stmt)
 
 
-state 73
+State 73
 
    49 simple_stmt: expr .  [LCASE, LDEFAULT, LBODY, ';', '}']
    50            | expr . LASOP expr
@@ -3107,61 +3106,61 @@ state 73
   112     | expr . LCOMM expr
   275 expr_list: expr .  [LCOLAS, '=', ',']
 
-    LASOP    shift, and go to state 176
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LDEC     shift, and go to state 180
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LINC     shift, and go to state 184
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LASOP    posunout a přejít do stavu 176
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LDEC     posunout a přejít do stavu 180
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LINC     posunout a přejít do stavu 184
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    LCOLAS    reduce using rule 275 (expr_list)
-    '='       reduce using rule 275 (expr_list)
-    ','       reduce using rule 275 (expr_list)
-    $default  reduce using rule 49 (simple_stmt)
+    LCOLAS      reduce using rule 275 (expr_list)
+    '='         reduce using rule 275 (expr_list)
+    ','         reduce using rule 275 (expr_list)
+    $výchozí  reduce using rule 49 (simple_stmt)
 
 
-state 74
+State 74
 
    92 expr: uexpr .
 
-    $default  reduce using rule 92 (expr)
+    $výchozí  reduce using rule 92 (expr)
 
 
-state 75
+State 75
 
   133 pexpr_no_paren: pseudocall .
 
-    $default  reduce using rule 133 (pexpr_no_paren)
+    $výchozí  reduce using rule 133 (pexpr_no_paren)
 
 
-state 76
+State 76
 
   136 pexpr_no_paren: pexpr_no_paren . '{' start_complit braced_keyval_list '}'
   145 pexpr: pexpr_no_paren .  [LASOP, LCOLAS, LCASE, LDDD, LDEFAULT, LANDAND, LANDNOT, LBODY, LCOMM, LDEC, LEQ, LGE, LGT, LINC, LLE, LLSH, LLT, LNE, LOROR, LRSH, '+', '-', '|', '^', '*', '/', '%', '&', '(', ')', ';', '.', '=', ':', '}', '[', ']', ',']
 
-    '{'  shift, and go to state 199
+    '{'  posunout a přejít do stavu 199
 
-    $default  reduce using rule 145 (pexpr)
+    $výchozí  reduce using rule 145 (pexpr)
 
 
-state 77
+State 77
 
   113 uexpr: pexpr .  [LASOP, LCOLAS, LCASE, LDDD, LDEFAULT, LANDAND, LANDNOT, LBODY, LCOMM, LDEC, LEQ, LGE, LGT, LINC, LLE, LLSH, LLT, LNE, LOROR, LRSH, '+', '-', '|', '^', '*', '/', '%', '&', ')', ';', '=', ':', '}', ']', ',']
   122 pseudocall: pexpr . '(' ')'
@@ -3174,148 +3173,148 @@ state 77
   131               | pexpr . '[' oexpr ':' oexpr ']'
   132               | pexpr . '[' oexpr ':' oexpr ':' oexpr ']'
 
-    '('  shift, and go to state 200
-    '.'  shift, and go to state 201
-    '['  shift, and go to state 202
+    '('  posunout a přejít do stavu 200
+    '.'  posunout a přejít do stavu 201
+    '['  posunout a přejít do stavu 202
 
-    $default  reduce using rule 113 (uexpr)
+    $výchozí  reduce using rule 113 (uexpr)
 
 
-state 78
+State 78
 
   162 labelname: new_name .
 
-    $default  reduce using rule 162 (labelname)
+    $výchozí  reduce using rule 162 (labelname)
 
 
-state 79
+State 79
 
   152 new_name: sym .  [':']
   161 name: sym .  [LASOP, LCOLAS, LCASE, LDEFAULT, LANDAND, LANDNOT, LCOMM, LDEC, LEQ, LGE, LGT, LINC, LLE, LLSH, LLT, LNE, LOROR, LRSH, '+', '-', '|', '^', '*', '/', '%', '&', '(', ';', '.', '=', '{', '}', '[', ',']
 
-    ':'       reduce using rule 152 (new_name)
-    $default  reduce using rule 161 (name)
+    ':'         reduce using rule 152 (new_name)
+    $výchozí  reduce using rule 161 (name)
 
 
-state 80
+State 80
 
   126 pexpr_no_paren: name .
 
-    $default  reduce using rule 126 (pexpr_no_paren)
+    $výchozí  reduce using rule 126 (pexpr_no_paren)
 
 
-state 81
+State 81
 
   261 non_dcl_stmt: labelname . ':' $@14 stmt
 
-    ':'  shift, and go to state 203
+    ':'  posunout a přejít do stavu 203
 
 
-state 82
+State 82
 
   134 pexpr_no_paren: convtype . '(' expr ocomma ')'
 
-    '('  shift, and go to state 204
+    '('  posunout a přejít do stavu 204
 
 
-state 83
+State 83
 
   135 pexpr_no_paren: comptype . lbrace start_complit braced_keyval_list '}'
   150 lbrace: . LBODY
   151       | . '{'
 
-    LBODY  shift, and go to state 134
-    '{'    shift, and go to state 135
+    LBODY  posunout a přejít do stavu 134
+    '{'    posunout a přejít do stavu 135
 
-    lbrace  go to state 205
+    lbrace  přejít do stavu 205
 
 
-state 84
+State 84
 
   181 convtype: othertype .  ['(']
   182 comptype: othertype .  [LBODY, '{']
 
-    '('       reduce using rule 181 (convtype)
-    $default  reduce using rule 182 (comptype)
+    '('         reduce using rule 181 (convtype)
+    $výchozí  reduce using rule 182 (comptype)
 
 
-state 85
+State 85
 
   195 othertype: structtype .
 
-    $default  reduce using rule 195 (othertype)
+    $výchozí  reduce using rule 195 (othertype)
 
 
-state 86
+State 86
 
   196 othertype: interfacetype .
 
-    $default  reduce using rule 196 (othertype)
+    $výchozí  reduce using rule 196 (othertype)
 
 
-state 87
+State 87
 
    25 xdcl: xfndcl .
 
-    $default  reduce using rule 25 (xdcl)
+    $výchozí  reduce using rule 25 (xdcl)
 
 
-state 88
+State 88
 
   180 convtype: fntype .  ['(']
   214 fnlitdcl: fntype .  [error, LBODY, '{']
 
-    '('       reduce using rule 180 (convtype)
-    $default  reduce using rule 214 (fnlitdcl)
+    '('         reduce using rule 180 (convtype)
+    $výchozí  reduce using rule 214 (fnlitdcl)
 
 
-state 89
+State 89
 
   150 lbrace: . LBODY
   151       | . '{'
   215 fnliteral: fnlitdcl . lbrace stmt_list '}'
   216          | fnlitdcl . error
 
-    error  shift, and go to state 206
-    LBODY  shift, and go to state 134
-    '{'    shift, and go to state 135
+    error  posunout a přejít do stavu 206
+    LBODY  posunout a přejít do stavu 134
+    '{'    posunout a přejít do stavu 135
 
-    lbrace  go to state 207
+    lbrace  přejít do stavu 207
 
 
-state 90
+State 90
 
   138 pexpr_no_paren: fnliteral .
 
-    $default  reduce using rule 138 (pexpr_no_paren)
+    $výchozí  reduce using rule 138 (pexpr_no_paren)
 
 
-state 91
+State 91
 
    26 xdcl: non_dcl_stmt .
 
-    $default  reduce using rule 26 (xdcl)
+    $výchozí  reduce using rule 26 (xdcl)
 
 
-state 92
+State 92
 
    51 simple_stmt: expr_list . '=' expr_list
    52            | expr_list . LCOLAS expr_list
   276 expr_list: expr_list . ',' expr
 
-    LCOLAS  shift, and go to state 208
-    '='     shift, and go to state 209
-    ','     shift, and go to state 210
+    LCOLAS  posunout a přejít do stavu 208
+    '='     posunout a přejít do stavu 209
+    ','     posunout a přejít do stavu 210
 
 
-state 93
+State 93
 
    18 import_package: LPACKAGE LNAME import_safety ';' .
 
-    $default  reduce using rule 18 (import_package)
+    $výchozí  reduce using rule 18 (import_package)
 
 
-state 94
+State 94
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -3323,13 +3322,13 @@ state 94
   306              | LCONST . hidden_pkg_importsym hidden_type '=' hidden_constant ';'
   309 hidden_pkg_importsym: . hidden_importsym
 
-    '@'  shift, and go to state 11
+    '@'  posunout a přejít do stavu 11
 
-    hidden_importsym      go to state 211
-    hidden_pkg_importsym  go to state 212
+    hidden_importsym      přejít do stavu 211
+    hidden_pkg_importsym  přejít do stavu 212
 
 
-state 95
+State 95
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -3338,22 +3337,22 @@ state 95
   308 hidden_import: LFUNC . hidden_fndcl fnbody ';'
   309 hidden_pkg_importsym: . hidden_importsym
 
-    '('  shift, and go to state 213
-    '@'  shift, and go to state 11
+    '('  posunout a přejít do stavu 213
+    '@'  posunout a přejít do stavu 11
 
-    hidden_importsym      go to state 211
-    hidden_fndcl          go to state 214
-    hidden_pkg_importsym  go to state 215
+    hidden_importsym      přejít do stavu 211
+    hidden_fndcl          přejít do stavu 214
+    hidden_pkg_importsym  přejít do stavu 215
 
 
-state 96
+State 96
 
   303 hidden_import: LIMPORT . LNAME LLITERAL ';'
 
-    LNAME  shift, and go to state 216
+    LNAME  posunout a přejít do stavu 216
 
 
-state 97
+State 97
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -3361,144 +3360,144 @@ state 97
   309 hidden_pkg_importsym: . hidden_importsym
   310 hidden_pkgtype: . hidden_pkg_importsym
 
-    '@'  shift, and go to state 11
+    '@'  posunout a přejít do stavu 11
 
-    hidden_importsym      go to state 211
-    hidden_pkg_importsym  go to state 217
-    hidden_pkgtype        go to state 218
+    hidden_importsym      přejít do stavu 211
+    hidden_pkg_importsym  přejít do stavu 217
+    hidden_pkgtype        přejít do stavu 218
 
 
-state 98
+State 98
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
   304 hidden_import: LVAR . hidden_pkg_importsym hidden_type ';'
   309 hidden_pkg_importsym: . hidden_importsym
 
-    '@'  shift, and go to state 11
+    '@'  posunout a přejít do stavu 11
 
-    hidden_importsym      go to state 211
-    hidden_pkg_importsym  go to state 219
+    hidden_importsym      přejít do stavu 211
+    hidden_pkg_importsym  přejít do stavu 219
 
 
-state 99
+State 99
 
    22 import_there: $@2 hidden_import_list '$' . '$'
 
-    '$'  shift, and go to state 220
+    '$'  posunout a přejít do stavu 220
 
 
-state 100
+State 100
 
   344 hidden_import_list: hidden_import_list hidden_import .
 
-    $default  reduce using rule 344 (hidden_import_list)
+    $výchozí  reduce using rule 344 (hidden_import_list)
 
 
-state 101
+State 101
 
   159 hidden_importsym: '@' LLITERAL '.' LNAME .
 
-    $default  reduce using rule 159 (hidden_importsym)
+    $výchozí  reduce using rule 159 (hidden_importsym)
 
 
-state 102
+State 102
 
   160 hidden_importsym: '@' LLITERAL '.' '?' .
 
-    $default  reduce using rule 160 (hidden_importsym)
+    $výchozí  reduce using rule 160 (hidden_importsym)
 
 
-state 103
+State 103
 
    10 import: LIMPORT '(' ')' .
 
-    $default  reduce using rule 10 (import)
+    $výchozí  reduce using rule 10 (import)
 
 
-state 104
+State 104
 
    13 import_stmt_list: import_stmt .
 
-    $default  reduce using rule 13 (import_stmt_list)
+    $výchozí  reduce using rule 13 (import_stmt_list)
 
 
-state 105
+State 105
 
     9 import: LIMPORT '(' import_stmt_list . osemi ')'
    14 import_stmt_list: import_stmt_list . ';' import_stmt
-  285 osemi: .  [')']
+  285 osemi: . %empty  [')']
   286      | . ';'
 
-    ';'  shift, and go to state 221
+    ';'  posunout a přejít do stavu 221
 
-    $default  reduce using rule 285 (osemi)
+    $výchozí  reduce using rule 285 (osemi)
 
-    osemi  go to state 222
+    osemi  přejít do stavu 222
 
 
-state 106
+State 106
 
    17 import_here: '.' LLITERAL .
 
-    $default  reduce using rule 17 (import_here)
+    $výchozí  reduce using rule 17 (import_here)
 
 
-state 107
+State 107
 
    11 import_stmt: import_here import_package . import_there
-   21 $@2: .
+   21 $@2: . %empty
    22 import_there: . $@2 hidden_import_list '$' '$'
 
-    $default  reduce using rule 21 ($@2)
+    $výchozí  reduce using rule 21 ($@2)
 
-    import_there  go to state 223
-    $@2           go to state 17
+    import_there  přejít do stavu 223
+    $@2           přejít do stavu 17
 
 
-state 108
+State 108
 
    12 import_stmt: import_here import_there .
 
-    $default  reduce using rule 12 (import_stmt)
+    $výchozí  reduce using rule 12 (import_stmt)
 
 
-state 109
+State 109
 
    16 import_here: sym LLITERAL .
 
-    $default  reduce using rule 16 (import_here)
+    $výchozí  reduce using rule 16 (import_here)
 
 
-state 110
+State 110
 
   155 onew_name: new_name .
 
-    $default  reduce using rule 155 (onew_name)
+    $výchozí  reduce using rule 155 (onew_name)
 
 
-state 111
+State 111
 
   263 non_dcl_stmt: LBREAK onew_name .
 
-    $default  reduce using rule 263 (non_dcl_stmt)
+    $výchozí  reduce using rule 263 (non_dcl_stmt)
 
 
-state 112
+State 112
 
   152 new_name: sym .
 
-    $default  reduce using rule 152 (new_name)
+    $výchozí  reduce using rule 152 (new_name)
 
 
-state 113
+State 113
 
   208 fntype: LFUNC . '(' oarg_type_list_ocomma ')' fnres
 
-    '('  shift, and go to state 224
+    '('  posunout a přejít do stavu 224
 
 
-state 114
+State 114
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -3530,33 +3529,33 @@ state 114
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 227
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 227
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 115
+State 115
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -3588,33 +3587,33 @@ state 115
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 233
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 233
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 116
+State 116
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -3646,104 +3645,104 @@ state 116
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 234
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 234
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 117
+State 117
 
   161 name: sym .
 
-    $default  reduce using rule 161 (name)
+    $výchozí  reduce using rule 161 (name)
 
 
-state 118
+State 118
 
   188 dotname: name .  [error, LLITERAL, LCOLAS, LCASE, LDDD, LDEFAULT, LBODY, '(', ')', ';', '=', ':', '{', '}', ']', ',']
   189        | name . '.' sym
 
-    '.'  shift, and go to state 235
+    '.'  posunout a přejít do stavu 235
 
-    $default  reduce using rule 188 (dotname)
+    $výchozí  reduce using rule 188 (dotname)
 
 
-state 119
+State 119
 
   192 othertype: LCHAN non_recvchantype .
 
-    $default  reduce using rule 192 (othertype)
+    $výchozí  reduce using rule 192 (othertype)
 
 
-state 120
+State 120
 
   178 non_recvchantype: dotname .
 
-    $default  reduce using rule 178 (non_recvchantype)
+    $výchozí  reduce using rule 178 (non_recvchantype)
 
 
-state 121
+State 121
 
   176 non_recvchantype: othertype .
 
-    $default  reduce using rule 176 (non_recvchantype)
+    $výchozí  reduce using rule 176 (non_recvchantype)
 
 
-state 122
+State 122
 
   177 non_recvchantype: ptrtype .
 
-    $default  reduce using rule 177 (non_recvchantype)
+    $výchozí  reduce using rule 177 (non_recvchantype)
 
 
-state 123
+State 123
 
   175 non_recvchantype: fntype .
 
-    $default  reduce using rule 175 (non_recvchantype)
+    $výchozí  reduce using rule 175 (non_recvchantype)
 
 
-state 124
+State 124
 
   264 non_dcl_stmt: LCONTINUE onew_name .
 
-    $default  reduce using rule 264 (non_dcl_stmt)
+    $výchozí  reduce using rule 264 (non_dcl_stmt)
 
 
-state 125
+State 125
 
   133 pexpr_no_paren: pseudocall .  ['(', '.', '{', '[']
   266 non_dcl_stmt: LDEFER pseudocall .  [LCASE, LDEFAULT, ';', '}']
 
-    LCASE     reduce using rule 266 (non_dcl_stmt)
-    LDEFAULT  reduce using rule 266 (non_dcl_stmt)
-    ';'       reduce using rule 266 (non_dcl_stmt)
-    '}'       reduce using rule 266 (non_dcl_stmt)
-    $default  reduce using rule 133 (pexpr_no_paren)
+    LCASE       reduce using rule 266 (non_dcl_stmt)
+    LDEFAULT    reduce using rule 266 (non_dcl_stmt)
+    ';'         reduce using rule 266 (non_dcl_stmt)
+    '}'         reduce using rule 266 (non_dcl_stmt)
+    $výchozí  reduce using rule 133 (pexpr_no_paren)
 
 
-state 126
+State 126
 
   122 pseudocall: pexpr . '(' ')'
   123           | pexpr . '(' expr_or_type_list ocomma ')'
@@ -3755,12 +3754,12 @@ state 126
   131               | pexpr . '[' oexpr ':' oexpr ']'
   132               | pexpr . '[' oexpr ':' oexpr ':' oexpr ']'
 
-    '('  shift, and go to state 200
-    '.'  shift, and go to state 201
-    '['  shift, and go to state 202
+    '('  posunout a přejít do stavu 200
+    '.'  posunout a přejít do stavu 201
+    '['  posunout a přejít do stavu 202
 
 
-state 127
+State 127
 
    49 simple_stmt: . expr
    50            | . expr LASOP expr
@@ -3850,56 +3849,56 @@ state 127
   216          | . fnlitdcl error
   275 expr_list: . expr
   276          | . expr_list ',' expr
-  293 osimple_stmt: .  [LBODY, ';']
+  293 osimple_stmt: . %empty  [LBODY, ';']
   294             | . simple_stmt
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 293 (osimple_stmt)
+    $výchozí  reduce using rule 293 (osimple_stmt)
 
-    simple_stmt       go to state 236
-    range_stmt        go to state 237
-    for_header        go to state 238
-    for_body          go to state 239
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 240
-    osimple_stmt      go to state 241
+    simple_stmt       přejít do stavu 236
+    range_stmt        přejít do stavu 237
+    for_header        přejít do stavu 238
+    for_body          přejít do stavu 239
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 240
+    osimple_stmt      přejít do stavu 241
 
 
-state 128
+State 128
 
   149 name_or_type: . ntype
   156 sym: . LNAME
@@ -3940,83 +3939,83 @@ state 128
   245         | . dotdotdot
   246 arg_type_list: . arg_type
   247              | . arg_type_list ',' arg_type
-  248 oarg_type_list_ocomma: .  [')']
+  248 oarg_type_list_ocomma: . %empty  [')']
   249                      | . arg_type_list ocomma
 
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 242
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 242
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 248 (oarg_type_list_ocomma)
+    $výchozí  reduce using rule 248 (oarg_type_list_ocomma)
 
-    name_or_type           go to state 243
-    sym                    go to state 244
-    hidden_importsym       go to state 13
-    name                   go to state 118
-    dotdotdot              go to state 245
-    ntype                  go to state 246
-    dotname                go to state 228
-    othertype              go to state 229
-    ptrtype                go to state 230
-    recvchantype           go to state 231
-    structtype             go to state 85
-    interfacetype          go to state 86
-    fntype                 go to state 232
-    arg_type               go to state 247
-    arg_type_list          go to state 248
-    oarg_type_list_ocomma  go to state 249
+    name_or_type           přejít do stavu 243
+    sym                    přejít do stavu 244
+    hidden_importsym       přejít do stavu 13
+    name                   přejít do stavu 118
+    dotdotdot              přejít do stavu 245
+    ntype                  přejít do stavu 246
+    dotname                přejít do stavu 228
+    othertype              přejít do stavu 229
+    ptrtype                přejít do stavu 230
+    recvchantype           přejít do stavu 231
+    structtype             přejít do stavu 85
+    interfacetype          přejít do stavu 86
+    fntype                 přejít do stavu 232
+    arg_type               přejít do stavu 247
+    arg_type_list          přejít do stavu 248
+    oarg_type_list_ocomma  přejít do stavu 249
 
 
-state 129
+State 129
 
   204 fndcl: sym . '(' oarg_type_list_ocomma ')' fnres
 
-    '('  shift, and go to state 250
+    '('  posunout a přejít do stavu 250
 
 
-state 130
+State 130
 
   203 xfndcl: LFUNC fndcl . fnbody
-  209 fnbody: .  [';']
+  209 fnbody: . %empty  [';']
   210       | . '{' stmt_list '}'
 
-    '{'  shift, and go to state 251
+    '{'  posunout a přejít do stavu 251
 
-    $default  reduce using rule 209 (fnbody)
+    $výchozí  reduce using rule 209 (fnbody)
 
-    fnbody  go to state 252
+    fnbody  přejít do stavu 252
 
 
-state 131
+State 131
 
   133 pexpr_no_paren: pseudocall .  ['(', '.', '{', '[']
   265 non_dcl_stmt: LGO pseudocall .  [LCASE, LDEFAULT, ';', '}']
 
-    LCASE     reduce using rule 265 (non_dcl_stmt)
-    LDEFAULT  reduce using rule 265 (non_dcl_stmt)
-    ';'       reduce using rule 265 (non_dcl_stmt)
-    '}'       reduce using rule 265 (non_dcl_stmt)
-    $default  reduce using rule 133 (pexpr_no_paren)
+    LCASE       reduce using rule 265 (non_dcl_stmt)
+    LDEFAULT    reduce using rule 265 (non_dcl_stmt)
+    ';'         reduce using rule 265 (non_dcl_stmt)
+    '}'         reduce using rule 265 (non_dcl_stmt)
+    $výchozí  reduce using rule 133 (pexpr_no_paren)
 
 
-state 132
+State 132
 
   267 non_dcl_stmt: LGOTO new_name .
 
-    $default  reduce using rule 267 (non_dcl_stmt)
+    $výchozí  reduce using rule 267 (non_dcl_stmt)
 
 
-state 133
+State 133
 
    49 simple_stmt: . expr
    50            | . expr LASOP expr
@@ -4102,68 +4101,68 @@ state 133
   216          | . fnlitdcl error
   275 expr_list: . expr
   276          | . expr_list ',' expr
-  293 osimple_stmt: .  [LBODY, ';']
+  293 osimple_stmt: . %empty  [LBODY, ';']
   294             | . simple_stmt
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 293 (osimple_stmt)
+    $výchozí  reduce using rule 293 (osimple_stmt)
 
-    simple_stmt       go to state 236
-    if_header         go to state 253
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 92
-    osimple_stmt      go to state 254
+    simple_stmt       přejít do stavu 236
+    if_header         přejít do stavu 253
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 92
+    osimple_stmt      přejít do stavu 254
 
 
-state 134
+State 134
 
   150 lbrace: LBODY .
 
-    $default  reduce using rule 150 (lbrace)
+    $výchozí  reduce using rule 150 (lbrace)
 
 
-state 135
+State 135
 
   151 lbrace: '{' .
 
-    $default  reduce using rule 151 (lbrace)
+    $výchozí  reduce using rule 151 (lbrace)
 
 
-state 136
+State 136
 
   152 new_name: . sym
   156 sym: . LNAME
@@ -4181,21 +4180,21 @@ state 136
   239             | . packname
   240             | . '(' packname ')'
 
-    LNAME  shift, and go to state 255
-    '('    shift, and go to state 256
-    '}'    shift, and go to state 257
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 255
+    '('    posunout a přejít do stavu 256
+    '}'    posunout a přejít do stavu 257
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    new_name           go to state 258
-    sym                go to state 112
-    hidden_importsym   go to state 13
-    interfacedcl_list  go to state 259
-    packname           go to state 260
-    interfacedcl       go to state 261
+    new_name           přejít do stavu 258
+    sym                přejít do stavu 112
+    hidden_importsym   přejít do stavu 13
+    interfacedcl_list  přejít do stavu 259
+    packname           přejít do stavu 260
+    interfacedcl       přejít do stavu 261
 
 
-state 137
+State 137
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -4227,33 +4226,33 @@ state 137
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 262
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 262
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 138
+State 138
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -4277,55 +4276,55 @@ state 138
   112     | expr . LCOMM expr
   275 expr_list: expr .  [LCASE, LDEFAULT, LBODY, ')', ';', '}', ',']
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 275 (expr_list)
+    $výchozí  reduce using rule 275 (expr_list)
 
 
-state 139
+State 139
 
   276 expr_list: expr_list . ',' expr
   292 oexpr_list: expr_list .  [LCASE, LDEFAULT, ';', '}']
 
-    ','  shift, and go to state 210
+    ','  posunout a přejít do stavu 210
 
-    $default  reduce using rule 292 (oexpr_list)
+    $výchozí  reduce using rule 292 (oexpr_list)
 
 
-state 140
+State 140
 
   268 non_dcl_stmt: LRETURN oexpr_list .
 
-    $default  reduce using rule 268 (non_dcl_stmt)
+    $výchozí  reduce using rule 268 (non_dcl_stmt)
 
 
-state 141
+State 141
 
    91 select_stmt: LSELECT $@13 . LBODY caseblock_list '}'
 
-    LBODY  shift, and go to state 263
+    LBODY  posunout a přejít do stavu 263
 
 
-state 142
+State 142
 
   152 new_name: . sym
   156 sym: . LNAME
@@ -4349,24 +4348,24 @@ state 142
   271 new_name_list: . new_name
   272              | . new_name_list ',' new_name
 
-    LNAME  shift, and go to state 255
-    '*'    shift, and go to state 264
-    '('    shift, and go to state 265
-    '}'    shift, and go to state 266
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 255
+    '*'    posunout a přejít do stavu 264
+    '('    posunout a přejít do stavu 265
+    '}'    posunout a přejít do stavu 266
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    new_name          go to state 267
-    sym               go to state 112
-    hidden_importsym  go to state 13
-    structdcl_list    go to state 268
-    structdcl         go to state 269
-    packname          go to state 270
-    embed             go to state 271
-    new_name_list     go to state 272
+    new_name          přejít do stavu 267
+    sym               přejít do stavu 112
+    hidden_importsym  přejít do stavu 13
+    structdcl_list    přejít do stavu 268
+    structdcl         přejít do stavu 269
+    packname          přejít do stavu 270
+    embed             přejít do stavu 271
+    new_name_list     přejít do stavu 272
 
 
-state 143
+State 143
 
    49 simple_stmt: . expr
    50            | . expr LASOP expr
@@ -4452,54 +4451,54 @@ state 143
   216          | . fnlitdcl error
   275 expr_list: . expr
   276          | . expr_list ',' expr
-  293 osimple_stmt: .  [LBODY, ';']
+  293 osimple_stmt: . %empty  [LBODY, ';']
   294             | . simple_stmt
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 293 (osimple_stmt)
+    $výchozí  reduce using rule 293 (osimple_stmt)
 
-    simple_stmt       go to state 236
-    if_header         go to state 273
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 92
-    osimple_stmt      go to state 254
+    simple_stmt       přejít do stavu 236
+    if_header         přejít do stavu 273
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 92
+    osimple_stmt      přejít do stavu 254
 
 
-state 144
+State 144
 
    36 common_dcl: LTYPE '(' . typedcl_list osemi ')'
    37           | LTYPE '(' . ')'
@@ -4513,19 +4512,19 @@ state 144
   223 typedcl_list: . typedcl
   224             | . typedcl_list ';' typedcl
 
-    LNAME  shift, and go to state 9
-    ')'    shift, and go to state 274
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    ')'    posunout a přejít do stavu 274
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    typedclname       go to state 145
-    typedcl           go to state 275
-    sym               go to state 147
-    hidden_importsym  go to state 13
-    typedcl_list      go to state 276
+    typedclname       přejít do stavu 145
+    typedcl           přejít do stavu 275
+    sym               přejít do stavu 147
+    hidden_importsym  přejít do stavu 13
+    typedcl_list      přejít do stavu 276
 
 
-state 145
+State 145
 
    48 typedcl: typedclname . ntype
   156 sym: . LNAME
@@ -4557,47 +4556,47 @@ state 145
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 277
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 277
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 146
+State 146
 
    35 common_dcl: LTYPE typedcl .
 
-    $default  reduce using rule 35 (common_dcl)
+    $výchozí  reduce using rule 35 (common_dcl)
 
 
-state 147
+State 147
 
    47 typedclname: sym .
 
-    $default  reduce using rule 47 (typedclname)
+    $výchozí  reduce using rule 47 (typedclname)
 
 
-state 148
+State 148
 
    29 common_dcl: LVAR '(' . vardcl_list osemi ')'
    30           | LVAR '(' . ')'
@@ -4615,41 +4614,41 @@ state 148
   273 dcl_name_list: . dcl_name
   274              | . dcl_name_list ',' dcl_name
 
-    LNAME  shift, and go to state 9
-    ')'    shift, and go to state 278
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    ')'    posunout a přejít do stavu 278
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    vardcl            go to state 279
-    dcl_name          go to state 150
-    sym               go to state 151
-    hidden_importsym  go to state 13
-    vardcl_list       go to state 280
-    dcl_name_list     go to state 152
+    vardcl            přejít do stavu 279
+    dcl_name          přejít do stavu 150
+    sym               přejít do stavu 151
+    hidden_importsym  přejít do stavu 13
+    vardcl_list       přejít do stavu 280
+    dcl_name_list     přejít do stavu 152
 
 
-state 149
+State 149
 
    28 common_dcl: LVAR vardcl .
 
-    $default  reduce using rule 28 (common_dcl)
+    $výchozí  reduce using rule 28 (common_dcl)
 
 
-state 150
+State 150
 
   273 dcl_name_list: dcl_name .
 
-    $default  reduce using rule 273 (dcl_name_list)
+    $výchozí  reduce using rule 273 (dcl_name_list)
 
 
-state 151
+State 151
 
   153 dcl_name: sym .
 
-    $default  reduce using rule 153 (dcl_name)
+    $výchozí  reduce using rule 153 (dcl_name)
 
 
-state 152
+State 152
 
    39 vardcl: dcl_name_list . ntype
    40       | dcl_name_list . ntype '=' expr_list
@@ -4684,77 +4683,77 @@ state 152
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
   274 dcl_name_list: dcl_name_list . ',' dcl_name
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '='         shift, and go to state 281
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
-    ','         shift, and go to state 282
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '='         posunout a přejít do stavu 281
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
+    ','         posunout a přejít do stavu 282
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 283
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 283
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 153
+State 153
 
   121 uexpr: LCOMM uexpr .
 
-    $default  reduce using rule 121 (uexpr)
+    $výchozí  reduce using rule 121 (uexpr)
 
 
-state 154
+State 154
 
   116 uexpr: '+' uexpr .
 
-    $default  reduce using rule 116 (uexpr)
+    $výchozí  reduce using rule 116 (uexpr)
 
 
-state 155
+State 155
 
   117 uexpr: '-' uexpr .
 
-    $default  reduce using rule 117 (uexpr)
+    $výchozí  reduce using rule 117 (uexpr)
 
 
-state 156
+State 156
 
   120 uexpr: '^' uexpr .
 
-    $default  reduce using rule 120 (uexpr)
+    $výchozí  reduce using rule 120 (uexpr)
 
 
-state 157
+State 157
 
   114 uexpr: '*' uexpr .
 
-    $default  reduce using rule 114 (uexpr)
+    $výchozí  reduce using rule 114 (uexpr)
 
 
-state 158
+State 158
 
   115 uexpr: '&' uexpr .
 
-    $default  reduce using rule 115 (uexpr)
+    $výchozí  reduce using rule 115 (uexpr)
 
 
-state 159
+State 159
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -4811,44 +4810,44 @@ state 159
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 284
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 284
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 153
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 153
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 160
+State 160
 
   113 uexpr: . pexpr
   114      | . '*' uexpr
@@ -4910,46 +4909,46 @@ state 160
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 159
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 160
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 159
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 160
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    uexpr             go to state 157
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    non_expr_type     go to state 285
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 164
-    recvchantype      go to state 165
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 166
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    uexpr             přejít do stavu 157
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    non_expr_type     přejít do stavu 285
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 164
+    recvchantype      přejít do stavu 165
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 166
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 161
+State 161
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -4973,99 +4972,99 @@ state 161
   112     | expr . LCOMM expr
   147 expr_or_type: expr .  [LCOLAS, LDDD, ')', '=', ':', ',']
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 147 (expr_or_type)
+    $výchozí  reduce using rule 147 (expr_or_type)
 
 
-state 162
+State 162
 
   137 pexpr_no_paren: '(' expr_or_type . ')' '{' start_complit braced_keyval_list '}'
   146 pexpr: '(' expr_or_type . ')'
 
-    ')'  shift, and go to state 286
+    ')'  posunout a přejít do stavu 286
 
 
-state 163
+State 163
 
   148 expr_or_type: non_expr_type .
 
-    $default  reduce using rule 148 (expr_or_type)
+    $výchozí  reduce using rule 148 (expr_or_type)
 
 
-state 164
+State 164
 
   173 non_expr_type: othertype .  [LCOLAS, LDDD, ')', '=', ':', ',']
   181 convtype: othertype .  ['(']
   182 comptype: othertype .  [LBODY, '{']
 
-    LBODY     reduce using rule 182 (comptype)
-    '('       reduce using rule 181 (convtype)
-    '{'       reduce using rule 182 (comptype)
-    $default  reduce using rule 173 (non_expr_type)
+    LBODY       reduce using rule 182 (comptype)
+    '('         reduce using rule 181 (convtype)
+    '{'         reduce using rule 182 (comptype)
+    $výchozí  reduce using rule 173 (non_expr_type)
 
 
-state 165
+State 165
 
   171 non_expr_type: recvchantype .
 
-    $default  reduce using rule 171 (non_expr_type)
+    $výchozí  reduce using rule 171 (non_expr_type)
 
 
-state 166
+State 166
 
   172 non_expr_type: fntype .  [LCOLAS, LDDD, ')', '=', ':', ',']
   180 convtype: fntype .  ['(']
   214 fnlitdcl: fntype .  [error, LBODY, '{']
 
-    error     reduce using rule 214 (fnlitdcl)
-    LBODY     reduce using rule 214 (fnlitdcl)
-    '('       reduce using rule 180 (convtype)
-    '{'       reduce using rule 214 (fnlitdcl)
-    $default  reduce using rule 172 (non_expr_type)
+    error       reduce using rule 214 (fnlitdcl)
+    LBODY       reduce using rule 214 (fnlitdcl)
+    '('         reduce using rule 180 (convtype)
+    '{'         reduce using rule 214 (fnlitdcl)
+    $výchozí  reduce using rule 172 (non_expr_type)
 
 
-state 167
+State 167
 
   118 uexpr: '!' uexpr .
 
-    $default  reduce using rule 118 (uexpr)
+    $výchozí  reduce using rule 118 (uexpr)
 
 
-state 168
+State 168
 
   119 uexpr: '~' uexpr .
 
-    $default  reduce using rule 119 (uexpr)
+    $výchozí  reduce using rule 119 (uexpr)
 
 
-state 169
+State 169
 
   191 othertype: '[' LDDD . ']' ntype
 
-    ']'  shift, and go to state 287
+    ']'  posunout a přejít do stavu 287
 
 
-state 170
+State 170
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -5089,45 +5088,45 @@ state 170
   112     | expr . LCOMM expr
   290 oexpr: expr .  [':', ']']
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 290 (oexpr)
+    $výchozí  reduce using rule 290 (oexpr)
 
 
-state 171
+State 171
 
   190 othertype: '[' oexpr . ']' ntype
 
-    ']'  shift, and go to state 288
+    ']'  posunout a přejít do stavu 288
 
 
-state 172
+State 172
 
   218 xdcl_list: xdcl_list xdcl ';' .
 
-    $default  reduce using rule 218 (xdcl_list)
+    $výchozí  reduce using rule 218 (xdcl_list)
 
 
-state 173
+State 173
 
    32 common_dcl: lconst '(' . constdcl osemi ')'
    33           | lconst '(' . constdcl ';' constdcl_list osemi ')'
@@ -5143,26 +5142,26 @@ state 173
   273 dcl_name_list: . dcl_name
   274              | . dcl_name_list ',' dcl_name
 
-    LNAME  shift, and go to state 9
-    ')'    shift, and go to state 289
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    ')'    posunout a přejít do stavu 289
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    constdcl          go to state 290
-    dcl_name          go to state 150
-    sym               go to state 151
-    hidden_importsym  go to state 13
-    dcl_name_list     go to state 175
+    constdcl          přejít do stavu 290
+    dcl_name          přejít do stavu 150
+    sym               přejít do stavu 151
+    hidden_importsym  přejít do stavu 13
+    dcl_name_list     přejít do stavu 175
 
 
-state 174
+State 174
 
    31 common_dcl: lconst constdcl .
 
-    $default  reduce using rule 31 (common_dcl)
+    $výchozí  reduce using rule 31 (common_dcl)
 
 
-state 175
+State 175
 
    42 constdcl: dcl_name_list . ntype '=' expr_list
    43         | dcl_name_list . '=' expr_list
@@ -5196,35 +5195,35 @@ state 175
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
   274 dcl_name_list: dcl_name_list . ',' dcl_name
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '='         shift, and go to state 291
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
-    ','         shift, and go to state 282
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '='         posunout a přejít do stavu 291
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
+    ','         posunout a přejít do stavu 282
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 292
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 292
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 176
+State 176
 
    50 simple_stmt: expr LASOP . expr
    92 expr: . uexpr
@@ -5301,45 +5300,45 @@ state 176
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 293
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 293
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 177
+State 177
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -5416,45 +5415,45 @@ state 177
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 294
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 294
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 178
+State 178
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -5531,45 +5530,45 @@ state 178
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 295
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 295
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 179
+State 179
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -5646,52 +5645,52 @@ state 179
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 296
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 296
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 180
+State 180
 
    54 simple_stmt: expr LDEC .
 
-    $default  reduce using rule 54 (simple_stmt)
+    $výchozí  reduce using rule 54 (simple_stmt)
 
 
-state 181
+State 181
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -5768,45 +5767,45 @@ state 181
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 297
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 297
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 182
+State 182
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -5883,45 +5882,45 @@ state 182
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 298
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 298
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 183
+State 183
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -5998,52 +5997,52 @@ state 183
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 299
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 299
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 184
+State 184
 
    53 simple_stmt: expr LINC .
 
-    $default  reduce using rule 53 (simple_stmt)
+    $výchozí  reduce using rule 53 (simple_stmt)
 
 
-state 185
+State 185
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -6120,45 +6119,45 @@ state 185
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 300
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 300
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 186
+State 186
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -6235,45 +6234,45 @@ state 186
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 301
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 301
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 187
+State 187
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -6350,45 +6349,45 @@ state 187
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 302
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 302
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 188
+State 188
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -6465,45 +6464,45 @@ state 188
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 303
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 303
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 189
+State 189
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -6580,45 +6579,45 @@ state 189
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 304
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 304
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 190
+State 190
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -6695,45 +6694,45 @@ state 190
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 305
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 305
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 191
+State 191
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -6810,45 +6809,45 @@ state 191
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 306
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 306
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 192
+State 192
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -6925,45 +6924,45 @@ state 192
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 307
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 307
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 193
+State 193
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -7040,45 +7039,45 @@ state 193
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 308
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 308
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 194
+State 194
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -7155,45 +7154,45 @@ state 194
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 309
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 309
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 195
+State 195
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -7270,45 +7269,45 @@ state 195
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 310
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 310
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 196
+State 196
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -7385,45 +7384,45 @@ state 196
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 311
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 311
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 197
+State 197
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -7500,45 +7499,45 @@ state 197
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 312
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 312
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 198
+State 198
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -7615,55 +7614,55 @@ state 198
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 313
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 313
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 199
+State 199
 
   136 pexpr_no_paren: pexpr_no_paren '{' . start_complit braced_keyval_list '}'
-  139 start_complit: .
+  139 start_complit: . %empty
 
-    $default  reduce using rule 139 (start_complit)
+    $výchozí  reduce using rule 139 (start_complit)
 
-    start_complit  go to state 314
+    start_complit  přejít do stavu 314
 
 
-state 200
+State 200
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -7751,50 +7750,50 @@ state 200
   277 expr_or_type_list: . expr_or_type
   278                  | . expr_or_type_list ',' expr_or_type
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 159
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 160
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    ')'         shift, and go to state 315
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 159
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 160
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    ')'         posunout a přejít do stavu 315
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr               go to state 161
-    uexpr              go to state 74
-    pseudocall         go to state 75
-    pexpr_no_paren     go to state 76
-    pexpr              go to state 77
-    expr_or_type       go to state 316
-    sym                go to state 117
-    hidden_importsym   go to state 13
-    name               go to state 80
-    non_expr_type      go to state 163
-    convtype           go to state 82
-    comptype           go to state 83
-    othertype          go to state 164
-    recvchantype       go to state 165
-    structtype         go to state 85
-    interfacetype      go to state 86
-    fntype             go to state 166
-    fnlitdcl           go to state 89
-    fnliteral          go to state 90
-    expr_or_type_list  go to state 317
+    expr               přejít do stavu 161
+    uexpr              přejít do stavu 74
+    pseudocall         přejít do stavu 75
+    pexpr_no_paren     přejít do stavu 76
+    pexpr              přejít do stavu 77
+    expr_or_type       přejít do stavu 316
+    sym                přejít do stavu 117
+    hidden_importsym   přejít do stavu 13
+    name               přejít do stavu 80
+    non_expr_type      přejít do stavu 163
+    convtype           přejít do stavu 82
+    comptype           přejít do stavu 83
+    othertype          přejít do stavu 164
+    recvchantype       přejít do stavu 165
+    structtype         přejít do stavu 85
+    interfacetype      přejít do stavu 86
+    fntype             přejít do stavu 166
+    fnlitdcl           přejít do stavu 89
+    fnliteral          přejít do stavu 90
+    expr_or_type_list  přejít do stavu 317
 
 
-state 201
+State 201
 
   127 pexpr_no_paren: pexpr '.' . sym
   128               | pexpr '.' . '(' expr_or_type ')'
@@ -7805,16 +7804,16 @@ state 201
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
 
-    LNAME  shift, and go to state 9
-    '('    shift, and go to state 318
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '('    posunout a přejít do stavu 318
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym               go to state 319
-    hidden_importsym  go to state 13
+    sym               přejít do stavu 319
+    hidden_importsym  přejít do stavu 13
 
 
-state 202
+State 202
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -7892,61 +7891,61 @@ state 202
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  289 oexpr: .  [':']
+  289 oexpr: . %empty  [':']
   290      | . expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 289 (oexpr)
+    $výchozí  reduce using rule 289 (oexpr)
 
-    expr              go to state 320
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    oexpr             go to state 321
+    expr              přejít do stavu 320
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    oexpr             přejít do stavu 321
 
 
-state 203
+State 203
 
-  260 $@14: .
+  260 $@14: . %empty
   261 non_dcl_stmt: labelname ':' . $@14 stmt
 
-    $default  reduce using rule 260 ($@14)
+    $výchozí  reduce using rule 260 ($@14)
 
-    $@14  go to state 322
+    $@14  přejít do stavu 322
 
 
-state 204
+State 204
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -8023,62 +8022,62 @@ state 204
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 323
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 323
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 205
+State 205
 
   135 pexpr_no_paren: comptype lbrace . start_complit braced_keyval_list '}'
-  139 start_complit: .
+  139 start_complit: . %empty
 
-    $default  reduce using rule 139 (start_complit)
+    $výchozí  reduce using rule 139 (start_complit)
 
-    start_complit  go to state 324
+    start_complit  přejít do stavu 324
 
 
-state 206
+State 206
 
   216 fnliteral: fnlitdcl error .
 
-    $default  reduce using rule 216 (fnliteral)
+    $výchozí  reduce using rule 216 (fnliteral)
 
 
-state 207
+State 207
 
    28 common_dcl: . LVAR vardcl
    29           | . LVAR '(' vardcl_list osemi ')'
@@ -8178,7 +8177,7 @@ state 207
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   215          | fnlitdcl lbrace . stmt_list '}'
   216          | . fnlitdcl error
-  250 stmt: .  [';', '}']
+  250 stmt: . %empty  [';', '}']
   251     | . compound_stmt
   252     | . common_dcl
   253     | . non_dcl_stmt
@@ -8201,78 +8200,78 @@ state 207
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    error       shift, and go to state 325
-    LLITERAL    shift, and go to state 35
-    LBREAK      shift, and go to state 36
-    LCHAN       shift, and go to state 37
-    LCONST      shift, and go to state 38
-    LCONTINUE   shift, and go to state 39
-    LDEFER      shift, and go to state 40
-    LFALL       shift, and go to state 41
-    LFOR        shift, and go to state 42
-    LFUNC       shift, and go to state 113
-    LGO         shift, and go to state 44
-    LGOTO       shift, and go to state 45
-    LIF         shift, and go to state 46
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRETURN     shift, and go to state 49
-    LSELECT     shift, and go to state 50
-    LSTRUCT     shift, and go to state 51
-    LSWITCH     shift, and go to state 52
-    LTYPE       shift, and go to state 53
-    LVAR        shift, and go to state 54
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 326
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    error       posunout a přejít do stavu 325
+    LLITERAL    posunout a přejít do stavu 35
+    LBREAK      posunout a přejít do stavu 36
+    LCHAN       posunout a přejít do stavu 37
+    LCONST      posunout a přejít do stavu 38
+    LCONTINUE   posunout a přejít do stavu 39
+    LDEFER      posunout a přejít do stavu 40
+    LFALL       posunout a přejít do stavu 41
+    LFOR        posunout a přejít do stavu 42
+    LFUNC       posunout a přejít do stavu 113
+    LGO         posunout a přejít do stavu 44
+    LGOTO       posunout a přejít do stavu 45
+    LIF         posunout a přejít do stavu 46
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRETURN     posunout a přejít do stavu 49
+    LSELECT     posunout a přejít do stavu 50
+    LSTRUCT     posunout a přejít do stavu 51
+    LSWITCH     posunout a přejít do stavu 52
+    LTYPE       posunout a přejít do stavu 53
+    LVAR        posunout a přejít do stavu 54
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 326
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
     ';'  reduce using rule 250 (stmt)
     '}'  reduce using rule 250 (stmt)
 
-    common_dcl        go to state 327
-    lconst            go to state 67
-    simple_stmt       go to state 68
-    compound_stmt     go to state 328
-    for_stmt          go to state 69
-    if_stmt           go to state 70
-    switch_stmt       go to state 71
-    select_stmt       go to state 72
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    new_name          go to state 78
-    sym               go to state 79
-    hidden_importsym  go to state 13
-    name              go to state 80
-    labelname         go to state 81
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    stmt              go to state 329
-    non_dcl_stmt      go to state 330
-    stmt_list         go to state 331
-    expr_list         go to state 92
+    common_dcl        přejít do stavu 327
+    lconst            přejít do stavu 67
+    simple_stmt       přejít do stavu 68
+    compound_stmt     přejít do stavu 328
+    for_stmt          přejít do stavu 69
+    if_stmt           přejít do stavu 70
+    switch_stmt       přejít do stavu 71
+    select_stmt       přejít do stavu 72
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    new_name          přejít do stavu 78
+    sym               přejít do stavu 79
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    labelname         přejít do stavu 81
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    stmt              přejít do stavu 329
+    non_dcl_stmt      přejít do stavu 330
+    stmt_list         přejít do stavu 331
+    expr_list         přejít do stavu 92
 
 
-state 208
+State 208
 
    52 simple_stmt: expr_list LCOLAS . expr_list
    92 expr: . uexpr
@@ -8351,46 +8350,46 @@ state 208
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 332
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 332
 
 
-state 209
+State 209
 
    51 simple_stmt: expr_list '=' . expr_list
    92 expr: . uexpr
@@ -8469,46 +8468,46 @@ state 209
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 333
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 333
 
 
-state 210
+State 210
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -8585,52 +8584,52 @@ state 210
   216          | . fnlitdcl error
   276 expr_list: expr_list ',' . expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 334
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 334
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 211
+State 211
 
   309 hidden_pkg_importsym: hidden_importsym .
 
-    $default  reduce using rule 309 (hidden_pkg_importsym)
+    $výchozí  reduce using rule 309 (hidden_pkg_importsym)
 
 
-state 212
+State 212
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -8653,26 +8652,26 @@ state 212
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '='         shift, and go to state 343
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '='         posunout a přejít do stavu 343
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 346
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 346
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 213
+State 213
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -8685,51 +8684,51 @@ state 213
   345 hidden_funarg_list: . hidden_funarg
   346                   | . hidden_funarg_list ',' hidden_funarg
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym                 go to state 350
-    hidden_importsym    go to state 13
-    hidden_funarg       go to state 351
-    hidden_funarg_list  go to state 352
+    sym                 přejít do stavu 350
+    hidden_importsym    přejít do stavu 13
+    hidden_funarg       přejít do stavu 351
+    hidden_funarg_list  přejít do stavu 352
 
 
-state 214
+State 214
 
-  209 fnbody: .  [';']
+  209 fnbody: . %empty  [';']
   210       | . '{' stmt_list '}'
   308 hidden_import: LFUNC hidden_fndcl . fnbody ';'
 
-    '{'  shift, and go to state 251
+    '{'  posunout a přejít do stavu 251
 
-    $default  reduce using rule 209 (fnbody)
+    $výchozí  reduce using rule 209 (fnbody)
 
-    fnbody  go to state 353
+    fnbody  přejít do stavu 353
 
 
-state 215
+State 215
 
   206 hidden_fndcl: hidden_pkg_importsym . '(' ohidden_funarg_list ')' ohidden_funres
 
-    '('  shift, and go to state 354
+    '('  posunout a přejít do stavu 354
 
 
-state 216
+State 216
 
   303 hidden_import: LIMPORT LNAME . LLITERAL ';'
 
-    LLITERAL  shift, and go to state 355
+    LLITERAL  posunout a přejít do stavu 355
 
 
-state 217
+State 217
 
   310 hidden_pkgtype: hidden_pkg_importsym .
 
-    $default  reduce using rule 310 (hidden_pkgtype)
+    $výchozí  reduce using rule 310 (hidden_pkgtype)
 
 
-state 218
+State 218
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -8751,25 +8750,25 @@ state 218
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 356
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 356
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 219
+State 219
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -8791,32 +8790,32 @@ state 219
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 357
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 357
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 220
+State 220
 
    22 import_there: $@2 hidden_import_list '$' '$' .
 
-    $default  reduce using rule 22 (import_there)
+    $výchozí  reduce using rule 22 (import_there)
 
 
-state 221
+State 221
 
    11 import_stmt: . import_here import_package import_there
    12            | . import_here import_there
@@ -8831,35 +8830,35 @@ state 221
   160                 | . '@' LLITERAL '.' '?'
   286 osemi: ';' .  [')']
 
-    LLITERAL  shift, and go to state 27
-    LNAME     shift, and go to state 9
-    '.'       shift, and go to state 29
-    '?'       shift, and go to state 10
-    '@'       shift, and go to state 11
+    LLITERAL  posunout a přejít do stavu 27
+    LNAME     posunout a přejít do stavu 9
+    '.'       posunout a přejít do stavu 29
+    '?'       posunout a přejít do stavu 10
+    '@'       posunout a přejít do stavu 11
 
-    $default  reduce using rule 286 (osemi)
+    $výchozí  reduce using rule 286 (osemi)
 
-    import_stmt       go to state 358
-    import_here       go to state 31
-    sym               go to state 32
-    hidden_importsym  go to state 13
+    import_stmt       přejít do stavu 358
+    import_here       přejít do stavu 31
+    sym               přejít do stavu 32
+    hidden_importsym  přejít do stavu 13
 
 
-state 222
+State 222
 
     9 import: LIMPORT '(' import_stmt_list osemi . ')'
 
-    ')'  shift, and go to state 359
+    ')'  posunout a přejít do stavu 359
 
 
-state 223
+State 223
 
    11 import_stmt: import_here import_package import_there .
 
-    $default  reduce using rule 11 (import_stmt)
+    $výchozí  reduce using rule 11 (import_stmt)
 
 
-state 224
+State 224
 
   149 name_or_type: . ntype
   156 sym: . LNAME
@@ -8899,51 +8898,51 @@ state 224
   245         | . dotdotdot
   246 arg_type_list: . arg_type
   247              | . arg_type_list ',' arg_type
-  248 oarg_type_list_ocomma: .  [')']
+  248 oarg_type_list_ocomma: . %empty  [')']
   249                      | . arg_type_list ocomma
 
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 242
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 242
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 248 (oarg_type_list_ocomma)
+    $výchozí  reduce using rule 248 (oarg_type_list_ocomma)
 
-    name_or_type           go to state 243
-    sym                    go to state 244
-    hidden_importsym       go to state 13
-    name                   go to state 118
-    dotdotdot              go to state 245
-    ntype                  go to state 246
-    dotname                go to state 228
-    othertype              go to state 229
-    ptrtype                go to state 230
-    recvchantype           go to state 231
-    structtype             go to state 85
-    interfacetype          go to state 86
-    fntype                 go to state 232
-    arg_type               go to state 247
-    arg_type_list          go to state 248
-    oarg_type_list_ocomma  go to state 360
+    name_or_type           přejít do stavu 243
+    sym                    přejít do stavu 244
+    hidden_importsym       přejít do stavu 13
+    name                   přejít do stavu 118
+    dotdotdot              přejít do stavu 245
+    ntype                  přejít do stavu 246
+    dotname                přejít do stavu 228
+    othertype              přejít do stavu 229
+    ptrtype                přejít do stavu 230
+    recvchantype           přejít do stavu 231
+    structtype             přejít do stavu 85
+    interfacetype          přejít do stavu 86
+    fntype                 přejít do stavu 232
+    arg_type               přejít do stavu 247
+    arg_type_list          přejít do stavu 248
+    oarg_type_list_ocomma  přejít do stavu 360
 
 
-state 225
+State 225
 
   198 recvchantype: LCOMM . LCHAN ntype
 
-    LCHAN  shift, and go to state 361
+    LCHAN  posunout a přejít do stavu 361
 
 
-state 226
+State 226
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -8975,89 +8974,89 @@ state 226
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 362
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 362
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 227
+State 227
 
   193 othertype: LCHAN LCOMM ntype .
 
-    $default  reduce using rule 193 (othertype)
+    $výchozí  reduce using rule 193 (othertype)
 
 
-state 228
+State 228
 
   169 ntype: dotname .
 
-    $default  reduce using rule 169 (ntype)
+    $výchozí  reduce using rule 169 (ntype)
 
 
-state 229
+State 229
 
   167 ntype: othertype .
 
-    $default  reduce using rule 167 (ntype)
+    $výchozí  reduce using rule 167 (ntype)
 
 
-state 230
+State 230
 
   168 ntype: ptrtype .
 
-    $default  reduce using rule 168 (ntype)
+    $výchozí  reduce using rule 168 (ntype)
 
 
-state 231
+State 231
 
   165 ntype: recvchantype .
 
-    $default  reduce using rule 165 (ntype)
+    $výchozí  reduce using rule 165 (ntype)
 
 
-state 232
+State 232
 
   166 ntype: fntype .
 
-    $default  reduce using rule 166 (ntype)
+    $výchozí  reduce using rule 166 (ntype)
 
 
-state 233
+State 233
 
   197 ptrtype: '*' ntype .
 
-    $default  reduce using rule 197 (ptrtype)
+    $výchozí  reduce using rule 197 (ptrtype)
 
 
-state 234
+State 234
 
   179 non_recvchantype: '(' ntype . ')'
 
-    ')'  shift, and go to state 363
+    ')'  posunout a přejít do stavu 363
 
 
-state 235
+State 235
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -9066,46 +9065,46 @@ state 235
   160                 | . '@' LLITERAL '.' '?'
   189 dotname: name '.' . sym
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym               go to state 364
-    hidden_importsym  go to state 13
+    sym               přejít do stavu 364
+    hidden_importsym  přejít do stavu 13
 
 
-state 236
+State 236
 
   294 osimple_stmt: simple_stmt .
 
-    $default  reduce using rule 294 (osimple_stmt)
+    $výchozí  reduce using rule 294 (osimple_stmt)
 
 
-state 237
+State 237
 
    71 for_header: range_stmt .
 
-    $default  reduce using rule 71 (for_header)
+    $výchozí  reduce using rule 71 (for_header)
 
 
-state 238
+State 238
 
    66 loop_body: . LBODY $@5 stmt_list '}'
    72 for_body: for_header . loop_body
 
-    LBODY  shift, and go to state 365
+    LBODY  posunout a přejít do stavu 365
 
-    loop_body  go to state 366
+    loop_body  přejít do stavu 366
 
 
-state 239
+State 239
 
    74 for_stmt: LFOR $@6 for_body .
 
-    $default  reduce using rule 74 (for_stmt)
+    $výchozí  reduce using rule 74 (for_stmt)
 
 
-state 240
+State 240
 
    51 simple_stmt: expr_list . '=' expr_list
    52            | expr_list . LCOLAS expr_list
@@ -9113,22 +9112,22 @@ state 240
    68           | expr_list . LCOLAS LRANGE expr
   276 expr_list: expr_list . ',' expr
 
-    LCOLAS  shift, and go to state 367
-    '='     shift, and go to state 368
-    ','     shift, and go to state 210
+    LCOLAS  posunout a přejít do stavu 367
+    '='     posunout a přejít do stavu 368
+    ','     posunout a přejít do stavu 210
 
 
-state 241
+State 241
 
    69 for_header: osimple_stmt . ';' osimple_stmt ';' osimple_stmt
    70           | osimple_stmt .  [LBODY]
 
-    ';'  shift, and go to state 369
+    ';'  posunout a přejít do stavu 369
 
-    $default  reduce using rule 70 (for_header)
+    $výchozí  reduce using rule 70 (for_header)
 
 
-state 242
+State 242
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -9161,42 +9160,42 @@ state 242
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 163 (dotdotdot)
+    $výchozí  reduce using rule 163 (dotdotdot)
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 370
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 370
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 243
+State 243
 
   242 arg_type: name_or_type .
 
-    $default  reduce using rule 242 (arg_type)
+    $výchozí  reduce using rule 242 (arg_type)
 
 
-state 244
+State 244
 
   149 name_or_type: . ntype
   156 sym: . LNAME
@@ -9233,81 +9232,81 @@ state 244
   243 arg_type: sym . name_or_type
   244         | sym . dotdotdot
 
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 242
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 242
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 161 (name)
+    $výchozí  reduce using rule 161 (name)
 
-    name_or_type      go to state 371
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    dotdotdot         go to state 372
-    ntype             go to state 246
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    name_or_type      přejít do stavu 371
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    dotdotdot         přejít do stavu 372
+    ntype             přejít do stavu 246
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 245
+State 245
 
   245 arg_type: dotdotdot .
 
-    $default  reduce using rule 245 (arg_type)
+    $výchozí  reduce using rule 245 (arg_type)
 
 
-state 246
+State 246
 
   149 name_or_type: ntype .
 
-    $default  reduce using rule 149 (name_or_type)
+    $výchozí  reduce using rule 149 (name_or_type)
 
 
-state 247
+State 247
 
   246 arg_type_list: arg_type .
 
-    $default  reduce using rule 246 (arg_type_list)
+    $výchozí  reduce using rule 246 (arg_type_list)
 
 
-state 248
+State 248
 
   247 arg_type_list: arg_type_list . ',' arg_type
   249 oarg_type_list_ocomma: arg_type_list . ocomma
-  287 ocomma: .  [')']
+  287 ocomma: . %empty  [')']
   288       | . ','
 
-    ','  shift, and go to state 373
+    ','  posunout a přejít do stavu 373
 
-    $default  reduce using rule 287 (ocomma)
+    $výchozí  reduce using rule 287 (ocomma)
 
-    ocomma  go to state 374
+    ocomma  přejít do stavu 374
 
 
-state 249
+State 249
 
   205 fndcl: '(' oarg_type_list_ocomma . ')' sym '(' oarg_type_list_ocomma ')' fnres
   208 fntype: LFUNC '(' oarg_type_list_ocomma . ')' fnres
 
-    ')'  shift, and go to state 375
+    ')'  posunout a přejít do stavu 375
 
 
-state 250
+State 250
 
   149 name_or_type: . ntype
   156 sym: . LNAME
@@ -9347,44 +9346,44 @@ state 250
   245         | . dotdotdot
   246 arg_type_list: . arg_type
   247              | . arg_type_list ',' arg_type
-  248 oarg_type_list_ocomma: .  [')']
+  248 oarg_type_list_ocomma: . %empty  [')']
   249                      | . arg_type_list ocomma
 
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 242
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 242
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 248 (oarg_type_list_ocomma)
+    $výchozí  reduce using rule 248 (oarg_type_list_ocomma)
 
-    name_or_type           go to state 243
-    sym                    go to state 244
-    hidden_importsym       go to state 13
-    name                   go to state 118
-    dotdotdot              go to state 245
-    ntype                  go to state 246
-    dotname                go to state 228
-    othertype              go to state 229
-    ptrtype                go to state 230
-    recvchantype           go to state 231
-    structtype             go to state 85
-    interfacetype          go to state 86
-    fntype                 go to state 232
-    arg_type               go to state 247
-    arg_type_list          go to state 248
-    oarg_type_list_ocomma  go to state 376
+    name_or_type           přejít do stavu 243
+    sym                    přejít do stavu 244
+    hidden_importsym       přejít do stavu 13
+    name                   přejít do stavu 118
+    dotdotdot              přejít do stavu 245
+    ntype                  přejít do stavu 246
+    dotname                přejít do stavu 228
+    othertype              přejít do stavu 229
+    ptrtype                přejít do stavu 230
+    recvchantype           přejít do stavu 231
+    structtype             přejít do stavu 85
+    interfacetype          přejít do stavu 86
+    fntype                 přejít do stavu 232
+    arg_type               přejít do stavu 247
+    arg_type_list          přejít do stavu 248
+    oarg_type_list_ocomma  přejít do stavu 376
 
 
-state 251
+State 251
 
    28 common_dcl: . LVAR vardcl
    29           | . LVAR '(' vardcl_list osemi ')'
@@ -9484,7 +9483,7 @@ state 251
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  250 stmt: .  [';', '}']
+  250 stmt: . %empty  [';', '}']
   251     | . compound_stmt
   252     | . common_dcl
   253     | . non_dcl_stmt
@@ -9507,193 +9506,193 @@ state 251
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    error       shift, and go to state 325
-    LLITERAL    shift, and go to state 35
-    LBREAK      shift, and go to state 36
-    LCHAN       shift, and go to state 37
-    LCONST      shift, and go to state 38
-    LCONTINUE   shift, and go to state 39
-    LDEFER      shift, and go to state 40
-    LFALL       shift, and go to state 41
-    LFOR        shift, and go to state 42
-    LFUNC       shift, and go to state 113
-    LGO         shift, and go to state 44
-    LGOTO       shift, and go to state 45
-    LIF         shift, and go to state 46
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRETURN     shift, and go to state 49
-    LSELECT     shift, and go to state 50
-    LSTRUCT     shift, and go to state 51
-    LSWITCH     shift, and go to state 52
-    LTYPE       shift, and go to state 53
-    LVAR        shift, and go to state 54
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 326
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    error       posunout a přejít do stavu 325
+    LLITERAL    posunout a přejít do stavu 35
+    LBREAK      posunout a přejít do stavu 36
+    LCHAN       posunout a přejít do stavu 37
+    LCONST      posunout a přejít do stavu 38
+    LCONTINUE   posunout a přejít do stavu 39
+    LDEFER      posunout a přejít do stavu 40
+    LFALL       posunout a přejít do stavu 41
+    LFOR        posunout a přejít do stavu 42
+    LFUNC       posunout a přejít do stavu 113
+    LGO         posunout a přejít do stavu 44
+    LGOTO       posunout a přejít do stavu 45
+    LIF         posunout a přejít do stavu 46
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRETURN     posunout a přejít do stavu 49
+    LSELECT     posunout a přejít do stavu 50
+    LSTRUCT     posunout a přejít do stavu 51
+    LSWITCH     posunout a přejít do stavu 52
+    LTYPE       posunout a přejít do stavu 53
+    LVAR        posunout a přejít do stavu 54
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 326
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
     ';'  reduce using rule 250 (stmt)
     '}'  reduce using rule 250 (stmt)
 
-    common_dcl        go to state 327
-    lconst            go to state 67
-    simple_stmt       go to state 68
-    compound_stmt     go to state 328
-    for_stmt          go to state 69
-    if_stmt           go to state 70
-    switch_stmt       go to state 71
-    select_stmt       go to state 72
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    new_name          go to state 78
-    sym               go to state 79
-    hidden_importsym  go to state 13
-    name              go to state 80
-    labelname         go to state 81
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    stmt              go to state 329
-    non_dcl_stmt      go to state 330
-    stmt_list         go to state 377
-    expr_list         go to state 92
+    common_dcl        přejít do stavu 327
+    lconst            přejít do stavu 67
+    simple_stmt       přejít do stavu 68
+    compound_stmt     přejít do stavu 328
+    for_stmt          přejít do stavu 69
+    if_stmt           přejít do stavu 70
+    switch_stmt       přejít do stavu 71
+    select_stmt       přejít do stavu 72
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    new_name          přejít do stavu 78
+    sym               přejít do stavu 79
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    labelname         přejít do stavu 81
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    stmt              přejít do stavu 329
+    non_dcl_stmt      přejít do stavu 330
+    stmt_list         přejít do stavu 377
+    expr_list         přejít do stavu 92
 
 
-state 252
+State 252
 
   203 xfndcl: LFUNC fndcl fnbody .
 
-    $default  reduce using rule 203 (xfndcl)
+    $výchozí  reduce using rule 203 (xfndcl)
 
 
-state 253
+State 253
 
-   78 $@8: .
+   78 $@8: . %empty
    80 if_stmt: LIF $@7 if_header . $@8 loop_body $@9 elseif_list else
 
-    $default  reduce using rule 78 ($@8)
+    $výchozí  reduce using rule 78 ($@8)
 
-    $@8  go to state 378
+    $@8  přejít do stavu 378
 
 
-state 254
+State 254
 
    75 if_header: osimple_stmt .  [LBODY]
    76          | osimple_stmt . ';' osimple_stmt
 
-    ';'  shift, and go to state 379
+    ';'  posunout a přejít do stavu 379
 
-    $default  reduce using rule 75 (if_header)
+    $výchozí  reduce using rule 75 (if_header)
 
 
-state 255
+State 255
 
   156 sym: LNAME .  [LCHAN, LFUNC, LINTERFACE, LMAP, LNAME, LSTRUCT, LCOMM, '*', '(', '[', '?', '@', ',']
   235 packname: LNAME .  [LLITERAL, ';', '}']
   236         | LNAME . '.' sym
 
-    '.'  shift, and go to state 380
+    '.'  posunout a přejít do stavu 380
 
-    LLITERAL  reduce using rule 235 (packname)
-    ';'       reduce using rule 235 (packname)
-    '}'       reduce using rule 235 (packname)
-    $default  reduce using rule 156 (sym)
+    LLITERAL    reduce using rule 235 (packname)
+    ';'         reduce using rule 235 (packname)
+    '}'         reduce using rule 235 (packname)
+    $výchozí  reduce using rule 156 (sym)
 
 
-state 256
+State 256
 
   235 packname: . LNAME
   236         | . LNAME '.' sym
   240 interfacedcl: '(' . packname ')'
 
-    LNAME  shift, and go to state 381
+    LNAME  posunout a přejít do stavu 381
 
-    packname  go to state 382
+    packname  přejít do stavu 382
 
 
-state 257
+State 257
 
   202 interfacetype: LINTERFACE lbrace '}' .
 
-    $default  reduce using rule 202 (interfacetype)
+    $výchozí  reduce using rule 202 (interfacetype)
 
 
-state 258
+State 258
 
   238 interfacedcl: new_name . indcl
   241 indcl: . '(' oarg_type_list_ocomma ')' fnres
 
-    '('  shift, and go to state 383
+    '('  posunout a přejít do stavu 383
 
-    indcl  go to state 384
+    indcl  přejít do stavu 384
 
 
-state 259
+State 259
 
   201 interfacetype: LINTERFACE lbrace interfacedcl_list . osemi '}'
   228 interfacedcl_list: interfacedcl_list . ';' interfacedcl
-  285 osemi: .  ['}']
+  285 osemi: . %empty  ['}']
   286      | . ';'
 
-    ';'  shift, and go to state 385
+    ';'  posunout a přejít do stavu 385
 
-    $default  reduce using rule 285 (osemi)
+    $výchozí  reduce using rule 285 (osemi)
 
-    osemi  go to state 386
+    osemi  přejít do stavu 386
 
 
-state 260
+State 260
 
   239 interfacedcl: packname .
 
-    $default  reduce using rule 239 (interfacedcl)
+    $výchozí  reduce using rule 239 (interfacedcl)
 
 
-state 261
+State 261
 
   227 interfacedcl_list: interfacedcl .
 
-    $default  reduce using rule 227 (interfacedcl_list)
+    $výchozí  reduce using rule 227 (interfacedcl_list)
 
 
-state 262
+State 262
 
   194 othertype: LMAP '[' ntype . ']' ntype
 
-    ']'  shift, and go to state 387
+    ']'  posunout a přejít do stavu 387
 
 
-state 263
+State 263
 
-   63 caseblock_list: .
+   63 caseblock_list: . %empty
    64               | . caseblock_list caseblock
    91 select_stmt: LSELECT $@13 LBODY . caseblock_list '}'
 
-    $default  reduce using rule 63 (caseblock_list)
+    $výchozí  reduce using rule 63 (caseblock_list)
 
-    caseblock_list  go to state 388
+    caseblock_list  přejít do stavu 388
 
 
-state 264
+State 264
 
   232 structdcl: '*' . embed oliteral
   234          | '*' . '(' embed ')' oliteral
@@ -9701,14 +9700,14 @@ state 264
   236         | . LNAME '.' sym
   237 embed: . packname
 
-    LNAME  shift, and go to state 381
-    '('    shift, and go to state 389
+    LNAME  posunout a přejít do stavu 381
+    '('    posunout a přejít do stavu 389
 
-    packname  go to state 270
-    embed     go to state 390
+    packname  přejít do stavu 270
+    embed     přejít do stavu 390
 
 
-state 265
+State 265
 
   231 structdcl: '(' . embed ')' oliteral
   233          | '(' . '*' embed ')' oliteral
@@ -9716,69 +9715,69 @@ state 265
   236         | . LNAME '.' sym
   237 embed: . packname
 
-    LNAME  shift, and go to state 381
-    '*'    shift, and go to state 391
+    LNAME  posunout a přejít do stavu 381
+    '*'    posunout a přejít do stavu 391
 
-    packname  go to state 270
-    embed     go to state 392
+    packname  přejít do stavu 270
+    embed     přejít do stavu 392
 
 
-state 266
+State 266
 
   200 structtype: LSTRUCT lbrace '}' .
 
-    $default  reduce using rule 200 (structtype)
+    $výchozí  reduce using rule 200 (structtype)
 
 
-state 267
+State 267
 
   271 new_name_list: new_name .
 
-    $default  reduce using rule 271 (new_name_list)
+    $výchozí  reduce using rule 271 (new_name_list)
 
 
-state 268
+State 268
 
   199 structtype: LSTRUCT lbrace structdcl_list . osemi '}'
   226 structdcl_list: structdcl_list . ';' structdcl
-  285 osemi: .  ['}']
+  285 osemi: . %empty  ['}']
   286      | . ';'
 
-    ';'  shift, and go to state 393
+    ';'  posunout a přejít do stavu 393
 
-    $default  reduce using rule 285 (osemi)
+    $výchozí  reduce using rule 285 (osemi)
 
-    osemi  go to state 394
+    osemi  přejít do stavu 394
 
 
-state 269
+State 269
 
   225 structdcl_list: structdcl .
 
-    $default  reduce using rule 225 (structdcl_list)
+    $výchozí  reduce using rule 225 (structdcl_list)
 
 
-state 270
+State 270
 
   237 embed: packname .
 
-    $default  reduce using rule 237 (embed)
+    $výchozí  reduce using rule 237 (embed)
 
 
-state 271
+State 271
 
   230 structdcl: embed . oliteral
-  301 oliteral: .  [';', '}']
+  301 oliteral: . %empty  [';', '}']
   302         | . LLITERAL
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 396
+    oliteral  přejít do stavu 396
 
 
-state 272
+State 272
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -9811,107 +9810,107 @@ state 272
   229 structdcl: new_name_list . ntype oliteral
   272 new_name_list: new_name_list . ',' new_name
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
-    ','         shift, and go to state 397
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
+    ','         posunout a přejít do stavu 397
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 398
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 398
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 273
+State 273
 
-   88 $@12: .
+   88 $@12: . %empty
    89 switch_stmt: LSWITCH $@11 if_header . $@12 LBODY caseblock_list '}'
 
-    $default  reduce using rule 88 ($@12)
+    $výchozí  reduce using rule 88 ($@12)
 
-    $@12  go to state 399
+    $@12  přejít do stavu 399
 
 
-state 274
+State 274
 
    37 common_dcl: LTYPE '(' ')' .
 
-    $default  reduce using rule 37 (common_dcl)
+    $výchozí  reduce using rule 37 (common_dcl)
 
 
-state 275
+State 275
 
   223 typedcl_list: typedcl .
 
-    $default  reduce using rule 223 (typedcl_list)
+    $výchozí  reduce using rule 223 (typedcl_list)
 
 
-state 276
+State 276
 
    36 common_dcl: LTYPE '(' typedcl_list . osemi ')'
   224 typedcl_list: typedcl_list . ';' typedcl
-  285 osemi: .  [')']
+  285 osemi: . %empty  [')']
   286      | . ';'
 
-    ';'  shift, and go to state 400
+    ';'  posunout a přejít do stavu 400
 
-    $default  reduce using rule 285 (osemi)
+    $výchozí  reduce using rule 285 (osemi)
 
-    osemi  go to state 401
+    osemi  přejít do stavu 401
 
 
-state 277
+State 277
 
    48 typedcl: typedclname ntype .
 
-    $default  reduce using rule 48 (typedcl)
+    $výchozí  reduce using rule 48 (typedcl)
 
 
-state 278
+State 278
 
    30 common_dcl: LVAR '(' ')' .
 
-    $default  reduce using rule 30 (common_dcl)
+    $výchozí  reduce using rule 30 (common_dcl)
 
 
-state 279
+State 279
 
   219 vardcl_list: vardcl .
 
-    $default  reduce using rule 219 (vardcl_list)
+    $výchozí  reduce using rule 219 (vardcl_list)
 
 
-state 280
+State 280
 
    29 common_dcl: LVAR '(' vardcl_list . osemi ')'
   220 vardcl_list: vardcl_list . ';' vardcl
-  285 osemi: .  [')']
+  285 osemi: . %empty  [')']
   286      | . ';'
 
-    ';'  shift, and go to state 402
+    ';'  posunout a přejít do stavu 402
 
-    $default  reduce using rule 285 (osemi)
+    $výchozí  reduce using rule 285 (osemi)
 
-    osemi  go to state 403
+    osemi  přejít do stavu 403
 
 
-state 281
+State 281
 
    41 vardcl: dcl_name_list '=' . expr_list
    92 expr: . uexpr
@@ -9990,46 +9989,46 @@ state 281
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 404
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 404
 
 
-state 282
+State 282
 
   153 dcl_name: . sym
   156 sym: . LNAME
@@ -10039,26 +10038,26 @@ state 282
   160                 | . '@' LLITERAL '.' '?'
   274 dcl_name_list: dcl_name_list ',' . dcl_name
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    dcl_name          go to state 405
-    sym               go to state 151
-    hidden_importsym  go to state 13
+    dcl_name          přejít do stavu 405
+    sym               přejít do stavu 151
+    hidden_importsym  přejít do stavu 13
 
 
-state 283
+State 283
 
    39 vardcl: dcl_name_list ntype .  [LCASE, LDEFAULT, ')', ';', '}']
    40       | dcl_name_list ntype . '=' expr_list
 
-    '='  shift, and go to state 406
+    '='  posunout a přejít do stavu 406
 
-    $default  reduce using rule 39 (vardcl)
+    $výchozí  reduce using rule 39 (vardcl)
 
 
-state 284
+State 284
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -10097,51 +10096,51 @@ state 284
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 407
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 408
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 407
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 408
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 409
-    non_recvchantype  go to state 119
-    dotname           go to state 410
-    othertype         go to state 411
-    ptrtype           go to state 412
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 413
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 409
+    non_recvchantype  přejít do stavu 119
+    dotname           přejít do stavu 410
+    othertype         přejít do stavu 411
+    ptrtype           přejít do stavu 412
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 413
 
 
-state 285
+State 285
 
   174 non_expr_type: '*' non_expr_type .
 
-    $default  reduce using rule 174 (non_expr_type)
+    $výchozí  reduce using rule 174 (non_expr_type)
 
 
-state 286
+State 286
 
   137 pexpr_no_paren: '(' expr_or_type ')' . '{' start_complit braced_keyval_list '}'
   146 pexpr: '(' expr_or_type ')' .  [LASOP, LCOLAS, LCASE, LDDD, LDEFAULT, LANDAND, LANDNOT, LBODY, LCOMM, LDEC, LEQ, LGE, LGT, LINC, LLE, LLSH, LLT, LNE, LOROR, LRSH, '+', '-', '|', '^', '*', '/', '%', '&', '(', ')', ';', '.', '=', ':', '}', '[', ']', ',']
 
-    '{'  shift, and go to state 414
+    '{'  posunout a přejít do stavu 414
 
-    $default  reduce using rule 146 (pexpr)
+    $výchozí  reduce using rule 146 (pexpr)
 
 
-state 287
+State 287
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -10173,33 +10172,33 @@ state 287
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 415
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 415
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 288
+State 288
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -10231,54 +10230,54 @@ state 288
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 416
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 416
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 289
+State 289
 
    34 common_dcl: lconst '(' ')' .
 
-    $default  reduce using rule 34 (common_dcl)
+    $výchozí  reduce using rule 34 (common_dcl)
 
 
-state 290
+State 290
 
    32 common_dcl: lconst '(' constdcl . osemi ')'
    33           | lconst '(' constdcl . ';' constdcl_list osemi ')'
-  285 osemi: .  [')']
+  285 osemi: . %empty  [')']
   286      | . ';'
 
-    ';'  shift, and go to state 417
+    ';'  posunout a přejít do stavu 417
 
-    $default  reduce using rule 285 (osemi)
+    $výchozí  reduce using rule 285 (osemi)
 
-    osemi  go to state 418
+    osemi  přejít do stavu 418
 
 
-state 291
+State 291
 
    43 constdcl: dcl_name_list '=' . expr_list
    92 expr: . uexpr
@@ -10357,53 +10356,53 @@ state 291
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 419
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 419
 
 
-state 292
+State 292
 
    42 constdcl: dcl_name_list ntype . '=' expr_list
 
-    '='  shift, and go to state 420
+    '='  posunout a přejít do stavu 420
 
 
-state 293
+State 293
 
    50 simple_stmt: expr LASOP expr .  [LCASE, LDEFAULT, LBODY, ';', '}']
    93 expr: expr . LOROR expr
@@ -10427,31 +10426,31 @@ state 293
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 50 (simple_stmt)
+    $výchozí  reduce using rule 50 (simple_stmt)
 
 
-state 294
+State 294
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10475,25 +10474,25 @@ state 294
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 94 (expr)
+    $výchozí  reduce using rule 94 (expr)
 
     Conflict between rule 94 and token LANDAND resolved as reduce (%left LANDAND).
     Conflict between rule 94 and token LANDNOT resolved as shift (LANDAND < LANDNOT).
@@ -10517,7 +10516,7 @@ state 294
     Conflict between rule 94 and token '&' resolved as shift (LANDAND < '&').
 
 
-state 295
+State 295
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10541,7 +10540,7 @@ state 295
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    $default  reduce using rule 109 (expr)
+    $výchozí  reduce using rule 109 (expr)
 
     Conflict between rule 109 and token LANDAND resolved as reduce (LANDAND < LANDNOT).
     Conflict between rule 109 and token LANDNOT resolved as reduce (%left LANDNOT).
@@ -10565,7 +10564,7 @@ state 295
     Conflict between rule 109 and token '&' resolved as reduce (%left '&').
 
 
-state 296
+State 296
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10589,27 +10588,27 @@ state 296
   112     | expr . LCOMM expr
   112     | expr LCOMM expr .  [LASOP, LCOLAS, LCASE, LDDD, LDEFAULT, LBODY, LCOMM, LDEC, LINC, ')', ';', '=', ':', '}', ']', ',']
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 112 (expr)
+    $výchozí  reduce using rule 112 (expr)
 
     Conflict between rule 112 and token LANDAND resolved as shift (LCOMM < LANDAND).
     Conflict between rule 112 and token LANDNOT resolved as shift (LCOMM < LANDNOT).
@@ -10633,7 +10632,7 @@ state 296
     Conflict between rule 112 and token '&' resolved as shift (LCOMM < '&').
 
 
-state 297
+State 297
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10657,19 +10656,19 @@ state 297
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 95 (expr)
+    $výchozí  reduce using rule 95 (expr)
 
     Conflict between rule 95 and token LANDAND resolved as reduce (LANDAND < LEQ).
     Conflict between rule 95 and token LANDNOT resolved as shift (LEQ < LANDNOT).
@@ -10693,7 +10692,7 @@ state 297
     Conflict between rule 95 and token '&' resolved as shift (LEQ < '&').
 
 
-state 298
+State 298
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10717,19 +10716,19 @@ state 298
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 99 (expr)
+    $výchozí  reduce using rule 99 (expr)
 
     Conflict between rule 99 and token LANDAND resolved as reduce (LANDAND < LGE).
     Conflict between rule 99 and token LANDNOT resolved as shift (LGE < LANDNOT).
@@ -10753,7 +10752,7 @@ state 298
     Conflict between rule 99 and token '&' resolved as shift (LGE < '&').
 
 
-state 299
+State 299
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10777,19 +10776,19 @@ state 299
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 100 (expr)
+    $výchozí  reduce using rule 100 (expr)
 
     Conflict between rule 100 and token LANDAND resolved as reduce (LANDAND < LGT).
     Conflict between rule 100 and token LANDNOT resolved as shift (LGT < LANDNOT).
@@ -10813,7 +10812,7 @@ state 299
     Conflict between rule 100 and token '&' resolved as shift (LGT < '&').
 
 
-state 300
+State 300
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10837,19 +10836,19 @@ state 300
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 98 (expr)
+    $výchozí  reduce using rule 98 (expr)
 
     Conflict between rule 98 and token LANDAND resolved as reduce (LANDAND < LLE).
     Conflict between rule 98 and token LANDNOT resolved as shift (LLE < LANDNOT).
@@ -10873,7 +10872,7 @@ state 300
     Conflict between rule 98 and token '&' resolved as shift (LLE < '&').
 
 
-state 301
+State 301
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10897,7 +10896,7 @@ state 301
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    $default  reduce using rule 110 (expr)
+    $výchozí  reduce using rule 110 (expr)
 
     Conflict between rule 110 and token LANDAND resolved as reduce (LANDAND < LLSH).
     Conflict between rule 110 and token LANDNOT resolved as reduce (%left LANDNOT).
@@ -10921,7 +10920,7 @@ state 301
     Conflict between rule 110 and token '&' resolved as reduce (%left '&').
 
 
-state 302
+State 302
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -10945,19 +10944,19 @@ state 302
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 97 (expr)
+    $výchozí  reduce using rule 97 (expr)
 
     Conflict between rule 97 and token LANDAND resolved as reduce (LANDAND < LLT).
     Conflict between rule 97 and token LANDNOT resolved as shift (LLT < LANDNOT).
@@ -10981,7 +10980,7 @@ state 302
     Conflict between rule 97 and token '&' resolved as shift (LLT < '&').
 
 
-state 303
+State 303
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11005,19 +11004,19 @@ state 303
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 96 (expr)
+    $výchozí  reduce using rule 96 (expr)
 
     Conflict between rule 96 and token LANDAND resolved as reduce (LANDAND < LNE).
     Conflict between rule 96 and token LANDNOT resolved as shift (LNE < LANDNOT).
@@ -11041,7 +11040,7 @@ state 303
     Conflict between rule 96 and token '&' resolved as shift (LNE < '&').
 
 
-state 304
+State 304
 
    93 expr: expr . LOROR expr
    93     | expr LOROR expr .  [LASOP, LCOLAS, LCASE, LDDD, LDEFAULT, LBODY, LCOMM, LDEC, LINC, LOROR, ')', ';', '=', ':', '}', ']', ',']
@@ -11065,26 +11064,26 @@ state 304
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 93 (expr)
+    $výchozí  reduce using rule 93 (expr)
 
     Conflict between rule 93 and token LANDAND resolved as shift (LOROR < LANDAND).
     Conflict between rule 93 and token LANDNOT resolved as shift (LOROR < LANDNOT).
@@ -11108,7 +11107,7 @@ state 304
     Conflict between rule 93 and token '&' resolved as shift (LOROR < '&').
 
 
-state 305
+State 305
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11132,7 +11131,7 @@ state 305
   111     | expr LRSH expr .  [LASOP, LCOLAS, LCASE, LDDD, LDEFAULT, LANDAND, LANDNOT, LBODY, LCOMM, LDEC, LEQ, LGE, LGT, LINC, LLE, LLSH, LLT, LNE, LOROR, LRSH, '+', '-', '|', '^', '*', '/', '%', '&', ')', ';', '=', ':', '}', ']', ',']
   112     | expr . LCOMM expr
 
-    $default  reduce using rule 111 (expr)
+    $výchozí  reduce using rule 111 (expr)
 
     Conflict between rule 111 and token LANDAND resolved as reduce (LANDAND < LRSH).
     Conflict between rule 111 and token LANDNOT resolved as reduce (%left LANDNOT).
@@ -11156,7 +11155,7 @@ state 305
     Conflict between rule 111 and token '&' resolved as reduce (%left '&').
 
 
-state 306
+State 306
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11180,15 +11179,15 @@ state 306
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 101 (expr)
+    $výchozí  reduce using rule 101 (expr)
 
     Conflict between rule 101 and token LANDAND resolved as reduce (LANDAND < '+').
     Conflict between rule 101 and token LANDNOT resolved as shift ('+' < LANDNOT).
@@ -11212,7 +11211,7 @@ state 306
     Conflict between rule 101 and token '&' resolved as shift ('+' < '&').
 
 
-state 307
+State 307
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11236,15 +11235,15 @@ state 307
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 102 (expr)
+    $výchozí  reduce using rule 102 (expr)
 
     Conflict between rule 102 and token LANDAND resolved as reduce (LANDAND < '-').
     Conflict between rule 102 and token LANDNOT resolved as shift ('-' < LANDNOT).
@@ -11268,7 +11267,7 @@ state 307
     Conflict between rule 102 and token '&' resolved as shift ('-' < '&').
 
 
-state 308
+State 308
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11292,15 +11291,15 @@ state 308
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 103 (expr)
+    $výchozí  reduce using rule 103 (expr)
 
     Conflict between rule 103 and token LANDAND resolved as reduce (LANDAND < '|').
     Conflict between rule 103 and token LANDNOT resolved as shift ('|' < LANDNOT).
@@ -11324,7 +11323,7 @@ state 308
     Conflict between rule 103 and token '&' resolved as shift ('|' < '&').
 
 
-state 309
+State 309
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11348,15 +11347,15 @@ state 309
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDNOT  shift, and go to state 178
-    LLSH     shift, and go to state 186
-    LRSH     shift, and go to state 190
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDNOT  posunout a přejít do stavu 178
+    LLSH     posunout a přejít do stavu 186
+    LRSH     posunout a přejít do stavu 190
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 104 (expr)
+    $výchozí  reduce using rule 104 (expr)
 
     Conflict between rule 104 and token LANDAND resolved as reduce (LANDAND < '^').
     Conflict between rule 104 and token LANDNOT resolved as shift ('^' < LANDNOT).
@@ -11380,7 +11379,7 @@ state 309
     Conflict between rule 104 and token '&' resolved as shift ('^' < '&').
 
 
-state 310
+State 310
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11404,7 +11403,7 @@ state 310
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    $default  reduce using rule 105 (expr)
+    $výchozí  reduce using rule 105 (expr)
 
     Conflict between rule 105 and token LANDAND resolved as reduce (LANDAND < '*').
     Conflict between rule 105 and token LANDNOT resolved as reduce (%left LANDNOT).
@@ -11428,7 +11427,7 @@ state 310
     Conflict between rule 105 and token '&' resolved as reduce (%left '&').
 
 
-state 311
+State 311
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11452,7 +11451,7 @@ state 311
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    $default  reduce using rule 106 (expr)
+    $výchozí  reduce using rule 106 (expr)
 
     Conflict between rule 106 and token LANDAND resolved as reduce (LANDAND < '/').
     Conflict between rule 106 and token LANDNOT resolved as reduce (%left LANDNOT).
@@ -11476,7 +11475,7 @@ state 311
     Conflict between rule 106 and token '&' resolved as reduce (%left '&').
 
 
-state 312
+State 312
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11500,7 +11499,7 @@ state 312
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    $default  reduce using rule 107 (expr)
+    $výchozí  reduce using rule 107 (expr)
 
     Conflict between rule 107 and token LANDAND resolved as reduce (LANDAND < '%').
     Conflict between rule 107 and token LANDNOT resolved as reduce (%left LANDNOT).
@@ -11524,7 +11523,7 @@ state 312
     Conflict between rule 107 and token '&' resolved as reduce (%left '&').
 
 
-state 313
+State 313
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11548,7 +11547,7 @@ state 313
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    $default  reduce using rule 108 (expr)
+    $výchozí  reduce using rule 108 (expr)
 
     Conflict between rule 108 and token LANDAND resolved as reduce (LANDAND < '&').
     Conflict between rule 108 and token LANDNOT resolved as reduce (%left LANDNOT).
@@ -11572,7 +11571,7 @@ state 313
     Conflict between rule 108 and token '&' resolved as reduce (%left '&').
 
 
-state 314
+State 314
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -11655,85 +11654,85 @@ state 314
   280            | . bare_complitexpr
   281            | . keyval_list ',' keyval
   282            | . keyval_list ',' bare_complitexpr
-  283 braced_keyval_list: .  ['}']
+  283 braced_keyval_list: . %empty  ['}']
   284                   | . keyval_list ocomma
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 421
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 421
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 283 (braced_keyval_list)
+    $výchozí  reduce using rule 283 (braced_keyval_list)
 
-    expr                go to state 422
-    uexpr               go to state 74
-    pseudocall          go to state 75
-    pexpr_no_paren      go to state 76
-    keyval              go to state 423
-    bare_complitexpr    go to state 424
-    pexpr               go to state 77
-    sym                 go to state 117
-    hidden_importsym    go to state 13
-    name                go to state 80
-    convtype            go to state 82
-    comptype            go to state 83
-    othertype           go to state 84
-    structtype          go to state 85
-    interfacetype       go to state 86
-    fntype              go to state 88
-    fnlitdcl            go to state 89
-    fnliteral           go to state 90
-    keyval_list         go to state 425
-    braced_keyval_list  go to state 426
+    expr                přejít do stavu 422
+    uexpr               přejít do stavu 74
+    pseudocall          přejít do stavu 75
+    pexpr_no_paren      přejít do stavu 76
+    keyval              přejít do stavu 423
+    bare_complitexpr    přejít do stavu 424
+    pexpr               přejít do stavu 77
+    sym                 přejít do stavu 117
+    hidden_importsym    přejít do stavu 13
+    name                přejít do stavu 80
+    convtype            přejít do stavu 82
+    comptype            přejít do stavu 83
+    othertype           přejít do stavu 84
+    structtype          přejít do stavu 85
+    interfacetype       přejít do stavu 86
+    fntype              přejít do stavu 88
+    fnlitdcl            přejít do stavu 89
+    fnliteral           přejít do stavu 90
+    keyval_list         přejít do stavu 425
+    braced_keyval_list  přejít do stavu 426
 
 
-state 315
+State 315
 
   122 pseudocall: pexpr '(' ')' .
 
-    $default  reduce using rule 122 (pseudocall)
+    $výchozí  reduce using rule 122 (pseudocall)
 
 
-state 316
+State 316
 
   277 expr_or_type_list: expr_or_type .
 
-    $default  reduce using rule 277 (expr_or_type_list)
+    $výchozí  reduce using rule 277 (expr_or_type_list)
 
 
-state 317
+State 317
 
   123 pseudocall: pexpr '(' expr_or_type_list . ocomma ')'
   124           | pexpr '(' expr_or_type_list . LDDD ocomma ')'
   278 expr_or_type_list: expr_or_type_list . ',' expr_or_type
-  287 ocomma: .  [')']
+  287 ocomma: . %empty  [')']
   288       | . ','
 
-    LDDD  shift, and go to state 427
-    ','   shift, and go to state 428
+    LDDD  posunout a přejít do stavu 427
+    ','   posunout a přejít do stavu 428
 
-    $default  reduce using rule 287 (ocomma)
+    $výchozí  reduce using rule 287 (ocomma)
 
-    ocomma  go to state 429
+    ocomma  přejít do stavu 429
 
 
-state 318
+State 318
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -11818,56 +11817,56 @@ state 318
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LTYPE       shift, and go to state 430
-    LCOMM       shift, and go to state 159
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 160
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LTYPE       posunout a přejít do stavu 430
+    LCOMM       posunout a přejít do stavu 159
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 160
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 161
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    expr_or_type      go to state 431
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    non_expr_type     go to state 163
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 164
-    recvchantype      go to state 165
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 166
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 161
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    expr_or_type      přejít do stavu 431
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    non_expr_type     přejít do stavu 163
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 164
+    recvchantype      přejít do stavu 165
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 166
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 319
+State 319
 
   127 pexpr_no_paren: pexpr '.' sym .
 
-    $default  reduce using rule 127 (pexpr_no_paren)
+    $výchozí  reduce using rule 127 (pexpr_no_paren)
 
 
-state 320
+State 320
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -11892,40 +11891,40 @@ state 320
   130 pexpr_no_paren: pexpr '[' expr . ']'
   290 oexpr: expr .  [':']
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
-    ']'      shift, and go to state 432
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
+    ']'      posunout a přejít do stavu 432
 
-    $default  reduce using rule 290 (oexpr)
+    $výchozí  reduce using rule 290 (oexpr)
 
 
-state 321
+State 321
 
   131 pexpr_no_paren: pexpr '[' oexpr . ':' oexpr ']'
   132               | pexpr '[' oexpr . ':' oexpr ':' oexpr ']'
 
-    ':'  shift, and go to state 433
+    ':'  posunout a přejít do stavu 433
 
 
-state 322
+State 322
 
    28 common_dcl: . LVAR vardcl
    29           | . LVAR '(' vardcl_list osemi ')'
@@ -12024,7 +12023,7 @@ state 322
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  250 stmt: .  [LCASE, LDEFAULT, ';', '}']
+  250 stmt: . %empty  [LCASE, LDEFAULT, ';', '}']
   251     | . compound_stmt
   252     | . common_dcl
   253     | . non_dcl_stmt
@@ -12046,79 +12045,79 @@ state 322
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    error       shift, and go to state 325
-    LLITERAL    shift, and go to state 35
-    LBREAK      shift, and go to state 36
-    LCHAN       shift, and go to state 37
-    LCONST      shift, and go to state 38
-    LCONTINUE   shift, and go to state 39
-    LDEFER      shift, and go to state 40
-    LFALL       shift, and go to state 41
-    LFOR        shift, and go to state 42
-    LFUNC       shift, and go to state 113
-    LGO         shift, and go to state 44
-    LGOTO       shift, and go to state 45
-    LIF         shift, and go to state 46
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRETURN     shift, and go to state 49
-    LSELECT     shift, and go to state 50
-    LSTRUCT     shift, and go to state 51
-    LSWITCH     shift, and go to state 52
-    LTYPE       shift, and go to state 53
-    LVAR        shift, and go to state 54
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 326
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    error       posunout a přejít do stavu 325
+    LLITERAL    posunout a přejít do stavu 35
+    LBREAK      posunout a přejít do stavu 36
+    LCHAN       posunout a přejít do stavu 37
+    LCONST      posunout a přejít do stavu 38
+    LCONTINUE   posunout a přejít do stavu 39
+    LDEFER      posunout a přejít do stavu 40
+    LFALL       posunout a přejít do stavu 41
+    LFOR        posunout a přejít do stavu 42
+    LFUNC       posunout a přejít do stavu 113
+    LGO         posunout a přejít do stavu 44
+    LGOTO       posunout a přejít do stavu 45
+    LIF         posunout a přejít do stavu 46
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRETURN     posunout a přejít do stavu 49
+    LSELECT     posunout a přejít do stavu 50
+    LSTRUCT     posunout a přejít do stavu 51
+    LSWITCH     posunout a přejít do stavu 52
+    LTYPE       posunout a přejít do stavu 53
+    LVAR        posunout a přejít do stavu 54
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 326
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
     LCASE     reduce using rule 250 (stmt)
     LDEFAULT  reduce using rule 250 (stmt)
     ';'       reduce using rule 250 (stmt)
     '}'       reduce using rule 250 (stmt)
 
-    common_dcl        go to state 327
-    lconst            go to state 67
-    simple_stmt       go to state 68
-    compound_stmt     go to state 328
-    for_stmt          go to state 69
-    if_stmt           go to state 70
-    switch_stmt       go to state 71
-    select_stmt       go to state 72
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    new_name          go to state 78
-    sym               go to state 79
-    hidden_importsym  go to state 13
-    name              go to state 80
-    labelname         go to state 81
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    stmt              go to state 434
-    non_dcl_stmt      go to state 330
-    expr_list         go to state 92
+    common_dcl        přejít do stavu 327
+    lconst            přejít do stavu 67
+    simple_stmt       přejít do stavu 68
+    compound_stmt     přejít do stavu 328
+    for_stmt          přejít do stavu 69
+    if_stmt           přejít do stavu 70
+    switch_stmt       přejít do stavu 71
+    select_stmt       přejít do stavu 72
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    new_name          přejít do stavu 78
+    sym               přejít do stavu 79
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    labelname         přejít do stavu 81
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    stmt              přejít do stavu 434
+    non_dcl_stmt      přejít do stavu 330
+    expr_list         přejít do stavu 92
 
 
-state 323
+State 323
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -12141,37 +12140,37 @@ state 323
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
   134 pexpr_no_paren: convtype '(' expr . ocomma ')'
-  287 ocomma: .  [')']
+  287 ocomma: . %empty  [')']
   288       | . ','
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
-    ','      shift, and go to state 435
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
+    ','      posunout a přejít do stavu 435
 
-    $default  reduce using rule 287 (ocomma)
+    $výchozí  reduce using rule 287 (ocomma)
 
-    ocomma  go to state 436
+    ocomma  přejít do stavu 436
 
 
-state 324
+State 324
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -12254,129 +12253,129 @@ state 324
   280            | . bare_complitexpr
   281            | . keyval_list ',' keyval
   282            | . keyval_list ',' bare_complitexpr
-  283 braced_keyval_list: .  ['}']
+  283 braced_keyval_list: . %empty  ['}']
   284                   | . keyval_list ocomma
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 421
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 421
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 283 (braced_keyval_list)
+    $výchozí  reduce using rule 283 (braced_keyval_list)
 
-    expr                go to state 422
-    uexpr               go to state 74
-    pseudocall          go to state 75
-    pexpr_no_paren      go to state 76
-    keyval              go to state 423
-    bare_complitexpr    go to state 424
-    pexpr               go to state 77
-    sym                 go to state 117
-    hidden_importsym    go to state 13
-    name                go to state 80
-    convtype            go to state 82
-    comptype            go to state 83
-    othertype           go to state 84
-    structtype          go to state 85
-    interfacetype       go to state 86
-    fntype              go to state 88
-    fnlitdcl            go to state 89
-    fnliteral           go to state 90
-    keyval_list         go to state 425
-    braced_keyval_list  go to state 437
+    expr                přejít do stavu 422
+    uexpr               přejít do stavu 74
+    pseudocall          přejít do stavu 75
+    pexpr_no_paren      přejít do stavu 76
+    keyval              přejít do stavu 423
+    bare_complitexpr    přejít do stavu 424
+    pexpr               přejít do stavu 77
+    sym                 přejít do stavu 117
+    hidden_importsym    přejít do stavu 13
+    name                přejít do stavu 80
+    convtype            přejít do stavu 82
+    comptype            přejít do stavu 83
+    othertype           přejít do stavu 84
+    structtype          přejít do stavu 85
+    interfacetype       přejít do stavu 86
+    fntype              přejít do stavu 88
+    fnlitdcl            přejít do stavu 89
+    fnliteral           přejít do stavu 90
+    keyval_list         přejít do stavu 425
+    braced_keyval_list  přejít do stavu 437
 
 
-state 325
+State 325
 
   254 stmt: error .
 
-    $default  reduce using rule 254 (stmt)
+    $výchozí  reduce using rule 254 (stmt)
 
 
-state 326
+State 326
 
-   59 $@3: .
+   59 $@3: . %empty
    60 compound_stmt: '{' . $@3 stmt_list '}'
 
-    $default  reduce using rule 59 ($@3)
+    $výchozí  reduce using rule 59 ($@3)
 
-    $@3  go to state 438
+    $@3  přejít do stavu 438
 
 
-state 327
+State 327
 
   252 stmt: common_dcl .
 
-    $default  reduce using rule 252 (stmt)
+    $výchozí  reduce using rule 252 (stmt)
 
 
-state 328
+State 328
 
   251 stmt: compound_stmt .
 
-    $default  reduce using rule 251 (stmt)
+    $výchozí  reduce using rule 251 (stmt)
 
 
-state 329
+State 329
 
   269 stmt_list: stmt .
 
-    $default  reduce using rule 269 (stmt_list)
+    $výchozí  reduce using rule 269 (stmt_list)
 
 
-state 330
+State 330
 
   253 stmt: non_dcl_stmt .
 
-    $default  reduce using rule 253 (stmt)
+    $výchozí  reduce using rule 253 (stmt)
 
 
-state 331
+State 331
 
   215 fnliteral: fnlitdcl lbrace stmt_list . '}'
   270 stmt_list: stmt_list . ';' stmt
 
-    ';'  shift, and go to state 439
-    '}'  shift, and go to state 440
+    ';'  posunout a přejít do stavu 439
+    '}'  posunout a přejít do stavu 440
 
 
-state 332
+State 332
 
    52 simple_stmt: expr_list LCOLAS expr_list .  [LCASE, LDEFAULT, LBODY, ';', '}']
   276 expr_list: expr_list . ',' expr
 
-    ','  shift, and go to state 210
+    ','  posunout a přejít do stavu 210
 
-    $default  reduce using rule 52 (simple_stmt)
+    $výchozí  reduce using rule 52 (simple_stmt)
 
 
-state 333
+State 333
 
    51 simple_stmt: expr_list '=' expr_list .  [LCASE, LDEFAULT, LBODY, ';', '}']
   276 expr_list: expr_list . ',' expr
 
-    ','  shift, and go to state 210
+    ','  posunout a přejít do stavu 210
 
-    $default  reduce using rule 51 (simple_stmt)
+    $výchozí  reduce using rule 51 (simple_stmt)
 
 
-state 334
+State 334
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -12400,31 +12399,31 @@ state 334
   112     | expr . LCOMM expr
   276 expr_list: expr_list ',' expr .  [LCOLAS, LCASE, LDEFAULT, LBODY, ')', ';', '=', '}', ',']
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 276 (expr_list)
+    $výchozí  reduce using rule 276 (expr_list)
 
 
-state 335
+State 335
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -12446,67 +12445,67 @@ state 335
   326                 | LCHAN . LCOMM hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 441
-    '*'         shift, and go to state 342
-    '('         shift, and go to state 442
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 441
+    '*'         posunout a přejít do stavu 342
+    '('         posunout a přejít do stavu 442
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym           go to state 345
-    hidden_type_non_recv_chan  go to state 443
-    hidden_type_misc           go to state 444
-    hidden_type_func           go to state 445
+    hidden_importsym           přejít do stavu 345
+    hidden_type_non_recv_chan  přejít do stavu 443
+    hidden_type_misc           přejít do stavu 444
+    hidden_type_func           přejít do stavu 445
 
 
-state 336
+State 336
 
   328 hidden_type_func: LFUNC . '(' ohidden_funarg_list ')' ohidden_funres
 
-    '('  shift, and go to state 446
+    '('  posunout a přejít do stavu 446
 
 
-state 337
+State 337
 
   322 hidden_type_misc: LINTERFACE . '{' ohidden_interfacedcl_list '}'
 
-    '{'  shift, and go to state 447
+    '{'  posunout a přejít do stavu 447
 
 
-state 338
+State 338
 
   320 hidden_type_misc: LMAP . '[' hidden_type ']' hidden_type
 
-    '['  shift, and go to state 448
+    '['  posunout a přejít do stavu 448
 
 
-state 339
+State 339
 
   317 hidden_type_misc: LNAME .
 
-    $default  reduce using rule 317 (hidden_type_misc)
+    $výchozí  reduce using rule 317 (hidden_type_misc)
 
 
-state 340
+State 340
 
   321 hidden_type_misc: LSTRUCT . '{' ohidden_structdcl_list '}'
 
-    '{'  shift, and go to state 449
+    '{'  posunout a přejít do stavu 449
 
 
-state 341
+State 341
 
   327 hidden_type_recv_chan: LCOMM . LCHAN hidden_type
 
-    LCHAN  shift, and go to state 450
+    LCHAN  posunout a přejít do stavu 450
 
 
-state 342
+State 342
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -12528,25 +12527,25 @@ state 342
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 451
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 451
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 343
+State 343
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -12560,64 +12559,64 @@ state 343
   341 hidden_constant: . hidden_literal
   342                | . '(' hidden_literal '+' hidden_literal ')'
 
-    LLITERAL  shift, and go to state 452
-    LNAME     shift, and go to state 9
-    '-'       shift, and go to state 453
-    '('       shift, and go to state 454
-    '?'       shift, and go to state 10
-    '@'       shift, and go to state 11
+    LLITERAL  posunout a přejít do stavu 452
+    LNAME     posunout a přejít do stavu 9
+    '-'       posunout a přejít do stavu 453
+    '('       posunout a přejít do stavu 454
+    '?'       posunout a přejít do stavu 10
+    '@'       posunout a přejít do stavu 11
 
-    sym               go to state 455
-    hidden_importsym  go to state 13
-    hidden_literal    go to state 456
-    hidden_constant   go to state 457
+    sym               přejít do stavu 455
+    hidden_importsym  přejít do stavu 13
+    hidden_literal    přejít do stavu 456
+    hidden_constant   přejít do stavu 457
 
 
-state 344
+State 344
 
   318 hidden_type_misc: '[' . ']' hidden_type
   319                 | '[' . LLITERAL ']' hidden_type
 
-    LLITERAL  shift, and go to state 458
-    ']'       shift, and go to state 459
+    LLITERAL  posunout a přejít do stavu 458
+    ']'       posunout a přejít do stavu 459
 
 
-state 345
+State 345
 
   316 hidden_type_misc: hidden_importsym .
 
-    $default  reduce using rule 316 (hidden_type_misc)
+    $výchozí  reduce using rule 316 (hidden_type_misc)
 
 
-state 346
+State 346
 
   306 hidden_import: LCONST hidden_pkg_importsym hidden_type . '=' hidden_constant ';'
 
-    '='  shift, and go to state 460
+    '='  posunout a přejít do stavu 460
 
 
-state 347
+State 347
 
   311 hidden_type: hidden_type_misc .
 
-    $default  reduce using rule 311 (hidden_type)
+    $výchozí  reduce using rule 311 (hidden_type)
 
 
-state 348
+State 348
 
   312 hidden_type: hidden_type_recv_chan .
 
-    $default  reduce using rule 312 (hidden_type)
+    $výchozí  reduce using rule 312 (hidden_type)
 
 
-state 349
+State 349
 
   313 hidden_type: hidden_type_func .
 
-    $default  reduce using rule 313 (hidden_type)
+    $výchozí  reduce using rule 313 (hidden_type)
 
 
-state 350
+State 350
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -12640,49 +12639,49 @@ state 350
   329 hidden_funarg: sym . hidden_type oliteral
   330              | sym . LDDD hidden_type oliteral
 
-    LCHAN       shift, and go to state 335
-    LDDD        shift, and go to state 461
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LDDD        posunout a přejít do stavu 461
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 462
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 462
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 351
+State 351
 
   345 hidden_funarg_list: hidden_funarg .
 
-    $default  reduce using rule 345 (hidden_funarg_list)
+    $výchozí  reduce using rule 345 (hidden_funarg_list)
 
 
-state 352
+State 352
 
   207 hidden_fndcl: '(' hidden_funarg_list . ')' sym '(' ohidden_funarg_list ')' ohidden_funres
   346 hidden_funarg_list: hidden_funarg_list . ',' hidden_funarg
 
-    ')'  shift, and go to state 463
-    ','  shift, and go to state 464
+    ')'  posunout a přejít do stavu 463
+    ','  posunout a přejít do stavu 464
 
 
-state 353
+State 353
 
   308 hidden_import: LFUNC hidden_fndcl fnbody . ';'
 
-    ';'  shift, and go to state 465
+    ';'  posunout a přejít do stavu 465
 
 
-state 354
+State 354
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -12690,69 +12689,69 @@ state 354
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
   206 hidden_fndcl: hidden_pkg_importsym '(' . ohidden_funarg_list ')' ohidden_funres
-  295 ohidden_funarg_list: .  [')']
+  295 ohidden_funarg_list: . %empty  [')']
   296                    | . hidden_funarg_list
   329 hidden_funarg: . sym hidden_type oliteral
   330              | . sym LDDD hidden_type oliteral
   345 hidden_funarg_list: . hidden_funarg
   346                   | . hidden_funarg_list ',' hidden_funarg
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 295 (ohidden_funarg_list)
+    $výchozí  reduce using rule 295 (ohidden_funarg_list)
 
-    sym                  go to state 350
-    hidden_importsym     go to state 13
-    ohidden_funarg_list  go to state 466
-    hidden_funarg        go to state 351
-    hidden_funarg_list   go to state 467
+    sym                  přejít do stavu 350
+    hidden_importsym     přejít do stavu 13
+    ohidden_funarg_list  přejít do stavu 466
+    hidden_funarg        přejít do stavu 351
+    hidden_funarg_list   přejít do stavu 467
 
 
-state 355
+State 355
 
   303 hidden_import: LIMPORT LNAME LLITERAL . ';'
 
-    ';'  shift, and go to state 468
+    ';'  posunout a přejít do stavu 468
 
 
-state 356
+State 356
 
   307 hidden_import: LTYPE hidden_pkgtype hidden_type . ';'
 
-    ';'  shift, and go to state 469
+    ';'  posunout a přejít do stavu 469
 
 
-state 357
+State 357
 
   304 hidden_import: LVAR hidden_pkg_importsym hidden_type . ';'
 
-    ';'  shift, and go to state 470
+    ';'  posunout a přejít do stavu 470
 
 
-state 358
+State 358
 
    14 import_stmt_list: import_stmt_list ';' import_stmt .
 
-    $default  reduce using rule 14 (import_stmt_list)
+    $výchozí  reduce using rule 14 (import_stmt_list)
 
 
-state 359
+State 359
 
     9 import: LIMPORT '(' import_stmt_list osemi ')' .
 
-    $default  reduce using rule 9 (import)
+    $výchozí  reduce using rule 9 (import)
 
 
-state 360
+State 360
 
   208 fntype: LFUNC '(' oarg_type_list_ocomma . ')' fnres
 
-    ')'  shift, and go to state 471
+    ')'  posunout a přejít do stavu 471
 
 
-state 361
+State 361
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -12784,71 +12783,71 @@ state 361
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 409
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 409
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 362
+State 362
 
   170 ntype: '(' ntype . ')'
 
-    ')'  shift, and go to state 472
+    ')'  posunout a přejít do stavu 472
 
 
-state 363
+State 363
 
   179 non_recvchantype: '(' ntype ')' .
 
-    $default  reduce using rule 179 (non_recvchantype)
+    $výchozí  reduce using rule 179 (non_recvchantype)
 
 
-state 364
+State 364
 
   189 dotname: name '.' sym .
 
-    $default  reduce using rule 189 (dotname)
+    $výchozí  reduce using rule 189 (dotname)
 
 
-state 365
+State 365
 
-   65 $@5: .
+   65 $@5: . %empty
    66 loop_body: LBODY . $@5 stmt_list '}'
 
-    $default  reduce using rule 65 ($@5)
+    $výchozí  reduce using rule 65 ($@5)
 
-    $@5  go to state 473
+    $@5  přejít do stavu 473
 
 
-state 366
+State 366
 
    72 for_body: for_header loop_body .
 
-    $default  reduce using rule 72 (for_body)
+    $výchozí  reduce using rule 72 (for_body)
 
 
-state 367
+State 367
 
    52 simple_stmt: expr_list LCOLAS . expr_list
    68 range_stmt: expr_list LCOLAS . LRANGE expr
@@ -12928,47 +12927,47 @@ state 367
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRANGE      shift, and go to state 474
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRANGE      posunout a přejít do stavu 474
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 332
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 332
 
 
-state 368
+State 368
 
    51 simple_stmt: expr_list '=' . expr_list
    67 range_stmt: expr_list '=' . LRANGE expr
@@ -13048,47 +13047,47 @@ state 368
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRANGE      shift, and go to state 475
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRANGE      posunout a přejít do stavu 475
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 333
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 333
 
 
-state 369
+State 369
 
    49 simple_stmt: . expr
    50            | . expr LASOP expr
@@ -13172,74 +13171,74 @@ state 369
   216          | . fnlitdcl error
   275 expr_list: . expr
   276          | . expr_list ',' expr
-  293 osimple_stmt: .  [';']
+  293 osimple_stmt: . %empty  [';']
   294             | . simple_stmt
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 293 (osimple_stmt)
+    $výchozí  reduce using rule 293 (osimple_stmt)
 
-    simple_stmt       go to state 236
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 92
-    osimple_stmt      go to state 476
+    simple_stmt       přejít do stavu 236
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 92
+    osimple_stmt      přejít do stavu 476
 
 
-state 370
+State 370
 
   164 dotdotdot: LDDD ntype .
 
-    $default  reduce using rule 164 (dotdotdot)
+    $výchozí  reduce using rule 164 (dotdotdot)
 
 
-state 371
+State 371
 
   243 arg_type: sym name_or_type .
 
-    $default  reduce using rule 243 (arg_type)
+    $výchozí  reduce using rule 243 (arg_type)
 
 
-state 372
+State 372
 
   244 arg_type: sym dotdotdot .
 
-    $default  reduce using rule 244 (arg_type)
+    $výchozí  reduce using rule 244 (arg_type)
 
 
-state 373
+State 373
 
   149 name_or_type: . ntype
   156 sym: . LNAME
@@ -13279,46 +13278,46 @@ state 373
   247 arg_type_list: arg_type_list ',' . arg_type
   288 ocomma: ',' .  [')']
 
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 242
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 242
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 288 (ocomma)
+    $výchozí  reduce using rule 288 (ocomma)
 
-    name_or_type      go to state 243
-    sym               go to state 244
-    hidden_importsym  go to state 13
-    name              go to state 118
-    dotdotdot         go to state 245
-    ntype             go to state 246
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
-    arg_type          go to state 477
+    name_or_type      přejít do stavu 243
+    sym               přejít do stavu 244
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    dotdotdot         přejít do stavu 245
+    ntype             přejít do stavu 246
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
+    arg_type          přejít do stavu 477
 
 
-state 374
+State 374
 
   249 oarg_type_list_ocomma: arg_type_list ocomma .
 
-    $default  reduce using rule 249 (oarg_type_list_ocomma)
+    $výchozí  reduce using rule 249 (oarg_type_list_ocomma)
 
 
-state 375
+State 375
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -13349,68 +13348,68 @@ state 375
   205 fndcl: '(' oarg_type_list_ocomma ')' . sym '(' oarg_type_list_ocomma ')' fnres
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
   208       | LFUNC '(' oarg_type_list_ocomma ')' . fnres
-  211 fnres: .  [error, LBODY, '{']
+  211 fnres: . %empty  [error, LBODY, '{']
   212      | . fnret_type
   213      | . '(' oarg_type_list_ocomma ')'
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 478
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 478
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 211 (fnres)
+    $výchozí  reduce using rule 211 (fnres)
 
-    sym               go to state 479
-    hidden_importsym  go to state 13
-    name              go to state 118
-    fnret_type        go to state 480
-    dotname           go to state 481
-    othertype         go to state 482
-    ptrtype           go to state 483
-    recvchantype      go to state 484
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 485
-    fnres             go to state 486
+    sym               přejít do stavu 479
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    fnret_type        přejít do stavu 480
+    dotname           přejít do stavu 481
+    othertype         přejít do stavu 482
+    ptrtype           přejít do stavu 483
+    recvchantype      přejít do stavu 484
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 485
+    fnres             přejít do stavu 486
 
     Conflict between rule 211 and token '(' resolved as shift (NotParen < '(').
 
 
-state 376
+State 376
 
   204 fndcl: sym '(' oarg_type_list_ocomma . ')' fnres
 
-    ')'  shift, and go to state 487
+    ')'  posunout a přejít do stavu 487
 
 
-state 377
+State 377
 
   210 fnbody: '{' stmt_list . '}'
   270 stmt_list: stmt_list . ';' stmt
 
-    ';'  shift, and go to state 439
-    '}'  shift, and go to state 488
+    ';'  posunout a přejít do stavu 439
+    '}'  posunout a přejít do stavu 488
 
 
-state 378
+State 378
 
    66 loop_body: . LBODY $@5 stmt_list '}'
    80 if_stmt: LIF $@7 if_header $@8 . loop_body $@9 elseif_list else
 
-    LBODY  shift, and go to state 365
+    LBODY  posunout a přejít do stavu 365
 
-    loop_body  go to state 489
+    loop_body  přejít do stavu 489
 
 
-state 379
+State 379
 
    49 simple_stmt: . expr
    50            | . expr LASOP expr
@@ -13494,53 +13493,53 @@ state 379
   216          | . fnlitdcl error
   275 expr_list: . expr
   276          | . expr_list ',' expr
-  293 osimple_stmt: .  [LBODY]
+  293 osimple_stmt: . %empty  [LBODY]
   294             | . simple_stmt
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 293 (osimple_stmt)
+    $výchozí  reduce using rule 293 (osimple_stmt)
 
-    simple_stmt       go to state 236
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 92
-    osimple_stmt      go to state 490
+    simple_stmt       přejít do stavu 236
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 92
+    osimple_stmt      přejít do stavu 490
 
 
-state 380
+State 380
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -13549,32 +13548,32 @@ state 380
   160                 | . '@' LLITERAL '.' '?'
   236 packname: LNAME '.' . sym
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym               go to state 491
-    hidden_importsym  go to state 13
+    sym               přejít do stavu 491
+    hidden_importsym  přejít do stavu 13
 
 
-state 381
+State 381
 
   235 packname: LNAME .  [LLITERAL, ')', ';', '}']
   236         | LNAME . '.' sym
 
-    '.'  shift, and go to state 380
+    '.'  posunout a přejít do stavu 380
 
-    $default  reduce using rule 235 (packname)
+    $výchozí  reduce using rule 235 (packname)
 
 
-state 382
+State 382
 
   240 interfacedcl: '(' packname . ')'
 
-    ')'  shift, and go to state 492
+    ')'  posunout a přejít do stavu 492
 
 
-state 383
+State 383
 
   149 name_or_type: . ntype
   156 sym: . LNAME
@@ -13614,51 +13613,51 @@ state 383
   245         | . dotdotdot
   246 arg_type_list: . arg_type
   247              | . arg_type_list ',' arg_type
-  248 oarg_type_list_ocomma: .  [')']
+  248 oarg_type_list_ocomma: . %empty  [')']
   249                      | . arg_type_list ocomma
 
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 242
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 242
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 248 (oarg_type_list_ocomma)
+    $výchozí  reduce using rule 248 (oarg_type_list_ocomma)
 
-    name_or_type           go to state 243
-    sym                    go to state 244
-    hidden_importsym       go to state 13
-    name                   go to state 118
-    dotdotdot              go to state 245
-    ntype                  go to state 246
-    dotname                go to state 228
-    othertype              go to state 229
-    ptrtype                go to state 230
-    recvchantype           go to state 231
-    structtype             go to state 85
-    interfacetype          go to state 86
-    fntype                 go to state 232
-    arg_type               go to state 247
-    arg_type_list          go to state 248
-    oarg_type_list_ocomma  go to state 493
+    name_or_type           přejít do stavu 243
+    sym                    přejít do stavu 244
+    hidden_importsym       přejít do stavu 13
+    name                   přejít do stavu 118
+    dotdotdot              přejít do stavu 245
+    ntype                  přejít do stavu 246
+    dotname                přejít do stavu 228
+    othertype              přejít do stavu 229
+    ptrtype                přejít do stavu 230
+    recvchantype           přejít do stavu 231
+    structtype             přejít do stavu 85
+    interfacetype          přejít do stavu 86
+    fntype                 přejít do stavu 232
+    arg_type               přejít do stavu 247
+    arg_type_list          přejít do stavu 248
+    oarg_type_list_ocomma  přejít do stavu 493
 
 
-state 384
+State 384
 
   238 interfacedcl: new_name indcl .
 
-    $default  reduce using rule 238 (interfacedcl)
+    $výchozí  reduce using rule 238 (interfacedcl)
 
 
-state 385
+State 385
 
   152 new_name: . sym
   156 sym: . LNAME
@@ -13674,28 +13673,28 @@ state 385
   240             | . '(' packname ')'
   286 osemi: ';' .  ['}']
 
-    LNAME  shift, and go to state 255
-    '('    shift, and go to state 256
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 255
+    '('    posunout a přejít do stavu 256
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 286 (osemi)
+    $výchozí  reduce using rule 286 (osemi)
 
-    new_name          go to state 258
-    sym               go to state 112
-    hidden_importsym  go to state 13
-    packname          go to state 260
-    interfacedcl      go to state 494
+    new_name          přejít do stavu 258
+    sym               přejít do stavu 112
+    hidden_importsym  přejít do stavu 13
+    packname          přejít do stavu 260
+    interfacedcl      přejít do stavu 494
 
 
-state 386
+State 386
 
   201 interfacetype: LINTERFACE lbrace interfacedcl_list osemi . '}'
 
-    '}'  shift, and go to state 495
+    '}'  posunout a přejít do stavu 495
 
 
-state 387
+State 387
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -13727,33 +13726,33 @@ state 387
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 496
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 496
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 388
+State 388
 
    55 case: . LCASE expr_or_type_list ':'
    56     | . LCASE expr_or_type_list '=' expr ':'
@@ -13763,61 +13762,61 @@ state 388
    64 caseblock_list: caseblock_list . caseblock
    91 select_stmt: LSELECT $@13 LBODY caseblock_list . '}'
 
-    LCASE     shift, and go to state 497
-    LDEFAULT  shift, and go to state 498
-    '}'       shift, and go to state 499
+    LCASE     posunout a přejít do stavu 497
+    LDEFAULT  posunout a přejít do stavu 498
+    '}'       posunout a přejít do stavu 499
 
-    case       go to state 500
-    caseblock  go to state 501
+    case       přejít do stavu 500
+    caseblock  přejít do stavu 501
 
 
-state 389
+State 389
 
   234 structdcl: '*' '(' . embed ')' oliteral
   235 packname: . LNAME
   236         | . LNAME '.' sym
   237 embed: . packname
 
-    LNAME  shift, and go to state 381
+    LNAME  posunout a přejít do stavu 381
 
-    packname  go to state 270
-    embed     go to state 502
+    packname  přejít do stavu 270
+    embed     přejít do stavu 502
 
 
-state 390
+State 390
 
   232 structdcl: '*' embed . oliteral
-  301 oliteral: .  [';', '}']
+  301 oliteral: . %empty  [';', '}']
   302         | . LLITERAL
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 503
+    oliteral  přejít do stavu 503
 
 
-state 391
+State 391
 
   233 structdcl: '(' '*' . embed ')' oliteral
   235 packname: . LNAME
   236         | . LNAME '.' sym
   237 embed: . packname
 
-    LNAME  shift, and go to state 381
+    LNAME  posunout a přejít do stavu 381
 
-    packname  go to state 270
-    embed     go to state 504
+    packname  přejít do stavu 270
+    embed     přejít do stavu 504
 
 
-state 392
+State 392
 
   231 structdcl: '(' embed . ')' oliteral
 
-    ')'  shift, and go to state 505
+    ')'  posunout a přejít do stavu 505
 
 
-state 393
+State 393
 
   152 new_name: . sym
   156 sym: . LNAME
@@ -13839,45 +13838,45 @@ state 393
   272              | . new_name_list ',' new_name
   286 osemi: ';' .  ['}']
 
-    LNAME  shift, and go to state 255
-    '*'    shift, and go to state 264
-    '('    shift, and go to state 265
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 255
+    '*'    posunout a přejít do stavu 264
+    '('    posunout a přejít do stavu 265
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 286 (osemi)
+    $výchozí  reduce using rule 286 (osemi)
 
-    new_name          go to state 267
-    sym               go to state 112
-    hidden_importsym  go to state 13
-    structdcl         go to state 506
-    packname          go to state 270
-    embed             go to state 271
-    new_name_list     go to state 272
+    new_name          přejít do stavu 267
+    sym               přejít do stavu 112
+    hidden_importsym  přejít do stavu 13
+    structdcl         přejít do stavu 506
+    packname          přejít do stavu 270
+    embed             přejít do stavu 271
+    new_name_list     přejít do stavu 272
 
 
-state 394
+State 394
 
   199 structtype: LSTRUCT lbrace structdcl_list osemi . '}'
 
-    '}'  shift, and go to state 507
+    '}'  posunout a přejít do stavu 507
 
 
-state 395
+State 395
 
   302 oliteral: LLITERAL .
 
-    $default  reduce using rule 302 (oliteral)
+    $výchozí  reduce using rule 302 (oliteral)
 
 
-state 396
+State 396
 
   230 structdcl: embed oliteral .
 
-    $default  reduce using rule 230 (structdcl)
+    $výchozí  reduce using rule 230 (structdcl)
 
 
-state 397
+State 397
 
   152 new_name: . sym
   156 sym: . LNAME
@@ -13887,36 +13886,36 @@ state 397
   160                 | . '@' LLITERAL '.' '?'
   272 new_name_list: new_name_list ',' . new_name
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    new_name          go to state 508
-    sym               go to state 112
-    hidden_importsym  go to state 13
+    new_name          přejít do stavu 508
+    sym               přejít do stavu 112
+    hidden_importsym  přejít do stavu 13
 
 
-state 398
+State 398
 
   229 structdcl: new_name_list ntype . oliteral
-  301 oliteral: .  [';', '}']
+  301 oliteral: . %empty  [';', '}']
   302         | . LLITERAL
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 509
+    oliteral  přejít do stavu 509
 
 
-state 399
+State 399
 
    89 switch_stmt: LSWITCH $@11 if_header $@12 . LBODY caseblock_list '}'
 
-    LBODY  shift, and go to state 510
+    LBODY  posunout a přejít do stavu 510
 
 
-state 400
+State 400
 
    47 typedclname: . sym
    48 typedcl: . typedclname ntype
@@ -13928,26 +13927,26 @@ state 400
   224 typedcl_list: typedcl_list ';' . typedcl
   286 osemi: ';' .  [')']
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 286 (osemi)
+    $výchozí  reduce using rule 286 (osemi)
 
-    typedclname       go to state 145
-    typedcl           go to state 511
-    sym               go to state 147
-    hidden_importsym  go to state 13
+    typedclname       přejít do stavu 145
+    typedcl           přejít do stavu 511
+    sym               přejít do stavu 147
+    hidden_importsym  přejít do stavu 13
 
 
-state 401
+State 401
 
    36 common_dcl: LTYPE '(' typedcl_list osemi . ')'
 
-    ')'  shift, and go to state 512
+    ')'  posunout a přejít do stavu 512
 
 
-state 402
+State 402
 
    39 vardcl: . dcl_name_list ntype
    40       | . dcl_name_list ntype '=' expr_list
@@ -13963,44 +13962,44 @@ state 402
   274              | . dcl_name_list ',' dcl_name
   286 osemi: ';' .  [')']
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 286 (osemi)
+    $výchozí  reduce using rule 286 (osemi)
 
-    vardcl            go to state 513
-    dcl_name          go to state 150
-    sym               go to state 151
-    hidden_importsym  go to state 13
-    dcl_name_list     go to state 152
+    vardcl            přejít do stavu 513
+    dcl_name          přejít do stavu 150
+    sym               přejít do stavu 151
+    hidden_importsym  přejít do stavu 13
+    dcl_name_list     přejít do stavu 152
 
 
-state 403
+State 403
 
    29 common_dcl: LVAR '(' vardcl_list osemi . ')'
 
-    ')'  shift, and go to state 514
+    ')'  posunout a přejít do stavu 514
 
 
-state 404
+State 404
 
    41 vardcl: dcl_name_list '=' expr_list .  [LCASE, LDEFAULT, ')', ';', '}']
   276 expr_list: expr_list . ',' expr
 
-    ','  shift, and go to state 210
+    ','  posunout a přejít do stavu 210
 
-    $default  reduce using rule 41 (vardcl)
+    $výchozí  reduce using rule 41 (vardcl)
 
 
-state 405
+State 405
 
   274 dcl_name_list: dcl_name_list ',' dcl_name .
 
-    $default  reduce using rule 274 (dcl_name_list)
+    $výchozí  reduce using rule 274 (dcl_name_list)
 
 
-state 406
+State 406
 
    40 vardcl: dcl_name_list ntype '=' . expr_list
    92 expr: . uexpr
@@ -14079,46 +14078,46 @@ state 406
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 515
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 515
 
 
-state 407
+State 407
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -14151,33 +14150,33 @@ state 407
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 284
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 284
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 227
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 227
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 408
+State 408
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -14210,108 +14209,108 @@ state 408
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 516
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 516
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 409
+State 409
 
   198 recvchantype: LCOMM LCHAN ntype .
 
-    $default  reduce using rule 198 (recvchantype)
+    $výchozí  reduce using rule 198 (recvchantype)
 
 
-state 410
+State 410
 
   169 ntype: dotname .  [LCOLAS, LDDD, ')', '=', ':', ',']
   178 non_recvchantype: dotname .  [LBODY, '(', '{']
 
-    LBODY     reduce using rule 178 (non_recvchantype)
-    '('       reduce using rule 178 (non_recvchantype)
-    '{'       reduce using rule 178 (non_recvchantype)
-    $default  reduce using rule 169 (ntype)
+    LBODY       reduce using rule 178 (non_recvchantype)
+    '('         reduce using rule 178 (non_recvchantype)
+    '{'         reduce using rule 178 (non_recvchantype)
+    $výchozí  reduce using rule 169 (ntype)
 
 
-state 411
+State 411
 
   167 ntype: othertype .  [LCOLAS, LDDD, ')', '=', ':', ',']
   176 non_recvchantype: othertype .  [LBODY, '(', '{']
 
-    LBODY     reduce using rule 176 (non_recvchantype)
-    '('       reduce using rule 176 (non_recvchantype)
-    '{'       reduce using rule 176 (non_recvchantype)
-    $default  reduce using rule 167 (ntype)
+    LBODY       reduce using rule 176 (non_recvchantype)
+    '('         reduce using rule 176 (non_recvchantype)
+    '{'         reduce using rule 176 (non_recvchantype)
+    $výchozí  reduce using rule 167 (ntype)
 
 
-state 412
+State 412
 
   168 ntype: ptrtype .  [LCOLAS, LDDD, ')', '=', ':', ',']
   177 non_recvchantype: ptrtype .  [LBODY, '(', '{']
 
-    LBODY     reduce using rule 177 (non_recvchantype)
-    '('       reduce using rule 177 (non_recvchantype)
-    '{'       reduce using rule 177 (non_recvchantype)
-    $default  reduce using rule 168 (ntype)
+    LBODY       reduce using rule 177 (non_recvchantype)
+    '('         reduce using rule 177 (non_recvchantype)
+    '{'         reduce using rule 177 (non_recvchantype)
+    $výchozí  reduce using rule 168 (ntype)
 
 
-state 413
+State 413
 
   166 ntype: fntype .  [LCOLAS, LDDD, ')', '=', ':', ',']
   175 non_recvchantype: fntype .  [LBODY, '(', '{']
 
-    LBODY     reduce using rule 175 (non_recvchantype)
-    '('       reduce using rule 175 (non_recvchantype)
-    '{'       reduce using rule 175 (non_recvchantype)
-    $default  reduce using rule 166 (ntype)
+    LBODY       reduce using rule 175 (non_recvchantype)
+    '('         reduce using rule 175 (non_recvchantype)
+    '{'         reduce using rule 175 (non_recvchantype)
+    $výchozí  reduce using rule 166 (ntype)
 
 
-state 414
+State 414
 
   137 pexpr_no_paren: '(' expr_or_type ')' '{' . start_complit braced_keyval_list '}'
-  139 start_complit: .
+  139 start_complit: . %empty
 
-    $default  reduce using rule 139 (start_complit)
+    $výchozí  reduce using rule 139 (start_complit)
 
-    start_complit  go to state 517
+    start_complit  přejít do stavu 517
 
 
-state 415
+State 415
 
   191 othertype: '[' LDDD ']' ntype .
 
-    $default  reduce using rule 191 (othertype)
+    $výchozí  reduce using rule 191 (othertype)
 
 
-state 416
+State 416
 
   190 othertype: '[' oexpr ']' ntype .
 
-    $default  reduce using rule 190 (othertype)
+    $výchozí  reduce using rule 190 (othertype)
 
 
-state 417
+State 417
 
    33 common_dcl: lconst '(' constdcl ';' . constdcl_list osemi ')'
    42 constdcl: . dcl_name_list ntype '=' expr_list
@@ -14331,39 +14330,39 @@ state 417
   274              | . dcl_name_list ',' dcl_name
   286 osemi: ';' .  [')']
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 286 (osemi)
+    $výchozí  reduce using rule 286 (osemi)
 
-    constdcl          go to state 518
-    constdcl1         go to state 519
-    dcl_name          go to state 150
-    sym               go to state 151
-    hidden_importsym  go to state 13
-    constdcl_list     go to state 520
-    dcl_name_list     go to state 521
+    constdcl          přejít do stavu 518
+    constdcl1         přejít do stavu 519
+    dcl_name          přejít do stavu 150
+    sym               přejít do stavu 151
+    hidden_importsym  přejít do stavu 13
+    constdcl_list     přejít do stavu 520
+    dcl_name_list     přejít do stavu 521
 
 
-state 418
+State 418
 
    32 common_dcl: lconst '(' constdcl osemi . ')'
 
-    ')'  shift, and go to state 522
+    ')'  posunout a přejít do stavu 522
 
 
-state 419
+State 419
 
    43 constdcl: dcl_name_list '=' expr_list .  [LCASE, LDEFAULT, ')', ';', '}']
   276 expr_list: expr_list . ',' expr
 
-    ','  shift, and go to state 210
+    ','  posunout a přejít do stavu 210
 
-    $default  reduce using rule 43 (constdcl)
+    $výchozí  reduce using rule 43 (constdcl)
 
 
-state 420
+State 420
 
    42 constdcl: dcl_name_list ntype '=' . expr_list
    92 expr: . uexpr
@@ -14442,56 +14441,56 @@ state 420
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 138
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 523
+    expr              přejít do stavu 138
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 523
 
 
-state 421
+State 421
 
-  139 start_complit: .
+  139 start_complit: . %empty
   142 bare_complitexpr: '{' . start_complit braced_keyval_list '}'
 
-    $default  reduce using rule 139 (start_complit)
+    $výchozí  reduce using rule 139 (start_complit)
 
-    start_complit  go to state 524
+    start_complit  přejít do stavu 524
 
 
-state 422
+State 422
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -14516,81 +14515,81 @@ state 422
   140 keyval: expr . ':' complitexpr
   141 bare_complitexpr: expr .  ['}', ',']
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
-    ':'      shift, and go to state 525
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
+    ':'      posunout a přejít do stavu 525
 
-    $default  reduce using rule 141 (bare_complitexpr)
+    $výchozí  reduce using rule 141 (bare_complitexpr)
 
 
-state 423
+State 423
 
   279 keyval_list: keyval .
 
-    $default  reduce using rule 279 (keyval_list)
+    $výchozí  reduce using rule 279 (keyval_list)
 
 
-state 424
+State 424
 
   280 keyval_list: bare_complitexpr .
 
-    $default  reduce using rule 280 (keyval_list)
+    $výchozí  reduce using rule 280 (keyval_list)
 
 
-state 425
+State 425
 
   281 keyval_list: keyval_list . ',' keyval
   282            | keyval_list . ',' bare_complitexpr
   284 braced_keyval_list: keyval_list . ocomma
-  287 ocomma: .  ['}']
+  287 ocomma: . %empty  ['}']
   288       | . ','
 
-    ','  shift, and go to state 526
+    ','  posunout a přejít do stavu 526
 
-    $default  reduce using rule 287 (ocomma)
+    $výchozí  reduce using rule 287 (ocomma)
 
-    ocomma  go to state 527
+    ocomma  přejít do stavu 527
 
 
-state 426
+State 426
 
   136 pexpr_no_paren: pexpr_no_paren '{' start_complit braced_keyval_list . '}'
 
-    '}'  shift, and go to state 528
+    '}'  posunout a přejít do stavu 528
 
 
-state 427
+State 427
 
   124 pseudocall: pexpr '(' expr_or_type_list LDDD . ocomma ')'
-  287 ocomma: .  [')']
+  287 ocomma: . %empty  [')']
   288       | . ','
 
-    ','  shift, and go to state 435
+    ','  posunout a přejít do stavu 435
 
-    $default  reduce using rule 287 (ocomma)
+    $výchozí  reduce using rule 287 (ocomma)
 
-    ocomma  go to state 529
+    ocomma  přejít do stavu 529
 
 
-state 428
+State 428
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -14675,78 +14674,78 @@ state 428
   278 expr_or_type_list: expr_or_type_list ',' . expr_or_type
   288 ocomma: ',' .  [')']
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 159
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 160
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 159
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 160
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 288 (ocomma)
+    $výchozí  reduce using rule 288 (ocomma)
 
-    expr              go to state 161
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    expr_or_type      go to state 530
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    non_expr_type     go to state 163
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 164
-    recvchantype      go to state 165
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 166
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 161
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    expr_or_type      přejít do stavu 530
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    non_expr_type     přejít do stavu 163
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 164
+    recvchantype      přejít do stavu 165
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 166
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 429
+State 429
 
   123 pseudocall: pexpr '(' expr_or_type_list ocomma . ')'
 
-    ')'  shift, and go to state 531
+    ')'  posunout a přejít do stavu 531
 
 
-state 430
+State 430
 
   129 pexpr_no_paren: pexpr '.' '(' LTYPE . ')'
 
-    ')'  shift, and go to state 532
+    ')'  posunout a přejít do stavu 532
 
 
-state 431
+State 431
 
   128 pexpr_no_paren: pexpr '.' '(' expr_or_type . ')'
 
-    ')'  shift, and go to state 533
+    ')'  posunout a přejít do stavu 533
 
 
-state 432
+State 432
 
   130 pexpr_no_paren: pexpr '[' expr ']' .
 
-    $default  reduce using rule 130 (pexpr_no_paren)
+    $výchozí  reduce using rule 130 (pexpr_no_paren)
 
 
-state 433
+State 433
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -14823,79 +14822,79 @@ state 433
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  289 oexpr: .  [':', ']']
+  289 oexpr: . %empty  [':', ']']
   290      | . expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 289 (oexpr)
+    $výchozí  reduce using rule 289 (oexpr)
 
-    expr              go to state 170
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    oexpr             go to state 534
+    expr              přejít do stavu 170
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    oexpr             přejít do stavu 534
 
 
-state 434
+State 434
 
   261 non_dcl_stmt: labelname ':' $@14 stmt .
 
-    $default  reduce using rule 261 (non_dcl_stmt)
+    $výchozí  reduce using rule 261 (non_dcl_stmt)
 
 
-state 435
+State 435
 
   288 ocomma: ',' .
 
-    $default  reduce using rule 288 (ocomma)
+    $výchozí  reduce using rule 288 (ocomma)
 
 
-state 436
+State 436
 
   134 pexpr_no_paren: convtype '(' expr ocomma . ')'
 
-    ')'  shift, and go to state 535
+    ')'  posunout a přejít do stavu 535
 
 
-state 437
+State 437
 
   135 pexpr_no_paren: comptype lbrace start_complit braced_keyval_list . '}'
 
-    '}'  shift, and go to state 536
+    '}'  posunout a přejít do stavu 536
 
 
-state 438
+State 438
 
    28 common_dcl: . LVAR vardcl
    29           | . LVAR '(' vardcl_list osemi ')'
@@ -14995,7 +14994,7 @@ state 438
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  250 stmt: .  [';', '}']
+  250 stmt: . %empty  [';', '}']
   251     | . compound_stmt
   252     | . common_dcl
   253     | . non_dcl_stmt
@@ -15018,78 +15017,78 @@ state 438
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    error       shift, and go to state 325
-    LLITERAL    shift, and go to state 35
-    LBREAK      shift, and go to state 36
-    LCHAN       shift, and go to state 37
-    LCONST      shift, and go to state 38
-    LCONTINUE   shift, and go to state 39
-    LDEFER      shift, and go to state 40
-    LFALL       shift, and go to state 41
-    LFOR        shift, and go to state 42
-    LFUNC       shift, and go to state 113
-    LGO         shift, and go to state 44
-    LGOTO       shift, and go to state 45
-    LIF         shift, and go to state 46
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRETURN     shift, and go to state 49
-    LSELECT     shift, and go to state 50
-    LSTRUCT     shift, and go to state 51
-    LSWITCH     shift, and go to state 52
-    LTYPE       shift, and go to state 53
-    LVAR        shift, and go to state 54
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 326
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    error       posunout a přejít do stavu 325
+    LLITERAL    posunout a přejít do stavu 35
+    LBREAK      posunout a přejít do stavu 36
+    LCHAN       posunout a přejít do stavu 37
+    LCONST      posunout a přejít do stavu 38
+    LCONTINUE   posunout a přejít do stavu 39
+    LDEFER      posunout a přejít do stavu 40
+    LFALL       posunout a přejít do stavu 41
+    LFOR        posunout a přejít do stavu 42
+    LFUNC       posunout a přejít do stavu 113
+    LGO         posunout a přejít do stavu 44
+    LGOTO       posunout a přejít do stavu 45
+    LIF         posunout a přejít do stavu 46
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRETURN     posunout a přejít do stavu 49
+    LSELECT     posunout a přejít do stavu 50
+    LSTRUCT     posunout a přejít do stavu 51
+    LSWITCH     posunout a přejít do stavu 52
+    LTYPE       posunout a přejít do stavu 53
+    LVAR        posunout a přejít do stavu 54
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 326
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
     ';'  reduce using rule 250 (stmt)
     '}'  reduce using rule 250 (stmt)
 
-    common_dcl        go to state 327
-    lconst            go to state 67
-    simple_stmt       go to state 68
-    compound_stmt     go to state 328
-    for_stmt          go to state 69
-    if_stmt           go to state 70
-    switch_stmt       go to state 71
-    select_stmt       go to state 72
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    new_name          go to state 78
-    sym               go to state 79
-    hidden_importsym  go to state 13
-    name              go to state 80
-    labelname         go to state 81
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    stmt              go to state 329
-    non_dcl_stmt      go to state 330
-    stmt_list         go to state 537
-    expr_list         go to state 92
+    common_dcl        přejít do stavu 327
+    lconst            přejít do stavu 67
+    simple_stmt       přejít do stavu 68
+    compound_stmt     přejít do stavu 328
+    for_stmt          přejít do stavu 69
+    if_stmt           přejít do stavu 70
+    switch_stmt       přejít do stavu 71
+    select_stmt       přejít do stavu 72
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    new_name          přejít do stavu 78
+    sym               přejít do stavu 79
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    labelname         přejít do stavu 81
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    stmt              přejít do stavu 329
+    non_dcl_stmt      přejít do stavu 330
+    stmt_list         přejít do stavu 537
+    expr_list         přejít do stavu 92
 
 
-state 439
+State 439
 
    28 common_dcl: . LVAR vardcl
    29           | . LVAR '(' vardcl_list osemi ')'
@@ -15188,7 +15187,7 @@ state 439
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  250 stmt: .  [LCASE, LDEFAULT, ';', '}']
+  250 stmt: . %empty  [LCASE, LDEFAULT, ';', '}']
   251     | . compound_stmt
   252     | . common_dcl
   253     | . non_dcl_stmt
@@ -15210,86 +15209,86 @@ state 439
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    error       shift, and go to state 325
-    LLITERAL    shift, and go to state 35
-    LBREAK      shift, and go to state 36
-    LCHAN       shift, and go to state 37
-    LCONST      shift, and go to state 38
-    LCONTINUE   shift, and go to state 39
-    LDEFER      shift, and go to state 40
-    LFALL       shift, and go to state 41
-    LFOR        shift, and go to state 42
-    LFUNC       shift, and go to state 113
-    LGO         shift, and go to state 44
-    LGOTO       shift, and go to state 45
-    LIF         shift, and go to state 46
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRETURN     shift, and go to state 49
-    LSELECT     shift, and go to state 50
-    LSTRUCT     shift, and go to state 51
-    LSWITCH     shift, and go to state 52
-    LTYPE       shift, and go to state 53
-    LVAR        shift, and go to state 54
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 326
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    error       posunout a přejít do stavu 325
+    LLITERAL    posunout a přejít do stavu 35
+    LBREAK      posunout a přejít do stavu 36
+    LCHAN       posunout a přejít do stavu 37
+    LCONST      posunout a přejít do stavu 38
+    LCONTINUE   posunout a přejít do stavu 39
+    LDEFER      posunout a přejít do stavu 40
+    LFALL       posunout a přejít do stavu 41
+    LFOR        posunout a přejít do stavu 42
+    LFUNC       posunout a přejít do stavu 113
+    LGO         posunout a přejít do stavu 44
+    LGOTO       posunout a přejít do stavu 45
+    LIF         posunout a přejít do stavu 46
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRETURN     posunout a přejít do stavu 49
+    LSELECT     posunout a přejít do stavu 50
+    LSTRUCT     posunout a přejít do stavu 51
+    LSWITCH     posunout a přejít do stavu 52
+    LTYPE       posunout a přejít do stavu 53
+    LVAR        posunout a přejít do stavu 54
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 326
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
     LCASE     reduce using rule 250 (stmt)
     LDEFAULT  reduce using rule 250 (stmt)
     ';'       reduce using rule 250 (stmt)
     '}'       reduce using rule 250 (stmt)
 
-    common_dcl        go to state 327
-    lconst            go to state 67
-    simple_stmt       go to state 68
-    compound_stmt     go to state 328
-    for_stmt          go to state 69
-    if_stmt           go to state 70
-    switch_stmt       go to state 71
-    select_stmt       go to state 72
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    new_name          go to state 78
-    sym               go to state 79
-    hidden_importsym  go to state 13
-    name              go to state 80
-    labelname         go to state 81
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    stmt              go to state 538
-    non_dcl_stmt      go to state 330
-    expr_list         go to state 92
+    common_dcl        přejít do stavu 327
+    lconst            přejít do stavu 67
+    simple_stmt       přejít do stavu 68
+    compound_stmt     přejít do stavu 328
+    for_stmt          přejít do stavu 69
+    if_stmt           přejít do stavu 70
+    switch_stmt       přejít do stavu 71
+    select_stmt       přejít do stavu 72
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    new_name          přejít do stavu 78
+    sym               přejít do stavu 79
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    labelname         přejít do stavu 81
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    stmt              přejít do stavu 538
+    non_dcl_stmt      přejít do stavu 330
+    expr_list         přejít do stavu 92
 
 
-state 440
+State 440
 
   215 fnliteral: fnlitdcl lbrace stmt_list '}' .
 
-    $default  reduce using rule 215 (fnliteral)
+    $výchozí  reduce using rule 215 (fnliteral)
 
 
-state 441
+State 441
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -15311,63 +15310,63 @@ state 441
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 539
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 539
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 442
+State 442
 
   325 hidden_type_misc: LCHAN '(' . hidden_type_recv_chan ')'
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
 
-    LCOMM  shift, and go to state 341
+    LCOMM  posunout a přejít do stavu 341
 
-    hidden_type_recv_chan  go to state 540
+    hidden_type_recv_chan  přejít do stavu 540
 
 
-state 443
+State 443
 
   324 hidden_type_misc: LCHAN hidden_type_non_recv_chan .
 
-    $default  reduce using rule 324 (hidden_type_misc)
+    $výchozí  reduce using rule 324 (hidden_type_misc)
 
 
-state 444
+State 444
 
   314 hidden_type_non_recv_chan: hidden_type_misc .
 
-    $default  reduce using rule 314 (hidden_type_non_recv_chan)
+    $výchozí  reduce using rule 314 (hidden_type_non_recv_chan)
 
 
-state 445
+State 445
 
   315 hidden_type_non_recv_chan: hidden_type_func .
 
-    $default  reduce using rule 315 (hidden_type_non_recv_chan)
+    $výchozí  reduce using rule 315 (hidden_type_non_recv_chan)
 
 
-state 446
+State 446
 
   156 sym: . LNAME
   157    | . hidden_importsym
   158    | . '?'
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
-  295 ohidden_funarg_list: .  [')']
+  295 ohidden_funarg_list: . %empty  [')']
   296                    | . hidden_funarg_list
   328 hidden_type_func: LFUNC '(' . ohidden_funarg_list ')' ohidden_funres
   329 hidden_funarg: . sym hidden_type oliteral
@@ -15375,27 +15374,27 @@ state 446
   345 hidden_funarg_list: . hidden_funarg
   346                   | . hidden_funarg_list ',' hidden_funarg
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 295 (ohidden_funarg_list)
+    $výchozí  reduce using rule 295 (ohidden_funarg_list)
 
-    sym                  go to state 350
-    hidden_importsym     go to state 13
-    ohidden_funarg_list  go to state 541
-    hidden_funarg        go to state 351
-    hidden_funarg_list   go to state 467
+    sym                  přejít do stavu 350
+    hidden_importsym     přejít do stavu 13
+    ohidden_funarg_list  přejít do stavu 541
+    hidden_funarg        přejít do stavu 351
+    hidden_funarg_list   přejít do stavu 467
 
 
-state 447
+State 447
 
   156 sym: . LNAME
   157    | . hidden_importsym
   158    | . '?'
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
-  299 ohidden_interfacedcl_list: .  ['}']
+  299 ohidden_interfacedcl_list: . %empty  ['}']
   300                          | . hidden_interfacedcl_list
   311 hidden_type: . hidden_type_misc
   312            | . hidden_type_recv_chan
@@ -15419,32 +15418,32 @@ state 447
   349 hidden_interfacedcl_list: . hidden_interfacedcl
   350                         | . hidden_interfacedcl_list ';' hidden_interfacedcl
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 542
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 542
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 299 (ohidden_interfacedcl_list)
+    $výchozí  reduce using rule 299 (ohidden_interfacedcl_list)
 
-    sym                        go to state 543
-    hidden_importsym           go to state 544
-    ohidden_interfacedcl_list  go to state 545
-    hidden_type                go to state 546
-    hidden_type_misc           go to state 347
-    hidden_type_recv_chan      go to state 348
-    hidden_type_func           go to state 349
-    hidden_interfacedcl        go to state 547
-    hidden_interfacedcl_list   go to state 548
+    sym                        přejít do stavu 543
+    hidden_importsym           přejít do stavu 544
+    ohidden_interfacedcl_list  přejít do stavu 545
+    hidden_type                přejít do stavu 546
+    hidden_type_misc           přejít do stavu 347
+    hidden_type_recv_chan      přejít do stavu 348
+    hidden_type_func           přejít do stavu 349
+    hidden_interfacedcl        přejít do stavu 547
+    hidden_interfacedcl_list   přejít do stavu 548
 
 
-state 448
+State 448
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -15466,52 +15465,52 @@ state 448
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 549
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 549
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 449
+State 449
 
   156 sym: . LNAME
   157    | . hidden_importsym
   158    | . '?'
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
-  297 ohidden_structdcl_list: .  ['}']
+  297 ohidden_structdcl_list: . %empty  ['}']
   298                       | . hidden_structdcl_list
   321 hidden_type_misc: LSTRUCT '{' . ohidden_structdcl_list '}'
   331 hidden_structdcl: . sym hidden_type oliteral
   347 hidden_structdcl_list: . hidden_structdcl
   348                      | . hidden_structdcl_list ';' hidden_structdcl
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 297 (ohidden_structdcl_list)
+    $výchozí  reduce using rule 297 (ohidden_structdcl_list)
 
-    sym                     go to state 550
-    hidden_importsym        go to state 13
-    ohidden_structdcl_list  go to state 551
-    hidden_structdcl        go to state 552
-    hidden_structdcl_list   go to state 553
+    sym                     přejít do stavu 550
+    hidden_importsym        přejít do stavu 13
+    ohidden_structdcl_list  přejít do stavu 551
+    hidden_structdcl        přejít do stavu 552
+    hidden_structdcl_list   přejít do stavu 553
 
 
-state 450
+State 450
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -15533,46 +15532,46 @@ state 450
   327                      | LCOMM LCHAN . hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 554
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 554
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 451
+State 451
 
   323 hidden_type_misc: '*' hidden_type .
 
-    $default  reduce using rule 323 (hidden_type_misc)
+    $výchozí  reduce using rule 323 (hidden_type_misc)
 
 
-state 452
+State 452
 
   338 hidden_literal: LLITERAL .
 
-    $default  reduce using rule 338 (hidden_literal)
+    $výchozí  reduce using rule 338 (hidden_literal)
 
 
-state 453
+State 453
 
   339 hidden_literal: '-' . LLITERAL
 
-    LLITERAL  shift, and go to state 555
+    LLITERAL  posunout a přejít do stavu 555
 
 
-state 454
+State 454
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -15584,46 +15583,46 @@ state 454
   340               | . sym
   342 hidden_constant: '(' . hidden_literal '+' hidden_literal ')'
 
-    LLITERAL  shift, and go to state 452
-    LNAME     shift, and go to state 9
-    '-'       shift, and go to state 453
-    '?'       shift, and go to state 10
-    '@'       shift, and go to state 11
+    LLITERAL  posunout a přejít do stavu 452
+    LNAME     posunout a přejít do stavu 9
+    '-'       posunout a přejít do stavu 453
+    '?'       posunout a přejít do stavu 10
+    '@'       posunout a přejít do stavu 11
 
-    sym               go to state 455
-    hidden_importsym  go to state 13
-    hidden_literal    go to state 556
+    sym               přejít do stavu 455
+    hidden_importsym  přejít do stavu 13
+    hidden_literal    přejít do stavu 556
 
 
-state 455
+State 455
 
   340 hidden_literal: sym .
 
-    $default  reduce using rule 340 (hidden_literal)
+    $výchozí  reduce using rule 340 (hidden_literal)
 
 
-state 456
+State 456
 
   341 hidden_constant: hidden_literal .
 
-    $default  reduce using rule 341 (hidden_constant)
+    $výchozí  reduce using rule 341 (hidden_constant)
 
 
-state 457
+State 457
 
   305 hidden_import: LCONST hidden_pkg_importsym '=' hidden_constant . ';'
 
-    ';'  shift, and go to state 557
+    ';'  posunout a přejít do stavu 557
 
 
-state 458
+State 458
 
   319 hidden_type_misc: '[' LLITERAL . ']' hidden_type
 
-    ']'  shift, and go to state 558
+    ']'  posunout a přejít do stavu 558
 
 
-state 459
+State 459
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -15645,25 +15644,25 @@ state 459
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 559
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 559
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 460
+State 460
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -15677,20 +15676,20 @@ state 460
   341 hidden_constant: . hidden_literal
   342                | . '(' hidden_literal '+' hidden_literal ')'
 
-    LLITERAL  shift, and go to state 452
-    LNAME     shift, and go to state 9
-    '-'       shift, and go to state 453
-    '('       shift, and go to state 454
-    '?'       shift, and go to state 10
-    '@'       shift, and go to state 11
+    LLITERAL  posunout a přejít do stavu 452
+    LNAME     posunout a přejít do stavu 9
+    '-'       posunout a přejít do stavu 453
+    '('       posunout a přejít do stavu 454
+    '?'       posunout a přejít do stavu 10
+    '@'       posunout a přejít do stavu 11
 
-    sym               go to state 455
-    hidden_importsym  go to state 13
-    hidden_literal    go to state 456
-    hidden_constant   go to state 560
+    sym               přejít do stavu 455
+    hidden_importsym  přejít do stavu 13
+    hidden_literal    přejít do stavu 456
+    hidden_constant   přejít do stavu 560
 
 
-state 461
+State 461
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -15712,38 +15711,38 @@ state 461
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
   330 hidden_funarg: sym LDDD . hidden_type oliteral
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 561
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 561
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 462
+State 462
 
-  301 oliteral: .  [')', ',']
+  301 oliteral: . %empty  [')', ',']
   302         | . LLITERAL
   329 hidden_funarg: sym hidden_type . oliteral
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 562
+    oliteral  přejít do stavu 562
 
 
-state 463
+State 463
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -15752,15 +15751,15 @@ state 463
   160                 | . '@' LLITERAL '.' '?'
   207 hidden_fndcl: '(' hidden_funarg_list ')' . sym '(' ohidden_funarg_list ')' ohidden_funres
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym               go to state 563
-    hidden_importsym  go to state 13
+    sym               přejít do stavu 563
+    hidden_importsym  přejít do stavu 13
 
 
-state 464
+State 464
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -15771,61 +15770,61 @@ state 464
   330              | . sym LDDD hidden_type oliteral
   346 hidden_funarg_list: hidden_funarg_list ',' . hidden_funarg
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym               go to state 350
-    hidden_importsym  go to state 13
-    hidden_funarg     go to state 564
+    sym               přejít do stavu 350
+    hidden_importsym  přejít do stavu 13
+    hidden_funarg     přejít do stavu 564
 
 
-state 465
+State 465
 
   308 hidden_import: LFUNC hidden_fndcl fnbody ';' .
 
-    $default  reduce using rule 308 (hidden_import)
+    $výchozí  reduce using rule 308 (hidden_import)
 
 
-state 466
+State 466
 
   206 hidden_fndcl: hidden_pkg_importsym '(' ohidden_funarg_list . ')' ohidden_funres
 
-    ')'  shift, and go to state 565
+    ')'  posunout a přejít do stavu 565
 
 
-state 467
+State 467
 
   296 ohidden_funarg_list: hidden_funarg_list .  [')']
   346 hidden_funarg_list: hidden_funarg_list . ',' hidden_funarg
 
-    ','  shift, and go to state 464
+    ','  posunout a přejít do stavu 464
 
-    $default  reduce using rule 296 (ohidden_funarg_list)
+    $výchozí  reduce using rule 296 (ohidden_funarg_list)
 
 
-state 468
+State 468
 
   303 hidden_import: LIMPORT LNAME LLITERAL ';' .
 
-    $default  reduce using rule 303 (hidden_import)
+    $výchozí  reduce using rule 303 (hidden_import)
 
 
-state 469
+State 469
 
   307 hidden_import: LTYPE hidden_pkgtype hidden_type ';' .
 
-    $default  reduce using rule 307 (hidden_import)
+    $výchozí  reduce using rule 307 (hidden_import)
 
 
-state 470
+State 470
 
   304 hidden_import: LVAR hidden_pkg_importsym hidden_type ';' .
 
-    $default  reduce using rule 304 (hidden_import)
+    $výchozí  reduce using rule 304 (hidden_import)
 
 
-state 471
+State 471
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -15855,49 +15854,49 @@ state 471
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
   208       | LFUNC '(' oarg_type_list_ocomma ')' . fnres
-  211 fnres: .  [error, LLITERAL, LCOLAS, LCASE, LDDD, LDEFAULT, LBODY, ')', ';', '=', ':', '{', '}', ']', ',']
+  211 fnres: . %empty  [error, LLITERAL, LCOLAS, LCASE, LDDD, LDEFAULT, LBODY, ')', ';', '=', ':', '{', '}', ']', ',']
   212      | . fnret_type
   213      | . '(' oarg_type_list_ocomma ')'
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 478
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 478
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 211 (fnres)
+    $výchozí  reduce using rule 211 (fnres)
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    fnret_type        go to state 480
-    dotname           go to state 481
-    othertype         go to state 482
-    ptrtype           go to state 483
-    recvchantype      go to state 484
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 485
-    fnres             go to state 486
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    fnret_type        přejít do stavu 480
+    dotname           přejít do stavu 481
+    othertype         přejít do stavu 482
+    ptrtype           přejít do stavu 483
+    recvchantype      přejít do stavu 484
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 485
+    fnres             přejít do stavu 486
 
     Conflict between rule 211 and token '(' resolved as shift (NotParen < '(').
 
 
-state 472
+State 472
 
   170 ntype: '(' ntype ')' .
 
-    $default  reduce using rule 170 (ntype)
+    $výchozí  reduce using rule 170 (ntype)
 
 
-state 473
+State 473
 
    28 common_dcl: . LVAR vardcl
    29           | . LVAR '(' vardcl_list osemi ')'
@@ -15997,7 +15996,7 @@ state 473
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  250 stmt: .  [';', '}']
+  250 stmt: . %empty  [';', '}']
   251     | . compound_stmt
   252     | . common_dcl
   253     | . non_dcl_stmt
@@ -16020,78 +16019,78 @@ state 473
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    error       shift, and go to state 325
-    LLITERAL    shift, and go to state 35
-    LBREAK      shift, and go to state 36
-    LCHAN       shift, and go to state 37
-    LCONST      shift, and go to state 38
-    LCONTINUE   shift, and go to state 39
-    LDEFER      shift, and go to state 40
-    LFALL       shift, and go to state 41
-    LFOR        shift, and go to state 42
-    LFUNC       shift, and go to state 113
-    LGO         shift, and go to state 44
-    LGOTO       shift, and go to state 45
-    LIF         shift, and go to state 46
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRETURN     shift, and go to state 49
-    LSELECT     shift, and go to state 50
-    LSTRUCT     shift, and go to state 51
-    LSWITCH     shift, and go to state 52
-    LTYPE       shift, and go to state 53
-    LVAR        shift, and go to state 54
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 326
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    error       posunout a přejít do stavu 325
+    LLITERAL    posunout a přejít do stavu 35
+    LBREAK      posunout a přejít do stavu 36
+    LCHAN       posunout a přejít do stavu 37
+    LCONST      posunout a přejít do stavu 38
+    LCONTINUE   posunout a přejít do stavu 39
+    LDEFER      posunout a přejít do stavu 40
+    LFALL       posunout a přejít do stavu 41
+    LFOR        posunout a přejít do stavu 42
+    LFUNC       posunout a přejít do stavu 113
+    LGO         posunout a přejít do stavu 44
+    LGOTO       posunout a přejít do stavu 45
+    LIF         posunout a přejít do stavu 46
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRETURN     posunout a přejít do stavu 49
+    LSELECT     posunout a přejít do stavu 50
+    LSTRUCT     posunout a přejít do stavu 51
+    LSWITCH     posunout a přejít do stavu 52
+    LTYPE       posunout a přejít do stavu 53
+    LVAR        posunout a přejít do stavu 54
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 326
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
     ';'  reduce using rule 250 (stmt)
     '}'  reduce using rule 250 (stmt)
 
-    common_dcl        go to state 327
-    lconst            go to state 67
-    simple_stmt       go to state 68
-    compound_stmt     go to state 328
-    for_stmt          go to state 69
-    if_stmt           go to state 70
-    switch_stmt       go to state 71
-    select_stmt       go to state 72
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    new_name          go to state 78
-    sym               go to state 79
-    hidden_importsym  go to state 13
-    name              go to state 80
-    labelname         go to state 81
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    stmt              go to state 329
-    non_dcl_stmt      go to state 330
-    stmt_list         go to state 566
-    expr_list         go to state 92
+    common_dcl        přejít do stavu 327
+    lconst            přejít do stavu 67
+    simple_stmt       přejít do stavu 68
+    compound_stmt     přejít do stavu 328
+    for_stmt          přejít do stavu 69
+    if_stmt           přejít do stavu 70
+    switch_stmt       přejít do stavu 71
+    select_stmt       přejít do stavu 72
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    new_name          přejít do stavu 78
+    sym               přejít do stavu 79
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    labelname         přejít do stavu 81
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    stmt              přejít do stavu 329
+    non_dcl_stmt      přejít do stavu 330
+    stmt_list         přejít do stavu 566
+    expr_list         přejít do stavu 92
 
 
-state 474
+State 474
 
    68 range_stmt: expr_list LCOLAS LRANGE . expr
    92 expr: . uexpr
@@ -16168,45 +16167,45 @@ state 474
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 567
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 567
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 475
+State 475
 
    67 range_stmt: expr_list '=' LRANGE . expr
    92 expr: . uexpr
@@ -16283,59 +16282,59 @@ state 475
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 568
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 568
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 476
+State 476
 
    69 for_header: osimple_stmt ';' osimple_stmt . ';' osimple_stmt
 
-    ';'  shift, and go to state 569
+    ';'  posunout a přejít do stavu 569
 
 
-state 477
+State 477
 
   247 arg_type_list: arg_type_list ',' arg_type .
 
-    $default  reduce using rule 247 (arg_type_list)
+    $výchozí  reduce using rule 247 (arg_type_list)
 
 
-state 478
+State 478
 
   149 name_or_type: . ntype
   156 sym: . LNAME
@@ -16375,105 +16374,105 @@ state 478
   245         | . dotdotdot
   246 arg_type_list: . arg_type
   247              | . arg_type_list ',' arg_type
-  248 oarg_type_list_ocomma: .  [')']
+  248 oarg_type_list_ocomma: . %empty  [')']
   249                      | . arg_type_list ocomma
 
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 242
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 242
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 248 (oarg_type_list_ocomma)
+    $výchozí  reduce using rule 248 (oarg_type_list_ocomma)
 
-    name_or_type           go to state 243
-    sym                    go to state 244
-    hidden_importsym       go to state 13
-    name                   go to state 118
-    dotdotdot              go to state 245
-    ntype                  go to state 246
-    dotname                go to state 228
-    othertype              go to state 229
-    ptrtype                go to state 230
-    recvchantype           go to state 231
-    structtype             go to state 85
-    interfacetype          go to state 86
-    fntype                 go to state 232
-    arg_type               go to state 247
-    arg_type_list          go to state 248
-    oarg_type_list_ocomma  go to state 570
+    name_or_type           přejít do stavu 243
+    sym                    přejít do stavu 244
+    hidden_importsym       přejít do stavu 13
+    name                   přejít do stavu 118
+    dotdotdot              přejít do stavu 245
+    ntype                  přejít do stavu 246
+    dotname                přejít do stavu 228
+    othertype              přejít do stavu 229
+    ptrtype                přejít do stavu 230
+    recvchantype           přejít do stavu 231
+    structtype             přejít do stavu 85
+    interfacetype          přejít do stavu 86
+    fntype                 přejít do stavu 232
+    arg_type               přejít do stavu 247
+    arg_type_list          přejít do stavu 248
+    oarg_type_list_ocomma  přejít do stavu 570
 
 
-state 479
+State 479
 
   161 name: sym .  [error, LBODY, '.', '{']
   205 fndcl: '(' oarg_type_list_ocomma ')' sym . '(' oarg_type_list_ocomma ')' fnres
 
-    '('  shift, and go to state 571
+    '('  posunout a přejít do stavu 571
 
-    $default  reduce using rule 161 (name)
+    $výchozí  reduce using rule 161 (name)
 
     Conflict between rule 161 and token '(' resolved as shift (NotParen < '(').
 
 
-state 480
+State 480
 
   212 fnres: fnret_type .
 
-    $default  reduce using rule 212 (fnres)
+    $výchozí  reduce using rule 212 (fnres)
 
 
-state 481
+State 481
 
   187 fnret_type: dotname .
 
-    $default  reduce using rule 187 (fnret_type)
+    $výchozí  reduce using rule 187 (fnret_type)
 
 
-state 482
+State 482
 
   185 fnret_type: othertype .
 
-    $default  reduce using rule 185 (fnret_type)
+    $výchozí  reduce using rule 185 (fnret_type)
 
 
-state 483
+State 483
 
   186 fnret_type: ptrtype .
 
-    $default  reduce using rule 186 (fnret_type)
+    $výchozí  reduce using rule 186 (fnret_type)
 
 
-state 484
+State 484
 
   183 fnret_type: recvchantype .
 
-    $default  reduce using rule 183 (fnret_type)
+    $výchozí  reduce using rule 183 (fnret_type)
 
 
-state 485
+State 485
 
   184 fnret_type: fntype .
 
-    $default  reduce using rule 184 (fnret_type)
+    $výchozí  reduce using rule 184 (fnret_type)
 
 
-state 486
+State 486
 
   208 fntype: LFUNC '(' oarg_type_list_ocomma ')' fnres .
 
-    $default  reduce using rule 208 (fntype)
+    $výchozí  reduce using rule 208 (fntype)
 
 
-state 487
+State 487
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -16503,106 +16502,106 @@ state 487
   202              | . LINTERFACE lbrace '}'
   204 fndcl: sym '(' oarg_type_list_ocomma ')' . fnres
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
-  211 fnres: .  [';', '{']
+  211 fnres: . %empty  [';', '{']
   212      | . fnret_type
   213      | . '(' oarg_type_list_ocomma ')'
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 478
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 478
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 211 (fnres)
+    $výchozí  reduce using rule 211 (fnres)
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    fnret_type        go to state 480
-    dotname           go to state 481
-    othertype         go to state 482
-    ptrtype           go to state 483
-    recvchantype      go to state 484
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 485
-    fnres             go to state 572
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    fnret_type        přejít do stavu 480
+    dotname           přejít do stavu 481
+    othertype         přejít do stavu 482
+    ptrtype           přejít do stavu 483
+    recvchantype      přejít do stavu 484
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 485
+    fnres             přejít do stavu 572
 
 
-state 488
+State 488
 
   210 fnbody: '{' stmt_list '}' .
 
-    $default  reduce using rule 210 (fnbody)
+    $výchozí  reduce using rule 210 (fnbody)
 
 
-state 489
+State 489
 
-   79 $@9: .
+   79 $@9: . %empty
    80 if_stmt: LIF $@7 if_header $@8 loop_body . $@9 elseif_list else
 
-    $default  reduce using rule 79 ($@9)
+    $výchozí  reduce using rule 79 ($@9)
 
-    $@9  go to state 573
+    $@9  přejít do stavu 573
 
 
-state 490
+State 490
 
    76 if_header: osimple_stmt ';' osimple_stmt .
 
-    $default  reduce using rule 76 (if_header)
+    $výchozí  reduce using rule 76 (if_header)
 
 
-state 491
+State 491
 
   236 packname: LNAME '.' sym .
 
-    $default  reduce using rule 236 (packname)
+    $výchozí  reduce using rule 236 (packname)
 
 
-state 492
+State 492
 
   240 interfacedcl: '(' packname ')' .
 
-    $default  reduce using rule 240 (interfacedcl)
+    $výchozí  reduce using rule 240 (interfacedcl)
 
 
-state 493
+State 493
 
   241 indcl: '(' oarg_type_list_ocomma . ')' fnres
 
-    ')'  shift, and go to state 574
+    ')'  posunout a přejít do stavu 574
 
 
-state 494
+State 494
 
   228 interfacedcl_list: interfacedcl_list ';' interfacedcl .
 
-    $default  reduce using rule 228 (interfacedcl_list)
+    $výchozí  reduce using rule 228 (interfacedcl_list)
 
 
-state 495
+State 495
 
   201 interfacetype: LINTERFACE lbrace interfacedcl_list osemi '}' .
 
-    $default  reduce using rule 201 (interfacetype)
+    $výchozí  reduce using rule 201 (interfacetype)
 
 
-state 496
+State 496
 
   194 othertype: LMAP '[' ntype ']' ntype .
 
-    $default  reduce using rule 194 (othertype)
+    $výchozí  reduce using rule 194 (othertype)
 
 
-state 497
+State 497
 
    55 case: LCASE . expr_or_type_list ':'
    56     | LCASE . expr_or_type_list '=' expr ':'
@@ -16690,199 +16689,199 @@ state 497
   277 expr_or_type_list: . expr_or_type
   278                  | . expr_or_type_list ',' expr_or_type
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 159
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 160
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 159
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 160
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr               go to state 161
-    uexpr              go to state 74
-    pseudocall         go to state 75
-    pexpr_no_paren     go to state 76
-    pexpr              go to state 77
-    expr_or_type       go to state 316
-    sym                go to state 117
-    hidden_importsym   go to state 13
-    name               go to state 80
-    non_expr_type      go to state 163
-    convtype           go to state 82
-    comptype           go to state 83
-    othertype          go to state 164
-    recvchantype       go to state 165
-    structtype         go to state 85
-    interfacetype      go to state 86
-    fntype             go to state 166
-    fnlitdcl           go to state 89
-    fnliteral          go to state 90
-    expr_or_type_list  go to state 575
+    expr               přejít do stavu 161
+    uexpr              přejít do stavu 74
+    pseudocall         přejít do stavu 75
+    pexpr_no_paren     přejít do stavu 76
+    pexpr              přejít do stavu 77
+    expr_or_type       přejít do stavu 316
+    sym                přejít do stavu 117
+    hidden_importsym   přejít do stavu 13
+    name               přejít do stavu 80
+    non_expr_type      přejít do stavu 163
+    convtype           přejít do stavu 82
+    comptype           přejít do stavu 83
+    othertype          přejít do stavu 164
+    recvchantype       přejít do stavu 165
+    structtype         přejít do stavu 85
+    interfacetype      přejít do stavu 86
+    fntype             přejít do stavu 166
+    fnlitdcl           přejít do stavu 89
+    fnliteral          přejít do stavu 90
+    expr_or_type_list  přejít do stavu 575
 
 
-state 498
+State 498
 
    58 case: LDEFAULT . ':'
 
-    ':'  shift, and go to state 576
+    ':'  posunout a přejít do stavu 576
 
 
-state 499
+State 499
 
    91 select_stmt: LSELECT $@13 LBODY caseblock_list '}' .
 
-    $default  reduce using rule 91 (select_stmt)
+    $výchozí  reduce using rule 91 (select_stmt)
 
 
-state 500
+State 500
 
-   61 $@4: .
+   61 $@4: . %empty
    62 caseblock: case . $@4 stmt_list
 
-    $default  reduce using rule 61 ($@4)
+    $výchozí  reduce using rule 61 ($@4)
 
-    $@4  go to state 577
+    $@4  přejít do stavu 577
 
 
-state 501
+State 501
 
    64 caseblock_list: caseblock_list caseblock .
 
-    $default  reduce using rule 64 (caseblock_list)
+    $výchozí  reduce using rule 64 (caseblock_list)
 
 
-state 502
+State 502
 
   234 structdcl: '*' '(' embed . ')' oliteral
 
-    ')'  shift, and go to state 578
+    ')'  posunout a přejít do stavu 578
 
 
-state 503
+State 503
 
   232 structdcl: '*' embed oliteral .
 
-    $default  reduce using rule 232 (structdcl)
+    $výchozí  reduce using rule 232 (structdcl)
 
 
-state 504
+State 504
 
   233 structdcl: '(' '*' embed . ')' oliteral
 
-    ')'  shift, and go to state 579
+    ')'  posunout a přejít do stavu 579
 
 
-state 505
+State 505
 
   231 structdcl: '(' embed ')' . oliteral
-  301 oliteral: .  [';', '}']
+  301 oliteral: . %empty  [';', '}']
   302         | . LLITERAL
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 580
+    oliteral  přejít do stavu 580
 
 
-state 506
+State 506
 
   226 structdcl_list: structdcl_list ';' structdcl .
 
-    $default  reduce using rule 226 (structdcl_list)
+    $výchozí  reduce using rule 226 (structdcl_list)
 
 
-state 507
+State 507
 
   199 structtype: LSTRUCT lbrace structdcl_list osemi '}' .
 
-    $default  reduce using rule 199 (structtype)
+    $výchozí  reduce using rule 199 (structtype)
 
 
-state 508
+State 508
 
   272 new_name_list: new_name_list ',' new_name .
 
-    $default  reduce using rule 272 (new_name_list)
+    $výchozí  reduce using rule 272 (new_name_list)
 
 
-state 509
+State 509
 
   229 structdcl: new_name_list ntype oliteral .
 
-    $default  reduce using rule 229 (structdcl)
+    $výchozí  reduce using rule 229 (structdcl)
 
 
-state 510
+State 510
 
-   63 caseblock_list: .
+   63 caseblock_list: . %empty
    64               | . caseblock_list caseblock
    89 switch_stmt: LSWITCH $@11 if_header $@12 LBODY . caseblock_list '}'
 
-    $default  reduce using rule 63 (caseblock_list)
+    $výchozí  reduce using rule 63 (caseblock_list)
 
-    caseblock_list  go to state 581
+    caseblock_list  přejít do stavu 581
 
 
-state 511
+State 511
 
   224 typedcl_list: typedcl_list ';' typedcl .
 
-    $default  reduce using rule 224 (typedcl_list)
+    $výchozí  reduce using rule 224 (typedcl_list)
 
 
-state 512
+State 512
 
    36 common_dcl: LTYPE '(' typedcl_list osemi ')' .
 
-    $default  reduce using rule 36 (common_dcl)
+    $výchozí  reduce using rule 36 (common_dcl)
 
 
-state 513
+State 513
 
   220 vardcl_list: vardcl_list ';' vardcl .
 
-    $default  reduce using rule 220 (vardcl_list)
+    $výchozí  reduce using rule 220 (vardcl_list)
 
 
-state 514
+State 514
 
    29 common_dcl: LVAR '(' vardcl_list osemi ')' .
 
-    $default  reduce using rule 29 (common_dcl)
+    $výchozí  reduce using rule 29 (common_dcl)
 
 
-state 515
+State 515
 
    40 vardcl: dcl_name_list ntype '=' expr_list .  [LCASE, LDEFAULT, ')', ';', '}']
   276 expr_list: expr_list . ',' expr
 
-    ','  shift, and go to state 210
+    ','  posunout a přejít do stavu 210
 
-    $default  reduce using rule 40 (vardcl)
+    $výchozí  reduce using rule 40 (vardcl)
 
 
-state 516
+State 516
 
   170 ntype: '(' ntype . ')'
   179 non_recvchantype: '(' ntype . ')'
 
-    ')'  shift, and go to state 582
+    ')'  posunout a přejít do stavu 582
 
 
-state 517
+State 517
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -16965,83 +16964,83 @@ state 517
   280            | . bare_complitexpr
   281            | . keyval_list ',' keyval
   282            | . keyval_list ',' bare_complitexpr
-  283 braced_keyval_list: .  ['}']
+  283 braced_keyval_list: . %empty  ['}']
   284                   | . keyval_list ocomma
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 421
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 421
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 283 (braced_keyval_list)
+    $výchozí  reduce using rule 283 (braced_keyval_list)
 
-    expr                go to state 422
-    uexpr               go to state 74
-    pseudocall          go to state 75
-    pexpr_no_paren      go to state 76
-    keyval              go to state 423
-    bare_complitexpr    go to state 424
-    pexpr               go to state 77
-    sym                 go to state 117
-    hidden_importsym    go to state 13
-    name                go to state 80
-    convtype            go to state 82
-    comptype            go to state 83
-    othertype           go to state 84
-    structtype          go to state 85
-    interfacetype       go to state 86
-    fntype              go to state 88
-    fnlitdcl            go to state 89
-    fnliteral           go to state 90
-    keyval_list         go to state 425
-    braced_keyval_list  go to state 583
+    expr                přejít do stavu 422
+    uexpr               přejít do stavu 74
+    pseudocall          přejít do stavu 75
+    pexpr_no_paren      přejít do stavu 76
+    keyval              přejít do stavu 423
+    bare_complitexpr    přejít do stavu 424
+    pexpr               přejít do stavu 77
+    sym                 přejít do stavu 117
+    hidden_importsym    přejít do stavu 13
+    name                přejít do stavu 80
+    convtype            přejít do stavu 82
+    comptype            přejít do stavu 83
+    othertype           přejít do stavu 84
+    structtype          přejít do stavu 85
+    interfacetype       přejít do stavu 86
+    fntype              přejít do stavu 88
+    fnlitdcl            přejít do stavu 89
+    fnliteral           přejít do stavu 90
+    keyval_list         přejít do stavu 425
+    braced_keyval_list  přejít do stavu 583
 
 
-state 518
+State 518
 
    44 constdcl1: constdcl .
 
-    $default  reduce using rule 44 (constdcl1)
+    $výchozí  reduce using rule 44 (constdcl1)
 
 
-state 519
+State 519
 
   221 constdcl_list: constdcl1 .
 
-    $default  reduce using rule 221 (constdcl_list)
+    $výchozí  reduce using rule 221 (constdcl_list)
 
 
-state 520
+State 520
 
    33 common_dcl: lconst '(' constdcl ';' constdcl_list . osemi ')'
   222 constdcl_list: constdcl_list . ';' constdcl1
-  285 osemi: .  [')']
+  285 osemi: . %empty  [')']
   286      | . ';'
 
-    ';'  shift, and go to state 584
+    ';'  posunout a přejít do stavu 584
 
-    $default  reduce using rule 285 (osemi)
+    $výchozí  reduce using rule 285 (osemi)
 
-    osemi  go to state 585
+    osemi  přejít do stavu 585
 
 
-state 521
+State 521
 
    42 constdcl: dcl_name_list . ntype '=' expr_list
    43         | dcl_name_list . '=' expr_list
@@ -17077,54 +17076,54 @@ state 521
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
   274 dcl_name_list: dcl_name_list . ',' dcl_name
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '='         shift, and go to state 291
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
-    ','         shift, and go to state 282
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '='         posunout a přejít do stavu 291
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
+    ','         posunout a přejít do stavu 282
 
-    $default  reduce using rule 46 (constdcl1)
+    $výchozí  reduce using rule 46 (constdcl1)
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    ntype             go to state 586
-    dotname           go to state 228
-    othertype         go to state 229
-    ptrtype           go to state 230
-    recvchantype      go to state 231
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 232
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    ntype             přejít do stavu 586
+    dotname           přejít do stavu 228
+    othertype         přejít do stavu 229
+    ptrtype           přejít do stavu 230
+    recvchantype      přejít do stavu 231
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 232
 
 
-state 522
+State 522
 
    32 common_dcl: lconst '(' constdcl osemi ')' .
 
-    $default  reduce using rule 32 (common_dcl)
+    $výchozí  reduce using rule 32 (common_dcl)
 
 
-state 523
+State 523
 
    42 constdcl: dcl_name_list ntype '=' expr_list .  [LCASE, LDEFAULT, ')', ';', '}']
   276 expr_list: expr_list . ',' expr
 
-    ','  shift, and go to state 210
+    ','  posunout a přejít do stavu 210
 
-    $default  reduce using rule 42 (constdcl)
+    $výchozí  reduce using rule 42 (constdcl)
 
 
-state 524
+State 524
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -17207,55 +17206,55 @@ state 524
   280            | . bare_complitexpr
   281            | . keyval_list ',' keyval
   282            | . keyval_list ',' bare_complitexpr
-  283 braced_keyval_list: .  ['}']
+  283 braced_keyval_list: . %empty  ['}']
   284                   | . keyval_list ocomma
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 421
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 421
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 283 (braced_keyval_list)
+    $výchozí  reduce using rule 283 (braced_keyval_list)
 
-    expr                go to state 422
-    uexpr               go to state 74
-    pseudocall          go to state 75
-    pexpr_no_paren      go to state 76
-    keyval              go to state 423
-    bare_complitexpr    go to state 424
-    pexpr               go to state 77
-    sym                 go to state 117
-    hidden_importsym    go to state 13
-    name                go to state 80
-    convtype            go to state 82
-    comptype            go to state 83
-    othertype           go to state 84
-    structtype          go to state 85
-    interfacetype       go to state 86
-    fntype              go to state 88
-    fnlitdcl            go to state 89
-    fnliteral           go to state 90
-    keyval_list         go to state 425
-    braced_keyval_list  go to state 587
+    expr                přejít do stavu 422
+    uexpr               přejít do stavu 74
+    pseudocall          přejít do stavu 75
+    pexpr_no_paren      přejít do stavu 76
+    keyval              přejít do stavu 423
+    bare_complitexpr    přejít do stavu 424
+    pexpr               přejít do stavu 77
+    sym                 přejít do stavu 117
+    hidden_importsym    přejít do stavu 13
+    name                přejít do stavu 80
+    convtype            přejít do stavu 82
+    comptype            přejít do stavu 83
+    othertype           přejít do stavu 84
+    structtype          přejít do stavu 85
+    interfacetype       přejít do stavu 86
+    fntype              přejít do stavu 88
+    fnlitdcl            přejít do stavu 89
+    fnliteral           přejít do stavu 90
+    keyval_list         přejít do stavu 425
+    braced_keyval_list  přejít do stavu 587
 
 
-state 525
+State 525
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -17334,47 +17333,47 @@ state 525
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 588
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 588
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 589
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    complitexpr       go to state 590
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 589
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    complitexpr       přejít do stavu 590
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 526
+State 526
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -17456,222 +17455,222 @@ state 526
   282            | keyval_list ',' . bare_complitexpr
   288 ocomma: ',' .  ['}']
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 421
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 421
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 288 (ocomma)
+    $výchozí  reduce using rule 288 (ocomma)
 
-    expr              go to state 422
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    keyval            go to state 591
-    bare_complitexpr  go to state 592
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 422
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    keyval            přejít do stavu 591
+    bare_complitexpr  přejít do stavu 592
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 527
+State 527
 
   284 braced_keyval_list: keyval_list ocomma .
 
-    $default  reduce using rule 284 (braced_keyval_list)
+    $výchozí  reduce using rule 284 (braced_keyval_list)
 
 
-state 528
+State 528
 
   136 pexpr_no_paren: pexpr_no_paren '{' start_complit braced_keyval_list '}' .
 
-    $default  reduce using rule 136 (pexpr_no_paren)
+    $výchozí  reduce using rule 136 (pexpr_no_paren)
 
 
-state 529
+State 529
 
   124 pseudocall: pexpr '(' expr_or_type_list LDDD ocomma . ')'
 
-    ')'  shift, and go to state 593
+    ')'  posunout a přejít do stavu 593
 
 
-state 530
+State 530
 
   278 expr_or_type_list: expr_or_type_list ',' expr_or_type .
 
-    $default  reduce using rule 278 (expr_or_type_list)
+    $výchozí  reduce using rule 278 (expr_or_type_list)
 
 
-state 531
+State 531
 
   123 pseudocall: pexpr '(' expr_or_type_list ocomma ')' .
 
-    $default  reduce using rule 123 (pseudocall)
+    $výchozí  reduce using rule 123 (pseudocall)
 
 
-state 532
+State 532
 
   129 pexpr_no_paren: pexpr '.' '(' LTYPE ')' .
 
-    $default  reduce using rule 129 (pexpr_no_paren)
+    $výchozí  reduce using rule 129 (pexpr_no_paren)
 
 
-state 533
+State 533
 
   128 pexpr_no_paren: pexpr '.' '(' expr_or_type ')' .
 
-    $default  reduce using rule 128 (pexpr_no_paren)
+    $výchozí  reduce using rule 128 (pexpr_no_paren)
 
 
-state 534
+State 534
 
   131 pexpr_no_paren: pexpr '[' oexpr ':' oexpr . ']'
   132               | pexpr '[' oexpr ':' oexpr . ':' oexpr ']'
 
-    ':'  shift, and go to state 594
-    ']'  shift, and go to state 595
+    ':'  posunout a přejít do stavu 594
+    ']'  posunout a přejít do stavu 595
 
 
-state 535
+State 535
 
   134 pexpr_no_paren: convtype '(' expr ocomma ')' .
 
-    $default  reduce using rule 134 (pexpr_no_paren)
+    $výchozí  reduce using rule 134 (pexpr_no_paren)
 
 
-state 536
+State 536
 
   135 pexpr_no_paren: comptype lbrace start_complit braced_keyval_list '}' .
 
-    $default  reduce using rule 135 (pexpr_no_paren)
+    $výchozí  reduce using rule 135 (pexpr_no_paren)
 
 
-state 537
+State 537
 
    60 compound_stmt: '{' $@3 stmt_list . '}'
   270 stmt_list: stmt_list . ';' stmt
 
-    ';'  shift, and go to state 439
-    '}'  shift, and go to state 596
+    ';'  posunout a přejít do stavu 439
+    '}'  posunout a přejít do stavu 596
 
 
-state 538
+State 538
 
   270 stmt_list: stmt_list ';' stmt .
 
-    $default  reduce using rule 270 (stmt_list)
+    $výchozí  reduce using rule 270 (stmt_list)
 
 
-state 539
+State 539
 
   326 hidden_type_misc: LCHAN LCOMM hidden_type .
 
-    $default  reduce using rule 326 (hidden_type_misc)
+    $výchozí  reduce using rule 326 (hidden_type_misc)
 
 
-state 540
+State 540
 
   325 hidden_type_misc: LCHAN '(' hidden_type_recv_chan . ')'
 
-    ')'  shift, and go to state 597
+    ')'  posunout a přejít do stavu 597
 
 
-state 541
+State 541
 
   328 hidden_type_func: LFUNC '(' ohidden_funarg_list . ')' ohidden_funres
 
-    ')'  shift, and go to state 598
+    ')'  posunout a přejít do stavu 598
 
 
-state 542
+State 542
 
   156 sym: LNAME .  ['(']
   317 hidden_type_misc: LNAME .  [';', '}']
 
-    '('       reduce using rule 156 (sym)
-    $default  reduce using rule 317 (hidden_type_misc)
+    '('         reduce using rule 156 (sym)
+    $výchozí  reduce using rule 317 (hidden_type_misc)
 
 
-state 543
+State 543
 
   332 hidden_interfacedcl: sym . '(' ohidden_funarg_list ')' ohidden_funres
 
-    '('  shift, and go to state 599
+    '('  posunout a přejít do stavu 599
 
 
-state 544
+State 544
 
   157 sym: hidden_importsym .  ['(']
   316 hidden_type_misc: hidden_importsym .  [';', '}']
 
-    '('       reduce using rule 157 (sym)
-    $default  reduce using rule 316 (hidden_type_misc)
+    '('         reduce using rule 157 (sym)
+    $výchozí  reduce using rule 316 (hidden_type_misc)
 
 
-state 545
+State 545
 
   322 hidden_type_misc: LINTERFACE '{' ohidden_interfacedcl_list . '}'
 
-    '}'  shift, and go to state 600
+    '}'  posunout a přejít do stavu 600
 
 
-state 546
+State 546
 
   333 hidden_interfacedcl: hidden_type .
 
-    $default  reduce using rule 333 (hidden_interfacedcl)
+    $výchozí  reduce using rule 333 (hidden_interfacedcl)
 
 
-state 547
+State 547
 
   349 hidden_interfacedcl_list: hidden_interfacedcl .
 
-    $default  reduce using rule 349 (hidden_interfacedcl_list)
+    $výchozí  reduce using rule 349 (hidden_interfacedcl_list)
 
 
-state 548
+State 548
 
   300 ohidden_interfacedcl_list: hidden_interfacedcl_list .  ['}']
   350 hidden_interfacedcl_list: hidden_interfacedcl_list . ';' hidden_interfacedcl
 
-    ';'  shift, and go to state 601
+    ';'  posunout a přejít do stavu 601
 
-    $default  reduce using rule 300 (ohidden_interfacedcl_list)
+    $výchozí  reduce using rule 300 (ohidden_interfacedcl_list)
 
 
-state 549
+State 549
 
   320 hidden_type_misc: LMAP '[' hidden_type . ']' hidden_type
 
-    ']'  shift, and go to state 602
+    ']'  posunout a přejít do stavu 602
 
 
-state 550
+State 550
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -17693,77 +17692,77 @@ state 550
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
   331 hidden_structdcl: sym . hidden_type oliteral
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 603
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 603
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 551
+State 551
 
   321 hidden_type_misc: LSTRUCT '{' ohidden_structdcl_list . '}'
 
-    '}'  shift, and go to state 604
+    '}'  posunout a přejít do stavu 604
 
 
-state 552
+State 552
 
   347 hidden_structdcl_list: hidden_structdcl .
 
-    $default  reduce using rule 347 (hidden_structdcl_list)
+    $výchozí  reduce using rule 347 (hidden_structdcl_list)
 
 
-state 553
+State 553
 
   298 ohidden_structdcl_list: hidden_structdcl_list .  ['}']
   348 hidden_structdcl_list: hidden_structdcl_list . ';' hidden_structdcl
 
-    ';'  shift, and go to state 605
+    ';'  posunout a přejít do stavu 605
 
-    $default  reduce using rule 298 (ohidden_structdcl_list)
+    $výchozí  reduce using rule 298 (ohidden_structdcl_list)
 
 
-state 554
+State 554
 
   327 hidden_type_recv_chan: LCOMM LCHAN hidden_type .
 
-    $default  reduce using rule 327 (hidden_type_recv_chan)
+    $výchozí  reduce using rule 327 (hidden_type_recv_chan)
 
 
-state 555
+State 555
 
   339 hidden_literal: '-' LLITERAL .
 
-    $default  reduce using rule 339 (hidden_literal)
+    $výchozí  reduce using rule 339 (hidden_literal)
 
 
-state 556
+State 556
 
   342 hidden_constant: '(' hidden_literal . '+' hidden_literal ')'
 
-    '+'  shift, and go to state 606
+    '+'  posunout a přejít do stavu 606
 
 
-state 557
+State 557
 
   305 hidden_import: LCONST hidden_pkg_importsym '=' hidden_constant ';' .
 
-    $default  reduce using rule 305 (hidden_import)
+    $výchozí  reduce using rule 305 (hidden_import)
 
 
-state 558
+State 558
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -17785,73 +17784,73 @@ state 558
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 607
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 607
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 559
+State 559
 
   318 hidden_type_misc: '[' ']' hidden_type .
 
-    $default  reduce using rule 318 (hidden_type_misc)
+    $výchozí  reduce using rule 318 (hidden_type_misc)
 
 
-state 560
+State 560
 
   306 hidden_import: LCONST hidden_pkg_importsym hidden_type '=' hidden_constant . ';'
 
-    ';'  shift, and go to state 608
+    ';'  posunout a přejít do stavu 608
 
 
-state 561
+State 561
 
-  301 oliteral: .  [')', ',']
+  301 oliteral: . %empty  [')', ',']
   302         | . LLITERAL
   330 hidden_funarg: sym LDDD hidden_type . oliteral
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 609
+    oliteral  přejít do stavu 609
 
 
-state 562
+State 562
 
   329 hidden_funarg: sym hidden_type oliteral .
 
-    $default  reduce using rule 329 (hidden_funarg)
+    $výchozí  reduce using rule 329 (hidden_funarg)
 
 
-state 563
+State 563
 
   207 hidden_fndcl: '(' hidden_funarg_list ')' sym . '(' ohidden_funarg_list ')' ohidden_funres
 
-    '('  shift, and go to state 610
+    '('  posunout a přejít do stavu 610
 
 
-state 564
+State 564
 
   346 hidden_funarg_list: hidden_funarg_list ',' hidden_funarg .
 
-    $default  reduce using rule 346 (hidden_funarg_list)
+    $výchozí  reduce using rule 346 (hidden_funarg_list)
 
 
-state 565
+State 565
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -17872,44 +17871,44 @@ state 565
   326                 | . LCHAN LCOMM hidden_type
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
-  334 ohidden_funres: .  [';', '{']
+  334 ohidden_funres: . %empty  [';', '{']
   335               | . hidden_funres
   336 hidden_funres: . '(' ohidden_funarg_list ')'
   337              | . hidden_type
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '('         shift, and go to state 611
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '('         posunout a přejít do stavu 611
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 334 (ohidden_funres)
+    $výchozí  reduce using rule 334 (ohidden_funres)
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 612
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
-    ohidden_funres         go to state 613
-    hidden_funres          go to state 614
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 612
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
+    ohidden_funres         přejít do stavu 613
+    hidden_funres          přejít do stavu 614
 
 
-state 566
+State 566
 
    66 loop_body: LBODY $@5 stmt_list . '}'
   270 stmt_list: stmt_list . ';' stmt
 
-    ';'  shift, and go to state 439
-    '}'  shift, and go to state 615
+    ';'  posunout a přejít do stavu 439
+    '}'  posunout a přejít do stavu 615
 
 
-state 567
+State 567
 
    68 range_stmt: expr_list LCOLAS LRANGE expr .  [LBODY]
    93 expr: expr . LOROR expr
@@ -17933,31 +17932,31 @@ state 567
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 68 (range_stmt)
+    $výchozí  reduce using rule 68 (range_stmt)
 
 
-state 568
+State 568
 
    67 range_stmt: expr_list '=' LRANGE expr .  [LBODY]
    93 expr: expr . LOROR expr
@@ -17981,31 +17980,31 @@ state 568
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 67 (range_stmt)
+    $výchozí  reduce using rule 67 (range_stmt)
 
 
-state 569
+State 569
 
    49 simple_stmt: . expr
    50            | . expr LASOP expr
@@ -18089,60 +18088,60 @@ state 569
   216          | . fnlitdcl error
   275 expr_list: . expr
   276          | . expr_list ',' expr
-  293 osimple_stmt: .  [LBODY]
+  293 osimple_stmt: . %empty  [LBODY]
   294             | . simple_stmt
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 293 (osimple_stmt)
+    $výchozí  reduce using rule 293 (osimple_stmt)
 
-    simple_stmt       go to state 236
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 92
-    osimple_stmt      go to state 616
+    simple_stmt       přejít do stavu 236
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 92
+    osimple_stmt      přejít do stavu 616
 
 
-state 570
+State 570
 
   213 fnres: '(' oarg_type_list_ocomma . ')'
 
-    ')'  shift, and go to state 617
+    ')'  posunout a přejít do stavu 617
 
 
-state 571
+State 571
 
   149 name_or_type: . ntype
   156 sym: . LNAME
@@ -18182,62 +18181,62 @@ state 571
   245         | . dotdotdot
   246 arg_type_list: . arg_type
   247              | . arg_type_list ',' arg_type
-  248 oarg_type_list_ocomma: .  [')']
+  248 oarg_type_list_ocomma: . %empty  [')']
   249                      | . arg_type_list ocomma
 
-    LCHAN       shift, and go to state 37
-    LDDD        shift, and go to state 242
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 226
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LDDD        posunout a přejít do stavu 242
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 226
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 248 (oarg_type_list_ocomma)
+    $výchozí  reduce using rule 248 (oarg_type_list_ocomma)
 
-    name_or_type           go to state 243
-    sym                    go to state 244
-    hidden_importsym       go to state 13
-    name                   go to state 118
-    dotdotdot              go to state 245
-    ntype                  go to state 246
-    dotname                go to state 228
-    othertype              go to state 229
-    ptrtype                go to state 230
-    recvchantype           go to state 231
-    structtype             go to state 85
-    interfacetype          go to state 86
-    fntype                 go to state 232
-    arg_type               go to state 247
-    arg_type_list          go to state 248
-    oarg_type_list_ocomma  go to state 618
+    name_or_type           přejít do stavu 243
+    sym                    přejít do stavu 244
+    hidden_importsym       přejít do stavu 13
+    name                   přejít do stavu 118
+    dotdotdot              přejít do stavu 245
+    ntype                  přejít do stavu 246
+    dotname                přejít do stavu 228
+    othertype              přejít do stavu 229
+    ptrtype                přejít do stavu 230
+    recvchantype           přejít do stavu 231
+    structtype             přejít do stavu 85
+    interfacetype          přejít do stavu 86
+    fntype                 přejít do stavu 232
+    arg_type               přejít do stavu 247
+    arg_type_list          přejít do stavu 248
+    oarg_type_list_ocomma  přejít do stavu 618
 
 
-state 572
+State 572
 
   204 fndcl: sym '(' oarg_type_list_ocomma ')' fnres .
 
-    $default  reduce using rule 204 (fndcl)
+    $výchozí  reduce using rule 204 (fndcl)
 
 
-state 573
+State 573
 
    80 if_stmt: LIF $@7 if_header $@8 loop_body $@9 . elseif_list else
-   83 elseif_list: .
+   83 elseif_list: . %empty
    84            | . elseif_list elseif
 
-    $default  reduce using rule 83 (elseif_list)
+    $výchozí  reduce using rule 83 (elseif_list)
 
-    elseif_list  go to state 619
+    elseif_list  přejít do stavu 619
 
 
-state 574
+State 574
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -18266,61 +18265,61 @@ state 574
   201 interfacetype: . LINTERFACE lbrace interfacedcl_list osemi '}'
   202              | . LINTERFACE lbrace '}'
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
-  211 fnres: .  [';', '}']
+  211 fnres: . %empty  [';', '}']
   212      | . fnret_type
   213      | . '(' oarg_type_list_ocomma ')'
   241 indcl: '(' oarg_type_list_ocomma ')' . fnres
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 478
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 478
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 211 (fnres)
+    $výchozí  reduce using rule 211 (fnres)
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    fnret_type        go to state 480
-    dotname           go to state 481
-    othertype         go to state 482
-    ptrtype           go to state 483
-    recvchantype      go to state 484
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 485
-    fnres             go to state 620
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    fnret_type        přejít do stavu 480
+    dotname           přejít do stavu 481
+    othertype         přejít do stavu 482
+    ptrtype           přejít do stavu 483
+    recvchantype      přejít do stavu 484
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 485
+    fnres             přejít do stavu 620
 
 
-state 575
+State 575
 
    55 case: LCASE expr_or_type_list . ':'
    56     | LCASE expr_or_type_list . '=' expr ':'
    57     | LCASE expr_or_type_list . LCOLAS expr ':'
   278 expr_or_type_list: expr_or_type_list . ',' expr_or_type
 
-    LCOLAS  shift, and go to state 621
-    '='     shift, and go to state 622
-    ':'     shift, and go to state 623
-    ','     shift, and go to state 624
+    LCOLAS  posunout a přejít do stavu 621
+    '='     posunout a přejít do stavu 622
+    ':'     posunout a přejít do stavu 623
+    ','     posunout a přejít do stavu 624
 
 
-state 576
+State 576
 
    58 case: LDEFAULT ':' .
 
-    $default  reduce using rule 58 (case)
+    $výchozí  reduce using rule 58 (case)
 
 
-state 577
+State 577
 
    28 common_dcl: . LVAR vardcl
    29           | . LVAR '(' vardcl_list osemi ')'
@@ -18420,7 +18419,7 @@ state 577
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  250 stmt: .  [LCASE, LDEFAULT, ';', '}']
+  250 stmt: . %empty  [LCASE, LDEFAULT, ';', '}']
   251     | . compound_stmt
   252     | . common_dcl
   253     | . non_dcl_stmt
@@ -18443,113 +18442,113 @@ state 577
   275 expr_list: . expr
   276          | . expr_list ',' expr
 
-    error       shift, and go to state 325
-    LLITERAL    shift, and go to state 35
-    LBREAK      shift, and go to state 36
-    LCHAN       shift, and go to state 37
-    LCONST      shift, and go to state 38
-    LCONTINUE   shift, and go to state 39
-    LDEFER      shift, and go to state 40
-    LFALL       shift, and go to state 41
-    LFOR        shift, and go to state 42
-    LFUNC       shift, and go to state 113
-    LGO         shift, and go to state 44
-    LGOTO       shift, and go to state 45
-    LIF         shift, and go to state 46
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LRETURN     shift, and go to state 49
-    LSELECT     shift, and go to state 50
-    LSTRUCT     shift, and go to state 51
-    LSWITCH     shift, and go to state 52
-    LTYPE       shift, and go to state 53
-    LVAR        shift, and go to state 54
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 326
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    error       posunout a přejít do stavu 325
+    LLITERAL    posunout a přejít do stavu 35
+    LBREAK      posunout a přejít do stavu 36
+    LCHAN       posunout a přejít do stavu 37
+    LCONST      posunout a přejít do stavu 38
+    LCONTINUE   posunout a přejít do stavu 39
+    LDEFER      posunout a přejít do stavu 40
+    LFALL       posunout a přejít do stavu 41
+    LFOR        posunout a přejít do stavu 42
+    LFUNC       posunout a přejít do stavu 113
+    LGO         posunout a přejít do stavu 44
+    LGOTO       posunout a přejít do stavu 45
+    LIF         posunout a přejít do stavu 46
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LRETURN     posunout a přejít do stavu 49
+    LSELECT     posunout a přejít do stavu 50
+    LSTRUCT     posunout a přejít do stavu 51
+    LSWITCH     posunout a přejít do stavu 52
+    LTYPE       posunout a přejít do stavu 53
+    LVAR        posunout a přejít do stavu 54
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 326
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
     LCASE     reduce using rule 250 (stmt)
     LDEFAULT  reduce using rule 250 (stmt)
     ';'       reduce using rule 250 (stmt)
     '}'       reduce using rule 250 (stmt)
 
-    common_dcl        go to state 327
-    lconst            go to state 67
-    simple_stmt       go to state 68
-    compound_stmt     go to state 328
-    for_stmt          go to state 69
-    if_stmt           go to state 70
-    switch_stmt       go to state 71
-    select_stmt       go to state 72
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    new_name          go to state 78
-    sym               go to state 79
-    hidden_importsym  go to state 13
-    name              go to state 80
-    labelname         go to state 81
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    stmt              go to state 329
-    non_dcl_stmt      go to state 330
-    stmt_list         go to state 625
-    expr_list         go to state 92
+    common_dcl        přejít do stavu 327
+    lconst            přejít do stavu 67
+    simple_stmt       přejít do stavu 68
+    compound_stmt     přejít do stavu 328
+    for_stmt          přejít do stavu 69
+    if_stmt           přejít do stavu 70
+    switch_stmt       přejít do stavu 71
+    select_stmt       přejít do stavu 72
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    new_name          přejít do stavu 78
+    sym               přejít do stavu 79
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    labelname         přejít do stavu 81
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    stmt              přejít do stavu 329
+    non_dcl_stmt      přejít do stavu 330
+    stmt_list         přejít do stavu 625
+    expr_list         přejít do stavu 92
 
 
-state 578
+State 578
 
   234 structdcl: '*' '(' embed ')' . oliteral
-  301 oliteral: .  [';', '}']
+  301 oliteral: . %empty  [';', '}']
   302         | . LLITERAL
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 626
+    oliteral  přejít do stavu 626
 
 
-state 579
+State 579
 
   233 structdcl: '(' '*' embed ')' . oliteral
-  301 oliteral: .  [';', '}']
+  301 oliteral: . %empty  [';', '}']
   302         | . LLITERAL
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 627
+    oliteral  přejít do stavu 627
 
 
-state 580
+State 580
 
   231 structdcl: '(' embed ')' oliteral .
 
-    $default  reduce using rule 231 (structdcl)
+    $výchozí  reduce using rule 231 (structdcl)
 
 
-state 581
+State 581
 
    55 case: . LCASE expr_or_type_list ':'
    56     | . LCASE expr_or_type_list '=' expr ':'
@@ -18559,33 +18558,33 @@ state 581
    64 caseblock_list: caseblock_list . caseblock
    89 switch_stmt: LSWITCH $@11 if_header $@12 LBODY caseblock_list . '}'
 
-    LCASE     shift, and go to state 497
-    LDEFAULT  shift, and go to state 498
-    '}'       shift, and go to state 628
+    LCASE     posunout a přejít do stavu 497
+    LDEFAULT  posunout a přejít do stavu 498
+    '}'       posunout a přejít do stavu 628
 
-    case       go to state 500
-    caseblock  go to state 501
+    case       přejít do stavu 500
+    caseblock  přejít do stavu 501
 
 
-state 582
+State 582
 
   170 ntype: '(' ntype ')' .  [LCOLAS, LDDD, ')', '=', ':', ',']
   179 non_recvchantype: '(' ntype ')' .  [LBODY, '(', '{']
 
-    LBODY     reduce using rule 179 (non_recvchantype)
-    '('       reduce using rule 179 (non_recvchantype)
-    '{'       reduce using rule 179 (non_recvchantype)
-    $default  reduce using rule 170 (ntype)
+    LBODY       reduce using rule 179 (non_recvchantype)
+    '('         reduce using rule 179 (non_recvchantype)
+    '{'         reduce using rule 179 (non_recvchantype)
+    $výchozí  reduce using rule 170 (ntype)
 
 
-state 583
+State 583
 
   137 pexpr_no_paren: '(' expr_or_type ')' '{' start_complit braced_keyval_list . '}'
 
-    '}'  shift, and go to state 629
+    '}'  posunout a přejít do stavu 629
 
 
-state 584
+State 584
 
    42 constdcl: . dcl_name_list ntype '=' expr_list
    43         | . dcl_name_list '=' expr_list
@@ -18603,55 +18602,55 @@ state 584
   274              | . dcl_name_list ',' dcl_name
   286 osemi: ';' .  [')']
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 286 (osemi)
+    $výchozí  reduce using rule 286 (osemi)
 
-    constdcl          go to state 518
-    constdcl1         go to state 630
-    dcl_name          go to state 150
-    sym               go to state 151
-    hidden_importsym  go to state 13
-    dcl_name_list     go to state 521
+    constdcl          přejít do stavu 518
+    constdcl1         přejít do stavu 630
+    dcl_name          přejít do stavu 150
+    sym               přejít do stavu 151
+    hidden_importsym  přejít do stavu 13
+    dcl_name_list     přejít do stavu 521
 
 
-state 585
+State 585
 
    33 common_dcl: lconst '(' constdcl ';' constdcl_list osemi . ')'
 
-    ')'  shift, and go to state 631
+    ')'  posunout a přejít do stavu 631
 
 
-state 586
+State 586
 
    42 constdcl: dcl_name_list ntype . '=' expr_list
    45 constdcl1: dcl_name_list ntype .  [')', ';']
 
-    '='  shift, and go to state 420
+    '='  posunout a přejít do stavu 420
 
-    $default  reduce using rule 45 (constdcl1)
+    $výchozí  reduce using rule 45 (constdcl1)
 
 
-state 587
+State 587
 
   142 bare_complitexpr: '{' start_complit braced_keyval_list . '}'
 
-    '}'  shift, and go to state 632
+    '}'  posunout a přejít do stavu 632
 
 
-state 588
+State 588
 
-  139 start_complit: .
+  139 start_complit: . %empty
   144 complitexpr: '{' . start_complit braced_keyval_list '}'
 
-    $default  reduce using rule 139 (start_complit)
+    $výchozí  reduce using rule 139 (start_complit)
 
-    start_complit  go to state 633
+    start_complit  přejít do stavu 633
 
 
-state 589
+State 589
 
    93 expr: expr . LOROR expr
    94     | expr . LANDAND expr
@@ -18675,59 +18674,59 @@ state 589
   112     | expr . LCOMM expr
   143 complitexpr: expr .  ['}', ',']
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
 
-    $default  reduce using rule 143 (complitexpr)
+    $výchozí  reduce using rule 143 (complitexpr)
 
 
-state 590
+State 590
 
   140 keyval: expr ':' complitexpr .
 
-    $default  reduce using rule 140 (keyval)
+    $výchozí  reduce using rule 140 (keyval)
 
 
-state 591
+State 591
 
   281 keyval_list: keyval_list ',' keyval .
 
-    $default  reduce using rule 281 (keyval_list)
+    $výchozí  reduce using rule 281 (keyval_list)
 
 
-state 592
+State 592
 
   282 keyval_list: keyval_list ',' bare_complitexpr .
 
-    $default  reduce using rule 282 (keyval_list)
+    $výchozí  reduce using rule 282 (keyval_list)
 
 
-state 593
+State 593
 
   124 pseudocall: pexpr '(' expr_or_type_list LDDD ocomma ')' .
 
-    $default  reduce using rule 124 (pseudocall)
+    $výchozí  reduce using rule 124 (pseudocall)
 
 
-state 594
+State 594
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -18803,72 +18802,72 @@ state 594
   214 fnlitdcl: . fntype
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
-  289 oexpr: .  [']']
+  289 oexpr: . %empty  [']']
   290      | . expr
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 289 (oexpr)
+    $výchozí  reduce using rule 289 (oexpr)
 
-    expr              go to state 170
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    oexpr             go to state 634
+    expr              přejít do stavu 170
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    oexpr             přejít do stavu 634
 
 
-state 595
+State 595
 
   131 pexpr_no_paren: pexpr '[' oexpr ':' oexpr ']' .
 
-    $default  reduce using rule 131 (pexpr_no_paren)
+    $výchozí  reduce using rule 131 (pexpr_no_paren)
 
 
-state 596
+State 596
 
    60 compound_stmt: '{' $@3 stmt_list '}' .
 
-    $default  reduce using rule 60 (compound_stmt)
+    $výchozí  reduce using rule 60 (compound_stmt)
 
 
-state 597
+State 597
 
   325 hidden_type_misc: LCHAN '(' hidden_type_recv_chan ')' .
 
-    $default  reduce using rule 325 (hidden_type_misc)
+    $výchozí  reduce using rule 325 (hidden_type_misc)
 
 
-state 598
+State 598
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -18889,42 +18888,42 @@ state 598
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
   328                 | LFUNC '(' ohidden_funarg_list ')' . ohidden_funres
-  334 ohidden_funres: .  [LLITERAL, ')', ';', '=', '{', '}', ']', ',']
+  334 ohidden_funres: . %empty  [LLITERAL, ')', ';', '=', '{', '}', ']', ',']
   335               | . hidden_funres
   336 hidden_funres: . '(' ohidden_funarg_list ')'
   337              | . hidden_type
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '('         shift, and go to state 611
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '('         posunout a přejít do stavu 611
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 334 (ohidden_funres)
+    $výchozí  reduce using rule 334 (ohidden_funres)
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 612
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
-    ohidden_funres         go to state 635
-    hidden_funres          go to state 614
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 612
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
+    ohidden_funres         přejít do stavu 635
+    hidden_funres          přejít do stavu 614
 
 
-state 599
+State 599
 
   156 sym: . LNAME
   157    | . hidden_importsym
   158    | . '?'
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
-  295 ohidden_funarg_list: .  [')']
+  295 ohidden_funarg_list: . %empty  [')']
   296                    | . hidden_funarg_list
   329 hidden_funarg: . sym hidden_type oliteral
   330              | . sym LDDD hidden_type oliteral
@@ -18932,27 +18931,27 @@ state 599
   345 hidden_funarg_list: . hidden_funarg
   346                   | . hidden_funarg_list ',' hidden_funarg
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 295 (ohidden_funarg_list)
+    $výchozí  reduce using rule 295 (ohidden_funarg_list)
 
-    sym                  go to state 350
-    hidden_importsym     go to state 13
-    ohidden_funarg_list  go to state 636
-    hidden_funarg        go to state 351
-    hidden_funarg_list   go to state 467
+    sym                  přejít do stavu 350
+    hidden_importsym     přejít do stavu 13
+    ohidden_funarg_list  přejít do stavu 636
+    hidden_funarg        přejít do stavu 351
+    hidden_funarg_list   přejít do stavu 467
 
 
-state 600
+State 600
 
   322 hidden_type_misc: LINTERFACE '{' ohidden_interfacedcl_list '}' .
 
-    $default  reduce using rule 322 (hidden_type_misc)
+    $výchozí  reduce using rule 322 (hidden_type_misc)
 
 
-state 601
+State 601
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -18979,28 +18978,28 @@ state 601
   333                    | . hidden_type
   350 hidden_interfacedcl_list: hidden_interfacedcl_list ';' . hidden_interfacedcl
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 542
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 542
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    sym                    go to state 543
-    hidden_importsym       go to state 544
-    hidden_type            go to state 546
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
-    hidden_interfacedcl    go to state 637
+    sym                    přejít do stavu 543
+    hidden_importsym       přejít do stavu 544
+    hidden_type            přejít do stavu 546
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
+    hidden_interfacedcl    přejít do stavu 637
 
 
-state 602
+State 602
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -19022,45 +19021,45 @@ state 602
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 638
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 638
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
 
 
-state 603
+State 603
 
-  301 oliteral: .  [';', '}']
+  301 oliteral: . %empty  [';', '}']
   302         | . LLITERAL
   331 hidden_structdcl: sym hidden_type . oliteral
 
-    LLITERAL  shift, and go to state 395
+    LLITERAL  posunout a přejít do stavu 395
 
-    $default  reduce using rule 301 (oliteral)
+    $výchozí  reduce using rule 301 (oliteral)
 
-    oliteral  go to state 639
+    oliteral  přejít do stavu 639
 
 
-state 604
+State 604
 
   321 hidden_type_misc: LSTRUCT '{' ohidden_structdcl_list '}' .
 
-    $default  reduce using rule 321 (hidden_type_misc)
+    $výchozí  reduce using rule 321 (hidden_type_misc)
 
 
-state 605
+State 605
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -19070,16 +19069,16 @@ state 605
   331 hidden_structdcl: . sym hidden_type oliteral
   348 hidden_structdcl_list: hidden_structdcl_list ';' . hidden_structdcl
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    sym               go to state 550
-    hidden_importsym  go to state 13
-    hidden_structdcl  go to state 640
+    sym               přejít do stavu 550
+    hidden_importsym  přejít do stavu 13
+    hidden_structdcl  přejít do stavu 640
 
 
-state 606
+State 606
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -19091,39 +19090,39 @@ state 606
   340               | . sym
   342 hidden_constant: '(' hidden_literal '+' . hidden_literal ')'
 
-    LLITERAL  shift, and go to state 452
-    LNAME     shift, and go to state 9
-    '-'       shift, and go to state 453
-    '?'       shift, and go to state 10
-    '@'       shift, and go to state 11
+    LLITERAL  posunout a přejít do stavu 452
+    LNAME     posunout a přejít do stavu 9
+    '-'       posunout a přejít do stavu 453
+    '?'       posunout a přejít do stavu 10
+    '@'       posunout a přejít do stavu 11
 
-    sym               go to state 455
-    hidden_importsym  go to state 13
-    hidden_literal    go to state 641
+    sym               přejít do stavu 455
+    hidden_importsym  přejít do stavu 13
+    hidden_literal    přejít do stavu 641
 
 
-state 607
+State 607
 
   319 hidden_type_misc: '[' LLITERAL ']' hidden_type .
 
-    $default  reduce using rule 319 (hidden_type_misc)
+    $výchozí  reduce using rule 319 (hidden_type_misc)
 
 
-state 608
+State 608
 
   306 hidden_import: LCONST hidden_pkg_importsym hidden_type '=' hidden_constant ';' .
 
-    $default  reduce using rule 306 (hidden_import)
+    $výchozí  reduce using rule 306 (hidden_import)
 
 
-state 609
+State 609
 
   330 hidden_funarg: sym LDDD hidden_type oliteral .
 
-    $default  reduce using rule 330 (hidden_funarg)
+    $výchozí  reduce using rule 330 (hidden_funarg)
 
 
-state 610
+State 610
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -19131,34 +19130,34 @@ state 610
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
   207 hidden_fndcl: '(' hidden_funarg_list ')' sym '(' . ohidden_funarg_list ')' ohidden_funres
-  295 ohidden_funarg_list: .  [')']
+  295 ohidden_funarg_list: . %empty  [')']
   296                    | . hidden_funarg_list
   329 hidden_funarg: . sym hidden_type oliteral
   330              | . sym LDDD hidden_type oliteral
   345 hidden_funarg_list: . hidden_funarg
   346                   | . hidden_funarg_list ',' hidden_funarg
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 295 (ohidden_funarg_list)
+    $výchozí  reduce using rule 295 (ohidden_funarg_list)
 
-    sym                  go to state 350
-    hidden_importsym     go to state 13
-    ohidden_funarg_list  go to state 642
-    hidden_funarg        go to state 351
-    hidden_funarg_list   go to state 467
+    sym                  přejít do stavu 350
+    hidden_importsym     přejít do stavu 13
+    ohidden_funarg_list  přejít do stavu 642
+    hidden_funarg        přejít do stavu 351
+    hidden_funarg_list   přejít do stavu 467
 
 
-state 611
+State 611
 
   156 sym: . LNAME
   157    | . hidden_importsym
   158    | . '?'
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
-  295 ohidden_funarg_list: .  [')']
+  295 ohidden_funarg_list: . %empty  [')']
   296                    | . hidden_funarg_list
   329 hidden_funarg: . sym hidden_type oliteral
   330              | . sym LDDD hidden_type oliteral
@@ -19166,92 +19165,92 @@ state 611
   345 hidden_funarg_list: . hidden_funarg
   346                   | . hidden_funarg_list ',' hidden_funarg
 
-    LNAME  shift, and go to state 9
-    '?'    shift, and go to state 10
-    '@'    shift, and go to state 11
+    LNAME  posunout a přejít do stavu 9
+    '?'    posunout a přejít do stavu 10
+    '@'    posunout a přejít do stavu 11
 
-    $default  reduce using rule 295 (ohidden_funarg_list)
+    $výchozí  reduce using rule 295 (ohidden_funarg_list)
 
-    sym                  go to state 350
-    hidden_importsym     go to state 13
-    ohidden_funarg_list  go to state 643
-    hidden_funarg        go to state 351
-    hidden_funarg_list   go to state 467
+    sym                  přejít do stavu 350
+    hidden_importsym     přejít do stavu 13
+    ohidden_funarg_list  přejít do stavu 643
+    hidden_funarg        přejít do stavu 351
+    hidden_funarg_list   přejít do stavu 467
 
 
-state 612
+State 612
 
   337 hidden_funres: hidden_type .
 
-    $default  reduce using rule 337 (hidden_funres)
+    $výchozí  reduce using rule 337 (hidden_funres)
 
 
-state 613
+State 613
 
   206 hidden_fndcl: hidden_pkg_importsym '(' ohidden_funarg_list ')' ohidden_funres .
 
-    $default  reduce using rule 206 (hidden_fndcl)
+    $výchozí  reduce using rule 206 (hidden_fndcl)
 
 
-state 614
+State 614
 
   335 ohidden_funres: hidden_funres .
 
-    $default  reduce using rule 335 (ohidden_funres)
+    $výchozí  reduce using rule 335 (ohidden_funres)
 
 
-state 615
+State 615
 
    66 loop_body: LBODY $@5 stmt_list '}' .
 
-    $default  reduce using rule 66 (loop_body)
+    $výchozí  reduce using rule 66 (loop_body)
 
 
-state 616
+State 616
 
    69 for_header: osimple_stmt ';' osimple_stmt ';' osimple_stmt .
 
-    $default  reduce using rule 69 (for_header)
+    $výchozí  reduce using rule 69 (for_header)
 
 
-state 617
+State 617
 
   213 fnres: '(' oarg_type_list_ocomma ')' .
 
-    $default  reduce using rule 213 (fnres)
+    $výchozí  reduce using rule 213 (fnres)
 
 
-state 618
+State 618
 
   205 fndcl: '(' oarg_type_list_ocomma ')' sym '(' oarg_type_list_ocomma . ')' fnres
 
-    ')'  shift, and go to state 644
+    ')'  posunout a přejít do stavu 644
 
 
-state 619
+State 619
 
    80 if_stmt: LIF $@7 if_header $@8 loop_body $@9 elseif_list . else
    82 elseif: . LELSE LIF $@10 if_header loop_body
    84 elseif_list: elseif_list . elseif
-   85 else: .  [LCASE, LDEFAULT, ';', '}']
+   85 else: . %empty  [LCASE, LDEFAULT, ';', '}']
    86     | . LELSE compound_stmt
 
-    LELSE  shift, and go to state 645
+    LELSE  posunout a přejít do stavu 645
 
-    $default  reduce using rule 85 (else)
+    $výchozí  reduce using rule 85 (else)
 
-    elseif  go to state 646
-    else    go to state 647
+    elseif  přejít do stavu 646
+    else    přejít do stavu 647
 
 
-state 620
+State 620
 
   241 indcl: '(' oarg_type_list_ocomma ')' fnres .
 
-    $default  reduce using rule 241 (indcl)
+    $výchozí  reduce using rule 241 (indcl)
 
 
-state 621
+State 621
 
    57 case: LCASE expr_or_type_list LCOLAS . expr ':'
    92 expr: . uexpr
@@ -19328,45 +19327,45 @@ state 621
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 648
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 648
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 622
+State 622
 
    56 case: LCASE expr_or_type_list '=' . expr ':'
    92 expr: . uexpr
@@ -19443,52 +19442,52 @@ state 622
   215 fnliteral: . fnlitdcl lbrace stmt_list '}'
   216          | . fnlitdcl error
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 649
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 649
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 623
+State 623
 
    55 case: LCASE expr_or_type_list ':' .
 
-    $default  reduce using rule 55 (case)
+    $výchozí  reduce using rule 55 (case)
 
 
-state 624
+State 624
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -19572,107 +19571,107 @@ state 624
   216          | . fnlitdcl error
   278 expr_or_type_list: expr_or_type_list ',' . expr_or_type
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 159
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 160
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 159
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 160
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    expr              go to state 161
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    expr_or_type      go to state 530
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    non_expr_type     go to state 163
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 164
-    recvchantype      go to state 165
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 166
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
+    expr              přejít do stavu 161
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    expr_or_type      přejít do stavu 530
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    non_expr_type     přejít do stavu 163
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 164
+    recvchantype      přejít do stavu 165
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 166
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
 
 
-state 625
+State 625
 
    62 caseblock: case $@4 stmt_list .  [LCASE, LDEFAULT, '}']
   270 stmt_list: stmt_list . ';' stmt
 
-    ';'  shift, and go to state 439
+    ';'  posunout a přejít do stavu 439
 
-    $default  reduce using rule 62 (caseblock)
+    $výchozí  reduce using rule 62 (caseblock)
 
 
-state 626
+State 626
 
   234 structdcl: '*' '(' embed ')' oliteral .
 
-    $default  reduce using rule 234 (structdcl)
+    $výchozí  reduce using rule 234 (structdcl)
 
 
-state 627
+State 627
 
   233 structdcl: '(' '*' embed ')' oliteral .
 
-    $default  reduce using rule 233 (structdcl)
+    $výchozí  reduce using rule 233 (structdcl)
 
 
-state 628
+State 628
 
    89 switch_stmt: LSWITCH $@11 if_header $@12 LBODY caseblock_list '}' .
 
-    $default  reduce using rule 89 (switch_stmt)
+    $výchozí  reduce using rule 89 (switch_stmt)
 
 
-state 629
+State 629
 
   137 pexpr_no_paren: '(' expr_or_type ')' '{' start_complit braced_keyval_list '}' .
 
-    $default  reduce using rule 137 (pexpr_no_paren)
+    $výchozí  reduce using rule 137 (pexpr_no_paren)
 
 
-state 630
+State 630
 
   222 constdcl_list: constdcl_list ';' constdcl1 .
 
-    $default  reduce using rule 222 (constdcl_list)
+    $výchozí  reduce using rule 222 (constdcl_list)
 
 
-state 631
+State 631
 
    33 common_dcl: lconst '(' constdcl ';' constdcl_list osemi ')' .
 
-    $default  reduce using rule 33 (common_dcl)
+    $výchozí  reduce using rule 33 (common_dcl)
 
 
-state 632
+State 632
 
   142 bare_complitexpr: '{' start_complit braced_keyval_list '}' .
 
-    $default  reduce using rule 142 (bare_complitexpr)
+    $výchozí  reduce using rule 142 (bare_complitexpr)
 
 
-state 633
+State 633
 
    92 expr: . uexpr
    93     | . expr LOROR expr
@@ -19755,125 +19754,125 @@ state 633
   280            | . bare_complitexpr
   281            | . keyval_list ',' keyval
   282            | . keyval_list ',' bare_complitexpr
-  283 braced_keyval_list: .  ['}']
+  283 braced_keyval_list: . %empty  ['}']
   284                   | . keyval_list ocomma
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '{'         shift, and go to state 421
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '{'         posunout a přejít do stavu 421
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 283 (braced_keyval_list)
+    $výchozí  reduce using rule 283 (braced_keyval_list)
 
-    expr                go to state 422
-    uexpr               go to state 74
-    pseudocall          go to state 75
-    pexpr_no_paren      go to state 76
-    keyval              go to state 423
-    bare_complitexpr    go to state 424
-    pexpr               go to state 77
-    sym                 go to state 117
-    hidden_importsym    go to state 13
-    name                go to state 80
-    convtype            go to state 82
-    comptype            go to state 83
-    othertype           go to state 84
-    structtype          go to state 85
-    interfacetype       go to state 86
-    fntype              go to state 88
-    fnlitdcl            go to state 89
-    fnliteral           go to state 90
-    keyval_list         go to state 425
-    braced_keyval_list  go to state 650
+    expr                přejít do stavu 422
+    uexpr               přejít do stavu 74
+    pseudocall          přejít do stavu 75
+    pexpr_no_paren      přejít do stavu 76
+    keyval              přejít do stavu 423
+    bare_complitexpr    přejít do stavu 424
+    pexpr               přejít do stavu 77
+    sym                 přejít do stavu 117
+    hidden_importsym    přejít do stavu 13
+    name                přejít do stavu 80
+    convtype            přejít do stavu 82
+    comptype            přejít do stavu 83
+    othertype           přejít do stavu 84
+    structtype          přejít do stavu 85
+    interfacetype       přejít do stavu 86
+    fntype              přejít do stavu 88
+    fnlitdcl            přejít do stavu 89
+    fnliteral           přejít do stavu 90
+    keyval_list         přejít do stavu 425
+    braced_keyval_list  přejít do stavu 650
 
 
-state 634
+State 634
 
   132 pexpr_no_paren: pexpr '[' oexpr ':' oexpr ':' oexpr . ']'
 
-    ']'  shift, and go to state 651
+    ']'  posunout a přejít do stavu 651
 
 
-state 635
+State 635
 
   328 hidden_type_func: LFUNC '(' ohidden_funarg_list ')' ohidden_funres .
 
-    $default  reduce using rule 328 (hidden_type_func)
+    $výchozí  reduce using rule 328 (hidden_type_func)
 
 
-state 636
+State 636
 
   332 hidden_interfacedcl: sym '(' ohidden_funarg_list . ')' ohidden_funres
 
-    ')'  shift, and go to state 652
+    ')'  posunout a přejít do stavu 652
 
 
-state 637
+State 637
 
   350 hidden_interfacedcl_list: hidden_interfacedcl_list ';' hidden_interfacedcl .
 
-    $default  reduce using rule 350 (hidden_interfacedcl_list)
+    $výchozí  reduce using rule 350 (hidden_interfacedcl_list)
 
 
-state 638
+State 638
 
   320 hidden_type_misc: LMAP '[' hidden_type ']' hidden_type .
 
-    $default  reduce using rule 320 (hidden_type_misc)
+    $výchozí  reduce using rule 320 (hidden_type_misc)
 
 
-state 639
+State 639
 
   331 hidden_structdcl: sym hidden_type oliteral .
 
-    $default  reduce using rule 331 (hidden_structdcl)
+    $výchozí  reduce using rule 331 (hidden_structdcl)
 
 
-state 640
+State 640
 
   348 hidden_structdcl_list: hidden_structdcl_list ';' hidden_structdcl .
 
-    $default  reduce using rule 348 (hidden_structdcl_list)
+    $výchozí  reduce using rule 348 (hidden_structdcl_list)
 
 
-state 641
+State 641
 
   342 hidden_constant: '(' hidden_literal '+' hidden_literal . ')'
 
-    ')'  shift, and go to state 653
+    ')'  posunout a přejít do stavu 653
 
 
-state 642
+State 642
 
   207 hidden_fndcl: '(' hidden_funarg_list ')' sym '(' ohidden_funarg_list . ')' ohidden_funres
 
-    ')'  shift, and go to state 654
+    ')'  posunout a přejít do stavu 654
 
 
-state 643
+State 643
 
   336 hidden_funres: '(' ohidden_funarg_list . ')'
 
-    ')'  shift, and go to state 655
+    ')'  posunout a přejít do stavu 655
 
 
-state 644
+State 644
 
   156 sym: . LNAME
   157    | . hidden_importsym
@@ -19903,66 +19902,66 @@ state 644
   202              | . LINTERFACE lbrace '}'
   205 fndcl: '(' oarg_type_list_ocomma ')' sym '(' oarg_type_list_ocomma ')' . fnres
   208 fntype: . LFUNC '(' oarg_type_list_ocomma ')' fnres
-  211 fnres: .  [';', '{']
+  211 fnres: . %empty  [';', '{']
   212      | . fnret_type
   213      | . '(' oarg_type_list_ocomma ')'
 
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 225
-    '*'         shift, and go to state 115
-    '('         shift, and go to state 478
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 225
+    '*'         posunout a přejít do stavu 115
+    '('         posunout a přejít do stavu 478
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 211 (fnres)
+    $výchozí  reduce using rule 211 (fnres)
 
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 118
-    fnret_type        go to state 480
-    dotname           go to state 481
-    othertype         go to state 482
-    ptrtype           go to state 483
-    recvchantype      go to state 484
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 485
-    fnres             go to state 656
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 118
+    fnret_type        přejít do stavu 480
+    dotname           přejít do stavu 481
+    othertype         přejít do stavu 482
+    ptrtype           přejít do stavu 483
+    recvchantype      přejít do stavu 484
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 485
+    fnres             přejít do stavu 656
 
 
-state 645
+State 645
 
    60 compound_stmt: . '{' $@3 stmt_list '}'
    82 elseif: LELSE . LIF $@10 if_header loop_body
    86 else: LELSE . compound_stmt
 
-    LIF  shift, and go to state 657
-    '{'  shift, and go to state 326
+    LIF  posunout a přejít do stavu 657
+    '{'  posunout a přejít do stavu 326
 
-    compound_stmt  go to state 658
+    compound_stmt  přejít do stavu 658
 
 
-state 646
+State 646
 
    84 elseif_list: elseif_list elseif .
 
-    $default  reduce using rule 84 (elseif_list)
+    $výchozí  reduce using rule 84 (elseif_list)
 
 
-state 647
+State 647
 
    80 if_stmt: LIF $@7 if_header $@8 loop_body $@9 elseif_list else .
 
-    $default  reduce using rule 80 (if_stmt)
+    $výchozí  reduce using rule 80 (if_stmt)
 
 
-state 648
+State 648
 
    57 case: LCASE expr_or_type_list LCOLAS expr . ':'
    93 expr: expr . LOROR expr
@@ -19986,30 +19985,30 @@ state 648
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
-    ':'      shift, and go to state 659
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
+    ':'      posunout a přejít do stavu 659
 
 
-state 649
+State 649
 
    56 case: LCASE expr_or_type_list '=' expr . ':'
    93 expr: expr . LOROR expr
@@ -20033,44 +20032,44 @@ state 649
   111     | expr . LRSH expr
   112     | expr . LCOMM expr
 
-    LANDAND  shift, and go to state 177
-    LANDNOT  shift, and go to state 178
-    LCOMM    shift, and go to state 179
-    LEQ      shift, and go to state 181
-    LGE      shift, and go to state 182
-    LGT      shift, and go to state 183
-    LLE      shift, and go to state 185
-    LLSH     shift, and go to state 186
-    LLT      shift, and go to state 187
-    LNE      shift, and go to state 188
-    LOROR    shift, and go to state 189
-    LRSH     shift, and go to state 190
-    '+'      shift, and go to state 191
-    '-'      shift, and go to state 192
-    '|'      shift, and go to state 193
-    '^'      shift, and go to state 194
-    '*'      shift, and go to state 195
-    '/'      shift, and go to state 196
-    '%'      shift, and go to state 197
-    '&'      shift, and go to state 198
-    ':'      shift, and go to state 660
+    LANDAND  posunout a přejít do stavu 177
+    LANDNOT  posunout a přejít do stavu 178
+    LCOMM    posunout a přejít do stavu 179
+    LEQ      posunout a přejít do stavu 181
+    LGE      posunout a přejít do stavu 182
+    LGT      posunout a přejít do stavu 183
+    LLE      posunout a přejít do stavu 185
+    LLSH     posunout a přejít do stavu 186
+    LLT      posunout a přejít do stavu 187
+    LNE      posunout a přejít do stavu 188
+    LOROR    posunout a přejít do stavu 189
+    LRSH     posunout a přejít do stavu 190
+    '+'      posunout a přejít do stavu 191
+    '-'      posunout a přejít do stavu 192
+    '|'      posunout a přejít do stavu 193
+    '^'      posunout a přejít do stavu 194
+    '*'      posunout a přejít do stavu 195
+    '/'      posunout a přejít do stavu 196
+    '%'      posunout a přejít do stavu 197
+    '&'      posunout a přejít do stavu 198
+    ':'      posunout a přejít do stavu 660
 
 
-state 650
+State 650
 
   144 complitexpr: '{' start_complit braced_keyval_list . '}'
 
-    '}'  shift, and go to state 661
+    '}'  posunout a přejít do stavu 661
 
 
-state 651
+State 651
 
   132 pexpr_no_paren: pexpr '[' oexpr ':' oexpr ':' oexpr ']' .
 
-    $default  reduce using rule 132 (pexpr_no_paren)
+    $výchozí  reduce using rule 132 (pexpr_no_paren)
 
 
-state 652
+State 652
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -20091,42 +20090,42 @@ state 652
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
   332 hidden_interfacedcl: sym '(' ohidden_funarg_list ')' . ohidden_funres
-  334 ohidden_funres: .  [';', '}']
+  334 ohidden_funres: . %empty  [';', '}']
   335               | . hidden_funres
   336 hidden_funres: . '(' ohidden_funarg_list ')'
   337              | . hidden_type
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '('         shift, and go to state 611
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '('         posunout a přejít do stavu 611
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 334 (ohidden_funres)
+    $výchozí  reduce using rule 334 (ohidden_funres)
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 612
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
-    ohidden_funres         go to state 662
-    hidden_funres          go to state 614
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 612
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
+    ohidden_funres         přejít do stavu 662
+    hidden_funres          přejít do stavu 614
 
 
-state 653
+State 653
 
   342 hidden_constant: '(' hidden_literal '+' hidden_literal ')' .
 
-    $default  reduce using rule 342 (hidden_constant)
+    $výchozí  reduce using rule 342 (hidden_constant)
 
 
-state 654
+State 654
 
   159 hidden_importsym: . '@' LLITERAL '.' LNAME
   160                 | . '@' LLITERAL '.' '?'
@@ -20147,101 +20146,101 @@ state 654
   326                 | . LCHAN LCOMM hidden_type
   327 hidden_type_recv_chan: . LCOMM LCHAN hidden_type
   328 hidden_type_func: . LFUNC '(' ohidden_funarg_list ')' ohidden_funres
-  334 ohidden_funres: .  [';', '{']
+  334 ohidden_funres: . %empty  [';', '{']
   335               | . hidden_funres
   336 hidden_funres: . '(' ohidden_funarg_list ')'
   337              | . hidden_type
 
-    LCHAN       shift, and go to state 335
-    LFUNC       shift, and go to state 336
-    LINTERFACE  shift, and go to state 337
-    LMAP        shift, and go to state 338
-    LNAME       shift, and go to state 339
-    LSTRUCT     shift, and go to state 340
-    LCOMM       shift, and go to state 341
-    '*'         shift, and go to state 342
-    '('         shift, and go to state 611
-    '['         shift, and go to state 344
-    '@'         shift, and go to state 11
+    LCHAN       posunout a přejít do stavu 335
+    LFUNC       posunout a přejít do stavu 336
+    LINTERFACE  posunout a přejít do stavu 337
+    LMAP        posunout a přejít do stavu 338
+    LNAME       posunout a přejít do stavu 339
+    LSTRUCT     posunout a přejít do stavu 340
+    LCOMM       posunout a přejít do stavu 341
+    '*'         posunout a přejít do stavu 342
+    '('         posunout a přejít do stavu 611
+    '['         posunout a přejít do stavu 344
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 334 (ohidden_funres)
+    $výchozí  reduce using rule 334 (ohidden_funres)
 
-    hidden_importsym       go to state 345
-    hidden_type            go to state 612
-    hidden_type_misc       go to state 347
-    hidden_type_recv_chan  go to state 348
-    hidden_type_func       go to state 349
-    ohidden_funres         go to state 663
-    hidden_funres          go to state 614
+    hidden_importsym       přejít do stavu 345
+    hidden_type            přejít do stavu 612
+    hidden_type_misc       přejít do stavu 347
+    hidden_type_recv_chan  přejít do stavu 348
+    hidden_type_func       přejít do stavu 349
+    ohidden_funres         přejít do stavu 663
+    hidden_funres          přejít do stavu 614
 
 
-state 655
+State 655
 
   336 hidden_funres: '(' ohidden_funarg_list ')' .
 
-    $default  reduce using rule 336 (hidden_funres)
+    $výchozí  reduce using rule 336 (hidden_funres)
 
 
-state 656
+State 656
 
   205 fndcl: '(' oarg_type_list_ocomma ')' sym '(' oarg_type_list_ocomma ')' fnres .
 
-    $default  reduce using rule 205 (fndcl)
+    $výchozí  reduce using rule 205 (fndcl)
 
 
-state 657
+State 657
 
-   81 $@10: .
+   81 $@10: . %empty
    82 elseif: LELSE LIF . $@10 if_header loop_body
 
-    $default  reduce using rule 81 ($@10)
+    $výchozí  reduce using rule 81 ($@10)
 
-    $@10  go to state 664
+    $@10  přejít do stavu 664
 
 
-state 658
+State 658
 
    86 else: LELSE compound_stmt .
 
-    $default  reduce using rule 86 (else)
+    $výchozí  reduce using rule 86 (else)
 
 
-state 659
+State 659
 
    57 case: LCASE expr_or_type_list LCOLAS expr ':' .
 
-    $default  reduce using rule 57 (case)
+    $výchozí  reduce using rule 57 (case)
 
 
-state 660
+State 660
 
    56 case: LCASE expr_or_type_list '=' expr ':' .
 
-    $default  reduce using rule 56 (case)
+    $výchozí  reduce using rule 56 (case)
 
 
-state 661
+State 661
 
   144 complitexpr: '{' start_complit braced_keyval_list '}' .
 
-    $default  reduce using rule 144 (complitexpr)
+    $výchozí  reduce using rule 144 (complitexpr)
 
 
-state 662
+State 662
 
   332 hidden_interfacedcl: sym '(' ohidden_funarg_list ')' ohidden_funres .
 
-    $default  reduce using rule 332 (hidden_interfacedcl)
+    $výchozí  reduce using rule 332 (hidden_interfacedcl)
 
 
-state 663
+State 663
 
   207 hidden_fndcl: '(' hidden_funarg_list ')' sym '(' ohidden_funarg_list ')' ohidden_funres .
 
-    $default  reduce using rule 207 (hidden_fndcl)
+    $výchozí  reduce using rule 207 (hidden_fndcl)
 
 
-state 664
+State 664
 
    49 simple_stmt: . expr
    50            | . expr LASOP expr
@@ -20327,65 +20326,65 @@ state 664
   216          | . fnlitdcl error
   275 expr_list: . expr
   276          | . expr_list ',' expr
-  293 osimple_stmt: .  [LBODY, ';']
+  293 osimple_stmt: . %empty  [LBODY, ';']
   294             | . simple_stmt
 
-    LLITERAL    shift, and go to state 35
-    LCHAN       shift, and go to state 37
-    LFUNC       shift, and go to state 113
-    LINTERFACE  shift, and go to state 47
-    LMAP        shift, and go to state 48
-    LNAME       shift, and go to state 9
-    LSTRUCT     shift, and go to state 51
-    LCOMM       shift, and go to state 55
-    '+'         shift, and go to state 56
-    '-'         shift, and go to state 57
-    '^'         shift, and go to state 58
-    '*'         shift, and go to state 59
-    '&'         shift, and go to state 60
-    '('         shift, and go to state 61
-    '!'         shift, and go to state 62
-    '~'         shift, and go to state 63
-    '['         shift, and go to state 64
-    '?'         shift, and go to state 10
-    '@'         shift, and go to state 11
+    LLITERAL    posunout a přejít do stavu 35
+    LCHAN       posunout a přejít do stavu 37
+    LFUNC       posunout a přejít do stavu 113
+    LINTERFACE  posunout a přejít do stavu 47
+    LMAP        posunout a přejít do stavu 48
+    LNAME       posunout a přejít do stavu 9
+    LSTRUCT     posunout a přejít do stavu 51
+    LCOMM       posunout a přejít do stavu 55
+    '+'         posunout a přejít do stavu 56
+    '-'         posunout a přejít do stavu 57
+    '^'         posunout a přejít do stavu 58
+    '*'         posunout a přejít do stavu 59
+    '&'         posunout a přejít do stavu 60
+    '('         posunout a přejít do stavu 61
+    '!'         posunout a přejít do stavu 62
+    '~'         posunout a přejít do stavu 63
+    '['         posunout a přejít do stavu 64
+    '?'         posunout a přejít do stavu 10
+    '@'         posunout a přejít do stavu 11
 
-    $default  reduce using rule 293 (osimple_stmt)
+    $výchozí  reduce using rule 293 (osimple_stmt)
 
-    simple_stmt       go to state 236
-    if_header         go to state 665
-    expr              go to state 73
-    uexpr             go to state 74
-    pseudocall        go to state 75
-    pexpr_no_paren    go to state 76
-    pexpr             go to state 77
-    sym               go to state 117
-    hidden_importsym  go to state 13
-    name              go to state 80
-    convtype          go to state 82
-    comptype          go to state 83
-    othertype         go to state 84
-    structtype        go to state 85
-    interfacetype     go to state 86
-    fntype            go to state 88
-    fnlitdcl          go to state 89
-    fnliteral         go to state 90
-    expr_list         go to state 92
-    osimple_stmt      go to state 254
+    simple_stmt       přejít do stavu 236
+    if_header         přejít do stavu 665
+    expr              přejít do stavu 73
+    uexpr             přejít do stavu 74
+    pseudocall        přejít do stavu 75
+    pexpr_no_paren    přejít do stavu 76
+    pexpr             přejít do stavu 77
+    sym               přejít do stavu 117
+    hidden_importsym  přejít do stavu 13
+    name              přejít do stavu 80
+    convtype          přejít do stavu 82
+    comptype          přejít do stavu 83
+    othertype         přejít do stavu 84
+    structtype        přejít do stavu 85
+    interfacetype     přejít do stavu 86
+    fntype            přejít do stavu 88
+    fnlitdcl          přejít do stavu 89
+    fnliteral         přejít do stavu 90
+    expr_list         přejít do stavu 92
+    osimple_stmt      přejít do stavu 254
 
 
-state 665
+State 665
 
    66 loop_body: . LBODY $@5 stmt_list '}'
    82 elseif: LELSE LIF $@10 if_header . loop_body
 
-    LBODY  shift, and go to state 365
+    LBODY  posunout a přejít do stavu 365
 
-    loop_body  go to state 666
+    loop_body  přejít do stavu 666
 
 
-state 666
+State 666
 
    82 elseif: LELSE LIF $@10 if_header loop_body .
 
-    $default  reduce using rule 82 (elseif)
+    $výchozí  reduce using rule 82 (elseif)

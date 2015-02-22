@@ -7,18 +7,18 @@ Terminals unused in grammar
    TEST2
 
 
-Grammar
+Gramatika
 
     0 $accept: File $end
 
-    1 $@1: /* empty */
+    1 $@1: %empty
 
     2 File: PackageDecl $@1 Imports TopLevelDeclList
 
-    3 PackageDecl: /* empty */
+    3 PackageDecl: %empty
     4            | PACKAGE Symbol ';'
 
-    5 Imports: /* empty */
+    5 Imports: %empty
     6        | Imports Import ';'
 
     7 Import: IMPORT ImportDecl
@@ -32,7 +32,7 @@ Grammar
    13 ImportDeclList: ImportDecl
    14               | ImportDeclList ';' ImportDecl
 
-   15 TopLevelDecl: /* empty */
+   15 TopLevelDecl: %empty
    16             | CommonDecl
    17             | FuncDecl
    18             | NonDclStmt
@@ -78,18 +78,18 @@ Grammar
    49     | CASE ExprOrTypeList COLAS Expr ':'
    50     | DEFAULT ':'
 
-   51 $@2: /* empty */
+   51 $@2: %empty
 
    52 CompoundStmt: '{' $@2 StmtList '}'
 
-   53 $@3: /* empty */
+   53 $@3: %empty
 
    54 CaseBlock: Case $@3 StmtList
 
-   55 CaseBlockList: /* empty */
+   55 CaseBlockList: %empty
    56              | CaseBlockList CaseBlock
 
-   57 $@4: /* empty */
+   57 $@4: %empty
 
    58 LoopBody: BODY $@4 StmtList '}'
 
@@ -102,37 +102,37 @@ Grammar
 
    64 ForBody: ForHeader LoopBody
 
-   65 $@5: /* empty */
+   65 $@5: %empty
 
    66 ForStmt: FOR $@5 ForBody
 
    67 IfHeader: oSimpleStmt
    68         | oSimpleStmt ';' oSimpleStmt
 
-   69 $@6: /* empty */
+   69 $@6: %empty
 
-   70 $@7: /* empty */
+   70 $@7: %empty
 
    71 IfStmt: IF $@6 IfHeader LoopBody $@7 ElseIfList Else
 
-   72 $@8: /* empty */
+   72 $@8: %empty
 
    73 ElseIf: ELSE IF IfHeader $@8 LoopBody
 
-   74 ElseIfList: /* empty */
+   74 ElseIfList: %empty
    75           | ElseIfList ElseIf
 
-   76 Else: /* empty */
+   76 Else: %empty
 
-   77 $@9: /* empty */
+   77 $@9: %empty
 
    78 Else: ELSE $@9 CompoundStmt
 
-   79 $@10: /* empty */
+   79 $@10: %empty
 
    80 SwitchStmt: SWITCH $@10 IfHeader BODY CaseBlockList '}'
 
-   81 $@11: /* empty */
+   81 $@11: %empty
 
    82 SelectStmt: SELECT $@11 BODY CaseBlockList '}'
 
@@ -188,7 +188,7 @@ Grammar
   129                   | '(' ExprOrType ')' '{' StartCompLit BracedKeyvalList '}'
   130                   | FuncLit
 
-  131 StartCompLit: /* empty */
+  131 StartCompLit: %empty
 
   132 Keyval: Expr ':' CompLitExpr
 
@@ -213,7 +213,7 @@ Grammar
 
   145 DeclName: Symbol
 
-  146 oNewName: /* empty */
+  146 oNewName: %empty
   147         | NewName
 
   148 Symbol: IDENT
@@ -290,10 +290,10 @@ Grammar
 
   200 FuncType: FUNC '(' oArgTypeListOComma ')' FuncResult
 
-  201 FuncBody: /* empty */
+  201 FuncBody: %empty
   202         | '{' StmtList '}'
 
-  203 FuncResult: /* empty */
+  203 FuncResult: %empty
   204           | FuncRetType
   205           | '(' oArgTypeListOComma ')'
 
@@ -302,7 +302,7 @@ Grammar
   207 FuncLit: FuncLitDecl LBrace StmtList '}'
   208        | FuncLitDecl error
 
-  209 TopLevelDeclList: /* empty */
+  209 TopLevelDeclList: %empty
   210                 | TopLevelDeclList TopLevelDecl ';'
 
   211 VarDeclList: VarDecl
@@ -346,10 +346,10 @@ Grammar
   238 ArgTypeList: ArgType
   239            | ArgTypeList ',' ArgType
 
-  240 oArgTypeListOComma: /* empty */
+  240 oArgTypeListOComma: %empty
   241                   | ArgTypeList oComma
 
-  242 Statement: /* empty */
+  242 Statement: %empty
   243          | CompoundStmt
   244          | CommonDecl
   245          | NonDclStmt
@@ -390,29 +390,29 @@ Grammar
   273           | KeyvalList ',' Keyval
   274           | KeyvalList ',' BareCompLitExpr
 
-  275 BracedKeyvalList: /* empty */
+  275 BracedKeyvalList: %empty
   276                 | KeyvalList oComma
 
-  277 oSemi: /* empty */
+  277 oSemi: %empty
   278      | ';'
 
-  279 oComma: /* empty */
+  279 oComma: %empty
   280       | ','
 
-  281 oExpr: /* empty */
+  281 oExpr: %empty
   282      | Expr
 
-  283 oExprList: /* empty */
+  283 oExprList: %empty
   284          | ExprList
 
-  285 oSimpleStmt: /* empty */
+  285 oSimpleStmt: %empty
   286            | SimpleStmt
 
-  287 oLiteral: /* empty */
+  287 oLiteral: %empty
   288         | LITERAL
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '!' (33) 109
@@ -497,345 +497,343 @@ notParen (309)
 preferToRightParen (310)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (79)
-    on left: 0
+    vlevo: 0
 File (80)
-    on left: 2, on right: 0
+    vlevo: 2, vpravo: 0
 $@1 (81)
-    on left: 1, on right: 2
+    vlevo: 1, vpravo: 2
 PackageDecl (82)
-    on left: 3 4, on right: 2
+    vlevo: 3 4, vpravo: 2
 Imports (83)
-    on left: 5 6, on right: 2 6
+    vlevo: 5 6, vpravo: 2 6
 Import (84)
-    on left: 7 8 9, on right: 6
+    vlevo: 7 8 9, vpravo: 6
 ImportDecl (85)
-    on left: 10 11 12, on right: 7 13 14
+    vlevo: 10 11 12, vpravo: 7 13 14
 ImportDeclList (86)
-    on left: 13 14, on right: 8 14
+    vlevo: 13 14, vpravo: 8 14
 TopLevelDecl (87)
-    on left: 15 16 17 18 19, on right: 210
+    vlevo: 15 16 17 18 19, vpravo: 210
 CommonDecl (88)
-    on left: 20 21 22 23 24 25 26 27 28 29, on right: 16 244
+    vlevo: 20 21 22 23 24 25 26 27 28 29, vpravo: 16 244
 Const (89)
-    on left: 30, on right: 23 24 25 26
+    vlevo: 30, vpravo: 23 24 25 26
 VarDecl (90)
-    on left: 31 32 33, on right: 20 211 212
+    vlevo: 31 32 33, vpravo: 20 211 212
 ConstDecl (91)
-    on left: 34 35, on right: 23 24 25 36
+    vlevo: 34 35, vpravo: 23 24 25 36
 ConstDecl1 (92)
-    on left: 36 37 38, on right: 213 214
+    vlevo: 36 37 38, vpravo: 213 214
 TypeDeclName (93)
-    on left: 39, on right: 40
+    vlevo: 39, vpravo: 40
 TypeDecl (94)
-    on left: 40, on right: 27 215 216
+    vlevo: 40, vpravo: 27 215 216
 SimpleStmt (95)
-    on left: 41 42 43 44 45 46, on right: 247 286
+    vlevo: 41 42 43 44 45 46, vpravo: 247 286
 Case (96)
-    on left: 47 48 49 50, on right: 54
+    vlevo: 47 48 49 50, vpravo: 54
 CompoundStmt (97)
-    on left: 52, on right: 78 243
+    vlevo: 52, vpravo: 78 243
 $@2 (98)
-    on left: 51, on right: 52
+    vlevo: 51, vpravo: 52
 CaseBlock (99)
-    on left: 54, on right: 56
+    vlevo: 54, vpravo: 56
 $@3 (100)
-    on left: 53, on right: 54
+    vlevo: 53, vpravo: 54
 CaseBlockList (101)
-    on left: 55 56, on right: 56 80 82
+    vlevo: 55 56, vpravo: 56 80 82
 LoopBody (102)
-    on left: 58, on right: 64 71 73
+    vlevo: 58, vpravo: 64 71 73
 $@4 (103)
-    on left: 57, on right: 58
+    vlevo: 57, vpravo: 58
 RangeStmt (104)
-    on left: 59 60, on right: 63
+    vlevo: 59 60, vpravo: 63
 ForHeader (105)
-    on left: 61 62 63, on right: 64
+    vlevo: 61 62 63, vpravo: 64
 ForBody (106)
-    on left: 64, on right: 66
+    vlevo: 64, vpravo: 66
 ForStmt (107)
-    on left: 66, on right: 248
+    vlevo: 66, vpravo: 248
 $@5 (108)
-    on left: 65, on right: 66
+    vlevo: 65, vpravo: 66
 IfHeader (109)
-    on left: 67 68, on right: 71 73 80
+    vlevo: 67 68, vpravo: 71 73 80
 IfStmt (110)
-    on left: 71, on right: 251
+    vlevo: 71, vpravo: 251
 $@6 (111)
-    on left: 69, on right: 71
+    vlevo: 69, vpravo: 71
 $@7 (112)
-    on left: 70, on right: 71
+    vlevo: 70, vpravo: 71
 ElseIf (113)
-    on left: 73, on right: 75
+    vlevo: 73, vpravo: 75
 $@8 (114)
-    on left: 72, on right: 73
+    vlevo: 72, vpravo: 73
 ElseIfList (115)
-    on left: 74 75, on right: 71 75
+    vlevo: 74 75, vpravo: 71 75
 Else (116)
-    on left: 76 78, on right: 71
+    vlevo: 76 78, vpravo: 71
 $@9 (117)
-    on left: 77, on right: 78
+    vlevo: 77, vpravo: 78
 SwitchStmt (118)
-    on left: 80, on right: 249
+    vlevo: 80, vpravo: 249
 $@10 (119)
-    on left: 79, on right: 80
+    vlevo: 79, vpravo: 80
 SelectStmt (120)
-    on left: 82, on right: 250
+    vlevo: 82, vpravo: 250
 $@11 (121)
-    on left: 81, on right: 82
+    vlevo: 81, vpravo: 82
 Expr (122)
-    on left: 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100
-    101 102 103, on right: 41 42 45 46 48 49 59 60 84 85 86 87 88 89
-    90 91 92 93 94 95 96 97 98 99 100 101 102 103 121 132 133 135 139
-    267 268 282
+    vlevo: 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101
+    102 103, vpravo: 41 42 45 46 48 49 59 60 84 85 86 87 88 89 90 91
+    92 93 94 95 96 97 98 99 100 101 102 103 121 132 133 135 139 267
+    268 282
 UnaryExpr (123)
-    on left: 104 105 106 107 108 109 110 111 112, on right: 83 105
-    106 107 108 109 110 111 112
+    vlevo: 104 105 106 107 108 109 110 111 112, vpravo: 83 105 106
+    107 108 109 110 111 112
 PseudoCall (124)
-    on left: 113 114 115, on right: 124 256 257
+    vlevo: 113 114 115, vpravo: 124 256 257
 PrimaryExprNoParen (125)
-    on left: 116 117 118 119 120 121 122 123 124 125 126 127 128 129
-    130, on right: 128 137
+    vlevo: 116 117 118 119 120 121 122 123 124 125 126 127 128 129
+    130, vpravo: 128 137
 StartCompLit (126)
-    on left: 131, on right: 127 128 129 134 136
+    vlevo: 131, vpravo: 127 128 129 134 136
 Keyval (127)
-    on left: 132, on right: 271 273
+    vlevo: 132, vpravo: 271 273
 BareCompLitExpr (128)
-    on left: 133 134, on right: 272 274
+    vlevo: 133 134, vpravo: 272 274
 CompLitExpr (129)
-    on left: 135 136, on right: 132
+    vlevo: 135 136, vpravo: 132
 PrimaryExpr (130)
-    on left: 137 138, on right: 104 113 114 115 118 119 120 121 122
-    123
+    vlevo: 137 138, vpravo: 104 113 114 115 118 119 120 121 122 123
 ExprOrType (131)
-    on left: 139 140, on right: 119 129 138 269 270
+    vlevo: 139 140, vpravo: 119 129 138 269 270
 NameOrType (132)
-    on left: 141, on right: 234 235
+    vlevo: 141, vpravo: 234 235
 LBrace (133)
-    on left: 142 143, on right: 127 189 190 191 192 193 194 195 196
-    207
+    vlevo: 142 143, vpravo: 127 189 190 191 192 193 194 195 196 207
 NewName (134)
-    on left: 144, on right: 147 150 230 258 263 264
+    vlevo: 144, vpravo: 147 150 230 258 263 264
 DeclName (135)
-    on left: 145, on right: 265 266
+    vlevo: 145, vpravo: 265 266
 oNewName (136)
-    on left: 146 147, on right: 254 255
+    vlevo: 146 147, vpravo: 254 255
 Symbol (137)
-    on left: 148, on right: 4 11 39 118 144 145 149 177 198 199 228
-    235 236
+    vlevo: 148, vpravo: 4 11 39 118 144 145 149 177 198 199 228 235
+    236
 Name (138)
-    on left: 149, on right: 117 176 177
+    vlevo: 149, vpravo: 117 176 177
 LabelName (139)
-    on left: 150, on right: 252
+    vlevo: 150, vpravo: 252
 Ddd (140)
-    on left: 151 152, on right: 236 237
+    vlevo: 151 152, vpravo: 236 237
 Type (141)
-    on left: 153 154 155 156 157 158, on right: 31 32 34 37 40 141
-    152 158 167 178 179 181 182 187 188 221
+    vlevo: 153 154 155 156 157 158, vpravo: 31 32 34 37 40 141 152
+    158 167 178 179 181 182 187 188 221
 NonExprType (142)
-    on left: 159 160 161 162, on right: 140 162
+    vlevo: 159 160 161 162, vpravo: 140 162
 NonRecvChanType (143)
-    on left: 163 164 165 166 167, on right: 180
+    vlevo: 163 164 165 166 167, vpravo: 180
 ConvType (144)
-    on left: 168 169, on right: 125 126
+    vlevo: 168 169, vpravo: 125 126
 CompLitType (145)
-    on left: 170, on right: 127
+    vlevo: 170, vpravo: 127
 FuncRetType (146)
-    on left: 171 172 173 174 175, on right: 204
+    vlevo: 171 172 173 174 175, vpravo: 204
 TypeName (147)
-    on left: 176 177, on right: 157 166 175
+    vlevo: 176 177, vpravo: 157 166 175
 OtherType (148)
-    on left: 178 179 180 181 182 183 184 185 186, on right: 155 161
-    164 169 170 173
+    vlevo: 178 179 180 181 182 183 184 185 186, vpravo: 155 161 164
+    169 170 173
 PtrType (149)
-    on left: 187, on right: 156 165 174
+    vlevo: 187, vpravo: 156 165 174
 RecvChanType (150)
-    on left: 188, on right: 153 159 171
+    vlevo: 188, vpravo: 153 159 171
 StructType (151)
-    on left: 189 190, on right: 183
+    vlevo: 189 190, vpravo: 183
 UnionType (152)
-    on left: 191 192, on right: 184
+    vlevo: 191 192, vpravo: 184
 VariantType (153)
-    on left: 193 194, on right: 185
+    vlevo: 193 194, vpravo: 185
 InterfaceType (154)
-    on left: 195 196, on right: 186
+    vlevo: 195 196, vpravo: 186
 FuncDecl (155)
-    on left: 197, on right: 17
+    vlevo: 197, vpravo: 17
 FuncDecl1 (156)
-    on left: 198 199, on right: 197
+    vlevo: 198 199, vpravo: 197
 FuncType (157)
-    on left: 200, on right: 154 160 163 168 172 206
+    vlevo: 200, vpravo: 154 160 163 168 172 206
 FuncBody (158)
-    on left: 201 202, on right: 197
+    vlevo: 201 202, vpravo: 197
 FuncResult (159)
-    on left: 203 204 205, on right: 198 199 200 233
+    vlevo: 203 204 205, vpravo: 198 199 200 233
 FuncLitDecl (160)
-    on left: 206, on right: 207 208
+    vlevo: 206, vpravo: 207 208
 FuncLit (161)
-    on left: 207 208, on right: 130
+    vlevo: 207 208, vpravo: 130
 TopLevelDeclList (162)
-    on left: 209 210, on right: 2 210
+    vlevo: 209 210, vpravo: 2 210
 VarDeclList (163)
-    on left: 211 212, on right: 21 212
+    vlevo: 211 212, vpravo: 21 212
 ConstDeclList (164)
-    on left: 213 214, on right: 25 214
+    vlevo: 213 214, vpravo: 25 214
 TypeDeclList (165)
-    on left: 215 216, on right: 28 216
+    vlevo: 215 216, vpravo: 28 216
 StructDeclList (166)
-    on left: 217 218, on right: 189 191 193 218
+    vlevo: 217 218, vpravo: 189 191 193 218
 InterfaceDeclList (167)
-    on left: 219 220, on right: 195 220
+    vlevo: 219 220, vpravo: 195 220
 StructDecl (168)
-    on left: 221 222 223 224 225 226, on right: 217 218
+    vlevo: 221 222 223 224 225 226, vpravo: 217 218
 Qualident (169)
-    on left: 227 228, on right: 229 231 232
+    vlevo: 227 228, vpravo: 229 231 232
 Embedded (170)
-    on left: 229, on right: 222 223 224 225 226
+    vlevo: 229, vpravo: 222 223 224 225 226
 InterfaceDecl (171)
-    on left: 230 231 232, on right: 219 220
+    vlevo: 230 231 232, vpravo: 219 220
 InterfaceMethodDecl (172)
-    on left: 233, on right: 230
+    vlevo: 233, vpravo: 230
 ArgType (173)
-    on left: 234 235 236 237, on right: 238 239
+    vlevo: 234 235 236 237, vpravo: 238 239
 ArgTypeList (174)
-    on left: 238 239, on right: 239 241
+    vlevo: 238 239, vpravo: 239 241
 oArgTypeListOComma (175)
-    on left: 240 241, on right: 198 199 200 205 233
+    vlevo: 240 241, vpravo: 198 199 200 205 233
 Statement (176)
-    on left: 242 243 244 245 246, on right: 252 261 262
+    vlevo: 242 243 244 245 246, vpravo: 252 261 262
 NonDclStmt (177)
-    on left: 247 248 249 250 251 252 253 254 255 256 257 258 259 260,
-    on right: 18 245
+    vlevo: 247 248 249 250 251 252 253 254 255 256 257 258 259 260,
+    vpravo: 18 245
 StmtList (178)
-    on left: 261 262, on right: 52 54 58 202 207 262
+    vlevo: 261 262, vpravo: 52 54 58 202 207 262
 NewNameList (179)
-    on left: 263 264, on right: 221 264
+    vlevo: 263 264, vpravo: 221 264
 DeclNameList (180)
-    on left: 265 266, on right: 31 32 33 34 35 37 38 266
+    vlevo: 265 266, vpravo: 31 32 33 34 35 37 38 266
 ExprList (181)
-    on left: 267 268, on right: 32 33 34 35 43 44 59 60 125 268 284
+    vlevo: 267 268, vpravo: 32 33 34 35 43 44 59 60 125 268 284
 ExprOrTypeList (182)
-    on left: 269 270, on right: 47 48 49 114 115 270
+    vlevo: 269 270, vpravo: 47 48 49 114 115 270
 KeyvalList (183)
-    on left: 271 272 273 274, on right: 273 274 276
+    vlevo: 271 272 273 274, vpravo: 273 274 276
 BracedKeyvalList (184)
-    on left: 275 276, on right: 127 128 129 134 136
+    vlevo: 275 276, vpravo: 127 128 129 134 136
 oSemi (185)
-    on left: 277 278, on right: 8 21 24 25 28 189 191 193 195
+    vlevo: 277 278, vpravo: 8 21 24 25 28 189 191 193 195
 oComma (186)
-    on left: 279 280, on right: 114 115 125 241 276
+    vlevo: 279 280, vpravo: 114 115 125 241 276
 oExpr (187)
-    on left: 281 282, on right: 122 123 178
+    vlevo: 281 282, vpravo: 122 123 178
 oExprList (188)
-    on left: 283 284, on right: 260
+    vlevo: 283 284, vpravo: 260
 oSimpleStmt (189)
-    on left: 285 286, on right: 61 62 67 68
+    vlevo: 285 286, vpravo: 61 62 67 68
 oLiteral (190)
-    on left: 287 288, on right: 221 222 223 224 225 226
+    vlevo: 287 288, vpravo: 221 222 223 224 225 226
 
 
-state 0
+State 0
 
     0 $accept: . File $end
     2 File: . PackageDecl $@1 Imports TopLevelDeclList
-    3 PackageDecl: .  [$end, error, BREAK, CHAN, COMM, CONST, CONTINUE, DEFER, FALL, FOR, FUNC, GO, GOTO, IDENT, IF, IMPORT, INTERFACE, LITERAL, MAP, RETURN, SELECT, STRUCT, SWITCH, TYPE, UNION, VAR, VARIANT, '!', '&', '(', '*', '+', '-', ';', '[', '^', '~']
+    3 PackageDecl: . %empty  [$end, error, BREAK, CHAN, COMM, CONST, CONTINUE, DEFER, FALL, FOR, FUNC, GO, GOTO, IDENT, IF, IMPORT, INTERFACE, LITERAL, MAP, RETURN, SELECT, STRUCT, SWITCH, TYPE, UNION, VAR, VARIANT, '!', '&', '(', '*', '+', '-', ';', '[', '^', '~']
     4            | . PACKAGE Symbol ';'
 
-    PACKAGE  shift, and go to state 1
+    PACKAGE  posunout a přejít do stavu 1
 
-    $default  reduce using rule 3 (PackageDecl)
+    $výchozí  reduce using rule 3 (PackageDecl)
 
-    File         go to state 2
-    PackageDecl  go to state 3
+    File         přejít do stavu 2
+    PackageDecl  přejít do stavu 3
 
 
-state 1
+State 1
 
     4 PackageDecl: PACKAGE . Symbol ';'
   148 Symbol: . IDENT
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    Symbol  go to state 5
+    Symbol  přejít do stavu 5
 
 
-state 2
+State 2
 
     0 $accept: File . $end
 
-    $end  shift, and go to state 6
+    $end  posunout a přejít do stavu 6
 
 
-state 3
+State 3
 
-    1 $@1: .
+    1 $@1: . %empty
     2 File: PackageDecl . $@1 Imports TopLevelDeclList
 
-    $default  reduce using rule 1 ($@1)
+    $výchozí  reduce using rule 1 ($@1)
 
-    $@1  go to state 7
+    $@1  přejít do stavu 7
 
 
-state 4
+State 4
 
   148 Symbol: IDENT .
 
-    $default  reduce using rule 148 (Symbol)
+    $výchozí  reduce using rule 148 (Symbol)
 
 
-state 5
+State 5
 
     4 PackageDecl: PACKAGE Symbol . ';'
 
-    ';'  shift, and go to state 8
+    ';'  posunout a přejít do stavu 8
 
 
-state 6
+State 6
 
     0 $accept: File $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 7
+State 7
 
     2 File: PackageDecl $@1 . Imports TopLevelDeclList
-    5 Imports: .
+    5 Imports: . %empty
     6        | . Imports Import ';'
 
-    $default  reduce using rule 5 (Imports)
+    $výchozí  reduce using rule 5 (Imports)
 
-    Imports  go to state 9
+    Imports  přejít do stavu 9
 
 
-state 8
+State 8
 
     4 PackageDecl: PACKAGE Symbol ';' .
 
-    $default  reduce using rule 4 (PackageDecl)
+    $výchozí  reduce using rule 4 (PackageDecl)
 
 
-state 9
+State 9
 
     2 File: PackageDecl $@1 Imports . TopLevelDeclList
     6 Imports: Imports . Import ';'
     7 Import: . IMPORT ImportDecl
     8       | . IMPORT '(' ImportDeclList oSemi ')'
     9       | . IMPORT '(' ')'
-  209 TopLevelDeclList: .  [$end, error, BREAK, CHAN, COMM, CONST, CONTINUE, DEFER, FALL, FOR, FUNC, GO, GOTO, IDENT, IF, INTERFACE, LITERAL, MAP, RETURN, SELECT, STRUCT, SWITCH, TYPE, UNION, VAR, VARIANT, '!', '&', '(', '*', '+', '-', ';', '[', '^', '~']
+  209 TopLevelDeclList: . %empty  [$end, error, BREAK, CHAN, COMM, CONST, CONTINUE, DEFER, FALL, FOR, FUNC, GO, GOTO, IDENT, IF, INTERFACE, LITERAL, MAP, RETURN, SELECT, STRUCT, SWITCH, TYPE, UNION, VAR, VARIANT, '!', '&', '(', '*', '+', '-', ';', '[', '^', '~']
   210                 | . TopLevelDeclList TopLevelDecl ';'
 
-    IMPORT  shift, and go to state 10
+    IMPORT  posunout a přejít do stavu 10
 
-    $default  reduce using rule 209 (TopLevelDeclList)
+    $výchozí  reduce using rule 209 (TopLevelDeclList)
 
-    Import            go to state 11
-    TopLevelDeclList  go to state 12
+    Import            přejít do stavu 11
+    TopLevelDeclList  přejít do stavu 12
 
 
-state 10
+State 10
 
     7 Import: IMPORT . ImportDecl
     8       | IMPORT . '(' ImportDeclList oSemi ')'
@@ -845,26 +843,26 @@ state 10
    12           | . '.' LITERAL
   148 Symbol: . IDENT
 
-    IDENT    shift, and go to state 4
-    LITERAL  shift, and go to state 13
-    '('      shift, and go to state 14
-    '.'      shift, and go to state 15
+    IDENT    posunout a přejít do stavu 4
+    LITERAL  posunout a přejít do stavu 13
+    '('      posunout a přejít do stavu 14
+    '.'      posunout a přejít do stavu 15
 
-    ImportDecl  go to state 16
-    Symbol      go to state 17
+    ImportDecl  přejít do stavu 16
+    Symbol      přejít do stavu 17
 
 
-state 11
+State 11
 
     6 Imports: Imports Import . ';'
 
-    ';'  shift, and go to state 18
+    ';'  posunout a přejít do stavu 18
 
 
-state 12
+State 12
 
     2 File: PackageDecl $@1 Imports TopLevelDeclList .  [$end]
-   15 TopLevelDecl: .  [';']
+   15 TopLevelDecl: . %empty  [';']
    16             | . CommonDecl
    17             | . FuncDecl
    18             | . NonDclStmt
@@ -987,84 +985,84 @@ state 12
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    error      shift, and go to state 19
-    BREAK      shift, and go to state 20
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    CONST      shift, and go to state 23
-    CONTINUE   shift, and go to state 24
-    DEFER      shift, and go to state 25
-    FALL       shift, and go to state 26
-    FOR        shift, and go to state 27
-    FUNC       shift, and go to state 28
-    GO         shift, and go to state 29
-    GOTO       shift, and go to state 30
-    IDENT      shift, and go to state 4
-    IF         shift, and go to state 31
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RETURN     shift, and go to state 35
-    SELECT     shift, and go to state 36
-    STRUCT     shift, and go to state 37
-    SWITCH     shift, and go to state 38
-    TYPE       shift, and go to state 39
-    UNION      shift, and go to state 40
-    VAR        shift, and go to state 41
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    error      posunout a přejít do stavu 19
+    BREAK      posunout a přejít do stavu 20
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    CONST      posunout a přejít do stavu 23
+    CONTINUE   posunout a přejít do stavu 24
+    DEFER      posunout a přejít do stavu 25
+    FALL       posunout a přejít do stavu 26
+    FOR        posunout a přejít do stavu 27
+    FUNC       posunout a přejít do stavu 28
+    GO         posunout a přejít do stavu 29
+    GOTO       posunout a přejít do stavu 30
+    IDENT      posunout a přejít do stavu 4
+    IF         posunout a přejít do stavu 31
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RETURN     posunout a přejít do stavu 35
+    SELECT     posunout a přejít do stavu 36
+    STRUCT     posunout a přejít do stavu 37
+    SWITCH     posunout a přejít do stavu 38
+    TYPE       posunout a přejít do stavu 39
+    UNION      posunout a přejít do stavu 40
+    VAR        posunout a přejít do stavu 41
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
     $end  reduce using rule 2 (File)
     ';'   reduce using rule 15 (TopLevelDecl)
 
-    TopLevelDecl        go to state 52
-    CommonDecl          go to state 53
-    Const               go to state 54
-    SimpleStmt          go to state 55
-    ForStmt             go to state 56
-    IfStmt              go to state 57
-    SwitchStmt          go to state 58
-    SelectStmt          go to state 59
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    NewName             go to state 65
-    Symbol              go to state 66
-    Name                go to state 67
-    LabelName           go to state 68
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncDecl            go to state 76
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    NonDclStmt          go to state 80
-    ExprList            go to state 81
+    TopLevelDecl        přejít do stavu 52
+    CommonDecl          přejít do stavu 53
+    Const               přejít do stavu 54
+    SimpleStmt          přejít do stavu 55
+    ForStmt             přejít do stavu 56
+    IfStmt              přejít do stavu 57
+    SwitchStmt          přejít do stavu 58
+    SelectStmt          přejít do stavu 59
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    NewName             přejít do stavu 65
+    Symbol              přejít do stavu 66
+    Name                přejít do stavu 67
+    LabelName           přejít do stavu 68
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncDecl            přejít do stavu 76
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    NonDclStmt          přejít do stavu 80
+    ExprList            přejít do stavu 81
 
 
-state 13
+State 13
 
    10 ImportDecl: LITERAL .
 
-    $default  reduce using rule 10 (ImportDecl)
+    $výchozí  reduce using rule 10 (ImportDecl)
 
 
-state 14
+State 14
 
     8 Import: IMPORT '(' . ImportDeclList oSemi ')'
     9       | IMPORT '(' . ')'
@@ -1075,69 +1073,69 @@ state 14
    14               | . ImportDeclList ';' ImportDecl
   148 Symbol: . IDENT
 
-    IDENT    shift, and go to state 4
-    LITERAL  shift, and go to state 13
-    ')'      shift, and go to state 82
-    '.'      shift, and go to state 15
+    IDENT    posunout a přejít do stavu 4
+    LITERAL  posunout a přejít do stavu 13
+    ')'      posunout a přejít do stavu 82
+    '.'      posunout a přejít do stavu 15
 
-    ImportDecl      go to state 83
-    ImportDeclList  go to state 84
-    Symbol          go to state 17
+    ImportDecl      přejít do stavu 83
+    ImportDeclList  přejít do stavu 84
+    Symbol          přejít do stavu 17
 
 
-state 15
+State 15
 
    12 ImportDecl: '.' . LITERAL
 
-    LITERAL  shift, and go to state 85
+    LITERAL  posunout a přejít do stavu 85
 
 
-state 16
+State 16
 
     7 Import: IMPORT ImportDecl .
 
-    $default  reduce using rule 7 (Import)
+    $výchozí  reduce using rule 7 (Import)
 
 
-state 17
+State 17
 
    11 ImportDecl: Symbol . LITERAL
 
-    LITERAL  shift, and go to state 86
+    LITERAL  posunout a přejít do stavu 86
 
 
-state 18
+State 18
 
     6 Imports: Imports Import ';' .
 
-    $default  reduce using rule 6 (Imports)
+    $výchozí  reduce using rule 6 (Imports)
 
 
-state 19
+State 19
 
    19 TopLevelDecl: error .
 
-    $default  reduce using rule 19 (TopLevelDecl)
+    $výchozí  reduce using rule 19 (TopLevelDecl)
 
 
-state 20
+State 20
 
   144 NewName: . Symbol
-  146 oNewName: .  [CASE, DEFAULT, ';', '}']
+  146 oNewName: . %empty  [CASE, DEFAULT, ';', '}']
   147         | . NewName
   148 Symbol: . IDENT
   254 NonDclStmt: BREAK . oNewName
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    $default  reduce using rule 146 (oNewName)
+    $výchozí  reduce using rule 146 (oNewName)
 
-    NewName   go to state 87
-    oNewName  go to state 88
-    Symbol    go to state 89
+    NewName   přejít do stavu 87
+    oNewName  přejít do stavu 88
+    Symbol    přejít do stavu 89
 
 
-state 21
+State 21
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -1170,33 +1168,33 @@ state 21
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 90
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 92
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 90
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 92
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol           go to state 94
-    Name             go to state 95
-    NonRecvChanType  go to state 96
-    TypeName         go to state 97
-    OtherType        go to state 98
-    PtrType          go to state 99
-    StructType       go to state 72
-    UnionType        go to state 73
-    VariantType      go to state 74
-    InterfaceType    go to state 75
-    FuncType         go to state 100
+    Symbol           přejít do stavu 94
+    Name             přejít do stavu 95
+    NonRecvChanType  přejít do stavu 96
+    TypeName         přejít do stavu 97
+    OtherType        přejít do stavu 98
+    PtrType          přejít do stavu 99
+    StructType       přejít do stavu 72
+    UnionType        přejít do stavu 73
+    VariantType      přejít do stavu 74
+    InterfaceType    přejít do stavu 75
+    FuncType         přejít do stavu 100
 
 
-state 22
+State 22
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -1255,69 +1253,69 @@ state 22
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 101
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 101
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 23
+State 23
 
    30 Const: CONST .
 
-    $default  reduce using rule 30 (Const)
+    $výchozí  reduce using rule 30 (Const)
 
 
-state 24
+State 24
 
   144 NewName: . Symbol
-  146 oNewName: .  [CASE, DEFAULT, ';', '}']
+  146 oNewName: . %empty  [CASE, DEFAULT, ';', '}']
   147         | . NewName
   148 Symbol: . IDENT
   255 NonDclStmt: CONTINUE . oNewName
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    $default  reduce using rule 146 (oNewName)
+    $výchozí  reduce using rule 146 (oNewName)
 
-    NewName   go to state 87
-    oNewName  go to state 102
-    Symbol    go to state 89
+    NewName   přejít do stavu 87
+    oNewName  přejít do stavu 102
+    Symbol    přejít do stavu 89
 
 
-state 25
+State 25
 
   113 PseudoCall: . PrimaryExpr '(' ')'
   114           | . PrimaryExpr '(' ExprOrTypeList oComma ')'
@@ -1367,53 +1365,53 @@ state 25
   208        | . FuncLitDecl error
   257 NonDclStmt: DEFER . PseudoCall
 
-    CHAN       shift, and go to state 21
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 45
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 45
+    '['        posunout a přejít do stavu 49
 
-    PseudoCall          go to state 103
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 104
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    PseudoCall          přejít do stavu 103
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 104
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 26
+State 26
 
   253 NonDclStmt: FALL .
 
-    $default  reduce using rule 253 (NonDclStmt)
+    $výchozí  reduce using rule 253 (NonDclStmt)
 
 
-state 27
+State 27
 
-   65 $@5: .
+   65 $@5: . %empty
    66 ForStmt: FOR . $@5 ForBody
 
-    $default  reduce using rule 65 ($@5)
+    $výchozí  reduce using rule 65 ($@5)
 
-    $@5  go to state 105
+    $@5  přejít do stavu 105
 
 
-state 28
+State 28
 
   148 Symbol: . IDENT
   197 FuncDecl: FUNC . FuncDecl1 FuncBody
@@ -1421,14 +1419,14 @@ state 28
   199          | . '(' oArgTypeListOComma ')' Symbol '(' oArgTypeListOComma ')' FuncResult
   200 FuncType: FUNC . '(' oArgTypeListOComma ')' FuncResult
 
-    IDENT  shift, and go to state 4
-    '('    shift, and go to state 106
+    IDENT  posunout a přejít do stavu 4
+    '('    posunout a přejít do stavu 106
 
-    Symbol     go to state 107
-    FuncDecl1  go to state 108
+    Symbol     přejít do stavu 107
+    FuncDecl1  přejít do stavu 108
 
 
-state 29
+State 29
 
   113 PseudoCall: . PrimaryExpr '(' ')'
   114           | . PrimaryExpr '(' ExprOrTypeList oComma ')'
@@ -1478,88 +1476,88 @@ state 29
   208        | . FuncLitDecl error
   256 NonDclStmt: GO . PseudoCall
 
-    CHAN       shift, and go to state 21
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 45
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 45
+    '['        posunout a přejít do stavu 49
 
-    PseudoCall          go to state 109
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 104
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    PseudoCall          přejít do stavu 109
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 104
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 30
+State 30
 
   144 NewName: . Symbol
   148 Symbol: . IDENT
   258 NonDclStmt: GOTO . NewName
   259           | GOTO .  [CASE, DEFAULT, ';', '}']
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    $default  reduce using rule 259 (NonDclStmt)
+    $výchozí  reduce using rule 259 (NonDclStmt)
 
-    NewName  go to state 110
-    Symbol   go to state 89
+    NewName  přejít do stavu 110
+    Symbol   přejít do stavu 89
 
 
-state 31
+State 31
 
-   69 $@6: .
+   69 $@6: . %empty
    71 IfStmt: IF . $@6 IfHeader LoopBody $@7 ElseIfList Else
 
-    $default  reduce using rule 69 ($@6)
+    $výchozí  reduce using rule 69 ($@6)
 
-    $@6  go to state 111
+    $@6  přejít do stavu 111
 
 
-state 32
+State 32
 
   142 LBrace: . BODY
   143       | . '{'
   195 InterfaceType: INTERFACE . LBrace InterfaceDeclList oSemi '}'
   196              | INTERFACE . LBrace '}'
 
-    BODY  shift, and go to state 112
-    '{'   shift, and go to state 113
+    BODY  posunout a přejít do stavu 112
+    '{'   posunout a přejít do stavu 113
 
-    LBrace  go to state 114
+    LBrace  přejít do stavu 114
 
 
-state 33
+State 33
 
   116 PrimaryExprNoParen: LITERAL .
 
-    $default  reduce using rule 116 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 116 (PrimaryExprNoParen)
 
 
-state 34
+State 34
 
   182 OtherType: MAP . '[' Type ']' Type
 
-    '['  shift, and go to state 115
+    '['  posunout a přejít do stavu 115
 
 
-state 35
+State 35
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -1640,86 +1638,86 @@ state 35
   260 NonDclStmt: RETURN . oExprList
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
-  283 oExprList: .  [CASE, DEFAULT, ';', '}']
+  283 oExprList: . %empty  [CASE, DEFAULT, ';', '}']
   284          | . ExprList
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 283 (oExprList)
+    $výchozí  reduce using rule 283 (oExprList)
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 117
-    oExprList           go to state 118
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 117
+    oExprList           přejít do stavu 118
 
 
-state 36
+State 36
 
-   81 $@11: .
+   81 $@11: . %empty
    82 SelectStmt: SELECT . $@11 BODY CaseBlockList '}'
 
-    $default  reduce using rule 81 ($@11)
+    $výchozí  reduce using rule 81 ($@11)
 
-    $@11  go to state 119
+    $@11  přejít do stavu 119
 
 
-state 37
+State 37
 
   142 LBrace: . BODY
   143       | . '{'
   189 StructType: STRUCT . LBrace StructDeclList oSemi '}'
   190           | STRUCT . LBrace '}'
 
-    BODY  shift, and go to state 112
-    '{'   shift, and go to state 113
+    BODY  posunout a přejít do stavu 112
+    '{'   posunout a přejít do stavu 113
 
-    LBrace  go to state 120
+    LBrace  přejít do stavu 120
 
 
-state 38
+State 38
 
-   79 $@10: .
+   79 $@10: . %empty
    80 SwitchStmt: SWITCH . $@10 IfHeader BODY CaseBlockList '}'
 
-    $default  reduce using rule 79 ($@10)
+    $výchozí  reduce using rule 79 ($@10)
 
-    $@10  go to state 121
+    $@10  přejít do stavu 121
 
 
-state 39
+State 39
 
    27 CommonDecl: TYPE . TypeDecl
    28           | TYPE . '(' TypeDeclList oSemi ')'
@@ -1728,28 +1726,28 @@ state 39
    40 TypeDecl: . TypeDeclName Type
   148 Symbol: . IDENT
 
-    IDENT  shift, and go to state 4
-    '('    shift, and go to state 122
+    IDENT  posunout a přejít do stavu 4
+    '('    posunout a přejít do stavu 122
 
-    TypeDeclName  go to state 123
-    TypeDecl      go to state 124
-    Symbol        go to state 125
+    TypeDeclName  přejít do stavu 123
+    TypeDecl      přejít do stavu 124
+    Symbol        přejít do stavu 125
 
 
-state 40
+State 40
 
   142 LBrace: . BODY
   143       | . '{'
   191 UnionType: UNION . LBrace StructDeclList oSemi '}'
   192          | UNION . LBrace '}'
 
-    BODY  shift, and go to state 112
-    '{'   shift, and go to state 113
+    BODY  posunout a přejít do stavu 112
+    '{'   posunout a přejít do stavu 113
 
-    LBrace  go to state 126
+    LBrace  přejít do stavu 126
 
 
-state 41
+State 41
 
    20 CommonDecl: VAR . VarDecl
    21           | VAR . '(' VarDeclList oSemi ')'
@@ -1762,29 +1760,29 @@ state 41
   265 DeclNameList: . DeclName
   266             | . DeclNameList ',' DeclName
 
-    IDENT  shift, and go to state 4
-    '('    shift, and go to state 127
+    IDENT  posunout a přejít do stavu 4
+    '('    posunout a přejít do stavu 127
 
-    VarDecl       go to state 128
-    DeclName      go to state 129
-    Symbol        go to state 130
-    DeclNameList  go to state 131
+    VarDecl       přejít do stavu 128
+    DeclName      přejít do stavu 129
+    Symbol        přejít do stavu 130
+    DeclNameList  přejít do stavu 131
 
 
-state 42
+State 42
 
   142 LBrace: . BODY
   143       | . '{'
   193 VariantType: VARIANT . LBrace StructDeclList oSemi '}'
   194            | VARIANT . LBrace '}'
 
-    BODY  shift, and go to state 112
-    '{'   shift, and go to state 113
+    BODY  posunout a přejít do stavu 112
+    '{'   posunout a přejít do stavu 113
 
-    LBrace  go to state 132
+    LBrace  přejít do stavu 132
 
 
-state 43
+State 43
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -1843,45 +1841,45 @@ state 43
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 133
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 133
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 44
+State 44
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -1940,45 +1938,45 @@ state 44
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 134
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 134
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 45
+State 45
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -2066,49 +2064,49 @@ state 45
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 135
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 136
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 135
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 136
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 137
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    ExprOrType          go to state 138
-    Symbol              go to state 94
-    Name                go to state 67
-    NonExprType         go to state 139
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 140
-    RecvChanType        go to state 141
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 142
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 137
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    ExprOrType          přejít do stavu 138
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    NonExprType         přejít do stavu 139
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 140
+    RecvChanType        přejít do stavu 141
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 142
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 46
+State 46
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -2167,45 +2165,45 @@ state 46
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 143
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 143
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 47
+State 47
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -2264,45 +2262,45 @@ state 47
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 144
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 144
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 48
+State 48
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -2361,45 +2359,45 @@ state 48
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 145
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 145
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 49
+State 49
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -2479,53 +2477,53 @@ state 49
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  281 oExpr: .  [']']
+  281 oExpr: . %empty  [']']
   282      | . Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    DDD        shift, and go to state 146
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    DDD        posunout a přejít do stavu 146
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 281 (oExpr)
+    $výchozí  reduce using rule 281 (oExpr)
 
-    Expr                go to state 147
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    oExpr               go to state 148
+    Expr                přejít do stavu 147
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    oExpr               přejít do stavu 148
 
 
-state 50
+State 50
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -2584,45 +2582,45 @@ state 50
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 149
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 149
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 51
+State 51
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -2681,59 +2679,59 @@ state 51
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 150
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 150
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 52
+State 52
 
   210 TopLevelDeclList: TopLevelDeclList TopLevelDecl . ';'
 
-    ';'  shift, and go to state 151
+    ';'  posunout a přejít do stavu 151
 
 
-state 53
+State 53
 
    16 TopLevelDecl: CommonDecl .
 
-    $default  reduce using rule 16 (TopLevelDecl)
+    $výchozí  reduce using rule 16 (TopLevelDecl)
 
 
-state 54
+State 54
 
    23 CommonDecl: Const . ConstDecl
    24           | Const . '(' ConstDecl oSemi ')'
@@ -2746,51 +2744,51 @@ state 54
   265 DeclNameList: . DeclName
   266             | . DeclNameList ',' DeclName
 
-    IDENT  shift, and go to state 4
-    '('    shift, and go to state 152
+    IDENT  posunout a přejít do stavu 4
+    '('    posunout a přejít do stavu 152
 
-    ConstDecl     go to state 153
-    DeclName      go to state 129
-    Symbol        go to state 130
-    DeclNameList  go to state 154
+    ConstDecl     přejít do stavu 153
+    DeclName      přejít do stavu 129
+    Symbol        přejít do stavu 130
+    DeclNameList  přejít do stavu 154
 
 
-state 55
+State 55
 
   247 NonDclStmt: SimpleStmt .
 
-    $default  reduce using rule 247 (NonDclStmt)
+    $výchozí  reduce using rule 247 (NonDclStmt)
 
 
-state 56
+State 56
 
   248 NonDclStmt: ForStmt .
 
-    $default  reduce using rule 248 (NonDclStmt)
+    $výchozí  reduce using rule 248 (NonDclStmt)
 
 
-state 57
+State 57
 
   251 NonDclStmt: IfStmt .
 
-    $default  reduce using rule 251 (NonDclStmt)
+    $výchozí  reduce using rule 251 (NonDclStmt)
 
 
-state 58
+State 58
 
   249 NonDclStmt: SwitchStmt .
 
-    $default  reduce using rule 249 (NonDclStmt)
+    $výchozí  reduce using rule 249 (NonDclStmt)
 
 
-state 59
+State 59
 
   250 NonDclStmt: SelectStmt .
 
-    $default  reduce using rule 250 (NonDclStmt)
+    $výchozí  reduce using rule 250 (NonDclStmt)
 
 
-state 60
+State 60
 
    41 SimpleStmt: Expr .  [BODY, CASE, DEFAULT, ';', '}']
    42           | Expr . ASOP Expr
@@ -2818,61 +2816,61 @@ state 60
   103     | Expr . COMM Expr
   267 ExprList: Expr .  [COLAS, '=', ',']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    ASOP    shift, and go to state 157
-    COMM    shift, and go to state 158
-    DEC     shift, and go to state 159
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    INC     shift, and go to state 162
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    ASOP    posunout a přejít do stavu 157
+    COMM    posunout a přejít do stavu 158
+    DEC     posunout a přejít do stavu 159
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    INC     posunout a přejít do stavu 162
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    COLAS     reduce using rule 267 (ExprList)
-    '='       reduce using rule 267 (ExprList)
-    ','       reduce using rule 267 (ExprList)
-    $default  reduce using rule 41 (SimpleStmt)
+    COLAS       reduce using rule 267 (ExprList)
+    '='         reduce using rule 267 (ExprList)
+    ','         reduce using rule 267 (ExprList)
+    $výchozí  reduce using rule 41 (SimpleStmt)
 
 
-state 61
+State 61
 
    83 Expr: UnaryExpr .
 
-    $default  reduce using rule 83 (Expr)
+    $výchozí  reduce using rule 83 (Expr)
 
 
-state 62
+State 62
 
   124 PrimaryExprNoParen: PseudoCall .
 
-    $default  reduce using rule 124 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 124 (PrimaryExprNoParen)
 
 
-state 63
+State 63
 
   128 PrimaryExprNoParen: PrimaryExprNoParen . '{' StartCompLit BracedKeyvalList '}'
   137 PrimaryExpr: PrimaryExprNoParen .  [ANDAND, ANDNOT, ASOP, BODY, CASE, COLAS, COMM, DDD, DEC, DEFAULT, EQ, GE, INC, LE, LSH, NE, OROR, RSH, '%', '&', '(', ')', '*', '+', '-', '.', '/', ':', ';', '<', '=', '>', '[', '^', '|', '}', ']', ',']
 
-    '{'  shift, and go to state 178
+    '{'  posunout a přejít do stavu 178
 
-    $default  reduce using rule 137 (PrimaryExpr)
+    $výchozí  reduce using rule 137 (PrimaryExpr)
 
 
-state 64
+State 64
 
   104 UnaryExpr: PrimaryExpr .  [ANDAND, ANDNOT, ASOP, BODY, CASE, COLAS, COMM, DDD, DEC, DEFAULT, EQ, GE, INC, LE, LSH, NE, OROR, RSH, '%', '&', ')', '*', '+', '-', '/', ':', ';', '<', '=', '>', '^', '|', '}', ']', ',']
   113 PseudoCall: PrimaryExpr . '(' ')'
@@ -2885,219 +2883,219 @@ state 64
   122                   | PrimaryExpr . '[' oExpr ':' oExpr ']'
   123                   | PrimaryExpr . '[' oExpr ':' oExpr ':' oExpr ']'
 
-    '('  shift, and go to state 179
-    '.'  shift, and go to state 180
-    '['  shift, and go to state 181
+    '('  posunout a přejít do stavu 179
+    '.'  posunout a přejít do stavu 180
+    '['  posunout a přejít do stavu 181
 
-    $default  reduce using rule 104 (UnaryExpr)
+    $výchozí  reduce using rule 104 (UnaryExpr)
 
 
-state 65
+State 65
 
   150 LabelName: NewName .
 
-    $default  reduce using rule 150 (LabelName)
+    $výchozí  reduce using rule 150 (LabelName)
 
 
-state 66
+State 66
 
   144 NewName: Symbol .  [':']
   149 Name: Symbol .  [ANDAND, ANDNOT, ASOP, CASE, COLAS, COMM, DEC, DEFAULT, EQ, GE, INC, LE, LSH, NE, OROR, RSH, '%', '&', '(', '*', '+', '-', '.', '/', ';', '<', '=', '>', '[', '^', '{', '|', '}', ',']
 
-    ':'       reduce using rule 144 (NewName)
-    $default  reduce using rule 149 (Name)
+    ':'         reduce using rule 144 (NewName)
+    $výchozí  reduce using rule 149 (Name)
 
 
-state 67
+State 67
 
   117 PrimaryExprNoParen: Name .
 
-    $default  reduce using rule 117 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 117 (PrimaryExprNoParen)
 
 
-state 68
+State 68
 
   252 NonDclStmt: LabelName . ':' Statement
 
-    ':'  shift, and go to state 182
+    ':'  posunout a přejít do stavu 182
 
 
-state 69
+State 69
 
   125 PrimaryExprNoParen: ConvType . '(' ExprList oComma ')'
   126                   | ConvType . '(' ')'
 
-    '('  shift, and go to state 183
+    '('  posunout a přejít do stavu 183
 
 
-state 70
+State 70
 
   127 PrimaryExprNoParen: CompLitType . LBrace StartCompLit BracedKeyvalList '}'
   142 LBrace: . BODY
   143       | . '{'
 
-    BODY  shift, and go to state 112
-    '{'   shift, and go to state 113
+    BODY  posunout a přejít do stavu 112
+    '{'   posunout a přejít do stavu 113
 
-    LBrace  go to state 184
+    LBrace  přejít do stavu 184
 
 
-state 71
+State 71
 
   169 ConvType: OtherType .  ['(']
   170 CompLitType: OtherType .  [BODY, '{']
 
-    '('       reduce using rule 169 (ConvType)
-    $default  reduce using rule 170 (CompLitType)
+    '('         reduce using rule 169 (ConvType)
+    $výchozí  reduce using rule 170 (CompLitType)
 
 
-state 72
+State 72
 
   183 OtherType: StructType .
 
-    $default  reduce using rule 183 (OtherType)
+    $výchozí  reduce using rule 183 (OtherType)
 
 
-state 73
+State 73
 
   184 OtherType: UnionType .
 
-    $default  reduce using rule 184 (OtherType)
+    $výchozí  reduce using rule 184 (OtherType)
 
 
-state 74
+State 74
 
   185 OtherType: VariantType .
 
-    $default  reduce using rule 185 (OtherType)
+    $výchozí  reduce using rule 185 (OtherType)
 
 
-state 75
+State 75
 
   186 OtherType: InterfaceType .
 
-    $default  reduce using rule 186 (OtherType)
+    $výchozí  reduce using rule 186 (OtherType)
 
 
-state 76
+State 76
 
    17 TopLevelDecl: FuncDecl .
 
-    $default  reduce using rule 17 (TopLevelDecl)
+    $výchozí  reduce using rule 17 (TopLevelDecl)
 
 
-state 77
+State 77
 
   168 ConvType: FuncType .  ['(']
   206 FuncLitDecl: FuncType .  [error, BODY, '{']
 
-    '('       reduce using rule 168 (ConvType)
-    $default  reduce using rule 206 (FuncLitDecl)
+    '('         reduce using rule 168 (ConvType)
+    $výchozí  reduce using rule 206 (FuncLitDecl)
 
 
-state 78
+State 78
 
   142 LBrace: . BODY
   143       | . '{'
   207 FuncLit: FuncLitDecl . LBrace StmtList '}'
   208        | FuncLitDecl . error
 
-    error  shift, and go to state 185
-    BODY   shift, and go to state 112
-    '{'    shift, and go to state 113
+    error  posunout a přejít do stavu 185
+    BODY   posunout a přejít do stavu 112
+    '{'    posunout a přejít do stavu 113
 
-    LBrace  go to state 186
+    LBrace  přejít do stavu 186
 
 
-state 79
+State 79
 
   130 PrimaryExprNoParen: FuncLit .
 
-    $default  reduce using rule 130 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 130 (PrimaryExprNoParen)
 
 
-state 80
+State 80
 
    18 TopLevelDecl: NonDclStmt .
 
-    $default  reduce using rule 18 (TopLevelDecl)
+    $výchozí  reduce using rule 18 (TopLevelDecl)
 
 
-state 81
+State 81
 
    43 SimpleStmt: ExprList . '=' ExprList
    44           | ExprList . COLAS ExprList
   268 ExprList: ExprList . ',' Expr
 
-    COLAS  shift, and go to state 187
-    '='    shift, and go to state 188
-    ','    shift, and go to state 189
+    COLAS  posunout a přejít do stavu 187
+    '='    posunout a přejít do stavu 188
+    ','    posunout a přejít do stavu 189
 
 
-state 82
+State 82
 
     9 Import: IMPORT '(' ')' .
 
-    $default  reduce using rule 9 (Import)
+    $výchozí  reduce using rule 9 (Import)
 
 
-state 83
+State 83
 
    13 ImportDeclList: ImportDecl .
 
-    $default  reduce using rule 13 (ImportDeclList)
+    $výchozí  reduce using rule 13 (ImportDeclList)
 
 
-state 84
+State 84
 
     8 Import: IMPORT '(' ImportDeclList . oSemi ')'
    14 ImportDeclList: ImportDeclList . ';' ImportDecl
-  277 oSemi: .  [')']
+  277 oSemi: . %empty  [')']
   278      | . ';'
 
-    ';'  shift, and go to state 190
+    ';'  posunout a přejít do stavu 190
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 191
+    oSemi  přejít do stavu 191
 
 
-state 85
+State 85
 
    12 ImportDecl: '.' LITERAL .
 
-    $default  reduce using rule 12 (ImportDecl)
+    $výchozí  reduce using rule 12 (ImportDecl)
 
 
-state 86
+State 86
 
    11 ImportDecl: Symbol LITERAL .
 
-    $default  reduce using rule 11 (ImportDecl)
+    $výchozí  reduce using rule 11 (ImportDecl)
 
 
-state 87
+State 87
 
   147 oNewName: NewName .
 
-    $default  reduce using rule 147 (oNewName)
+    $výchozí  reduce using rule 147 (oNewName)
 
 
-state 88
+State 88
 
   254 NonDclStmt: BREAK oNewName .
 
-    $default  reduce using rule 254 (NonDclStmt)
+    $výchozí  reduce using rule 254 (NonDclStmt)
 
 
-state 89
+State 89
 
   144 NewName: Symbol .
 
-    $default  reduce using rule 144 (NewName)
+    $výchozí  reduce using rule 144 (NewName)
 
 
-state 90
+State 90
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -3131,41 +3129,41 @@ state 90
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 194
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 194
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 91
+State 91
 
   200 FuncType: FUNC . '(' oArgTypeListOComma ')' FuncResult
 
-    '('  shift, and go to state 200
+    '('  posunout a přejít do stavu 200
 
 
-state 92
+State 92
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -3199,34 +3197,34 @@ state 92
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 201
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 201
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 93
+State 93
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -3260,112 +3258,112 @@ state 93
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 202
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 202
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 94
+State 94
 
   149 Name: Symbol .
 
-    $default  reduce using rule 149 (Name)
+    $výchozí  reduce using rule 149 (Name)
 
 
-state 95
+State 95
 
   176 TypeName: Name .  [error, BODY, CASE, COLAS, DDD, DEFAULT, LITERAL, '(', ')', ':', ';', '=', '{', '}', ']', ',']
   177         | Name . '.' Symbol
 
-    '.'  shift, and go to state 203
+    '.'  posunout a přejít do stavu 203
 
-    $default  reduce using rule 176 (TypeName)
+    $výchozí  reduce using rule 176 (TypeName)
 
 
-state 96
+State 96
 
   180 OtherType: CHAN NonRecvChanType .
 
-    $default  reduce using rule 180 (OtherType)
+    $výchozí  reduce using rule 180 (OtherType)
 
 
-state 97
+State 97
 
   166 NonRecvChanType: TypeName .
 
-    $default  reduce using rule 166 (NonRecvChanType)
+    $výchozí  reduce using rule 166 (NonRecvChanType)
 
 
-state 98
+State 98
 
   164 NonRecvChanType: OtherType .
 
-    $default  reduce using rule 164 (NonRecvChanType)
+    $výchozí  reduce using rule 164 (NonRecvChanType)
 
 
-state 99
+State 99
 
   165 NonRecvChanType: PtrType .
 
-    $default  reduce using rule 165 (NonRecvChanType)
+    $výchozí  reduce using rule 165 (NonRecvChanType)
 
 
-state 100
+State 100
 
   163 NonRecvChanType: FuncType .
 
-    $default  reduce using rule 163 (NonRecvChanType)
+    $výchozí  reduce using rule 163 (NonRecvChanType)
 
 
-state 101
+State 101
 
   112 UnaryExpr: COMM UnaryExpr .
 
-    $default  reduce using rule 112 (UnaryExpr)
+    $výchozí  reduce using rule 112 (UnaryExpr)
 
 
-state 102
+State 102
 
   255 NonDclStmt: CONTINUE oNewName .
 
-    $default  reduce using rule 255 (NonDclStmt)
+    $výchozí  reduce using rule 255 (NonDclStmt)
 
 
-state 103
+State 103
 
   124 PrimaryExprNoParen: PseudoCall .  ['(', '.', '[', '{']
   257 NonDclStmt: DEFER PseudoCall .  [CASE, DEFAULT, ';', '}']
 
-    CASE      reduce using rule 257 (NonDclStmt)
-    DEFAULT   reduce using rule 257 (NonDclStmt)
-    ';'       reduce using rule 257 (NonDclStmt)
-    '}'       reduce using rule 257 (NonDclStmt)
-    $default  reduce using rule 124 (PrimaryExprNoParen)
+    CASE        reduce using rule 257 (NonDclStmt)
+    DEFAULT     reduce using rule 257 (NonDclStmt)
+    ';'         reduce using rule 257 (NonDclStmt)
+    '}'         reduce using rule 257 (NonDclStmt)
+    $výchozí  reduce using rule 124 (PrimaryExprNoParen)
 
 
-state 104
+State 104
 
   113 PseudoCall: PrimaryExpr . '(' ')'
   114           | PrimaryExpr . '(' ExprOrTypeList oComma ')'
@@ -3377,12 +3375,12 @@ state 104
   122                   | PrimaryExpr . '[' oExpr ':' oExpr ']'
   123                   | PrimaryExpr . '[' oExpr ':' oExpr ':' oExpr ']'
 
-    '('  shift, and go to state 179
-    '.'  shift, and go to state 180
-    '['  shift, and go to state 181
+    '('  posunout a přejít do stavu 179
+    '.'  posunout a přejít do stavu 180
+    '['  posunout a přejít do stavu 181
 
 
-state 105
+State 105
 
    41 SimpleStmt: . Expr
    42           | . Expr ASOP Expr
@@ -3475,57 +3473,57 @@ state 105
   208        | . FuncLitDecl error
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
-  285 oSimpleStmt: .  [BODY, ';']
+  285 oSimpleStmt: . %empty  [BODY, ';']
   286            | . SimpleStmt
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 285 (oSimpleStmt)
+    $výchozí  reduce using rule 285 (oSimpleStmt)
 
-    SimpleStmt          go to state 204
-    RangeStmt           go to state 205
-    ForHeader           go to state 206
-    ForBody             go to state 207
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 208
-    oSimpleStmt         go to state 209
+    SimpleStmt          přejít do stavu 204
+    RangeStmt           přejít do stavu 205
+    ForHeader           přejít do stavu 206
+    ForBody             přejít do stavu 207
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 208
+    oSimpleStmt         přejít do stavu 209
 
 
-state 106
+State 106
 
   141 NameOrType: . Type
   148 Symbol: . IDENT
@@ -3568,84 +3566,84 @@ state 106
   237        | . Ddd
   238 ArgTypeList: . ArgType
   239            | . ArgTypeList ',' ArgType
-  240 oArgTypeListOComma: .  [')']
+  240 oArgTypeListOComma: . %empty  [')']
   241                   | . ArgTypeList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    DDD        shift, and go to state 210
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    DDD        posunout a přejít do stavu 210
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 240 (oArgTypeListOComma)
+    $výchozí  reduce using rule 240 (oArgTypeListOComma)
 
-    NameOrType          go to state 211
-    Symbol              go to state 212
-    Name                go to state 95
-    Ddd                 go to state 213
-    Type                go to state 214
-    TypeName            go to state 195
-    OtherType           go to state 196
-    PtrType             go to state 197
-    RecvChanType        go to state 198
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 199
-    ArgType             go to state 215
-    ArgTypeList         go to state 216
-    oArgTypeListOComma  go to state 217
+    NameOrType          přejít do stavu 211
+    Symbol              přejít do stavu 212
+    Name                přejít do stavu 95
+    Ddd                 přejít do stavu 213
+    Type                přejít do stavu 214
+    TypeName            přejít do stavu 195
+    OtherType           přejít do stavu 196
+    PtrType             přejít do stavu 197
+    RecvChanType        přejít do stavu 198
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 199
+    ArgType             přejít do stavu 215
+    ArgTypeList         přejít do stavu 216
+    oArgTypeListOComma  přejít do stavu 217
 
 
-state 107
+State 107
 
   198 FuncDecl1: Symbol . '(' oArgTypeListOComma ')' FuncResult
 
-    '('  shift, and go to state 218
+    '('  posunout a přejít do stavu 218
 
 
-state 108
+State 108
 
   197 FuncDecl: FUNC FuncDecl1 . FuncBody
-  201 FuncBody: .  [';']
+  201 FuncBody: . %empty  [';']
   202         | . '{' StmtList '}'
 
-    '{'  shift, and go to state 219
+    '{'  posunout a přejít do stavu 219
 
-    $default  reduce using rule 201 (FuncBody)
+    $výchozí  reduce using rule 201 (FuncBody)
 
-    FuncBody  go to state 220
+    FuncBody  přejít do stavu 220
 
 
-state 109
+State 109
 
   124 PrimaryExprNoParen: PseudoCall .  ['(', '.', '[', '{']
   256 NonDclStmt: GO PseudoCall .  [CASE, DEFAULT, ';', '}']
 
-    CASE      reduce using rule 256 (NonDclStmt)
-    DEFAULT   reduce using rule 256 (NonDclStmt)
-    ';'       reduce using rule 256 (NonDclStmt)
-    '}'       reduce using rule 256 (NonDclStmt)
-    $default  reduce using rule 124 (PrimaryExprNoParen)
+    CASE        reduce using rule 256 (NonDclStmt)
+    DEFAULT     reduce using rule 256 (NonDclStmt)
+    ';'         reduce using rule 256 (NonDclStmt)
+    '}'         reduce using rule 256 (NonDclStmt)
+    $výchozí  reduce using rule 124 (PrimaryExprNoParen)
 
 
-state 110
+State 110
 
   258 NonDclStmt: GOTO NewName .
 
-    $default  reduce using rule 258 (NonDclStmt)
+    $výchozí  reduce using rule 258 (NonDclStmt)
 
 
-state 111
+State 111
 
    41 SimpleStmt: . Expr
    42           | . Expr ASOP Expr
@@ -3734,69 +3732,69 @@ state 111
   208        | . FuncLitDecl error
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
-  285 oSimpleStmt: .  [BODY, ';']
+  285 oSimpleStmt: . %empty  [BODY, ';']
   286            | . SimpleStmt
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 285 (oSimpleStmt)
+    $výchozí  reduce using rule 285 (oSimpleStmt)
 
-    SimpleStmt          go to state 204
-    IfHeader            go to state 221
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 81
-    oSimpleStmt         go to state 222
+    SimpleStmt          přejít do stavu 204
+    IfHeader            přejít do stavu 221
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 81
+    oSimpleStmt         přejít do stavu 222
 
 
-state 112
+State 112
 
   142 LBrace: BODY .
 
-    $default  reduce using rule 142 (LBrace)
+    $výchozí  reduce using rule 142 (LBrace)
 
 
-state 113
+State 113
 
   143 LBrace: '{' .
 
-    $default  reduce using rule 143 (LBrace)
+    $výchozí  reduce using rule 143 (LBrace)
 
 
-state 114
+State 114
 
   144 NewName: . Symbol
   148 Symbol: . IDENT
@@ -3810,18 +3808,18 @@ state 114
   231              | . Qualident
   232              | . '(' Qualident ')'
 
-    IDENT  shift, and go to state 223
-    '('    shift, and go to state 224
-    '}'    shift, and go to state 225
+    IDENT  posunout a přejít do stavu 223
+    '('    posunout a přejít do stavu 224
+    '}'    posunout a přejít do stavu 225
 
-    NewName            go to state 226
-    Symbol             go to state 89
-    InterfaceDeclList  go to state 227
-    Qualident          go to state 228
-    InterfaceDecl      go to state 229
+    NewName            přejít do stavu 226
+    Symbol             přejít do stavu 89
+    InterfaceDeclList  přejít do stavu 227
+    Qualident          přejít do stavu 228
+    InterfaceDecl      přejít do stavu 229
 
 
-state 115
+State 115
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -3855,34 +3853,34 @@ state 115
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 230
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 230
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 116
+State 116
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -3906,55 +3904,55 @@ state 116
   103     | Expr . COMM Expr
   267 ExprList: Expr .  [BODY, CASE, DEFAULT, ')', ';', '}', ',']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 267 (ExprList)
+    $výchozí  reduce using rule 267 (ExprList)
 
 
-state 117
+State 117
 
   268 ExprList: ExprList . ',' Expr
   284 oExprList: ExprList .  [CASE, DEFAULT, ';', '}']
 
-    ','  shift, and go to state 189
+    ','  posunout a přejít do stavu 189
 
-    $default  reduce using rule 284 (oExprList)
+    $výchozí  reduce using rule 284 (oExprList)
 
 
-state 118
+State 118
 
   260 NonDclStmt: RETURN oExprList .
 
-    $default  reduce using rule 260 (NonDclStmt)
+    $výchozí  reduce using rule 260 (NonDclStmt)
 
 
-state 119
+State 119
 
    82 SelectStmt: SELECT $@11 . BODY CaseBlockList '}'
 
-    BODY  shift, and go to state 231
+    BODY  posunout a přejít do stavu 231
 
 
-state 120
+State 120
 
   144 NewName: . Symbol
   148 Symbol: . IDENT
@@ -3974,21 +3972,21 @@ state 120
   263 NewNameList: . NewName
   264            | . NewNameList ',' NewName
 
-    IDENT  shift, and go to state 223
-    '('    shift, and go to state 232
-    '*'    shift, and go to state 233
-    '}'    shift, and go to state 234
+    IDENT  posunout a přejít do stavu 223
+    '('    posunout a přejít do stavu 232
+    '*'    posunout a přejít do stavu 233
+    '}'    posunout a přejít do stavu 234
 
-    NewName         go to state 235
-    Symbol          go to state 89
-    StructDeclList  go to state 236
-    StructDecl      go to state 237
-    Qualident       go to state 238
-    Embedded        go to state 239
-    NewNameList     go to state 240
+    NewName         přejít do stavu 235
+    Symbol          přejít do stavu 89
+    StructDeclList  přejít do stavu 236
+    StructDecl      přejít do stavu 237
+    Qualident       přejít do stavu 238
+    Embedded        přejít do stavu 239
+    NewNameList     přejít do stavu 240
 
 
-state 121
+State 121
 
    41 SimpleStmt: . Expr
    42           | . Expr ASOP Expr
@@ -4077,55 +4075,55 @@ state 121
   208        | . FuncLitDecl error
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
-  285 oSimpleStmt: .  [BODY, ';']
+  285 oSimpleStmt: . %empty  [BODY, ';']
   286            | . SimpleStmt
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 285 (oSimpleStmt)
+    $výchozí  reduce using rule 285 (oSimpleStmt)
 
-    SimpleStmt          go to state 204
-    IfHeader            go to state 241
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 81
-    oSimpleStmt         go to state 222
+    SimpleStmt          přejít do stavu 204
+    IfHeader            přejít do stavu 241
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 81
+    oSimpleStmt         přejít do stavu 222
 
 
-state 122
+State 122
 
    28 CommonDecl: TYPE '(' . TypeDeclList oSemi ')'
    29           | TYPE '(' . ')'
@@ -4135,16 +4133,16 @@ state 122
   215 TypeDeclList: . TypeDecl
   216             | . TypeDeclList ';' TypeDecl
 
-    IDENT  shift, and go to state 4
-    ')'    shift, and go to state 242
+    IDENT  posunout a přejít do stavu 4
+    ')'    posunout a přejít do stavu 242
 
-    TypeDeclName  go to state 123
-    TypeDecl      go to state 243
-    Symbol        go to state 125
-    TypeDeclList  go to state 244
+    TypeDeclName  přejít do stavu 123
+    TypeDecl      přejít do stavu 243
+    Symbol        přejít do stavu 125
+    TypeDeclList  přejít do stavu 244
 
 
-state 123
+State 123
 
    40 TypeDecl: TypeDeclName . Type
   148 Symbol: . IDENT
@@ -4178,48 +4176,48 @@ state 123
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 245
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 245
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 124
+State 124
 
    27 CommonDecl: TYPE TypeDecl .
 
-    $default  reduce using rule 27 (CommonDecl)
+    $výchozí  reduce using rule 27 (CommonDecl)
 
 
-state 125
+State 125
 
    39 TypeDeclName: Symbol .
 
-    $default  reduce using rule 39 (TypeDeclName)
+    $výchozí  reduce using rule 39 (TypeDeclName)
 
 
-state 126
+State 126
 
   144 NewName: . Symbol
   148 Symbol: . IDENT
@@ -4239,21 +4237,21 @@ state 126
   263 NewNameList: . NewName
   264            | . NewNameList ',' NewName
 
-    IDENT  shift, and go to state 223
-    '('    shift, and go to state 232
-    '*'    shift, and go to state 233
-    '}'    shift, and go to state 246
+    IDENT  posunout a přejít do stavu 223
+    '('    posunout a přejít do stavu 232
+    '*'    posunout a přejít do stavu 233
+    '}'    posunout a přejít do stavu 246
 
-    NewName         go to state 235
-    Symbol          go to state 89
-    StructDeclList  go to state 247
-    StructDecl      go to state 237
-    Qualident       go to state 238
-    Embedded        go to state 239
-    NewNameList     go to state 240
+    NewName         přejít do stavu 235
+    Symbol          přejít do stavu 89
+    StructDeclList  přejít do stavu 247
+    StructDecl      přejít do stavu 237
+    Qualident       přejít do stavu 238
+    Embedded        přejít do stavu 239
+    NewNameList     přejít do stavu 240
 
 
-state 127
+State 127
 
    21 CommonDecl: VAR '(' . VarDeclList oSemi ')'
    22           | VAR '(' . ')'
@@ -4267,38 +4265,38 @@ state 127
   265 DeclNameList: . DeclName
   266             | . DeclNameList ',' DeclName
 
-    IDENT  shift, and go to state 4
-    ')'    shift, and go to state 248
+    IDENT  posunout a přejít do stavu 4
+    ')'    posunout a přejít do stavu 248
 
-    VarDecl       go to state 249
-    DeclName      go to state 129
-    Symbol        go to state 130
-    VarDeclList   go to state 250
-    DeclNameList  go to state 131
+    VarDecl       přejít do stavu 249
+    DeclName      přejít do stavu 129
+    Symbol        přejít do stavu 130
+    VarDeclList   přejít do stavu 250
+    DeclNameList  přejít do stavu 131
 
 
-state 128
+State 128
 
    20 CommonDecl: VAR VarDecl .
 
-    $default  reduce using rule 20 (CommonDecl)
+    $výchozí  reduce using rule 20 (CommonDecl)
 
 
-state 129
+State 129
 
   265 DeclNameList: DeclName .
 
-    $default  reduce using rule 265 (DeclNameList)
+    $výchozí  reduce using rule 265 (DeclNameList)
 
 
-state 130
+State 130
 
   145 DeclName: Symbol .
 
-    $default  reduce using rule 145 (DeclName)
+    $výchozí  reduce using rule 145 (DeclName)
 
 
-state 131
+State 131
 
    31 VarDecl: DeclNameList . Type
    32        | DeclNameList . Type '=' ExprList
@@ -4335,36 +4333,36 @@ state 131
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
   266 DeclNameList: DeclNameList . ',' DeclName
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '='        shift, and go to state 251
-    '['        shift, and go to state 49
-    ','        shift, and go to state 252
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '='        posunout a přejít do stavu 251
+    '['        posunout a přejít do stavu 49
+    ','        posunout a přejít do stavu 252
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 253
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 253
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 132
+State 132
 
   144 NewName: . Symbol
   148 Symbol: . IDENT
@@ -4384,35 +4382,35 @@ state 132
   263 NewNameList: . NewName
   264            | . NewNameList ',' NewName
 
-    IDENT  shift, and go to state 223
-    '('    shift, and go to state 232
-    '*'    shift, and go to state 233
-    '}'    shift, and go to state 254
+    IDENT  posunout a přejít do stavu 223
+    '('    posunout a přejít do stavu 232
+    '*'    posunout a přejít do stavu 233
+    '}'    posunout a přejít do stavu 254
 
-    NewName         go to state 235
-    Symbol          go to state 89
-    StructDeclList  go to state 255
-    StructDecl      go to state 237
-    Qualident       go to state 238
-    Embedded        go to state 239
-    NewNameList     go to state 240
+    NewName         přejít do stavu 235
+    Symbol          přejít do stavu 89
+    StructDeclList  přejít do stavu 255
+    StructDecl      přejít do stavu 237
+    Qualident       přejít do stavu 238
+    Embedded        přejít do stavu 239
+    NewNameList     přejít do stavu 240
 
 
-state 133
+State 133
 
   109 UnaryExpr: '!' UnaryExpr .
 
-    $default  reduce using rule 109 (UnaryExpr)
+    $výchozí  reduce using rule 109 (UnaryExpr)
 
 
-state 134
+State 134
 
   106 UnaryExpr: '&' UnaryExpr .
 
-    $default  reduce using rule 106 (UnaryExpr)
+    $výchozí  reduce using rule 106 (UnaryExpr)
 
 
-state 135
+State 135
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -4472,45 +4470,45 @@ state 135
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 256
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 256
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 101
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 101
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 136
+State 136
 
   104 UnaryExpr: . PrimaryExpr
   105          | . '*' UnaryExpr
@@ -4575,47 +4573,47 @@ state 136
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 135
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 136
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 135
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 136
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    UnaryExpr           go to state 143
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    NonExprType         go to state 257
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 140
-    RecvChanType        go to state 141
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 142
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    UnaryExpr           přejít do stavu 143
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    NonExprType         přejít do stavu 257
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 140
+    RecvChanType        přejít do stavu 141
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 142
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 137
+State 137
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -4639,106 +4637,106 @@ state 137
   103     | Expr . COMM Expr
   139 ExprOrType: Expr .  [COLAS, DDD, ')', ':', '=', ',']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 139 (ExprOrType)
+    $výchozí  reduce using rule 139 (ExprOrType)
 
 
-state 138
+State 138
 
   129 PrimaryExprNoParen: '(' ExprOrType . ')' '{' StartCompLit BracedKeyvalList '}'
   138 PrimaryExpr: '(' ExprOrType . ')'
 
-    ')'  shift, and go to state 258
+    ')'  posunout a přejít do stavu 258
 
 
-state 139
+State 139
 
   140 ExprOrType: NonExprType .
 
-    $default  reduce using rule 140 (ExprOrType)
+    $výchozí  reduce using rule 140 (ExprOrType)
 
 
-state 140
+State 140
 
   161 NonExprType: OtherType .  [COLAS, DDD, ')', ':', '=', ',']
   169 ConvType: OtherType .  ['(']
   170 CompLitType: OtherType .  [BODY, '{']
 
-    BODY      reduce using rule 170 (CompLitType)
-    '('       reduce using rule 169 (ConvType)
-    '{'       reduce using rule 170 (CompLitType)
-    $default  reduce using rule 161 (NonExprType)
+    BODY        reduce using rule 170 (CompLitType)
+    '('         reduce using rule 169 (ConvType)
+    '{'         reduce using rule 170 (CompLitType)
+    $výchozí  reduce using rule 161 (NonExprType)
 
 
-state 141
+State 141
 
   159 NonExprType: RecvChanType .
 
-    $default  reduce using rule 159 (NonExprType)
+    $výchozí  reduce using rule 159 (NonExprType)
 
 
-state 142
+State 142
 
   160 NonExprType: FuncType .  [COLAS, DDD, ')', ':', '=', ',']
   168 ConvType: FuncType .  ['(']
   206 FuncLitDecl: FuncType .  [error, BODY, '{']
 
-    error     reduce using rule 206 (FuncLitDecl)
-    BODY      reduce using rule 206 (FuncLitDecl)
-    '('       reduce using rule 168 (ConvType)
-    '{'       reduce using rule 206 (FuncLitDecl)
-    $default  reduce using rule 160 (NonExprType)
+    error       reduce using rule 206 (FuncLitDecl)
+    BODY        reduce using rule 206 (FuncLitDecl)
+    '('         reduce using rule 168 (ConvType)
+    '{'         reduce using rule 206 (FuncLitDecl)
+    $výchozí  reduce using rule 160 (NonExprType)
 
 
-state 143
+State 143
 
   105 UnaryExpr: '*' UnaryExpr .
 
-    $default  reduce using rule 105 (UnaryExpr)
+    $výchozí  reduce using rule 105 (UnaryExpr)
 
 
-state 144
+State 144
 
   107 UnaryExpr: '+' UnaryExpr .
 
-    $default  reduce using rule 107 (UnaryExpr)
+    $výchozí  reduce using rule 107 (UnaryExpr)
 
 
-state 145
+State 145
 
   108 UnaryExpr: '-' UnaryExpr .
 
-    $default  reduce using rule 108 (UnaryExpr)
+    $výchozí  reduce using rule 108 (UnaryExpr)
 
 
-state 146
+State 146
 
   179 OtherType: '[' DDD . ']' Type
 
-    ']'  shift, and go to state 259
+    ']'  posunout a přejít do stavu 259
 
 
-state 147
+State 147
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -4762,59 +4760,59 @@ state 147
   103     | Expr . COMM Expr
   282 oExpr: Expr .  [':', ']']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 282 (oExpr)
+    $výchozí  reduce using rule 282 (oExpr)
 
 
-state 148
+State 148
 
   178 OtherType: '[' oExpr . ']' Type
 
-    ']'  shift, and go to state 260
+    ']'  posunout a přejít do stavu 260
 
 
-state 149
+State 149
 
   111 UnaryExpr: '^' UnaryExpr .
 
-    $default  reduce using rule 111 (UnaryExpr)
+    $výchozí  reduce using rule 111 (UnaryExpr)
 
 
-state 150
+State 150
 
   110 UnaryExpr: '~' UnaryExpr .
 
-    $default  reduce using rule 110 (UnaryExpr)
+    $výchozí  reduce using rule 110 (UnaryExpr)
 
 
-state 151
+State 151
 
   210 TopLevelDeclList: TopLevelDeclList TopLevelDecl ';' .
 
-    $default  reduce using rule 210 (TopLevelDeclList)
+    $výchozí  reduce using rule 210 (TopLevelDeclList)
 
 
-state 152
+State 152
 
    24 CommonDecl: Const '(' . ConstDecl oSemi ')'
    25           | Const '(' . ConstDecl ';' ConstDeclList oSemi ')'
@@ -4826,23 +4824,23 @@ state 152
   265 DeclNameList: . DeclName
   266             | . DeclNameList ',' DeclName
 
-    IDENT  shift, and go to state 4
-    ')'    shift, and go to state 261
+    IDENT  posunout a přejít do stavu 4
+    ')'    posunout a přejít do stavu 261
 
-    ConstDecl     go to state 262
-    DeclName      go to state 129
-    Symbol        go to state 130
-    DeclNameList  go to state 154
+    ConstDecl     přejít do stavu 262
+    DeclName      přejít do stavu 129
+    Symbol        přejít do stavu 130
+    DeclNameList  přejít do stavu 154
 
 
-state 153
+State 153
 
    23 CommonDecl: Const ConstDecl .
 
-    $default  reduce using rule 23 (CommonDecl)
+    $výchozí  reduce using rule 23 (CommonDecl)
 
 
-state 154
+State 154
 
    34 ConstDecl: DeclNameList . Type '=' ExprList
    35          | DeclNameList . '=' ExprList
@@ -4878,36 +4876,36 @@ state 154
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
   266 DeclNameList: DeclNameList . ',' DeclName
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '='        shift, and go to state 263
-    '['        shift, and go to state 49
-    ','        shift, and go to state 252
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '='        posunout a přejít do stavu 263
+    '['        posunout a přejít do stavu 49
+    ','        posunout a přejít do stavu 252
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 264
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 264
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 155
+State 155
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -4987,46 +4985,46 @@ state 155
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 265
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 265
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 156
+State 156
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -5106,46 +5104,46 @@ state 156
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 266
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 266
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 157
+State 157
 
    42 SimpleStmt: Expr ASOP . Expr
    83 Expr: . UnaryExpr
@@ -5225,46 +5223,46 @@ state 157
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 267
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 267
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 158
+State 158
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -5344,53 +5342,53 @@ state 158
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 268
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 268
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 159
+State 159
 
    46 SimpleStmt: Expr DEC .
 
-    $default  reduce using rule 46 (SimpleStmt)
+    $výchozí  reduce using rule 46 (SimpleStmt)
 
 
-state 160
+State 160
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -5470,46 +5468,46 @@ state 160
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 269
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 269
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 161
+State 161
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -5589,53 +5587,53 @@ state 161
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 270
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 270
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 162
+State 162
 
    45 SimpleStmt: Expr INC .
 
-    $default  reduce using rule 45 (SimpleStmt)
+    $výchozí  reduce using rule 45 (SimpleStmt)
 
 
-state 163
+State 163
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -5715,46 +5713,46 @@ state 163
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 271
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 271
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 164
+State 164
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -5834,46 +5832,46 @@ state 164
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 272
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 272
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 165
+State 165
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -5953,46 +5951,46 @@ state 165
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 273
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 273
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 166
+State 166
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -6072,46 +6070,46 @@ state 166
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 274
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 274
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 167
+State 167
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -6191,46 +6189,46 @@ state 167
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 275
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 275
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 168
+State 168
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -6310,46 +6308,46 @@ state 168
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 276
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 276
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 169
+State 169
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -6429,46 +6427,46 @@ state 169
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 277
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 277
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 170
+State 170
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -6548,46 +6546,46 @@ state 170
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 278
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 278
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 171
+State 171
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -6667,46 +6665,46 @@ state 171
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 279
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 279
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 172
+State 172
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -6786,46 +6784,46 @@ state 172
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 280
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 280
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 173
+State 173
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -6905,46 +6903,46 @@ state 173
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 281
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 281
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 174
+State 174
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -7024,46 +7022,46 @@ state 174
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 282
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 282
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 175
+State 175
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -7143,46 +7141,46 @@ state 175
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 283
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 283
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 176
+State 176
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -7262,46 +7260,46 @@ state 176
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 284
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 284
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 177
+State 177
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -7381,56 +7379,56 @@ state 177
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 285
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 285
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 178
+State 178
 
   128 PrimaryExprNoParen: PrimaryExprNoParen '{' . StartCompLit BracedKeyvalList '}'
-  131 StartCompLit: .
+  131 StartCompLit: . %empty
 
-    $default  reduce using rule 131 (StartCompLit)
+    $výchozí  reduce using rule 131 (StartCompLit)
 
-    StartCompLit  go to state 286
+    StartCompLit  přejít do stavu 286
 
 
-state 179
+State 179
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -7521,64 +7519,64 @@ state 179
   269 ExprOrTypeList: . ExprOrType
   270               | . ExprOrTypeList ',' ExprOrType
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 135
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    ')'        shift, and go to state 287
-    '*'        shift, and go to state 136
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 135
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    ')'        posunout a přejít do stavu 287
+    '*'        posunout a přejít do stavu 136
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 137
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    ExprOrType          go to state 288
-    Symbol              go to state 94
-    Name                go to state 67
-    NonExprType         go to state 139
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 140
-    RecvChanType        go to state 141
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 142
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprOrTypeList      go to state 289
+    Expr                přejít do stavu 137
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    ExprOrType          přejít do stavu 288
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    NonExprType         přejít do stavu 139
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 140
+    RecvChanType        přejít do stavu 141
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 142
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprOrTypeList      přejít do stavu 289
 
 
-state 180
+State 180
 
   118 PrimaryExprNoParen: PrimaryExpr '.' . Symbol
   119                   | PrimaryExpr '.' . '(' ExprOrType ')'
   120                   | PrimaryExpr '.' . '(' TYPE ')'
   148 Symbol: . IDENT
 
-    IDENT  shift, and go to state 4
-    '('    shift, and go to state 290
+    IDENT  posunout a přejít do stavu 4
+    '('    posunout a přejít do stavu 290
 
-    Symbol  go to state 291
+    Symbol  přejít do stavu 291
 
 
-state 181
+State 181
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -7659,52 +7657,52 @@ state 181
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  281 oExpr: .  [':']
+  281 oExpr: . %empty  [':']
   282      | . Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 281 (oExpr)
+    $výchozí  reduce using rule 281 (oExpr)
 
-    Expr                go to state 292
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    oExpr               go to state 293
+    Expr                přejít do stavu 292
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    oExpr               přejít do stavu 293
 
 
-state 182
+State 182
 
    20 CommonDecl: . VAR VarDecl
    21           | . VAR '(' VarDeclList oSemi ')'
@@ -7806,7 +7804,7 @@ state 182
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  242 Statement: .  [CASE, DEFAULT, ';', '}']
+  242 Statement: . %empty  [CASE, DEFAULT, ';', '}']
   243          | . CompoundStmt
   244          | . CommonDecl
   245          | . NonDclStmt
@@ -7829,80 +7827,80 @@ state 182
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    error      shift, and go to state 294
-    BREAK      shift, and go to state 20
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    CONST      shift, and go to state 23
-    CONTINUE   shift, and go to state 24
-    DEFER      shift, and go to state 25
-    FALL       shift, and go to state 26
-    FOR        shift, and go to state 27
-    FUNC       shift, and go to state 91
-    GO         shift, and go to state 29
-    GOTO       shift, and go to state 30
-    IDENT      shift, and go to state 4
-    IF         shift, and go to state 31
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RETURN     shift, and go to state 35
-    SELECT     shift, and go to state 36
-    STRUCT     shift, and go to state 37
-    SWITCH     shift, and go to state 38
-    TYPE       shift, and go to state 39
-    UNION      shift, and go to state 40
-    VAR        shift, and go to state 41
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 295
-    '~'        shift, and go to state 51
+    error      posunout a přejít do stavu 294
+    BREAK      posunout a přejít do stavu 20
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    CONST      posunout a přejít do stavu 23
+    CONTINUE   posunout a přejít do stavu 24
+    DEFER      posunout a přejít do stavu 25
+    FALL       posunout a přejít do stavu 26
+    FOR        posunout a přejít do stavu 27
+    FUNC       posunout a přejít do stavu 91
+    GO         posunout a přejít do stavu 29
+    GOTO       posunout a přejít do stavu 30
+    IDENT      posunout a přejít do stavu 4
+    IF         posunout a přejít do stavu 31
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RETURN     posunout a přejít do stavu 35
+    SELECT     posunout a přejít do stavu 36
+    STRUCT     posunout a přejít do stavu 37
+    SWITCH     posunout a přejít do stavu 38
+    TYPE       posunout a přejít do stavu 39
+    UNION      posunout a přejít do stavu 40
+    VAR        posunout a přejít do stavu 41
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 295
+    '~'        posunout a přejít do stavu 51
 
     CASE     reduce using rule 242 (Statement)
     DEFAULT  reduce using rule 242 (Statement)
     ';'      reduce using rule 242 (Statement)
     '}'      reduce using rule 242 (Statement)
 
-    CommonDecl          go to state 296
-    Const               go to state 54
-    SimpleStmt          go to state 55
-    CompoundStmt        go to state 297
-    ForStmt             go to state 56
-    IfStmt              go to state 57
-    SwitchStmt          go to state 58
-    SelectStmt          go to state 59
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    NewName             go to state 65
-    Symbol              go to state 66
-    Name                go to state 67
-    LabelName           go to state 68
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    Statement           go to state 298
-    NonDclStmt          go to state 299
-    ExprList            go to state 81
+    CommonDecl          přejít do stavu 296
+    Const               přejít do stavu 54
+    SimpleStmt          přejít do stavu 55
+    CompoundStmt        přejít do stavu 297
+    ForStmt             přejít do stavu 56
+    IfStmt              přejít do stavu 57
+    SwitchStmt          přejít do stavu 58
+    SelectStmt          přejít do stavu 59
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    NewName             přejít do stavu 65
+    Symbol              přejít do stavu 66
+    Name                přejít do stavu 67
+    LabelName           přejít do stavu 68
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    Statement           přejít do stavu 298
+    NonDclStmt          přejít do stavu 299
+    ExprList            přejít do stavu 81
 
 
-state 183
+State 183
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -7985,65 +7983,65 @@ state 183
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    ')'        shift, and go to state 300
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    ')'        posunout a přejít do stavu 300
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 301
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 301
 
 
-state 184
+State 184
 
   127 PrimaryExprNoParen: CompLitType LBrace . StartCompLit BracedKeyvalList '}'
-  131 StartCompLit: .
+  131 StartCompLit: . %empty
 
-    $default  reduce using rule 131 (StartCompLit)
+    $výchozí  reduce using rule 131 (StartCompLit)
 
-    StartCompLit  go to state 302
+    StartCompLit  přejít do stavu 302
 
 
-state 185
+State 185
 
   208 FuncLit: FuncLitDecl error .
 
-    $default  reduce using rule 208 (FuncLit)
+    $výchozí  reduce using rule 208 (FuncLit)
 
 
-state 186
+State 186
 
    20 CommonDecl: . VAR VarDecl
    21           | . VAR '(' VarDeclList oSemi ')'
@@ -8146,7 +8144,7 @@ state 186
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   207        | FuncLitDecl LBrace . StmtList '}'
   208        | . FuncLitDecl error
-  242 Statement: .  [';', '}']
+  242 Statement: . %empty  [';', '}']
   243          | . CompoundStmt
   244          | . CommonDecl
   245          | . NonDclStmt
@@ -8170,79 +8168,79 @@ state 186
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    error      shift, and go to state 294
-    BREAK      shift, and go to state 20
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    CONST      shift, and go to state 23
-    CONTINUE   shift, and go to state 24
-    DEFER      shift, and go to state 25
-    FALL       shift, and go to state 26
-    FOR        shift, and go to state 27
-    FUNC       shift, and go to state 91
-    GO         shift, and go to state 29
-    GOTO       shift, and go to state 30
-    IDENT      shift, and go to state 4
-    IF         shift, and go to state 31
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RETURN     shift, and go to state 35
-    SELECT     shift, and go to state 36
-    STRUCT     shift, and go to state 37
-    SWITCH     shift, and go to state 38
-    TYPE       shift, and go to state 39
-    UNION      shift, and go to state 40
-    VAR        shift, and go to state 41
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 295
-    '~'        shift, and go to state 51
+    error      posunout a přejít do stavu 294
+    BREAK      posunout a přejít do stavu 20
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    CONST      posunout a přejít do stavu 23
+    CONTINUE   posunout a přejít do stavu 24
+    DEFER      posunout a přejít do stavu 25
+    FALL       posunout a přejít do stavu 26
+    FOR        posunout a přejít do stavu 27
+    FUNC       posunout a přejít do stavu 91
+    GO         posunout a přejít do stavu 29
+    GOTO       posunout a přejít do stavu 30
+    IDENT      posunout a přejít do stavu 4
+    IF         posunout a přejít do stavu 31
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RETURN     posunout a přejít do stavu 35
+    SELECT     posunout a přejít do stavu 36
+    STRUCT     posunout a přejít do stavu 37
+    SWITCH     posunout a přejít do stavu 38
+    TYPE       posunout a přejít do stavu 39
+    UNION      posunout a přejít do stavu 40
+    VAR        posunout a přejít do stavu 41
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 295
+    '~'        posunout a přejít do stavu 51
 
     ';'  reduce using rule 242 (Statement)
     '}'  reduce using rule 242 (Statement)
 
-    CommonDecl          go to state 296
-    Const               go to state 54
-    SimpleStmt          go to state 55
-    CompoundStmt        go to state 297
-    ForStmt             go to state 56
-    IfStmt              go to state 57
-    SwitchStmt          go to state 58
-    SelectStmt          go to state 59
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    NewName             go to state 65
-    Symbol              go to state 66
-    Name                go to state 67
-    LabelName           go to state 68
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    Statement           go to state 303
-    NonDclStmt          go to state 299
-    StmtList            go to state 304
-    ExprList            go to state 81
+    CommonDecl          přejít do stavu 296
+    Const               přejít do stavu 54
+    SimpleStmt          přejít do stavu 55
+    CompoundStmt        přejít do stavu 297
+    ForStmt             přejít do stavu 56
+    IfStmt              přejít do stavu 57
+    SwitchStmt          přejít do stavu 58
+    SelectStmt          přejít do stavu 59
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    NewName             přejít do stavu 65
+    Symbol              přejít do stavu 66
+    Name                přejít do stavu 67
+    LabelName           přejít do stavu 68
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    Statement           přejít do stavu 303
+    NonDclStmt          přejít do stavu 299
+    StmtList            přejít do stavu 304
+    ExprList            přejít do stavu 81
 
 
-state 187
+State 187
 
    44 SimpleStmt: ExprList COLAS . ExprList
    83 Expr: . UnaryExpr
@@ -8324,47 +8322,47 @@ state 187
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 305
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 305
 
 
-state 188
+State 188
 
    43 SimpleStmt: ExprList '=' . ExprList
    83 Expr: . UnaryExpr
@@ -8446,47 +8444,47 @@ state 188
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 306
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 306
 
 
-state 189
+State 189
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -8566,46 +8564,46 @@ state 189
   208        | . FuncLitDecl error
   268 ExprList: ExprList ',' . Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 307
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 307
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 190
+State 190
 
    10 ImportDecl: . LITERAL
    11           | . Symbol LITERAL
@@ -8614,31 +8612,31 @@ state 190
   148 Symbol: . IDENT
   278 oSemi: ';' .  [')']
 
-    IDENT    shift, and go to state 4
-    LITERAL  shift, and go to state 13
-    '.'      shift, and go to state 15
+    IDENT    posunout a přejít do stavu 4
+    LITERAL  posunout a přejít do stavu 13
+    '.'      posunout a přejít do stavu 15
 
-    $default  reduce using rule 278 (oSemi)
+    $výchozí  reduce using rule 278 (oSemi)
 
-    ImportDecl  go to state 308
-    Symbol      go to state 17
+    ImportDecl  přejít do stavu 308
+    Symbol      přejít do stavu 17
 
 
-state 191
+State 191
 
     8 Import: IMPORT '(' ImportDeclList oSemi . ')'
 
-    ')'  shift, and go to state 309
+    ')'  posunout a přejít do stavu 309
 
 
-state 192
+State 192
 
   188 RecvChanType: COMM . CHAN Type
 
-    CHAN  shift, and go to state 310
+    CHAN  posunout a přejít do stavu 310
 
 
-state 193
+State 193
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -8672,76 +8670,76 @@ state 193
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 311
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 311
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 194
+State 194
 
   181 OtherType: CHAN COMM Type .
 
-    $default  reduce using rule 181 (OtherType)
+    $výchozí  reduce using rule 181 (OtherType)
 
 
-state 195
+State 195
 
   157 Type: TypeName .
 
-    $default  reduce using rule 157 (Type)
+    $výchozí  reduce using rule 157 (Type)
 
 
-state 196
+State 196
 
   155 Type: OtherType .
 
-    $default  reduce using rule 155 (Type)
+    $výchozí  reduce using rule 155 (Type)
 
 
-state 197
+State 197
 
   156 Type: PtrType .
 
-    $default  reduce using rule 156 (Type)
+    $výchozí  reduce using rule 156 (Type)
 
 
-state 198
+State 198
 
   153 Type: RecvChanType .
 
-    $default  reduce using rule 153 (Type)
+    $výchozí  reduce using rule 153 (Type)
 
 
-state 199
+State 199
 
   154 Type: FuncType .
 
-    $default  reduce using rule 154 (Type)
+    $výchozí  reduce using rule 154 (Type)
 
 
-state 200
+State 200
 
   141 NameOrType: . Type
   148 Symbol: . IDENT
@@ -8783,100 +8781,100 @@ state 200
   237        | . Ddd
   238 ArgTypeList: . ArgType
   239            | . ArgTypeList ',' ArgType
-  240 oArgTypeListOComma: .  [')']
+  240 oArgTypeListOComma: . %empty  [')']
   241                   | . ArgTypeList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    DDD        shift, and go to state 210
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    DDD        posunout a přejít do stavu 210
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 240 (oArgTypeListOComma)
+    $výchozí  reduce using rule 240 (oArgTypeListOComma)
 
-    NameOrType          go to state 211
-    Symbol              go to state 212
-    Name                go to state 95
-    Ddd                 go to state 213
-    Type                go to state 214
-    TypeName            go to state 195
-    OtherType           go to state 196
-    PtrType             go to state 197
-    RecvChanType        go to state 198
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 199
-    ArgType             go to state 215
-    ArgTypeList         go to state 216
-    oArgTypeListOComma  go to state 312
+    NameOrType          přejít do stavu 211
+    Symbol              přejít do stavu 212
+    Name                přejít do stavu 95
+    Ddd                 přejít do stavu 213
+    Type                přejít do stavu 214
+    TypeName            přejít do stavu 195
+    OtherType           přejít do stavu 196
+    PtrType             přejít do stavu 197
+    RecvChanType        přejít do stavu 198
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 199
+    ArgType             přejít do stavu 215
+    ArgTypeList         přejít do stavu 216
+    oArgTypeListOComma  přejít do stavu 312
 
 
-state 201
+State 201
 
   167 NonRecvChanType: '(' Type . ')'
 
-    ')'  shift, and go to state 313
+    ')'  posunout a přejít do stavu 313
 
 
-state 202
+State 202
 
   187 PtrType: '*' Type .
 
-    $default  reduce using rule 187 (PtrType)
+    $výchozí  reduce using rule 187 (PtrType)
 
 
-state 203
+State 203
 
   148 Symbol: . IDENT
   177 TypeName: Name '.' . Symbol
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    Symbol  go to state 314
+    Symbol  přejít do stavu 314
 
 
-state 204
+State 204
 
   286 oSimpleStmt: SimpleStmt .
 
-    $default  reduce using rule 286 (oSimpleStmt)
+    $výchozí  reduce using rule 286 (oSimpleStmt)
 
 
-state 205
+State 205
 
    63 ForHeader: RangeStmt .
 
-    $default  reduce using rule 63 (ForHeader)
+    $výchozí  reduce using rule 63 (ForHeader)
 
 
-state 206
+State 206
 
    58 LoopBody: . BODY $@4 StmtList '}'
    64 ForBody: ForHeader . LoopBody
 
-    BODY  shift, and go to state 315
+    BODY  posunout a přejít do stavu 315
 
-    LoopBody  go to state 316
+    LoopBody  přejít do stavu 316
 
 
-state 207
+State 207
 
    66 ForStmt: FOR $@5 ForBody .
 
-    $default  reduce using rule 66 (ForStmt)
+    $výchozí  reduce using rule 66 (ForStmt)
 
 
-state 208
+State 208
 
    43 SimpleStmt: ExprList . '=' ExprList
    44           | ExprList . COLAS ExprList
@@ -8884,22 +8882,22 @@ state 208
    60          | ExprList . COLAS RANGE Expr
   268 ExprList: ExprList . ',' Expr
 
-    COLAS  shift, and go to state 317
-    '='    shift, and go to state 318
-    ','    shift, and go to state 189
+    COLAS  posunout a přejít do stavu 317
+    '='    posunout a přejít do stavu 318
+    ','    posunout a přejít do stavu 189
 
 
-state 209
+State 209
 
    61 ForHeader: oSimpleStmt . ';' oSimpleStmt ';' oSimpleStmt
    62          | oSimpleStmt .  [BODY]
 
-    ';'  shift, and go to state 319
+    ';'  posunout a přejít do stavu 319
 
-    $default  reduce using rule 62 (ForHeader)
+    $výchozí  reduce using rule 62 (ForHeader)
 
 
-state 210
+State 210
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -8934,43 +8932,43 @@ state 210
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 151 (Ddd)
+    $výchozí  reduce using rule 151 (Ddd)
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 320
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 320
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 211
+State 211
 
   234 ArgType: NameOrType .
 
-    $default  reduce using rule 234 (ArgType)
+    $výchozí  reduce using rule 234 (ArgType)
 
 
-state 212
+State 212
 
   141 NameOrType: . Type
   148 Symbol: . IDENT
@@ -9009,82 +9007,82 @@ state 212
   235 ArgType: Symbol . NameOrType
   236        | Symbol . Ddd
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    DDD        shift, and go to state 210
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    DDD        posunout a přejít do stavu 210
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 149 (Name)
+    $výchozí  reduce using rule 149 (Name)
 
-    NameOrType     go to state 321
-    Symbol         go to state 94
-    Name           go to state 95
-    Ddd            go to state 322
-    Type           go to state 214
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    NameOrType     přejít do stavu 321
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Ddd            přejít do stavu 322
+    Type           přejít do stavu 214
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 213
+State 213
 
   237 ArgType: Ddd .
 
-    $default  reduce using rule 237 (ArgType)
+    $výchozí  reduce using rule 237 (ArgType)
 
 
-state 214
+State 214
 
   141 NameOrType: Type .
 
-    $default  reduce using rule 141 (NameOrType)
+    $výchozí  reduce using rule 141 (NameOrType)
 
 
-state 215
+State 215
 
   238 ArgTypeList: ArgType .
 
-    $default  reduce using rule 238 (ArgTypeList)
+    $výchozí  reduce using rule 238 (ArgTypeList)
 
 
-state 216
+State 216
 
   239 ArgTypeList: ArgTypeList . ',' ArgType
   241 oArgTypeListOComma: ArgTypeList . oComma
-  279 oComma: .  [')']
+  279 oComma: . %empty  [')']
   280       | . ','
 
-    ','  shift, and go to state 323
+    ','  posunout a přejít do stavu 323
 
-    $default  reduce using rule 279 (oComma)
+    $výchozí  reduce using rule 279 (oComma)
 
-    oComma  go to state 324
+    oComma  přejít do stavu 324
 
 
-state 217
+State 217
 
   199 FuncDecl1: '(' oArgTypeListOComma . ')' Symbol '(' oArgTypeListOComma ')' FuncResult
   200 FuncType: FUNC '(' oArgTypeListOComma . ')' FuncResult
 
-    ')'  shift, and go to state 325
+    ')'  posunout a přejít do stavu 325
 
 
-state 218
+State 218
 
   141 NameOrType: . Type
   148 Symbol: . IDENT
@@ -9126,45 +9124,45 @@ state 218
   237        | . Ddd
   238 ArgTypeList: . ArgType
   239            | . ArgTypeList ',' ArgType
-  240 oArgTypeListOComma: .  [')']
+  240 oArgTypeListOComma: . %empty  [')']
   241                   | . ArgTypeList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    DDD        shift, and go to state 210
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    DDD        posunout a přejít do stavu 210
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 240 (oArgTypeListOComma)
+    $výchozí  reduce using rule 240 (oArgTypeListOComma)
 
-    NameOrType          go to state 211
-    Symbol              go to state 212
-    Name                go to state 95
-    Ddd                 go to state 213
-    Type                go to state 214
-    TypeName            go to state 195
-    OtherType           go to state 196
-    PtrType             go to state 197
-    RecvChanType        go to state 198
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 199
-    ArgType             go to state 215
-    ArgTypeList         go to state 216
-    oArgTypeListOComma  go to state 326
+    NameOrType          přejít do stavu 211
+    Symbol              přejít do stavu 212
+    Name                přejít do stavu 95
+    Ddd                 přejít do stavu 213
+    Type                přejít do stavu 214
+    TypeName            přejít do stavu 195
+    OtherType           přejít do stavu 196
+    PtrType             přejít do stavu 197
+    RecvChanType        přejít do stavu 198
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 199
+    ArgType             přejít do stavu 215
+    ArgTypeList         přejít do stavu 216
+    oArgTypeListOComma  přejít do stavu 326
 
 
-state 219
+State 219
 
    20 CommonDecl: . VAR VarDecl
    21           | . VAR '(' VarDeclList oSemi ')'
@@ -9267,7 +9265,7 @@ state 219
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  242 Statement: .  [';', '}']
+  242 Statement: . %empty  [';', '}']
   243          | . CompoundStmt
   244          | . CommonDecl
   245          | . NonDclStmt
@@ -9291,194 +9289,194 @@ state 219
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    error      shift, and go to state 294
-    BREAK      shift, and go to state 20
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    CONST      shift, and go to state 23
-    CONTINUE   shift, and go to state 24
-    DEFER      shift, and go to state 25
-    FALL       shift, and go to state 26
-    FOR        shift, and go to state 27
-    FUNC       shift, and go to state 91
-    GO         shift, and go to state 29
-    GOTO       shift, and go to state 30
-    IDENT      shift, and go to state 4
-    IF         shift, and go to state 31
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RETURN     shift, and go to state 35
-    SELECT     shift, and go to state 36
-    STRUCT     shift, and go to state 37
-    SWITCH     shift, and go to state 38
-    TYPE       shift, and go to state 39
-    UNION      shift, and go to state 40
-    VAR        shift, and go to state 41
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 295
-    '~'        shift, and go to state 51
+    error      posunout a přejít do stavu 294
+    BREAK      posunout a přejít do stavu 20
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    CONST      posunout a přejít do stavu 23
+    CONTINUE   posunout a přejít do stavu 24
+    DEFER      posunout a přejít do stavu 25
+    FALL       posunout a přejít do stavu 26
+    FOR        posunout a přejít do stavu 27
+    FUNC       posunout a přejít do stavu 91
+    GO         posunout a přejít do stavu 29
+    GOTO       posunout a přejít do stavu 30
+    IDENT      posunout a přejít do stavu 4
+    IF         posunout a přejít do stavu 31
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RETURN     posunout a přejít do stavu 35
+    SELECT     posunout a přejít do stavu 36
+    STRUCT     posunout a přejít do stavu 37
+    SWITCH     posunout a přejít do stavu 38
+    TYPE       posunout a přejít do stavu 39
+    UNION      posunout a přejít do stavu 40
+    VAR        posunout a přejít do stavu 41
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 295
+    '~'        posunout a přejít do stavu 51
 
     ';'  reduce using rule 242 (Statement)
     '}'  reduce using rule 242 (Statement)
 
-    CommonDecl          go to state 296
-    Const               go to state 54
-    SimpleStmt          go to state 55
-    CompoundStmt        go to state 297
-    ForStmt             go to state 56
-    IfStmt              go to state 57
-    SwitchStmt          go to state 58
-    SelectStmt          go to state 59
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    NewName             go to state 65
-    Symbol              go to state 66
-    Name                go to state 67
-    LabelName           go to state 68
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    Statement           go to state 303
-    NonDclStmt          go to state 299
-    StmtList            go to state 327
-    ExprList            go to state 81
+    CommonDecl          přejít do stavu 296
+    Const               přejít do stavu 54
+    SimpleStmt          přejít do stavu 55
+    CompoundStmt        přejít do stavu 297
+    ForStmt             přejít do stavu 56
+    IfStmt              přejít do stavu 57
+    SwitchStmt          přejít do stavu 58
+    SelectStmt          přejít do stavu 59
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    NewName             přejít do stavu 65
+    Symbol              přejít do stavu 66
+    Name                přejít do stavu 67
+    LabelName           přejít do stavu 68
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    Statement           přejít do stavu 303
+    NonDclStmt          přejít do stavu 299
+    StmtList            přejít do stavu 327
+    ExprList            přejít do stavu 81
 
 
-state 220
+State 220
 
   197 FuncDecl: FUNC FuncDecl1 FuncBody .
 
-    $default  reduce using rule 197 (FuncDecl)
+    $výchozí  reduce using rule 197 (FuncDecl)
 
 
-state 221
+State 221
 
    58 LoopBody: . BODY $@4 StmtList '}'
    71 IfStmt: IF $@6 IfHeader . LoopBody $@7 ElseIfList Else
 
-    BODY  shift, and go to state 315
+    BODY  posunout a přejít do stavu 315
 
-    LoopBody  go to state 328
+    LoopBody  přejít do stavu 328
 
 
-state 222
+State 222
 
    67 IfHeader: oSimpleStmt .  [BODY]
    68         | oSimpleStmt . ';' oSimpleStmt
 
-    ';'  shift, and go to state 329
+    ';'  posunout a přejít do stavu 329
 
-    $default  reduce using rule 67 (IfHeader)
+    $výchozí  reduce using rule 67 (IfHeader)
 
 
-state 223
+State 223
 
   148 Symbol: IDENT .  [CHAN, COMM, FUNC, IDENT, INTERFACE, MAP, STRUCT, UNION, VARIANT, '(', '*', '[', ',']
   227 Qualident: IDENT .  [LITERAL, ';', '}']
   228          | IDENT . '.' Symbol
 
-    '.'  shift, and go to state 330
+    '.'  posunout a přejít do stavu 330
 
-    LITERAL   reduce using rule 227 (Qualident)
-    ';'       reduce using rule 227 (Qualident)
-    '}'       reduce using rule 227 (Qualident)
-    $default  reduce using rule 148 (Symbol)
+    LITERAL     reduce using rule 227 (Qualident)
+    ';'         reduce using rule 227 (Qualident)
+    '}'         reduce using rule 227 (Qualident)
+    $výchozí  reduce using rule 148 (Symbol)
 
 
-state 224
+State 224
 
   227 Qualident: . IDENT
   228          | . IDENT '.' Symbol
   232 InterfaceDecl: '(' . Qualident ')'
 
-    IDENT  shift, and go to state 331
+    IDENT  posunout a přejít do stavu 331
 
-    Qualident  go to state 332
+    Qualident  přejít do stavu 332
 
 
-state 225
+State 225
 
   196 InterfaceType: INTERFACE LBrace '}' .
 
-    $default  reduce using rule 196 (InterfaceType)
+    $výchozí  reduce using rule 196 (InterfaceType)
 
 
-state 226
+State 226
 
   230 InterfaceDecl: NewName . InterfaceMethodDecl
   233 InterfaceMethodDecl: . '(' oArgTypeListOComma ')' FuncResult
 
-    '('  shift, and go to state 333
+    '('  posunout a přejít do stavu 333
 
-    InterfaceMethodDecl  go to state 334
+    InterfaceMethodDecl  přejít do stavu 334
 
 
-state 227
+State 227
 
   195 InterfaceType: INTERFACE LBrace InterfaceDeclList . oSemi '}'
   220 InterfaceDeclList: InterfaceDeclList . ';' InterfaceDecl
-  277 oSemi: .  ['}']
+  277 oSemi: . %empty  ['}']
   278      | . ';'
 
-    ';'  shift, and go to state 335
+    ';'  posunout a přejít do stavu 335
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 336
+    oSemi  přejít do stavu 336
 
 
-state 228
+State 228
 
   231 InterfaceDecl: Qualident .
 
-    $default  reduce using rule 231 (InterfaceDecl)
+    $výchozí  reduce using rule 231 (InterfaceDecl)
 
 
-state 229
+State 229
 
   219 InterfaceDeclList: InterfaceDecl .
 
-    $default  reduce using rule 219 (InterfaceDeclList)
+    $výchozí  reduce using rule 219 (InterfaceDeclList)
 
 
-state 230
+State 230
 
   182 OtherType: MAP '[' Type . ']' Type
 
-    ']'  shift, and go to state 337
+    ']'  posunout a přejít do stavu 337
 
 
-state 231
+State 231
 
-   55 CaseBlockList: .
+   55 CaseBlockList: . %empty
    56              | . CaseBlockList CaseBlock
    82 SelectStmt: SELECT $@11 BODY . CaseBlockList '}'
 
-    $default  reduce using rule 55 (CaseBlockList)
+    $výchozí  reduce using rule 55 (CaseBlockList)
 
-    CaseBlockList  go to state 338
+    CaseBlockList  přejít do stavu 338
 
 
-state 232
+State 232
 
   223 StructDecl: '(' . Embedded ')' oLiteral
   225           | '(' . '*' Embedded ')' oLiteral
@@ -9486,14 +9484,14 @@ state 232
   228          | . IDENT '.' Symbol
   229 Embedded: . Qualident
 
-    IDENT  shift, and go to state 331
-    '*'    shift, and go to state 339
+    IDENT  posunout a přejít do stavu 331
+    '*'    posunout a přejít do stavu 339
 
-    Qualident  go to state 238
-    Embedded   go to state 340
+    Qualident  přejít do stavu 238
+    Embedded   přejít do stavu 340
 
 
-state 233
+State 233
 
   224 StructDecl: '*' . Embedded oLiteral
   226           | '*' . '(' Embedded ')' oLiteral
@@ -9501,69 +9499,69 @@ state 233
   228          | . IDENT '.' Symbol
   229 Embedded: . Qualident
 
-    IDENT  shift, and go to state 331
-    '('    shift, and go to state 341
+    IDENT  posunout a přejít do stavu 331
+    '('    posunout a přejít do stavu 341
 
-    Qualident  go to state 238
-    Embedded   go to state 342
+    Qualident  přejít do stavu 238
+    Embedded   přejít do stavu 342
 
 
-state 234
+State 234
 
   190 StructType: STRUCT LBrace '}' .
 
-    $default  reduce using rule 190 (StructType)
+    $výchozí  reduce using rule 190 (StructType)
 
 
-state 235
+State 235
 
   263 NewNameList: NewName .
 
-    $default  reduce using rule 263 (NewNameList)
+    $výchozí  reduce using rule 263 (NewNameList)
 
 
-state 236
+State 236
 
   189 StructType: STRUCT LBrace StructDeclList . oSemi '}'
   218 StructDeclList: StructDeclList . ';' StructDecl
-  277 oSemi: .  ['}']
+  277 oSemi: . %empty  ['}']
   278      | . ';'
 
-    ';'  shift, and go to state 343
+    ';'  posunout a přejít do stavu 343
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 344
+    oSemi  přejít do stavu 344
 
 
-state 237
+State 237
 
   217 StructDeclList: StructDecl .
 
-    $default  reduce using rule 217 (StructDeclList)
+    $výchozí  reduce using rule 217 (StructDeclList)
 
 
-state 238
+State 238
 
   229 Embedded: Qualident .
 
-    $default  reduce using rule 229 (Embedded)
+    $výchozí  reduce using rule 229 (Embedded)
 
 
-state 239
+State 239
 
   222 StructDecl: Embedded . oLiteral
-  287 oLiteral: .  [';', '}']
+  287 oLiteral: . %empty  [';', '}']
   288         | . LITERAL
 
-    LITERAL  shift, and go to state 345
+    LITERAL  posunout a přejít do stavu 345
 
-    $default  reduce using rule 287 (oLiteral)
+    $výchozí  reduce using rule 287 (oLiteral)
 
-    oLiteral  go to state 346
+    oLiteral  přejít do stavu 346
 
 
-state 240
+State 240
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -9598,126 +9596,126 @@ state 240
   221 StructDecl: NewNameList . Type oLiteral
   264 NewNameList: NewNameList . ',' NewName
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
-    ','        shift, and go to state 347
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
+    ','        posunout a přejít do stavu 347
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 348
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 348
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 241
+State 241
 
    80 SwitchStmt: SWITCH $@10 IfHeader . BODY CaseBlockList '}'
 
-    BODY  shift, and go to state 349
+    BODY  posunout a přejít do stavu 349
 
 
-state 242
+State 242
 
    29 CommonDecl: TYPE '(' ')' .
 
-    $default  reduce using rule 29 (CommonDecl)
+    $výchozí  reduce using rule 29 (CommonDecl)
 
 
-state 243
+State 243
 
   215 TypeDeclList: TypeDecl .
 
-    $default  reduce using rule 215 (TypeDeclList)
+    $výchozí  reduce using rule 215 (TypeDeclList)
 
 
-state 244
+State 244
 
    28 CommonDecl: TYPE '(' TypeDeclList . oSemi ')'
   216 TypeDeclList: TypeDeclList . ';' TypeDecl
-  277 oSemi: .  [')']
+  277 oSemi: . %empty  [')']
   278      | . ';'
 
-    ';'  shift, and go to state 350
+    ';'  posunout a přejít do stavu 350
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 351
+    oSemi  přejít do stavu 351
 
 
-state 245
+State 245
 
    40 TypeDecl: TypeDeclName Type .
 
-    $default  reduce using rule 40 (TypeDecl)
+    $výchozí  reduce using rule 40 (TypeDecl)
 
 
-state 246
+State 246
 
   192 UnionType: UNION LBrace '}' .
 
-    $default  reduce using rule 192 (UnionType)
+    $výchozí  reduce using rule 192 (UnionType)
 
 
-state 247
+State 247
 
   191 UnionType: UNION LBrace StructDeclList . oSemi '}'
   218 StructDeclList: StructDeclList . ';' StructDecl
-  277 oSemi: .  ['}']
+  277 oSemi: . %empty  ['}']
   278      | . ';'
 
-    ';'  shift, and go to state 343
+    ';'  posunout a přejít do stavu 343
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 352
+    oSemi  přejít do stavu 352
 
 
-state 248
+State 248
 
    22 CommonDecl: VAR '(' ')' .
 
-    $default  reduce using rule 22 (CommonDecl)
+    $výchozí  reduce using rule 22 (CommonDecl)
 
 
-state 249
+State 249
 
   211 VarDeclList: VarDecl .
 
-    $default  reduce using rule 211 (VarDeclList)
+    $výchozí  reduce using rule 211 (VarDeclList)
 
 
-state 250
+State 250
 
    21 CommonDecl: VAR '(' VarDeclList . oSemi ')'
   212 VarDeclList: VarDeclList . ';' VarDecl
-  277 oSemi: .  [')']
+  277 oSemi: . %empty  [')']
   278      | . ';'
 
-    ';'  shift, and go to state 353
+    ';'  posunout a přejít do stavu 353
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 354
+    oSemi  přejít do stavu 354
 
 
-state 251
+State 251
 
    33 VarDecl: DeclNameList '=' . ExprList
    83 Expr: . UnaryExpr
@@ -9799,90 +9797,90 @@ state 251
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 355
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 355
 
 
-state 252
+State 252
 
   145 DeclName: . Symbol
   148 Symbol: . IDENT
   266 DeclNameList: DeclNameList ',' . DeclName
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    DeclName  go to state 356
-    Symbol    go to state 130
+    DeclName  přejít do stavu 356
+    Symbol    přejít do stavu 130
 
 
-state 253
+State 253
 
    31 VarDecl: DeclNameList Type .  [CASE, DEFAULT, ')', ';', '}']
    32        | DeclNameList Type . '=' ExprList
 
-    '='  shift, and go to state 357
+    '='  posunout a přejít do stavu 357
 
-    $default  reduce using rule 31 (VarDecl)
+    $výchozí  reduce using rule 31 (VarDecl)
 
 
-state 254
+State 254
 
   194 VariantType: VARIANT LBrace '}' .
 
-    $default  reduce using rule 194 (VariantType)
+    $výchozí  reduce using rule 194 (VariantType)
 
 
-state 255
+State 255
 
   193 VariantType: VARIANT LBrace StructDeclList . oSemi '}'
   218 StructDeclList: StructDeclList . ';' StructDecl
-  277 oSemi: .  ['}']
+  277 oSemi: . %empty  ['}']
   278      | . ';'
 
-    ';'  shift, and go to state 343
+    ';'  posunout a přejít do stavu 343
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 358
+    oSemi  přejít do stavu 358
 
 
-state 256
+State 256
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -9923,52 +9921,52 @@ state 256
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 359
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 360
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 359
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 360
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol           go to state 94
-    Name             go to state 95
-    Type             go to state 361
-    NonRecvChanType  go to state 96
-    TypeName         go to state 362
-    OtherType        go to state 363
-    PtrType          go to state 364
-    RecvChanType     go to state 198
-    StructType       go to state 72
-    UnionType        go to state 73
-    VariantType      go to state 74
-    InterfaceType    go to state 75
-    FuncType         go to state 365
+    Symbol           přejít do stavu 94
+    Name             přejít do stavu 95
+    Type             přejít do stavu 361
+    NonRecvChanType  přejít do stavu 96
+    TypeName         přejít do stavu 362
+    OtherType        přejít do stavu 363
+    PtrType          přejít do stavu 364
+    RecvChanType     přejít do stavu 198
+    StructType       přejít do stavu 72
+    UnionType        přejít do stavu 73
+    VariantType      přejít do stavu 74
+    InterfaceType    přejít do stavu 75
+    FuncType         přejít do stavu 365
 
 
-state 257
+State 257
 
   162 NonExprType: '*' NonExprType .
 
-    $default  reduce using rule 162 (NonExprType)
+    $výchozí  reduce using rule 162 (NonExprType)
 
 
-state 258
+State 258
 
   129 PrimaryExprNoParen: '(' ExprOrType ')' . '{' StartCompLit BracedKeyvalList '}'
   138 PrimaryExpr: '(' ExprOrType ')' .  [ANDAND, ANDNOT, ASOP, BODY, CASE, COLAS, COMM, DDD, DEC, DEFAULT, EQ, GE, INC, LE, LSH, NE, OROR, RSH, '%', '&', '(', ')', '*', '+', '-', '.', '/', ':', ';', '<', '=', '>', '[', '^', '|', '}', ']', ',']
 
-    '{'  shift, and go to state 366
+    '{'  posunout a přejít do stavu 366
 
-    $default  reduce using rule 138 (PrimaryExpr)
+    $výchozí  reduce using rule 138 (PrimaryExpr)
 
 
-state 259
+State 259
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -10002,34 +10000,34 @@ state 259
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 367
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 367
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 260
+State 260
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -10063,55 +10061,55 @@ state 260
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 368
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 368
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 261
+State 261
 
    26 CommonDecl: Const '(' ')' .
 
-    $default  reduce using rule 26 (CommonDecl)
+    $výchozí  reduce using rule 26 (CommonDecl)
 
 
-state 262
+State 262
 
    24 CommonDecl: Const '(' ConstDecl . oSemi ')'
    25           | Const '(' ConstDecl . ';' ConstDeclList oSemi ')'
-  277 oSemi: .  [')']
+  277 oSemi: . %empty  [')']
   278      | . ';'
 
-    ';'  shift, and go to state 369
+    ';'  posunout a přejít do stavu 369
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 370
+    oSemi  přejít do stavu 370
 
 
-state 263
+State 263
 
    35 ConstDecl: DeclNameList '=' . ExprList
    83 Expr: . UnaryExpr
@@ -10193,54 +10191,54 @@ state 263
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 371
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 371
 
 
-state 264
+State 264
 
    34 ConstDecl: DeclNameList Type . '=' ExprList
 
-    '='  shift, and go to state 372
+    '='  posunout a přejít do stavu 372
 
 
-state 265
+State 265
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10264,25 +10262,25 @@ state 265
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDNOT  posunout a přejít do stavu 156
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 85 (Expr)
+    $výchozí  reduce using rule 85 (Expr)
 
     Conflict between rule 85 and token ANDAND resolved as reduce (%left ANDAND).
     Conflict between rule 85 and token ANDNOT resolved as shift (ANDAND < ANDNOT).
@@ -10306,7 +10304,7 @@ state 265
     Conflict between rule 85 and token '|' resolved as shift (ANDAND < '|').
 
 
-state 266
+State 266
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10330,7 +10328,7 @@ state 266
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    $default  reduce using rule 100 (Expr)
+    $výchozí  reduce using rule 100 (Expr)
 
     Conflict between rule 100 and token ANDAND resolved as reduce (ANDAND < ANDNOT).
     Conflict between rule 100 and token ANDNOT resolved as reduce (%left ANDNOT).
@@ -10354,7 +10352,7 @@ state 266
     Conflict between rule 100 and token '|' resolved as reduce ('|' < ANDNOT).
 
 
-state 267
+State 267
 
    42 SimpleStmt: Expr ASOP Expr .  [BODY, CASE, DEFAULT, ';', '}']
    84 Expr: Expr . OROR Expr
@@ -10378,31 +10376,31 @@ state 267
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 42 (SimpleStmt)
+    $výchozí  reduce using rule 42 (SimpleStmt)
 
 
-state 268
+State 268
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10426,27 +10424,27 @@ state 268
   103     | Expr . COMM Expr
   103     | Expr COMM Expr .  [ASOP, BODY, CASE, COLAS, COMM, DDD, DEC, DEFAULT, INC, ')', ':', ';', '=', '}', ']', ',']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 103 (Expr)
+    $výchozí  reduce using rule 103 (Expr)
 
     Conflict between rule 103 and token ANDAND resolved as shift (COMM < ANDAND).
     Conflict between rule 103 and token ANDNOT resolved as shift (COMM < ANDNOT).
@@ -10470,7 +10468,7 @@ state 268
     Conflict between rule 103 and token '|' resolved as shift (COMM < '|').
 
 
-state 269
+State 269
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10494,19 +10492,19 @@ state 269
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 86 (Expr)
+    $výchozí  reduce using rule 86 (Expr)
 
     Conflict between rule 86 and token ANDAND resolved as reduce (ANDAND < EQ).
     Conflict between rule 86 and token ANDNOT resolved as shift (EQ < ANDNOT).
@@ -10530,7 +10528,7 @@ state 269
     Conflict between rule 86 and token '|' resolved as shift (EQ < '|').
 
 
-state 270
+State 270
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10554,19 +10552,19 @@ state 270
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 90 (Expr)
+    $výchozí  reduce using rule 90 (Expr)
 
     Conflict between rule 90 and token ANDAND resolved as reduce (ANDAND < GE).
     Conflict between rule 90 and token ANDNOT resolved as shift (GE < ANDNOT).
@@ -10590,7 +10588,7 @@ state 270
     Conflict between rule 90 and token '|' resolved as shift (GE < '|').
 
 
-state 271
+State 271
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10614,19 +10612,19 @@ state 271
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 89 (Expr)
+    $výchozí  reduce using rule 89 (Expr)
 
     Conflict between rule 89 and token ANDAND resolved as reduce (ANDAND < LE).
     Conflict between rule 89 and token ANDNOT resolved as shift (LE < ANDNOT).
@@ -10650,7 +10648,7 @@ state 271
     Conflict between rule 89 and token '|' resolved as shift (LE < '|').
 
 
-state 272
+State 272
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10674,7 +10672,7 @@ state 272
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    $default  reduce using rule 101 (Expr)
+    $výchozí  reduce using rule 101 (Expr)
 
     Conflict between rule 101 and token ANDAND resolved as reduce (ANDAND < LSH).
     Conflict between rule 101 and token ANDNOT resolved as reduce (%left ANDNOT).
@@ -10698,7 +10696,7 @@ state 272
     Conflict between rule 101 and token '|' resolved as reduce ('|' < LSH).
 
 
-state 273
+State 273
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10722,19 +10720,19 @@ state 273
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 87 (Expr)
+    $výchozí  reduce using rule 87 (Expr)
 
     Conflict between rule 87 and token ANDAND resolved as reduce (ANDAND < NE).
     Conflict between rule 87 and token ANDNOT resolved as shift (NE < ANDNOT).
@@ -10758,7 +10756,7 @@ state 273
     Conflict between rule 87 and token '|' resolved as shift (NE < '|').
 
 
-state 274
+State 274
 
    84 Expr: Expr . OROR Expr
    84     | Expr OROR Expr .  [ASOP, BODY, CASE, COLAS, COMM, DDD, DEC, DEFAULT, INC, OROR, ')', ':', ';', '=', '}', ']', ',']
@@ -10782,26 +10780,26 @@ state 274
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 84 (Expr)
+    $výchozí  reduce using rule 84 (Expr)
 
     Conflict between rule 84 and token ANDAND resolved as shift (OROR < ANDAND).
     Conflict between rule 84 and token ANDNOT resolved as shift (OROR < ANDNOT).
@@ -10825,7 +10823,7 @@ state 274
     Conflict between rule 84 and token '|' resolved as shift (OROR < '|').
 
 
-state 275
+State 275
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10849,7 +10847,7 @@ state 275
   102     | Expr RSH Expr .  [ANDAND, ANDNOT, ASOP, BODY, CASE, COLAS, COMM, DDD, DEC, DEFAULT, EQ, GE, INC, LE, LSH, NE, OROR, RSH, '%', '&', ')', '*', '+', '-', '/', ':', ';', '<', '=', '>', '^', '|', '}', ']', ',']
   103     | Expr . COMM Expr
 
-    $default  reduce using rule 102 (Expr)
+    $výchozí  reduce using rule 102 (Expr)
 
     Conflict between rule 102 and token ANDAND resolved as reduce (ANDAND < RSH).
     Conflict between rule 102 and token ANDNOT resolved as reduce (%left ANDNOT).
@@ -10873,7 +10871,7 @@ state 275
     Conflict between rule 102 and token '|' resolved as reduce ('|' < RSH).
 
 
-state 276
+State 276
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10897,7 +10895,7 @@ state 276
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    $default  reduce using rule 98 (Expr)
+    $výchozí  reduce using rule 98 (Expr)
 
     Conflict between rule 98 and token ANDAND resolved as reduce (ANDAND < '%').
     Conflict between rule 98 and token ANDNOT resolved as reduce (%left ANDNOT).
@@ -10921,7 +10919,7 @@ state 276
     Conflict between rule 98 and token '|' resolved as reduce ('|' < '%').
 
 
-state 277
+State 277
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10945,7 +10943,7 @@ state 277
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    $default  reduce using rule 99 (Expr)
+    $výchozí  reduce using rule 99 (Expr)
 
     Conflict between rule 99 and token ANDAND resolved as reduce (ANDAND < '&').
     Conflict between rule 99 and token ANDNOT resolved as reduce (%left ANDNOT).
@@ -10969,7 +10967,7 @@ state 277
     Conflict between rule 99 and token '|' resolved as reduce ('|' < '&').
 
 
-state 278
+State 278
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -10993,7 +10991,7 @@ state 278
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    $default  reduce using rule 96 (Expr)
+    $výchozí  reduce using rule 96 (Expr)
 
     Conflict between rule 96 and token ANDAND resolved as reduce (ANDAND < '*').
     Conflict between rule 96 and token ANDNOT resolved as reduce (%left ANDNOT).
@@ -11017,7 +11015,7 @@ state 278
     Conflict between rule 96 and token '|' resolved as reduce ('|' < '*').
 
 
-state 279
+State 279
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -11041,15 +11039,15 @@ state 279
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '/'     shift, and go to state 173
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '/'     posunout a přejít do stavu 173
 
-    $default  reduce using rule 92 (Expr)
+    $výchozí  reduce using rule 92 (Expr)
 
     Conflict between rule 92 and token ANDAND resolved as reduce (ANDAND < '+').
     Conflict between rule 92 and token ANDNOT resolved as shift ('+' < ANDNOT).
@@ -11073,7 +11071,7 @@ state 279
     Conflict between rule 92 and token '|' resolved as reduce (%left '|').
 
 
-state 280
+State 280
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -11097,15 +11095,15 @@ state 280
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '/'     shift, and go to state 173
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '/'     posunout a přejít do stavu 173
 
-    $default  reduce using rule 93 (Expr)
+    $výchozí  reduce using rule 93 (Expr)
 
     Conflict between rule 93 and token ANDAND resolved as reduce (ANDAND < '-').
     Conflict between rule 93 and token ANDNOT resolved as shift ('-' < ANDNOT).
@@ -11129,7 +11127,7 @@ state 280
     Conflict between rule 93 and token '|' resolved as reduce (%left '|').
 
 
-state 281
+State 281
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -11153,7 +11151,7 @@ state 281
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    $default  reduce using rule 97 (Expr)
+    $výchozí  reduce using rule 97 (Expr)
 
     Conflict between rule 97 and token ANDAND resolved as reduce (ANDAND < '/').
     Conflict between rule 97 and token ANDNOT resolved as reduce (%left ANDNOT).
@@ -11177,7 +11175,7 @@ state 281
     Conflict between rule 97 and token '|' resolved as reduce ('|' < '/').
 
 
-state 282
+State 282
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -11201,19 +11199,19 @@ state 282
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 88 (Expr)
+    $výchozí  reduce using rule 88 (Expr)
 
     Conflict between rule 88 and token ANDAND resolved as reduce (ANDAND < '<').
     Conflict between rule 88 and token ANDNOT resolved as shift ('<' < ANDNOT).
@@ -11237,7 +11235,7 @@ state 282
     Conflict between rule 88 and token '|' resolved as shift ('<' < '|').
 
 
-state 283
+State 283
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -11261,19 +11259,19 @@ state 283
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 91 (Expr)
+    $výchozí  reduce using rule 91 (Expr)
 
     Conflict between rule 91 and token ANDAND resolved as reduce (ANDAND < '>').
     Conflict between rule 91 and token ANDNOT resolved as shift ('>' < ANDNOT).
@@ -11297,7 +11295,7 @@ state 283
     Conflict between rule 91 and token '|' resolved as shift ('>' < '|').
 
 
-state 284
+State 284
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -11321,15 +11319,15 @@ state 284
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '/'     shift, and go to state 173
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '/'     posunout a přejít do stavu 173
 
-    $default  reduce using rule 95 (Expr)
+    $výchozí  reduce using rule 95 (Expr)
 
     Conflict between rule 95 and token ANDAND resolved as reduce (ANDAND < '^').
     Conflict between rule 95 and token ANDNOT resolved as shift ('^' < ANDNOT).
@@ -11353,7 +11351,7 @@ state 284
     Conflict between rule 95 and token '|' resolved as reduce (%left '|').
 
 
-state 285
+State 285
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -11377,15 +11375,15 @@ state 285
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDNOT  shift, and go to state 156
-    LSH     shift, and go to state 164
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '/'     shift, and go to state 173
+    ANDNOT  posunout a přejít do stavu 156
+    LSH     posunout a přejít do stavu 164
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '/'     posunout a přejít do stavu 173
 
-    $default  reduce using rule 94 (Expr)
+    $výchozí  reduce using rule 94 (Expr)
 
     Conflict between rule 94 and token ANDAND resolved as reduce (ANDAND < '|').
     Conflict between rule 94 and token ANDNOT resolved as shift ('|' < ANDNOT).
@@ -11409,7 +11407,7 @@ state 285
     Conflict between rule 94 and token '|' resolved as reduce (%left '|').
 
 
-state 286
+State 286
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -11495,86 +11493,86 @@ state 286
   272           | . BareCompLitExpr
   273           | . KeyvalList ',' Keyval
   274           | . KeyvalList ',' BareCompLitExpr
-  275 BracedKeyvalList: .  ['}']
+  275 BracedKeyvalList: . %empty  ['}']
   276                 | . KeyvalList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 373
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 373
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 275 (BracedKeyvalList)
+    $výchozí  reduce using rule 275 (BracedKeyvalList)
 
-    Expr                go to state 374
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    Keyval              go to state 375
-    BareCompLitExpr     go to state 376
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    KeyvalList          go to state 377
-    BracedKeyvalList    go to state 378
+    Expr                přejít do stavu 374
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    Keyval              přejít do stavu 375
+    BareCompLitExpr     přejít do stavu 376
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    KeyvalList          přejít do stavu 377
+    BracedKeyvalList    přejít do stavu 378
 
 
-state 287
+State 287
 
   113 PseudoCall: PrimaryExpr '(' ')' .
 
-    $default  reduce using rule 113 (PseudoCall)
+    $výchozí  reduce using rule 113 (PseudoCall)
 
 
-state 288
+State 288
 
   269 ExprOrTypeList: ExprOrType .
 
-    $default  reduce using rule 269 (ExprOrTypeList)
+    $výchozí  reduce using rule 269 (ExprOrTypeList)
 
 
-state 289
+State 289
 
   114 PseudoCall: PrimaryExpr '(' ExprOrTypeList . oComma ')'
   115           | PrimaryExpr '(' ExprOrTypeList . DDD oComma ')'
   270 ExprOrTypeList: ExprOrTypeList . ',' ExprOrType
-  279 oComma: .  [')']
+  279 oComma: . %empty  [')']
   280       | . ','
 
-    DDD  shift, and go to state 379
-    ','  shift, and go to state 380
+    DDD  posunout a přejít do stavu 379
+    ','  posunout a přejít do stavu 380
 
-    $default  reduce using rule 279 (oComma)
+    $výchozí  reduce using rule 279 (oComma)
 
-    oComma  go to state 381
+    oComma  přejít do stavu 381
 
 
-state 290
+State 290
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -11662,57 +11660,57 @@ state 290
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 135
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    TYPE       shift, and go to state 382
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 136
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 135
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    TYPE       posunout a přejít do stavu 382
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 136
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 137
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    ExprOrType          go to state 383
-    Symbol              go to state 94
-    Name                go to state 67
-    NonExprType         go to state 139
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 140
-    RecvChanType        go to state 141
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 142
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 137
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    ExprOrType          přejít do stavu 383
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    NonExprType         přejít do stavu 139
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 140
+    RecvChanType        přejít do stavu 141
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 142
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 291
+State 291
 
   118 PrimaryExprNoParen: PrimaryExpr '.' Symbol .
 
-    $default  reduce using rule 118 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 118 (PrimaryExprNoParen)
 
 
-state 292
+State 292
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -11737,106 +11735,106 @@ state 292
   121 PrimaryExprNoParen: PrimaryExpr '[' Expr . ']'
   282 oExpr: Expr .  [':']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
-    ']'     shift, and go to state 384
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
+    ']'     posunout a přejít do stavu 384
 
-    $default  reduce using rule 282 (oExpr)
+    $výchozí  reduce using rule 282 (oExpr)
 
 
-state 293
+State 293
 
   122 PrimaryExprNoParen: PrimaryExpr '[' oExpr . ':' oExpr ']'
   123                   | PrimaryExpr '[' oExpr . ':' oExpr ':' oExpr ']'
 
-    ':'  shift, and go to state 385
+    ':'  posunout a přejít do stavu 385
 
 
-state 294
+State 294
 
   246 Statement: error .
 
-    $default  reduce using rule 246 (Statement)
+    $výchozí  reduce using rule 246 (Statement)
 
 
-state 295
+State 295
 
-   51 $@2: .
+   51 $@2: . %empty
    52 CompoundStmt: '{' . $@2 StmtList '}'
 
-    $default  reduce using rule 51 ($@2)
+    $výchozí  reduce using rule 51 ($@2)
 
-    $@2  go to state 386
+    $@2  přejít do stavu 386
 
 
-state 296
+State 296
 
   244 Statement: CommonDecl .
 
-    $default  reduce using rule 244 (Statement)
+    $výchozí  reduce using rule 244 (Statement)
 
 
-state 297
+State 297
 
   243 Statement: CompoundStmt .
 
-    $default  reduce using rule 243 (Statement)
+    $výchozí  reduce using rule 243 (Statement)
 
 
-state 298
+State 298
 
   252 NonDclStmt: LabelName ':' Statement .
 
-    $default  reduce using rule 252 (NonDclStmt)
+    $výchozí  reduce using rule 252 (NonDclStmt)
 
 
-state 299
+State 299
 
   245 Statement: NonDclStmt .
 
-    $default  reduce using rule 245 (Statement)
+    $výchozí  reduce using rule 245 (Statement)
 
 
-state 300
+State 300
 
   126 PrimaryExprNoParen: ConvType '(' ')' .
 
-    $default  reduce using rule 126 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 126 (PrimaryExprNoParen)
 
 
-state 301
+State 301
 
   125 PrimaryExprNoParen: ConvType '(' ExprList . oComma ')'
   268 ExprList: ExprList . ',' Expr
-  279 oComma: .  [')']
+  279 oComma: . %empty  [')']
   280       | . ','
 
-    ','  shift, and go to state 387
+    ','  posunout a přejít do stavu 387
 
-    $default  reduce using rule 279 (oComma)
+    $výchozí  reduce using rule 279 (oComma)
 
-    oComma  go to state 388
+    oComma  přejít do stavu 388
 
 
-state 302
+State 302
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -11922,92 +11920,92 @@ state 302
   272           | . BareCompLitExpr
   273           | . KeyvalList ',' Keyval
   274           | . KeyvalList ',' BareCompLitExpr
-  275 BracedKeyvalList: .  ['}']
+  275 BracedKeyvalList: . %empty  ['}']
   276                 | . KeyvalList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 373
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 373
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 275 (BracedKeyvalList)
+    $výchozí  reduce using rule 275 (BracedKeyvalList)
 
-    Expr                go to state 374
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    Keyval              go to state 375
-    BareCompLitExpr     go to state 376
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    KeyvalList          go to state 377
-    BracedKeyvalList    go to state 389
+    Expr                přejít do stavu 374
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    Keyval              přejít do stavu 375
+    BareCompLitExpr     přejít do stavu 376
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    KeyvalList          přejít do stavu 377
+    BracedKeyvalList    přejít do stavu 389
 
 
-state 303
+State 303
 
   261 StmtList: Statement .
 
-    $default  reduce using rule 261 (StmtList)
+    $výchozí  reduce using rule 261 (StmtList)
 
 
-state 304
+State 304
 
   207 FuncLit: FuncLitDecl LBrace StmtList . '}'
   262 StmtList: StmtList . ';' Statement
 
-    ';'  shift, and go to state 390
-    '}'  shift, and go to state 391
+    ';'  posunout a přejít do stavu 390
+    '}'  posunout a přejít do stavu 391
 
 
-state 305
+State 305
 
    44 SimpleStmt: ExprList COLAS ExprList .  [BODY, CASE, DEFAULT, ';', '}']
   268 ExprList: ExprList . ',' Expr
 
-    ','  shift, and go to state 189
+    ','  posunout a přejít do stavu 189
 
-    $default  reduce using rule 44 (SimpleStmt)
+    $výchozí  reduce using rule 44 (SimpleStmt)
 
 
-state 306
+State 306
 
    43 SimpleStmt: ExprList '=' ExprList .  [BODY, CASE, DEFAULT, ';', '}']
   268 ExprList: ExprList . ',' Expr
 
-    ','  shift, and go to state 189
+    ','  posunout a přejít do stavu 189
 
-    $default  reduce using rule 43 (SimpleStmt)
+    $výchozí  reduce using rule 43 (SimpleStmt)
 
 
-state 307
+State 307
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -12031,45 +12029,45 @@ state 307
   103     | Expr . COMM Expr
   268 ExprList: ExprList ',' Expr .  [BODY, CASE, COLAS, DEFAULT, ')', ';', '=', '}', ',']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 268 (ExprList)
+    $výchozí  reduce using rule 268 (ExprList)
 
 
-state 308
+State 308
 
    14 ImportDeclList: ImportDeclList ';' ImportDecl .
 
-    $default  reduce using rule 14 (ImportDeclList)
+    $výchozí  reduce using rule 14 (ImportDeclList)
 
 
-state 309
+State 309
 
     8 Import: IMPORT '(' ImportDeclList oSemi ')' .
 
-    $default  reduce using rule 8 (Import)
+    $výchozí  reduce using rule 8 (Import)
 
 
-state 310
+State 310
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -12103,79 +12101,79 @@ state 310
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 361
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 361
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 311
+State 311
 
   158 Type: '(' Type . ')'
 
-    ')'  shift, and go to state 392
+    ')'  posunout a přejít do stavu 392
 
 
-state 312
+State 312
 
   200 FuncType: FUNC '(' oArgTypeListOComma . ')' FuncResult
 
-    ')'  shift, and go to state 393
+    ')'  posunout a přejít do stavu 393
 
 
-state 313
+State 313
 
   167 NonRecvChanType: '(' Type ')' .
 
-    $default  reduce using rule 167 (NonRecvChanType)
+    $výchozí  reduce using rule 167 (NonRecvChanType)
 
 
-state 314
+State 314
 
   177 TypeName: Name '.' Symbol .
 
-    $default  reduce using rule 177 (TypeName)
+    $výchozí  reduce using rule 177 (TypeName)
 
 
-state 315
+State 315
 
-   57 $@4: .
+   57 $@4: . %empty
    58 LoopBody: BODY . $@4 StmtList '}'
 
-    $default  reduce using rule 57 ($@4)
+    $výchozí  reduce using rule 57 ($@4)
 
-    $@4  go to state 394
+    $@4  přejít do stavu 394
 
 
-state 316
+State 316
 
    64 ForBody: ForHeader LoopBody .
 
-    $default  reduce using rule 64 (ForBody)
+    $výchozí  reduce using rule 64 (ForBody)
 
 
-state 317
+State 317
 
    44 SimpleStmt: ExprList COLAS . ExprList
    60 RangeStmt: ExprList COLAS . RANGE Expr
@@ -12258,48 +12256,48 @@ state 317
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RANGE      shift, and go to state 395
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RANGE      posunout a přejít do stavu 395
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 305
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 305
 
 
-state 318
+State 318
 
    43 SimpleStmt: ExprList '=' . ExprList
    59 RangeStmt: ExprList '=' . RANGE Expr
@@ -12382,48 +12380,48 @@ state 318
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RANGE      shift, and go to state 396
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RANGE      posunout a přejít do stavu 396
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 306
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 306
 
 
-state 319
+State 319
 
    41 SimpleStmt: . Expr
    42           | . Expr ASOP Expr
@@ -12510,75 +12508,75 @@ state 319
   208        | . FuncLitDecl error
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
-  285 oSimpleStmt: .  [';']
+  285 oSimpleStmt: . %empty  [';']
   286            | . SimpleStmt
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 285 (oSimpleStmt)
+    $výchozí  reduce using rule 285 (oSimpleStmt)
 
-    SimpleStmt          go to state 204
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 81
-    oSimpleStmt         go to state 397
+    SimpleStmt          přejít do stavu 204
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 81
+    oSimpleStmt         přejít do stavu 397
 
 
-state 320
+State 320
 
   152 Ddd: DDD Type .
 
-    $default  reduce using rule 152 (Ddd)
+    $výchozí  reduce using rule 152 (Ddd)
 
 
-state 321
+State 321
 
   235 ArgType: Symbol NameOrType .
 
-    $default  reduce using rule 235 (ArgType)
+    $výchozí  reduce using rule 235 (ArgType)
 
 
-state 322
+State 322
 
   236 ArgType: Symbol Ddd .
 
-    $default  reduce using rule 236 (ArgType)
+    $výchozí  reduce using rule 236 (ArgType)
 
 
-state 323
+State 323
 
   141 NameOrType: . Type
   148 Symbol: . IDENT
@@ -12620,47 +12618,47 @@ state 323
   239 ArgTypeList: ArgTypeList ',' . ArgType
   280 oComma: ',' .  [')']
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    DDD        shift, and go to state 210
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    DDD        posunout a přejít do stavu 210
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 280 (oComma)
+    $výchozí  reduce using rule 280 (oComma)
 
-    NameOrType     go to state 211
-    Symbol         go to state 212
-    Name           go to state 95
-    Ddd            go to state 213
-    Type           go to state 214
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
-    ArgType        go to state 398
+    NameOrType     přejít do stavu 211
+    Symbol         přejít do stavu 212
+    Name           přejít do stavu 95
+    Ddd            přejít do stavu 213
+    Type           přejít do stavu 214
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
+    ArgType        přejít do stavu 398
 
 
-state 324
+State 324
 
   241 oArgTypeListOComma: ArgTypeList oComma .
 
-    $default  reduce using rule 241 (oArgTypeListOComma)
+    $výchozí  reduce using rule 241 (oArgTypeListOComma)
 
 
-state 325
+State 325
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -12693,69 +12691,69 @@ state 325
   199 FuncDecl1: '(' oArgTypeListOComma ')' . Symbol '(' oArgTypeListOComma ')' FuncResult
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
   200         | FUNC '(' oArgTypeListOComma ')' . FuncResult
-  203 FuncResult: .  [error, BODY, '{']
+  203 FuncResult: . %empty  [error, BODY, '{']
   204           | . FuncRetType
   205           | . '(' oArgTypeListOComma ')'
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 399
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 399
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 203 (FuncResult)
+    $výchozí  reduce using rule 203 (FuncResult)
 
-    Symbol         go to state 400
-    Name           go to state 95
-    FuncRetType    go to state 401
-    TypeName       go to state 402
-    OtherType      go to state 403
-    PtrType        go to state 404
-    RecvChanType   go to state 405
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 406
-    FuncResult     go to state 407
+    Symbol         přejít do stavu 400
+    Name           přejít do stavu 95
+    FuncRetType    přejít do stavu 401
+    TypeName       přejít do stavu 402
+    OtherType      přejít do stavu 403
+    PtrType        přejít do stavu 404
+    RecvChanType   přejít do stavu 405
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 406
+    FuncResult     přejít do stavu 407
 
     Conflict between rule 203 and token '(' resolved as shift (notParen < '(').
 
 
-state 326
+State 326
 
   198 FuncDecl1: Symbol '(' oArgTypeListOComma . ')' FuncResult
 
-    ')'  shift, and go to state 408
+    ')'  posunout a přejít do stavu 408
 
 
-state 327
+State 327
 
   202 FuncBody: '{' StmtList . '}'
   262 StmtList: StmtList . ';' Statement
 
-    ';'  shift, and go to state 390
-    '}'  shift, and go to state 409
+    ';'  posunout a přejít do stavu 390
+    '}'  posunout a přejít do stavu 409
 
 
-state 328
+State 328
 
-   70 $@7: .
+   70 $@7: . %empty
    71 IfStmt: IF $@6 IfHeader LoopBody . $@7 ElseIfList Else
 
-    $default  reduce using rule 70 ($@7)
+    $výchozí  reduce using rule 70 ($@7)
 
-    $@7  go to state 410
+    $@7  přejít do stavu 410
 
 
-state 329
+State 329
 
    41 SimpleStmt: . Expr
    42           | . Expr ASOP Expr
@@ -12842,81 +12840,81 @@ state 329
   208        | . FuncLitDecl error
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
-  285 oSimpleStmt: .  [BODY]
+  285 oSimpleStmt: . %empty  [BODY]
   286            | . SimpleStmt
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 285 (oSimpleStmt)
+    $výchozí  reduce using rule 285 (oSimpleStmt)
 
-    SimpleStmt          go to state 204
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 81
-    oSimpleStmt         go to state 411
+    SimpleStmt          přejít do stavu 204
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 81
+    oSimpleStmt         přejít do stavu 411
 
 
-state 330
+State 330
 
   148 Symbol: . IDENT
   228 Qualident: IDENT '.' . Symbol
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    Symbol  go to state 412
+    Symbol  přejít do stavu 412
 
 
-state 331
+State 331
 
   227 Qualident: IDENT .  [LITERAL, ')', ';', '}']
   228          | IDENT . '.' Symbol
 
-    '.'  shift, and go to state 330
+    '.'  posunout a přejít do stavu 330
 
-    $default  reduce using rule 227 (Qualident)
+    $výchozí  reduce using rule 227 (Qualident)
 
 
-state 332
+State 332
 
   232 InterfaceDecl: '(' Qualident . ')'
 
-    ')'  shift, and go to state 413
+    ')'  posunout a přejít do stavu 413
 
 
-state 333
+State 333
 
   141 NameOrType: . Type
   148 Symbol: . IDENT
@@ -12958,52 +12956,52 @@ state 333
   237        | . Ddd
   238 ArgTypeList: . ArgType
   239            | . ArgTypeList ',' ArgType
-  240 oArgTypeListOComma: .  [')']
+  240 oArgTypeListOComma: . %empty  [')']
   241                   | . ArgTypeList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    DDD        shift, and go to state 210
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    DDD        posunout a přejít do stavu 210
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 240 (oArgTypeListOComma)
+    $výchozí  reduce using rule 240 (oArgTypeListOComma)
 
-    NameOrType          go to state 211
-    Symbol              go to state 212
-    Name                go to state 95
-    Ddd                 go to state 213
-    Type                go to state 214
-    TypeName            go to state 195
-    OtherType           go to state 196
-    PtrType             go to state 197
-    RecvChanType        go to state 198
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 199
-    ArgType             go to state 215
-    ArgTypeList         go to state 216
-    oArgTypeListOComma  go to state 414
+    NameOrType          přejít do stavu 211
+    Symbol              přejít do stavu 212
+    Name                přejít do stavu 95
+    Ddd                 přejít do stavu 213
+    Type                přejít do stavu 214
+    TypeName            přejít do stavu 195
+    OtherType           přejít do stavu 196
+    PtrType             přejít do stavu 197
+    RecvChanType        přejít do stavu 198
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 199
+    ArgType             přejít do stavu 215
+    ArgTypeList         přejít do stavu 216
+    oArgTypeListOComma  přejít do stavu 414
 
 
-state 334
+State 334
 
   230 InterfaceDecl: NewName InterfaceMethodDecl .
 
-    $default  reduce using rule 230 (InterfaceDecl)
+    $výchozí  reduce using rule 230 (InterfaceDecl)
 
 
-state 335
+State 335
 
   144 NewName: . Symbol
   148 Symbol: . IDENT
@@ -13015,25 +13013,25 @@ state 335
   232              | . '(' Qualident ')'
   278 oSemi: ';' .  ['}']
 
-    IDENT  shift, and go to state 223
-    '('    shift, and go to state 224
+    IDENT  posunout a přejít do stavu 223
+    '('    posunout a přejít do stavu 224
 
-    $default  reduce using rule 278 (oSemi)
+    $výchozí  reduce using rule 278 (oSemi)
 
-    NewName        go to state 226
-    Symbol         go to state 89
-    Qualident      go to state 228
-    InterfaceDecl  go to state 415
+    NewName        přejít do stavu 226
+    Symbol         přejít do stavu 89
+    Qualident      přejít do stavu 228
+    InterfaceDecl  přejít do stavu 415
 
 
-state 336
+State 336
 
   195 InterfaceType: INTERFACE LBrace InterfaceDeclList oSemi . '}'
 
-    '}'  shift, and go to state 416
+    '}'  posunout a přejít do stavu 416
 
 
-state 337
+State 337
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -13067,34 +13065,34 @@ state 337
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 417
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 417
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 338
+State 338
 
    47 Case: . CASE ExprOrTypeList ':'
    48     | . CASE ExprOrTypeList '=' Expr ':'
@@ -13104,61 +13102,61 @@ state 338
    56 CaseBlockList: CaseBlockList . CaseBlock
    82 SelectStmt: SELECT $@11 BODY CaseBlockList . '}'
 
-    CASE     shift, and go to state 418
-    DEFAULT  shift, and go to state 419
-    '}'      shift, and go to state 420
+    CASE     posunout a přejít do stavu 418
+    DEFAULT  posunout a přejít do stavu 419
+    '}'      posunout a přejít do stavu 420
 
-    Case       go to state 421
-    CaseBlock  go to state 422
+    Case       přejít do stavu 421
+    CaseBlock  přejít do stavu 422
 
 
-state 339
+State 339
 
   225 StructDecl: '(' '*' . Embedded ')' oLiteral
   227 Qualident: . IDENT
   228          | . IDENT '.' Symbol
   229 Embedded: . Qualident
 
-    IDENT  shift, and go to state 331
+    IDENT  posunout a přejít do stavu 331
 
-    Qualident  go to state 238
-    Embedded   go to state 423
+    Qualident  přejít do stavu 238
+    Embedded   přejít do stavu 423
 
 
-state 340
+State 340
 
   223 StructDecl: '(' Embedded . ')' oLiteral
 
-    ')'  shift, and go to state 424
+    ')'  posunout a přejít do stavu 424
 
 
-state 341
+State 341
 
   226 StructDecl: '*' '(' . Embedded ')' oLiteral
   227 Qualident: . IDENT
   228          | . IDENT '.' Symbol
   229 Embedded: . Qualident
 
-    IDENT  shift, and go to state 331
+    IDENT  posunout a přejít do stavu 331
 
-    Qualident  go to state 238
-    Embedded   go to state 425
+    Qualident  přejít do stavu 238
+    Embedded   přejít do stavu 425
 
 
-state 342
+State 342
 
   224 StructDecl: '*' Embedded . oLiteral
-  287 oLiteral: .  [';', '}']
+  287 oLiteral: . %empty  [';', '}']
   288         | . LITERAL
 
-    LITERAL  shift, and go to state 345
+    LITERAL  posunout a přejít do stavu 345
 
-    $default  reduce using rule 287 (oLiteral)
+    $výchozí  reduce using rule 287 (oLiteral)
 
-    oLiteral  go to state 426
+    oLiteral  přejít do stavu 426
 
 
-state 343
+State 343
 
   144 NewName: . Symbol
   148 Symbol: . IDENT
@@ -13176,78 +13174,78 @@ state 343
   264            | . NewNameList ',' NewName
   278 oSemi: ';' .  ['}']
 
-    IDENT  shift, and go to state 223
-    '('    shift, and go to state 232
-    '*'    shift, and go to state 233
+    IDENT  posunout a přejít do stavu 223
+    '('    posunout a přejít do stavu 232
+    '*'    posunout a přejít do stavu 233
 
-    $default  reduce using rule 278 (oSemi)
+    $výchozí  reduce using rule 278 (oSemi)
 
-    NewName      go to state 235
-    Symbol       go to state 89
-    StructDecl   go to state 427
-    Qualident    go to state 238
-    Embedded     go to state 239
-    NewNameList  go to state 240
+    NewName      přejít do stavu 235
+    Symbol       přejít do stavu 89
+    StructDecl   přejít do stavu 427
+    Qualident    přejít do stavu 238
+    Embedded     přejít do stavu 239
+    NewNameList  přejít do stavu 240
 
 
-state 344
+State 344
 
   189 StructType: STRUCT LBrace StructDeclList oSemi . '}'
 
-    '}'  shift, and go to state 428
+    '}'  posunout a přejít do stavu 428
 
 
-state 345
+State 345
 
   288 oLiteral: LITERAL .
 
-    $default  reduce using rule 288 (oLiteral)
+    $výchozí  reduce using rule 288 (oLiteral)
 
 
-state 346
+State 346
 
   222 StructDecl: Embedded oLiteral .
 
-    $default  reduce using rule 222 (StructDecl)
+    $výchozí  reduce using rule 222 (StructDecl)
 
 
-state 347
+State 347
 
   144 NewName: . Symbol
   148 Symbol: . IDENT
   264 NewNameList: NewNameList ',' . NewName
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    NewName  go to state 429
-    Symbol   go to state 89
+    NewName  přejít do stavu 429
+    Symbol   přejít do stavu 89
 
 
-state 348
+State 348
 
   221 StructDecl: NewNameList Type . oLiteral
-  287 oLiteral: .  [';', '}']
+  287 oLiteral: . %empty  [';', '}']
   288         | . LITERAL
 
-    LITERAL  shift, and go to state 345
+    LITERAL  posunout a přejít do stavu 345
 
-    $default  reduce using rule 287 (oLiteral)
+    $výchozí  reduce using rule 287 (oLiteral)
 
-    oLiteral  go to state 430
+    oLiteral  přejít do stavu 430
 
 
-state 349
+State 349
 
-   55 CaseBlockList: .
+   55 CaseBlockList: . %empty
    56              | . CaseBlockList CaseBlock
    80 SwitchStmt: SWITCH $@10 IfHeader BODY . CaseBlockList '}'
 
-    $default  reduce using rule 55 (CaseBlockList)
+    $výchozí  reduce using rule 55 (CaseBlockList)
 
-    CaseBlockList  go to state 431
+    CaseBlockList  přejít do stavu 431
 
 
-state 350
+State 350
 
    39 TypeDeclName: . Symbol
    40 TypeDecl: . TypeDeclName Type
@@ -13255,30 +13253,30 @@ state 350
   216 TypeDeclList: TypeDeclList ';' . TypeDecl
   278 oSemi: ';' .  [')']
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    $default  reduce using rule 278 (oSemi)
+    $výchozí  reduce using rule 278 (oSemi)
 
-    TypeDeclName  go to state 123
-    TypeDecl      go to state 432
-    Symbol        go to state 125
+    TypeDeclName  přejít do stavu 123
+    TypeDecl      přejít do stavu 432
+    Symbol        přejít do stavu 125
 
 
-state 351
+State 351
 
    28 CommonDecl: TYPE '(' TypeDeclList oSemi . ')'
 
-    ')'  shift, and go to state 433
+    ')'  posunout a přejít do stavu 433
 
 
-state 352
+State 352
 
   191 UnionType: UNION LBrace StructDeclList oSemi . '}'
 
-    '}'  shift, and go to state 434
+    '}'  posunout a přejít do stavu 434
 
 
-state 353
+State 353
 
    31 VarDecl: . DeclNameList Type
    32        | . DeclNameList Type '=' ExprList
@@ -13290,41 +13288,41 @@ state 353
   266             | . DeclNameList ',' DeclName
   278 oSemi: ';' .  [')']
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    $default  reduce using rule 278 (oSemi)
+    $výchozí  reduce using rule 278 (oSemi)
 
-    VarDecl       go to state 435
-    DeclName      go to state 129
-    Symbol        go to state 130
-    DeclNameList  go to state 131
+    VarDecl       přejít do stavu 435
+    DeclName      přejít do stavu 129
+    Symbol        přejít do stavu 130
+    DeclNameList  přejít do stavu 131
 
 
-state 354
+State 354
 
    21 CommonDecl: VAR '(' VarDeclList oSemi . ')'
 
-    ')'  shift, and go to state 436
+    ')'  posunout a přejít do stavu 436
 
 
-state 355
+State 355
 
    33 VarDecl: DeclNameList '=' ExprList .  [CASE, DEFAULT, ')', ';', '}']
   268 ExprList: ExprList . ',' Expr
 
-    ','  shift, and go to state 189
+    ','  posunout a přejít do stavu 189
 
-    $default  reduce using rule 33 (VarDecl)
+    $výchozí  reduce using rule 33 (VarDecl)
 
 
-state 356
+State 356
 
   266 DeclNameList: DeclNameList ',' DeclName .
 
-    $default  reduce using rule 266 (DeclNameList)
+    $výchozí  reduce using rule 266 (DeclNameList)
 
 
-state 357
+State 357
 
    32 VarDecl: DeclNameList Type '=' . ExprList
    83 Expr: . UnaryExpr
@@ -13406,54 +13404,54 @@ state 357
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 437
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 437
 
 
-state 358
+State 358
 
   193 VariantType: VARIANT LBrace StructDeclList oSemi . '}'
 
-    '}'  shift, and go to state 438
+    '}'  posunout a přejít do stavu 438
 
 
-state 359
+State 359
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -13488,34 +13486,34 @@ state 359
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 256
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 256
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 194
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 194
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 360
+State 360
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -13550,109 +13548,109 @@ state 360
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 439
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 439
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 361
+State 361
 
   188 RecvChanType: COMM CHAN Type .
 
-    $default  reduce using rule 188 (RecvChanType)
+    $výchozí  reduce using rule 188 (RecvChanType)
 
 
-state 362
+State 362
 
   157 Type: TypeName .  [COLAS, DDD, ')', ':', '=', ',']
   166 NonRecvChanType: TypeName .  [BODY, '(', '{']
 
-    BODY      reduce using rule 166 (NonRecvChanType)
-    '('       reduce using rule 166 (NonRecvChanType)
-    '{'       reduce using rule 166 (NonRecvChanType)
-    $default  reduce using rule 157 (Type)
+    BODY        reduce using rule 166 (NonRecvChanType)
+    '('         reduce using rule 166 (NonRecvChanType)
+    '{'         reduce using rule 166 (NonRecvChanType)
+    $výchozí  reduce using rule 157 (Type)
 
 
-state 363
+State 363
 
   155 Type: OtherType .  [COLAS, DDD, ')', ':', '=', ',']
   164 NonRecvChanType: OtherType .  [BODY, '(', '{']
 
-    BODY      reduce using rule 164 (NonRecvChanType)
-    '('       reduce using rule 164 (NonRecvChanType)
-    '{'       reduce using rule 164 (NonRecvChanType)
-    $default  reduce using rule 155 (Type)
+    BODY        reduce using rule 164 (NonRecvChanType)
+    '('         reduce using rule 164 (NonRecvChanType)
+    '{'         reduce using rule 164 (NonRecvChanType)
+    $výchozí  reduce using rule 155 (Type)
 
 
-state 364
+State 364
 
   156 Type: PtrType .  [COLAS, DDD, ')', ':', '=', ',']
   165 NonRecvChanType: PtrType .  [BODY, '(', '{']
 
-    BODY      reduce using rule 165 (NonRecvChanType)
-    '('       reduce using rule 165 (NonRecvChanType)
-    '{'       reduce using rule 165 (NonRecvChanType)
-    $default  reduce using rule 156 (Type)
+    BODY        reduce using rule 165 (NonRecvChanType)
+    '('         reduce using rule 165 (NonRecvChanType)
+    '{'         reduce using rule 165 (NonRecvChanType)
+    $výchozí  reduce using rule 156 (Type)
 
 
-state 365
+State 365
 
   154 Type: FuncType .  [COLAS, DDD, ')', ':', '=', ',']
   163 NonRecvChanType: FuncType .  [BODY, '(', '{']
 
-    BODY      reduce using rule 163 (NonRecvChanType)
-    '('       reduce using rule 163 (NonRecvChanType)
-    '{'       reduce using rule 163 (NonRecvChanType)
-    $default  reduce using rule 154 (Type)
+    BODY        reduce using rule 163 (NonRecvChanType)
+    '('         reduce using rule 163 (NonRecvChanType)
+    '{'         reduce using rule 163 (NonRecvChanType)
+    $výchozí  reduce using rule 154 (Type)
 
 
-state 366
+State 366
 
   129 PrimaryExprNoParen: '(' ExprOrType ')' '{' . StartCompLit BracedKeyvalList '}'
-  131 StartCompLit: .
+  131 StartCompLit: . %empty
 
-    $default  reduce using rule 131 (StartCompLit)
+    $výchozí  reduce using rule 131 (StartCompLit)
 
-    StartCompLit  go to state 440
+    StartCompLit  přejít do stavu 440
 
 
-state 367
+State 367
 
   179 OtherType: '[' DDD ']' Type .
 
-    $default  reduce using rule 179 (OtherType)
+    $výchozí  reduce using rule 179 (OtherType)
 
 
-state 368
+State 368
 
   178 OtherType: '[' oExpr ']' Type .
 
-    $default  reduce using rule 178 (OtherType)
+    $výchozí  reduce using rule 178 (OtherType)
 
 
-state 369
+State 369
 
    25 CommonDecl: Const '(' ConstDecl ';' . ConstDeclList oSemi ')'
    34 ConstDecl: . DeclNameList Type '=' ExprList
@@ -13668,36 +13666,36 @@ state 369
   266             | . DeclNameList ',' DeclName
   278 oSemi: ';' .  [')']
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    $default  reduce using rule 278 (oSemi)
+    $výchozí  reduce using rule 278 (oSemi)
 
-    ConstDecl      go to state 441
-    ConstDecl1     go to state 442
-    DeclName       go to state 129
-    Symbol         go to state 130
-    ConstDeclList  go to state 443
-    DeclNameList   go to state 444
+    ConstDecl      přejít do stavu 441
+    ConstDecl1     přejít do stavu 442
+    DeclName       přejít do stavu 129
+    Symbol         přejít do stavu 130
+    ConstDeclList  přejít do stavu 443
+    DeclNameList   přejít do stavu 444
 
 
-state 370
+State 370
 
    24 CommonDecl: Const '(' ConstDecl oSemi . ')'
 
-    ')'  shift, and go to state 445
+    ')'  posunout a přejít do stavu 445
 
 
-state 371
+State 371
 
    35 ConstDecl: DeclNameList '=' ExprList .  [CASE, DEFAULT, ')', ';', '}']
   268 ExprList: ExprList . ',' Expr
 
-    ','  shift, and go to state 189
+    ','  posunout a přejít do stavu 189
 
-    $default  reduce using rule 35 (ConstDecl)
+    $výchozí  reduce using rule 35 (ConstDecl)
 
 
-state 372
+State 372
 
    34 ConstDecl: DeclNameList Type '=' . ExprList
    83 Expr: . UnaryExpr
@@ -13779,57 +13777,57 @@ state 372
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 116
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 446
+    Expr                přejít do stavu 116
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 446
 
 
-state 373
+State 373
 
-  131 StartCompLit: .
+  131 StartCompLit: . %empty
   134 BareCompLitExpr: '{' . StartCompLit BracedKeyvalList '}'
 
-    $default  reduce using rule 131 (StartCompLit)
+    $výchozí  reduce using rule 131 (StartCompLit)
 
-    StartCompLit  go to state 447
+    StartCompLit  přejít do stavu 447
 
 
-state 374
+State 374
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -13854,81 +13852,81 @@ state 374
   132 Keyval: Expr . ':' CompLitExpr
   133 BareCompLitExpr: Expr .  ['}', ',']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    ':'     shift, and go to state 448
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    ':'     posunout a přejít do stavu 448
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 133 (BareCompLitExpr)
+    $výchozí  reduce using rule 133 (BareCompLitExpr)
 
 
-state 375
+State 375
 
   271 KeyvalList: Keyval .
 
-    $default  reduce using rule 271 (KeyvalList)
+    $výchozí  reduce using rule 271 (KeyvalList)
 
 
-state 376
+State 376
 
   272 KeyvalList: BareCompLitExpr .
 
-    $default  reduce using rule 272 (KeyvalList)
+    $výchozí  reduce using rule 272 (KeyvalList)
 
 
-state 377
+State 377
 
   273 KeyvalList: KeyvalList . ',' Keyval
   274           | KeyvalList . ',' BareCompLitExpr
   276 BracedKeyvalList: KeyvalList . oComma
-  279 oComma: .  ['}']
+  279 oComma: . %empty  ['}']
   280       | . ','
 
-    ','  shift, and go to state 449
+    ','  posunout a přejít do stavu 449
 
-    $default  reduce using rule 279 (oComma)
+    $výchozí  reduce using rule 279 (oComma)
 
-    oComma  go to state 450
+    oComma  přejít do stavu 450
 
 
-state 378
+State 378
 
   128 PrimaryExprNoParen: PrimaryExprNoParen '{' StartCompLit BracedKeyvalList . '}'
 
-    '}'  shift, and go to state 451
+    '}'  posunout a přejít do stavu 451
 
 
-state 379
+State 379
 
   115 PseudoCall: PrimaryExpr '(' ExprOrTypeList DDD . oComma ')'
-  279 oComma: .  [')']
+  279 oComma: . %empty  [')']
   280       | . ','
 
-    ','  shift, and go to state 452
+    ','  posunout a přejít do stavu 452
 
-    $default  reduce using rule 279 (oComma)
+    $výchozí  reduce using rule 279 (oComma)
 
-    oComma  go to state 453
+    oComma  přejít do stavu 453
 
 
-state 380
+State 380
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -14016,79 +14014,79 @@ state 380
   270 ExprOrTypeList: ExprOrTypeList ',' . ExprOrType
   280 oComma: ',' .  [')']
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 135
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 136
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 135
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 136
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 280 (oComma)
+    $výchozí  reduce using rule 280 (oComma)
 
-    Expr                go to state 137
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    ExprOrType          go to state 454
-    Symbol              go to state 94
-    Name                go to state 67
-    NonExprType         go to state 139
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 140
-    RecvChanType        go to state 141
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 142
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 137
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    ExprOrType          přejít do stavu 454
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    NonExprType         přejít do stavu 139
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 140
+    RecvChanType        přejít do stavu 141
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 142
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 381
+State 381
 
   114 PseudoCall: PrimaryExpr '(' ExprOrTypeList oComma . ')'
 
-    ')'  shift, and go to state 455
+    ')'  posunout a přejít do stavu 455
 
 
-state 382
+State 382
 
   120 PrimaryExprNoParen: PrimaryExpr '.' '(' TYPE . ')'
 
-    ')'  shift, and go to state 456
+    ')'  posunout a přejít do stavu 456
 
 
-state 383
+State 383
 
   119 PrimaryExprNoParen: PrimaryExpr '.' '(' ExprOrType . ')'
 
-    ')'  shift, and go to state 457
+    ')'  posunout a přejít do stavu 457
 
 
-state 384
+State 384
 
   121 PrimaryExprNoParen: PrimaryExpr '[' Expr ']' .
 
-    $default  reduce using rule 121 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 121 (PrimaryExprNoParen)
 
 
-state 385
+State 385
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -14168,52 +14166,52 @@ state 385
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  281 oExpr: .  [':', ']']
+  281 oExpr: . %empty  [':', ']']
   282      | . Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 281 (oExpr)
+    $výchozí  reduce using rule 281 (oExpr)
 
-    Expr                go to state 147
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    oExpr               go to state 458
+    Expr                přejít do stavu 147
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    oExpr               přejít do stavu 458
 
 
-state 386
+State 386
 
    20 CommonDecl: . VAR VarDecl
    21           | . VAR '(' VarDeclList oSemi ')'
@@ -14316,7 +14314,7 @@ state 386
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  242 Statement: .  [';', '}']
+  242 Statement: . %empty  [';', '}']
   243          | . CompoundStmt
   244          | . CommonDecl
   245          | . NonDclStmt
@@ -14340,79 +14338,79 @@ state 386
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    error      shift, and go to state 294
-    BREAK      shift, and go to state 20
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    CONST      shift, and go to state 23
-    CONTINUE   shift, and go to state 24
-    DEFER      shift, and go to state 25
-    FALL       shift, and go to state 26
-    FOR        shift, and go to state 27
-    FUNC       shift, and go to state 91
-    GO         shift, and go to state 29
-    GOTO       shift, and go to state 30
-    IDENT      shift, and go to state 4
-    IF         shift, and go to state 31
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RETURN     shift, and go to state 35
-    SELECT     shift, and go to state 36
-    STRUCT     shift, and go to state 37
-    SWITCH     shift, and go to state 38
-    TYPE       shift, and go to state 39
-    UNION      shift, and go to state 40
-    VAR        shift, and go to state 41
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 295
-    '~'        shift, and go to state 51
+    error      posunout a přejít do stavu 294
+    BREAK      posunout a přejít do stavu 20
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    CONST      posunout a přejít do stavu 23
+    CONTINUE   posunout a přejít do stavu 24
+    DEFER      posunout a přejít do stavu 25
+    FALL       posunout a přejít do stavu 26
+    FOR        posunout a přejít do stavu 27
+    FUNC       posunout a přejít do stavu 91
+    GO         posunout a přejít do stavu 29
+    GOTO       posunout a přejít do stavu 30
+    IDENT      posunout a přejít do stavu 4
+    IF         posunout a přejít do stavu 31
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RETURN     posunout a přejít do stavu 35
+    SELECT     posunout a přejít do stavu 36
+    STRUCT     posunout a přejít do stavu 37
+    SWITCH     posunout a přejít do stavu 38
+    TYPE       posunout a přejít do stavu 39
+    UNION      posunout a přejít do stavu 40
+    VAR        posunout a přejít do stavu 41
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 295
+    '~'        posunout a přejít do stavu 51
 
     ';'  reduce using rule 242 (Statement)
     '}'  reduce using rule 242 (Statement)
 
-    CommonDecl          go to state 296
-    Const               go to state 54
-    SimpleStmt          go to state 55
-    CompoundStmt        go to state 297
-    ForStmt             go to state 56
-    IfStmt              go to state 57
-    SwitchStmt          go to state 58
-    SelectStmt          go to state 59
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    NewName             go to state 65
-    Symbol              go to state 66
-    Name                go to state 67
-    LabelName           go to state 68
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    Statement           go to state 303
-    NonDclStmt          go to state 299
-    StmtList            go to state 459
-    ExprList            go to state 81
+    CommonDecl          přejít do stavu 296
+    Const               přejít do stavu 54
+    SimpleStmt          přejít do stavu 55
+    CompoundStmt        přejít do stavu 297
+    ForStmt             přejít do stavu 56
+    IfStmt              přejít do stavu 57
+    SwitchStmt          přejít do stavu 58
+    SelectStmt          přejít do stavu 59
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    NewName             přejít do stavu 65
+    Symbol              přejít do stavu 66
+    Name                přejít do stavu 67
+    LabelName           přejít do stavu 68
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    Statement           přejít do stavu 303
+    NonDclStmt          přejít do stavu 299
+    StmtList            přejít do stavu 459
+    ExprList            přejít do stavu 81
 
 
-state 387
+State 387
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -14493,62 +14491,62 @@ state 387
   268 ExprList: ExprList ',' . Expr
   280 oComma: ',' .  [')']
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 280 (oComma)
+    $výchozí  reduce using rule 280 (oComma)
 
-    Expr                go to state 307
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 307
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 388
+State 388
 
   125 PrimaryExprNoParen: ConvType '(' ExprList oComma . ')'
 
-    ')'  shift, and go to state 460
+    ')'  posunout a přejít do stavu 460
 
 
-state 389
+State 389
 
   127 PrimaryExprNoParen: CompLitType LBrace StartCompLit BracedKeyvalList . '}'
 
-    '}'  shift, and go to state 461
+    '}'  posunout a přejít do stavu 461
 
 
-state 390
+State 390
 
    20 CommonDecl: . VAR VarDecl
    21           | . VAR '(' VarDeclList oSemi ')'
@@ -14650,7 +14648,7 @@ state 390
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  242 Statement: .  [CASE, DEFAULT, ';', '}']
+  242 Statement: . %empty  [CASE, DEFAULT, ';', '}']
   243          | . CompoundStmt
   244          | . CommonDecl
   245          | . NonDclStmt
@@ -14673,94 +14671,94 @@ state 390
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    error      shift, and go to state 294
-    BREAK      shift, and go to state 20
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    CONST      shift, and go to state 23
-    CONTINUE   shift, and go to state 24
-    DEFER      shift, and go to state 25
-    FALL       shift, and go to state 26
-    FOR        shift, and go to state 27
-    FUNC       shift, and go to state 91
-    GO         shift, and go to state 29
-    GOTO       shift, and go to state 30
-    IDENT      shift, and go to state 4
-    IF         shift, and go to state 31
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RETURN     shift, and go to state 35
-    SELECT     shift, and go to state 36
-    STRUCT     shift, and go to state 37
-    SWITCH     shift, and go to state 38
-    TYPE       shift, and go to state 39
-    UNION      shift, and go to state 40
-    VAR        shift, and go to state 41
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 295
-    '~'        shift, and go to state 51
+    error      posunout a přejít do stavu 294
+    BREAK      posunout a přejít do stavu 20
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    CONST      posunout a přejít do stavu 23
+    CONTINUE   posunout a přejít do stavu 24
+    DEFER      posunout a přejít do stavu 25
+    FALL       posunout a přejít do stavu 26
+    FOR        posunout a přejít do stavu 27
+    FUNC       posunout a přejít do stavu 91
+    GO         posunout a přejít do stavu 29
+    GOTO       posunout a přejít do stavu 30
+    IDENT      posunout a přejít do stavu 4
+    IF         posunout a přejít do stavu 31
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RETURN     posunout a přejít do stavu 35
+    SELECT     posunout a přejít do stavu 36
+    STRUCT     posunout a přejít do stavu 37
+    SWITCH     posunout a přejít do stavu 38
+    TYPE       posunout a přejít do stavu 39
+    UNION      posunout a přejít do stavu 40
+    VAR        posunout a přejít do stavu 41
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 295
+    '~'        posunout a přejít do stavu 51
 
     CASE     reduce using rule 242 (Statement)
     DEFAULT  reduce using rule 242 (Statement)
     ';'      reduce using rule 242 (Statement)
     '}'      reduce using rule 242 (Statement)
 
-    CommonDecl          go to state 296
-    Const               go to state 54
-    SimpleStmt          go to state 55
-    CompoundStmt        go to state 297
-    ForStmt             go to state 56
-    IfStmt              go to state 57
-    SwitchStmt          go to state 58
-    SelectStmt          go to state 59
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    NewName             go to state 65
-    Symbol              go to state 66
-    Name                go to state 67
-    LabelName           go to state 68
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    Statement           go to state 462
-    NonDclStmt          go to state 299
-    ExprList            go to state 81
+    CommonDecl          přejít do stavu 296
+    Const               přejít do stavu 54
+    SimpleStmt          přejít do stavu 55
+    CompoundStmt        přejít do stavu 297
+    ForStmt             přejít do stavu 56
+    IfStmt              přejít do stavu 57
+    SwitchStmt          přejít do stavu 58
+    SelectStmt          přejít do stavu 59
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    NewName             přejít do stavu 65
+    Symbol              přejít do stavu 66
+    Name                přejít do stavu 67
+    LabelName           přejít do stavu 68
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    Statement           přejít do stavu 462
+    NonDclStmt          přejít do stavu 299
+    ExprList            přejít do stavu 81
 
 
-state 391
+State 391
 
   207 FuncLit: FuncLitDecl LBrace StmtList '}' .
 
-    $default  reduce using rule 207 (FuncLit)
+    $výchozí  reduce using rule 207 (FuncLit)
 
 
-state 392
+State 392
 
   158 Type: '(' Type ')' .
 
-    $default  reduce using rule 158 (Type)
+    $výchozí  reduce using rule 158 (Type)
 
 
-state 393
+State 393
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -14792,43 +14790,43 @@ state 393
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
   200         | FUNC '(' oArgTypeListOComma ')' . FuncResult
-  203 FuncResult: .  [error, BODY, CASE, COLAS, DDD, DEFAULT, LITERAL, ')', ':', ';', '=', '{', '}', ']', ',']
+  203 FuncResult: . %empty  [error, BODY, CASE, COLAS, DDD, DEFAULT, LITERAL, ')', ':', ';', '=', '{', '}', ']', ',']
   204           | . FuncRetType
   205           | . '(' oArgTypeListOComma ')'
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 399
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 399
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 203 (FuncResult)
+    $výchozí  reduce using rule 203 (FuncResult)
 
-    Symbol         go to state 94
-    Name           go to state 95
-    FuncRetType    go to state 401
-    TypeName       go to state 402
-    OtherType      go to state 403
-    PtrType        go to state 404
-    RecvChanType   go to state 405
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 406
-    FuncResult     go to state 407
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    FuncRetType    přejít do stavu 401
+    TypeName       přejít do stavu 402
+    OtherType      přejít do stavu 403
+    PtrType        přejít do stavu 404
+    RecvChanType   přejít do stavu 405
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 406
+    FuncResult     přejít do stavu 407
 
     Conflict between rule 203 and token '(' resolved as shift (notParen < '(').
 
 
-state 394
+State 394
 
    20 CommonDecl: . VAR VarDecl
    21           | . VAR '(' VarDeclList oSemi ')'
@@ -14931,7 +14929,7 @@ state 394
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  242 Statement: .  [';', '}']
+  242 Statement: . %empty  [';', '}']
   243          | . CompoundStmt
   244          | . CommonDecl
   245          | . NonDclStmt
@@ -14955,79 +14953,79 @@ state 394
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    error      shift, and go to state 294
-    BREAK      shift, and go to state 20
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    CONST      shift, and go to state 23
-    CONTINUE   shift, and go to state 24
-    DEFER      shift, and go to state 25
-    FALL       shift, and go to state 26
-    FOR        shift, and go to state 27
-    FUNC       shift, and go to state 91
-    GO         shift, and go to state 29
-    GOTO       shift, and go to state 30
-    IDENT      shift, and go to state 4
-    IF         shift, and go to state 31
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RETURN     shift, and go to state 35
-    SELECT     shift, and go to state 36
-    STRUCT     shift, and go to state 37
-    SWITCH     shift, and go to state 38
-    TYPE       shift, and go to state 39
-    UNION      shift, and go to state 40
-    VAR        shift, and go to state 41
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 295
-    '~'        shift, and go to state 51
+    error      posunout a přejít do stavu 294
+    BREAK      posunout a přejít do stavu 20
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    CONST      posunout a přejít do stavu 23
+    CONTINUE   posunout a přejít do stavu 24
+    DEFER      posunout a přejít do stavu 25
+    FALL       posunout a přejít do stavu 26
+    FOR        posunout a přejít do stavu 27
+    FUNC       posunout a přejít do stavu 91
+    GO         posunout a přejít do stavu 29
+    GOTO       posunout a přejít do stavu 30
+    IDENT      posunout a přejít do stavu 4
+    IF         posunout a přejít do stavu 31
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RETURN     posunout a přejít do stavu 35
+    SELECT     posunout a přejít do stavu 36
+    STRUCT     posunout a přejít do stavu 37
+    SWITCH     posunout a přejít do stavu 38
+    TYPE       posunout a přejít do stavu 39
+    UNION      posunout a přejít do stavu 40
+    VAR        posunout a přejít do stavu 41
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 295
+    '~'        posunout a přejít do stavu 51
 
     ';'  reduce using rule 242 (Statement)
     '}'  reduce using rule 242 (Statement)
 
-    CommonDecl          go to state 296
-    Const               go to state 54
-    SimpleStmt          go to state 55
-    CompoundStmt        go to state 297
-    ForStmt             go to state 56
-    IfStmt              go to state 57
-    SwitchStmt          go to state 58
-    SelectStmt          go to state 59
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    NewName             go to state 65
-    Symbol              go to state 66
-    Name                go to state 67
-    LabelName           go to state 68
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    Statement           go to state 303
-    NonDclStmt          go to state 299
-    StmtList            go to state 463
-    ExprList            go to state 81
+    CommonDecl          přejít do stavu 296
+    Const               přejít do stavu 54
+    SimpleStmt          přejít do stavu 55
+    CompoundStmt        přejít do stavu 297
+    ForStmt             přejít do stavu 56
+    IfStmt              přejít do stavu 57
+    SwitchStmt          přejít do stavu 58
+    SelectStmt          přejít do stavu 59
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    NewName             přejít do stavu 65
+    Symbol              přejít do stavu 66
+    Name                přejít do stavu 67
+    LabelName           přejít do stavu 68
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    Statement           přejít do stavu 303
+    NonDclStmt          přejít do stavu 299
+    StmtList            přejít do stavu 463
+    ExprList            přejít do stavu 81
 
 
-state 395
+State 395
 
    60 RangeStmt: ExprList COLAS RANGE . Expr
    83 Expr: . UnaryExpr
@@ -15107,46 +15105,46 @@ state 395
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 464
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 464
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 396
+State 396
 
    59 RangeStmt: ExprList '=' RANGE . Expr
    83 Expr: . UnaryExpr
@@ -15226,60 +15224,60 @@ state 396
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 465
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 465
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 397
+State 397
 
    61 ForHeader: oSimpleStmt ';' oSimpleStmt . ';' oSimpleStmt
 
-    ';'  shift, and go to state 466
+    ';'  posunout a přejít do stavu 466
 
 
-state 398
+State 398
 
   239 ArgTypeList: ArgTypeList ',' ArgType .
 
-    $default  reduce using rule 239 (ArgTypeList)
+    $výchozí  reduce using rule 239 (ArgTypeList)
 
 
-state 399
+State 399
 
   141 NameOrType: . Type
   148 Symbol: . IDENT
@@ -15321,106 +15319,106 @@ state 399
   237        | . Ddd
   238 ArgTypeList: . ArgType
   239            | . ArgTypeList ',' ArgType
-  240 oArgTypeListOComma: .  [')']
+  240 oArgTypeListOComma: . %empty  [')']
   241                   | . ArgTypeList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    DDD        shift, and go to state 210
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    DDD        posunout a přejít do stavu 210
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 240 (oArgTypeListOComma)
+    $výchozí  reduce using rule 240 (oArgTypeListOComma)
 
-    NameOrType          go to state 211
-    Symbol              go to state 212
-    Name                go to state 95
-    Ddd                 go to state 213
-    Type                go to state 214
-    TypeName            go to state 195
-    OtherType           go to state 196
-    PtrType             go to state 197
-    RecvChanType        go to state 198
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 199
-    ArgType             go to state 215
-    ArgTypeList         go to state 216
-    oArgTypeListOComma  go to state 467
+    NameOrType          přejít do stavu 211
+    Symbol              přejít do stavu 212
+    Name                přejít do stavu 95
+    Ddd                 přejít do stavu 213
+    Type                přejít do stavu 214
+    TypeName            přejít do stavu 195
+    OtherType           přejít do stavu 196
+    PtrType             přejít do stavu 197
+    RecvChanType        přejít do stavu 198
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 199
+    ArgType             přejít do stavu 215
+    ArgTypeList         přejít do stavu 216
+    oArgTypeListOComma  přejít do stavu 467
 
 
-state 400
+State 400
 
   149 Name: Symbol .  [error, BODY, '.', '{']
   199 FuncDecl1: '(' oArgTypeListOComma ')' Symbol . '(' oArgTypeListOComma ')' FuncResult
 
-    '('  shift, and go to state 468
+    '('  posunout a přejít do stavu 468
 
-    $default  reduce using rule 149 (Name)
+    $výchozí  reduce using rule 149 (Name)
 
     Conflict between rule 149 and token '(' resolved as shift (notParen < '(').
 
 
-state 401
+State 401
 
   204 FuncResult: FuncRetType .
 
-    $default  reduce using rule 204 (FuncResult)
+    $výchozí  reduce using rule 204 (FuncResult)
 
 
-state 402
+State 402
 
   175 FuncRetType: TypeName .
 
-    $default  reduce using rule 175 (FuncRetType)
+    $výchozí  reduce using rule 175 (FuncRetType)
 
 
-state 403
+State 403
 
   173 FuncRetType: OtherType .
 
-    $default  reduce using rule 173 (FuncRetType)
+    $výchozí  reduce using rule 173 (FuncRetType)
 
 
-state 404
+State 404
 
   174 FuncRetType: PtrType .
 
-    $default  reduce using rule 174 (FuncRetType)
+    $výchozí  reduce using rule 174 (FuncRetType)
 
 
-state 405
+State 405
 
   171 FuncRetType: RecvChanType .
 
-    $default  reduce using rule 171 (FuncRetType)
+    $výchozí  reduce using rule 171 (FuncRetType)
 
 
-state 406
+State 406
 
   172 FuncRetType: FuncType .
 
-    $default  reduce using rule 172 (FuncRetType)
+    $výchozí  reduce using rule 172 (FuncRetType)
 
 
-state 407
+State 407
 
   200 FuncType: FUNC '(' oArgTypeListOComma ')' FuncResult .
 
-    $default  reduce using rule 200 (FuncType)
+    $výchozí  reduce using rule 200 (FuncType)
 
 
-state 408
+State 408
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -15452,108 +15450,108 @@ state 408
   196              | . INTERFACE LBrace '}'
   198 FuncDecl1: Symbol '(' oArgTypeListOComma ')' . FuncResult
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
-  203 FuncResult: .  [';', '{']
+  203 FuncResult: . %empty  [';', '{']
   204           | . FuncRetType
   205           | . '(' oArgTypeListOComma ')'
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 399
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 399
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 203 (FuncResult)
+    $výchozí  reduce using rule 203 (FuncResult)
 
-    Symbol         go to state 94
-    Name           go to state 95
-    FuncRetType    go to state 401
-    TypeName       go to state 402
-    OtherType      go to state 403
-    PtrType        go to state 404
-    RecvChanType   go to state 405
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 406
-    FuncResult     go to state 469
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    FuncRetType    přejít do stavu 401
+    TypeName       přejít do stavu 402
+    OtherType      přejít do stavu 403
+    PtrType        přejít do stavu 404
+    RecvChanType   přejít do stavu 405
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 406
+    FuncResult     přejít do stavu 469
 
 
-state 409
+State 409
 
   202 FuncBody: '{' StmtList '}' .
 
-    $default  reduce using rule 202 (FuncBody)
+    $výchozí  reduce using rule 202 (FuncBody)
 
 
-state 410
+State 410
 
    71 IfStmt: IF $@6 IfHeader LoopBody $@7 . ElseIfList Else
-   74 ElseIfList: .
+   74 ElseIfList: . %empty
    75           | . ElseIfList ElseIf
 
-    $default  reduce using rule 74 (ElseIfList)
+    $výchozí  reduce using rule 74 (ElseIfList)
 
-    ElseIfList  go to state 470
+    ElseIfList  přejít do stavu 470
 
 
-state 411
+State 411
 
    68 IfHeader: oSimpleStmt ';' oSimpleStmt .
 
-    $default  reduce using rule 68 (IfHeader)
+    $výchozí  reduce using rule 68 (IfHeader)
 
 
-state 412
+State 412
 
   228 Qualident: IDENT '.' Symbol .
 
-    $default  reduce using rule 228 (Qualident)
+    $výchozí  reduce using rule 228 (Qualident)
 
 
-state 413
+State 413
 
   232 InterfaceDecl: '(' Qualident ')' .
 
-    $default  reduce using rule 232 (InterfaceDecl)
+    $výchozí  reduce using rule 232 (InterfaceDecl)
 
 
-state 414
+State 414
 
   233 InterfaceMethodDecl: '(' oArgTypeListOComma . ')' FuncResult
 
-    ')'  shift, and go to state 471
+    ')'  posunout a přejít do stavu 471
 
 
-state 415
+State 415
 
   220 InterfaceDeclList: InterfaceDeclList ';' InterfaceDecl .
 
-    $default  reduce using rule 220 (InterfaceDeclList)
+    $výchozí  reduce using rule 220 (InterfaceDeclList)
 
 
-state 416
+State 416
 
   195 InterfaceType: INTERFACE LBrace InterfaceDeclList oSemi '}' .
 
-    $default  reduce using rule 195 (InterfaceType)
+    $výchozí  reduce using rule 195 (InterfaceType)
 
 
-state 417
+State 417
 
   182 OtherType: MAP '[' Type ']' Type .
 
-    $default  reduce using rule 182 (OtherType)
+    $výchozí  reduce using rule 182 (OtherType)
 
 
-state 418
+State 418
 
    47 Case: CASE . ExprOrTypeList ':'
    48     | CASE . ExprOrTypeList '=' Expr ':'
@@ -15644,143 +15642,143 @@ state 418
   269 ExprOrTypeList: . ExprOrType
   270               | . ExprOrTypeList ',' ExprOrType
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 135
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 136
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 135
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 136
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 137
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    ExprOrType          go to state 288
-    Symbol              go to state 94
-    Name                go to state 67
-    NonExprType         go to state 139
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 140
-    RecvChanType        go to state 141
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 142
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprOrTypeList      go to state 472
+    Expr                přejít do stavu 137
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    ExprOrType          přejít do stavu 288
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    NonExprType         přejít do stavu 139
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 140
+    RecvChanType        přejít do stavu 141
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 142
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprOrTypeList      přejít do stavu 472
 
 
-state 419
+State 419
 
    50 Case: DEFAULT . ':'
 
-    ':'  shift, and go to state 473
+    ':'  posunout a přejít do stavu 473
 
 
-state 420
+State 420
 
    82 SelectStmt: SELECT $@11 BODY CaseBlockList '}' .
 
-    $default  reduce using rule 82 (SelectStmt)
+    $výchozí  reduce using rule 82 (SelectStmt)
 
 
-state 421
+State 421
 
-   53 $@3: .
+   53 $@3: . %empty
    54 CaseBlock: Case . $@3 StmtList
 
-    $default  reduce using rule 53 ($@3)
+    $výchozí  reduce using rule 53 ($@3)
 
-    $@3  go to state 474
+    $@3  přejít do stavu 474
 
 
-state 422
+State 422
 
    56 CaseBlockList: CaseBlockList CaseBlock .
 
-    $default  reduce using rule 56 (CaseBlockList)
+    $výchozí  reduce using rule 56 (CaseBlockList)
 
 
-state 423
+State 423
 
   225 StructDecl: '(' '*' Embedded . ')' oLiteral
 
-    ')'  shift, and go to state 475
+    ')'  posunout a přejít do stavu 475
 
 
-state 424
+State 424
 
   223 StructDecl: '(' Embedded ')' . oLiteral
-  287 oLiteral: .  [';', '}']
+  287 oLiteral: . %empty  [';', '}']
   288         | . LITERAL
 
-    LITERAL  shift, and go to state 345
+    LITERAL  posunout a přejít do stavu 345
 
-    $default  reduce using rule 287 (oLiteral)
+    $výchozí  reduce using rule 287 (oLiteral)
 
-    oLiteral  go to state 476
+    oLiteral  přejít do stavu 476
 
 
-state 425
+State 425
 
   226 StructDecl: '*' '(' Embedded . ')' oLiteral
 
-    ')'  shift, and go to state 477
+    ')'  posunout a přejít do stavu 477
 
 
-state 426
+State 426
 
   224 StructDecl: '*' Embedded oLiteral .
 
-    $default  reduce using rule 224 (StructDecl)
+    $výchozí  reduce using rule 224 (StructDecl)
 
 
-state 427
+State 427
 
   218 StructDeclList: StructDeclList ';' StructDecl .
 
-    $default  reduce using rule 218 (StructDeclList)
+    $výchozí  reduce using rule 218 (StructDeclList)
 
 
-state 428
+State 428
 
   189 StructType: STRUCT LBrace StructDeclList oSemi '}' .
 
-    $default  reduce using rule 189 (StructType)
+    $výchozí  reduce using rule 189 (StructType)
 
 
-state 429
+State 429
 
   264 NewNameList: NewNameList ',' NewName .
 
-    $default  reduce using rule 264 (NewNameList)
+    $výchozí  reduce using rule 264 (NewNameList)
 
 
-state 430
+State 430
 
   221 StructDecl: NewNameList Type oLiteral .
 
-    $default  reduce using rule 221 (StructDecl)
+    $výchozí  reduce using rule 221 (StructDecl)
 
 
-state 431
+State 431
 
    47 Case: . CASE ExprOrTypeList ':'
    48     | . CASE ExprOrTypeList '=' Expr ':'
@@ -15790,75 +15788,75 @@ state 431
    56 CaseBlockList: CaseBlockList . CaseBlock
    80 SwitchStmt: SWITCH $@10 IfHeader BODY CaseBlockList . '}'
 
-    CASE     shift, and go to state 418
-    DEFAULT  shift, and go to state 419
-    '}'      shift, and go to state 478
+    CASE     posunout a přejít do stavu 418
+    DEFAULT  posunout a přejít do stavu 419
+    '}'      posunout a přejít do stavu 478
 
-    Case       go to state 421
-    CaseBlock  go to state 422
+    Case       přejít do stavu 421
+    CaseBlock  přejít do stavu 422
 
 
-state 432
+State 432
 
   216 TypeDeclList: TypeDeclList ';' TypeDecl .
 
-    $default  reduce using rule 216 (TypeDeclList)
+    $výchozí  reduce using rule 216 (TypeDeclList)
 
 
-state 433
+State 433
 
    28 CommonDecl: TYPE '(' TypeDeclList oSemi ')' .
 
-    $default  reduce using rule 28 (CommonDecl)
+    $výchozí  reduce using rule 28 (CommonDecl)
 
 
-state 434
+State 434
 
   191 UnionType: UNION LBrace StructDeclList oSemi '}' .
 
-    $default  reduce using rule 191 (UnionType)
+    $výchozí  reduce using rule 191 (UnionType)
 
 
-state 435
+State 435
 
   212 VarDeclList: VarDeclList ';' VarDecl .
 
-    $default  reduce using rule 212 (VarDeclList)
+    $výchozí  reduce using rule 212 (VarDeclList)
 
 
-state 436
+State 436
 
    21 CommonDecl: VAR '(' VarDeclList oSemi ')' .
 
-    $default  reduce using rule 21 (CommonDecl)
+    $výchozí  reduce using rule 21 (CommonDecl)
 
 
-state 437
+State 437
 
    32 VarDecl: DeclNameList Type '=' ExprList .  [CASE, DEFAULT, ')', ';', '}']
   268 ExprList: ExprList . ',' Expr
 
-    ','  shift, and go to state 189
+    ','  posunout a přejít do stavu 189
 
-    $default  reduce using rule 32 (VarDecl)
+    $výchozí  reduce using rule 32 (VarDecl)
 
 
-state 438
+State 438
 
   193 VariantType: VARIANT LBrace StructDeclList oSemi '}' .
 
-    $default  reduce using rule 193 (VariantType)
+    $výchozí  reduce using rule 193 (VariantType)
 
 
-state 439
+State 439
 
   158 Type: '(' Type . ')'
   167 NonRecvChanType: '(' Type . ')'
 
-    ')'  shift, and go to state 479
+    ')'  posunout a přejít do stavu 479
 
 
-state 440
+State 440
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -15944,84 +15942,84 @@ state 440
   272           | . BareCompLitExpr
   273           | . KeyvalList ',' Keyval
   274           | . KeyvalList ',' BareCompLitExpr
-  275 BracedKeyvalList: .  ['}']
+  275 BracedKeyvalList: . %empty  ['}']
   276                 | . KeyvalList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 373
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 373
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 275 (BracedKeyvalList)
+    $výchozí  reduce using rule 275 (BracedKeyvalList)
 
-    Expr                go to state 374
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    Keyval              go to state 375
-    BareCompLitExpr     go to state 376
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    KeyvalList          go to state 377
-    BracedKeyvalList    go to state 480
+    Expr                přejít do stavu 374
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    Keyval              přejít do stavu 375
+    BareCompLitExpr     přejít do stavu 376
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    KeyvalList          přejít do stavu 377
+    BracedKeyvalList    přejít do stavu 480
 
 
-state 441
+State 441
 
    36 ConstDecl1: ConstDecl .
 
-    $default  reduce using rule 36 (ConstDecl1)
+    $výchozí  reduce using rule 36 (ConstDecl1)
 
 
-state 442
+State 442
 
   213 ConstDeclList: ConstDecl1 .
 
-    $default  reduce using rule 213 (ConstDeclList)
+    $výchozí  reduce using rule 213 (ConstDeclList)
 
 
-state 443
+State 443
 
    25 CommonDecl: Const '(' ConstDecl ';' ConstDeclList . oSemi ')'
   214 ConstDeclList: ConstDeclList . ';' ConstDecl1
-  277 oSemi: .  [')']
+  277 oSemi: . %empty  [')']
   278      | . ';'
 
-    ';'  shift, and go to state 481
+    ';'  posunout a přejít do stavu 481
 
-    $default  reduce using rule 277 (oSemi)
+    $výchozí  reduce using rule 277 (oSemi)
 
-    oSemi  go to state 482
+    oSemi  přejít do stavu 482
 
 
-state 444
+State 444
 
    34 ConstDecl: DeclNameList . Type '=' ExprList
    35          | DeclNameList . '=' ExprList
@@ -16059,55 +16057,55 @@ state 444
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
   266 DeclNameList: DeclNameList . ',' DeclName
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '='        shift, and go to state 263
-    '['        shift, and go to state 49
-    ','        shift, and go to state 252
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '='        posunout a přejít do stavu 263
+    '['        posunout a přejít do stavu 49
+    ','        posunout a přejít do stavu 252
 
-    $default  reduce using rule 38 (ConstDecl1)
+    $výchozí  reduce using rule 38 (ConstDecl1)
 
-    Symbol         go to state 94
-    Name           go to state 95
-    Type           go to state 483
-    TypeName       go to state 195
-    OtherType      go to state 196
-    PtrType        go to state 197
-    RecvChanType   go to state 198
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 199
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    Type           přejít do stavu 483
+    TypeName       přejít do stavu 195
+    OtherType      přejít do stavu 196
+    PtrType        přejít do stavu 197
+    RecvChanType   přejít do stavu 198
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 199
 
 
-state 445
+State 445
 
    24 CommonDecl: Const '(' ConstDecl oSemi ')' .
 
-    $default  reduce using rule 24 (CommonDecl)
+    $výchozí  reduce using rule 24 (CommonDecl)
 
 
-state 446
+State 446
 
    34 ConstDecl: DeclNameList Type '=' ExprList .  [CASE, DEFAULT, ')', ';', '}']
   268 ExprList: ExprList . ',' Expr
 
-    ','  shift, and go to state 189
+    ','  posunout a přejít do stavu 189
 
-    $default  reduce using rule 34 (ConstDecl)
+    $výchozí  reduce using rule 34 (ConstDecl)
 
 
-state 447
+State 447
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -16193,56 +16191,56 @@ state 447
   272           | . BareCompLitExpr
   273           | . KeyvalList ',' Keyval
   274           | . KeyvalList ',' BareCompLitExpr
-  275 BracedKeyvalList: .  ['}']
+  275 BracedKeyvalList: . %empty  ['}']
   276                 | . KeyvalList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 373
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 373
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 275 (BracedKeyvalList)
+    $výchozí  reduce using rule 275 (BracedKeyvalList)
 
-    Expr                go to state 374
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    Keyval              go to state 375
-    BareCompLitExpr     go to state 376
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    KeyvalList          go to state 377
-    BracedKeyvalList    go to state 484
+    Expr                přejít do stavu 374
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    Keyval              přejít do stavu 375
+    BareCompLitExpr     přejít do stavu 376
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    KeyvalList          přejít do stavu 377
+    BracedKeyvalList    přejít do stavu 484
 
 
-state 448
+State 448
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -16324,48 +16322,48 @@ state 448
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 485
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 485
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 486
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    CompLitExpr         go to state 487
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 486
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    CompLitExpr         přejít do stavu 487
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 449
+State 449
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -16450,155 +16448,155 @@ state 449
   274           | KeyvalList ',' . BareCompLitExpr
   280 oComma: ',' .  ['}']
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 373
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 373
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 280 (oComma)
+    $výchozí  reduce using rule 280 (oComma)
 
-    Expr                go to state 374
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    Keyval              go to state 488
-    BareCompLitExpr     go to state 489
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 374
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    Keyval              přejít do stavu 488
+    BareCompLitExpr     přejít do stavu 489
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 450
+State 450
 
   276 BracedKeyvalList: KeyvalList oComma .
 
-    $default  reduce using rule 276 (BracedKeyvalList)
+    $výchozí  reduce using rule 276 (BracedKeyvalList)
 
 
-state 451
+State 451
 
   128 PrimaryExprNoParen: PrimaryExprNoParen '{' StartCompLit BracedKeyvalList '}' .
 
-    $default  reduce using rule 128 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 128 (PrimaryExprNoParen)
 
 
-state 452
+State 452
 
   280 oComma: ',' .
 
-    $default  reduce using rule 280 (oComma)
+    $výchozí  reduce using rule 280 (oComma)
 
 
-state 453
+State 453
 
   115 PseudoCall: PrimaryExpr '(' ExprOrTypeList DDD oComma . ')'
 
-    ')'  shift, and go to state 490
+    ')'  posunout a přejít do stavu 490
 
 
-state 454
+State 454
 
   270 ExprOrTypeList: ExprOrTypeList ',' ExprOrType .
 
-    $default  reduce using rule 270 (ExprOrTypeList)
+    $výchozí  reduce using rule 270 (ExprOrTypeList)
 
 
-state 455
+State 455
 
   114 PseudoCall: PrimaryExpr '(' ExprOrTypeList oComma ')' .
 
-    $default  reduce using rule 114 (PseudoCall)
+    $výchozí  reduce using rule 114 (PseudoCall)
 
 
-state 456
+State 456
 
   120 PrimaryExprNoParen: PrimaryExpr '.' '(' TYPE ')' .
 
-    $default  reduce using rule 120 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 120 (PrimaryExprNoParen)
 
 
-state 457
+State 457
 
   119 PrimaryExprNoParen: PrimaryExpr '.' '(' ExprOrType ')' .
 
-    $default  reduce using rule 119 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 119 (PrimaryExprNoParen)
 
 
-state 458
+State 458
 
   122 PrimaryExprNoParen: PrimaryExpr '[' oExpr ':' oExpr . ']'
   123                   | PrimaryExpr '[' oExpr ':' oExpr . ':' oExpr ']'
 
-    ':'  shift, and go to state 491
-    ']'  shift, and go to state 492
+    ':'  posunout a přejít do stavu 491
+    ']'  posunout a přejít do stavu 492
 
 
-state 459
+State 459
 
    52 CompoundStmt: '{' $@2 StmtList . '}'
   262 StmtList: StmtList . ';' Statement
 
-    ';'  shift, and go to state 390
-    '}'  shift, and go to state 493
+    ';'  posunout a přejít do stavu 390
+    '}'  posunout a přejít do stavu 493
 
 
-state 460
+State 460
 
   125 PrimaryExprNoParen: ConvType '(' ExprList oComma ')' .
 
-    $default  reduce using rule 125 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 125 (PrimaryExprNoParen)
 
 
-state 461
+State 461
 
   127 PrimaryExprNoParen: CompLitType LBrace StartCompLit BracedKeyvalList '}' .
 
-    $default  reduce using rule 127 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 127 (PrimaryExprNoParen)
 
 
-state 462
+State 462
 
   262 StmtList: StmtList ';' Statement .
 
-    $default  reduce using rule 262 (StmtList)
+    $výchozí  reduce using rule 262 (StmtList)
 
 
-state 463
+State 463
 
    58 LoopBody: BODY $@4 StmtList . '}'
   262 StmtList: StmtList . ';' Statement
 
-    ';'  shift, and go to state 390
-    '}'  shift, and go to state 494
+    ';'  posunout a přejít do stavu 390
+    '}'  posunout a přejít do stavu 494
 
 
-state 464
+State 464
 
    60 RangeStmt: ExprList COLAS RANGE Expr .  [BODY]
    84 Expr: Expr . OROR Expr
@@ -16622,31 +16620,31 @@ state 464
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 60 (RangeStmt)
+    $výchozí  reduce using rule 60 (RangeStmt)
 
 
-state 465
+State 465
 
    59 RangeStmt: ExprList '=' RANGE Expr .  [BODY]
    84 Expr: Expr . OROR Expr
@@ -16670,31 +16668,31 @@ state 465
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 59 (RangeStmt)
+    $výchozí  reduce using rule 59 (RangeStmt)
 
 
-state 466
+State 466
 
    41 SimpleStmt: . Expr
    42           | . Expr ASOP Expr
@@ -16781,61 +16779,61 @@ state 466
   208        | . FuncLitDecl error
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
-  285 oSimpleStmt: .  [BODY]
+  285 oSimpleStmt: . %empty  [BODY]
   286            | . SimpleStmt
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 285 (oSimpleStmt)
+    $výchozí  reduce using rule 285 (oSimpleStmt)
 
-    SimpleStmt          go to state 204
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 81
-    oSimpleStmt         go to state 495
+    SimpleStmt          přejít do stavu 204
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 81
+    oSimpleStmt         přejít do stavu 495
 
 
-state 467
+State 467
 
   205 FuncResult: '(' oArgTypeListOComma . ')'
 
-    ')'  shift, and go to state 496
+    ')'  posunout a přejít do stavu 496
 
 
-state 468
+State 468
 
   141 NameOrType: . Type
   148 Symbol: . IDENT
@@ -16877,68 +16875,68 @@ state 468
   237        | . Ddd
   238 ArgTypeList: . ArgType
   239            | . ArgTypeList ',' ArgType
-  240 oArgTypeListOComma: .  [')']
+  240 oArgTypeListOComma: . %empty  [')']
   241                   | . ArgTypeList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    DDD        shift, and go to state 210
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 193
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    DDD        posunout a přejít do stavu 210
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 193
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 240 (oArgTypeListOComma)
+    $výchozí  reduce using rule 240 (oArgTypeListOComma)
 
-    NameOrType          go to state 211
-    Symbol              go to state 212
-    Name                go to state 95
-    Ddd                 go to state 213
-    Type                go to state 214
-    TypeName            go to state 195
-    OtherType           go to state 196
-    PtrType             go to state 197
-    RecvChanType        go to state 198
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 199
-    ArgType             go to state 215
-    ArgTypeList         go to state 216
-    oArgTypeListOComma  go to state 497
+    NameOrType          přejít do stavu 211
+    Symbol              přejít do stavu 212
+    Name                přejít do stavu 95
+    Ddd                 přejít do stavu 213
+    Type                přejít do stavu 214
+    TypeName            přejít do stavu 195
+    OtherType           přejít do stavu 196
+    PtrType             přejít do stavu 197
+    RecvChanType        přejít do stavu 198
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 199
+    ArgType             přejít do stavu 215
+    ArgTypeList         přejít do stavu 216
+    oArgTypeListOComma  přejít do stavu 497
 
 
-state 469
+State 469
 
   198 FuncDecl1: Symbol '(' oArgTypeListOComma ')' FuncResult .
 
-    $default  reduce using rule 198 (FuncDecl1)
+    $výchozí  reduce using rule 198 (FuncDecl1)
 
 
-state 470
+State 470
 
    71 IfStmt: IF $@6 IfHeader LoopBody $@7 ElseIfList . Else
    73 ElseIf: . ELSE IF IfHeader $@8 LoopBody
    75 ElseIfList: ElseIfList . ElseIf
-   76 Else: .  [CASE, DEFAULT, ';', '}']
+   76 Else: . %empty  [CASE, DEFAULT, ';', '}']
    78     | . ELSE $@9 CompoundStmt
 
-    ELSE  shift, and go to state 498
+    ELSE  posunout a přejít do stavu 498
 
-    $default  reduce using rule 76 (Else)
+    $výchozí  reduce using rule 76 (Else)
 
-    ElseIf  go to state 499
-    Else    go to state 500
+    ElseIf  přejít do stavu 499
+    Else    přejít do stavu 500
 
 
-state 471
+State 471
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -16969,62 +16967,62 @@ state 471
   195 InterfaceType: . INTERFACE LBrace InterfaceDeclList oSemi '}'
   196              | . INTERFACE LBrace '}'
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
-  203 FuncResult: .  [';', '}']
+  203 FuncResult: . %empty  [';', '}']
   204           | . FuncRetType
   205           | . '(' oArgTypeListOComma ')'
   233 InterfaceMethodDecl: '(' oArgTypeListOComma ')' . FuncResult
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 399
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 399
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 203 (FuncResult)
+    $výchozí  reduce using rule 203 (FuncResult)
 
-    Symbol         go to state 94
-    Name           go to state 95
-    FuncRetType    go to state 401
-    TypeName       go to state 402
-    OtherType      go to state 403
-    PtrType        go to state 404
-    RecvChanType   go to state 405
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 406
-    FuncResult     go to state 501
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    FuncRetType    přejít do stavu 401
+    TypeName       přejít do stavu 402
+    OtherType      přejít do stavu 403
+    PtrType        přejít do stavu 404
+    RecvChanType   přejít do stavu 405
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 406
+    FuncResult     přejít do stavu 501
 
 
-state 472
+State 472
 
    47 Case: CASE ExprOrTypeList . ':'
    48     | CASE ExprOrTypeList . '=' Expr ':'
    49     | CASE ExprOrTypeList . COLAS Expr ':'
   270 ExprOrTypeList: ExprOrTypeList . ',' ExprOrType
 
-    COLAS  shift, and go to state 502
-    ':'    shift, and go to state 503
-    '='    shift, and go to state 504
-    ','    shift, and go to state 505
+    COLAS  posunout a přejít do stavu 502
+    ':'    posunout a přejít do stavu 503
+    '='    posunout a přejít do stavu 504
+    ','    posunout a přejít do stavu 505
 
 
-state 473
+State 473
 
    50 Case: DEFAULT ':' .
 
-    $default  reduce using rule 50 (Case)
+    $výchozí  reduce using rule 50 (Case)
 
 
-state 474
+State 474
 
    20 CommonDecl: . VAR VarDecl
    21           | . VAR '(' VarDeclList oSemi ')'
@@ -17127,7 +17125,7 @@ state 474
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  242 Statement: .  [CASE, DEFAULT, ';', '}']
+  242 Statement: . %empty  [CASE, DEFAULT, ';', '}']
   243          | . CompoundStmt
   244          | . CommonDecl
   245          | . NonDclStmt
@@ -17151,139 +17149,139 @@ state 474
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
 
-    error      shift, and go to state 294
-    BREAK      shift, and go to state 20
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    CONST      shift, and go to state 23
-    CONTINUE   shift, and go to state 24
-    DEFER      shift, and go to state 25
-    FALL       shift, and go to state 26
-    FOR        shift, and go to state 27
-    FUNC       shift, and go to state 91
-    GO         shift, and go to state 29
-    GOTO       shift, and go to state 30
-    IDENT      shift, and go to state 4
-    IF         shift, and go to state 31
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    RETURN     shift, and go to state 35
-    SELECT     shift, and go to state 36
-    STRUCT     shift, and go to state 37
-    SWITCH     shift, and go to state 38
-    TYPE       shift, and go to state 39
-    UNION      shift, and go to state 40
-    VAR        shift, and go to state 41
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 295
-    '~'        shift, and go to state 51
+    error      posunout a přejít do stavu 294
+    BREAK      posunout a přejít do stavu 20
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    CONST      posunout a přejít do stavu 23
+    CONTINUE   posunout a přejít do stavu 24
+    DEFER      posunout a přejít do stavu 25
+    FALL       posunout a přejít do stavu 26
+    FOR        posunout a přejít do stavu 27
+    FUNC       posunout a přejít do stavu 91
+    GO         posunout a přejít do stavu 29
+    GOTO       posunout a přejít do stavu 30
+    IDENT      posunout a přejít do stavu 4
+    IF         posunout a přejít do stavu 31
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    RETURN     posunout a přejít do stavu 35
+    SELECT     posunout a přejít do stavu 36
+    STRUCT     posunout a přejít do stavu 37
+    SWITCH     posunout a přejít do stavu 38
+    TYPE       posunout a přejít do stavu 39
+    UNION      posunout a přejít do stavu 40
+    VAR        posunout a přejít do stavu 41
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 295
+    '~'        posunout a přejít do stavu 51
 
     CASE     reduce using rule 242 (Statement)
     DEFAULT  reduce using rule 242 (Statement)
     ';'      reduce using rule 242 (Statement)
     '}'      reduce using rule 242 (Statement)
 
-    CommonDecl          go to state 296
-    Const               go to state 54
-    SimpleStmt          go to state 55
-    CompoundStmt        go to state 297
-    ForStmt             go to state 56
-    IfStmt              go to state 57
-    SwitchStmt          go to state 58
-    SelectStmt          go to state 59
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    NewName             go to state 65
-    Symbol              go to state 66
-    Name                go to state 67
-    LabelName           go to state 68
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    Statement           go to state 303
-    NonDclStmt          go to state 299
-    StmtList            go to state 506
-    ExprList            go to state 81
+    CommonDecl          přejít do stavu 296
+    Const               přejít do stavu 54
+    SimpleStmt          přejít do stavu 55
+    CompoundStmt        přejít do stavu 297
+    ForStmt             přejít do stavu 56
+    IfStmt              přejít do stavu 57
+    SwitchStmt          přejít do stavu 58
+    SelectStmt          přejít do stavu 59
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    NewName             přejít do stavu 65
+    Symbol              přejít do stavu 66
+    Name                přejít do stavu 67
+    LabelName           přejít do stavu 68
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    Statement           přejít do stavu 303
+    NonDclStmt          přejít do stavu 299
+    StmtList            přejít do stavu 506
+    ExprList            přejít do stavu 81
 
 
-state 475
+State 475
 
   225 StructDecl: '(' '*' Embedded ')' . oLiteral
-  287 oLiteral: .  [';', '}']
+  287 oLiteral: . %empty  [';', '}']
   288         | . LITERAL
 
-    LITERAL  shift, and go to state 345
+    LITERAL  posunout a přejít do stavu 345
 
-    $default  reduce using rule 287 (oLiteral)
+    $výchozí  reduce using rule 287 (oLiteral)
 
-    oLiteral  go to state 507
+    oLiteral  přejít do stavu 507
 
 
-state 476
+State 476
 
   223 StructDecl: '(' Embedded ')' oLiteral .
 
-    $default  reduce using rule 223 (StructDecl)
+    $výchozí  reduce using rule 223 (StructDecl)
 
 
-state 477
+State 477
 
   226 StructDecl: '*' '(' Embedded ')' . oLiteral
-  287 oLiteral: .  [';', '}']
+  287 oLiteral: . %empty  [';', '}']
   288         | . LITERAL
 
-    LITERAL  shift, and go to state 345
+    LITERAL  posunout a přejít do stavu 345
 
-    $default  reduce using rule 287 (oLiteral)
+    $výchozí  reduce using rule 287 (oLiteral)
 
-    oLiteral  go to state 508
+    oLiteral  přejít do stavu 508
 
 
-state 478
+State 478
 
    80 SwitchStmt: SWITCH $@10 IfHeader BODY CaseBlockList '}' .
 
-    $default  reduce using rule 80 (SwitchStmt)
+    $výchozí  reduce using rule 80 (SwitchStmt)
 
 
-state 479
+State 479
 
   158 Type: '(' Type ')' .  [COLAS, DDD, ')', ':', '=', ',']
   167 NonRecvChanType: '(' Type ')' .  [BODY, '(', '{']
 
-    BODY      reduce using rule 167 (NonRecvChanType)
-    '('       reduce using rule 167 (NonRecvChanType)
-    '{'       reduce using rule 167 (NonRecvChanType)
-    $default  reduce using rule 158 (Type)
+    BODY        reduce using rule 167 (NonRecvChanType)
+    '('         reduce using rule 167 (NonRecvChanType)
+    '{'         reduce using rule 167 (NonRecvChanType)
+    $výchozí  reduce using rule 158 (Type)
 
 
-state 480
+State 480
 
   129 PrimaryExprNoParen: '(' ExprOrType ')' '{' StartCompLit BracedKeyvalList . '}'
 
-    '}'  shift, and go to state 509
+    '}'  posunout a přejít do stavu 509
 
 
-state 481
+State 481
 
    34 ConstDecl: . DeclNameList Type '=' ExprList
    35          | . DeclNameList '=' ExprList
@@ -17297,52 +17295,52 @@ state 481
   266             | . DeclNameList ',' DeclName
   278 oSemi: ';' .  [')']
 
-    IDENT  shift, and go to state 4
+    IDENT  posunout a přejít do stavu 4
 
-    $default  reduce using rule 278 (oSemi)
+    $výchozí  reduce using rule 278 (oSemi)
 
-    ConstDecl     go to state 441
-    ConstDecl1    go to state 510
-    DeclName      go to state 129
-    Symbol        go to state 130
-    DeclNameList  go to state 444
+    ConstDecl     přejít do stavu 441
+    ConstDecl1    přejít do stavu 510
+    DeclName      přejít do stavu 129
+    Symbol        přejít do stavu 130
+    DeclNameList  přejít do stavu 444
 
 
-state 482
+State 482
 
    25 CommonDecl: Const '(' ConstDecl ';' ConstDeclList oSemi . ')'
 
-    ')'  shift, and go to state 511
+    ')'  posunout a přejít do stavu 511
 
 
-state 483
+State 483
 
    34 ConstDecl: DeclNameList Type . '=' ExprList
    37 ConstDecl1: DeclNameList Type .  [')', ';']
 
-    '='  shift, and go to state 372
+    '='  posunout a přejít do stavu 372
 
-    $default  reduce using rule 37 (ConstDecl1)
+    $výchozí  reduce using rule 37 (ConstDecl1)
 
 
-state 484
+State 484
 
   134 BareCompLitExpr: '{' StartCompLit BracedKeyvalList . '}'
 
-    '}'  shift, and go to state 512
+    '}'  posunout a přejít do stavu 512
 
 
-state 485
+State 485
 
-  131 StartCompLit: .
+  131 StartCompLit: . %empty
   136 CompLitExpr: '{' . StartCompLit BracedKeyvalList '}'
 
-    $default  reduce using rule 131 (StartCompLit)
+    $výchozí  reduce using rule 131 (StartCompLit)
 
-    StartCompLit  go to state 513
+    StartCompLit  přejít do stavu 513
 
 
-state 486
+State 486
 
    84 Expr: Expr . OROR Expr
    85     | Expr . ANDAND Expr
@@ -17366,59 +17364,59 @@ state 486
   103     | Expr . COMM Expr
   135 CompLitExpr: Expr .  ['}', ',']
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
-    $default  reduce using rule 135 (CompLitExpr)
+    $výchozí  reduce using rule 135 (CompLitExpr)
 
 
-state 487
+State 487
 
   132 Keyval: Expr ':' CompLitExpr .
 
-    $default  reduce using rule 132 (Keyval)
+    $výchozí  reduce using rule 132 (Keyval)
 
 
-state 488
+State 488
 
   273 KeyvalList: KeyvalList ',' Keyval .
 
-    $default  reduce using rule 273 (KeyvalList)
+    $výchozí  reduce using rule 273 (KeyvalList)
 
 
-state 489
+State 489
 
   274 KeyvalList: KeyvalList ',' BareCompLitExpr .
 
-    $default  reduce using rule 274 (KeyvalList)
+    $výchozí  reduce using rule 274 (KeyvalList)
 
 
-state 490
+State 490
 
   115 PseudoCall: PrimaryExpr '(' ExprOrTypeList DDD oComma ')' .
 
-    $default  reduce using rule 115 (PseudoCall)
+    $výchozí  reduce using rule 115 (PseudoCall)
 
 
-state 491
+State 491
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -17497,128 +17495,128 @@ state 491
   206 FuncLitDecl: . FuncType
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
-  281 oExpr: .  [']']
+  281 oExpr: . %empty  [']']
   282      | . Expr
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 281 (oExpr)
+    $výchozí  reduce using rule 281 (oExpr)
 
-    Expr                go to state 147
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    oExpr               go to state 514
+    Expr                přejít do stavu 147
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    oExpr               přejít do stavu 514
 
 
-state 492
+State 492
 
   122 PrimaryExprNoParen: PrimaryExpr '[' oExpr ':' oExpr ']' .
 
-    $default  reduce using rule 122 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 122 (PrimaryExprNoParen)
 
 
-state 493
+State 493
 
    52 CompoundStmt: '{' $@2 StmtList '}' .
 
-    $default  reduce using rule 52 (CompoundStmt)
+    $výchozí  reduce using rule 52 (CompoundStmt)
 
 
-state 494
+State 494
 
    58 LoopBody: BODY $@4 StmtList '}' .
 
-    $default  reduce using rule 58 (LoopBody)
+    $výchozí  reduce using rule 58 (LoopBody)
 
 
-state 495
+State 495
 
    61 ForHeader: oSimpleStmt ';' oSimpleStmt ';' oSimpleStmt .
 
-    $default  reduce using rule 61 (ForHeader)
+    $výchozí  reduce using rule 61 (ForHeader)
 
 
-state 496
+State 496
 
   205 FuncResult: '(' oArgTypeListOComma ')' .
 
-    $default  reduce using rule 205 (FuncResult)
+    $výchozí  reduce using rule 205 (FuncResult)
 
 
-state 497
+State 497
 
   199 FuncDecl1: '(' oArgTypeListOComma ')' Symbol '(' oArgTypeListOComma . ')' FuncResult
 
-    ')'  shift, and go to state 515
+    ')'  posunout a přejít do stavu 515
 
 
-state 498
+State 498
 
    73 ElseIf: ELSE . IF IfHeader $@8 LoopBody
-   77 $@9: .  ['{']
+   77 $@9: . %empty  ['{']
    78 Else: ELSE . $@9 CompoundStmt
 
-    IF  shift, and go to state 516
+    IF  posunout a přejít do stavu 516
 
-    $default  reduce using rule 77 ($@9)
+    $výchozí  reduce using rule 77 ($@9)
 
-    $@9  go to state 517
+    $@9  přejít do stavu 517
 
 
-state 499
+State 499
 
    75 ElseIfList: ElseIfList ElseIf .
 
-    $default  reduce using rule 75 (ElseIfList)
+    $výchozí  reduce using rule 75 (ElseIfList)
 
 
-state 500
+State 500
 
    71 IfStmt: IF $@6 IfHeader LoopBody $@7 ElseIfList Else .
 
-    $default  reduce using rule 71 (IfStmt)
+    $výchozí  reduce using rule 71 (IfStmt)
 
 
-state 501
+State 501
 
   233 InterfaceMethodDecl: '(' oArgTypeListOComma ')' FuncResult .
 
-    $default  reduce using rule 233 (InterfaceMethodDecl)
+    $výchozí  reduce using rule 233 (InterfaceMethodDecl)
 
 
-state 502
+State 502
 
    49 Case: CASE ExprOrTypeList COLAS . Expr ':'
    83 Expr: . UnaryExpr
@@ -17698,53 +17696,53 @@ state 502
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 518
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 518
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 503
+State 503
 
    47 Case: CASE ExprOrTypeList ':' .
 
-    $default  reduce using rule 47 (Case)
+    $výchozí  reduce using rule 47 (Case)
 
 
-state 504
+State 504
 
    48 Case: CASE ExprOrTypeList '=' . Expr ':'
    83 Expr: . UnaryExpr
@@ -17824,46 +17822,46 @@ state 504
   207 FuncLit: . FuncLitDecl LBrace StmtList '}'
   208        | . FuncLitDecl error
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 519
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 519
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 505
+State 505
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -17950,101 +17948,101 @@ state 505
   208        | . FuncLitDecl error
   270 ExprOrTypeList: ExprOrTypeList ',' . ExprOrType
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 135
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 136
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 135
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 136
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    Expr                go to state 137
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    ExprOrType          go to state 454
-    Symbol              go to state 94
-    Name                go to state 67
-    NonExprType         go to state 139
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 140
-    RecvChanType        go to state 141
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 142
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
+    Expr                přejít do stavu 137
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    ExprOrType          přejít do stavu 454
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    NonExprType         přejít do stavu 139
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 140
+    RecvChanType        přejít do stavu 141
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 142
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
 
 
-state 506
+State 506
 
    54 CaseBlock: Case $@3 StmtList .  [CASE, DEFAULT, '}']
   262 StmtList: StmtList . ';' Statement
 
-    ';'  shift, and go to state 390
+    ';'  posunout a přejít do stavu 390
 
-    $default  reduce using rule 54 (CaseBlock)
+    $výchozí  reduce using rule 54 (CaseBlock)
 
 
-state 507
+State 507
 
   225 StructDecl: '(' '*' Embedded ')' oLiteral .
 
-    $default  reduce using rule 225 (StructDecl)
+    $výchozí  reduce using rule 225 (StructDecl)
 
 
-state 508
+State 508
 
   226 StructDecl: '*' '(' Embedded ')' oLiteral .
 
-    $default  reduce using rule 226 (StructDecl)
+    $výchozí  reduce using rule 226 (StructDecl)
 
 
-state 509
+State 509
 
   129 PrimaryExprNoParen: '(' ExprOrType ')' '{' StartCompLit BracedKeyvalList '}' .
 
-    $default  reduce using rule 129 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 129 (PrimaryExprNoParen)
 
 
-state 510
+State 510
 
   214 ConstDeclList: ConstDeclList ';' ConstDecl1 .
 
-    $default  reduce using rule 214 (ConstDeclList)
+    $výchozí  reduce using rule 214 (ConstDeclList)
 
 
-state 511
+State 511
 
    25 CommonDecl: Const '(' ConstDecl ';' ConstDeclList oSemi ')' .
 
-    $default  reduce using rule 25 (CommonDecl)
+    $výchozí  reduce using rule 25 (CommonDecl)
 
 
-state 512
+State 512
 
   134 BareCompLitExpr: '{' StartCompLit BracedKeyvalList '}' .
 
-    $default  reduce using rule 134 (BareCompLitExpr)
+    $výchozí  reduce using rule 134 (BareCompLitExpr)
 
 
-state 513
+State 513
 
    83 Expr: . UnaryExpr
    84     | . Expr OROR Expr
@@ -18130,63 +18128,63 @@ state 513
   272           | . BareCompLitExpr
   273           | . KeyvalList ',' Keyval
   274           | . KeyvalList ',' BareCompLitExpr
-  275 BracedKeyvalList: .  ['}']
+  275 BracedKeyvalList: . %empty  ['}']
   276                 | . KeyvalList oComma
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '{'        shift, and go to state 373
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '{'        posunout a přejít do stavu 373
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 275 (BracedKeyvalList)
+    $výchozí  reduce using rule 275 (BracedKeyvalList)
 
-    Expr                go to state 374
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    Keyval              go to state 375
-    BareCompLitExpr     go to state 376
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    KeyvalList          go to state 377
-    BracedKeyvalList    go to state 520
+    Expr                přejít do stavu 374
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    Keyval              přejít do stavu 375
+    BareCompLitExpr     přejít do stavu 376
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    KeyvalList          přejít do stavu 377
+    BracedKeyvalList    přejít do stavu 520
 
 
-state 514
+State 514
 
   123 PrimaryExprNoParen: PrimaryExpr '[' oExpr ':' oExpr ':' oExpr . ']'
 
-    ']'  shift, and go to state 521
+    ']'  posunout a přejít do stavu 521
 
 
-state 515
+State 515
 
   148 Symbol: . IDENT
   149 Name: . Symbol
@@ -18218,41 +18216,41 @@ state 515
   196              | . INTERFACE LBrace '}'
   199 FuncDecl1: '(' oArgTypeListOComma ')' Symbol '(' oArgTypeListOComma ')' . FuncResult
   200 FuncType: . FUNC '(' oArgTypeListOComma ')' FuncResult
-  203 FuncResult: .  [';', '{']
+  203 FuncResult: . %empty  [';', '{']
   204           | . FuncRetType
   205           | . '(' oArgTypeListOComma ')'
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 192
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '('        shift, and go to state 399
-    '*'        shift, and go to state 93
-    '['        shift, and go to state 49
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 192
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '('        posunout a přejít do stavu 399
+    '*'        posunout a přejít do stavu 93
+    '['        posunout a přejít do stavu 49
 
-    $default  reduce using rule 203 (FuncResult)
+    $výchozí  reduce using rule 203 (FuncResult)
 
-    Symbol         go to state 94
-    Name           go to state 95
-    FuncRetType    go to state 401
-    TypeName       go to state 402
-    OtherType      go to state 403
-    PtrType        go to state 404
-    RecvChanType   go to state 405
-    StructType     go to state 72
-    UnionType      go to state 73
-    VariantType    go to state 74
-    InterfaceType  go to state 75
-    FuncType       go to state 406
-    FuncResult     go to state 522
+    Symbol         přejít do stavu 94
+    Name           přejít do stavu 95
+    FuncRetType    přejít do stavu 401
+    TypeName       přejít do stavu 402
+    OtherType      přejít do stavu 403
+    PtrType        přejít do stavu 404
+    RecvChanType   přejít do stavu 405
+    StructType     přejít do stavu 72
+    UnionType      přejít do stavu 73
+    VariantType    přejít do stavu 74
+    InterfaceType  přejít do stavu 75
+    FuncType       přejít do stavu 406
+    FuncResult     přejít do stavu 522
 
 
-state 516
+State 516
 
    41 SimpleStmt: . Expr
    42           | . Expr ASOP Expr
@@ -18341,65 +18339,65 @@ state 516
   208        | . FuncLitDecl error
   267 ExprList: . Expr
   268         | . ExprList ',' Expr
-  285 oSimpleStmt: .  [BODY, ';']
+  285 oSimpleStmt: . %empty  [BODY, ';']
   286            | . SimpleStmt
 
-    CHAN       shift, and go to state 21
-    COMM       shift, and go to state 22
-    FUNC       shift, and go to state 91
-    IDENT      shift, and go to state 4
-    INTERFACE  shift, and go to state 32
-    LITERAL    shift, and go to state 33
-    MAP        shift, and go to state 34
-    STRUCT     shift, and go to state 37
-    UNION      shift, and go to state 40
-    VARIANT    shift, and go to state 42
-    '!'        shift, and go to state 43
-    '&'        shift, and go to state 44
-    '('        shift, and go to state 45
-    '*'        shift, and go to state 46
-    '+'        shift, and go to state 47
-    '-'        shift, and go to state 48
-    '['        shift, and go to state 49
-    '^'        shift, and go to state 50
-    '~'        shift, and go to state 51
+    CHAN       posunout a přejít do stavu 21
+    COMM       posunout a přejít do stavu 22
+    FUNC       posunout a přejít do stavu 91
+    IDENT      posunout a přejít do stavu 4
+    INTERFACE  posunout a přejít do stavu 32
+    LITERAL    posunout a přejít do stavu 33
+    MAP        posunout a přejít do stavu 34
+    STRUCT     posunout a přejít do stavu 37
+    UNION      posunout a přejít do stavu 40
+    VARIANT    posunout a přejít do stavu 42
+    '!'        posunout a přejít do stavu 43
+    '&'        posunout a přejít do stavu 44
+    '('        posunout a přejít do stavu 45
+    '*'        posunout a přejít do stavu 46
+    '+'        posunout a přejít do stavu 47
+    '-'        posunout a přejít do stavu 48
+    '['        posunout a přejít do stavu 49
+    '^'        posunout a přejít do stavu 50
+    '~'        posunout a přejít do stavu 51
 
-    $default  reduce using rule 285 (oSimpleStmt)
+    $výchozí  reduce using rule 285 (oSimpleStmt)
 
-    SimpleStmt          go to state 204
-    IfHeader            go to state 523
-    Expr                go to state 60
-    UnaryExpr           go to state 61
-    PseudoCall          go to state 62
-    PrimaryExprNoParen  go to state 63
-    PrimaryExpr         go to state 64
-    Symbol              go to state 94
-    Name                go to state 67
-    ConvType            go to state 69
-    CompLitType         go to state 70
-    OtherType           go to state 71
-    StructType          go to state 72
-    UnionType           go to state 73
-    VariantType         go to state 74
-    InterfaceType       go to state 75
-    FuncType            go to state 77
-    FuncLitDecl         go to state 78
-    FuncLit             go to state 79
-    ExprList            go to state 81
-    oSimpleStmt         go to state 222
+    SimpleStmt          přejít do stavu 204
+    IfHeader            přejít do stavu 523
+    Expr                přejít do stavu 60
+    UnaryExpr           přejít do stavu 61
+    PseudoCall          přejít do stavu 62
+    PrimaryExprNoParen  přejít do stavu 63
+    PrimaryExpr         přejít do stavu 64
+    Symbol              přejít do stavu 94
+    Name                přejít do stavu 67
+    ConvType            přejít do stavu 69
+    CompLitType         přejít do stavu 70
+    OtherType           přejít do stavu 71
+    StructType          přejít do stavu 72
+    UnionType           přejít do stavu 73
+    VariantType         přejít do stavu 74
+    InterfaceType       přejít do stavu 75
+    FuncType            přejít do stavu 77
+    FuncLitDecl         přejít do stavu 78
+    FuncLit             přejít do stavu 79
+    ExprList            přejít do stavu 81
+    oSimpleStmt         přejít do stavu 222
 
 
-state 517
+State 517
 
    52 CompoundStmt: . '{' $@2 StmtList '}'
    78 Else: ELSE $@9 . CompoundStmt
 
-    '{'  shift, and go to state 295
+    '{'  posunout a přejít do stavu 295
 
-    CompoundStmt  go to state 524
+    CompoundStmt  přejít do stavu 524
 
 
-state 518
+State 518
 
    49 Case: CASE ExprOrTypeList COLAS Expr . ':'
    84 Expr: Expr . OROR Expr
@@ -18423,30 +18421,30 @@ state 518
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    ':'     shift, and go to state 525
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    ':'     posunout a přejít do stavu 525
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
 
-state 519
+State 519
 
    48 Case: CASE ExprOrTypeList '=' Expr . ':'
    84 Expr: Expr . OROR Expr
@@ -18470,100 +18468,100 @@ state 519
   102     | Expr . RSH Expr
   103     | Expr . COMM Expr
 
-    ANDAND  shift, and go to state 155
-    ANDNOT  shift, and go to state 156
-    COMM    shift, and go to state 158
-    EQ      shift, and go to state 160
-    GE      shift, and go to state 161
-    LE      shift, and go to state 163
-    LSH     shift, and go to state 164
-    NE      shift, and go to state 165
-    OROR    shift, and go to state 166
-    RSH     shift, and go to state 167
-    '%'     shift, and go to state 168
-    '&'     shift, and go to state 169
-    '*'     shift, and go to state 170
-    '+'     shift, and go to state 171
-    '-'     shift, and go to state 172
-    '/'     shift, and go to state 173
-    ':'     shift, and go to state 526
-    '<'     shift, and go to state 174
-    '>'     shift, and go to state 175
-    '^'     shift, and go to state 176
-    '|'     shift, and go to state 177
+    ANDAND  posunout a přejít do stavu 155
+    ANDNOT  posunout a přejít do stavu 156
+    COMM    posunout a přejít do stavu 158
+    EQ      posunout a přejít do stavu 160
+    GE      posunout a přejít do stavu 161
+    LE      posunout a přejít do stavu 163
+    LSH     posunout a přejít do stavu 164
+    NE      posunout a přejít do stavu 165
+    OROR    posunout a přejít do stavu 166
+    RSH     posunout a přejít do stavu 167
+    '%'     posunout a přejít do stavu 168
+    '&'     posunout a přejít do stavu 169
+    '*'     posunout a přejít do stavu 170
+    '+'     posunout a přejít do stavu 171
+    '-'     posunout a přejít do stavu 172
+    '/'     posunout a přejít do stavu 173
+    ':'     posunout a přejít do stavu 526
+    '<'     posunout a přejít do stavu 174
+    '>'     posunout a přejít do stavu 175
+    '^'     posunout a přejít do stavu 176
+    '|'     posunout a přejít do stavu 177
 
 
-state 520
+State 520
 
   136 CompLitExpr: '{' StartCompLit BracedKeyvalList . '}'
 
-    '}'  shift, and go to state 527
+    '}'  posunout a přejít do stavu 527
 
 
-state 521
+State 521
 
   123 PrimaryExprNoParen: PrimaryExpr '[' oExpr ':' oExpr ':' oExpr ']' .
 
-    $default  reduce using rule 123 (PrimaryExprNoParen)
+    $výchozí  reduce using rule 123 (PrimaryExprNoParen)
 
 
-state 522
+State 522
 
   199 FuncDecl1: '(' oArgTypeListOComma ')' Symbol '(' oArgTypeListOComma ')' FuncResult .
 
-    $default  reduce using rule 199 (FuncDecl1)
+    $výchozí  reduce using rule 199 (FuncDecl1)
 
 
-state 523
+State 523
 
-   72 $@8: .
+   72 $@8: . %empty
    73 ElseIf: ELSE IF IfHeader . $@8 LoopBody
 
-    $default  reduce using rule 72 ($@8)
+    $výchozí  reduce using rule 72 ($@8)
 
-    $@8  go to state 528
+    $@8  přejít do stavu 528
 
 
-state 524
+State 524
 
    78 Else: ELSE $@9 CompoundStmt .
 
-    $default  reduce using rule 78 (Else)
+    $výchozí  reduce using rule 78 (Else)
 
 
-state 525
+State 525
 
    49 Case: CASE ExprOrTypeList COLAS Expr ':' .
 
-    $default  reduce using rule 49 (Case)
+    $výchozí  reduce using rule 49 (Case)
 
 
-state 526
+State 526
 
    48 Case: CASE ExprOrTypeList '=' Expr ':' .
 
-    $default  reduce using rule 48 (Case)
+    $výchozí  reduce using rule 48 (Case)
 
 
-state 527
+State 527
 
   136 CompLitExpr: '{' StartCompLit BracedKeyvalList '}' .
 
-    $default  reduce using rule 136 (CompLitExpr)
+    $výchozí  reduce using rule 136 (CompLitExpr)
 
 
-state 528
+State 528
 
    58 LoopBody: . BODY $@4 StmtList '}'
    73 ElseIf: ELSE IF IfHeader $@8 . LoopBody
 
-    BODY  shift, and go to state 315
+    BODY  posunout a přejít do stavu 315
 
-    LoopBody  go to state 529
+    LoopBody  přejít do stavu 529
 
 
-state 529
+State 529
 
    73 ElseIf: ELSE IF IfHeader $@8 LoopBody .
 
-    $default  reduce using rule 73 (ElseIf)
+    $výchozí  reduce using rule 73 (ElseIf)

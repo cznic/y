@@ -1,10 +1,10 @@
-Grammar
+Gramatika
 
     0 $accept: program $end
 
     1 program: program statement '\n'
     2        | program error '\n'
-    3        | /* empty */
+    3        | %empty
 
     4 statement: expression
     5          | VARIABLE '=' expression
@@ -18,7 +18,7 @@ Grammar
    12           | '(' expression ')'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '\n' (10) 1 2
@@ -34,31 +34,31 @@ INTEGER (258) 6
 VARIABLE (259) 5 7
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (13)
-    on left: 0
+    vlevo: 0
 program (14)
-    on left: 1 2 3, on right: 0 1 2
+    vlevo: 1 2 3, vpravo: 0 1 2
 statement (15)
-    on left: 4 5, on right: 1
+    vlevo: 4 5, vpravo: 1
 expression (16)
-    on left: 6 7 8 9 10 11 12, on right: 4 5 8 9 10 11 12
+    vlevo: 6 7 8 9 10 11 12, vpravo: 4 5 8 9 10 11 12
 
 
-state 0
+State 0
 
     0 $accept: . program $end
     1 program: . program statement '\n'
     2        | . program error '\n'
-    3        | .
+    3        | . %empty
 
-    $default  reduce using rule 3 (program)
+    $výchozí  reduce using rule 3 (program)
 
-    program  go to state 1
+    program  přejít do stavu 1
 
 
-state 1
+State 1
 
     0 $accept: program . $end
     1 program: program . statement '\n'
@@ -73,48 +73,48 @@ state 1
    11           | . expression '/' expression
    12           | . '(' expression ')'
 
-    $end      shift, and go to state 2
-    error     shift, and go to state 3
-    INTEGER   shift, and go to state 4
-    VARIABLE  shift, and go to state 5
-    '('       shift, and go to state 6
+    $end      posunout a přejít do stavu 2
+    error     posunout a přejít do stavu 3
+    INTEGER   posunout a přejít do stavu 4
+    VARIABLE  posunout a přejít do stavu 5
+    '('       posunout a přejít do stavu 6
 
-    statement   go to state 7
-    expression  go to state 8
+    statement   přejít do stavu 7
+    expression  přejít do stavu 8
 
 
-state 2
+State 2
 
     0 $accept: program $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 3
+State 3
 
     2 program: program error . '\n'
 
-    '\n'  shift, and go to state 9
+    '\n'  posunout a přejít do stavu 9
 
 
-state 4
+State 4
 
     6 expression: INTEGER .
 
-    $default  reduce using rule 6 (expression)
+    $výchozí  reduce using rule 6 (expression)
 
 
-state 5
+State 5
 
     5 statement: VARIABLE . '=' expression
     7 expression: VARIABLE .  ['+', '-', '*', '/', '\n']
 
-    '='  shift, and go to state 10
+    '='  posunout a přejít do stavu 10
 
-    $default  reduce using rule 7 (expression)
+    $výchozí  reduce using rule 7 (expression)
 
 
-state 6
+State 6
 
     6 expression: . INTEGER
     7           | . VARIABLE
@@ -125,21 +125,21 @@ state 6
    12           | . '(' expression ')'
    12           | '(' . expression ')'
 
-    INTEGER   shift, and go to state 4
-    VARIABLE  shift, and go to state 11
-    '('       shift, and go to state 6
+    INTEGER   posunout a přejít do stavu 4
+    VARIABLE  posunout a přejít do stavu 11
+    '('       posunout a přejít do stavu 6
 
-    expression  go to state 12
+    expression  přejít do stavu 12
 
 
-state 7
+State 7
 
     1 program: program statement . '\n'
 
-    '\n'  shift, and go to state 13
+    '\n'  posunout a přejít do stavu 13
 
 
-state 8
+State 8
 
     4 statement: expression .  ['\n']
     8 expression: expression . '+' expression
@@ -147,22 +147,22 @@ state 8
    10           | expression . '*' expression
    11           | expression . '/' expression
 
-    '+'  shift, and go to state 14
-    '-'  shift, and go to state 15
-    '*'  shift, and go to state 16
-    '/'  shift, and go to state 17
+    '+'  posunout a přejít do stavu 14
+    '-'  posunout a přejít do stavu 15
+    '*'  posunout a přejít do stavu 16
+    '/'  posunout a přejít do stavu 17
 
-    $default  reduce using rule 4 (statement)
+    $výchozí  reduce using rule 4 (statement)
 
 
-state 9
+State 9
 
     2 program: program error '\n' .
 
-    $default  reduce using rule 2 (program)
+    $výchozí  reduce using rule 2 (program)
 
 
-state 10
+State 10
 
     5 statement: VARIABLE '=' . expression
     6 expression: . INTEGER
@@ -173,21 +173,21 @@ state 10
    11           | . expression '/' expression
    12           | . '(' expression ')'
 
-    INTEGER   shift, and go to state 4
-    VARIABLE  shift, and go to state 11
-    '('       shift, and go to state 6
+    INTEGER   posunout a přejít do stavu 4
+    VARIABLE  posunout a přejít do stavu 11
+    '('       posunout a přejít do stavu 6
 
-    expression  go to state 18
+    expression  přejít do stavu 18
 
 
-state 11
+State 11
 
     7 expression: VARIABLE .
 
-    $default  reduce using rule 7 (expression)
+    $výchozí  reduce using rule 7 (expression)
 
 
-state 12
+State 12
 
     8 expression: expression . '+' expression
     9           | expression . '-' expression
@@ -195,21 +195,21 @@ state 12
    11           | expression . '/' expression
    12           | '(' expression . ')'
 
-    '+'  shift, and go to state 14
-    '-'  shift, and go to state 15
-    '*'  shift, and go to state 16
-    '/'  shift, and go to state 17
-    ')'  shift, and go to state 19
+    '+'  posunout a přejít do stavu 14
+    '-'  posunout a přejít do stavu 15
+    '*'  posunout a přejít do stavu 16
+    '/'  posunout a přejít do stavu 17
+    ')'  posunout a přejít do stavu 19
 
 
-state 13
+State 13
 
     1 program: program statement '\n' .
 
-    $default  reduce using rule 1 (program)
+    $výchozí  reduce using rule 1 (program)
 
 
-state 14
+State 14
 
     6 expression: . INTEGER
     7           | . VARIABLE
@@ -220,14 +220,14 @@ state 14
    11           | . expression '/' expression
    12           | . '(' expression ')'
 
-    INTEGER   shift, and go to state 4
-    VARIABLE  shift, and go to state 11
-    '('       shift, and go to state 6
+    INTEGER   posunout a přejít do stavu 4
+    VARIABLE  posunout a přejít do stavu 11
+    '('       posunout a přejít do stavu 6
 
-    expression  go to state 20
+    expression  přejít do stavu 20
 
 
-state 15
+State 15
 
     6 expression: . INTEGER
     7           | . VARIABLE
@@ -238,14 +238,14 @@ state 15
    11           | . expression '/' expression
    12           | . '(' expression ')'
 
-    INTEGER   shift, and go to state 4
-    VARIABLE  shift, and go to state 11
-    '('       shift, and go to state 6
+    INTEGER   posunout a přejít do stavu 4
+    VARIABLE  posunout a přejít do stavu 11
+    '('       posunout a přejít do stavu 6
 
-    expression  go to state 21
+    expression  přejít do stavu 21
 
 
-state 16
+State 16
 
     6 expression: . INTEGER
     7           | . VARIABLE
@@ -256,14 +256,14 @@ state 16
    11           | . expression '/' expression
    12           | . '(' expression ')'
 
-    INTEGER   shift, and go to state 4
-    VARIABLE  shift, and go to state 11
-    '('       shift, and go to state 6
+    INTEGER   posunout a přejít do stavu 4
+    VARIABLE  posunout a přejít do stavu 11
+    '('       posunout a přejít do stavu 6
 
-    expression  go to state 22
+    expression  přejít do stavu 22
 
 
-state 17
+State 17
 
     6 expression: . INTEGER
     7           | . VARIABLE
@@ -274,14 +274,14 @@ state 17
    11           | expression '/' . expression
    12           | . '(' expression ')'
 
-    INTEGER   shift, and go to state 4
-    VARIABLE  shift, and go to state 11
-    '('       shift, and go to state 6
+    INTEGER   posunout a přejít do stavu 4
+    VARIABLE  posunout a přejít do stavu 11
+    '('       posunout a přejít do stavu 6
 
-    expression  go to state 23
+    expression  přejít do stavu 23
 
 
-state 18
+State 18
 
     5 statement: VARIABLE '=' expression .  ['\n']
     8 expression: expression . '+' expression
@@ -289,22 +289,22 @@ state 18
    10           | expression . '*' expression
    11           | expression . '/' expression
 
-    '+'  shift, and go to state 14
-    '-'  shift, and go to state 15
-    '*'  shift, and go to state 16
-    '/'  shift, and go to state 17
+    '+'  posunout a přejít do stavu 14
+    '-'  posunout a přejít do stavu 15
+    '*'  posunout a přejít do stavu 16
+    '/'  posunout a přejít do stavu 17
 
-    $default  reduce using rule 5 (statement)
+    $výchozí  reduce using rule 5 (statement)
 
 
-state 19
+State 19
 
    12 expression: '(' expression ')' .
 
-    $default  reduce using rule 12 (expression)
+    $výchozí  reduce using rule 12 (expression)
 
 
-state 20
+State 20
 
     8 expression: expression . '+' expression
     8           | expression '+' expression .  ['+', '-', '\n', ')']
@@ -312,10 +312,10 @@ state 20
    10           | expression . '*' expression
    11           | expression . '/' expression
 
-    '*'  shift, and go to state 16
-    '/'  shift, and go to state 17
+    '*'  posunout a přejít do stavu 16
+    '/'  posunout a přejít do stavu 17
 
-    $default  reduce using rule 8 (expression)
+    $výchozí  reduce using rule 8 (expression)
 
     Conflict between rule 8 and token '+' resolved as reduce (%left '+').
     Conflict between rule 8 and token '-' resolved as reduce (%left '-').
@@ -323,7 +323,7 @@ state 20
     Conflict between rule 8 and token '/' resolved as shift ('+' < '/').
 
 
-state 21
+State 21
 
     8 expression: expression . '+' expression
     9           | expression . '-' expression
@@ -331,10 +331,10 @@ state 21
    10           | expression . '*' expression
    11           | expression . '/' expression
 
-    '*'  shift, and go to state 16
-    '/'  shift, and go to state 17
+    '*'  posunout a přejít do stavu 16
+    '/'  posunout a přejít do stavu 17
 
-    $default  reduce using rule 9 (expression)
+    $výchozí  reduce using rule 9 (expression)
 
     Conflict between rule 9 and token '+' resolved as reduce (%left '+').
     Conflict between rule 9 and token '-' resolved as reduce (%left '-').
@@ -342,7 +342,7 @@ state 21
     Conflict between rule 9 and token '/' resolved as shift ('-' < '/').
 
 
-state 22
+State 22
 
     8 expression: expression . '+' expression
     9           | expression . '-' expression
@@ -350,7 +350,7 @@ state 22
    10           | expression '*' expression .  ['+', '-', '*', '/', '\n', ')']
    11           | expression . '/' expression
 
-    $default  reduce using rule 10 (expression)
+    $výchozí  reduce using rule 10 (expression)
 
     Conflict between rule 10 and token '+' resolved as reduce ('+' < '*').
     Conflict between rule 10 and token '-' resolved as reduce ('-' < '*').
@@ -358,7 +358,7 @@ state 22
     Conflict between rule 10 and token '/' resolved as reduce (%left '/').
 
 
-state 23
+State 23
 
     8 expression: expression . '+' expression
     9           | expression . '-' expression
@@ -366,7 +366,7 @@ state 23
    11           | expression . '/' expression
    11           | expression '/' expression .  ['+', '-', '*', '/', '\n', ')']
 
-    $default  reduce using rule 11 (expression)
+    $výchozí  reduce using rule 11 (expression)
 
     Conflict between rule 11 and token '+' resolved as reduce ('+' < '/').
     Conflict between rule 11 and token '-' resolved as reduce ('-' < '/').

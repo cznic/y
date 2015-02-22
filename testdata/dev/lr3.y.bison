@@ -1,4 +1,4 @@
-Grammar
+Gramatika
 
     0 $accept: E $end
 
@@ -10,7 +10,7 @@ Grammar
     5  | '1'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '*' (42) 1
@@ -20,17 +20,17 @@ $end (0) 0
 error (256)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (7)
-    on left: 0
+    vlevo: 0
 E (8)
-    on left: 1 2 3, on right: 0 1 2
+    vlevo: 1 2 3, vpravo: 0 1 2
 B (9)
-    on left: 4 5, on right: 3
+    vlevo: 4 5, vpravo: 3
 
 
-state 0
+State 0
 
     0 $accept: . E $end
     1 E: . E '*' E
@@ -39,53 +39,53 @@ state 0
     4 B: . '0'
     5  | . '1'
 
-    '0'  shift, and go to state 1
-    '1'  shift, and go to state 2
+    '0'  posunout a přejít do stavu 1
+    '1'  posunout a přejít do stavu 2
 
-    E  go to state 3
-    B  go to state 4
+    E  přejít do stavu 3
+    B  přejít do stavu 4
 
 
-state 1
+State 1
 
     4 B: '0' .
 
-    $default  reduce using rule 4 (B)
+    $výchozí  reduce using rule 4 (B)
 
 
-state 2
+State 2
 
     5 B: '1' .
 
-    $default  reduce using rule 5 (B)
+    $výchozí  reduce using rule 5 (B)
 
 
-state 3
+State 3
 
     0 $accept: E . $end
     1 E: E . '*' E
     2  | E . '+' E
 
-    $end  shift, and go to state 5
-    '+'   shift, and go to state 6
-    '*'   shift, and go to state 7
+    $end  posunout a přejít do stavu 5
+    '+'   posunout a přejít do stavu 6
+    '*'   posunout a přejít do stavu 7
 
 
-state 4
+State 4
 
     3 E: B .
 
-    $default  reduce using rule 3 (E)
+    $výchozí  reduce using rule 3 (E)
 
 
-state 5
+State 5
 
     0 $accept: E $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 6
+State 6
 
     1 E: . E '*' E
     2  | . E '+' E
@@ -94,14 +94,14 @@ state 6
     4 B: . '0'
     5  | . '1'
 
-    '0'  shift, and go to state 1
-    '1'  shift, and go to state 2
+    '0'  posunout a přejít do stavu 1
+    '1'  posunout a přejít do stavu 2
 
-    E  go to state 8
-    B  go to state 4
+    E  přejít do stavu 8
+    B  přejít do stavu 4
 
 
-state 7
+State 7
 
     1 E: . E '*' E
     1  | E '*' . E
@@ -110,34 +110,34 @@ state 7
     4 B: . '0'
     5  | . '1'
 
-    '0'  shift, and go to state 1
-    '1'  shift, and go to state 2
+    '0'  posunout a přejít do stavu 1
+    '1'  posunout a přejít do stavu 2
 
-    E  go to state 9
-    B  go to state 4
+    E  přejít do stavu 9
+    B  přejít do stavu 4
 
 
-state 8
+State 8
 
     1 E: E . '*' E
     2  | E . '+' E
     2  | E '+' E .  [$end, '+']
 
-    '*'  shift, and go to state 7
+    '*'  posunout a přejít do stavu 7
 
-    $default  reduce using rule 2 (E)
+    $výchozí  reduce using rule 2 (E)
 
     Conflict between rule 2 and token '+' resolved as reduce (%left '+').
     Conflict between rule 2 and token '*' resolved as shift ('+' < '*').
 
 
-state 9
+State 9
 
     1 E: E . '*' E
     1  | E '*' E .  [$end, '+', '*']
     2  | E . '+' E
 
-    $default  reduce using rule 1 (E)
+    $výchozí  reduce using rule 1 (E)
 
     Conflict between rule 1 and token '+' resolved as reduce ('+' < '*').
     Conflict between rule 1 and token '*' resolved as reduce (%left '*').

@@ -1,15 +1,15 @@
-Grammar
+Gramatika
 
     0 $accept: start $end
 
     1 start: start expr
-    2      | /* empty */
+    2      | %empty
 
     3 expr: NR
     4     | expr '+' expr
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '+' (43) 4
@@ -17,80 +17,80 @@ error (256)
 NR (258) 3
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (5)
-    on left: 0
+    vlevo: 0
 start (6)
-    on left: 1 2, on right: 0 1
+    vlevo: 1 2, vpravo: 0 1
 expr (7)
-    on left: 3 4, on right: 1 4
+    vlevo: 3 4, vpravo: 1 4
 
 
-state 0
+State 0
 
     0 $accept: . start $end
     1 start: . start expr
-    2      | .
+    2      | . %empty
 
-    $default  reduce using rule 2 (start)
+    $výchozí  reduce using rule 2 (start)
 
-    start  go to state 1
+    start  přejít do stavu 1
 
 
-state 1
+State 1
 
     0 $accept: start . $end
     1 start: start . expr
     3 expr: . NR
     4     | . expr '+' expr
 
-    $end  shift, and go to state 2
-    NR    shift, and go to state 3
+    $end  posunout a přejít do stavu 2
+    NR    posunout a přejít do stavu 3
 
-    expr  go to state 4
+    expr  přejít do stavu 4
 
 
-state 2
+State 2
 
     0 $accept: start $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 3
+State 3
 
     3 expr: NR .
 
-    $default  reduce using rule 3 (expr)
+    $výchozí  reduce using rule 3 (expr)
 
 
-state 4
+State 4
 
     1 start: start expr .  [$end, NR]
     4 expr: expr . '+' expr
 
-    '+'  shift, and go to state 5
+    '+'  posunout a přejít do stavu 5
 
-    $default  reduce using rule 1 (start)
+    $výchozí  reduce using rule 1 (start)
 
 
-state 5
+State 5
 
     3 expr: . NR
     4     | . expr '+' expr
     4     | expr '+' . expr
 
-    NR  shift, and go to state 3
+    NR  posunout a přejít do stavu 3
 
-    expr  go to state 6
+    expr  přejít do stavu 6
 
 
-state 6
+State 6
 
     4 expr: expr . '+' expr
     4     | expr '+' expr .  [$end, NR, '+']
 
-    $default  reduce using rule 4 (expr)
+    $výchozí  reduce using rule 4 (expr)
 
     Conflict between rule 4 and token '+' resolved as reduce (%left '+').

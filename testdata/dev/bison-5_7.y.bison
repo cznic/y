@@ -1,7 +1,7 @@
-State 1 conflicts: 1 reduce/reduce
+Stav 1 conflicts: 1 reduce/reduce
 
 
-Grammar
+Gramatika
 
     0 $accept: def $end
 
@@ -21,7 +21,7 @@ Grammar
     9          | name ',' name_list
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 ',' (44) 1 9
@@ -30,25 +30,25 @@ error (256)
 id (258) 6 7
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (6)
-    on left: 0
+    vlevo: 0
 def (7)
-    on left: 1, on right: 0
+    vlevo: 1, vpravo: 0
 param_spec (8)
-    on left: 2 3, on right: 1
+    vlevo: 2 3, vpravo: 1
 return_spec (9)
-    on left: 4 5, on right: 1
+    vlevo: 4 5, vpravo: 1
 type (10)
-    on left: 6, on right: 2 3 4 5
+    vlevo: 6, vpravo: 2 3 4 5
 name (11)
-    on left: 7, on right: 5 8 9
+    vlevo: 7, vpravo: 5 8 9
 name_list (12)
-    on left: 8 9, on right: 3 9
+    vlevo: 8 9, vpravo: 3 9
 
 
-state 0
+State 0
 
     0 $accept: . def $end
     1 def: . param_spec return_spec ','
@@ -59,34 +59,34 @@ state 0
     8 name_list: . name
     9          | . name ',' name_list
 
-    id  shift, and go to state 1
+    id  posunout a přejít do stavu 1
 
-    def         go to state 2
-    param_spec  go to state 3
-    type        go to state 4
-    name        go to state 5
-    name_list   go to state 6
+    def         přejít do stavu 2
+    param_spec  přejít do stavu 3
+    type        přejít do stavu 4
+    name        přejít do stavu 5
+    name_list   přejít do stavu 6
 
 
-state 1
+State 1
 
     6 type: id .  [id, ',']
     7 name: id .  [',', ':']
 
-    ','       reduce using rule 6 (type)
-    ','       [reduce using rule 7 (name)]
-    ':'       reduce using rule 7 (name)
-    $default  reduce using rule 6 (type)
+    ','         reduce using rule 6 (type)
+    ','         [reduce using rule 7 (name)]
+    ':'         reduce using rule 7 (name)
+    $výchozí  reduce using rule 6 (type)
 
 
-state 2
+State 2
 
     0 $accept: def . $end
 
-    $end  shift, and go to state 7
+    $end  posunout a přejít do stavu 7
 
 
-state 3
+State 3
 
     1 def: param_spec . return_spec ','
     4 return_spec: . type
@@ -94,135 +94,135 @@ state 3
     6 type: . id
     7 name: . id
 
-    id  shift, and go to state 1
+    id  posunout a přejít do stavu 1
 
-    return_spec  go to state 8
-    type         go to state 9
-    name         go to state 10
+    return_spec  přejít do stavu 8
+    type         přejít do stavu 9
+    name         přejít do stavu 10
 
 
-state 4
+State 4
 
     2 param_spec: type .
 
-    $default  reduce using rule 2 (param_spec)
+    $výchozí  reduce using rule 2 (param_spec)
 
 
-state 5
+State 5
 
     8 name_list: name .  [':']
     9          | name . ',' name_list
 
-    ','  shift, and go to state 11
+    ','  posunout a přejít do stavu 11
 
-    $default  reduce using rule 8 (name_list)
+    $výchozí  reduce using rule 8 (name_list)
 
 
-state 6
+State 6
 
     3 param_spec: name_list . ':' type
 
-    ':'  shift, and go to state 12
+    ':'  posunout a přejít do stavu 12
 
 
-state 7
+State 7
 
     0 $accept: def $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 8
+State 8
 
     1 def: param_spec return_spec . ','
 
-    ','  shift, and go to state 13
+    ','  posunout a přejít do stavu 13
 
 
-state 9
+State 9
 
     4 return_spec: type .
 
-    $default  reduce using rule 4 (return_spec)
+    $výchozí  reduce using rule 4 (return_spec)
 
 
-state 10
+State 10
 
     5 return_spec: name . ':' type
 
-    ':'  shift, and go to state 14
+    ':'  posunout a přejít do stavu 14
 
 
-state 11
+State 11
 
     7 name: . id
     8 name_list: . name
     9          | . name ',' name_list
     9          | name ',' . name_list
 
-    id  shift, and go to state 15
+    id  posunout a přejít do stavu 15
 
-    name       go to state 5
-    name_list  go to state 16
+    name       přejít do stavu 5
+    name_list  přejít do stavu 16
 
 
-state 12
+State 12
 
     3 param_spec: name_list ':' . type
     6 type: . id
 
-    id  shift, and go to state 17
+    id  posunout a přejít do stavu 17
 
-    type  go to state 18
+    type  přejít do stavu 18
 
 
-state 13
+State 13
 
     1 def: param_spec return_spec ',' .
 
-    $default  reduce using rule 1 (def)
+    $výchozí  reduce using rule 1 (def)
 
 
-state 14
+State 14
 
     5 return_spec: name ':' . type
     6 type: . id
 
-    id  shift, and go to state 17
+    id  posunout a přejít do stavu 17
 
-    type  go to state 19
+    type  přejít do stavu 19
 
 
-state 15
+State 15
 
     7 name: id .
 
-    $default  reduce using rule 7 (name)
+    $výchozí  reduce using rule 7 (name)
 
 
-state 16
+State 16
 
     9 name_list: name ',' name_list .
 
-    $default  reduce using rule 9 (name_list)
+    $výchozí  reduce using rule 9 (name_list)
 
 
-state 17
+State 17
 
     6 type: id .
 
-    $default  reduce using rule 6 (type)
+    $výchozí  reduce using rule 6 (type)
 
 
-state 18
+State 18
 
     3 param_spec: name_list ':' type .
 
-    $default  reduce using rule 3 (param_spec)
+    $výchozí  reduce using rule 3 (param_spec)
 
 
-state 19
+State 19
 
     5 return_spec: name ':' type .
 
-    $default  reduce using rule 5 (return_spec)
+    $výchozí  reduce using rule 5 (return_spec)

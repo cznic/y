@@ -1,65 +1,65 @@
 Rules useless in parser due to conflicts
 
-    2 AnonymousField1: /* empty */
+    2 AnonymousField1: %empty
 
-  100 ForClause1: /* empty */
+  100 ForClause1: %empty
 
-  104 ForClause3: /* empty */
+  104 ForClause3: %empty
 
-  126 IfStmt1: /* empty */
+  126 IfStmt1: %empty
 
-  224 RecvStmt1: /* empty */
+  224 RecvStmt1: %empty
 
-  322 TypeSwitchStmt1: /* empty */
+  322 TypeSwitchStmt1: %empty
   323                | SimpleStmt ';'
 
 
-State 41 conflicts: 1 shift/reduce
-State 59 conflicts: 1 shift/reduce
-State 85 conflicts: 1 shift/reduce
-State 88 conflicts: 1 shift/reduce
-State 111 conflicts: 1 shift/reduce, 5 reduce/reduce
-State 135 conflicts: 17 shift/reduce, 1 reduce/reduce
-State 136 conflicts: 5 reduce/reduce
-State 141 conflicts: 1 reduce/reduce
-State 155 conflicts: 10 shift/reduce
-State 179 conflicts: 1 shift/reduce
-State 192 conflicts: 16 shift/reduce
-State 212 conflicts: 1 shift/reduce
-State 223 conflicts: 1 shift/reduce
-State 243 conflicts: 1 shift/reduce
-State 245 conflicts: 1 shift/reduce
-State 250 conflicts: 1 shift/reduce, 3 reduce/reduce
-State 259 conflicts: 1 shift/reduce
-State 264 conflicts: 1 shift/reduce
-State 272 conflicts: 1 shift/reduce
-State 275 conflicts: 1 shift/reduce, 4 reduce/reduce
-State 280 conflicts: 1 reduce/reduce
-State 283 conflicts: 16 shift/reduce
-State 286 conflicts: 16 shift/reduce, 15 reduce/reduce
-State 335 conflicts: 1 shift/reduce
-State 344 conflicts: 16 shift/reduce
-State 359 conflicts: 1 shift/reduce, 4 reduce/reduce
-State 381 conflicts: 1 shift/reduce
-State 392 conflicts: 16 shift/reduce
-State 393 conflicts: 1 shift/reduce
-State 408 conflicts: 15 reduce/reduce
-State 423 conflicts: 16 shift/reduce
-State 432 conflicts: 1 reduce/reduce
+Stav 41 conflicts: 1 shift/reduce
+Stav 59 conflicts: 1 shift/reduce
+Stav 85 conflicts: 1 shift/reduce
+Stav 88 conflicts: 1 shift/reduce
+Stav 111 conflicts: 1 shift/reduce, 5 reduce/reduce
+Stav 135 conflicts: 17 shift/reduce, 1 reduce/reduce
+Stav 136 conflicts: 5 reduce/reduce
+Stav 141 conflicts: 1 reduce/reduce
+Stav 155 conflicts: 10 shift/reduce
+Stav 179 conflicts: 1 shift/reduce
+Stav 192 conflicts: 16 shift/reduce
+Stav 212 conflicts: 1 shift/reduce
+Stav 223 conflicts: 1 shift/reduce
+Stav 243 conflicts: 1 shift/reduce
+Stav 245 conflicts: 1 shift/reduce
+Stav 250 conflicts: 1 shift/reduce, 3 reduce/reduce
+Stav 259 conflicts: 1 shift/reduce
+Stav 264 conflicts: 1 shift/reduce
+Stav 272 conflicts: 1 shift/reduce
+Stav 275 conflicts: 1 shift/reduce, 4 reduce/reduce
+Stav 280 conflicts: 1 reduce/reduce
+Stav 283 conflicts: 16 shift/reduce
+Stav 286 conflicts: 16 shift/reduce, 15 reduce/reduce
+Stav 335 conflicts: 1 shift/reduce
+Stav 344 conflicts: 16 shift/reduce
+Stav 359 conflicts: 1 shift/reduce, 4 reduce/reduce
+Stav 381 conflicts: 1 shift/reduce
+Stav 392 conflicts: 16 shift/reduce
+Stav 393 conflicts: 1 shift/reduce
+Stav 408 conflicts: 15 reduce/reduce
+Stav 423 conflicts: 16 shift/reduce
+Stav 432 conflicts: 1 reduce/reduce
 
 
-Grammar
+Gramatika
 
     0 $accept: Start $end
 
     1 AnonymousField: AnonymousField1 TypeName
 
-    2 AnonymousField1: /* empty */
+    2 AnonymousField1: %empty
     3                | '*'
 
     4 ArgumentList: ExpressionList ArgumentList1
 
-    5 ArgumentList1: /* empty */
+    5 ArgumentList1: %empty
     6              | TOK4
 
     7 ArrayLength: Expression
@@ -82,29 +82,29 @@ Grammar
 
    18 BreakStmt: BREAK BreakStmt1
 
-   19 BreakStmt1: /* empty */
+   19 BreakStmt1: %empty
    20           | Label
 
    21 BuiltinArgs: Type BuiltinArgs1
    22            | ArgumentList
 
-   23 BuiltinArgs1: /* empty */
+   23 BuiltinArgs1: %empty
    24             | ',' ArgumentList
 
    25 BuiltinCall: IDENTIFIER '(' BuiltinCall1 ')'
 
-   26 BuiltinCall1: /* empty */
+   26 BuiltinCall1: %empty
    27             | BuiltinArgs BuiltinCall11
 
-   28 BuiltinCall11: /* empty */
+   28 BuiltinCall11: %empty
    29              | ','
 
    30 Call: '(' Call1 ')'
 
-   31 Call1: /* empty */
+   31 Call1: %empty
    32      | ArgumentList Call11
 
-   33 Call11: /* empty */
+   33 Call11: %empty
    34       | ','
 
    35 Channel: Expression
@@ -132,25 +132,25 @@ Grammar
    48 ConstDecl1: ConstSpec
    49           | '(' ConstDecl11 ')'
 
-   50 ConstDecl11: /* empty */
+   50 ConstDecl11: %empty
    51            | ConstDecl11 ConstSpec ';'
 
    52 ConstSpec: IdentifierList ConstSpec1
 
-   53 ConstSpec1: /* empty */
+   53 ConstSpec1: %empty
    54           | ConstSpec11 '=' ExpressionList
 
-   55 ConstSpec11: /* empty */
+   55 ConstSpec11: %empty
    56            | Type
 
    57 ContinueStmt: CONTINUE ContinueStmt1
 
-   58 ContinueStmt1: /* empty */
+   58 ContinueStmt1: %empty
    59              | Label
 
    60 Conversion: Type '(' Expression Conversion1 ')'
 
-   61 Conversion1: /* empty */
+   61 Conversion1: %empty
    62            | ','
 
    63 Declaration: ConstDecl
@@ -161,19 +161,19 @@ Grammar
 
    67 Element: Element1 Value
 
-   68 Element1: /* empty */
+   68 Element1: %empty
    69         | Key ':'
 
    70 ElementIndex: Expression
 
    71 ElementList: Element ElementList1
 
-   72 ElementList1: /* empty */
+   72 ElementList1: %empty
    73             | ElementList1 ',' Element
 
    74 ElementType: Type
 
-   75 EmptyStmt: /* empty */
+   75 EmptyStmt: %empty
 
    76 ExprCaseClause: ExprSwitchCase ':' StatementList
 
@@ -182,13 +182,13 @@ Grammar
 
    79 ExprSwitchStmt: SWITCH ExprSwitchStmt1 ExprSwitchStmt2 '{' ExprSwitchStmt3 '}'
 
-   80 ExprSwitchStmt1: /* empty */
+   80 ExprSwitchStmt1: %empty
    81                | SimpleStmt ';'
 
-   82 ExprSwitchStmt2: /* empty */
+   82 ExprSwitchStmt2: %empty
    83                | Expression
 
-   84 ExprSwitchStmt3: /* empty */
+   84 ExprSwitchStmt3: %empty
    85                | ExprSwitchStmt3 ExprCaseClause
 
    86 Expression: UnaryExpr
@@ -196,7 +196,7 @@ Grammar
 
    88 ExpressionList: Expression ExpressionList1
 
-   89 ExpressionList1: /* empty */
+   89 ExpressionList1: %empty
    90                | ExpressionList1 ',' Expression
 
    91 ExpressionStmt: Expression
@@ -208,25 +208,25 @@ Grammar
    94 FieldDecl1: IdentifierList Type
    95           | AnonymousField
 
-   96 FieldDecl2: /* empty */
+   96 FieldDecl2: %empty
    97           | Tag
 
    98 FieldName: IDENTIFIER
 
    99 ForClause: ForClause1 ';' ForClause2 ';' ForClause3
 
-  100 ForClause1: /* empty */
+  100 ForClause1: %empty
   101           | InitStmt
 
-  102 ForClause2: /* empty */
+  102 ForClause2: %empty
   103           | Condition
 
-  104 ForClause3: /* empty */
+  104 ForClause3: %empty
   105           | PostStmt
 
   106 ForStmt: FOR ForStmt1 Block
 
-  107 ForStmt1: /* empty */
+  107 ForStmt1: %empty
   108         | ForStmt11
 
   109 ForStmt11: Condition
@@ -254,15 +254,15 @@ Grammar
 
   122 IdentifierList: IDENTIFIER IdentifierList1
 
-  123 IdentifierList1: /* empty */
+  123 IdentifierList1: %empty
   124                | IdentifierList1 ',' IDENTIFIER
 
   125 IfStmt: IF IfStmt1 Expression Block IfStmt2
 
-  126 IfStmt1: /* empty */
+  126 IfStmt1: %empty
   127        | SimpleStmt ';'
 
-  128 IfStmt2: /* empty */
+  128 IfStmt2: %empty
   129        | ELSE IfStmt21
 
   130 IfStmt21: IfStmt
@@ -273,14 +273,14 @@ Grammar
   133 ImportDecl1: ImportSpec
   134            | '(' ImportDecl11 ')'
 
-  135 ImportDecl11: /* empty */
+  135 ImportDecl11: %empty
   136             | ImportDecl11 ImportSpec ';'
 
   137 ImportPath: STRING_LIT
 
   138 ImportSpec: ImportSpec1 ImportPath
 
-  139 ImportSpec1: /* empty */
+  139 ImportSpec1: %empty
   140            | ImportSpec11
 
   141 ImportSpec11: '.'
@@ -297,7 +297,7 @@ Grammar
 
   148 InterfaceType: INTERFACE '{' InterfaceType1 '}'
 
-  149 InterfaceType1: /* empty */
+  149 InterfaceType1: %empty
   150               | InterfaceType1 MethodSpec ';'
 
   151 InterfaceTypeName: TypeName
@@ -324,10 +324,10 @@ Grammar
 
   166 LiteralValue: '{' LiteralValue1 '}'
 
-  167 LiteralValue1: /* empty */
+  167 LiteralValue1: %empty
   168              | ElementList LiteralValue11
 
-  169 LiteralValue11: /* empty */
+  169 LiteralValue11: %empty
   170               | ','
 
   171 MapType: MAP '[' KeyType ']' ElementType
@@ -358,23 +358,23 @@ Grammar
 
   187 ParameterDecl: ParameterDecl1 ParameterDecl2 Type
 
-  188 ParameterDecl1: /* empty */
+  188 ParameterDecl1: %empty
   189               | IdentifierList
 
-  190 ParameterDecl2: /* empty */
+  190 ParameterDecl2: %empty
   191               | TOK4
 
   192 ParameterList: ParameterDecl ParameterList1
 
-  193 ParameterList1: /* empty */
+  193 ParameterList1: %empty
   194               | ParameterList1 ',' ParameterDecl
 
   195 Parameters: '(' Parameters1 ')'
 
-  196 Parameters1: /* empty */
+  196 Parameters1: %empty
   197            | ParameterList Parameters11
 
-  198 Parameters11: /* empty */
+  198 Parameters11: %empty
   199             | ','
 
   200 PointerType: '*' BaseType
@@ -399,10 +399,10 @@ Grammar
 
   214 Receiver: '(' Receiver1 Receiver2 BaseTypeName ')'
 
-  215 Receiver1: /* empty */
+  215 Receiver1: %empty
   216          | IDENTIFIER
 
-  217 Receiver2: /* empty */
+  217 Receiver2: %empty
   218          | '*'
 
   219 ReceiverType: TypeName
@@ -413,7 +413,7 @@ Grammar
 
   223 RecvStmt: RecvStmt1 RecvExpr
 
-  224 RecvStmt1: /* empty */
+  224 RecvStmt1: %empty
   225          | RecvStmt11
 
   226 RecvStmt11: ExpressionList '='
@@ -424,12 +424,12 @@ Grammar
 
   230 ReturnStmt: RETURN ReturnStmt1
 
-  231 ReturnStmt1: /* empty */
+  231 ReturnStmt1: %empty
   232            | ExpressionList
 
   233 SelectStmt: SELECT '{' SelectStmt1 '}'
 
-  234 SelectStmt1: /* empty */
+  234 SelectStmt1: %empty
   235            | SelectStmt1 CommClause
 
   236 Selector: '.' IDENTIFIER
@@ -440,7 +440,7 @@ Grammar
 
   239 Signature: Parameters Signature1
 
-  240 Signature1: /* empty */
+  240 Signature1: %empty
   241           | Result
 
   242 SimpleStmt: EmptyStmt
@@ -455,25 +455,25 @@ Grammar
 
   250 Slice1: Slice11 ':' Slice12
 
-  251 Slice11: /* empty */
+  251 Slice11: %empty
   252        | Expression
 
-  253 Slice12: /* empty */
+  253 Slice12: %empty
   254        | Expression
 
   255 Slice2: Slice21 ':' Expression ':' Expression
 
-  256 Slice21: /* empty */
+  256 Slice21: %empty
   257        | Expression
 
   258 SliceType: '[' ']' ElementType
 
   259 SourceFile: PackageClause ';' SourceFile1 SourceFile2
 
-  260 SourceFile1: /* empty */
+  260 SourceFile1: %empty
   261            | SourceFile1 ImportDecl ';'
 
-  262 SourceFile2: /* empty */
+  262 SourceFile2: %empty
   263            | SourceFile2 TopLevelDecl ';'
 
   264 Start: SourceFile
@@ -496,12 +496,12 @@ Grammar
 
   280 StatementList: StatementList1
 
-  281 StatementList1: /* empty */
+  281 StatementList1: %empty
   282               | StatementList1 Statement ';'
 
   283 StructType: STRUCT '{' StructType1 '}'
 
-  284 StructType1: /* empty */
+  284 StructType1: %empty
   285            | StructType1 FieldDecl ';'
 
   286 SwitchStmt: ExprSwitchStmt
@@ -526,12 +526,12 @@ Grammar
   298 TypeDecl1: TypeSpec
   299          | '(' TypeDecl11 ')'
 
-  300 TypeDecl11: /* empty */
+  300 TypeDecl11: %empty
   301           | TypeDecl11 TypeSpec ';'
 
   302 TypeList: Type TypeList1
 
-  303 TypeList1: /* empty */
+  303 TypeList1: %empty
   304          | TypeList1 ',' Type
 
   305 TypeLit: ArrayType
@@ -553,15 +553,15 @@ Grammar
 
   318 TypeSwitchGuard: TypeSwitchGuard1 PrimaryExpr '.' '(' TYPE ')'
 
-  319 TypeSwitchGuard1: /* empty */
+  319 TypeSwitchGuard1: %empty
   320                 | IDENTIFIER TOK3
 
   321 TypeSwitchStmt: SWITCH TypeSwitchStmt1 TypeSwitchGuard '{' TypeSwitchStmt2 '}'
 
-  322 TypeSwitchStmt1: /* empty */
+  322 TypeSwitchStmt1: %empty
   323                | SimpleStmt ';'
 
-  324 TypeSwitchStmt2: /* empty */
+  324 TypeSwitchStmt2: %empty
   325                | TypeSwitchStmt2 TypeCaseClause
 
   326 UnaryExpr: PrimaryExpr
@@ -575,7 +575,7 @@ Grammar
   331 VarDecl1: VarSpec
   332         | '(' VarDecl11 ')'
 
-  333 VarDecl11: /* empty */
+  333 VarDecl11: %empty
   334          | VarDecl11 VarSpec ';'
 
   335 VarSpec: IdentifierList VarSpec1
@@ -583,11 +583,11 @@ Grammar
   336 VarSpec1: Type VarSpec11
   337         | '=' ExpressionList
 
-  338 VarSpec11: /* empty */
+  338 VarSpec11: %empty
   339          | '=' ExpressionList
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '(' (40) 25 30 49 60 134 182 195 214 220 221 294 295 299 318 332
@@ -645,533 +645,532 @@ TYPE (295) 297 318
 VAR (296) 330
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (54)
-    on left: 0
+    vlevo: 0
 AnonymousField (55)
-    on left: 1, on right: 95
+    vlevo: 1, vpravo: 95
 AnonymousField1 (56)
-    on left: 2 3, on right: 1
+    vlevo: 2 3, vpravo: 1
 ArgumentList (57)
-    on left: 4, on right: 22 24 32
+    vlevo: 4, vpravo: 22 24 32
 ArgumentList1 (58)
-    on left: 5 6, on right: 4
+    vlevo: 5 6, vpravo: 4
 ArrayLength (59)
-    on left: 7, on right: 8
+    vlevo: 7, vpravo: 8
 ArrayType (60)
-    on left: 8, on right: 161 305
+    vlevo: 8, vpravo: 161 305
 Assignment (61)
-    on left: 9, on right: 246
+    vlevo: 9, vpravo: 246
 BaseType (62)
-    on left: 10, on right: 200
+    vlevo: 10, vpravo: 200
 BaseTypeName (63)
-    on left: 11, on right: 214
+    vlevo: 11, vpravo: 214
 BasicLit (64)
-    on left: 12 13 14 15 16, on right: 157
+    vlevo: 12 13 14 15 16, vpravo: 157
 Block (65)
-    on left: 17, on right: 106 113 125 131 274
+    vlevo: 17, vpravo: 106 113 125 131 274
 BreakStmt (66)
-    on left: 18, on right: 270
+    vlevo: 18, vpravo: 270
 BreakStmt1 (67)
-    on left: 19 20, on right: 18
+    vlevo: 19 20, vpravo: 18
 BuiltinArgs (68)
-    on left: 21 22, on right: 27
+    vlevo: 21 22, vpravo: 27
 BuiltinArgs1 (69)
-    on left: 23 24, on right: 21
+    vlevo: 23 24, vpravo: 21
 BuiltinCall (70)
-    on left: 25, on right: 204
+    vlevo: 25, vpravo: 204
 BuiltinCall1 (71)
-    on left: 26 27, on right: 25
+    vlevo: 26 27, vpravo: 25
 BuiltinCall11 (72)
-    on left: 28 29, on right: 27
+    vlevo: 28 29, vpravo: 27
 Call (73)
-    on left: 30, on right: 209
+    vlevo: 30, vpravo: 209
 Call1 (74)
-    on left: 31 32, on right: 30
+    vlevo: 31 32, vpravo: 30
 Call11 (75)
-    on left: 33 34, on right: 32
+    vlevo: 33 34, vpravo: 32
 Channel (76)
-    on left: 35, on right: 237
+    vlevo: 35, vpravo: 237
 ChannelType (77)
-    on left: 36, on right: 312
+    vlevo: 36, vpravo: 312
 ChannelType1 (78)
-    on left: 37 38 39, on right: 36
+    vlevo: 37 38 39, vpravo: 36
 CommCase (79)
-    on left: 40 41, on right: 44
+    vlevo: 40 41, vpravo: 44
 CommCase1 (80)
-    on left: 42 43, on right: 40
+    vlevo: 42 43, vpravo: 40
 CommClause (81)
-    on left: 44, on right: 235
+    vlevo: 44, vpravo: 235
 CompositeLit (82)
-    on left: 45, on right: 158
+    vlevo: 45, vpravo: 158
 Condition (83)
-    on left: 46, on right: 103 109
+    vlevo: 46, vpravo: 103 109
 ConstDecl (84)
-    on left: 47, on right: 63
+    vlevo: 47, vpravo: 63
 ConstDecl1 (85)
-    on left: 48 49, on right: 47
+    vlevo: 48 49, vpravo: 47
 ConstDecl11 (86)
-    on left: 50 51, on right: 49 51
+    vlevo: 50 51, vpravo: 49 51
 ConstSpec (87)
-    on left: 52, on right: 48 51
+    vlevo: 52, vpravo: 48 51
 ConstSpec1 (88)
-    on left: 53 54, on right: 52
+    vlevo: 53 54, vpravo: 52
 ConstSpec11 (89)
-    on left: 55 56, on right: 54
+    vlevo: 55 56, vpravo: 54
 ContinueStmt (90)
-    on left: 57, on right: 271
+    vlevo: 57, vpravo: 271
 ContinueStmt1 (91)
-    on left: 58 59, on right: 57
+    vlevo: 58 59, vpravo: 57
 Conversion (92)
-    on left: 60, on right: 203
+    vlevo: 60, vpravo: 203
 Conversion1 (93)
-    on left: 61 62, on right: 60
+    vlevo: 61 62, vpravo: 60
 Declaration (94)
-    on left: 63 64 65, on right: 265 289
+    vlevo: 63 64 65, vpravo: 265 289
 DeferStmt (95)
-    on left: 66, on right: 279
+    vlevo: 66, vpravo: 279
 Element (96)
-    on left: 67, on right: 71 73
+    vlevo: 67, vpravo: 71 73
 Element1 (97)
-    on left: 68 69, on right: 67
+    vlevo: 68 69, vpravo: 67
 ElementIndex (98)
-    on left: 70, on right: 153
+    vlevo: 70, vpravo: 153
 ElementList (99)
-    on left: 71, on right: 168
+    vlevo: 71, vpravo: 168
 ElementList1 (100)
-    on left: 72 73, on right: 71 73
+    vlevo: 72 73, vpravo: 71 73
 ElementType (101)
-    on left: 74, on right: 8 36 162 171 258
+    vlevo: 74, vpravo: 8 36 162 171 258
 EmptyStmt (102)
-    on left: 75, on right: 242
+    vlevo: 75, vpravo: 242
 ExprCaseClause (103)
-    on left: 76, on right: 85
+    vlevo: 76, vpravo: 85
 ExprSwitchCase (104)
-    on left: 77 78, on right: 76
+    vlevo: 77 78, vpravo: 76
 ExprSwitchStmt (105)
-    on left: 79, on right: 286
+    vlevo: 79, vpravo: 286
 ExprSwitchStmt1 (106)
-    on left: 80 81, on right: 79
+    vlevo: 80 81, vpravo: 79
 ExprSwitchStmt2 (107)
-    on left: 82 83, on right: 79
+    vlevo: 82 83, vpravo: 79
 ExprSwitchStmt3 (108)
-    on left: 84 85, on right: 79 85
+    vlevo: 84 85, vpravo: 79 85
 Expression (109)
-    on left: 86 87, on right: 7 35 46 60 66 70 83 87 88 90 91 120 125
-    143 146 182 211 222 237 252 254 255 257 328
+    vlevo: 86 87, vpravo: 7 35 46 60 66 70 83 87 88 90 91 120 125 143
+    146 182 211 222 237 252 254 255 257 328
 ExpressionList (110)
-    on left: 88, on right: 4 9 54 77 212 226 232 238 337 339
+    vlevo: 88, vpravo: 4 9 54 77 212 226 232 238 337 339
 ExpressionList1 (111)
-    on left: 89 90, on right: 88 90
+    vlevo: 89 90, vpravo: 88 90
 ExpressionStmt (112)
-    on left: 91, on right: 243
+    vlevo: 91, vpravo: 243
 FallthroughStmt (113)
-    on left: 92, on right: 273
+    vlevo: 92, vpravo: 273
 FieldDecl (114)
-    on left: 93, on right: 285
+    vlevo: 93, vpravo: 285
 FieldDecl1 (115)
-    on left: 94 95, on right: 93
+    vlevo: 94 95, vpravo: 93
 FieldDecl2 (116)
-    on left: 96 97, on right: 93
+    vlevo: 96 97, vpravo: 93
 FieldName (117)
-    on left: 98, on right: 152
+    vlevo: 98, vpravo: 152
 ForClause (118)
-    on left: 99, on right: 110
+    vlevo: 99, vpravo: 110
 ForClause1 (119)
-    on left: 100 101, on right: 99
+    vlevo: 100 101, vpravo: 99
 ForClause2 (120)
-    on left: 102 103, on right: 99
+    vlevo: 102 103, vpravo: 99
 ForClause3 (121)
-    on left: 104 105, on right: 99
+    vlevo: 104 105, vpravo: 99
 ForStmt (122)
-    on left: 106, on right: 278
+    vlevo: 106, vpravo: 278
 ForStmt1 (123)
-    on left: 107 108, on right: 106
+    vlevo: 107 108, vpravo: 106
 ForStmt11 (124)
-    on left: 109 110 111, on right: 108
+    vlevo: 109 110 111, vpravo: 108
 Function (125)
-    on left: 112, on right: 115 117 173
+    vlevo: 112, vpravo: 115 117 173
 FunctionBody (126)
-    on left: 113, on right: 112
+    vlevo: 113, vpravo: 112
 FunctionDecl (127)
-    on left: 114, on right: 290
+    vlevo: 114, vpravo: 290
 FunctionDecl1 (128)
-    on left: 115 116, on right: 114
+    vlevo: 115 116, vpravo: 114
 FunctionLit (129)
-    on left: 117, on right: 159
+    vlevo: 117, vpravo: 159
 FunctionName (130)
-    on left: 118, on right: 114
+    vlevo: 118, vpravo: 114
 FunctionType (131)
-    on left: 119, on right: 308
+    vlevo: 119, vpravo: 308
 GoStmt (132)
-    on left: 120, on right: 268
+    vlevo: 120, vpravo: 268
 GotoStmt (133)
-    on left: 121, on right: 272
+    vlevo: 121, vpravo: 272
 IdentifierList (134)
-    on left: 122, on right: 52 94 189 213 227 238 335
+    vlevo: 122, vpravo: 52 94 189 213 227 238 335
 IdentifierList1 (135)
-    on left: 123 124, on right: 122 124
+    vlevo: 123 124, vpravo: 122 124
 IfStmt (136)
-    on left: 125, on right: 130 275
+    vlevo: 125, vpravo: 130 275
 IfStmt1 (137)
-    on left: 126 127, on right: 125
+    vlevo: 126 127, vpravo: 125
 IfStmt2 (138)
-    on left: 128 129, on right: 125
+    vlevo: 128 129, vpravo: 125
 IfStmt21 (139)
-    on left: 130 131, on right: 129
+    vlevo: 130 131, vpravo: 129
 ImportDecl (140)
-    on left: 132, on right: 261
+    vlevo: 132, vpravo: 261
 ImportDecl1 (141)
-    on left: 133 134, on right: 132
+    vlevo: 133 134, vpravo: 132
 ImportDecl11 (142)
-    on left: 135 136, on right: 134 136
+    vlevo: 135 136, vpravo: 134 136
 ImportPath (143)
-    on left: 137, on right: 138
+    vlevo: 137, vpravo: 138
 ImportSpec (144)
-    on left: 138, on right: 133 136
+    vlevo: 138, vpravo: 133 136
 ImportSpec1 (145)
-    on left: 139 140, on right: 138
+    vlevo: 139 140, vpravo: 138
 ImportSpec11 (146)
-    on left: 141 142, on right: 140
+    vlevo: 141 142, vpravo: 140
 IncDecStmt (147)
-    on left: 143, on right: 245
+    vlevo: 143, vpravo: 245
 IncDecStmt1 (148)
-    on left: 144 145, on right: 143
+    vlevo: 144 145, vpravo: 143
 Index (149)
-    on left: 146, on right: 206
+    vlevo: 146, vpravo: 206
 InitStmt (150)
-    on left: 147, on right: 101
+    vlevo: 147, vpravo: 101
 InterfaceType (151)
-    on left: 148, on right: 309
+    vlevo: 148, vpravo: 309
 InterfaceType1 (152)
-    on left: 149 150, on right: 148 150
+    vlevo: 149 150, vpravo: 148 150
 InterfaceTypeName (153)
-    on left: 151, on right: 178
+    vlevo: 151, vpravo: 178
 Key (154)
-    on left: 152 153, on right: 69
+    vlevo: 152 153, vpravo: 69
 KeyType (155)
-    on left: 154, on right: 171
+    vlevo: 154, vpravo: 171
 Label (156)
-    on left: 155, on right: 20 59 121 156
+    vlevo: 155, vpravo: 20 59 121 156
 LabeledStmt (157)
-    on left: 156, on right: 266
+    vlevo: 156, vpravo: 266
 Literal (158)
-    on left: 157 158 159, on right: 179
+    vlevo: 157 158 159, vpravo: 179
 LiteralType (159)
-    on left: 160 161 162 163 164 165, on right: 45
+    vlevo: 160 161 162 163 164 165, vpravo: 45
 LiteralValue (160)
-    on left: 166, on right: 45 329
+    vlevo: 166, vpravo: 45 329
 LiteralValue1 (161)
-    on left: 167 168, on right: 166
+    vlevo: 167 168, vpravo: 166
 LiteralValue11 (162)
-    on left: 169 170, on right: 168
+    vlevo: 169 170, vpravo: 168
 MapType (163)
-    on left: 171, on right: 164 311
+    vlevo: 171, vpravo: 164 311
 MethodDecl (164)
-    on left: 172, on right: 291
+    vlevo: 172, vpravo: 291
 MethodDecl1 (165)
-    on left: 173 174, on right: 172
+    vlevo: 173 174, vpravo: 172
 MethodExpr (166)
-    on left: 175, on right: 181
+    vlevo: 175, vpravo: 181
 MethodName (167)
-    on left: 176, on right: 172 175 177
+    vlevo: 176, vpravo: 172 175 177
 MethodSpec (168)
-    on left: 177 178, on right: 150
+    vlevo: 177 178, vpravo: 150
 Operand (169)
-    on left: 179 180 181 182, on right: 202
+    vlevo: 179 180 181 182, vpravo: 202
 OperandName (170)
-    on left: 183 184, on right: 180
+    vlevo: 183 184, vpravo: 180
 PackageClause (171)
-    on left: 185, on right: 259
+    vlevo: 185, vpravo: 259
 PackageName (172)
-    on left: 186, on right: 142 185 210
+    vlevo: 186, vpravo: 142 185 210
 ParameterDecl (173)
-    on left: 187, on right: 192 194
+    vlevo: 187, vpravo: 192 194
 ParameterDecl1 (174)
-    on left: 188 189, on right: 187
+    vlevo: 188 189, vpravo: 187
 ParameterDecl2 (175)
-    on left: 190 191, on right: 187
+    vlevo: 190 191, vpravo: 187
 ParameterList (176)
-    on left: 192, on right: 197
+    vlevo: 192, vpravo: 197
 ParameterList1 (177)
-    on left: 193 194, on right: 192 194
+    vlevo: 193 194, vpravo: 192 194
 Parameters (178)
-    on left: 195, on right: 228 239
+    vlevo: 195, vpravo: 228 239
 Parameters1 (179)
-    on left: 196 197, on right: 195
+    vlevo: 196 197, vpravo: 195
 Parameters11 (180)
-    on left: 198 199, on right: 197
+    vlevo: 198 199, vpravo: 197
 PointerType (181)
-    on left: 200, on right: 307
+    vlevo: 200, vpravo: 307
 PostStmt (182)
-    on left: 201, on right: 105
+    vlevo: 201, vpravo: 105
 PrimaryExpr (183)
-    on left: 202 203 204 205 206 207 208 209, on right: 205 206 207
-    208 209 318 326
+    vlevo: 202 203 204 205 206 207 208 209, vpravo: 205 206 207 208
+    209 318 326
 QualifiedIdent (184)
-    on left: 210, on right: 184 314
+    vlevo: 210, vpravo: 184 314
 RangeClause (185)
-    on left: 211, on right: 111
+    vlevo: 211, vpravo: 111
 RangeClause1 (186)
-    on left: 212 213, on right: 211
+    vlevo: 212 213, vpravo: 211
 Receiver (187)
-    on left: 214, on right: 172
+    vlevo: 214, vpravo: 172
 Receiver1 (188)
-    on left: 215 216, on right: 214
+    vlevo: 215 216, vpravo: 214
 Receiver2 (189)
-    on left: 217 218, on right: 214
+    vlevo: 217 218, vpravo: 214
 ReceiverType (190)
-    on left: 219 220 221, on right: 175 221
+    vlevo: 219 220 221, vpravo: 175 221
 RecvExpr (191)
-    on left: 222, on right: 223
+    vlevo: 222, vpravo: 223
 RecvStmt (192)
-    on left: 223, on right: 43
+    vlevo: 223, vpravo: 43
 RecvStmt1 (193)
-    on left: 224 225, on right: 223
+    vlevo: 224 225, vpravo: 223
 RecvStmt11 (194)
-    on left: 226 227, on right: 225
+    vlevo: 226 227, vpravo: 225
 Result (195)
-    on left: 228 229, on right: 241
+    vlevo: 228 229, vpravo: 241
 ReturnStmt (196)
-    on left: 230, on right: 269
+    vlevo: 230, vpravo: 269
 ReturnStmt1 (197)
-    on left: 231 232, on right: 230
+    vlevo: 231 232, vpravo: 230
 SelectStmt (198)
-    on left: 233, on right: 277
+    vlevo: 233, vpravo: 277
 SelectStmt1 (199)
-    on left: 234 235, on right: 233 235
+    vlevo: 234 235, vpravo: 233 235
 Selector (200)
-    on left: 236, on right: 205
+    vlevo: 236, vpravo: 205
 SendStmt (201)
-    on left: 237, on right: 42 244
+    vlevo: 237, vpravo: 42 244
 ShortVarDecl (202)
-    on left: 238, on right: 247
+    vlevo: 238, vpravo: 247
 Signature (203)
-    on left: 239, on right: 112 116 119 174 177
+    vlevo: 239, vpravo: 112 116 119 174 177
 Signature1 (204)
-    on left: 240 241, on right: 239
+    vlevo: 240 241, vpravo: 239
 SimpleStmt (205)
-    on left: 242 243 244 245 246 247, on right: 81 127 147 201 267
-    323
+    vlevo: 242 243 244 245 246 247, vpravo: 81 127 147 201 267 323
 Slice (206)
-    on left: 248 249, on right: 207
+    vlevo: 248 249, vpravo: 207
 Slice1 (207)
-    on left: 250, on right: 248
+    vlevo: 250, vpravo: 248
 Slice11 (208)
-    on left: 251 252, on right: 250
+    vlevo: 251 252, vpravo: 250
 Slice12 (209)
-    on left: 253 254, on right: 250
+    vlevo: 253 254, vpravo: 250
 Slice2 (210)
-    on left: 255, on right: 249
+    vlevo: 255, vpravo: 249
 Slice21 (211)
-    on left: 256 257, on right: 255
+    vlevo: 256 257, vpravo: 255
 SliceType (212)
-    on left: 258, on right: 163 310
+    vlevo: 258, vpravo: 163 310
 SourceFile (213)
-    on left: 259, on right: 264
+    vlevo: 259, vpravo: 264
 SourceFile1 (214)
-    on left: 260 261, on right: 259 261
+    vlevo: 260 261, vpravo: 259 261
 SourceFile2 (215)
-    on left: 262 263, on right: 259 263
+    vlevo: 262 263, vpravo: 259 263
 Start (216)
-    on left: 264, on right: 0
+    vlevo: 264, vpravo: 0
 Statement (217)
-    on left: 265 266 267 268 269 270 271 272 273 274 275 276 277 278
-    279, on right: 156 282
+    vlevo: 265 266 267 268 269 270 271 272 273 274 275 276 277 278
+    279, vpravo: 156 282
 StatementList (218)
-    on left: 280, on right: 17 44 76 296
+    vlevo: 280, vpravo: 17 44 76 296
 StatementList1 (219)
-    on left: 281 282, on right: 280 282
+    vlevo: 281 282, vpravo: 280 282
 StructType (220)
-    on left: 283, on right: 160 306
+    vlevo: 283, vpravo: 160 306
 StructType1 (221)
-    on left: 284 285, on right: 283 285
+    vlevo: 284 285, vpravo: 283 285
 SwitchStmt (222)
-    on left: 286 287, on right: 276
+    vlevo: 286 287, vpravo: 276
 Tag (223)
-    on left: 288, on right: 97
+    vlevo: 288, vpravo: 97
 TopLevelDecl (224)
-    on left: 289 290 291, on right: 263
+    vlevo: 289 290 291, vpravo: 263
 Type (225)
-    on left: 292 293 294, on right: 10 21 56 60 74 94 154 187 229 294
-    295 302 304 315 336
+    vlevo: 292 293 294, vpravo: 10 21 56 60 74 94 154 187 229 294 295
+    302 304 315 336
 TypeAssertion (226)
-    on left: 295, on right: 208
+    vlevo: 295, vpravo: 208
 TypeCaseClause (227)
-    on left: 296, on right: 325
+    vlevo: 296, vpravo: 325
 TypeDecl (228)
-    on left: 297, on right: 64
+    vlevo: 297, vpravo: 64
 TypeDecl1 (229)
-    on left: 298 299, on right: 297
+    vlevo: 298 299, vpravo: 297
 TypeDecl11 (230)
-    on left: 300 301, on right: 299 301
+    vlevo: 300 301, vpravo: 299 301
 TypeList (231)
-    on left: 302, on right: 316
+    vlevo: 302, vpravo: 316
 TypeList1 (232)
-    on left: 303 304, on right: 302 304
+    vlevo: 303 304, vpravo: 302 304
 TypeLit (233)
-    on left: 305 306 307 308 309 310 311 312, on right: 293
+    vlevo: 305 306 307 308 309 310 311 312, vpravo: 293
 TypeName (234)
-    on left: 313 314, on right: 1 151 165 219 220 292
+    vlevo: 313 314, vpravo: 1 151 165 219 220 292
 TypeSpec (235)
-    on left: 315, on right: 298 301
+    vlevo: 315, vpravo: 298 301
 TypeSwitchCase (236)
-    on left: 316 317, on right: 296
+    vlevo: 316 317, vpravo: 296
 TypeSwitchGuard (237)
-    on left: 318, on right: 321
+    vlevo: 318, vpravo: 321
 TypeSwitchGuard1 (238)
-    on left: 319 320, on right: 318
+    vlevo: 319 320, vpravo: 318
 TypeSwitchStmt (239)
-    on left: 321, on right: 287
+    vlevo: 321, vpravo: 287
 TypeSwitchStmt1 (240)
-    on left: 322 323, on right: 321
+    vlevo: 322 323, vpravo: 321
 TypeSwitchStmt2 (241)
-    on left: 324 325, on right: 321 325
+    vlevo: 324 325, vpravo: 321 325
 UnaryExpr (242)
-    on left: 326 327, on right: 86 87 327
+    vlevo: 326 327, vpravo: 86 87 327
 Value (243)
-    on left: 328 329, on right: 67
+    vlevo: 328 329, vpravo: 67
 VarDecl (244)
-    on left: 330, on right: 65
+    vlevo: 330, vpravo: 65
 VarDecl1 (245)
-    on left: 331 332, on right: 330
+    vlevo: 331 332, vpravo: 330
 VarDecl11 (246)
-    on left: 333 334, on right: 332 334
+    vlevo: 333 334, vpravo: 332 334
 VarSpec (247)
-    on left: 335, on right: 331 334
+    vlevo: 335, vpravo: 331 334
 VarSpec1 (248)
-    on left: 336 337, on right: 335
+    vlevo: 336 337, vpravo: 335
 VarSpec11 (249)
-    on left: 338 339, on right: 336
+    vlevo: 338 339, vpravo: 336
 
 
-state 0
+State 0
 
     0 $accept: . Start $end
   185 PackageClause: . PACKAGE PackageName
   259 SourceFile: . PackageClause ';' SourceFile1 SourceFile2
   264 Start: . SourceFile
 
-    PACKAGE  shift, and go to state 1
+    PACKAGE  posunout a přejít do stavu 1
 
-    PackageClause  go to state 2
-    SourceFile     go to state 3
-    Start          go to state 4
+    PackageClause  přejít do stavu 2
+    SourceFile     přejít do stavu 3
+    Start          přejít do stavu 4
 
 
-state 1
+State 1
 
   185 PackageClause: PACKAGE . PackageName
   186 PackageName: . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 5
+    IDENTIFIER  posunout a přejít do stavu 5
 
-    PackageName  go to state 6
+    PackageName  přejít do stavu 6
 
 
-state 2
+State 2
 
   259 SourceFile: PackageClause . ';' SourceFile1 SourceFile2
 
-    ';'  shift, and go to state 7
+    ';'  posunout a přejít do stavu 7
 
 
-state 3
+State 3
 
   264 Start: SourceFile .
 
-    $default  reduce using rule 264 (Start)
+    $výchozí  reduce using rule 264 (Start)
 
 
-state 4
+State 4
 
     0 $accept: Start . $end
 
-    $end  shift, and go to state 8
+    $end  posunout a přejít do stavu 8
 
 
-state 5
+State 5
 
   186 PackageName: IDENTIFIER .
 
-    $default  reduce using rule 186 (PackageName)
+    $výchozí  reduce using rule 186 (PackageName)
 
 
-state 6
+State 6
 
   185 PackageClause: PACKAGE PackageName .
 
-    $default  reduce using rule 185 (PackageClause)
+    $výchozí  reduce using rule 185 (PackageClause)
 
 
-state 7
+State 7
 
   259 SourceFile: PackageClause ';' . SourceFile1 SourceFile2
-  260 SourceFile1: .
+  260 SourceFile1: . %empty
   261            | . SourceFile1 ImportDecl ';'
 
-    $default  reduce using rule 260 (SourceFile1)
+    $výchozí  reduce using rule 260 (SourceFile1)
 
-    SourceFile1  go to state 9
+    SourceFile1  přejít do stavu 9
 
 
-state 8
+State 8
 
     0 $accept: Start $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 9
+State 9
 
   132 ImportDecl: . IMPORT ImportDecl1
   259 SourceFile: PackageClause ';' SourceFile1 . SourceFile2
   261 SourceFile1: SourceFile1 . ImportDecl ';'
-  262 SourceFile2: .  [$end, CONST, FUNC, TYPE, VAR]
+  262 SourceFile2: . %empty  [$end, CONST, FUNC, TYPE, VAR]
   263            | . SourceFile2 TopLevelDecl ';'
 
-    IMPORT  shift, and go to state 10
+    IMPORT  posunout a přejít do stavu 10
 
-    $default  reduce using rule 262 (SourceFile2)
+    $výchozí  reduce using rule 262 (SourceFile2)
 
-    ImportDecl   go to state 11
-    SourceFile2  go to state 12
+    ImportDecl   přejít do stavu 11
+    SourceFile2  přejít do stavu 12
 
 
-state 10
+State 10
 
   132 ImportDecl: IMPORT . ImportDecl1
   133 ImportDecl1: . ImportSpec
   134            | . '(' ImportDecl11 ')'
   138 ImportSpec: . ImportSpec1 ImportPath
-  139 ImportSpec1: .  [STRING_LIT]
+  139 ImportSpec1: . %empty  [STRING_LIT]
   140            | . ImportSpec11
   141 ImportSpec11: . '.'
   142             | . PackageName
   186 PackageName: . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 5
-    '('         shift, and go to state 13
-    '.'         shift, and go to state 14
+    IDENTIFIER  posunout a přejít do stavu 5
+    '('         posunout a přejít do stavu 13
+    '.'         posunout a přejít do stavu 14
 
-    $default  reduce using rule 139 (ImportSpec1)
+    $výchozí  reduce using rule 139 (ImportSpec1)
 
-    ImportDecl1   go to state 15
-    ImportSpec    go to state 16
-    ImportSpec1   go to state 17
-    ImportSpec11  go to state 18
-    PackageName   go to state 19
+    ImportDecl1   přejít do stavu 15
+    ImportSpec    přejít do stavu 16
+    ImportSpec1   přejít do stavu 17
+    ImportSpec11  přejít do stavu 18
+    PackageName   přejít do stavu 19
 
 
-state 11
+State 11
 
   261 SourceFile1: SourceFile1 ImportDecl . ';'
 
-    ';'  shift, and go to state 20
+    ';'  posunout a přejít do stavu 20
 
 
-state 12
+State 12
 
    47 ConstDecl: . CONST ConstDecl1
    63 Declaration: . ConstDecl
@@ -1187,86 +1186,86 @@ state 12
   297 TypeDecl: . TYPE TypeDecl1
   330 VarDecl: . VAR VarDecl1
 
-    CONST  shift, and go to state 21
-    FUNC   shift, and go to state 22
-    TYPE   shift, and go to state 23
-    VAR    shift, and go to state 24
+    CONST  posunout a přejít do stavu 21
+    FUNC   posunout a přejít do stavu 22
+    TYPE   posunout a přejít do stavu 23
+    VAR    posunout a přejít do stavu 24
 
-    $default  reduce using rule 259 (SourceFile)
+    $výchozí  reduce using rule 259 (SourceFile)
 
-    ConstDecl     go to state 25
-    Declaration   go to state 26
-    FunctionDecl  go to state 27
-    MethodDecl    go to state 28
-    TopLevelDecl  go to state 29
-    TypeDecl      go to state 30
-    VarDecl       go to state 31
+    ConstDecl     přejít do stavu 25
+    Declaration   přejít do stavu 26
+    FunctionDecl  přejít do stavu 27
+    MethodDecl    přejít do stavu 28
+    TopLevelDecl  přejít do stavu 29
+    TypeDecl      přejít do stavu 30
+    VarDecl       přejít do stavu 31
 
 
-state 13
+State 13
 
   134 ImportDecl1: '(' . ImportDecl11 ')'
-  135 ImportDecl11: .
+  135 ImportDecl11: . %empty
   136             | . ImportDecl11 ImportSpec ';'
 
-    $default  reduce using rule 135 (ImportDecl11)
+    $výchozí  reduce using rule 135 (ImportDecl11)
 
-    ImportDecl11  go to state 32
+    ImportDecl11  přejít do stavu 32
 
 
-state 14
+State 14
 
   141 ImportSpec11: '.' .
 
-    $default  reduce using rule 141 (ImportSpec11)
+    $výchozí  reduce using rule 141 (ImportSpec11)
 
 
-state 15
+State 15
 
   132 ImportDecl: IMPORT ImportDecl1 .
 
-    $default  reduce using rule 132 (ImportDecl)
+    $výchozí  reduce using rule 132 (ImportDecl)
 
 
-state 16
+State 16
 
   133 ImportDecl1: ImportSpec .
 
-    $default  reduce using rule 133 (ImportDecl1)
+    $výchozí  reduce using rule 133 (ImportDecl1)
 
 
-state 17
+State 17
 
   137 ImportPath: . STRING_LIT
   138 ImportSpec: ImportSpec1 . ImportPath
 
-    STRING_LIT  shift, and go to state 33
+    STRING_LIT  posunout a přejít do stavu 33
 
-    ImportPath  go to state 34
+    ImportPath  přejít do stavu 34
 
 
-state 18
+State 18
 
   140 ImportSpec1: ImportSpec11 .
 
-    $default  reduce using rule 140 (ImportSpec1)
+    $výchozí  reduce using rule 140 (ImportSpec1)
 
 
-state 19
+State 19
 
   142 ImportSpec11: PackageName .
 
-    $default  reduce using rule 142 (ImportSpec11)
+    $výchozí  reduce using rule 142 (ImportSpec11)
 
 
-state 20
+State 20
 
   261 SourceFile1: SourceFile1 ImportDecl ';' .
 
-    $default  reduce using rule 261 (SourceFile1)
+    $výchozí  reduce using rule 261 (SourceFile1)
 
 
-state 21
+State 21
 
    47 ConstDecl: CONST . ConstDecl1
    48 ConstDecl1: . ConstSpec
@@ -1274,43 +1273,43 @@ state 21
    52 ConstSpec: . IdentifierList ConstSpec1
   122 IdentifierList: . IDENTIFIER IdentifierList1
 
-    IDENTIFIER  shift, and go to state 35
-    '('         shift, and go to state 36
+    IDENTIFIER  posunout a přejít do stavu 35
+    '('         posunout a přejít do stavu 36
 
-    ConstDecl1      go to state 37
-    ConstSpec       go to state 38
-    IdentifierList  go to state 39
+    ConstDecl1      přejít do stavu 37
+    ConstSpec       přejít do stavu 38
+    IdentifierList  přejít do stavu 39
 
 
-state 22
+State 22
 
   114 FunctionDecl: FUNC . FunctionName FunctionDecl1
   118 FunctionName: . IDENTIFIER
   172 MethodDecl: FUNC . Receiver MethodName MethodDecl1
   214 Receiver: . '(' Receiver1 Receiver2 BaseTypeName ')'
 
-    IDENTIFIER  shift, and go to state 40
-    '('         shift, and go to state 41
+    IDENTIFIER  posunout a přejít do stavu 40
+    '('         posunout a přejít do stavu 41
 
-    FunctionName  go to state 42
-    Receiver      go to state 43
+    FunctionName  přejít do stavu 42
+    Receiver      přejít do stavu 43
 
 
-state 23
+State 23
 
   297 TypeDecl: TYPE . TypeDecl1
   298 TypeDecl1: . TypeSpec
   299          | . '(' TypeDecl11 ')'
   315 TypeSpec: . IDENTIFIER Type
 
-    IDENTIFIER  shift, and go to state 44
-    '('         shift, and go to state 45
+    IDENTIFIER  posunout a přejít do stavu 44
+    '('         posunout a přejít do stavu 45
 
-    TypeDecl1  go to state 46
-    TypeSpec   go to state 47
+    TypeDecl1  přejít do stavu 46
+    TypeSpec   přejít do stavu 47
 
 
-state 24
+State 24
 
   122 IdentifierList: . IDENTIFIER IdentifierList1
   330 VarDecl: VAR . VarDecl1
@@ -1318,137 +1317,137 @@ state 24
   332         | . '(' VarDecl11 ')'
   335 VarSpec: . IdentifierList VarSpec1
 
-    IDENTIFIER  shift, and go to state 35
-    '('         shift, and go to state 48
+    IDENTIFIER  posunout a přejít do stavu 35
+    '('         posunout a přejít do stavu 48
 
-    IdentifierList  go to state 49
-    VarDecl1        go to state 50
-    VarSpec         go to state 51
+    IdentifierList  přejít do stavu 49
+    VarDecl1        přejít do stavu 50
+    VarSpec         přejít do stavu 51
 
 
-state 25
+State 25
 
    63 Declaration: ConstDecl .
 
-    $default  reduce using rule 63 (Declaration)
+    $výchozí  reduce using rule 63 (Declaration)
 
 
-state 26
+State 26
 
   289 TopLevelDecl: Declaration .
 
-    $default  reduce using rule 289 (TopLevelDecl)
+    $výchozí  reduce using rule 289 (TopLevelDecl)
 
 
-state 27
+State 27
 
   290 TopLevelDecl: FunctionDecl .
 
-    $default  reduce using rule 290 (TopLevelDecl)
+    $výchozí  reduce using rule 290 (TopLevelDecl)
 
 
-state 28
+State 28
 
   291 TopLevelDecl: MethodDecl .
 
-    $default  reduce using rule 291 (TopLevelDecl)
+    $výchozí  reduce using rule 291 (TopLevelDecl)
 
 
-state 29
+State 29
 
   263 SourceFile2: SourceFile2 TopLevelDecl . ';'
 
-    ';'  shift, and go to state 52
+    ';'  posunout a přejít do stavu 52
 
 
-state 30
+State 30
 
    64 Declaration: TypeDecl .
 
-    $default  reduce using rule 64 (Declaration)
+    $výchozí  reduce using rule 64 (Declaration)
 
 
-state 31
+State 31
 
    65 Declaration: VarDecl .
 
-    $default  reduce using rule 65 (Declaration)
+    $výchozí  reduce using rule 65 (Declaration)
 
 
-state 32
+State 32
 
   134 ImportDecl1: '(' ImportDecl11 . ')'
   136 ImportDecl11: ImportDecl11 . ImportSpec ';'
   138 ImportSpec: . ImportSpec1 ImportPath
-  139 ImportSpec1: .  [STRING_LIT]
+  139 ImportSpec1: . %empty  [STRING_LIT]
   140            | . ImportSpec11
   141 ImportSpec11: . '.'
   142             | . PackageName
   186 PackageName: . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 5
-    ')'         shift, and go to state 53
-    '.'         shift, and go to state 14
+    IDENTIFIER  posunout a přejít do stavu 5
+    ')'         posunout a přejít do stavu 53
+    '.'         posunout a přejít do stavu 14
 
-    $default  reduce using rule 139 (ImportSpec1)
+    $výchozí  reduce using rule 139 (ImportSpec1)
 
-    ImportSpec    go to state 54
-    ImportSpec1   go to state 17
-    ImportSpec11  go to state 18
-    PackageName   go to state 19
+    ImportSpec    přejít do stavu 54
+    ImportSpec1   přejít do stavu 17
+    ImportSpec11  přejít do stavu 18
+    PackageName   přejít do stavu 19
 
 
-state 33
+State 33
 
   137 ImportPath: STRING_LIT .
 
-    $default  reduce using rule 137 (ImportPath)
+    $výchozí  reduce using rule 137 (ImportPath)
 
 
-state 34
+State 34
 
   138 ImportSpec: ImportSpec1 ImportPath .
 
-    $default  reduce using rule 138 (ImportSpec)
+    $výchozí  reduce using rule 138 (ImportSpec)
 
 
-state 35
+State 35
 
   122 IdentifierList: IDENTIFIER . IdentifierList1
-  123 IdentifierList1: .
+  123 IdentifierList1: . %empty
   124                | . IdentifierList1 ',' IDENTIFIER
 
-    $default  reduce using rule 123 (IdentifierList1)
+    $výchozí  reduce using rule 123 (IdentifierList1)
 
-    IdentifierList1  go to state 55
+    IdentifierList1  přejít do stavu 55
 
 
-state 36
+State 36
 
    49 ConstDecl1: '(' . ConstDecl11 ')'
-   50 ConstDecl11: .
+   50 ConstDecl11: . %empty
    51            | . ConstDecl11 ConstSpec ';'
 
-    $default  reduce using rule 50 (ConstDecl11)
+    $výchozí  reduce using rule 50 (ConstDecl11)
 
-    ConstDecl11  go to state 56
+    ConstDecl11  přejít do stavu 56
 
 
-state 37
+State 37
 
    47 ConstDecl: CONST ConstDecl1 .
 
-    $default  reduce using rule 47 (ConstDecl)
+    $výchozí  reduce using rule 47 (ConstDecl)
 
 
-state 38
+State 38
 
    48 ConstDecl1: ConstSpec .
 
-    $default  reduce using rule 48 (ConstDecl1)
+    $výchozí  reduce using rule 48 (ConstDecl1)
 
 
-state 39
+State 39
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -1456,9 +1455,9 @@ state 39
    38             | . CHAN TOK5
    39             | . TOK5 CHAN
    52 ConstSpec: IdentifierList . ConstSpec1
-   53 ConstSpec1: .  [';']
+   53 ConstSpec1: . %empty  [';']
    54           | . ConstSpec11 '=' ExpressionList
-   55 ConstSpec11: .  ['=']
+   55 ConstSpec11: . %empty  ['=']
    56            | . Type
   119 FunctionType: . FUNC Signature
   148 InterfaceType: . INTERFACE '{' InterfaceType1 '}'
@@ -1482,60 +1481,60 @@ state 39
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    '='       reduce using rule 55 (ConstSpec11)
-    $default  reduce using rule 53 (ConstSpec1)
+    '='         reduce using rule 55 (ConstSpec11)
+    $výchozí  reduce using rule 53 (ConstSpec1)
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    ConstSpec1      go to state 70
-    ConstSpec11     go to state 71
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 80
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    ConstSpec1      přejít do stavu 70
+    ConstSpec11     přejít do stavu 71
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 80
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 40
+State 40
 
   118 FunctionName: IDENTIFIER .
 
-    $default  reduce using rule 118 (FunctionName)
+    $výchozí  reduce using rule 118 (FunctionName)
 
 
-state 41
+State 41
 
   214 Receiver: '(' . Receiver1 Receiver2 BaseTypeName ')'
-  215 Receiver1: .  [IDENTIFIER, '*']
+  215 Receiver1: . %empty  [IDENTIFIER, '*']
   216          | . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 83
+    IDENTIFIER  posunout a přejít do stavu 83
 
     IDENTIFIER  [reduce using rule 215 (Receiver1)]
-    $default    reduce using rule 215 (Receiver1)
+    $výchozí  reduce using rule 215 (Receiver1)
 
-    Receiver1  go to state 84
+    Receiver1  přejít do stavu 84
 
 
-state 42
+State 42
 
   112 Function: . Signature FunctionBody
   114 FunctionDecl: FUNC FunctionName . FunctionDecl1
@@ -1544,25 +1543,25 @@ state 42
   195 Parameters: . '(' Parameters1 ')'
   239 Signature: . Parameters Signature1
 
-    '('  shift, and go to state 85
+    '('  posunout a přejít do stavu 85
 
-    Function       go to state 86
-    FunctionDecl1  go to state 87
-    Parameters     go to state 88
-    Signature      go to state 89
+    Function       přejít do stavu 86
+    FunctionDecl1  přejít do stavu 87
+    Parameters     přejít do stavu 88
+    Signature      přejít do stavu 89
 
 
-state 43
+State 43
 
   172 MethodDecl: FUNC Receiver . MethodName MethodDecl1
   176 MethodName: . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 90
+    IDENTIFIER  posunout a přejít do stavu 90
 
-    MethodName  go to state 91
+    MethodName  přejít do stavu 91
 
 
-state 44
+State 44
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -1592,70 +1591,70 @@ state 44
   314         | . QualifiedIdent
   315 TypeSpec: IDENTIFIER . Type
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 92
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 92
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 45
+State 45
 
   299 TypeDecl1: '(' . TypeDecl11 ')'
-  300 TypeDecl11: .
+  300 TypeDecl11: . %empty
   301           | . TypeDecl11 TypeSpec ';'
 
-    $default  reduce using rule 300 (TypeDecl11)
+    $výchozí  reduce using rule 300 (TypeDecl11)
 
-    TypeDecl11  go to state 93
+    TypeDecl11  přejít do stavu 93
 
 
-state 46
+State 46
 
   297 TypeDecl: TYPE TypeDecl1 .
 
-    $default  reduce using rule 297 (TypeDecl)
+    $výchozí  reduce using rule 297 (TypeDecl)
 
 
-state 47
+State 47
 
   298 TypeDecl1: TypeSpec .
 
-    $default  reduce using rule 298 (TypeDecl1)
+    $výchozí  reduce using rule 298 (TypeDecl1)
 
 
-state 48
+State 48
 
   332 VarDecl1: '(' . VarDecl11 ')'
-  333 VarDecl11: .
+  333 VarDecl11: . %empty
   334          | . VarDecl11 VarSpec ';'
 
-    $default  reduce using rule 333 (VarDecl11)
+    $výchozí  reduce using rule 333 (VarDecl11)
 
-    VarDecl11  go to state 94
+    VarDecl11  přejít do stavu 94
 
 
-state 49
+State 49
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -1687,155 +1686,155 @@ state 49
   336 VarSpec1: . Type VarSpec11
   337         | . '=' ExpressionList
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
-    '='         shift, and go to state 95
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
+    '='         posunout a přejít do stavu 95
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 96
-    TypeLit         go to state 81
-    TypeName        go to state 82
-    VarSpec1        go to state 97
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 96
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
+    VarSpec1        přejít do stavu 97
 
 
-state 50
+State 50
 
   330 VarDecl: VAR VarDecl1 .
 
-    $default  reduce using rule 330 (VarDecl)
+    $výchozí  reduce using rule 330 (VarDecl)
 
 
-state 51
+State 51
 
   331 VarDecl1: VarSpec .
 
-    $default  reduce using rule 331 (VarDecl1)
+    $výchozí  reduce using rule 331 (VarDecl1)
 
 
-state 52
+State 52
 
   263 SourceFile2: SourceFile2 TopLevelDecl ';' .
 
-    $default  reduce using rule 263 (SourceFile2)
+    $výchozí  reduce using rule 263 (SourceFile2)
 
 
-state 53
+State 53
 
   134 ImportDecl1: '(' ImportDecl11 ')' .
 
-    $default  reduce using rule 134 (ImportDecl1)
+    $výchozí  reduce using rule 134 (ImportDecl1)
 
 
-state 54
+State 54
 
   136 ImportDecl11: ImportDecl11 ImportSpec . ';'
 
-    ';'  shift, and go to state 98
+    ';'  posunout a přejít do stavu 98
 
 
-state 55
+State 55
 
   122 IdentifierList: IDENTIFIER IdentifierList1 .  [IDENTIFIER, TOK3, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(', ';', '=']
   124 IdentifierList1: IdentifierList1 . ',' IDENTIFIER
 
-    ','  shift, and go to state 99
+    ','  posunout a přejít do stavu 99
 
-    $default  reduce using rule 122 (IdentifierList)
+    $výchozí  reduce using rule 122 (IdentifierList)
 
 
-state 56
+State 56
 
    49 ConstDecl1: '(' ConstDecl11 . ')'
    51 ConstDecl11: ConstDecl11 . ConstSpec ';'
    52 ConstSpec: . IdentifierList ConstSpec1
   122 IdentifierList: . IDENTIFIER IdentifierList1
 
-    IDENTIFIER  shift, and go to state 35
-    ')'         shift, and go to state 100
+    IDENTIFIER  posunout a přejít do stavu 35
+    ')'         posunout a přejít do stavu 100
 
-    ConstSpec       go to state 101
-    IdentifierList  go to state 39
+    ConstSpec       přejít do stavu 101
+    IdentifierList  přejít do stavu 39
 
 
-state 57
+State 57
 
   186 PackageName: IDENTIFIER .  ['.']
   313 TypeName: IDENTIFIER .  [STRING_LIT, ']', '{', ',', '(', ')', ':', ';', '=']
 
-    '.'       reduce using rule 186 (PackageName)
-    $default  reduce using rule 313 (TypeName)
+    '.'         reduce using rule 186 (PackageName)
+    $výchozí  reduce using rule 313 (TypeName)
 
 
-state 58
+State 58
 
    39 ChannelType1: TOK5 . CHAN
 
-    CHAN  shift, and go to state 102
+    CHAN  posunout a přejít do stavu 102
 
 
-state 59
+State 59
 
    37 ChannelType1: CHAN .  [IDENTIFIER, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
    38             | CHAN . TOK5
 
-    TOK5  shift, and go to state 103
+    TOK5  posunout a přejít do stavu 103
 
-    TOK5      [reduce using rule 37 (ChannelType1)]
-    $default  reduce using rule 37 (ChannelType1)
+    TOK5        [reduce using rule 37 (ChannelType1)]
+    $výchozí  reduce using rule 37 (ChannelType1)
 
 
-state 60
+State 60
 
   119 FunctionType: FUNC . Signature
   195 Parameters: . '(' Parameters1 ')'
   239 Signature: . Parameters Signature1
 
-    '('  shift, and go to state 85
+    '('  posunout a přejít do stavu 85
 
-    Parameters  go to state 88
-    Signature   go to state 104
+    Parameters  přejít do stavu 88
+    Signature   přejít do stavu 104
 
 
-state 61
+State 61
 
   148 InterfaceType: INTERFACE . '{' InterfaceType1 '}'
 
-    '{'  shift, and go to state 105
+    '{'  posunout a přejít do stavu 105
 
 
-state 62
+State 62
 
   171 MapType: MAP . '[' KeyType ']' ElementType
 
-    '['  shift, and go to state 106
+    '['  posunout a přejít do stavu 106
 
 
-state 63
+State 63
 
   283 StructType: STRUCT . '{' StructType1 '}'
 
-    '{'  shift, and go to state 107
+    '{'  posunout a přejít do stavu 107
 
 
-state 64
+State 64
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    10 BaseType: . Type
@@ -1866,35 +1865,35 @@ state 64
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    BaseType        go to state 108
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 109
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    BaseType        přejít do stavu 108
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 109
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 65
+State 65
 
     7 ArrayLength: . Expression
     8 ArrayType: . '[' ArrayLength ']' ElementType
@@ -1966,56 +1965,56 @@ state 65
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    ']'            shift, and go to state 119
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    ']'            posunout a přejít do stavu 119
+    '('            posunout a přejít do stavu 120
 
-    ArrayLength     go to state 121
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 127
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayLength     přejít do stavu 121
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 127
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 66
+State 66
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -2045,48 +2044,48 @@ state 66
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 143
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 143
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 67
+State 67
 
   305 TypeLit: ArrayType .
 
-    $default  reduce using rule 305 (TypeLit)
+    $výchozí  reduce using rule 305 (TypeLit)
 
 
-state 68
+State 68
 
   312 TypeLit: ChannelType .
 
-    $default  reduce using rule 312 (TypeLit)
+    $výchozí  reduce using rule 312 (TypeLit)
 
 
-state 69
+State 69
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -2117,184 +2116,184 @@ state 69
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    ElementType     go to state 144
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 145
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    ElementType     přejít do stavu 144
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 145
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 70
+State 70
 
    52 ConstSpec: IdentifierList ConstSpec1 .
 
-    $default  reduce using rule 52 (ConstSpec)
+    $výchozí  reduce using rule 52 (ConstSpec)
 
 
-state 71
+State 71
 
    54 ConstSpec1: ConstSpec11 . '=' ExpressionList
 
-    '='  shift, and go to state 146
+    '='  posunout a přejít do stavu 146
 
 
-state 72
+State 72
 
   308 TypeLit: FunctionType .
 
-    $default  reduce using rule 308 (TypeLit)
+    $výchozí  reduce using rule 308 (TypeLit)
 
 
-state 73
+State 73
 
   309 TypeLit: InterfaceType .
 
-    $default  reduce using rule 309 (TypeLit)
+    $výchozí  reduce using rule 309 (TypeLit)
 
 
-state 74
+State 74
 
   311 TypeLit: MapType .
 
-    $default  reduce using rule 311 (TypeLit)
+    $výchozí  reduce using rule 311 (TypeLit)
 
 
-state 75
+State 75
 
   210 QualifiedIdent: PackageName . '.' IDENTIFIER
 
-    '.'  shift, and go to state 147
+    '.'  posunout a přejít do stavu 147
 
 
-state 76
+State 76
 
   307 TypeLit: PointerType .
 
-    $default  reduce using rule 307 (TypeLit)
+    $výchozí  reduce using rule 307 (TypeLit)
 
 
-state 77
+State 77
 
   314 TypeName: QualifiedIdent .
 
-    $default  reduce using rule 314 (TypeName)
+    $výchozí  reduce using rule 314 (TypeName)
 
 
-state 78
+State 78
 
   310 TypeLit: SliceType .
 
-    $default  reduce using rule 310 (TypeLit)
+    $výchozí  reduce using rule 310 (TypeLit)
 
 
-state 79
+State 79
 
   306 TypeLit: StructType .
 
-    $default  reduce using rule 306 (TypeLit)
+    $výchozí  reduce using rule 306 (TypeLit)
 
 
-state 80
+State 80
 
    56 ConstSpec11: Type .
 
-    $default  reduce using rule 56 (ConstSpec11)
+    $výchozí  reduce using rule 56 (ConstSpec11)
 
 
-state 81
+State 81
 
   293 Type: TypeLit .
 
-    $default  reduce using rule 293 (Type)
+    $výchozí  reduce using rule 293 (Type)
 
 
-state 82
+State 82
 
   292 Type: TypeName .
 
-    $default  reduce using rule 292 (Type)
+    $výchozí  reduce using rule 292 (Type)
 
 
-state 83
+State 83
 
   216 Receiver1: IDENTIFIER .
 
-    $default  reduce using rule 216 (Receiver1)
+    $výchozí  reduce using rule 216 (Receiver1)
 
 
-state 84
+State 84
 
   214 Receiver: '(' Receiver1 . Receiver2 BaseTypeName ')'
-  217 Receiver2: .  [IDENTIFIER]
+  217 Receiver2: . %empty  [IDENTIFIER]
   218          | . '*'
 
-    '*'  shift, and go to state 148
+    '*'  posunout a přejít do stavu 148
 
-    $default  reduce using rule 217 (Receiver2)
+    $výchozí  reduce using rule 217 (Receiver2)
 
-    Receiver2  go to state 149
+    Receiver2  přejít do stavu 149
 
 
-state 85
+State 85
 
   122 IdentifierList: . IDENTIFIER IdentifierList1
   187 ParameterDecl: . ParameterDecl1 ParameterDecl2 Type
-  188 ParameterDecl1: .  [IDENTIFIER, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
+  188 ParameterDecl1: . %empty  [IDENTIFIER, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
   189               | . IdentifierList
   192 ParameterList: . ParameterDecl ParameterList1
   195 Parameters: '(' . Parameters1 ')'
-  196 Parameters1: .  [')']
+  196 Parameters1: . %empty  [')']
   197            | . ParameterList Parameters11
 
-    IDENTIFIER  shift, and go to state 35
+    IDENTIFIER  posunout a přejít do stavu 35
 
     IDENTIFIER  [reduce using rule 188 (ParameterDecl1)]
     ')'         reduce using rule 196 (Parameters1)
-    $default    reduce using rule 188 (ParameterDecl1)
+    $výchozí  reduce using rule 188 (ParameterDecl1)
 
-    IdentifierList  go to state 150
-    ParameterDecl   go to state 151
-    ParameterDecl1  go to state 152
-    ParameterList   go to state 153
-    Parameters1     go to state 154
+    IdentifierList  přejít do stavu 150
+    ParameterDecl   přejít do stavu 151
+    ParameterDecl1  přejít do stavu 152
+    ParameterList   přejít do stavu 153
+    Parameters1     přejít do stavu 154
 
 
-state 86
+State 86
 
   115 FunctionDecl1: Function .
 
-    $default  reduce using rule 115 (FunctionDecl1)
+    $výchozí  reduce using rule 115 (FunctionDecl1)
 
 
-state 87
+State 87
 
   114 FunctionDecl: FUNC FunctionName FunctionDecl1 .
 
-    $default  reduce using rule 114 (FunctionDecl)
+    $výchozí  reduce using rule 114 (FunctionDecl)
 
 
-state 88
+State 88
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -2311,7 +2310,7 @@ state 88
   228 Result: . Parameters
   229       | . Type
   239 Signature: Parameters . Signature1
-  240 Signature1: .  [STRING_LIT, ']', '{', ',', '(', ')', ':', ';', '=']
+  240 Signature1: . %empty  [STRING_LIT, ']', '{', ',', '(', ')', ':', ';', '=']
   241           | . Result
   258 SliceType: . '[' ']' ElementType
   283 StructType: . STRUCT '{' StructType1 '}'
@@ -2329,62 +2328,62 @@ state 88
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 155
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 155
 
-    '('       [reduce using rule 240 (Signature1)]
-    $default  reduce using rule 240 (Signature1)
+    '('         [reduce using rule 240 (Signature1)]
+    $výchozí  reduce using rule 240 (Signature1)
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    Parameters      go to state 156
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    Result          go to state 157
-    Signature1      go to state 158
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 159
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    Parameters      přejít do stavu 156
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    Result          přejít do stavu 157
+    Signature1      přejít do stavu 158
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 159
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 89
+State 89
 
    17 Block: . '{' StatementList '}'
   112 Function: Signature . FunctionBody
   113 FunctionBody: . Block
   116 FunctionDecl1: Signature .  [';']
 
-    '{'  shift, and go to state 160
+    '{'  posunout a přejít do stavu 160
 
-    $default  reduce using rule 116 (FunctionDecl1)
+    $výchozí  reduce using rule 116 (FunctionDecl1)
 
-    Block         go to state 161
-    FunctionBody  go to state 162
+    Block         přejít do stavu 161
+    FunctionBody  přejít do stavu 162
 
 
-state 90
+State 90
 
   176 MethodName: IDENTIFIER .
 
-    $default  reduce using rule 176 (MethodName)
+    $výchozí  reduce using rule 176 (MethodName)
 
 
-state 91
+State 91
 
   112 Function: . Signature FunctionBody
   172 MethodDecl: FUNC Receiver MethodName . MethodDecl1
@@ -2393,48 +2392,48 @@ state 91
   195 Parameters: . '(' Parameters1 ')'
   239 Signature: . Parameters Signature1
 
-    '('  shift, and go to state 85
+    '('  posunout a přejít do stavu 85
 
-    Function     go to state 163
-    MethodDecl1  go to state 164
-    Parameters   go to state 88
-    Signature    go to state 165
+    Function     přejít do stavu 163
+    MethodDecl1  přejít do stavu 164
+    Parameters   přejít do stavu 88
+    Signature    přejít do stavu 165
 
 
-state 92
+State 92
 
   315 TypeSpec: IDENTIFIER Type .
 
-    $default  reduce using rule 315 (TypeSpec)
+    $výchozí  reduce using rule 315 (TypeSpec)
 
 
-state 93
+State 93
 
   299 TypeDecl1: '(' TypeDecl11 . ')'
   301 TypeDecl11: TypeDecl11 . TypeSpec ';'
   315 TypeSpec: . IDENTIFIER Type
 
-    IDENTIFIER  shift, and go to state 44
-    ')'         shift, and go to state 166
+    IDENTIFIER  posunout a přejít do stavu 44
+    ')'         posunout a přejít do stavu 166
 
-    TypeSpec  go to state 167
+    TypeSpec  přejít do stavu 167
 
 
-state 94
+State 94
 
   122 IdentifierList: . IDENTIFIER IdentifierList1
   332 VarDecl1: '(' VarDecl11 . ')'
   334 VarDecl11: VarDecl11 . VarSpec ';'
   335 VarSpec: . IdentifierList VarSpec1
 
-    IDENTIFIER  shift, and go to state 35
-    ')'         shift, and go to state 168
+    IDENTIFIER  posunout a přejít do stavu 35
+    ')'         posunout a přejít do stavu 168
 
-    IdentifierList  go to state 49
-    VarSpec         go to state 169
+    IdentifierList  přejít do stavu 49
+    VarSpec         přejít do stavu 169
 
 
-state 95
+State 95
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -2505,135 +2504,135 @@ state 95
   327          | . UNARY_OP UnaryExpr
   337 VarSpec1: '=' . ExpressionList
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 171
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 171
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 96
+State 96
 
   336 VarSpec1: Type . VarSpec11
-  338 VarSpec11: .  [';']
+  338 VarSpec11: . %empty  [';']
   339          | . '=' ExpressionList
 
-    '='  shift, and go to state 172
+    '='  posunout a přejít do stavu 172
 
-    $default  reduce using rule 338 (VarSpec11)
+    $výchozí  reduce using rule 338 (VarSpec11)
 
-    VarSpec11  go to state 173
+    VarSpec11  přejít do stavu 173
 
 
-state 97
+State 97
 
   335 VarSpec: IdentifierList VarSpec1 .
 
-    $default  reduce using rule 335 (VarSpec)
+    $výchozí  reduce using rule 335 (VarSpec)
 
 
-state 98
+State 98
 
   136 ImportDecl11: ImportDecl11 ImportSpec ';' .
 
-    $default  reduce using rule 136 (ImportDecl11)
+    $výchozí  reduce using rule 136 (ImportDecl11)
 
 
-state 99
+State 99
 
   124 IdentifierList1: IdentifierList1 ',' . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 174
+    IDENTIFIER  posunout a přejít do stavu 174
 
 
-state 100
+State 100
 
    49 ConstDecl1: '(' ConstDecl11 ')' .
 
-    $default  reduce using rule 49 (ConstDecl1)
+    $výchozí  reduce using rule 49 (ConstDecl1)
 
 
-state 101
+State 101
 
    51 ConstDecl11: ConstDecl11 ConstSpec . ';'
 
-    ';'  shift, and go to state 175
+    ';'  posunout a přejít do stavu 175
 
 
-state 102
+State 102
 
    39 ChannelType1: TOK5 CHAN .
 
-    $default  reduce using rule 39 (ChannelType1)
+    $výchozí  reduce using rule 39 (ChannelType1)
 
 
-state 103
+State 103
 
    38 ChannelType1: CHAN TOK5 .
 
-    $default  reduce using rule 38 (ChannelType1)
+    $výchozí  reduce using rule 38 (ChannelType1)
 
 
-state 104
+State 104
 
   119 FunctionType: FUNC Signature .
 
-    $default  reduce using rule 119 (FunctionType)
+    $výchozí  reduce using rule 119 (FunctionType)
 
 
-state 105
+State 105
 
   148 InterfaceType: INTERFACE '{' . InterfaceType1 '}'
-  149 InterfaceType1: .
+  149 InterfaceType1: . %empty
   150               | . InterfaceType1 MethodSpec ';'
 
-    $default  reduce using rule 149 (InterfaceType1)
+    $výchozí  reduce using rule 149 (InterfaceType1)
 
-    InterfaceType1  go to state 176
+    InterfaceType1  přejít do stavu 176
 
 
-state 106
+State 106
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -2664,118 +2663,118 @@ state 106
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    KeyType         go to state 177
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 178
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    KeyType         přejít do stavu 177
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 178
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 107
+State 107
 
   283 StructType: STRUCT '{' . StructType1 '}'
-  284 StructType1: .
+  284 StructType1: . %empty
   285            | . StructType1 FieldDecl ';'
 
-    $default  reduce using rule 284 (StructType1)
+    $výchozí  reduce using rule 284 (StructType1)
 
-    StructType1  go to state 179
+    StructType1  přejít do stavu 179
 
 
-state 108
+State 108
 
   200 PointerType: '*' BaseType .
 
-    $default  reduce using rule 200 (PointerType)
+    $výchozí  reduce using rule 200 (PointerType)
 
 
-state 109
+State 109
 
    10 BaseType: Type .
 
-    $default  reduce using rule 10 (BaseType)
+    $výchozí  reduce using rule 10 (BaseType)
 
 
-state 110
+State 110
 
    13 BasicLit: FLOAT_LIT .
 
-    $default  reduce using rule 13 (BasicLit)
+    $výchozí  reduce using rule 13 (BasicLit)
 
 
-state 111
+State 111
 
    25 BuiltinCall: IDENTIFIER . '(' BuiltinCall1 ')'
   183 OperandName: IDENTIFIER .  [ASSIGN_OP, BINARY_OP, FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK1, TOK2, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ']', '{', '}', ',', '(', ')', ':', ';', '=', '.']
   186 PackageName: IDENTIFIER .  ['.']
   313 TypeName: IDENTIFIER .  ['{', ',', '(', ')', '.']
 
-    '('  shift, and go to state 180
+    '('  posunout a přejít do stavu 180
 
-    '{'       reduce using rule 183 (OperandName)
-    '{'       [reduce using rule 313 (TypeName)]
-    ','       reduce using rule 183 (OperandName)
-    ','       [reduce using rule 313 (TypeName)]
-    '('       [reduce using rule 183 (OperandName)]
-    '('       [reduce using rule 313 (TypeName)]
-    ')'       reduce using rule 183 (OperandName)
-    ')'       [reduce using rule 313 (TypeName)]
-    '.'       reduce using rule 183 (OperandName)
-    '.'       [reduce using rule 186 (PackageName)]
-    '.'       [reduce using rule 313 (TypeName)]
-    $default  reduce using rule 183 (OperandName)
+    '{'         reduce using rule 183 (OperandName)
+    '{'         [reduce using rule 313 (TypeName)]
+    ','         reduce using rule 183 (OperandName)
+    ','         [reduce using rule 313 (TypeName)]
+    '('         [reduce using rule 183 (OperandName)]
+    '('         [reduce using rule 313 (TypeName)]
+    ')'         reduce using rule 183 (OperandName)
+    ')'         [reduce using rule 313 (TypeName)]
+    '.'         reduce using rule 183 (OperandName)
+    '.'         [reduce using rule 186 (PackageName)]
+    '.'         [reduce using rule 313 (TypeName)]
+    $výchozí  reduce using rule 183 (OperandName)
 
 
-state 112
+State 112
 
    14 BasicLit: IMAGINARY_LIT .
 
-    $default  reduce using rule 14 (BasicLit)
+    $výchozí  reduce using rule 14 (BasicLit)
 
 
-state 113
+State 113
 
    12 BasicLit: INT_LIT .
 
-    $default  reduce using rule 12 (BasicLit)
+    $výchozí  reduce using rule 12 (BasicLit)
 
 
-state 114
+State 114
 
    15 BasicLit: RUNE_LIT .
 
-    $default  reduce using rule 15 (BasicLit)
+    $výchozí  reduce using rule 15 (BasicLit)
 
 
-state 115
+State 115
 
    16 BasicLit: STRING_LIT .
 
-    $default  reduce using rule 16 (BasicLit)
+    $výchozí  reduce using rule 16 (BasicLit)
 
 
-state 116
+State 116
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -2843,53 +2842,53 @@ state 116
   327          | . UNARY_OP UnaryExpr
   327          | UNARY_OP . UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 181
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 181
 
 
-state 117
+State 117
 
   112 Function: . Signature FunctionBody
   117 FunctionLit: FUNC . Function
@@ -2897,14 +2896,14 @@ state 117
   195 Parameters: . '(' Parameters1 ')'
   239 Signature: . Parameters Signature1
 
-    '('  shift, and go to state 85
+    '('  posunout a přejít do stavu 85
 
-    Function    go to state 182
-    Parameters  go to state 88
-    Signature   go to state 183
+    Function    přejít do stavu 182
+    Parameters  přejít do stavu 88
+    Signature   přejít do stavu 183
 
 
-state 118
+State 118
 
     7 ArrayLength: . Expression
     8 ArrayType: . '[' ArrayLength ']' ElementType
@@ -2977,57 +2976,57 @@ state 118
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK4           shift, and go to state 184
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    ']'            shift, and go to state 119
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK4           posunout a přejít do stavu 184
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    ']'            posunout a přejít do stavu 119
+    '('            posunout a přejít do stavu 120
 
-    ArrayLength     go to state 121
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 127
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayLength     přejít do stavu 121
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 127
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 119
+State 119
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -3058,35 +3057,35 @@ state 119
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    ElementType     go to state 185
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 145
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    ElementType     přejít do stavu 185
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 145
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 120
+State 120
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -3159,162 +3158,162 @@ state 120
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 186
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 186
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 187
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 188
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 189
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 187
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 188
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 189
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 121
+State 121
 
     8 ArrayType: '[' ArrayLength . ']' ElementType
 
-    ']'  shift, and go to state 190
+    ']'  posunout a přejít do stavu 190
 
 
-state 122
+State 122
 
   161 LiteralType: ArrayType .  ['{']
   305 TypeLit: ArrayType .  [',', '(', ')']
 
-    '{'       reduce using rule 161 (LiteralType)
-    $default  reduce using rule 305 (TypeLit)
+    '{'         reduce using rule 161 (LiteralType)
+    $výchozí  reduce using rule 305 (TypeLit)
 
 
-state 123
+State 123
 
   157 Literal: BasicLit .
 
-    $default  reduce using rule 157 (Literal)
+    $výchozí  reduce using rule 157 (Literal)
 
 
-state 124
+State 124
 
   204 PrimaryExpr: BuiltinCall .
 
-    $default  reduce using rule 204 (PrimaryExpr)
+    $výchozí  reduce using rule 204 (PrimaryExpr)
 
 
-state 125
+State 125
 
   158 Literal: CompositeLit .
 
-    $default  reduce using rule 158 (Literal)
+    $výchozí  reduce using rule 158 (Literal)
 
 
-state 126
+State 126
 
   203 PrimaryExpr: Conversion .
 
-    $default  reduce using rule 203 (PrimaryExpr)
+    $výchozí  reduce using rule 203 (PrimaryExpr)
 
 
-state 127
+State 127
 
     7 ArrayLength: Expression .  [']']
    87 Expression: Expression . BINARY_OP UnaryExpr
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 7 (ArrayLength)
+    $výchozí  reduce using rule 7 (ArrayLength)
 
 
-state 128
+State 128
 
   159 Literal: FunctionLit .
 
-    $default  reduce using rule 159 (Literal)
+    $výchozí  reduce using rule 159 (Literal)
 
 
-state 129
+State 129
 
   179 Operand: Literal .
 
-    $default  reduce using rule 179 (Operand)
+    $výchozí  reduce using rule 179 (Operand)
 
 
-state 130
+State 130
 
    45 CompositeLit: LiteralType . LiteralValue
   166 LiteralValue: . '{' LiteralValue1 '}'
 
-    '{'  shift, and go to state 192
+    '{'  posunout a přejít do stavu 192
 
-    LiteralValue  go to state 193
+    LiteralValue  přejít do stavu 193
 
 
-state 131
+State 131
 
   164 LiteralType: MapType .  ['{']
   311 TypeLit: MapType .  [',', '(', ')']
 
-    '{'       reduce using rule 164 (LiteralType)
-    $default  reduce using rule 311 (TypeLit)
+    '{'         reduce using rule 164 (LiteralType)
+    $výchozí  reduce using rule 311 (TypeLit)
 
 
-state 132
+State 132
 
   181 Operand: MethodExpr .
 
-    $default  reduce using rule 181 (Operand)
+    $výchozí  reduce using rule 181 (Operand)
 
 
-state 133
+State 133
 
   202 PrimaryExpr: Operand .
 
-    $default  reduce using rule 202 (PrimaryExpr)
+    $výchozí  reduce using rule 202 (PrimaryExpr)
 
 
-state 134
+State 134
 
   180 Operand: OperandName .
 
-    $default  reduce using rule 180 (Operand)
+    $výchozí  reduce using rule 180 (Operand)
 
 
-state 135
+State 135
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -3376,7 +3375,7 @@ state 135
   248 Slice: . '[' Slice1
   249      | . Slice2 ']'
   255 Slice2: . Slice21 ':' Expression ':' Expression
-  256 Slice21: .  [':']
+  256 Slice21: . %empty  [':']
   257        | . Expression
   258 SliceType: . '[' ']' ElementType
   283 StructType: . STRUCT '{' StructType1 '}'
@@ -3398,23 +3397,23 @@ state 135
   326          | PrimaryExpr .  [ASSIGN_OP, BINARY_OP, FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK1, TOK2, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ']', '{', '}', ',', '(', ')', ':', ';', '=', '.']
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 194
-    '('            shift, and go to state 195
-    '.'            shift, and go to state 196
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 194
+    '('            posunout a přejít do stavu 195
+    '.'            posunout a přejít do stavu 196
 
     FLOAT_LIT      [reduce using rule 326 (UnaryExpr)]
     IDENTIFIER     [reduce using rule 326 (UnaryExpr)]
@@ -3435,138 +3434,138 @@ state 135
     ':'            reduce using rule 256 (Slice21)
     ':'            [reduce using rule 326 (UnaryExpr)]
     '.'            [reduce using rule 326 (UnaryExpr)]
-    $default       reduce using rule 326 (UnaryExpr)
+    $výchozí     reduce using rule 326 (UnaryExpr)
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    Call            go to state 197
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 198
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    Index           go to state 199
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    Selector        go to state 200
-    Slice           go to state 201
-    Slice2          go to state 202
-    Slice21         go to state 203
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeAssertion   go to state 204
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    Call            přejít do stavu 197
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 198
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    Index           přejít do stavu 199
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    Selector        přejít do stavu 200
+    Slice           přejít do stavu 201
+    Slice2          přejít do stavu 202
+    Slice21         přejít do stavu 203
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeAssertion   přejít do stavu 204
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 136
+State 136
 
   184 OperandName: QualifiedIdent .  [ASSIGN_OP, BINARY_OP, FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK1, TOK2, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ']', '{', '}', ',', '(', ')', ':', ';', '=', '.']
   314 TypeName: QualifiedIdent .  ['{', ',', '(', ')', '.']
 
-    '{'       reduce using rule 184 (OperandName)
-    '{'       [reduce using rule 314 (TypeName)]
-    ','       reduce using rule 184 (OperandName)
-    ','       [reduce using rule 314 (TypeName)]
-    '('       reduce using rule 184 (OperandName)
-    '('       [reduce using rule 314 (TypeName)]
-    ')'       reduce using rule 184 (OperandName)
-    ')'       [reduce using rule 314 (TypeName)]
-    '.'       reduce using rule 184 (OperandName)
-    '.'       [reduce using rule 314 (TypeName)]
-    $default  reduce using rule 184 (OperandName)
+    '{'         reduce using rule 184 (OperandName)
+    '{'         [reduce using rule 314 (TypeName)]
+    ','         reduce using rule 184 (OperandName)
+    ','         [reduce using rule 314 (TypeName)]
+    '('         reduce using rule 184 (OperandName)
+    '('         [reduce using rule 314 (TypeName)]
+    ')'         reduce using rule 184 (OperandName)
+    ')'         [reduce using rule 314 (TypeName)]
+    '.'         reduce using rule 184 (OperandName)
+    '.'         [reduce using rule 314 (TypeName)]
+    $výchozí  reduce using rule 184 (OperandName)
 
 
-state 137
+State 137
 
   175 MethodExpr: ReceiverType . '.' MethodName
 
-    '.'  shift, and go to state 205
+    '.'  posunout a přejít do stavu 205
 
 
-state 138
+State 138
 
   163 LiteralType: SliceType .  ['{']
   310 TypeLit: SliceType .  [',', '(', ')']
 
-    '{'       reduce using rule 163 (LiteralType)
-    $default  reduce using rule 310 (TypeLit)
+    '{'         reduce using rule 163 (LiteralType)
+    $výchozí  reduce using rule 310 (TypeLit)
 
 
-state 139
+State 139
 
   160 LiteralType: StructType .  ['{']
   306 TypeLit: StructType .  [',', '(', ')']
 
-    '{'       reduce using rule 160 (LiteralType)
-    $default  reduce using rule 306 (TypeLit)
+    '{'         reduce using rule 160 (LiteralType)
+    $výchozí  reduce using rule 306 (TypeLit)
 
 
-state 140
+State 140
 
    60 Conversion: Type . '(' Expression Conversion1 ')'
 
-    '('  shift, and go to state 206
+    '('  posunout a přejít do stavu 206
 
 
-state 141
+State 141
 
   165 LiteralType: TypeName .  ['{']
   219 ReceiverType: TypeName .  [')', '.']
   292 Type: TypeName .  [',', '(', ')']
 
-    '{'       reduce using rule 165 (LiteralType)
-    ','       reduce using rule 292 (Type)
-    '('       reduce using rule 292 (Type)
-    ')'       reduce using rule 219 (ReceiverType)
-    ')'       [reduce using rule 292 (Type)]
-    $default  reduce using rule 219 (ReceiverType)
+    '{'         reduce using rule 165 (LiteralType)
+    ','         reduce using rule 292 (Type)
+    '('         reduce using rule 292 (Type)
+    ')'         reduce using rule 219 (ReceiverType)
+    ')'         [reduce using rule 292 (Type)]
+    $výchozí  reduce using rule 219 (ReceiverType)
 
 
-state 142
+State 142
 
    86 Expression: UnaryExpr .
 
-    $default  reduce using rule 86 (Expression)
+    $výchozí  reduce using rule 86 (Expression)
 
 
-state 143
+State 143
 
   294 Type: '(' Type . ')'
 
-    ')'  shift, and go to state 207
+    ')'  posunout a přejít do stavu 207
 
 
-state 144
+State 144
 
    36 ChannelType: ChannelType1 ElementType .
 
-    $default  reduce using rule 36 (ChannelType)
+    $výchozí  reduce using rule 36 (ChannelType)
 
 
-state 145
+State 145
 
    74 ElementType: Type .
 
-    $default  reduce using rule 74 (ElementType)
+    $výchozí  reduce using rule 74 (ElementType)
 
 
-state 146
+State 146
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -3637,130 +3636,130 @@ state 146
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 208
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 208
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 147
+State 147
 
   210 QualifiedIdent: PackageName '.' . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 209
+    IDENTIFIER  posunout a přejít do stavu 209
 
 
-state 148
+State 148
 
   218 Receiver2: '*' .
 
-    $default  reduce using rule 218 (Receiver2)
+    $výchozí  reduce using rule 218 (Receiver2)
 
 
-state 149
+State 149
 
    11 BaseTypeName: . IDENTIFIER
   214 Receiver: '(' Receiver1 Receiver2 . BaseTypeName ')'
 
-    IDENTIFIER  shift, and go to state 210
+    IDENTIFIER  posunout a přejít do stavu 210
 
-    BaseTypeName  go to state 211
+    BaseTypeName  přejít do stavu 211
 
 
-state 150
+State 150
 
   189 ParameterDecl1: IdentifierList .
 
-    $default  reduce using rule 189 (ParameterDecl1)
+    $výchozí  reduce using rule 189 (ParameterDecl1)
 
 
-state 151
+State 151
 
   192 ParameterList: ParameterDecl . ParameterList1
-  193 ParameterList1: .
+  193 ParameterList1: . %empty
   194               | . ParameterList1 ',' ParameterDecl
 
-    $default  reduce using rule 193 (ParameterList1)
+    $výchozí  reduce using rule 193 (ParameterList1)
 
-    ParameterList1  go to state 212
+    ParameterList1  přejít do stavu 212
 
 
-state 152
+State 152
 
   187 ParameterDecl: ParameterDecl1 . ParameterDecl2 Type
-  190 ParameterDecl2: .  [IDENTIFIER, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
+  190 ParameterDecl2: . %empty  [IDENTIFIER, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
   191               | . TOK4
 
-    TOK4  shift, and go to state 213
+    TOK4  posunout a přejít do stavu 213
 
-    $default  reduce using rule 190 (ParameterDecl2)
+    $výchozí  reduce using rule 190 (ParameterDecl2)
 
-    ParameterDecl2  go to state 214
+    ParameterDecl2  přejít do stavu 214
 
 
-state 153
+State 153
 
   197 Parameters1: ParameterList . Parameters11
-  198 Parameters11: .  [')']
+  198 Parameters11: . %empty  [')']
   199             | . ','
 
-    ','  shift, and go to state 215
+    ','  posunout a přejít do stavu 215
 
-    $default  reduce using rule 198 (Parameters11)
+    $výchozí  reduce using rule 198 (Parameters11)
 
-    Parameters11  go to state 216
+    Parameters11  přejít do stavu 216
 
 
-state 154
+State 154
 
   195 Parameters: '(' Parameters1 . ')'
 
-    ')'  shift, and go to state 217
+    ')'  posunout a přejít do stavu 217
 
 
-state 155
+State 155
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -3773,11 +3772,11 @@ state 155
   171 MapType: . MAP '[' KeyType ']' ElementType
   186 PackageName: . IDENTIFIER
   187 ParameterDecl: . ParameterDecl1 ParameterDecl2 Type
-  188 ParameterDecl1: .  [IDENTIFIER, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
+  188 ParameterDecl1: . %empty  [IDENTIFIER, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
   189               | . IdentifierList
   192 ParameterList: . ParameterDecl ParameterList1
   195 Parameters: '(' . Parameters1 ')'
-  196 Parameters1: .  [')']
+  196 Parameters1: . %empty  [')']
   197            | . ParameterList Parameters11
   200 PointerType: . '*' BaseType
   210 QualifiedIdent: . PackageName '.' IDENTIFIER
@@ -3798,16 +3797,16 @@ state 155
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 218
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 218
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
     IDENTIFIER  [reduce using rule 188 (ParameterDecl1)]
     TOK5        [reduce using rule 188 (ParameterDecl1)]
@@ -3820,163 +3819,163 @@ state 155
     '['         [reduce using rule 188 (ParameterDecl1)]
     '('         [reduce using rule 188 (ParameterDecl1)]
     ')'         reduce using rule 196 (Parameters1)
-    $default    reduce using rule 188 (ParameterDecl1)
+    $výchozí  reduce using rule 188 (ParameterDecl1)
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    IdentifierList  go to state 150
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    ParameterDecl   go to state 151
-    ParameterDecl1  go to state 152
-    ParameterList   go to state 153
-    Parameters1     go to state 154
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 143
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    IdentifierList  přejít do stavu 150
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    ParameterDecl   přejít do stavu 151
+    ParameterDecl1  přejít do stavu 152
+    ParameterList   přejít do stavu 153
+    Parameters1     přejít do stavu 154
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 143
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 156
+State 156
 
   228 Result: Parameters .
 
-    $default  reduce using rule 228 (Result)
+    $výchozí  reduce using rule 228 (Result)
 
 
-state 157
+State 157
 
   241 Signature1: Result .
 
-    $default  reduce using rule 241 (Signature1)
+    $výchozí  reduce using rule 241 (Signature1)
 
 
-state 158
+State 158
 
   239 Signature: Parameters Signature1 .
 
-    $default  reduce using rule 239 (Signature)
+    $výchozí  reduce using rule 239 (Signature)
 
 
-state 159
+State 159
 
   229 Result: Type .
 
-    $default  reduce using rule 229 (Result)
+    $výchozí  reduce using rule 229 (Result)
 
 
-state 160
+State 160
 
    17 Block: '{' . StatementList '}'
   280 StatementList: . StatementList1
-  281 StatementList1: .
+  281 StatementList1: . %empty
   282               | . StatementList1 Statement ';'
 
-    $default  reduce using rule 281 (StatementList1)
+    $výchozí  reduce using rule 281 (StatementList1)
 
-    StatementList   go to state 219
-    StatementList1  go to state 220
+    StatementList   přejít do stavu 219
+    StatementList1  přejít do stavu 220
 
 
-state 161
+State 161
 
   113 FunctionBody: Block .
 
-    $default  reduce using rule 113 (FunctionBody)
+    $výchozí  reduce using rule 113 (FunctionBody)
 
 
-state 162
+State 162
 
   112 Function: Signature FunctionBody .
 
-    $default  reduce using rule 112 (Function)
+    $výchozí  reduce using rule 112 (Function)
 
 
-state 163
+State 163
 
   173 MethodDecl1: Function .
 
-    $default  reduce using rule 173 (MethodDecl1)
+    $výchozí  reduce using rule 173 (MethodDecl1)
 
 
-state 164
+State 164
 
   172 MethodDecl: FUNC Receiver MethodName MethodDecl1 .
 
-    $default  reduce using rule 172 (MethodDecl)
+    $výchozí  reduce using rule 172 (MethodDecl)
 
 
-state 165
+State 165
 
    17 Block: . '{' StatementList '}'
   112 Function: Signature . FunctionBody
   113 FunctionBody: . Block
   174 MethodDecl1: Signature .  [';']
 
-    '{'  shift, and go to state 160
+    '{'  posunout a přejít do stavu 160
 
-    $default  reduce using rule 174 (MethodDecl1)
+    $výchozí  reduce using rule 174 (MethodDecl1)
 
-    Block         go to state 161
-    FunctionBody  go to state 162
+    Block         přejít do stavu 161
+    FunctionBody  přejít do stavu 162
 
 
-state 166
+State 166
 
   299 TypeDecl1: '(' TypeDecl11 ')' .
 
-    $default  reduce using rule 299 (TypeDecl1)
+    $výchozí  reduce using rule 299 (TypeDecl1)
 
 
-state 167
+State 167
 
   301 TypeDecl11: TypeDecl11 TypeSpec . ';'
 
-    ';'  shift, and go to state 221
+    ';'  posunout a přejít do stavu 221
 
 
-state 168
+State 168
 
   332 VarDecl1: '(' VarDecl11 ')' .
 
-    $default  reduce using rule 332 (VarDecl1)
+    $výchozí  reduce using rule 332 (VarDecl1)
 
 
-state 169
+State 169
 
   334 VarDecl11: VarDecl11 VarSpec . ';'
 
-    ';'  shift, and go to state 222
+    ';'  posunout a přejít do stavu 222
 
 
-state 170
+State 170
 
    87 Expression: Expression . BINARY_OP UnaryExpr
    88 ExpressionList: Expression . ExpressionList1
-   89 ExpressionList1: .  [TOK4, '{', ',', ')', ':', ';']
+   89 ExpressionList1: . %empty  [TOK4, '{', ',', ')', ':', ';']
    90                | . ExpressionList1 ',' Expression
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 89 (ExpressionList1)
+    $výchozí  reduce using rule 89 (ExpressionList1)
 
-    ExpressionList1  go to state 223
+    ExpressionList1  přejít do stavu 223
 
 
-state 171
+State 171
 
   337 VarSpec1: '=' ExpressionList .
 
-    $default  reduce using rule 337 (VarSpec1)
+    $výchozí  reduce using rule 337 (VarSpec1)
 
 
-state 172
+State 172
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -4047,76 +4046,76 @@ state 172
   327          | . UNARY_OP UnaryExpr
   339 VarSpec11: '=' . ExpressionList
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 224
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 224
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 173
+State 173
 
   336 VarSpec1: Type VarSpec11 .
 
-    $default  reduce using rule 336 (VarSpec1)
+    $výchozí  reduce using rule 336 (VarSpec1)
 
 
-state 174
+State 174
 
   124 IdentifierList1: IdentifierList1 ',' IDENTIFIER .
 
-    $default  reduce using rule 124 (IdentifierList1)
+    $výchozí  reduce using rule 124 (IdentifierList1)
 
 
-state 175
+State 175
 
    51 ConstDecl11: ConstDecl11 ConstSpec ';' .
 
-    $default  reduce using rule 51 (ConstDecl11)
+    $výchozí  reduce using rule 51 (ConstDecl11)
 
 
-state 176
+State 176
 
   148 InterfaceType: INTERFACE '{' InterfaceType1 . '}'
   150 InterfaceType1: InterfaceType1 . MethodSpec ';'
@@ -4129,35 +4128,35 @@ state 176
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 225
-    '}'         shift, and go to state 226
+    IDENTIFIER  posunout a přejít do stavu 225
+    '}'         posunout a přejít do stavu 226
 
-    InterfaceTypeName  go to state 227
-    MethodName         go to state 228
-    MethodSpec         go to state 229
-    PackageName        go to state 75
-    QualifiedIdent     go to state 77
-    TypeName           go to state 230
+    InterfaceTypeName  přejít do stavu 227
+    MethodName         přejít do stavu 228
+    MethodSpec         přejít do stavu 229
+    PackageName        přejít do stavu 75
+    QualifiedIdent     přejít do stavu 77
+    TypeName           přejít do stavu 230
 
 
-state 177
+State 177
 
   171 MapType: MAP '[' KeyType . ']' ElementType
 
-    ']'  shift, and go to state 231
+    ']'  posunout a přejít do stavu 231
 
 
-state 178
+State 178
 
   154 KeyType: Type .
 
-    $default  reduce using rule 154 (KeyType)
+    $výchozí  reduce using rule 154 (KeyType)
 
 
-state 179
+State 179
 
     1 AnonymousField: . AnonymousField1 TypeName
-    2 AnonymousField1: .  [IDENTIFIER]
+    2 AnonymousField1: . %empty  [IDENTIFIER]
     3                | . '*'
    93 FieldDecl: . FieldDecl1 FieldDecl2
    94 FieldDecl1: . IdentifierList Type
@@ -4166,20 +4165,20 @@ state 179
   283 StructType: STRUCT '{' StructType1 . '}'
   285 StructType1: StructType1 . FieldDecl ';'
 
-    IDENTIFIER  shift, and go to state 35
-    '*'         shift, and go to state 232
-    '}'         shift, and go to state 233
+    IDENTIFIER  posunout a přejít do stavu 35
+    '*'         posunout a přejít do stavu 232
+    '}'         posunout a přejít do stavu 233
 
     IDENTIFIER  [reduce using rule 2 (AnonymousField1)]
 
-    AnonymousField   go to state 234
-    AnonymousField1  go to state 235
-    FieldDecl        go to state 236
-    FieldDecl1       go to state 237
-    IdentifierList   go to state 238
+    AnonymousField   přejít do stavu 234
+    AnonymousField1  přejít do stavu 235
+    FieldDecl        přejít do stavu 236
+    FieldDecl1       přejít do stavu 237
+    IdentifierList   přejít do stavu 238
 
 
-state 180
+State 180
 
     4 ArgumentList: . ExpressionList ArgumentList1
     8 ArrayType: . '[' ArrayLength ']' ElementType
@@ -4192,7 +4191,7 @@ state 180
    22            | . ArgumentList
    25 BuiltinCall: . IDENTIFIER '(' BuiltinCall1 ')'
    25            | IDENTIFIER '(' . BuiltinCall1 ')'
-   26 BuiltinCall1: .  [')']
+   26 BuiltinCall1: . %empty  [')']
    27             | . BuiltinArgs BuiltinCall11
    36 ChannelType: . ChannelType1 ElementType
    37 ChannelType1: . CHAN
@@ -4255,103 +4254,103 @@ state 180
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    $default  reduce using rule 26 (BuiltinCall1)
+    $výchozí  reduce using rule 26 (BuiltinCall1)
 
-    ArgumentList    go to state 239
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinArgs     go to state 240
-    BuiltinCall     go to state 124
-    BuiltinCall1    go to state 241
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 242
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 243
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArgumentList    přejít do stavu 239
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinArgs     přejít do stavu 240
+    BuiltinCall     přejít do stavu 124
+    BuiltinCall1    přejít do stavu 241
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 242
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 243
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 181
+State 181
 
   327 UnaryExpr: UNARY_OP UnaryExpr .
 
-    $default  reduce using rule 327 (UnaryExpr)
+    $výchozí  reduce using rule 327 (UnaryExpr)
 
 
-state 182
+State 182
 
   117 FunctionLit: FUNC Function .
 
-    $default  reduce using rule 117 (FunctionLit)
+    $výchozí  reduce using rule 117 (FunctionLit)
 
 
-state 183
+State 183
 
    17 Block: . '{' StatementList '}'
   112 Function: Signature . FunctionBody
   113 FunctionBody: . Block
   119 FunctionType: FUNC Signature .  [',', '(', ')']
 
-    '{'  shift, and go to state 160
+    '{'  posunout a přejít do stavu 160
 
-    $default  reduce using rule 119 (FunctionType)
+    $výchozí  reduce using rule 119 (FunctionType)
 
-    Block         go to state 161
-    FunctionBody  go to state 162
+    Block         přejít do stavu 161
+    FunctionBody  přejít do stavu 162
 
 
-state 184
+State 184
 
   162 LiteralType: '[' TOK4 . ']' ElementType
 
-    ']'  shift, and go to state 244
+    ']'  posunout a přejít do stavu 244
 
 
-state 185
+State 185
 
   258 SliceType: '[' ']' ElementType .
 
-    $default  reduce using rule 258 (SliceType)
+    $výchozí  reduce using rule 258 (SliceType)
 
 
-state 186
+State 186
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    10 BaseType: . Type
@@ -4383,62 +4382,62 @@ state 186
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    BaseType        go to state 108
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 109
-    TypeLit         go to state 81
-    TypeName        go to state 245
+    ArrayType       přejít do stavu 67
+    BaseType        přejít do stavu 108
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 109
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 245
 
 
-state 187
+State 187
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   182 Operand: '(' Expression . ')'
 
-    BINARY_OP  shift, and go to state 191
-    ')'        shift, and go to state 246
+    BINARY_OP  posunout a přejít do stavu 191
+    ')'        posunout a přejít do stavu 246
 
 
-state 188
+State 188
 
   175 MethodExpr: ReceiverType . '.' MethodName
   221 ReceiverType: '(' ReceiverType . ')'
 
-    ')'  shift, and go to state 247
-    '.'  shift, and go to state 205
+    ')'  posunout a přejít do stavu 247
+    '.'  posunout a přejít do stavu 205
 
 
-state 189
+State 189
 
    60 Conversion: Type . '(' Expression Conversion1 ')'
   294 Type: '(' Type . ')'
 
-    '('  shift, and go to state 206
-    ')'  shift, and go to state 207
+    '('  posunout a přejít do stavu 206
+    ')'  posunout a přejít do stavu 207
 
 
-state 190
+State 190
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
     8          | '[' ArrayLength ']' . ElementType
@@ -4469,35 +4468,35 @@ state 190
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    ElementType     go to state 248
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 145
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    ElementType     přejít do stavu 248
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 145
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 191
+State 191
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -4565,53 +4564,53 @@ state 191
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 249
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 249
 
 
-state 192
+State 192
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -4627,7 +4626,7 @@ state 192
    45 CompositeLit: . LiteralType LiteralValue
    60 Conversion: . Type '(' Expression Conversion1 ')'
    67 Element: . Element1 Value
-   68 Element1: .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '{', '(']
+   68 Element1: . %empty  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '{', '(']
    69         | . Key ':'
    70 ElementIndex: . Expression
    71 ElementList: . Element ElementList1
@@ -4649,7 +4648,7 @@ state 192
   164            | . MapType
   165            | . TypeName
   166 LiteralValue: '{' . LiteralValue1 '}'
-  167 LiteralValue1: .  ['}']
+  167 LiteralValue1: . %empty  ['}']
   168              | . ElementList LiteralValue11
   171 MapType: . MAP '[' KeyType ']' ElementType
   175 MethodExpr: . ReceiverType '.' MethodName
@@ -4691,22 +4690,22 @@ state 192
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 250
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 250
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
     FLOAT_LIT      [reduce using rule 68 (Element1)]
     IDENTIFIER     [reduce using rule 68 (Element1)]
@@ -4725,53 +4724,53 @@ state 192
     '['            [reduce using rule 68 (Element1)]
     '}'            reduce using rule 167 (LiteralValue1)
     '('            [reduce using rule 68 (Element1)]
-    $default       reduce using rule 68 (Element1)
+    $výchozí     reduce using rule 68 (Element1)
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Element         go to state 251
-    Element1        go to state 252
-    ElementIndex    go to state 253
-    ElementList     go to state 254
-    Expression      go to state 255
-    FieldName       go to state 256
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Key             go to state 257
-    Literal         go to state 129
-    LiteralType     go to state 130
-    LiteralValue1   go to state 258
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Element         přejít do stavu 251
+    Element1        přejít do stavu 252
+    ElementIndex    přejít do stavu 253
+    ElementList     přejít do stavu 254
+    Expression      přejít do stavu 255
+    FieldName       přejít do stavu 256
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Key             přejít do stavu 257
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    LiteralValue1   přejít do stavu 258
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 193
+State 193
 
    45 CompositeLit: LiteralType LiteralValue .
 
-    $default  reduce using rule 45 (CompositeLit)
+    $výchozí  reduce using rule 45 (CompositeLit)
 
 
-state 194
+State 194
 
     7 ArrayLength: . Expression
     8 ArrayType: . '[' ArrayLength ']' ElementType
@@ -4828,7 +4827,7 @@ state 194
   221             | . '(' ReceiverType ')'
   248 Slice: '[' . Slice1
   250 Slice1: . Slice11 ':' Slice12
-  251 Slice11: .  [':']
+  251 Slice11: . %empty  [':']
   252        | . Expression
   258 SliceType: . '[' ']' ElementType
   258          | '[' . ']' ElementType
@@ -4849,61 +4848,61 @@ state 194
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK4           shift, and go to state 184
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    ']'            shift, and go to state 119
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK4           posunout a přejít do stavu 184
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    ']'            posunout a přejít do stavu 119
+    '('            posunout a přejít do stavu 120
 
-    $default  reduce using rule 251 (Slice11)
+    $výchozí  reduce using rule 251 (Slice11)
 
-    ArrayLength     go to state 121
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 259
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    Slice1          go to state 260
-    Slice11         go to state 261
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayLength     přejít do stavu 121
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 259
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    Slice1          přejít do stavu 260
+    Slice11         přejít do stavu 261
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 195
+State 195
 
     4 ArgumentList: . ExpressionList ArgumentList1
     8 ArrayType: . '[' ArrayLength ']' ElementType
@@ -4914,7 +4913,7 @@ state 195
    16         | . STRING_LIT
    25 BuiltinCall: . IDENTIFIER '(' BuiltinCall1 ')'
    30 Call: '(' . Call1 ')'
-   31 Call1: .  [')']
+   31 Call1: . %empty  [')']
    32      | . ArgumentList Call11
    36 ChannelType: . ChannelType1 ElementType
    37 ChannelType1: . CHAN
@@ -4981,137 +4980,137 @@ state 195
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 186
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 186
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    $default  reduce using rule 31 (Call1)
+    $výchozí  reduce using rule 31 (Call1)
 
-    ArgumentList    go to state 262
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    Call1           go to state 263
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 264
-    ExpressionList  go to state 242
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 188
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 189
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArgumentList    přejít do stavu 262
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    Call1           přejít do stavu 263
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 264
+    ExpressionList  přejít do stavu 242
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 188
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 189
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 196
+State 196
 
   236 Selector: '.' . IDENTIFIER
   295 TypeAssertion: '.' . '(' Type ')'
 
-    IDENTIFIER  shift, and go to state 265
-    '('         shift, and go to state 266
+    IDENTIFIER  posunout a přejít do stavu 265
+    '('         posunout a přejít do stavu 266
 
 
-state 197
+State 197
 
   209 PrimaryExpr: PrimaryExpr Call .
 
-    $default  reduce using rule 209 (PrimaryExpr)
+    $výchozí  reduce using rule 209 (PrimaryExpr)
 
 
-state 198
+State 198
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   257 Slice21: Expression .  [':']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 257 (Slice21)
+    $výchozí  reduce using rule 257 (Slice21)
 
 
-state 199
+State 199
 
   206 PrimaryExpr: PrimaryExpr Index .
 
-    $default  reduce using rule 206 (PrimaryExpr)
+    $výchozí  reduce using rule 206 (PrimaryExpr)
 
 
-state 200
+State 200
 
   205 PrimaryExpr: PrimaryExpr Selector .
 
-    $default  reduce using rule 205 (PrimaryExpr)
+    $výchozí  reduce using rule 205 (PrimaryExpr)
 
 
-state 201
+State 201
 
   207 PrimaryExpr: PrimaryExpr Slice .
 
-    $default  reduce using rule 207 (PrimaryExpr)
+    $výchozí  reduce using rule 207 (PrimaryExpr)
 
 
-state 202
+State 202
 
   249 Slice: Slice2 . ']'
 
-    ']'  shift, and go to state 267
+    ']'  posunout a přejít do stavu 267
 
 
-state 203
+State 203
 
   255 Slice2: Slice21 . ':' Expression ':' Expression
 
-    ':'  shift, and go to state 268
+    ':'  posunout a přejít do stavu 268
 
 
-state 204
+State 204
 
   208 PrimaryExpr: PrimaryExpr TypeAssertion .
 
-    $default  reduce using rule 208 (PrimaryExpr)
+    $výchozí  reduce using rule 208 (PrimaryExpr)
 
 
-state 205
+State 205
 
   175 MethodExpr: ReceiverType '.' . MethodName
   176 MethodName: . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 90
+    IDENTIFIER  posunout a přejít do stavu 90
 
-    MethodName  go to state 269
+    MethodName  přejít do stavu 269
 
 
-state 206
+State 206
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -5181,107 +5180,107 @@ state 206
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 270
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 270
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 207
+State 207
 
   294 Type: '(' Type ')' .
 
-    $default  reduce using rule 294 (Type)
+    $výchozí  reduce using rule 294 (Type)
 
 
-state 208
+State 208
 
    54 ConstSpec1: ConstSpec11 '=' ExpressionList .
 
-    $default  reduce using rule 54 (ConstSpec1)
+    $výchozí  reduce using rule 54 (ConstSpec1)
 
 
-state 209
+State 209
 
   210 QualifiedIdent: PackageName '.' IDENTIFIER .
 
-    $default  reduce using rule 210 (QualifiedIdent)
+    $výchozí  reduce using rule 210 (QualifiedIdent)
 
 
-state 210
+State 210
 
    11 BaseTypeName: IDENTIFIER .
 
-    $default  reduce using rule 11 (BaseTypeName)
+    $výchozí  reduce using rule 11 (BaseTypeName)
 
 
-state 211
+State 211
 
   214 Receiver: '(' Receiver1 Receiver2 BaseTypeName . ')'
 
-    ')'  shift, and go to state 271
+    ')'  posunout a přejít do stavu 271
 
 
-state 212
+State 212
 
   192 ParameterList: ParameterDecl ParameterList1 .  [',', ')']
   194 ParameterList1: ParameterList1 . ',' ParameterDecl
 
-    ','  shift, and go to state 272
+    ','  posunout a přejít do stavu 272
 
-    ','       [reduce using rule 192 (ParameterList)]
-    $default  reduce using rule 192 (ParameterList)
+    ','         [reduce using rule 192 (ParameterList)]
+    $výchozí  reduce using rule 192 (ParameterList)
 
 
-state 213
+State 213
 
   191 ParameterDecl2: TOK4 .
 
-    $default  reduce using rule 191 (ParameterDecl2)
+    $výchozí  reduce using rule 191 (ParameterDecl2)
 
 
-state 214
+State 214
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -5311,77 +5310,77 @@ state 214
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 273
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 273
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 215
+State 215
 
   199 Parameters11: ',' .
 
-    $default  reduce using rule 199 (Parameters11)
+    $výchozí  reduce using rule 199 (Parameters11)
 
 
-state 216
+State 216
 
   197 Parameters1: ParameterList Parameters11 .
 
-    $default  reduce using rule 197 (Parameters1)
+    $výchozí  reduce using rule 197 (Parameters1)
 
 
-state 217
+State 217
 
   195 Parameters: '(' Parameters1 ')' .
 
-    $default  reduce using rule 195 (Parameters)
+    $výchozí  reduce using rule 195 (Parameters)
 
 
-state 218
+State 218
 
   122 IdentifierList: IDENTIFIER . IdentifierList1
-  123 IdentifierList1: .  [IDENTIFIER, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ',', '(']
+  123 IdentifierList1: . %empty  [IDENTIFIER, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ',', '(']
   124                | . IdentifierList1 ',' IDENTIFIER
   186 PackageName: IDENTIFIER .  ['.']
   313 TypeName: IDENTIFIER .  [')']
 
-    ')'       reduce using rule 313 (TypeName)
-    '.'       reduce using rule 186 (PackageName)
-    $default  reduce using rule 123 (IdentifierList1)
+    ')'         reduce using rule 313 (TypeName)
+    '.'         reduce using rule 186 (PackageName)
+    $výchozí  reduce using rule 123 (IdentifierList1)
 
-    IdentifierList1  go to state 55
+    IdentifierList1  přejít do stavu 55
 
 
-state 219
+State 219
 
    17 Block: '{' StatementList . '}'
 
-    '}'  shift, and go to state 274
+    '}'  posunout a přejít do stavu 274
 
 
-state 220
+State 220
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
     9 Assignment: . ExpressionList ASSIGN_OP ExpressionList
@@ -5406,7 +5405,7 @@ state 220
    64            | . TypeDecl
    65            | . VarDecl
    66 DeferStmt: . DEFER Expression
-   75 EmptyStmt: .  [';']
+   75 EmptyStmt: . %empty  [';']
    79 ExprSwitchStmt: . SWITCH ExprSwitchStmt1 ExprSwitchStmt2 '{' ExprSwitchStmt3 '}'
    86 Expression: . UnaryExpr
    87           | . Expression BINARY_OP UnaryExpr
@@ -5505,186 +5504,186 @@ state 220
   327          | . UNARY_OP UnaryExpr
   330 VarDecl: . VAR VarDecl1
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 275
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    BREAK          shift, and go to state 276
-    CHAN           shift, and go to state 59
-    CONST          shift, and go to state 21
-    CONTINUE       shift, and go to state 277
-    DEFER          shift, and go to state 278
-    FALLTHROUGH    shift, and go to state 279
-    FOR            shift, and go to state 280
-    FUNC           shift, and go to state 117
-    GO             shift, and go to state 281
-    GOTO           shift, and go to state 282
-    IF             shift, and go to state 283
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    RETURN         shift, and go to state 284
-    SELECT         shift, and go to state 285
-    STRUCT         shift, and go to state 63
-    SWITCH         shift, and go to state 286
-    TYPE           shift, and go to state 23
-    VAR            shift, and go to state 24
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '{'            shift, and go to state 160
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 275
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    BREAK          posunout a přejít do stavu 276
+    CHAN           posunout a přejít do stavu 59
+    CONST          posunout a přejít do stavu 21
+    CONTINUE       posunout a přejít do stavu 277
+    DEFER          posunout a přejít do stavu 278
+    FALLTHROUGH    posunout a přejít do stavu 279
+    FOR            posunout a přejít do stavu 280
+    FUNC           posunout a přejít do stavu 117
+    GO             posunout a přejít do stavu 281
+    GOTO           posunout a přejít do stavu 282
+    IF             posunout a přejít do stavu 283
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    RETURN         posunout a přejít do stavu 284
+    SELECT         posunout a přejít do stavu 285
+    STRUCT         posunout a přejít do stavu 63
+    SWITCH         posunout a přejít do stavu 286
+    TYPE           posunout a přejít do stavu 23
+    VAR            posunout a přejít do stavu 24
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '{'            posunout a přejít do stavu 160
+    '('            posunout a přejít do stavu 120
 
-    ';'       reduce using rule 75 (EmptyStmt)
-    $default  reduce using rule 280 (StatementList)
+    ';'         reduce using rule 75 (EmptyStmt)
+    $výchozí  reduce using rule 280 (StatementList)
 
-    ArrayType        go to state 122
-    Assignment       go to state 287
-    BasicLit         go to state 123
-    Block            go to state 288
-    BreakStmt        go to state 289
-    BuiltinCall      go to state 124
-    Channel          go to state 290
-    ChannelType      go to state 68
-    ChannelType1     go to state 69
-    CompositeLit     go to state 125
-    ConstDecl        go to state 25
-    ContinueStmt     go to state 291
-    Conversion       go to state 126
-    Declaration      go to state 292
-    DeferStmt        go to state 293
-    EmptyStmt        go to state 294
-    ExprSwitchStmt   go to state 295
-    Expression       go to state 296
-    ExpressionList   go to state 297
-    ExpressionStmt   go to state 298
-    FallthroughStmt  go to state 299
-    ForStmt          go to state 300
-    FunctionLit      go to state 128
-    FunctionType     go to state 72
-    GoStmt           go to state 301
-    GotoStmt         go to state 302
-    IdentifierList   go to state 303
-    IfStmt           go to state 304
-    IncDecStmt       go to state 305
-    InterfaceType    go to state 73
-    Label            go to state 306
-    LabeledStmt      go to state 307
-    Literal          go to state 129
-    LiteralType      go to state 130
-    MapType          go to state 131
-    MethodExpr       go to state 132
-    Operand          go to state 133
-    OperandName      go to state 134
-    PackageName      go to state 75
-    PointerType      go to state 76
-    PrimaryExpr      go to state 135
-    QualifiedIdent   go to state 136
-    ReceiverType     go to state 137
-    ReturnStmt       go to state 308
-    SelectStmt       go to state 309
-    SendStmt         go to state 310
-    ShortVarDecl     go to state 311
-    SimpleStmt       go to state 312
-    SliceType        go to state 138
-    Statement        go to state 313
-    StructType       go to state 139
-    SwitchStmt       go to state 314
-    Type             go to state 140
-    TypeDecl         go to state 30
-    TypeLit          go to state 81
-    TypeName         go to state 141
-    TypeSwitchStmt   go to state 315
-    UnaryExpr        go to state 142
-    VarDecl          go to state 31
+    ArrayType        přejít do stavu 122
+    Assignment       přejít do stavu 287
+    BasicLit         přejít do stavu 123
+    Block            přejít do stavu 288
+    BreakStmt        přejít do stavu 289
+    BuiltinCall      přejít do stavu 124
+    Channel          přejít do stavu 290
+    ChannelType      přejít do stavu 68
+    ChannelType1     přejít do stavu 69
+    CompositeLit     přejít do stavu 125
+    ConstDecl        přejít do stavu 25
+    ContinueStmt     přejít do stavu 291
+    Conversion       přejít do stavu 126
+    Declaration      přejít do stavu 292
+    DeferStmt        přejít do stavu 293
+    EmptyStmt        přejít do stavu 294
+    ExprSwitchStmt   přejít do stavu 295
+    Expression       přejít do stavu 296
+    ExpressionList   přejít do stavu 297
+    ExpressionStmt   přejít do stavu 298
+    FallthroughStmt  přejít do stavu 299
+    ForStmt          přejít do stavu 300
+    FunctionLit      přejít do stavu 128
+    FunctionType     přejít do stavu 72
+    GoStmt           přejít do stavu 301
+    GotoStmt         přejít do stavu 302
+    IdentifierList   přejít do stavu 303
+    IfStmt           přejít do stavu 304
+    IncDecStmt       přejít do stavu 305
+    InterfaceType    přejít do stavu 73
+    Label            přejít do stavu 306
+    LabeledStmt      přejít do stavu 307
+    Literal          přejít do stavu 129
+    LiteralType      přejít do stavu 130
+    MapType          přejít do stavu 131
+    MethodExpr       přejít do stavu 132
+    Operand          přejít do stavu 133
+    OperandName      přejít do stavu 134
+    PackageName      přejít do stavu 75
+    PointerType      přejít do stavu 76
+    PrimaryExpr      přejít do stavu 135
+    QualifiedIdent   přejít do stavu 136
+    ReceiverType     přejít do stavu 137
+    ReturnStmt       přejít do stavu 308
+    SelectStmt       přejít do stavu 309
+    SendStmt         přejít do stavu 310
+    ShortVarDecl     přejít do stavu 311
+    SimpleStmt       přejít do stavu 312
+    SliceType        přejít do stavu 138
+    Statement        přejít do stavu 313
+    StructType       přejít do stavu 139
+    SwitchStmt       přejít do stavu 314
+    Type             přejít do stavu 140
+    TypeDecl         přejít do stavu 30
+    TypeLit          přejít do stavu 81
+    TypeName         přejít do stavu 141
+    TypeSwitchStmt   přejít do stavu 315
+    UnaryExpr        přejít do stavu 142
+    VarDecl          přejít do stavu 31
 
 
-state 221
+State 221
 
   301 TypeDecl11: TypeDecl11 TypeSpec ';' .
 
-    $default  reduce using rule 301 (TypeDecl11)
+    $výchozí  reduce using rule 301 (TypeDecl11)
 
 
-state 222
+State 222
 
   334 VarDecl11: VarDecl11 VarSpec ';' .
 
-    $default  reduce using rule 334 (VarDecl11)
+    $výchozí  reduce using rule 334 (VarDecl11)
 
 
-state 223
+State 223
 
    88 ExpressionList: Expression ExpressionList1 .  [ASSIGN_OP, TOK4, '{', ',', ')', ':', ';', '=']
    90 ExpressionList1: ExpressionList1 . ',' Expression
 
-    ','  shift, and go to state 316
+    ','  posunout a přejít do stavu 316
 
-    ','       [reduce using rule 88 (ExpressionList)]
-    $default  reduce using rule 88 (ExpressionList)
+    ','         [reduce using rule 88 (ExpressionList)]
+    $výchozí  reduce using rule 88 (ExpressionList)
 
 
-state 224
+State 224
 
   339 VarSpec11: '=' ExpressionList .
 
-    $default  reduce using rule 339 (VarSpec11)
+    $výchozí  reduce using rule 339 (VarSpec11)
 
 
-state 225
+State 225
 
   176 MethodName: IDENTIFIER .  ['(']
   186 PackageName: IDENTIFIER .  ['.']
   313 TypeName: IDENTIFIER .  [';']
 
-    ';'       reduce using rule 313 (TypeName)
-    '.'       reduce using rule 186 (PackageName)
-    $default  reduce using rule 176 (MethodName)
+    ';'         reduce using rule 313 (TypeName)
+    '.'         reduce using rule 186 (PackageName)
+    $výchozí  reduce using rule 176 (MethodName)
 
 
-state 226
+State 226
 
   148 InterfaceType: INTERFACE '{' InterfaceType1 '}' .
 
-    $default  reduce using rule 148 (InterfaceType)
+    $výchozí  reduce using rule 148 (InterfaceType)
 
 
-state 227
+State 227
 
   178 MethodSpec: InterfaceTypeName .
 
-    $default  reduce using rule 178 (MethodSpec)
+    $výchozí  reduce using rule 178 (MethodSpec)
 
 
-state 228
+State 228
 
   177 MethodSpec: MethodName . Signature
   195 Parameters: . '(' Parameters1 ')'
   239 Signature: . Parameters Signature1
 
-    '('  shift, and go to state 85
+    '('  posunout a přejít do stavu 85
 
-    Parameters  go to state 88
-    Signature   go to state 317
+    Parameters  přejít do stavu 88
+    Signature   přejít do stavu 317
 
 
-state 229
+State 229
 
   150 InterfaceType1: InterfaceType1 MethodSpec . ';'
 
-    ';'  shift, and go to state 318
+    ';'  posunout a přejít do stavu 318
 
 
-state 230
+State 230
 
   151 InterfaceTypeName: TypeName .
 
-    $default  reduce using rule 151 (InterfaceTypeName)
+    $výchozí  reduce using rule 151 (InterfaceTypeName)
 
 
-state 231
+State 231
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -5715,56 +5714,56 @@ state 231
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    ElementType     go to state 319
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 145
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    ElementType     přejít do stavu 319
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 145
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 232
+State 232
 
     3 AnonymousField1: '*' .
 
-    $default  reduce using rule 3 (AnonymousField1)
+    $výchozí  reduce using rule 3 (AnonymousField1)
 
 
-state 233
+State 233
 
   283 StructType: STRUCT '{' StructType1 '}' .
 
-    $default  reduce using rule 283 (StructType)
+    $výchozí  reduce using rule 283 (StructType)
 
 
-state 234
+State 234
 
    95 FieldDecl1: AnonymousField .
 
-    $default  reduce using rule 95 (FieldDecl1)
+    $výchozí  reduce using rule 95 (FieldDecl1)
 
 
-state 235
+State 235
 
     1 AnonymousField: AnonymousField1 . TypeName
   186 PackageName: . IDENTIFIER
@@ -5772,36 +5771,36 @@ state 235
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
+    IDENTIFIER  posunout a přejít do stavu 57
 
-    PackageName     go to state 75
-    QualifiedIdent  go to state 77
-    TypeName        go to state 320
+    PackageName     přejít do stavu 75
+    QualifiedIdent  přejít do stavu 77
+    TypeName        přejít do stavu 320
 
 
-state 236
+State 236
 
   285 StructType1: StructType1 FieldDecl . ';'
 
-    ';'  shift, and go to state 321
+    ';'  posunout a přejít do stavu 321
 
 
-state 237
+State 237
 
    93 FieldDecl: FieldDecl1 . FieldDecl2
-   96 FieldDecl2: .  [';']
+   96 FieldDecl2: . %empty  [';']
    97           | . Tag
   288 Tag: . STRING_LIT
 
-    STRING_LIT  shift, and go to state 322
+    STRING_LIT  posunout a přejít do stavu 322
 
-    $default  reduce using rule 96 (FieldDecl2)
+    $výchozí  reduce using rule 96 (FieldDecl2)
 
-    FieldDecl2  go to state 323
-    Tag         go to state 324
+    FieldDecl2  přejít do stavu 323
+    Tag         přejít do stavu 324
 
 
-state 238
+State 238
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -5831,90 +5830,90 @@ state 238
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 325
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 325
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 239
+State 239
 
    22 BuiltinArgs: ArgumentList .
 
-    $default  reduce using rule 22 (BuiltinArgs)
+    $výchozí  reduce using rule 22 (BuiltinArgs)
 
 
-state 240
+State 240
 
    27 BuiltinCall1: BuiltinArgs . BuiltinCall11
-   28 BuiltinCall11: .  [')']
+   28 BuiltinCall11: . %empty  [')']
    29              | . ','
 
-    ','  shift, and go to state 326
+    ','  posunout a přejít do stavu 326
 
-    $default  reduce using rule 28 (BuiltinCall11)
+    $výchozí  reduce using rule 28 (BuiltinCall11)
 
-    BuiltinCall11  go to state 327
+    BuiltinCall11  přejít do stavu 327
 
 
-state 241
+State 241
 
    25 BuiltinCall: IDENTIFIER '(' BuiltinCall1 . ')'
 
-    ')'  shift, and go to state 328
+    ')'  posunout a přejít do stavu 328
 
 
-state 242
+State 242
 
     4 ArgumentList: ExpressionList . ArgumentList1
-    5 ArgumentList1: .  [',', ')']
+    5 ArgumentList1: . %empty  [',', ')']
     6              | . TOK4
 
-    TOK4  shift, and go to state 329
+    TOK4  posunout a přejít do stavu 329
 
-    $default  reduce using rule 5 (ArgumentList1)
+    $výchozí  reduce using rule 5 (ArgumentList1)
 
-    ArgumentList1  go to state 330
+    ArgumentList1  přejít do stavu 330
 
 
-state 243
+State 243
 
    21 BuiltinArgs: Type . BuiltinArgs1
-   23 BuiltinArgs1: .  [',', ')']
+   23 BuiltinArgs1: . %empty  [',', ')']
    24             | . ',' ArgumentList
    60 Conversion: Type . '(' Expression Conversion1 ')'
 
-    ','  shift, and go to state 331
-    '('  shift, and go to state 206
+    ','  posunout a přejít do stavu 331
+    '('  posunout a přejít do stavu 206
 
-    ','       [reduce using rule 23 (BuiltinArgs1)]
-    $default  reduce using rule 23 (BuiltinArgs1)
+    ','         [reduce using rule 23 (BuiltinArgs1)]
+    $výchozí  reduce using rule 23 (BuiltinArgs1)
 
-    BuiltinArgs1  go to state 332
+    BuiltinArgs1  přejít do stavu 332
 
 
-state 244
+State 244
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -5945,74 +5944,74 @@ state 244
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    ElementType     go to state 333
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 145
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    ElementType     přejít do stavu 333
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 145
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 245
+State 245
 
   220 ReceiverType: '(' '*' TypeName . ')'
   292 Type: TypeName .  ['(', ')']
 
-    ')'  shift, and go to state 334
+    ')'  posunout a přejít do stavu 334
 
-    ')'       [reduce using rule 292 (Type)]
-    $default  reduce using rule 292 (Type)
+    ')'         [reduce using rule 292 (Type)]
+    $výchozí  reduce using rule 292 (Type)
 
 
-state 246
+State 246
 
   182 Operand: '(' Expression ')' .
 
-    $default  reduce using rule 182 (Operand)
+    $výchozí  reduce using rule 182 (Operand)
 
 
-state 247
+State 247
 
   221 ReceiverType: '(' ReceiverType ')' .
 
-    $default  reduce using rule 221 (ReceiverType)
+    $výchozí  reduce using rule 221 (ReceiverType)
 
 
-state 248
+State 248
 
     8 ArrayType: '[' ArrayLength ']' ElementType .
 
-    $default  reduce using rule 8 (ArrayType)
+    $výchozí  reduce using rule 8 (ArrayType)
 
 
-state 249
+State 249
 
    87 Expression: Expression BINARY_OP UnaryExpr .
 
-    $default  reduce using rule 87 (Expression)
+    $výchozí  reduce using rule 87 (Expression)
 
 
-state 250
+State 250
 
    25 BuiltinCall: IDENTIFIER . '(' BuiltinCall1 ')'
    98 FieldName: IDENTIFIER .  [':']
@@ -6020,31 +6019,31 @@ state 250
   186 PackageName: IDENTIFIER .  ['.']
   313 TypeName: IDENTIFIER .  ['{', '(', '.']
 
-    '('  shift, and go to state 180
+    '('  posunout a přejít do stavu 180
 
-    '{'       reduce using rule 313 (TypeName)
-    '('       [reduce using rule 183 (OperandName)]
-    '('       [reduce using rule 313 (TypeName)]
-    ':'       reduce using rule 98 (FieldName)
-    ':'       [reduce using rule 183 (OperandName)]
-    '.'       reduce using rule 183 (OperandName)
-    '.'       [reduce using rule 186 (PackageName)]
-    '.'       [reduce using rule 313 (TypeName)]
-    $default  reduce using rule 183 (OperandName)
+    '{'         reduce using rule 313 (TypeName)
+    '('         [reduce using rule 183 (OperandName)]
+    '('         [reduce using rule 313 (TypeName)]
+    ':'         reduce using rule 98 (FieldName)
+    ':'         [reduce using rule 183 (OperandName)]
+    '.'         reduce using rule 183 (OperandName)
+    '.'         [reduce using rule 186 (PackageName)]
+    '.'         [reduce using rule 313 (TypeName)]
+    $výchozí  reduce using rule 183 (OperandName)
 
 
-state 251
+State 251
 
    71 ElementList: Element . ElementList1
-   72 ElementList1: .
+   72 ElementList1: . %empty
    73             | . ElementList1 ',' Element
 
-    $default  reduce using rule 72 (ElementList1)
+    $výchozí  reduce using rule 72 (ElementList1)
 
-    ElementList1  go to state 335
+    ElementList1  přejít do stavu 335
 
 
-state 252
+State 252
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -6117,180 +6116,180 @@ state 252
   328 Value: . Expression
   329      | . LiteralValue
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '{'            shift, and go to state 192
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '{'            posunout a přejít do stavu 192
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 336
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    LiteralValue    go to state 337
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
-    Value           go to state 338
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 336
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    LiteralValue    přejít do stavu 337
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
+    Value           přejít do stavu 338
 
 
-state 253
+State 253
 
   153 Key: ElementIndex .
 
-    $default  reduce using rule 153 (Key)
+    $výchozí  reduce using rule 153 (Key)
 
 
-state 254
+State 254
 
   168 LiteralValue1: ElementList . LiteralValue11
-  169 LiteralValue11: .  ['}']
+  169 LiteralValue11: . %empty  ['}']
   170               | . ','
 
-    ','  shift, and go to state 339
+    ','  posunout a přejít do stavu 339
 
-    $default  reduce using rule 169 (LiteralValue11)
+    $výchozí  reduce using rule 169 (LiteralValue11)
 
-    LiteralValue11  go to state 340
+    LiteralValue11  přejít do stavu 340
 
 
-state 255
+State 255
 
    70 ElementIndex: Expression .  [':']
    87 Expression: Expression . BINARY_OP UnaryExpr
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 70 (ElementIndex)
+    $výchozí  reduce using rule 70 (ElementIndex)
 
 
-state 256
+State 256
 
   152 Key: FieldName .
 
-    $default  reduce using rule 152 (Key)
+    $výchozí  reduce using rule 152 (Key)
 
 
-state 257
+State 257
 
    69 Element1: Key . ':'
 
-    ':'  shift, and go to state 341
+    ':'  posunout a přejít do stavu 341
 
 
-state 258
+State 258
 
   166 LiteralValue: '{' LiteralValue1 . '}'
 
-    '}'  shift, and go to state 342
+    '}'  posunout a přejít do stavu 342
 
 
-state 259
+State 259
 
     7 ArrayLength: Expression .  [']']
    87 Expression: Expression . BINARY_OP UnaryExpr
   146 Index: '[' Expression . ']'
   252 Slice11: Expression .  [':']
 
-    BINARY_OP  shift, and go to state 191
-    ']'        shift, and go to state 343
+    BINARY_OP  posunout a přejít do stavu 191
+    ']'        posunout a přejít do stavu 343
 
-    ']'       [reduce using rule 7 (ArrayLength)]
-    $default  reduce using rule 252 (Slice11)
+    ']'         [reduce using rule 7 (ArrayLength)]
+    $výchozí  reduce using rule 252 (Slice11)
 
 
-state 260
+State 260
 
   248 Slice: '[' Slice1 .
 
-    $default  reduce using rule 248 (Slice)
+    $výchozí  reduce using rule 248 (Slice)
 
 
-state 261
+State 261
 
   250 Slice1: Slice11 . ':' Slice12
 
-    ':'  shift, and go to state 344
+    ':'  posunout a přejít do stavu 344
 
 
-state 262
+State 262
 
    32 Call1: ArgumentList . Call11
-   33 Call11: .  [')']
+   33 Call11: . %empty  [')']
    34       | . ','
 
-    ','  shift, and go to state 345
+    ','  posunout a přejít do stavu 345
 
-    $default  reduce using rule 33 (Call11)
+    $výchozí  reduce using rule 33 (Call11)
 
-    Call11  go to state 346
+    Call11  přejít do stavu 346
 
 
-state 263
+State 263
 
    30 Call: '(' Call1 . ')'
 
-    ')'  shift, and go to state 347
+    ')'  posunout a přejít do stavu 347
 
 
-state 264
+State 264
 
    87 Expression: Expression . BINARY_OP UnaryExpr
    88 ExpressionList: Expression . ExpressionList1
-   89 ExpressionList1: .  [TOK4, ',', ')']
+   89 ExpressionList1: . %empty  [TOK4, ',', ')']
    90                | . ExpressionList1 ',' Expression
   182 Operand: '(' Expression . ')'
 
-    BINARY_OP  shift, and go to state 191
-    ')'        shift, and go to state 246
+    BINARY_OP  posunout a přejít do stavu 191
+    ')'        posunout a přejít do stavu 246
 
-    ')'       [reduce using rule 89 (ExpressionList1)]
-    $default  reduce using rule 89 (ExpressionList1)
+    ')'         [reduce using rule 89 (ExpressionList1)]
+    $výchozí  reduce using rule 89 (ExpressionList1)
 
-    ExpressionList1  go to state 223
+    ExpressionList1  přejít do stavu 223
 
 
-state 265
+State 265
 
   236 Selector: '.' IDENTIFIER .
 
-    $default  reduce using rule 236 (Selector)
+    $výchozí  reduce using rule 236 (Selector)
 
 
-state 266
+State 266
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -6320,41 +6319,41 @@ state 266
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 348
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 348
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 267
+State 267
 
   249 Slice: Slice2 ']' .
 
-    $default  reduce using rule 249 (Slice)
+    $výchozí  reduce using rule 249 (Slice)
 
 
-state 268
+State 268
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -6424,174 +6423,174 @@ state 268
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 349
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 349
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 269
+State 269
 
   175 MethodExpr: ReceiverType '.' MethodName .
 
-    $default  reduce using rule 175 (MethodExpr)
+    $výchozí  reduce using rule 175 (MethodExpr)
 
 
-state 270
+State 270
 
    60 Conversion: Type '(' Expression . Conversion1 ')'
-   61 Conversion1: .  [')']
+   61 Conversion1: . %empty  [')']
    62            | . ','
    87 Expression: Expression . BINARY_OP UnaryExpr
 
-    BINARY_OP  shift, and go to state 191
-    ','        shift, and go to state 350
+    BINARY_OP  posunout a přejít do stavu 191
+    ','        posunout a přejít do stavu 350
 
-    $default  reduce using rule 61 (Conversion1)
+    $výchozí  reduce using rule 61 (Conversion1)
 
-    Conversion1  go to state 351
+    Conversion1  přejít do stavu 351
 
 
-state 271
+State 271
 
   214 Receiver: '(' Receiver1 Receiver2 BaseTypeName ')' .
 
-    $default  reduce using rule 214 (Receiver)
+    $výchozí  reduce using rule 214 (Receiver)
 
 
-state 272
+State 272
 
   122 IdentifierList: . IDENTIFIER IdentifierList1
   187 ParameterDecl: . ParameterDecl1 ParameterDecl2 Type
-  188 ParameterDecl1: .  [IDENTIFIER, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
+  188 ParameterDecl1: . %empty  [IDENTIFIER, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
   189               | . IdentifierList
   194 ParameterList1: ParameterList1 ',' . ParameterDecl
 
-    IDENTIFIER  shift, and go to state 35
+    IDENTIFIER  posunout a přejít do stavu 35
 
     IDENTIFIER  [reduce using rule 188 (ParameterDecl1)]
-    $default    reduce using rule 188 (ParameterDecl1)
+    $výchozí  reduce using rule 188 (ParameterDecl1)
 
-    IdentifierList  go to state 150
-    ParameterDecl   go to state 352
-    ParameterDecl1  go to state 152
+    IdentifierList  přejít do stavu 150
+    ParameterDecl   přejít do stavu 352
+    ParameterDecl1  přejít do stavu 152
 
 
-state 273
+State 273
 
   187 ParameterDecl: ParameterDecl1 ParameterDecl2 Type .
 
-    $default  reduce using rule 187 (ParameterDecl)
+    $výchozí  reduce using rule 187 (ParameterDecl)
 
 
-state 274
+State 274
 
    17 Block: '{' StatementList '}' .
 
-    $default  reduce using rule 17 (Block)
+    $výchozí  reduce using rule 17 (Block)
 
 
-state 275
+State 275
 
    25 BuiltinCall: IDENTIFIER . '(' BuiltinCall1 ')'
   122 IdentifierList: IDENTIFIER . IdentifierList1
-  123 IdentifierList1: .  [TOK3, ',']
+  123 IdentifierList1: . %empty  [TOK3, ',']
   124                | . IdentifierList1 ',' IDENTIFIER
   155 Label: IDENTIFIER .  [':']
   183 OperandName: IDENTIFIER .  [ASSIGN_OP, BINARY_OP, FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK1, TOK2, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ',', '(', ':', ';', '.']
   186 PackageName: IDENTIFIER .  ['.']
   313 TypeName: IDENTIFIER .  ['{', '(', '.']
 
-    '('  shift, and go to state 180
+    '('  posunout a přejít do stavu 180
 
-    TOK3      reduce using rule 123 (IdentifierList1)
-    '{'       reduce using rule 313 (TypeName)
-    ','       reduce using rule 123 (IdentifierList1)
-    ','       [reduce using rule 183 (OperandName)]
-    '('       [reduce using rule 183 (OperandName)]
-    '('       [reduce using rule 313 (TypeName)]
-    ':'       reduce using rule 155 (Label)
-    ':'       [reduce using rule 183 (OperandName)]
-    '.'       reduce using rule 183 (OperandName)
-    '.'       [reduce using rule 186 (PackageName)]
-    '.'       [reduce using rule 313 (TypeName)]
-    $default  reduce using rule 183 (OperandName)
+    TOK3        reduce using rule 123 (IdentifierList1)
+    '{'         reduce using rule 313 (TypeName)
+    ','         reduce using rule 123 (IdentifierList1)
+    ','         [reduce using rule 183 (OperandName)]
+    '('         [reduce using rule 183 (OperandName)]
+    '('         [reduce using rule 313 (TypeName)]
+    ':'         reduce using rule 155 (Label)
+    ':'         [reduce using rule 183 (OperandName)]
+    '.'         reduce using rule 183 (OperandName)
+    '.'         [reduce using rule 186 (PackageName)]
+    '.'         [reduce using rule 313 (TypeName)]
+    $výchozí  reduce using rule 183 (OperandName)
 
-    IdentifierList1  go to state 55
+    IdentifierList1  přejít do stavu 55
 
 
-state 276
+State 276
 
    18 BreakStmt: BREAK . BreakStmt1
-   19 BreakStmt1: .  [';']
+   19 BreakStmt1: . %empty  [';']
    20           | . Label
   155 Label: . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 353
+    IDENTIFIER  posunout a přejít do stavu 353
 
-    $default  reduce using rule 19 (BreakStmt1)
+    $výchozí  reduce using rule 19 (BreakStmt1)
 
-    BreakStmt1  go to state 354
-    Label       go to state 355
+    BreakStmt1  přejít do stavu 354
+    Label       přejít do stavu 355
 
 
-state 277
+State 277
 
    57 ContinueStmt: CONTINUE . ContinueStmt1
-   58 ContinueStmt1: .  [';']
+   58 ContinueStmt1: . %empty  [';']
    59              | . Label
   155 Label: . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 353
+    IDENTIFIER  posunout a přejít do stavu 353
 
-    $default  reduce using rule 58 (ContinueStmt1)
+    $výchozí  reduce using rule 58 (ContinueStmt1)
 
-    ContinueStmt1  go to state 356
-    Label          go to state 357
+    ContinueStmt1  přejít do stavu 356
+    Label          přejít do stavu 357
 
 
-state 278
+State 278
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -6661,61 +6660,61 @@ state 278
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 358
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 358
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 279
+State 279
 
    92 FallthroughStmt: FALLTHROUGH .
 
-    $default  reduce using rule 92 (FallthroughStmt)
+    $výchozí  reduce using rule 92 (FallthroughStmt)
 
 
-state 280
+State 280
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
     9 Assignment: . ExpressionList ASSIGN_OP ExpressionList
@@ -6733,16 +6732,16 @@ state 280
    45 CompositeLit: . LiteralType LiteralValue
    46 Condition: . Expression
    60 Conversion: . Type '(' Expression Conversion1 ')'
-   75 EmptyStmt: .  [';']
+   75 EmptyStmt: . %empty  [';']
    86 Expression: . UnaryExpr
    87           | . Expression BINARY_OP UnaryExpr
    88 ExpressionList: . Expression ExpressionList1
    91 ExpressionStmt: . Expression
    99 ForClause: . ForClause1 ';' ForClause2 ';' ForClause3
-  100 ForClause1: .  [';']
+  100 ForClause1: . %empty  [';']
   101           | . InitStmt
   106 ForStmt: FOR . ForStmt1 Block
-  107 ForStmt1: .  ['{']
+  107 ForStmt1: . %empty  ['{']
   108         | . ForStmt11
   109 ForStmt11: . Condition
   110          | . ForClause
@@ -6813,77 +6812,77 @@ state 280
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 359
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 359
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    '{'       reduce using rule 107 (ForStmt1)
-    ';'       reduce using rule 75 (EmptyStmt)
-    ';'       [reduce using rule 100 (ForClause1)]
-    $default  reduce using rule 75 (EmptyStmt)
+    '{'         reduce using rule 107 (ForStmt1)
+    ';'         reduce using rule 75 (EmptyStmt)
+    ';'         [reduce using rule 100 (ForClause1)]
+    $výchozí  reduce using rule 75 (EmptyStmt)
 
-    ArrayType       go to state 122
-    Assignment      go to state 287
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    Channel         go to state 290
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Condition       go to state 360
-    Conversion      go to state 126
-    EmptyStmt       go to state 294
-    Expression      go to state 361
-    ExpressionList  go to state 362
-    ExpressionStmt  go to state 298
-    ForClause       go to state 363
-    ForClause1      go to state 364
-    ForStmt1        go to state 365
-    ForStmt11       go to state 366
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    IdentifierList  go to state 367
-    IncDecStmt      go to state 305
-    InitStmt        go to state 368
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    RangeClause     go to state 369
-    RangeClause1    go to state 370
-    ReceiverType    go to state 137
-    SendStmt        go to state 310
-    ShortVarDecl    go to state 311
-    SimpleStmt      go to state 371
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    Assignment      přejít do stavu 287
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    Channel         přejít do stavu 290
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Condition       přejít do stavu 360
+    Conversion      přejít do stavu 126
+    EmptyStmt       přejít do stavu 294
+    Expression      přejít do stavu 361
+    ExpressionList  přejít do stavu 362
+    ExpressionStmt  přejít do stavu 298
+    ForClause       přejít do stavu 363
+    ForClause1      přejít do stavu 364
+    ForStmt1        přejít do stavu 365
+    ForStmt11       přejít do stavu 366
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    IdentifierList  přejít do stavu 367
+    IncDecStmt      přejít do stavu 305
+    InitStmt        přejít do stavu 368
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    RangeClause     přejít do stavu 369
+    RangeClause1    přejít do stavu 370
+    ReceiverType    přejít do stavu 137
+    SendStmt        přejít do stavu 310
+    ShortVarDecl    přejít do stavu 311
+    SimpleStmt      přejít do stavu 371
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 281
+State 281
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -6953,64 +6952,64 @@ state 281
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 372
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 372
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 282
+State 282
 
   121 GotoStmt: GOTO . Label
   155 Label: . IDENTIFIER
 
-    IDENTIFIER  shift, and go to state 353
+    IDENTIFIER  posunout a přejít do stavu 353
 
-    Label  go to state 373
+    Label  přejít do stavu 373
 
 
-state 283
+State 283
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
     9 Assignment: . ExpressionList ASSIGN_OP ExpressionList
@@ -7027,7 +7026,7 @@ state 283
    39             | . TOK5 CHAN
    45 CompositeLit: . LiteralType LiteralValue
    60 Conversion: . Type '(' Expression Conversion1 ')'
-   75 EmptyStmt: .  [';']
+   75 EmptyStmt: . %empty  [';']
    86 Expression: . UnaryExpr
    87           | . Expression BINARY_OP UnaryExpr
    88 ExpressionList: . Expression ExpressionList1
@@ -7036,7 +7035,7 @@ state 283
   119 FunctionType: . FUNC Signature
   122 IdentifierList: . IDENTIFIER IdentifierList1
   125 IfStmt: IF . IfStmt1 Expression Block IfStmt2
-  126 IfStmt1: .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
+  126 IfStmt1: . %empty  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
   127        | . SimpleStmt ';'
   143 IncDecStmt: . Expression IncDecStmt1
   148 InterfaceType: . INTERFACE '{' InterfaceType1 '}'
@@ -7097,22 +7096,22 @@ state 283
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 359
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 359
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
     FLOAT_LIT      [reduce using rule 126 (IfStmt1)]
     IDENTIFIER     [reduce using rule 126 (IfStmt1)]
@@ -7130,50 +7129,50 @@ state 283
     '*'            [reduce using rule 126 (IfStmt1)]
     '['            [reduce using rule 126 (IfStmt1)]
     '('            [reduce using rule 126 (IfStmt1)]
-    $default       reduce using rule 75 (EmptyStmt)
+    $výchozí     reduce using rule 75 (EmptyStmt)
 
-    ArrayType       go to state 122
-    Assignment      go to state 287
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    Channel         go to state 290
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    EmptyStmt       go to state 294
-    Expression      go to state 296
-    ExpressionList  go to state 297
-    ExpressionStmt  go to state 298
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    IdentifierList  go to state 303
-    IfStmt1         go to state 374
-    IncDecStmt      go to state 305
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SendStmt        go to state 310
-    ShortVarDecl    go to state 311
-    SimpleStmt      go to state 375
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    Assignment      přejít do stavu 287
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    Channel         přejít do stavu 290
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    EmptyStmt       přejít do stavu 294
+    Expression      přejít do stavu 296
+    ExpressionList  přejít do stavu 297
+    ExpressionStmt  přejít do stavu 298
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    IdentifierList  přejít do stavu 303
+    IfStmt1         přejít do stavu 374
+    IncDecStmt      přejít do stavu 305
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SendStmt        přejít do stavu 310
+    ShortVarDecl    přejít do stavu 311
+    SimpleStmt      přejít do stavu 375
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 284
+State 284
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -7226,7 +7225,7 @@ state 284
   220             | . '(' '*' TypeName ')'
   221             | . '(' ReceiverType ')'
   230 ReturnStmt: RETURN . ReturnStmt1
-  231 ReturnStmt1: .  [';']
+  231 ReturnStmt1: . %empty  [';']
   232            | . ExpressionList
   258 SliceType: . '[' ']' ElementType
   283 StructType: . STRUCT '{' StructType1 '}'
@@ -7246,65 +7245,65 @@ state 284
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    $default  reduce using rule 231 (ReturnStmt1)
+    $výchozí  reduce using rule 231 (ReturnStmt1)
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 376
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    ReturnStmt1     go to state 377
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 376
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    ReturnStmt1     přejít do stavu 377
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 285
+State 285
 
   233 SelectStmt: SELECT . '{' SelectStmt1 '}'
 
-    '{'  shift, and go to state 378
+    '{'  posunout a přejít do stavu 378
 
 
-state 286
+State 286
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
     9 Assignment: . ExpressionList ASSIGN_OP ExpressionList
@@ -7321,9 +7320,9 @@ state 286
    39             | . TOK5 CHAN
    45 CompositeLit: . LiteralType LiteralValue
    60 Conversion: . Type '(' Expression Conversion1 ')'
-   75 EmptyStmt: .  [';']
+   75 EmptyStmt: . %empty  [';']
    79 ExprSwitchStmt: SWITCH . ExprSwitchStmt1 ExprSwitchStmt2 '{' ExprSwitchStmt3 '}'
-   80 ExprSwitchStmt1: .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '{', '(']
+   80 ExprSwitchStmt1: . %empty  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '{', '(']
    81                | . SimpleStmt ';'
    86 Expression: . UnaryExpr
    87           | . Expression BINARY_OP UnaryExpr
@@ -7389,27 +7388,27 @@ state 286
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
   321 TypeSwitchStmt: SWITCH . TypeSwitchStmt1 TypeSwitchGuard '{' TypeSwitchStmt2 '}'
-  322 TypeSwitchStmt1: .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
+  322 TypeSwitchStmt1: . %empty  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
   323                | . SimpleStmt ';'
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 359
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 359
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
     FLOAT_LIT      [reduce using rule 80 (ExprSwitchStmt1)]
     FLOAT_LIT      [reduce using rule 322 (TypeSwitchStmt1)]
@@ -7443,272 +7442,272 @@ state 286
     '{'            reduce using rule 80 (ExprSwitchStmt1)
     '('            [reduce using rule 80 (ExprSwitchStmt1)]
     '('            [reduce using rule 322 (TypeSwitchStmt1)]
-    $default       reduce using rule 75 (EmptyStmt)
+    $výchozí     reduce using rule 75 (EmptyStmt)
 
-    ArrayType        go to state 122
-    Assignment       go to state 287
-    BasicLit         go to state 123
-    BuiltinCall      go to state 124
-    Channel          go to state 290
-    ChannelType      go to state 68
-    ChannelType1     go to state 69
-    CompositeLit     go to state 125
-    Conversion       go to state 126
-    EmptyStmt        go to state 294
-    ExprSwitchStmt1  go to state 379
-    Expression       go to state 296
-    ExpressionList   go to state 297
-    ExpressionStmt   go to state 298
-    FunctionLit      go to state 128
-    FunctionType     go to state 72
-    IdentifierList   go to state 303
-    IncDecStmt       go to state 305
-    InterfaceType    go to state 73
-    Literal          go to state 129
-    LiteralType      go to state 130
-    MapType          go to state 131
-    MethodExpr       go to state 132
-    Operand          go to state 133
-    OperandName      go to state 134
-    PackageName      go to state 75
-    PointerType      go to state 76
-    PrimaryExpr      go to state 135
-    QualifiedIdent   go to state 136
-    ReceiverType     go to state 137
-    SendStmt         go to state 310
-    ShortVarDecl     go to state 311
-    SimpleStmt       go to state 380
-    SliceType        go to state 138
-    StructType       go to state 139
-    Type             go to state 140
-    TypeLit          go to state 81
-    TypeName         go to state 141
-    TypeSwitchStmt1  go to state 381
-    UnaryExpr        go to state 142
+    ArrayType        přejít do stavu 122
+    Assignment       přejít do stavu 287
+    BasicLit         přejít do stavu 123
+    BuiltinCall      přejít do stavu 124
+    Channel          přejít do stavu 290
+    ChannelType      přejít do stavu 68
+    ChannelType1     přejít do stavu 69
+    CompositeLit     přejít do stavu 125
+    Conversion       přejít do stavu 126
+    EmptyStmt        přejít do stavu 294
+    ExprSwitchStmt1  přejít do stavu 379
+    Expression       přejít do stavu 296
+    ExpressionList   přejít do stavu 297
+    ExpressionStmt   přejít do stavu 298
+    FunctionLit      přejít do stavu 128
+    FunctionType     přejít do stavu 72
+    IdentifierList   přejít do stavu 303
+    IncDecStmt       přejít do stavu 305
+    InterfaceType    přejít do stavu 73
+    Literal          přejít do stavu 129
+    LiteralType      přejít do stavu 130
+    MapType          přejít do stavu 131
+    MethodExpr       přejít do stavu 132
+    Operand          přejít do stavu 133
+    OperandName      přejít do stavu 134
+    PackageName      přejít do stavu 75
+    PointerType      přejít do stavu 76
+    PrimaryExpr      přejít do stavu 135
+    QualifiedIdent   přejít do stavu 136
+    ReceiverType     přejít do stavu 137
+    SendStmt         přejít do stavu 310
+    ShortVarDecl     přejít do stavu 311
+    SimpleStmt       přejít do stavu 380
+    SliceType        přejít do stavu 138
+    StructType       přejít do stavu 139
+    Type             přejít do stavu 140
+    TypeLit          přejít do stavu 81
+    TypeName         přejít do stavu 141
+    TypeSwitchStmt1  přejít do stavu 381
+    UnaryExpr        přejít do stavu 142
 
 
-state 287
+State 287
 
   246 SimpleStmt: Assignment .
 
-    $default  reduce using rule 246 (SimpleStmt)
+    $výchozí  reduce using rule 246 (SimpleStmt)
 
 
-state 288
+State 288
 
   274 Statement: Block .
 
-    $default  reduce using rule 274 (Statement)
+    $výchozí  reduce using rule 274 (Statement)
 
 
-state 289
+State 289
 
   270 Statement: BreakStmt .
 
-    $default  reduce using rule 270 (Statement)
+    $výchozí  reduce using rule 270 (Statement)
 
 
-state 290
+State 290
 
   237 SendStmt: Channel . TOK5 Expression
 
-    TOK5  shift, and go to state 382
+    TOK5  posunout a přejít do stavu 382
 
 
-state 291
+State 291
 
   271 Statement: ContinueStmt .
 
-    $default  reduce using rule 271 (Statement)
+    $výchozí  reduce using rule 271 (Statement)
 
 
-state 292
+State 292
 
   265 Statement: Declaration .
 
-    $default  reduce using rule 265 (Statement)
+    $výchozí  reduce using rule 265 (Statement)
 
 
-state 293
+State 293
 
   279 Statement: DeferStmt .
 
-    $default  reduce using rule 279 (Statement)
+    $výchozí  reduce using rule 279 (Statement)
 
 
-state 294
+State 294
 
   242 SimpleStmt: EmptyStmt .
 
-    $default  reduce using rule 242 (SimpleStmt)
+    $výchozí  reduce using rule 242 (SimpleStmt)
 
 
-state 295
+State 295
 
   286 SwitchStmt: ExprSwitchStmt .
 
-    $default  reduce using rule 286 (SwitchStmt)
+    $výchozí  reduce using rule 286 (SwitchStmt)
 
 
-state 296
+State 296
 
    35 Channel: Expression .  [TOK5]
    87 Expression: Expression . BINARY_OP UnaryExpr
    88 ExpressionList: Expression . ExpressionList1
-   89 ExpressionList1: .  [ASSIGN_OP, ',']
+   89 ExpressionList1: . %empty  [ASSIGN_OP, ',']
    90                | . ExpressionList1 ',' Expression
    91 ExpressionStmt: Expression .  ['{', ';']
   143 IncDecStmt: Expression . IncDecStmt1
   144 IncDecStmt1: . TOK2
   145            | . TOK1
 
-    BINARY_OP  shift, and go to state 191
-    TOK1       shift, and go to state 383
-    TOK2       shift, and go to state 384
+    BINARY_OP  posunout a přejít do stavu 191
+    TOK1       posunout a přejít do stavu 383
+    TOK2       posunout a přejít do stavu 384
 
-    TOK5      reduce using rule 35 (Channel)
-    '{'       reduce using rule 91 (ExpressionStmt)
-    ';'       reduce using rule 91 (ExpressionStmt)
-    $default  reduce using rule 89 (ExpressionList1)
+    TOK5        reduce using rule 35 (Channel)
+    '{'         reduce using rule 91 (ExpressionStmt)
+    ';'         reduce using rule 91 (ExpressionStmt)
+    $výchozí  reduce using rule 89 (ExpressionList1)
 
-    ExpressionList1  go to state 223
-    IncDecStmt1      go to state 385
+    ExpressionList1  přejít do stavu 223
+    IncDecStmt1      přejít do stavu 385
 
 
-state 297
+State 297
 
     9 Assignment: ExpressionList . ASSIGN_OP ExpressionList
 
-    ASSIGN_OP  shift, and go to state 386
+    ASSIGN_OP  posunout a přejít do stavu 386
 
 
-state 298
+State 298
 
   243 SimpleStmt: ExpressionStmt .
 
-    $default  reduce using rule 243 (SimpleStmt)
+    $výchozí  reduce using rule 243 (SimpleStmt)
 
 
-state 299
+State 299
 
   273 Statement: FallthroughStmt .
 
-    $default  reduce using rule 273 (Statement)
+    $výchozí  reduce using rule 273 (Statement)
 
 
-state 300
+State 300
 
   278 Statement: ForStmt .
 
-    $default  reduce using rule 278 (Statement)
+    $výchozí  reduce using rule 278 (Statement)
 
 
-state 301
+State 301
 
   268 Statement: GoStmt .
 
-    $default  reduce using rule 268 (Statement)
+    $výchozí  reduce using rule 268 (Statement)
 
 
-state 302
+State 302
 
   272 Statement: GotoStmt .
 
-    $default  reduce using rule 272 (Statement)
+    $výchozí  reduce using rule 272 (Statement)
 
 
-state 303
+State 303
 
   238 ShortVarDecl: IdentifierList . TOK3 ExpressionList
 
-    TOK3  shift, and go to state 387
+    TOK3  posunout a přejít do stavu 387
 
 
-state 304
+State 304
 
   275 Statement: IfStmt .
 
-    $default  reduce using rule 275 (Statement)
+    $výchozí  reduce using rule 275 (Statement)
 
 
-state 305
+State 305
 
   245 SimpleStmt: IncDecStmt .
 
-    $default  reduce using rule 245 (SimpleStmt)
+    $výchozí  reduce using rule 245 (SimpleStmt)
 
 
-state 306
+State 306
 
   156 LabeledStmt: Label . ':' Statement
 
-    ':'  shift, and go to state 388
+    ':'  posunout a přejít do stavu 388
 
 
-state 307
+State 307
 
   266 Statement: LabeledStmt .
 
-    $default  reduce using rule 266 (Statement)
+    $výchozí  reduce using rule 266 (Statement)
 
 
-state 308
+State 308
 
   269 Statement: ReturnStmt .
 
-    $default  reduce using rule 269 (Statement)
+    $výchozí  reduce using rule 269 (Statement)
 
 
-state 309
+State 309
 
   277 Statement: SelectStmt .
 
-    $default  reduce using rule 277 (Statement)
+    $výchozí  reduce using rule 277 (Statement)
 
 
-state 310
+State 310
 
   244 SimpleStmt: SendStmt .
 
-    $default  reduce using rule 244 (SimpleStmt)
+    $výchozí  reduce using rule 244 (SimpleStmt)
 
 
-state 311
+State 311
 
   247 SimpleStmt: ShortVarDecl .
 
-    $default  reduce using rule 247 (SimpleStmt)
+    $výchozí  reduce using rule 247 (SimpleStmt)
 
 
-state 312
+State 312
 
   267 Statement: SimpleStmt .
 
-    $default  reduce using rule 267 (Statement)
+    $výchozí  reduce using rule 267 (Statement)
 
 
-state 313
+State 313
 
   282 StatementList1: StatementList1 Statement . ';'
 
-    ';'  shift, and go to state 389
+    ';'  posunout a přejít do stavu 389
 
 
-state 314
+State 314
 
   276 Statement: SwitchStmt .
 
-    $default  reduce using rule 276 (Statement)
+    $výchozí  reduce using rule 276 (Statement)
 
 
-state 315
+State 315
 
   287 SwitchStmt: TypeSwitchStmt .
 
-    $default  reduce using rule 287 (SwitchStmt)
+    $výchozí  reduce using rule 287 (SwitchStmt)
 
 
-state 316
+State 316
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -7778,152 +7777,152 @@ state 316
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 390
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 390
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 317
+State 317
 
   177 MethodSpec: MethodName Signature .
 
-    $default  reduce using rule 177 (MethodSpec)
+    $výchozí  reduce using rule 177 (MethodSpec)
 
 
-state 318
+State 318
 
   150 InterfaceType1: InterfaceType1 MethodSpec ';' .
 
-    $default  reduce using rule 150 (InterfaceType1)
+    $výchozí  reduce using rule 150 (InterfaceType1)
 
 
-state 319
+State 319
 
   171 MapType: MAP '[' KeyType ']' ElementType .
 
-    $default  reduce using rule 171 (MapType)
+    $výchozí  reduce using rule 171 (MapType)
 
 
-state 320
+State 320
 
     1 AnonymousField: AnonymousField1 TypeName .
 
-    $default  reduce using rule 1 (AnonymousField)
+    $výchozí  reduce using rule 1 (AnonymousField)
 
 
-state 321
+State 321
 
   285 StructType1: StructType1 FieldDecl ';' .
 
-    $default  reduce using rule 285 (StructType1)
+    $výchozí  reduce using rule 285 (StructType1)
 
 
-state 322
+State 322
 
   288 Tag: STRING_LIT .
 
-    $default  reduce using rule 288 (Tag)
+    $výchozí  reduce using rule 288 (Tag)
 
 
-state 323
+State 323
 
    93 FieldDecl: FieldDecl1 FieldDecl2 .
 
-    $default  reduce using rule 93 (FieldDecl)
+    $výchozí  reduce using rule 93 (FieldDecl)
 
 
-state 324
+State 324
 
    97 FieldDecl2: Tag .
 
-    $default  reduce using rule 97 (FieldDecl2)
+    $výchozí  reduce using rule 97 (FieldDecl2)
 
 
-state 325
+State 325
 
    94 FieldDecl1: IdentifierList Type .
 
-    $default  reduce using rule 94 (FieldDecl1)
+    $výchozí  reduce using rule 94 (FieldDecl1)
 
 
-state 326
+State 326
 
    29 BuiltinCall11: ',' .
 
-    $default  reduce using rule 29 (BuiltinCall11)
+    $výchozí  reduce using rule 29 (BuiltinCall11)
 
 
-state 327
+State 327
 
    27 BuiltinCall1: BuiltinArgs BuiltinCall11 .
 
-    $default  reduce using rule 27 (BuiltinCall1)
+    $výchozí  reduce using rule 27 (BuiltinCall1)
 
 
-state 328
+State 328
 
    25 BuiltinCall: IDENTIFIER '(' BuiltinCall1 ')' .
 
-    $default  reduce using rule 25 (BuiltinCall)
+    $výchozí  reduce using rule 25 (BuiltinCall)
 
 
-state 329
+State 329
 
     6 ArgumentList1: TOK4 .
 
-    $default  reduce using rule 6 (ArgumentList1)
+    $výchozí  reduce using rule 6 (ArgumentList1)
 
 
-state 330
+State 330
 
     4 ArgumentList: ExpressionList ArgumentList1 .
 
-    $default  reduce using rule 4 (ArgumentList)
+    $výchozí  reduce using rule 4 (ArgumentList)
 
 
-state 331
+State 331
 
     4 ArgumentList: . ExpressionList ArgumentList1
     8 ArrayType: . '[' ArrayLength ']' ElementType
@@ -7995,147 +7994,147 @@ state 331
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArgumentList    go to state 391
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 242
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArgumentList    přejít do stavu 391
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 242
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 332
+State 332
 
    21 BuiltinArgs: Type BuiltinArgs1 .
 
-    $default  reduce using rule 21 (BuiltinArgs)
+    $výchozí  reduce using rule 21 (BuiltinArgs)
 
 
-state 333
+State 333
 
   162 LiteralType: '[' TOK4 ']' ElementType .
 
-    $default  reduce using rule 162 (LiteralType)
+    $výchozí  reduce using rule 162 (LiteralType)
 
 
-state 334
+State 334
 
   220 ReceiverType: '(' '*' TypeName ')' .
 
-    $default  reduce using rule 220 (ReceiverType)
+    $výchozí  reduce using rule 220 (ReceiverType)
 
 
-state 335
+State 335
 
    71 ElementList: Element ElementList1 .  ['}', ',']
    73 ElementList1: ElementList1 . ',' Element
 
-    ','  shift, and go to state 392
+    ','  posunout a přejít do stavu 392
 
-    ','       [reduce using rule 71 (ElementList)]
-    $default  reduce using rule 71 (ElementList)
+    ','         [reduce using rule 71 (ElementList)]
+    $výchozí  reduce using rule 71 (ElementList)
 
 
-state 336
+State 336
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   328 Value: Expression .  ['}', ',']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 328 (Value)
+    $výchozí  reduce using rule 328 (Value)
 
 
-state 337
+State 337
 
   329 Value: LiteralValue .
 
-    $default  reduce using rule 329 (Value)
+    $výchozí  reduce using rule 329 (Value)
 
 
-state 338
+State 338
 
    67 Element: Element1 Value .
 
-    $default  reduce using rule 67 (Element)
+    $výchozí  reduce using rule 67 (Element)
 
 
-state 339
+State 339
 
   170 LiteralValue11: ',' .
 
-    $default  reduce using rule 170 (LiteralValue11)
+    $výchozí  reduce using rule 170 (LiteralValue11)
 
 
-state 340
+State 340
 
   168 LiteralValue1: ElementList LiteralValue11 .
 
-    $default  reduce using rule 168 (LiteralValue1)
+    $výchozí  reduce using rule 168 (LiteralValue1)
 
 
-state 341
+State 341
 
    69 Element1: Key ':' .
 
-    $default  reduce using rule 69 (Element1)
+    $výchozí  reduce using rule 69 (Element1)
 
 
-state 342
+State 342
 
   166 LiteralValue: '{' LiteralValue1 '}' .
 
-    $default  reduce using rule 166 (LiteralValue)
+    $výchozí  reduce using rule 166 (LiteralValue)
 
 
-state 343
+State 343
 
   146 Index: '[' Expression ']' .
 
-    $default  reduce using rule 146 (Index)
+    $výchozí  reduce using rule 146 (Index)
 
 
-state 344
+State 344
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -8187,7 +8186,7 @@ state 344
   220             | . '(' '*' TypeName ')'
   221             | . '(' ReceiverType ')'
   250 Slice1: Slice11 ':' . Slice12
-  253 Slice12: .  [ASSIGN_OP, BINARY_OP, FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK1, TOK2, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ']', '{', '}', ',', '(', ')', ':', ';', '=', '.']
+  253 Slice12: . %empty  [ASSIGN_OP, BINARY_OP, FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK1, TOK2, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ']', '{', '}', ',', '(', ')', ':', ';', '=', '.']
   254        | . Expression
   258 SliceType: . '[' ']' ElementType
   283 StructType: . STRUCT '{' StructType1 '}'
@@ -8207,22 +8206,22 @@ state 344
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
     FLOAT_LIT      [reduce using rule 253 (Slice12)]
     IDENTIFIER     [reduce using rule 253 (Slice12)]
@@ -8240,296 +8239,296 @@ state 344
     '*'            [reduce using rule 253 (Slice12)]
     '['            [reduce using rule 253 (Slice12)]
     '('            [reduce using rule 253 (Slice12)]
-    $default       reduce using rule 253 (Slice12)
+    $výchozí     reduce using rule 253 (Slice12)
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 393
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    Slice12         go to state 394
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 393
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    Slice12         přejít do stavu 394
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 345
+State 345
 
    34 Call11: ',' .
 
-    $default  reduce using rule 34 (Call11)
+    $výchozí  reduce using rule 34 (Call11)
 
 
-state 346
+State 346
 
    32 Call1: ArgumentList Call11 .
 
-    $default  reduce using rule 32 (Call1)
+    $výchozí  reduce using rule 32 (Call1)
 
 
-state 347
+State 347
 
    30 Call: '(' Call1 ')' .
 
-    $default  reduce using rule 30 (Call)
+    $výchozí  reduce using rule 30 (Call)
 
 
-state 348
+State 348
 
   295 TypeAssertion: '.' '(' Type . ')'
 
-    ')'  shift, and go to state 395
+    ')'  posunout a přejít do stavu 395
 
 
-state 349
+State 349
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   255 Slice2: Slice21 ':' Expression . ':' Expression
 
-    BINARY_OP  shift, and go to state 191
-    ':'        shift, and go to state 396
+    BINARY_OP  posunout a přejít do stavu 191
+    ':'        posunout a přejít do stavu 396
 
 
-state 350
+State 350
 
    62 Conversion1: ',' .
 
-    $default  reduce using rule 62 (Conversion1)
+    $výchozí  reduce using rule 62 (Conversion1)
 
 
-state 351
+State 351
 
    60 Conversion: Type '(' Expression Conversion1 . ')'
 
-    ')'  shift, and go to state 397
+    ')'  posunout a přejít do stavu 397
 
 
-state 352
+State 352
 
   194 ParameterList1: ParameterList1 ',' ParameterDecl .
 
-    $default  reduce using rule 194 (ParameterList1)
+    $výchozí  reduce using rule 194 (ParameterList1)
 
 
-state 353
+State 353
 
   155 Label: IDENTIFIER .
 
-    $default  reduce using rule 155 (Label)
+    $výchozí  reduce using rule 155 (Label)
 
 
-state 354
+State 354
 
    18 BreakStmt: BREAK BreakStmt1 .
 
-    $default  reduce using rule 18 (BreakStmt)
+    $výchozí  reduce using rule 18 (BreakStmt)
 
 
-state 355
+State 355
 
    20 BreakStmt1: Label .
 
-    $default  reduce using rule 20 (BreakStmt1)
+    $výchozí  reduce using rule 20 (BreakStmt1)
 
 
-state 356
+State 356
 
    57 ContinueStmt: CONTINUE ContinueStmt1 .
 
-    $default  reduce using rule 57 (ContinueStmt)
+    $výchozí  reduce using rule 57 (ContinueStmt)
 
 
-state 357
+State 357
 
    59 ContinueStmt1: Label .
 
-    $default  reduce using rule 59 (ContinueStmt1)
+    $výchozí  reduce using rule 59 (ContinueStmt1)
 
 
-state 358
+State 358
 
    66 DeferStmt: DEFER Expression .  [';']
    87 Expression: Expression . BINARY_OP UnaryExpr
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 66 (DeferStmt)
+    $výchozí  reduce using rule 66 (DeferStmt)
 
 
-state 359
+State 359
 
    25 BuiltinCall: IDENTIFIER . '(' BuiltinCall1 ')'
   122 IdentifierList: IDENTIFIER . IdentifierList1
-  123 IdentifierList1: .  [TOK3, ',']
+  123 IdentifierList1: . %empty  [TOK3, ',']
   124                | . IdentifierList1 ',' IDENTIFIER
   183 OperandName: IDENTIFIER .  [ASSIGN_OP, BINARY_OP, FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK1, TOK2, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '{', ',', '(', ':', ';', '=', '.']
   186 PackageName: IDENTIFIER .  ['.']
   313 TypeName: IDENTIFIER .  ['{', '(', '.']
 
-    '('  shift, and go to state 180
+    '('  posunout a přejít do stavu 180
 
-    TOK3      reduce using rule 123 (IdentifierList1)
-    '{'       reduce using rule 183 (OperandName)
-    '{'       [reduce using rule 313 (TypeName)]
-    ','       reduce using rule 123 (IdentifierList1)
-    ','       [reduce using rule 183 (OperandName)]
-    '('       [reduce using rule 183 (OperandName)]
-    '('       [reduce using rule 313 (TypeName)]
-    '.'       reduce using rule 183 (OperandName)
-    '.'       [reduce using rule 186 (PackageName)]
-    '.'       [reduce using rule 313 (TypeName)]
-    $default  reduce using rule 183 (OperandName)
+    TOK3        reduce using rule 123 (IdentifierList1)
+    '{'         reduce using rule 183 (OperandName)
+    '{'         [reduce using rule 313 (TypeName)]
+    ','         reduce using rule 123 (IdentifierList1)
+    ','         [reduce using rule 183 (OperandName)]
+    '('         [reduce using rule 183 (OperandName)]
+    '('         [reduce using rule 313 (TypeName)]
+    '.'         reduce using rule 183 (OperandName)
+    '.'         [reduce using rule 186 (PackageName)]
+    '.'         [reduce using rule 313 (TypeName)]
+    $výchozí  reduce using rule 183 (OperandName)
 
-    IdentifierList1  go to state 55
+    IdentifierList1  přejít do stavu 55
 
 
-state 360
+State 360
 
   109 ForStmt11: Condition .
 
-    $default  reduce using rule 109 (ForStmt11)
+    $výchozí  reduce using rule 109 (ForStmt11)
 
 
-state 361
+State 361
 
    35 Channel: Expression .  [TOK5]
    46 Condition: Expression .  ['{']
    87 Expression: Expression . BINARY_OP UnaryExpr
    88 ExpressionList: Expression . ExpressionList1
-   89 ExpressionList1: .  [ASSIGN_OP, ',', '=']
+   89 ExpressionList1: . %empty  [ASSIGN_OP, ',', '=']
    90                | . ExpressionList1 ',' Expression
    91 ExpressionStmt: Expression .  [';']
   143 IncDecStmt: Expression . IncDecStmt1
   144 IncDecStmt1: . TOK2
   145            | . TOK1
 
-    BINARY_OP  shift, and go to state 191
-    TOK1       shift, and go to state 383
-    TOK2       shift, and go to state 384
+    BINARY_OP  posunout a přejít do stavu 191
+    TOK1       posunout a přejít do stavu 383
+    TOK2       posunout a přejít do stavu 384
 
-    TOK5      reduce using rule 35 (Channel)
-    '{'       reduce using rule 46 (Condition)
-    ';'       reduce using rule 91 (ExpressionStmt)
-    $default  reduce using rule 89 (ExpressionList1)
+    TOK5        reduce using rule 35 (Channel)
+    '{'         reduce using rule 46 (Condition)
+    ';'         reduce using rule 91 (ExpressionStmt)
+    $výchozí  reduce using rule 89 (ExpressionList1)
 
-    ExpressionList1  go to state 223
-    IncDecStmt1      go to state 385
+    ExpressionList1  přejít do stavu 223
+    IncDecStmt1      přejít do stavu 385
 
 
-state 362
+State 362
 
     9 Assignment: ExpressionList . ASSIGN_OP ExpressionList
   212 RangeClause1: ExpressionList . '='
 
-    ASSIGN_OP  shift, and go to state 386
-    '='        shift, and go to state 398
+    ASSIGN_OP  posunout a přejít do stavu 386
+    '='        posunout a přejít do stavu 398
 
 
-state 363
+State 363
 
   110 ForStmt11: ForClause .
 
-    $default  reduce using rule 110 (ForStmt11)
+    $výchozí  reduce using rule 110 (ForStmt11)
 
 
-state 364
+State 364
 
    99 ForClause: ForClause1 . ';' ForClause2 ';' ForClause3
 
-    ';'  shift, and go to state 399
+    ';'  posunout a přejít do stavu 399
 
 
-state 365
+State 365
 
    17 Block: . '{' StatementList '}'
   106 ForStmt: FOR ForStmt1 . Block
 
-    '{'  shift, and go to state 160
+    '{'  posunout a přejít do stavu 160
 
-    Block  go to state 400
+    Block  přejít do stavu 400
 
 
-state 366
+State 366
 
   108 ForStmt1: ForStmt11 .
 
-    $default  reduce using rule 108 (ForStmt1)
+    $výchozí  reduce using rule 108 (ForStmt1)
 
 
-state 367
+State 367
 
   213 RangeClause1: IdentifierList . TOK3
   238 ShortVarDecl: IdentifierList . TOK3 ExpressionList
 
-    TOK3  shift, and go to state 401
+    TOK3  posunout a přejít do stavu 401
 
 
-state 368
+State 368
 
   101 ForClause1: InitStmt .
 
-    $default  reduce using rule 101 (ForClause1)
+    $výchozí  reduce using rule 101 (ForClause1)
 
 
-state 369
+State 369
 
   111 ForStmt11: RangeClause .
 
-    $default  reduce using rule 111 (ForStmt11)
+    $výchozí  reduce using rule 111 (ForStmt11)
 
 
-state 370
+State 370
 
   211 RangeClause: RangeClause1 . RANGE Expression
 
-    RANGE  shift, and go to state 402
+    RANGE  posunout a přejít do stavu 402
 
 
-state 371
+State 371
 
   147 InitStmt: SimpleStmt .
 
-    $default  reduce using rule 147 (InitStmt)
+    $výchozí  reduce using rule 147 (InitStmt)
 
 
-state 372
+State 372
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   120 GoStmt: GO Expression .  [';']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 120 (GoStmt)
+    $výchozí  reduce using rule 120 (GoStmt)
 
 
-state 373
+State 373
 
   121 GotoStmt: GOTO Label .
 
-    $default  reduce using rule 121 (GotoStmt)
+    $výchozí  reduce using rule 121 (GotoStmt)
 
 
-state 374
+State 374
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -8599,86 +8598,86 @@ state 374
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 403
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 403
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 375
+State 375
 
   127 IfStmt1: SimpleStmt . ';'
 
-    ';'  shift, and go to state 404
+    ';'  posunout a přejít do stavu 404
 
 
-state 376
+State 376
 
   232 ReturnStmt1: ExpressionList .
 
-    $default  reduce using rule 232 (ReturnStmt1)
+    $výchozí  reduce using rule 232 (ReturnStmt1)
 
 
-state 377
+State 377
 
   230 ReturnStmt: RETURN ReturnStmt1 .
 
-    $default  reduce using rule 230 (ReturnStmt)
+    $výchozí  reduce using rule 230 (ReturnStmt)
 
 
-state 378
+State 378
 
   233 SelectStmt: SELECT '{' . SelectStmt1 '}'
-  234 SelectStmt1: .
+  234 SelectStmt1: . %empty
   235            | . SelectStmt1 CommClause
 
-    $default  reduce using rule 234 (SelectStmt1)
+    $výchozí  reduce using rule 234 (SelectStmt1)
 
-    SelectStmt1  go to state 405
+    SelectStmt1  přejít do stavu 405
 
 
-state 379
+State 379
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -8694,7 +8693,7 @@ state 379
    45 CompositeLit: . LiteralType LiteralValue
    60 Conversion: . Type '(' Expression Conversion1 ')'
    79 ExprSwitchStmt: SWITCH ExprSwitchStmt1 . ExprSwitchStmt2 '{' ExprSwitchStmt3 '}'
-   82 ExprSwitchStmt2: .  ['{']
+   82 ExprSwitchStmt2: . %empty  ['{']
    83                | . Expression
    86 Expression: . UnaryExpr
    87           | . Expression BINARY_OP UnaryExpr
@@ -8750,81 +8749,81 @@ state 379
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    $default  reduce using rule 82 (ExprSwitchStmt2)
+    $výchozí  reduce using rule 82 (ExprSwitchStmt2)
 
-    ArrayType        go to state 122
-    BasicLit         go to state 123
-    BuiltinCall      go to state 124
-    ChannelType      go to state 68
-    ChannelType1     go to state 69
-    CompositeLit     go to state 125
-    Conversion       go to state 126
-    ExprSwitchStmt2  go to state 406
-    Expression       go to state 407
-    FunctionLit      go to state 128
-    FunctionType     go to state 72
-    InterfaceType    go to state 73
-    Literal          go to state 129
-    LiteralType      go to state 130
-    MapType          go to state 131
-    MethodExpr       go to state 132
-    Operand          go to state 133
-    OperandName      go to state 134
-    PackageName      go to state 75
-    PointerType      go to state 76
-    PrimaryExpr      go to state 135
-    QualifiedIdent   go to state 136
-    ReceiverType     go to state 137
-    SliceType        go to state 138
-    StructType       go to state 139
-    Type             go to state 140
-    TypeLit          go to state 81
-    TypeName         go to state 141
-    UnaryExpr        go to state 142
+    ArrayType        přejít do stavu 122
+    BasicLit         přejít do stavu 123
+    BuiltinCall      přejít do stavu 124
+    ChannelType      přejít do stavu 68
+    ChannelType1     přejít do stavu 69
+    CompositeLit     přejít do stavu 125
+    Conversion       přejít do stavu 126
+    ExprSwitchStmt2  přejít do stavu 406
+    Expression       přejít do stavu 407
+    FunctionLit      přejít do stavu 128
+    FunctionType     přejít do stavu 72
+    InterfaceType    přejít do stavu 73
+    Literal          přejít do stavu 129
+    LiteralType      přejít do stavu 130
+    MapType          přejít do stavu 131
+    MethodExpr       přejít do stavu 132
+    Operand          přejít do stavu 133
+    OperandName      přejít do stavu 134
+    PackageName      přejít do stavu 75
+    PointerType      přejít do stavu 76
+    PrimaryExpr      přejít do stavu 135
+    QualifiedIdent   přejít do stavu 136
+    ReceiverType     přejít do stavu 137
+    SliceType        přejít do stavu 138
+    StructType       přejít do stavu 139
+    Type             přejít do stavu 140
+    TypeLit          přejít do stavu 81
+    TypeName         přejít do stavu 141
+    UnaryExpr        přejít do stavu 142
 
 
-state 380
+State 380
 
    81 ExprSwitchStmt1: SimpleStmt . ';'
   323 TypeSwitchStmt1: SimpleStmt . ';'
 
-    ';'  shift, and go to state 408
+    ';'  posunout a přejít do stavu 408
 
 
-state 381
+State 381
 
   318 TypeSwitchGuard: . TypeSwitchGuard1 PrimaryExpr '.' '(' TYPE ')'
-  319 TypeSwitchGuard1: .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
+  319 TypeSwitchGuard1: . %empty  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
   320                 | . IDENTIFIER TOK3
   321 TypeSwitchStmt: SWITCH TypeSwitchStmt1 . TypeSwitchGuard '{' TypeSwitchStmt2 '}'
 
-    IDENTIFIER  shift, and go to state 409
+    IDENTIFIER  posunout a přejít do stavu 409
 
     IDENTIFIER  [reduce using rule 319 (TypeSwitchGuard1)]
-    $default    reduce using rule 319 (TypeSwitchGuard1)
+    $výchozí  reduce using rule 319 (TypeSwitchGuard1)
 
-    TypeSwitchGuard   go to state 410
-    TypeSwitchGuard1  go to state 411
+    TypeSwitchGuard   přejít do stavu 410
+    TypeSwitchGuard1  přejít do stavu 411
 
 
-state 382
+State 382
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -8894,75 +8893,75 @@ state 382
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 412
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 412
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 383
+State 383
 
   145 IncDecStmt1: TOK1 .
 
-    $default  reduce using rule 145 (IncDecStmt1)
+    $výchozí  reduce using rule 145 (IncDecStmt1)
 
 
-state 384
+State 384
 
   144 IncDecStmt1: TOK2 .
 
-    $default  reduce using rule 144 (IncDecStmt1)
+    $výchozí  reduce using rule 144 (IncDecStmt1)
 
 
-state 385
+State 385
 
   143 IncDecStmt: Expression IncDecStmt1 .
 
-    $default  reduce using rule 143 (IncDecStmt)
+    $výchozí  reduce using rule 143 (IncDecStmt)
 
 
-state 386
+State 386
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
     9 Assignment: ExpressionList ASSIGN_OP . ExpressionList
@@ -9033,55 +9032,55 @@ state 386
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 413
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 413
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 387
+State 387
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -9152,55 +9151,55 @@ state 387
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 414
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 414
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 388
+State 388
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
     9 Assignment: . ExpressionList ASSIGN_OP ExpressionList
@@ -9225,7 +9224,7 @@ state 388
    64            | . TypeDecl
    65            | . VarDecl
    66 DeferStmt: . DEFER Expression
-   75 EmptyStmt: .  [';']
+   75 EmptyStmt: . %empty  [';']
    79 ExprSwitchStmt: . SWITCH ExprSwitchStmt1 ExprSwitchStmt2 '{' ExprSwitchStmt3 '}'
    86 Expression: . UnaryExpr
    87           | . Expression BINARY_OP UnaryExpr
@@ -9323,126 +9322,126 @@ state 388
   327          | . UNARY_OP UnaryExpr
   330 VarDecl: . VAR VarDecl1
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 275
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    BREAK          shift, and go to state 276
-    CHAN           shift, and go to state 59
-    CONST          shift, and go to state 21
-    CONTINUE       shift, and go to state 277
-    DEFER          shift, and go to state 278
-    FALLTHROUGH    shift, and go to state 279
-    FOR            shift, and go to state 280
-    FUNC           shift, and go to state 117
-    GO             shift, and go to state 281
-    GOTO           shift, and go to state 282
-    IF             shift, and go to state 283
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    RETURN         shift, and go to state 284
-    SELECT         shift, and go to state 285
-    STRUCT         shift, and go to state 63
-    SWITCH         shift, and go to state 286
-    TYPE           shift, and go to state 23
-    VAR            shift, and go to state 24
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '{'            shift, and go to state 160
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 275
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    BREAK          posunout a přejít do stavu 276
+    CHAN           posunout a přejít do stavu 59
+    CONST          posunout a přejít do stavu 21
+    CONTINUE       posunout a přejít do stavu 277
+    DEFER          posunout a přejít do stavu 278
+    FALLTHROUGH    posunout a přejít do stavu 279
+    FOR            posunout a přejít do stavu 280
+    FUNC           posunout a přejít do stavu 117
+    GO             posunout a přejít do stavu 281
+    GOTO           posunout a přejít do stavu 282
+    IF             posunout a přejít do stavu 283
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    RETURN         posunout a přejít do stavu 284
+    SELECT         posunout a přejít do stavu 285
+    STRUCT         posunout a přejít do stavu 63
+    SWITCH         posunout a přejít do stavu 286
+    TYPE           posunout a přejít do stavu 23
+    VAR            posunout a přejít do stavu 24
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '{'            posunout a přejít do stavu 160
+    '('            posunout a přejít do stavu 120
 
-    $default  reduce using rule 75 (EmptyStmt)
+    $výchozí  reduce using rule 75 (EmptyStmt)
 
-    ArrayType        go to state 122
-    Assignment       go to state 287
-    BasicLit         go to state 123
-    Block            go to state 288
-    BreakStmt        go to state 289
-    BuiltinCall      go to state 124
-    Channel          go to state 290
-    ChannelType      go to state 68
-    ChannelType1     go to state 69
-    CompositeLit     go to state 125
-    ConstDecl        go to state 25
-    ContinueStmt     go to state 291
-    Conversion       go to state 126
-    Declaration      go to state 292
-    DeferStmt        go to state 293
-    EmptyStmt        go to state 294
-    ExprSwitchStmt   go to state 295
-    Expression       go to state 296
-    ExpressionList   go to state 297
-    ExpressionStmt   go to state 298
-    FallthroughStmt  go to state 299
-    ForStmt          go to state 300
-    FunctionLit      go to state 128
-    FunctionType     go to state 72
-    GoStmt           go to state 301
-    GotoStmt         go to state 302
-    IdentifierList   go to state 303
-    IfStmt           go to state 304
-    IncDecStmt       go to state 305
-    InterfaceType    go to state 73
-    Label            go to state 306
-    LabeledStmt      go to state 307
-    Literal          go to state 129
-    LiteralType      go to state 130
-    MapType          go to state 131
-    MethodExpr       go to state 132
-    Operand          go to state 133
-    OperandName      go to state 134
-    PackageName      go to state 75
-    PointerType      go to state 76
-    PrimaryExpr      go to state 135
-    QualifiedIdent   go to state 136
-    ReceiverType     go to state 137
-    ReturnStmt       go to state 308
-    SelectStmt       go to state 309
-    SendStmt         go to state 310
-    ShortVarDecl     go to state 311
-    SimpleStmt       go to state 312
-    SliceType        go to state 138
-    Statement        go to state 415
-    StructType       go to state 139
-    SwitchStmt       go to state 314
-    Type             go to state 140
-    TypeDecl         go to state 30
-    TypeLit          go to state 81
-    TypeName         go to state 141
-    TypeSwitchStmt   go to state 315
-    UnaryExpr        go to state 142
-    VarDecl          go to state 31
+    ArrayType        přejít do stavu 122
+    Assignment       přejít do stavu 287
+    BasicLit         přejít do stavu 123
+    Block            přejít do stavu 288
+    BreakStmt        přejít do stavu 289
+    BuiltinCall      přejít do stavu 124
+    Channel          přejít do stavu 290
+    ChannelType      přejít do stavu 68
+    ChannelType1     přejít do stavu 69
+    CompositeLit     přejít do stavu 125
+    ConstDecl        přejít do stavu 25
+    ContinueStmt     přejít do stavu 291
+    Conversion       přejít do stavu 126
+    Declaration      přejít do stavu 292
+    DeferStmt        přejít do stavu 293
+    EmptyStmt        přejít do stavu 294
+    ExprSwitchStmt   přejít do stavu 295
+    Expression       přejít do stavu 296
+    ExpressionList   přejít do stavu 297
+    ExpressionStmt   přejít do stavu 298
+    FallthroughStmt  přejít do stavu 299
+    ForStmt          přejít do stavu 300
+    FunctionLit      přejít do stavu 128
+    FunctionType     přejít do stavu 72
+    GoStmt           přejít do stavu 301
+    GotoStmt         přejít do stavu 302
+    IdentifierList   přejít do stavu 303
+    IfStmt           přejít do stavu 304
+    IncDecStmt       přejít do stavu 305
+    InterfaceType    přejít do stavu 73
+    Label            přejít do stavu 306
+    LabeledStmt      přejít do stavu 307
+    Literal          přejít do stavu 129
+    LiteralType      přejít do stavu 130
+    MapType          přejít do stavu 131
+    MethodExpr       přejít do stavu 132
+    Operand          přejít do stavu 133
+    OperandName      přejít do stavu 134
+    PackageName      přejít do stavu 75
+    PointerType      přejít do stavu 76
+    PrimaryExpr      přejít do stavu 135
+    QualifiedIdent   přejít do stavu 136
+    ReceiverType     přejít do stavu 137
+    ReturnStmt       přejít do stavu 308
+    SelectStmt       přejít do stavu 309
+    SendStmt         přejít do stavu 310
+    ShortVarDecl     přejít do stavu 311
+    SimpleStmt       přejít do stavu 312
+    SliceType        přejít do stavu 138
+    Statement        přejít do stavu 415
+    StructType       přejít do stavu 139
+    SwitchStmt       přejít do stavu 314
+    Type             přejít do stavu 140
+    TypeDecl         přejít do stavu 30
+    TypeLit          přejít do stavu 81
+    TypeName         přejít do stavu 141
+    TypeSwitchStmt   přejít do stavu 315
+    UnaryExpr        přejít do stavu 142
+    VarDecl          přejít do stavu 31
 
 
-state 389
+State 389
 
   282 StatementList1: StatementList1 Statement ';' .
 
-    $default  reduce using rule 282 (StatementList1)
+    $výchozí  reduce using rule 282 (StatementList1)
 
 
-state 390
+State 390
 
    87 Expression: Expression . BINARY_OP UnaryExpr
    90 ExpressionList1: ExpressionList1 ',' Expression .  [ASSIGN_OP, TOK4, '{', ',', ')', ':', ';', '=']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 90 (ExpressionList1)
+    $výchozí  reduce using rule 90 (ExpressionList1)
 
 
-state 391
+State 391
 
    24 BuiltinArgs1: ',' ArgumentList .
 
-    $default  reduce using rule 24 (BuiltinArgs1)
+    $výchozí  reduce using rule 24 (BuiltinArgs1)
 
 
-state 392
+State 392
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -9458,7 +9457,7 @@ state 392
    45 CompositeLit: . LiteralType LiteralValue
    60 Conversion: . Type '(' Expression Conversion1 ')'
    67 Element: . Element1 Value
-   68 Element1: .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '{', '(']
+   68 Element1: . %empty  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '{', '(']
    69         | . Key ':'
    70 ElementIndex: . Expression
    73 ElementList1: ElementList1 ',' . Element
@@ -9519,22 +9518,22 @@ state 392
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 250
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 250
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
     FLOAT_LIT      [reduce using rule 68 (Element1)]
     IDENTIFIER     [reduce using rule 68 (Element1)]
@@ -9552,69 +9551,69 @@ state 392
     '*'            [reduce using rule 68 (Element1)]
     '['            [reduce using rule 68 (Element1)]
     '('            [reduce using rule 68 (Element1)]
-    $default       reduce using rule 68 (Element1)
+    $výchozí     reduce using rule 68 (Element1)
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Element         go to state 416
-    Element1        go to state 252
-    ElementIndex    go to state 253
-    Expression      go to state 255
-    FieldName       go to state 256
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Key             go to state 257
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Element         přejít do stavu 416
+    Element1        přejít do stavu 252
+    ElementIndex    přejít do stavu 253
+    Expression      přejít do stavu 255
+    FieldName       přejít do stavu 256
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Key             přejít do stavu 257
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 393
+State 393
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   254 Slice12: Expression .  [ASSIGN_OP, BINARY_OP, FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK1, TOK2, TOK4, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', ']', '{', '}', ',', '(', ')', ':', ';', '=', '.']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    BINARY_OP  [reduce using rule 254 (Slice12)]
-    $default   reduce using rule 254 (Slice12)
+    BINARY_OP   [reduce using rule 254 (Slice12)]
+    $výchozí  reduce using rule 254 (Slice12)
 
 
-state 394
+State 394
 
   250 Slice1: Slice11 ':' Slice12 .
 
-    $default  reduce using rule 250 (Slice1)
+    $výchozí  reduce using rule 250 (Slice1)
 
 
-state 395
+State 395
 
   295 TypeAssertion: '.' '(' Type ')' .
 
-    $default  reduce using rule 295 (TypeAssertion)
+    $výchozí  reduce using rule 295 (TypeAssertion)
 
 
-state 396
+State 396
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -9684,68 +9683,68 @@ state 396
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 417
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 417
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 397
+State 397
 
    60 Conversion: Type '(' Expression Conversion1 ')' .
 
-    $default  reduce using rule 60 (Conversion)
+    $výchozí  reduce using rule 60 (Conversion)
 
 
-state 398
+State 398
 
   212 RangeClause1: ExpressionList '=' .
 
-    $default  reduce using rule 212 (RangeClause1)
+    $výchozí  reduce using rule 212 (RangeClause1)
 
 
-state 399
+State 399
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -9764,7 +9763,7 @@ state 399
    86 Expression: . UnaryExpr
    87           | . Expression BINARY_OP UnaryExpr
    99 ForClause: ForClause1 ';' . ForClause2 ';' ForClause3
-  102 ForClause2: .  [';']
+  102 ForClause2: . %empty  [';']
   103           | . Condition
   117 FunctionLit: . FUNC Function
   119 FunctionType: . FUNC Signature
@@ -9818,65 +9817,65 @@ state 399
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    $default  reduce using rule 102 (ForClause2)
+    $výchozí  reduce using rule 102 (ForClause2)
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Condition       go to state 418
-    Conversion      go to state 126
-    Expression      go to state 419
-    ForClause2      go to state 420
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Condition       přejít do stavu 418
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 419
+    ForClause2      přejít do stavu 420
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 400
+State 400
 
   106 ForStmt: FOR ForStmt1 Block .
 
-    $default  reduce using rule 106 (ForStmt)
+    $výchozí  reduce using rule 106 (ForStmt)
 
 
-state 401
+State 401
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -9948,57 +9947,57 @@ state 401
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    $default  reduce using rule 213 (RangeClause1)
+    $výchozí  reduce using rule 213 (RangeClause1)
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 414
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 414
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 402
+State 402
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -10068,73 +10067,73 @@ state 402
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 421
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 421
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 403
+State 403
 
    17 Block: . '{' StatementList '}'
    87 Expression: Expression . BINARY_OP UnaryExpr
   125 IfStmt: IF IfStmt1 Expression . Block IfStmt2
 
-    BINARY_OP  shift, and go to state 191
-    '{'        shift, and go to state 160
+    BINARY_OP  posunout a přejít do stavu 191
+    '{'        posunout a přejít do stavu 160
 
-    Block  go to state 422
+    Block  přejít do stavu 422
 
 
-state 404
+State 404
 
   127 IfStmt1: SimpleStmt ';' .
 
-    $default  reduce using rule 127 (IfStmt1)
+    $výchozí  reduce using rule 127 (IfStmt1)
 
 
-state 405
+State 405
 
    40 CommCase: . CASE CommCase1
    41         | . DEFAULT
@@ -10142,32 +10141,32 @@ state 405
   233 SelectStmt: SELECT '{' SelectStmt1 . '}'
   235 SelectStmt1: SelectStmt1 . CommClause
 
-    CASE     shift, and go to state 423
-    DEFAULT  shift, and go to state 424
-    '}'      shift, and go to state 425
+    CASE     posunout a přejít do stavu 423
+    DEFAULT  posunout a přejít do stavu 424
+    '}'      posunout a přejít do stavu 425
 
-    CommCase    go to state 426
-    CommClause  go to state 427
+    CommCase    přejít do stavu 426
+    CommClause  přejít do stavu 427
 
 
-state 406
+State 406
 
    79 ExprSwitchStmt: SWITCH ExprSwitchStmt1 ExprSwitchStmt2 . '{' ExprSwitchStmt3 '}'
 
-    '{'  shift, and go to state 428
+    '{'  posunout a přejít do stavu 428
 
 
-state 407
+State 407
 
    83 ExprSwitchStmt2: Expression .  ['{']
    87 Expression: Expression . BINARY_OP UnaryExpr
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 83 (ExprSwitchStmt2)
+    $výchozí  reduce using rule 83 (ExprSwitchStmt2)
 
 
-state 408
+State 408
 
    81 ExprSwitchStmt1: SimpleStmt ';' .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '{', '(']
   323 TypeSwitchStmt1: SimpleStmt ';' .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
@@ -10202,24 +10201,24 @@ state 408
     '['            [reduce using rule 323 (TypeSwitchStmt1)]
     '('            reduce using rule 81 (ExprSwitchStmt1)
     '('            [reduce using rule 323 (TypeSwitchStmt1)]
-    $default       reduce using rule 81 (ExprSwitchStmt1)
+    $výchozí     reduce using rule 81 (ExprSwitchStmt1)
 
 
-state 409
+State 409
 
   320 TypeSwitchGuard1: IDENTIFIER . TOK3
 
-    TOK3  shift, and go to state 429
+    TOK3  posunout a přejít do stavu 429
 
 
-state 410
+State 410
 
   321 TypeSwitchStmt: SWITCH TypeSwitchStmt1 TypeSwitchGuard . '{' TypeSwitchStmt2 '}'
 
-    '{'  shift, and go to state 430
+    '{'  posunout a přejít do stavu 430
 
 
-state 411
+State 411
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -10285,146 +10284,146 @@ state 411
   314         | . QualifiedIdent
   318 TypeSwitchGuard: TypeSwitchGuard1 . PrimaryExpr '.' '(' TYPE ')'
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 431
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 431
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
 
 
-state 412
+State 412
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   237 SendStmt: Channel TOK5 Expression .  ['{', ':', ';']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 237 (SendStmt)
+    $výchozí  reduce using rule 237 (SendStmt)
 
 
-state 413
+State 413
 
     9 Assignment: ExpressionList ASSIGN_OP ExpressionList .
 
-    $default  reduce using rule 9 (Assignment)
+    $výchozí  reduce using rule 9 (Assignment)
 
 
-state 414
+State 414
 
   238 ShortVarDecl: IdentifierList TOK3 ExpressionList .
 
-    $default  reduce using rule 238 (ShortVarDecl)
+    $výchozí  reduce using rule 238 (ShortVarDecl)
 
 
-state 415
+State 415
 
   156 LabeledStmt: Label ':' Statement .
 
-    $default  reduce using rule 156 (LabeledStmt)
+    $výchozí  reduce using rule 156 (LabeledStmt)
 
 
-state 416
+State 416
 
    73 ElementList1: ElementList1 ',' Element .
 
-    $default  reduce using rule 73 (ElementList1)
+    $výchozí  reduce using rule 73 (ElementList1)
 
 
-state 417
+State 417
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   255 Slice2: Slice21 ':' Expression ':' Expression .  [']']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 255 (Slice2)
+    $výchozí  reduce using rule 255 (Slice2)
 
 
-state 418
+State 418
 
   103 ForClause2: Condition .
 
-    $default  reduce using rule 103 (ForClause2)
+    $výchozí  reduce using rule 103 (ForClause2)
 
 
-state 419
+State 419
 
    46 Condition: Expression .  [';']
    87 Expression: Expression . BINARY_OP UnaryExpr
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 46 (Condition)
+    $výchozí  reduce using rule 46 (Condition)
 
 
-state 420
+State 420
 
    99 ForClause: ForClause1 ';' ForClause2 . ';' ForClause3
 
-    ';'  shift, and go to state 432
+    ';'  posunout a přejít do stavu 432
 
 
-state 421
+State 421
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   211 RangeClause: RangeClause1 RANGE Expression .  ['{']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 211 (RangeClause)
+    $výchozí  reduce using rule 211 (RangeClause)
 
 
-state 422
+State 422
 
   125 IfStmt: IF IfStmt1 Expression Block . IfStmt2
-  128 IfStmt2: .  [';']
+  128 IfStmt2: . %empty  [';']
   129        | . ELSE IfStmt21
 
-    ELSE  shift, and go to state 433
+    ELSE  posunout a přejít do stavu 433
 
-    $default  reduce using rule 128 (IfStmt2)
+    $výchozí  reduce using rule 128 (IfStmt2)
 
-    IfStmt2  go to state 434
+    IfStmt2  přejít do stavu 434
 
 
-state 423
+State 423
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -10482,7 +10481,7 @@ state 423
   220             | . '(' '*' TypeName ')'
   221             | . '(' ReceiverType ')'
   223 RecvStmt: . RecvStmt1 RecvExpr
-  224 RecvStmt1: .  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
+  224 RecvStmt1: . %empty  [FLOAT_LIT, IDENTIFIER, IMAGINARY_LIT, INT_LIT, RUNE_LIT, STRING_LIT, UNARY_OP, TOK5, CHAN, FUNC, INTERFACE, MAP, STRUCT, '*', '[', '(']
   225          | . RecvStmt11
   226 RecvStmt11: . ExpressionList '='
   227           | . IdentifierList TOK3
@@ -10505,22 +10504,22 @@ state 423
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 359
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 359
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
     FLOAT_LIT      [reduce using rule 224 (RecvStmt1)]
     IDENTIFIER     [reduce using rule 224 (RecvStmt1)]
@@ -10539,102 +10538,102 @@ state 423
     '['            [reduce using rule 224 (RecvStmt1)]
     '('            [reduce using rule 224 (RecvStmt1)]
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    Channel         go to state 290
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CommCase1       go to state 435
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 436
-    ExpressionList  go to state 437
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    IdentifierList  go to state 438
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    RecvStmt        go to state 439
-    RecvStmt1       go to state 440
-    RecvStmt11      go to state 441
-    SendStmt        go to state 442
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    Channel         přejít do stavu 290
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CommCase1       přejít do stavu 435
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 436
+    ExpressionList  přejít do stavu 437
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    IdentifierList  přejít do stavu 438
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    RecvStmt        přejít do stavu 439
+    RecvStmt1       přejít do stavu 440
+    RecvStmt11      přejít do stavu 441
+    SendStmt        přejít do stavu 442
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 424
+State 424
 
    41 CommCase: DEFAULT .
 
-    $default  reduce using rule 41 (CommCase)
+    $výchozí  reduce using rule 41 (CommCase)
 
 
-state 425
+State 425
 
   233 SelectStmt: SELECT '{' SelectStmt1 '}' .
 
-    $default  reduce using rule 233 (SelectStmt)
+    $výchozí  reduce using rule 233 (SelectStmt)
 
 
-state 426
+State 426
 
    44 CommClause: CommCase . ':' StatementList
 
-    ':'  shift, and go to state 443
+    ':'  posunout a přejít do stavu 443
 
 
-state 427
+State 427
 
   235 SelectStmt1: SelectStmt1 CommClause .
 
-    $default  reduce using rule 235 (SelectStmt1)
+    $výchozí  reduce using rule 235 (SelectStmt1)
 
 
-state 428
+State 428
 
    79 ExprSwitchStmt: SWITCH ExprSwitchStmt1 ExprSwitchStmt2 '{' . ExprSwitchStmt3 '}'
-   84 ExprSwitchStmt3: .
+   84 ExprSwitchStmt3: . %empty
    85                | . ExprSwitchStmt3 ExprCaseClause
 
-    $default  reduce using rule 84 (ExprSwitchStmt3)
+    $výchozí  reduce using rule 84 (ExprSwitchStmt3)
 
-    ExprSwitchStmt3  go to state 444
+    ExprSwitchStmt3  přejít do stavu 444
 
 
-state 429
+State 429
 
   320 TypeSwitchGuard1: IDENTIFIER TOK3 .
 
-    $default  reduce using rule 320 (TypeSwitchGuard1)
+    $výchozí  reduce using rule 320 (TypeSwitchGuard1)
 
 
-state 430
+State 430
 
   321 TypeSwitchStmt: SWITCH TypeSwitchStmt1 TypeSwitchGuard '{' . TypeSwitchStmt2 '}'
-  324 TypeSwitchStmt2: .
+  324 TypeSwitchStmt2: . %empty
   325                | . TypeSwitchStmt2 TypeCaseClause
 
-    $default  reduce using rule 324 (TypeSwitchStmt2)
+    $výchozí  reduce using rule 324 (TypeSwitchStmt2)
 
-    TypeSwitchStmt2  go to state 445
+    TypeSwitchStmt2  přejít do stavu 445
 
 
-state 431
+State 431
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -10696,7 +10695,7 @@ state 431
   248 Slice: . '[' Slice1
   249      | . Slice2 ']'
   255 Slice2: . Slice21 ':' Expression ':' Expression
-  256 Slice21: .  [':']
+  256 Slice21: . %empty  [':']
   257        | . Expression
   258 SliceType: . '[' ']' ElementType
   283 StructType: . STRUCT '{' StructType1 '}'
@@ -10718,64 +10717,64 @@ state 431
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 194
-    '('            shift, and go to state 195
-    '.'            shift, and go to state 446
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 194
+    '('            posunout a přejít do stavu 195
+    '.'            posunout a přejít do stavu 446
 
-    $default  reduce using rule 256 (Slice21)
+    $výchozí  reduce using rule 256 (Slice21)
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    Call            go to state 197
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 198
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    Index           go to state 199
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    Selector        go to state 200
-    Slice           go to state 201
-    Slice2          go to state 202
-    Slice21         go to state 203
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeAssertion   go to state 204
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    Call            přejít do stavu 197
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 198
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    Index           přejít do stavu 199
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    Selector        přejít do stavu 200
+    Slice           přejít do stavu 201
+    Slice2          přejít do stavu 202
+    Slice21         přejít do stavu 203
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeAssertion   přejít do stavu 204
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 432
+State 432
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
     9 Assignment: . ExpressionList ASSIGN_OP ExpressionList
@@ -10792,13 +10791,13 @@ state 432
    39             | . TOK5 CHAN
    45 CompositeLit: . LiteralType LiteralValue
    60 Conversion: . Type '(' Expression Conversion1 ')'
-   75 EmptyStmt: .  ['{']
+   75 EmptyStmt: . %empty  ['{']
    86 Expression: . UnaryExpr
    87           | . Expression BINARY_OP UnaryExpr
    88 ExpressionList: . Expression ExpressionList1
    91 ExpressionStmt: . Expression
    99 ForClause: ForClause1 ';' ForClause2 ';' . ForClause3
-  104 ForClause3: .  ['{']
+  104 ForClause3: . %empty  ['{']
   105           | . PostStmt
   117 FunctionLit: . FUNC Function
   119 FunctionType: . FUNC Signature
@@ -10863,70 +10862,70 @@ state 432
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 359
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 359
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    '{'       reduce using rule 75 (EmptyStmt)
-    '{'       [reduce using rule 104 (ForClause3)]
-    $default  reduce using rule 75 (EmptyStmt)
+    '{'         reduce using rule 75 (EmptyStmt)
+    '{'         [reduce using rule 104 (ForClause3)]
+    $výchozí  reduce using rule 75 (EmptyStmt)
 
-    ArrayType       go to state 122
-    Assignment      go to state 287
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    Channel         go to state 290
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    EmptyStmt       go to state 294
-    Expression      go to state 296
-    ExpressionList  go to state 297
-    ExpressionStmt  go to state 298
-    ForClause3      go to state 447
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    IdentifierList  go to state 303
-    IncDecStmt      go to state 305
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PostStmt        go to state 448
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SendStmt        go to state 310
-    ShortVarDecl    go to state 311
-    SimpleStmt      go to state 449
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    Assignment      přejít do stavu 287
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    Channel         přejít do stavu 290
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    EmptyStmt       přejít do stavu 294
+    Expression      přejít do stavu 296
+    ExpressionList  přejít do stavu 297
+    ExpressionStmt  přejít do stavu 298
+    ForClause3      přejít do stavu 447
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    IdentifierList  přejít do stavu 303
+    IncDecStmt      přejít do stavu 305
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PostStmt        přejít do stavu 448
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SendStmt        přejít do stavu 310
+    ShortVarDecl    přejít do stavu 311
+    SimpleStmt      přejít do stavu 449
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 433
+State 433
 
    17 Block: . '{' StatementList '}'
   125 IfStmt: . IF IfStmt1 Expression Block IfStmt2
@@ -10934,66 +10933,66 @@ state 433
   130 IfStmt21: . IfStmt
   131         | . Block
 
-    IF   shift, and go to state 283
-    '{'  shift, and go to state 160
+    IF   posunout a přejít do stavu 283
+    '{'  posunout a přejít do stavu 160
 
-    Block     go to state 450
-    IfStmt    go to state 451
-    IfStmt21  go to state 452
+    Block     přejít do stavu 450
+    IfStmt    přejít do stavu 451
+    IfStmt21  přejít do stavu 452
 
 
-state 434
+State 434
 
   125 IfStmt: IF IfStmt1 Expression Block IfStmt2 .
 
-    $default  reduce using rule 125 (IfStmt)
+    $výchozí  reduce using rule 125 (IfStmt)
 
 
-state 435
+State 435
 
    40 CommCase: CASE CommCase1 .
 
-    $default  reduce using rule 40 (CommCase)
+    $výchozí  reduce using rule 40 (CommCase)
 
 
-state 436
+State 436
 
    35 Channel: Expression .  [TOK5]
    87 Expression: Expression . BINARY_OP UnaryExpr
    88 ExpressionList: Expression . ExpressionList1
-   89 ExpressionList1: .  [',', '=']
+   89 ExpressionList1: . %empty  [',', '=']
    90                | . ExpressionList1 ',' Expression
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    TOK5      reduce using rule 35 (Channel)
-    $default  reduce using rule 89 (ExpressionList1)
+    TOK5        reduce using rule 35 (Channel)
+    $výchozí  reduce using rule 89 (ExpressionList1)
 
-    ExpressionList1  go to state 223
+    ExpressionList1  přejít do stavu 223
 
 
-state 437
+State 437
 
   226 RecvStmt11: ExpressionList . '='
 
-    '='  shift, and go to state 453
+    '='  posunout a přejít do stavu 453
 
 
-state 438
+State 438
 
   227 RecvStmt11: IdentifierList . TOK3
 
-    TOK3  shift, and go to state 454
+    TOK3  posunout a přejít do stavu 454
 
 
-state 439
+State 439
 
    43 CommCase1: RecvStmt .
 
-    $default  reduce using rule 43 (CommCase1)
+    $výchozí  reduce using rule 43 (CommCase1)
 
 
-state 440
+State 440
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -11064,82 +11063,82 @@ state 440
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 455
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    RecvExpr        go to state 456
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 455
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    RecvExpr        přejít do stavu 456
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 441
+State 441
 
   225 RecvStmt1: RecvStmt11 .
 
-    $default  reduce using rule 225 (RecvStmt1)
+    $výchozí  reduce using rule 225 (RecvStmt1)
 
 
-state 442
+State 442
 
    42 CommCase1: SendStmt .
 
-    $default  reduce using rule 42 (CommCase1)
+    $výchozí  reduce using rule 42 (CommCase1)
 
 
-state 443
+State 443
 
    44 CommClause: CommCase ':' . StatementList
   280 StatementList: . StatementList1
-  281 StatementList1: .
+  281 StatementList1: . %empty
   282               | . StatementList1 Statement ';'
 
-    $default  reduce using rule 281 (StatementList1)
+    $výchozí  reduce using rule 281 (StatementList1)
 
-    StatementList   go to state 457
-    StatementList1  go to state 220
+    StatementList   přejít do stavu 457
+    StatementList1  přejít do stavu 220
 
 
-state 444
+State 444
 
    76 ExprCaseClause: . ExprSwitchCase ':' StatementList
    77 ExprSwitchCase: . CASE ExpressionList
@@ -11147,15 +11146,15 @@ state 444
    79 ExprSwitchStmt: SWITCH ExprSwitchStmt1 ExprSwitchStmt2 '{' ExprSwitchStmt3 . '}'
    85 ExprSwitchStmt3: ExprSwitchStmt3 . ExprCaseClause
 
-    CASE     shift, and go to state 458
-    DEFAULT  shift, and go to state 459
-    '}'      shift, and go to state 460
+    CASE     posunout a přejít do stavu 458
+    DEFAULT  posunout a přejít do stavu 459
+    '}'      posunout a přejít do stavu 460
 
-    ExprCaseClause  go to state 461
-    ExprSwitchCase  go to state 462
+    ExprCaseClause  přejít do stavu 461
+    ExprSwitchCase  přejít do stavu 462
 
 
-state 445
+State 445
 
   296 TypeCaseClause: . TypeSwitchCase ':' StatementList
   316 TypeSwitchCase: . CASE TypeList
@@ -11163,105 +11162,105 @@ state 445
   321 TypeSwitchStmt: SWITCH TypeSwitchStmt1 TypeSwitchGuard '{' TypeSwitchStmt2 . '}'
   325 TypeSwitchStmt2: TypeSwitchStmt2 . TypeCaseClause
 
-    CASE     shift, and go to state 463
-    DEFAULT  shift, and go to state 464
-    '}'      shift, and go to state 465
+    CASE     posunout a přejít do stavu 463
+    DEFAULT  posunout a přejít do stavu 464
+    '}'      posunout a přejít do stavu 465
 
-    TypeCaseClause  go to state 466
-    TypeSwitchCase  go to state 467
+    TypeCaseClause  přejít do stavu 466
+    TypeSwitchCase  přejít do stavu 467
 
 
-state 446
+State 446
 
   236 Selector: '.' . IDENTIFIER
   295 TypeAssertion: '.' . '(' Type ')'
   318 TypeSwitchGuard: TypeSwitchGuard1 PrimaryExpr '.' . '(' TYPE ')'
 
-    IDENTIFIER  shift, and go to state 265
-    '('         shift, and go to state 468
+    IDENTIFIER  posunout a přejít do stavu 265
+    '('         posunout a přejít do stavu 468
 
 
-state 447
+State 447
 
    99 ForClause: ForClause1 ';' ForClause2 ';' ForClause3 .
 
-    $default  reduce using rule 99 (ForClause)
+    $výchozí  reduce using rule 99 (ForClause)
 
 
-state 448
+State 448
 
   105 ForClause3: PostStmt .
 
-    $default  reduce using rule 105 (ForClause3)
+    $výchozí  reduce using rule 105 (ForClause3)
 
 
-state 449
+State 449
 
   201 PostStmt: SimpleStmt .
 
-    $default  reduce using rule 201 (PostStmt)
+    $výchozí  reduce using rule 201 (PostStmt)
 
 
-state 450
+State 450
 
   131 IfStmt21: Block .
 
-    $default  reduce using rule 131 (IfStmt21)
+    $výchozí  reduce using rule 131 (IfStmt21)
 
 
-state 451
+State 451
 
   130 IfStmt21: IfStmt .
 
-    $default  reduce using rule 130 (IfStmt21)
+    $výchozí  reduce using rule 130 (IfStmt21)
 
 
-state 452
+State 452
 
   129 IfStmt2: ELSE IfStmt21 .
 
-    $default  reduce using rule 129 (IfStmt2)
+    $výchozí  reduce using rule 129 (IfStmt2)
 
 
-state 453
+State 453
 
   226 RecvStmt11: ExpressionList '=' .
 
-    $default  reduce using rule 226 (RecvStmt11)
+    $výchozí  reduce using rule 226 (RecvStmt11)
 
 
-state 454
+State 454
 
   227 RecvStmt11: IdentifierList TOK3 .
 
-    $default  reduce using rule 227 (RecvStmt11)
+    $výchozí  reduce using rule 227 (RecvStmt11)
 
 
-state 455
+State 455
 
    87 Expression: Expression . BINARY_OP UnaryExpr
   222 RecvExpr: Expression .  [':']
 
-    BINARY_OP  shift, and go to state 191
+    BINARY_OP  posunout a přejít do stavu 191
 
-    $default  reduce using rule 222 (RecvExpr)
+    $výchozí  reduce using rule 222 (RecvExpr)
 
 
-state 456
+State 456
 
   223 RecvStmt: RecvStmt1 RecvExpr .
 
-    $default  reduce using rule 223 (RecvStmt)
+    $výchozí  reduce using rule 223 (RecvStmt)
 
 
-state 457
+State 457
 
    44 CommClause: CommCase ':' StatementList .
 
-    $default  reduce using rule 44 (CommClause)
+    $výchozí  reduce using rule 44 (CommClause)
 
 
-state 458
+State 458
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    12 BasicLit: . INT_LIT
@@ -11332,83 +11331,83 @@ state 458
   326 UnaryExpr: . PrimaryExpr
   327          | . UNARY_OP UnaryExpr
 
-    FLOAT_LIT      shift, and go to state 110
-    IDENTIFIER     shift, and go to state 111
-    IMAGINARY_LIT  shift, and go to state 112
-    INT_LIT        shift, and go to state 113
-    RUNE_LIT       shift, and go to state 114
-    STRING_LIT     shift, and go to state 115
-    UNARY_OP       shift, and go to state 116
-    TOK5           shift, and go to state 58
-    CHAN           shift, and go to state 59
-    FUNC           shift, and go to state 117
-    INTERFACE      shift, and go to state 61
-    MAP            shift, and go to state 62
-    STRUCT         shift, and go to state 63
-    '*'            shift, and go to state 64
-    '['            shift, and go to state 118
-    '('            shift, and go to state 120
+    FLOAT_LIT      posunout a přejít do stavu 110
+    IDENTIFIER     posunout a přejít do stavu 111
+    IMAGINARY_LIT  posunout a přejít do stavu 112
+    INT_LIT        posunout a přejít do stavu 113
+    RUNE_LIT       posunout a přejít do stavu 114
+    STRING_LIT     posunout a přejít do stavu 115
+    UNARY_OP       posunout a přejít do stavu 116
+    TOK5           posunout a přejít do stavu 58
+    CHAN           posunout a přejít do stavu 59
+    FUNC           posunout a přejít do stavu 117
+    INTERFACE      posunout a přejít do stavu 61
+    MAP            posunout a přejít do stavu 62
+    STRUCT         posunout a přejít do stavu 63
+    '*'            posunout a přejít do stavu 64
+    '['            posunout a přejít do stavu 118
+    '('            posunout a přejít do stavu 120
 
-    ArrayType       go to state 122
-    BasicLit        go to state 123
-    BuiltinCall     go to state 124
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    CompositeLit    go to state 125
-    Conversion      go to state 126
-    Expression      go to state 170
-    ExpressionList  go to state 469
-    FunctionLit     go to state 128
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    Literal         go to state 129
-    LiteralType     go to state 130
-    MapType         go to state 131
-    MethodExpr      go to state 132
-    Operand         go to state 133
-    OperandName     go to state 134
-    PackageName     go to state 75
-    PointerType     go to state 76
-    PrimaryExpr     go to state 135
-    QualifiedIdent  go to state 136
-    ReceiverType    go to state 137
-    SliceType       go to state 138
-    StructType      go to state 139
-    Type            go to state 140
-    TypeLit         go to state 81
-    TypeName        go to state 141
-    UnaryExpr       go to state 142
+    ArrayType       přejít do stavu 122
+    BasicLit        přejít do stavu 123
+    BuiltinCall     přejít do stavu 124
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    CompositeLit    přejít do stavu 125
+    Conversion      přejít do stavu 126
+    Expression      přejít do stavu 170
+    ExpressionList  přejít do stavu 469
+    FunctionLit     přejít do stavu 128
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    Literal         přejít do stavu 129
+    LiteralType     přejít do stavu 130
+    MapType         přejít do stavu 131
+    MethodExpr      přejít do stavu 132
+    Operand         přejít do stavu 133
+    OperandName     přejít do stavu 134
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    PrimaryExpr     přejít do stavu 135
+    QualifiedIdent  přejít do stavu 136
+    ReceiverType    přejít do stavu 137
+    SliceType       přejít do stavu 138
+    StructType      přejít do stavu 139
+    Type            přejít do stavu 140
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 141
+    UnaryExpr       přejít do stavu 142
 
 
-state 459
+State 459
 
    78 ExprSwitchCase: DEFAULT .
 
-    $default  reduce using rule 78 (ExprSwitchCase)
+    $výchozí  reduce using rule 78 (ExprSwitchCase)
 
 
-state 460
+State 460
 
    79 ExprSwitchStmt: SWITCH ExprSwitchStmt1 ExprSwitchStmt2 '{' ExprSwitchStmt3 '}' .
 
-    $default  reduce using rule 79 (ExprSwitchStmt)
+    $výchozí  reduce using rule 79 (ExprSwitchStmt)
 
 
-state 461
+State 461
 
    85 ExprSwitchStmt3: ExprSwitchStmt3 ExprCaseClause .
 
-    $default  reduce using rule 85 (ExprSwitchStmt3)
+    $výchozí  reduce using rule 85 (ExprSwitchStmt3)
 
 
-state 462
+State 462
 
    76 ExprCaseClause: ExprSwitchCase . ':' StatementList
 
-    ':'  shift, and go to state 470
+    ':'  posunout a přejít do stavu 470
 
 
-state 463
+State 463
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -11439,63 +11438,63 @@ state 463
   314         | . QualifiedIdent
   316 TypeSwitchCase: CASE . TypeList
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 471
-    TypeList        go to state 472
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 471
+    TypeList        přejít do stavu 472
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 464
+State 464
 
   317 TypeSwitchCase: DEFAULT .
 
-    $default  reduce using rule 317 (TypeSwitchCase)
+    $výchozí  reduce using rule 317 (TypeSwitchCase)
 
 
-state 465
+State 465
 
   321 TypeSwitchStmt: SWITCH TypeSwitchStmt1 TypeSwitchGuard '{' TypeSwitchStmt2 '}' .
 
-    $default  reduce using rule 321 (TypeSwitchStmt)
+    $výchozí  reduce using rule 321 (TypeSwitchStmt)
 
 
-state 466
+State 466
 
   325 TypeSwitchStmt2: TypeSwitchStmt2 TypeCaseClause .
 
-    $default  reduce using rule 325 (TypeSwitchStmt2)
+    $výchozí  reduce using rule 325 (TypeSwitchStmt2)
 
 
-state 467
+State 467
 
   296 TypeCaseClause: TypeSwitchCase . ':' StatementList
 
-    ':'  shift, and go to state 473
+    ':'  posunout a přejít do stavu 473
 
 
-state 468
+State 468
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -11526,124 +11525,124 @@ state 468
   314         | . QualifiedIdent
   318 TypeSwitchGuard: TypeSwitchGuard1 PrimaryExpr '.' '(' . TYPE ')'
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    TYPE        shift, and go to state 474
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    TYPE        posunout a přejít do stavu 474
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 348
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 348
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 469
+State 469
 
    77 ExprSwitchCase: CASE ExpressionList .
 
-    $default  reduce using rule 77 (ExprSwitchCase)
+    $výchozí  reduce using rule 77 (ExprSwitchCase)
 
 
-state 470
+State 470
 
    76 ExprCaseClause: ExprSwitchCase ':' . StatementList
   280 StatementList: . StatementList1
-  281 StatementList1: .
+  281 StatementList1: . %empty
   282               | . StatementList1 Statement ';'
 
-    $default  reduce using rule 281 (StatementList1)
+    $výchozí  reduce using rule 281 (StatementList1)
 
-    StatementList   go to state 475
-    StatementList1  go to state 220
+    StatementList   přejít do stavu 475
+    StatementList1  přejít do stavu 220
 
 
-state 471
+State 471
 
   302 TypeList: Type . TypeList1
-  303 TypeList1: .
+  303 TypeList1: . %empty
   304          | . TypeList1 ',' Type
 
-    $default  reduce using rule 303 (TypeList1)
+    $výchozí  reduce using rule 303 (TypeList1)
 
-    TypeList1  go to state 476
+    TypeList1  přejít do stavu 476
 
 
-state 472
+State 472
 
   316 TypeSwitchCase: CASE TypeList .
 
-    $default  reduce using rule 316 (TypeSwitchCase)
+    $výchozí  reduce using rule 316 (TypeSwitchCase)
 
 
-state 473
+State 473
 
   280 StatementList: . StatementList1
-  281 StatementList1: .
+  281 StatementList1: . %empty
   282               | . StatementList1 Statement ';'
   296 TypeCaseClause: TypeSwitchCase ':' . StatementList
 
-    $default  reduce using rule 281 (StatementList1)
+    $výchozí  reduce using rule 281 (StatementList1)
 
-    StatementList   go to state 477
-    StatementList1  go to state 220
+    StatementList   přejít do stavu 477
+    StatementList1  přejít do stavu 220
 
 
-state 474
+State 474
 
   318 TypeSwitchGuard: TypeSwitchGuard1 PrimaryExpr '.' '(' TYPE . ')'
 
-    ')'  shift, and go to state 478
+    ')'  posunout a přejít do stavu 478
 
 
-state 475
+State 475
 
    76 ExprCaseClause: ExprSwitchCase ':' StatementList .
 
-    $default  reduce using rule 76 (ExprCaseClause)
+    $výchozí  reduce using rule 76 (ExprCaseClause)
 
 
-state 476
+State 476
 
   302 TypeList: Type TypeList1 .  [':']
   304 TypeList1: TypeList1 . ',' Type
 
-    ','  shift, and go to state 479
+    ','  posunout a přejít do stavu 479
 
-    $default  reduce using rule 302 (TypeList)
+    $výchozí  reduce using rule 302 (TypeList)
 
 
-state 477
+State 477
 
   296 TypeCaseClause: TypeSwitchCase ':' StatementList .
 
-    $default  reduce using rule 296 (TypeCaseClause)
+    $výchozí  reduce using rule 296 (TypeCaseClause)
 
 
-state 478
+State 478
 
   318 TypeSwitchGuard: TypeSwitchGuard1 PrimaryExpr '.' '(' TYPE ')' .
 
-    $default  reduce using rule 318 (TypeSwitchGuard)
+    $výchozí  reduce using rule 318 (TypeSwitchGuard)
 
 
-state 479
+State 479
 
     8 ArrayType: . '[' ArrayLength ']' ElementType
    36 ChannelType: . ChannelType1 ElementType
@@ -11673,35 +11672,35 @@ state 479
   313 TypeName: . IDENTIFIER
   314         | . QualifiedIdent
 
-    IDENTIFIER  shift, and go to state 57
-    TOK5        shift, and go to state 58
-    CHAN        shift, and go to state 59
-    FUNC        shift, and go to state 60
-    INTERFACE   shift, and go to state 61
-    MAP         shift, and go to state 62
-    STRUCT      shift, and go to state 63
-    '*'         shift, and go to state 64
-    '['         shift, and go to state 65
-    '('         shift, and go to state 66
+    IDENTIFIER  posunout a přejít do stavu 57
+    TOK5        posunout a přejít do stavu 58
+    CHAN        posunout a přejít do stavu 59
+    FUNC        posunout a přejít do stavu 60
+    INTERFACE   posunout a přejít do stavu 61
+    MAP         posunout a přejít do stavu 62
+    STRUCT      posunout a přejít do stavu 63
+    '*'         posunout a přejít do stavu 64
+    '['         posunout a přejít do stavu 65
+    '('         posunout a přejít do stavu 66
 
-    ArrayType       go to state 67
-    ChannelType     go to state 68
-    ChannelType1    go to state 69
-    FunctionType    go to state 72
-    InterfaceType   go to state 73
-    MapType         go to state 74
-    PackageName     go to state 75
-    PointerType     go to state 76
-    QualifiedIdent  go to state 77
-    SliceType       go to state 78
-    StructType      go to state 79
-    Type            go to state 480
-    TypeLit         go to state 81
-    TypeName        go to state 82
+    ArrayType       přejít do stavu 67
+    ChannelType     přejít do stavu 68
+    ChannelType1    přejít do stavu 69
+    FunctionType    přejít do stavu 72
+    InterfaceType   přejít do stavu 73
+    MapType         přejít do stavu 74
+    PackageName     přejít do stavu 75
+    PointerType     přejít do stavu 76
+    QualifiedIdent  přejít do stavu 77
+    SliceType       přejít do stavu 78
+    StructType      přejít do stavu 79
+    Type            přejít do stavu 480
+    TypeLit         přejít do stavu 81
+    TypeName        přejít do stavu 82
 
 
-state 480
+State 480
 
   304 TypeList1: TypeList1 ',' Type .
 
-    $default  reduce using rule 304 (TypeList1)
+    $výchozí  reduce using rule 304 (TypeList1)

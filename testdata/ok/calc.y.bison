@@ -1,8 +1,8 @@
-Grammar
+Gramatika
 
     0 $accept: input $end
 
-    1 input: /* empty */
+    1 input: %empty
     2      | input line
 
     3 line: '\n'
@@ -18,7 +18,7 @@ Grammar
    12    | '(' exp ')'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 '\n' (10) 3 4
@@ -34,30 +34,30 @@ NUM (258) 5
 NEG (259)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (13)
-    on left: 0
+    vlevo: 0
 input (14)
-    on left: 1 2, on right: 0 2
+    vlevo: 1 2, vpravo: 0 2
 line (15)
-    on left: 3 4, on right: 2
+    vlevo: 3 4, vpravo: 2
 exp (16)
-    on left: 5 6 7 8 9 10 11 12, on right: 4 6 7 8 9 10 11 12
+    vlevo: 5 6 7 8 9 10 11 12, vpravo: 4 6 7 8 9 10 11 12
 
 
-state 0
+State 0
 
     0 $accept: . input $end
-    1 input: .
+    1 input: . %empty
     2      | . input line
 
-    $default  reduce using rule 1 (input)
+    $výchozí  reduce using rule 1 (input)
 
-    input  go to state 1
+    input  přejít do stavu 1
 
 
-state 1
+State 1
 
     0 $accept: input . $end
     2 input: input . line
@@ -72,31 +72,31 @@ state 1
    11    | . exp '^' exp
    12    | . '(' exp ')'
 
-    $end  shift, and go to state 2
-    NUM   shift, and go to state 3
-    '-'   shift, and go to state 4
-    '\n'  shift, and go to state 5
-    '('   shift, and go to state 6
+    $end  posunout a přejít do stavu 2
+    NUM   posunout a přejít do stavu 3
+    '-'   posunout a přejít do stavu 4
+    '\n'  posunout a přejít do stavu 5
+    '('   posunout a přejít do stavu 6
 
-    line  go to state 7
-    exp   go to state 8
+    line  přejít do stavu 7
+    exp   přejít do stavu 8
 
 
-state 2
+State 2
 
     0 $accept: input $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 3
+State 3
 
     5 exp: NUM .
 
-    $default  reduce using rule 5 (exp)
+    $výchozí  reduce using rule 5 (exp)
 
 
-state 4
+State 4
 
     5 exp: . NUM
     6    | . exp '+' exp
@@ -108,21 +108,21 @@ state 4
    11    | . exp '^' exp
    12    | . '(' exp ')'
 
-    NUM  shift, and go to state 3
-    '-'  shift, and go to state 4
-    '('  shift, and go to state 6
+    NUM  posunout a přejít do stavu 3
+    '-'  posunout a přejít do stavu 4
+    '('  posunout a přejít do stavu 6
 
-    exp  go to state 9
+    exp  přejít do stavu 9
 
 
-state 5
+State 5
 
     3 line: '\n' .
 
-    $default  reduce using rule 3 (line)
+    $výchozí  reduce using rule 3 (line)
 
 
-state 6
+State 6
 
     5 exp: . NUM
     6    | . exp '+' exp
@@ -134,21 +134,21 @@ state 6
    12    | . '(' exp ')'
    12    | '(' . exp ')'
 
-    NUM  shift, and go to state 3
-    '-'  shift, and go to state 4
-    '('  shift, and go to state 6
+    NUM  posunout a přejít do stavu 3
+    '-'  posunout a přejít do stavu 4
+    '('  posunout a přejít do stavu 6
 
-    exp  go to state 10
+    exp  přejít do stavu 10
 
 
-state 7
+State 7
 
     2 input: input line .
 
-    $default  reduce using rule 2 (input)
+    $výchozí  reduce using rule 2 (input)
 
 
-state 8
+State 8
 
     4 line: exp . '\n'
     6 exp: exp . '+' exp
@@ -157,15 +157,15 @@ state 8
     9    | exp . '/' exp
    11    | exp . '^' exp
 
-    '-'   shift, and go to state 11
-    '+'   shift, and go to state 12
-    '*'   shift, and go to state 13
-    '/'   shift, and go to state 14
-    '^'   shift, and go to state 15
-    '\n'  shift, and go to state 16
+    '-'   posunout a přejít do stavu 11
+    '+'   posunout a přejít do stavu 12
+    '*'   posunout a přejít do stavu 13
+    '/'   posunout a přejít do stavu 14
+    '^'   posunout a přejít do stavu 15
+    '\n'  posunout a přejít do stavu 16
 
 
-state 9
+State 9
 
     6 exp: exp . '+' exp
     7    | exp . '-' exp
@@ -174,9 +174,9 @@ state 9
    10    | '-' exp .  ['-', '+', '*', '/', '\n', ')']
    11    | exp . '^' exp
 
-    '^'  shift, and go to state 15
+    '^'  posunout a přejít do stavu 15
 
-    $default  reduce using rule 10 (exp)
+    $výchozí  reduce using rule 10 (exp)
 
     Conflict between rule 10 and token '-' resolved as reduce ('-' < NEG).
     Conflict between rule 10 and token '+' resolved as reduce ('+' < NEG).
@@ -185,7 +185,7 @@ state 9
     Conflict between rule 10 and token '^' resolved as shift (NEG < '^').
 
 
-state 10
+State 10
 
     6 exp: exp . '+' exp
     7    | exp . '-' exp
@@ -194,15 +194,15 @@ state 10
    11    | exp . '^' exp
    12    | '(' exp . ')'
 
-    '-'  shift, and go to state 11
-    '+'  shift, and go to state 12
-    '*'  shift, and go to state 13
-    '/'  shift, and go to state 14
-    '^'  shift, and go to state 15
-    ')'  shift, and go to state 17
+    '-'  posunout a přejít do stavu 11
+    '+'  posunout a přejít do stavu 12
+    '*'  posunout a přejít do stavu 13
+    '/'  posunout a přejít do stavu 14
+    '^'  posunout a přejít do stavu 15
+    ')'  posunout a přejít do stavu 17
 
 
-state 11
+State 11
 
     5 exp: . NUM
     6    | . exp '+' exp
@@ -214,14 +214,14 @@ state 11
    11    | . exp '^' exp
    12    | . '(' exp ')'
 
-    NUM  shift, and go to state 3
-    '-'  shift, and go to state 4
-    '('  shift, and go to state 6
+    NUM  posunout a přejít do stavu 3
+    '-'  posunout a přejít do stavu 4
+    '('  posunout a přejít do stavu 6
 
-    exp  go to state 18
+    exp  přejít do stavu 18
 
 
-state 12
+State 12
 
     5 exp: . NUM
     6    | . exp '+' exp
@@ -233,14 +233,14 @@ state 12
    11    | . exp '^' exp
    12    | . '(' exp ')'
 
-    NUM  shift, and go to state 3
-    '-'  shift, and go to state 4
-    '('  shift, and go to state 6
+    NUM  posunout a přejít do stavu 3
+    '-'  posunout a přejít do stavu 4
+    '('  posunout a přejít do stavu 6
 
-    exp  go to state 19
+    exp  přejít do stavu 19
 
 
-state 13
+State 13
 
     5 exp: . NUM
     6    | . exp '+' exp
@@ -252,14 +252,14 @@ state 13
    11    | . exp '^' exp
    12    | . '(' exp ')'
 
-    NUM  shift, and go to state 3
-    '-'  shift, and go to state 4
-    '('  shift, and go to state 6
+    NUM  posunout a přejít do stavu 3
+    '-'  posunout a přejít do stavu 4
+    '('  posunout a přejít do stavu 6
 
-    exp  go to state 20
+    exp  přejít do stavu 20
 
 
-state 14
+State 14
 
     5 exp: . NUM
     6    | . exp '+' exp
@@ -271,14 +271,14 @@ state 14
    11    | . exp '^' exp
    12    | . '(' exp ')'
 
-    NUM  shift, and go to state 3
-    '-'  shift, and go to state 4
-    '('  shift, and go to state 6
+    NUM  posunout a přejít do stavu 3
+    '-'  posunout a přejít do stavu 4
+    '('  posunout a přejít do stavu 6
 
-    exp  go to state 21
+    exp  přejít do stavu 21
 
 
-state 15
+State 15
 
     5 exp: . NUM
     6    | . exp '+' exp
@@ -290,28 +290,28 @@ state 15
    11    | exp '^' . exp
    12    | . '(' exp ')'
 
-    NUM  shift, and go to state 3
-    '-'  shift, and go to state 4
-    '('  shift, and go to state 6
+    NUM  posunout a přejít do stavu 3
+    '-'  posunout a přejít do stavu 4
+    '('  posunout a přejít do stavu 6
 
-    exp  go to state 22
+    exp  přejít do stavu 22
 
 
-state 16
+State 16
 
     4 line: exp '\n' .
 
-    $default  reduce using rule 4 (line)
+    $výchozí  reduce using rule 4 (line)
 
 
-state 17
+State 17
 
    12 exp: '(' exp ')' .
 
-    $default  reduce using rule 12 (exp)
+    $výchozí  reduce using rule 12 (exp)
 
 
-state 18
+State 18
 
     6 exp: exp . '+' exp
     7    | exp . '-' exp
@@ -320,11 +320,11 @@ state 18
     9    | exp . '/' exp
    11    | exp . '^' exp
 
-    '*'  shift, and go to state 13
-    '/'  shift, and go to state 14
-    '^'  shift, and go to state 15
+    '*'  posunout a přejít do stavu 13
+    '/'  posunout a přejít do stavu 14
+    '^'  posunout a přejít do stavu 15
 
-    $default  reduce using rule 7 (exp)
+    $výchozí  reduce using rule 7 (exp)
 
     Conflict between rule 7 and token '-' resolved as reduce (%left '-').
     Conflict between rule 7 and token '+' resolved as reduce (%left '+').
@@ -333,7 +333,7 @@ state 18
     Conflict between rule 7 and token '^' resolved as shift ('-' < '^').
 
 
-state 19
+State 19
 
     6 exp: exp . '+' exp
     6    | exp '+' exp .  ['-', '+', '\n', ')']
@@ -342,11 +342,11 @@ state 19
     9    | exp . '/' exp
    11    | exp . '^' exp
 
-    '*'  shift, and go to state 13
-    '/'  shift, and go to state 14
-    '^'  shift, and go to state 15
+    '*'  posunout a přejít do stavu 13
+    '/'  posunout a přejít do stavu 14
+    '^'  posunout a přejít do stavu 15
 
-    $default  reduce using rule 6 (exp)
+    $výchozí  reduce using rule 6 (exp)
 
     Conflict between rule 6 and token '-' resolved as reduce (%left '-').
     Conflict between rule 6 and token '+' resolved as reduce (%left '+').
@@ -355,7 +355,7 @@ state 19
     Conflict between rule 6 and token '^' resolved as shift ('+' < '^').
 
 
-state 20
+State 20
 
     6 exp: exp . '+' exp
     7    | exp . '-' exp
@@ -364,9 +364,9 @@ state 20
     9    | exp . '/' exp
    11    | exp . '^' exp
 
-    '^'  shift, and go to state 15
+    '^'  posunout a přejít do stavu 15
 
-    $default  reduce using rule 8 (exp)
+    $výchozí  reduce using rule 8 (exp)
 
     Conflict between rule 8 and token '-' resolved as reduce ('-' < '*').
     Conflict between rule 8 and token '+' resolved as reduce ('+' < '*').
@@ -375,7 +375,7 @@ state 20
     Conflict between rule 8 and token '^' resolved as shift ('*' < '^').
 
 
-state 21
+State 21
 
     6 exp: exp . '+' exp
     7    | exp . '-' exp
@@ -384,9 +384,9 @@ state 21
     9    | exp '/' exp .  ['-', '+', '*', '/', '\n', ')']
    11    | exp . '^' exp
 
-    '^'  shift, and go to state 15
+    '^'  posunout a přejít do stavu 15
 
-    $default  reduce using rule 9 (exp)
+    $výchozí  reduce using rule 9 (exp)
 
     Conflict between rule 9 and token '-' resolved as reduce ('-' < '/').
     Conflict between rule 9 and token '+' resolved as reduce ('+' < '/').
@@ -395,7 +395,7 @@ state 21
     Conflict between rule 9 and token '^' resolved as shift ('/' < '^').
 
 
-state 22
+State 22
 
     6 exp: exp . '+' exp
     7    | exp . '-' exp
@@ -404,9 +404,9 @@ state 22
    11    | exp . '^' exp
    11    | exp '^' exp .  ['-', '+', '*', '/', '\n', ')']
 
-    '^'  shift, and go to state 15
+    '^'  posunout a přejít do stavu 15
 
-    $default  reduce using rule 11 (exp)
+    $výchozí  reduce using rule 11 (exp)
 
     Conflict between rule 11 and token '-' resolved as reduce ('-' < '^').
     Conflict between rule 11 and token '+' resolved as reduce ('+' < '^').

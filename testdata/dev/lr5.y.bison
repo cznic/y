@@ -3,10 +3,10 @@ Rules useless in parser due to conflicts
     6 F: 'e'
 
 
-State 4 conflicts: 2 reduce/reduce
+Stav 4 conflicts: 2 reduce/reduce
 
 
-Grammar
+Gramatika
 
     0 $accept: S $end
 
@@ -20,7 +20,7 @@ Grammar
     6 F: 'e'
 
 
-Terminals, with rules where they appear
+Terminály s pravidly, ve kterých se objevují
 
 $end (0) 0
 'a' (97) 1 2
@@ -31,19 +31,19 @@ $end (0) 0
 error (256)
 
 
-Nonterminals, with rules where they appear
+Neterminály s pravidly, ve kterých se objevují
 
 $accept (8)
-    on left: 0
+    vlevo: 0
 S (9)
-    on left: 1 2 3 4, on right: 0
+    vlevo: 1 2 3 4, vpravo: 0
 E (10)
-    on left: 5, on right: 1 4
+    vlevo: 5, vpravo: 1 4
 F (11)
-    on left: 6, on right: 2 3
+    vlevo: 6, vpravo: 2 3
 
 
-state 0
+State 0
 
     0 $accept: . S $end
     1 S: . 'a' E 'c'
@@ -51,115 +51,115 @@ state 0
     3  | . 'b' F 'c'
     4  | . 'b' E 'd'
 
-    'a'  shift, and go to state 1
-    'b'  shift, and go to state 2
+    'a'  posunout a přejít do stavu 1
+    'b'  posunout a přejít do stavu 2
 
-    S  go to state 3
+    S  přejít do stavu 3
 
 
-state 1
+State 1
 
     1 S: 'a' . E 'c'
     2  | 'a' . F 'd'
     5 E: . 'e'
     6 F: . 'e'
 
-    'e'  shift, and go to state 4
+    'e'  posunout a přejít do stavu 4
 
-    E  go to state 5
-    F  go to state 6
+    E  přejít do stavu 5
+    F  přejít do stavu 6
 
 
-state 2
+State 2
 
     3 S: 'b' . F 'c'
     4  | 'b' . E 'd'
     5 E: . 'e'
     6 F: . 'e'
 
-    'e'  shift, and go to state 4
+    'e'  posunout a přejít do stavu 4
 
-    E  go to state 7
-    F  go to state 8
+    E  přejít do stavu 7
+    F  přejít do stavu 8
 
 
-state 3
+State 3
 
     0 $accept: S . $end
 
-    $end  shift, and go to state 9
+    $end  posunout a přejít do stavu 9
 
 
-state 4
+State 4
 
     5 E: 'e' .  ['c', 'd']
     6 F: 'e' .  ['c', 'd']
 
-    'c'       reduce using rule 5 (E)
-    'c'       [reduce using rule 6 (F)]
-    'd'       reduce using rule 5 (E)
-    'd'       [reduce using rule 6 (F)]
-    $default  reduce using rule 5 (E)
+    'c'         reduce using rule 5 (E)
+    'c'         [reduce using rule 6 (F)]
+    'd'         reduce using rule 5 (E)
+    'd'         [reduce using rule 6 (F)]
+    $výchozí  reduce using rule 5 (E)
 
 
-state 5
+State 5
 
     1 S: 'a' E . 'c'
 
-    'c'  shift, and go to state 10
+    'c'  posunout a přejít do stavu 10
 
 
-state 6
+State 6
 
     2 S: 'a' F . 'd'
 
-    'd'  shift, and go to state 11
+    'd'  posunout a přejít do stavu 11
 
 
-state 7
+State 7
 
     4 S: 'b' E . 'd'
 
-    'd'  shift, and go to state 12
+    'd'  posunout a přejít do stavu 12
 
 
-state 8
+State 8
 
     3 S: 'b' F . 'c'
 
-    'c'  shift, and go to state 13
+    'c'  posunout a přejít do stavu 13
 
 
-state 9
+State 9
 
     0 $accept: S $end .
 
-    $default  accept
+    $výchozí  přijmout
 
 
-state 10
+State 10
 
     1 S: 'a' E 'c' .
 
-    $default  reduce using rule 1 (S)
+    $výchozí  reduce using rule 1 (S)
 
 
-state 11
+State 11
 
     2 S: 'a' F 'd' .
 
-    $default  reduce using rule 2 (S)
+    $výchozí  reduce using rule 2 (S)
 
 
-state 12
+State 12
 
     4 S: 'b' E 'd' .
 
-    $default  reduce using rule 4 (S)
+    $výchozí  reduce using rule 4 (S)
 
 
-state 13
+State 13
 
     3 S: 'b' F 'c' .
 
-    $default  reduce using rule 3 (S)
+    $výchozí  reduce using rule 3 (S)
