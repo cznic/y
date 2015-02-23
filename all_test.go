@@ -85,7 +85,7 @@ func (s itemSet1) dump(y *y) string {
 	return strings.Join(a, "\n")
 }
 
-func test0(t *testing.T, root string, filter func(pth string) bool, opts *Options) {
+func test0(t *testing.T, root string, filter func(pth string) bool, opts *Options, xerrors bool) {
 	const cc = "testdata/ok/cc.y"
 	if err := filepath.Walk(root, func(pth string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -140,6 +140,15 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 
 		if p == nil {
 			return nil
+		}
+
+		if xerrors {
+			var buf bytes.Buffer
+			if err := p.SkeletonXErrors(&buf); err != nil {
+				t.Error(err)
+			} else {
+				t.Logf("\n%s", buf.Bytes())
+			}
 		}
 
 		y := p.y
@@ -200,7 +209,7 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 }
 
 func Test0(t *testing.T) {
-	test0(t, "testdata/ok", nil, &Options{})
+	test0(t, "testdata/ok", nil, &Options{}, false)
 }
 
 func TestDev(t *testing.T) {
@@ -228,6 +237,7 @@ func TestDev(t *testing.T) {
 			Resolved:  true,
 			debugSyms: *oDebugSyms,
 		},
+		true,
 	)
 }
 
@@ -671,4 +681,102 @@ error "expected number"
 	// 5: [0 2] lookahead "'-'", msg "binary operator not supported"
 	// 6: [0 2] lookahead "<nil>", msg "expected operator"
 	// 7: [0] lookahead "<nil>", msg "expected number"
+}
+
+func Example_skeletonXErrors() {
+	p, err := ProcessSource(
+		token.NewFileSet(),
+		"example.y",
+		[]byte(`
+%token NUMBER
+
+%left                '+' '-'
+%left                '*' '/'
+%precedence        UNARY
+
+%%
+
+Expression:
+        Term
+|   Term '+' Term
+|   Term '-' Term
+
+Term:
+        Factor
+|   Factor '*' Factor        
+|   Factor '/' Factor
+
+Factor:
+        NUMBER
+|   '+' NUMBER %prec UNARY
+|   '-' NUMBER %prec UNARY
+
+`),
+		&Options{})
+	if err != nil {
+		panic(err)
+	}
+
+	p.SkeletonXErrors(os.Stdout)
+	// Output:
+	// /*
+	// 	Reject empty file
+	// */
+	// "invalid empty source file"
+	// 
+	// // state set: [0]
+	//  error
+	// "syntax error: expected Expression or one of ['+' '-' NUMBER]"
+	// 
+	// // state set: [5]
+	// '+' error
+	// "syntax error: expected NUMBER"
+	// 
+	// // state set: [8]
+	// '+' NUMBER error
+	// "syntax error: expected one of [$end '*' '+' '-' '/']"
+	// 
+	// // state set: [6]
+	// '-' error
+	// "syntax error: expected NUMBER"
+	// 
+	// // state set: [7]
+	// '-' NUMBER error
+	// "syntax error: expected one of [$end '*' '+' '-' '/']"
+	// 
+	// // state set: [1 2 3 4]
+	// NUMBER error
+	// "syntax error: expected one of [$end '*' '+' '-' '/']"
+	// 
+	// // state set: [9]
+	// NUMBER '*' error
+	// "syntax error: expected Factor or one of ['+' '-' NUMBER]"
+	// 
+	// // state set: [12]
+	// NUMBER '*' NUMBER error
+	// "syntax error: expected one of [$end '+' '-']"
+	// 
+	// // state set: [13]
+	// NUMBER '+' error
+	// "syntax error: expected Term or one of ['+' '-' NUMBER]"
+	// 
+	// // state set: [16]
+	// NUMBER '+' NUMBER error
+	// "syntax error: expected $end"
+	// 
+	// // state set: [14]
+	// NUMBER '-' error
+	// "syntax error: expected Term or one of ['+' '-' NUMBER]"
+	// 
+	// // state set: [15]
+	// NUMBER '-' NUMBER error
+	// "syntax error: expected $end"
+	// 
+	// // state set: [10]
+	// NUMBER '/' error
+	// "syntax error: expected Factor or one of ['+' '-' NUMBER]"
+	// 
+	// // state set: [11]
+	// NUMBER '/' NUMBER error
+	// "syntax error: expected one of [$end '+' '-']"
 }

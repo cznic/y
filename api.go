@@ -9,6 +9,8 @@
 //
 // Changelog
 //
+// 2015-02-23: Added methods Parser.{AcceptsEmptyInput,SkeletonXErrors}.
+//
 // 2015-01-16: Added Parser.Reductions and State.Reduce0 methods.
 //
 // 2014-12-18: Support %precedence for better bison compatibility[5].
@@ -33,6 +35,7 @@ import (
 	"io"
 	"io/ioutil"
 	"sort"
+	"strings"
 
 	yparser "github.com/cznic/parser/yacc"
 	yscanner "github.com/cznic/scanner/yacc"
@@ -248,6 +251,82 @@ stack:
 	return yystate, fmt.Errorf("parser stall in state %d", yystate)
 }
 
+// AcceptsEmptyInput returns whether the token string [$end] is accepted by the
+// grammar.
+func (p *Parser) AcceptsEmptyInput() bool {
+	toks, la := p.States[1].Syms0()
+	return len(toks) == 0 && la == p.y.endSym
+}
+
+// SkeletonXErrors writes an automatically generated errors by example file to
+// w.
+func (p *Parser) SkeletonXErrors(w io.Writer) error {
+	if !p.AcceptsEmptyInput() {
+		if _, err := fmt.Fprintf(w, `/*
+	Reject empty file
+*/
+"invalid empty source file"
+
+`); err != nil {
+			return err
+		}
+	}
+
+	errs := map[string][]int{}
+	for si, state := range p.States {
+		toks, _ := state.Syms0()
+		s := fmt.Sprintf("%v", toks)
+		s = strings.TrimSpace(s[1 : len(s)-1])
+		errs[s] = append(errs[s], si)
+	}
+	var a []string
+	for k := range errs {
+		a = append(a, k)
+	}
+	sort.Strings(a)
+	for _, k := range a {
+		nts := map[*Symbol]struct{}{}
+		ts := map[*Symbol]struct{}{}
+		sis := errs[k]
+		for _, si := range sis {
+			state := p.States[si]
+			n, t := state.skeletonXErrors(p.y)
+			for k, v := range n {
+				nts[k] = v
+			}
+			for k, v := range t {
+				ts[k] = v
+			}
+		}
+		var nta, ta []string
+		for k := range nts {
+			nta = append(nta, k.Name)
+		}
+		sort.Strings(nta)
+		for k := range ts {
+			ta = append(ta, k.Name)
+		}
+		sort.Strings(ta)
+		snt := strings.Join(nta, " or ")
+		if len(nta) != 0 {
+			snt += " or "
+		}
+		st := strings.Join(ta, " ")
+		if len(ta) > 1 {
+			st = "one of [" + st + "]"
+		}
+		if _, err := fmt.Fprintf(
+			w,
+			"// state set: %v\n%s error\n\"syntax error: expected %s%s\"\n\n",
+			sis, k, snt, st,
+		); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 // Reductions returns a mapping rule# -> []state#. The slice is a sorted set of
 // states in which the corresponding rule is reduced.
 func (p *Parser) Reductions() map[int][]int {
@@ -274,9 +353,7 @@ func ProcessAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*Parser, 
 		return nil, err
 	}
 
-	if isTesting {
-		y.Parser.y = y
-	}
+	y.Parser.y = y
 
 	for i, row := range y.Parser.Table {
 		sort.Sort(actions(row))
@@ -408,6 +485,30 @@ func newState(y *y, s itemSet) *State {
 		trans:     map[trans]stateItem{},
 		y:         y,
 	}
+}
+
+func (s *State) skeletonXErrors(y *y) (nonTerminals, terminals map[*Symbol]struct{}) {
+	for _, item := range s.kernel {
+		if sym := item.next(y); sym != nil && !sym.IsTerminal {
+			if nonTerminals == nil {
+				nonTerminals = map[*Symbol]struct{}{}
+			}
+			nonTerminals[sym] = struct{}{}
+		}
+	}
+	for _, item := range s.xitems {
+		if sym := item.next(y); sym != nil && !sym.IsTerminal {
+			if nonTerminals == nil {
+				nonTerminals = map[*Symbol]struct{}{}
+			}
+			nonTerminals[sym] = struct{}{}
+		}
+	}
+	terminals = map[*Symbol]struct{}{}
+	for k := range s.actions {
+		terminals[k] = struct{}{}
+	}
+	return nonTerminals, terminals
 }
 
 func (s *State) zpath() []int {
