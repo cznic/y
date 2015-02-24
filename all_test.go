@@ -723,59 +723,59 @@ Factor:
 	// 	Reject empty file
 	// */
 	// "invalid empty source file"
-	// 
+	//
 	// // state set: [0]
 	//  error
 	// "syntax error: expected Expression or one of ['+' '-' NUMBER]"
-	// 
+	//
 	// // state set: [5]
 	// '+' error
 	// "syntax error: expected NUMBER"
-	// 
+	//
 	// // state set: [8]
 	// '+' NUMBER error
 	// "syntax error: expected one of [$end '*' '+' '-' '/']"
-	// 
+	//
 	// // state set: [6]
 	// '-' error
 	// "syntax error: expected NUMBER"
-	// 
+	//
 	// // state set: [7]
 	// '-' NUMBER error
 	// "syntax error: expected one of [$end '*' '+' '-' '/']"
-	// 
+	//
 	// // state set: [1 2 3 4]
 	// NUMBER error
 	// "syntax error: expected one of [$end '*' '+' '-' '/']"
-	// 
+	//
 	// // state set: [9]
 	// NUMBER '*' error
 	// "syntax error: expected Factor or one of ['+' '-' NUMBER]"
-	// 
+	//
 	// // state set: [12]
 	// NUMBER '*' NUMBER error
 	// "syntax error: expected one of [$end '+' '-']"
-	// 
+	//
 	// // state set: [13]
 	// NUMBER '+' error
 	// "syntax error: expected Term or one of ['+' '-' NUMBER]"
-	// 
+	//
 	// // state set: [16]
 	// NUMBER '+' NUMBER error
 	// "syntax error: expected $end"
-	// 
+	//
 	// // state set: [14]
 	// NUMBER '-' error
 	// "syntax error: expected Term or one of ['+' '-' NUMBER]"
-	// 
+	//
 	// // state set: [15]
 	// NUMBER '-' NUMBER error
 	// "syntax error: expected $end"
-	// 
+	//
 	// // state set: [10]
 	// NUMBER '/' error
 	// "syntax error: expected Factor or one of ['+' '-' NUMBER]"
-	// 
+	//
 	// // state set: [11]
 	// NUMBER '/' NUMBER error
 	// "syntax error: expected one of [$end '+' '-']"
