@@ -105,7 +105,6 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 			return nil
 		}
 
-		//dbg("---------------------- %s", pth)
 		t0 := time.Now()
 		p, err := ProcessFile(token.NewFileSet(), pth, opts)
 		t.Log(pth, time.Since(t0))
@@ -159,7 +158,6 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 				if la != nil {
 					syms = append(syms, la)
 				}
-				//dbg("\n\n====\n\nparse state %d // syms0: %v, la: %v, zpath %v ", si, syms, la, state.zpath())
 				stop, err := y.Parser.parse(si, func() *Symbol {
 					if len(syms) == 0 {
 						return nil
@@ -171,17 +169,14 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 				})
 
 				if stop == si {
-					//dbg("OK")
 					continue
 				}
 
 				if err != nil {
-					//dbg("err: %v", err)
 					t.Error(err)
 				}
 
 				if g, e := stop, si; g != e {
-					//dbg("state %d not reached (final state %d)", si, stop)
 					t.Errorf("state %d not reached (final state %d)", si, stop)
 				}
 			}
@@ -319,7 +314,6 @@ states:
 			return nil, fmt.Errorf("got state number %d, expected %d", g, e)
 		}
 
-		//dbg("state %s (%d)", line, bisonState)
 		for { // skip blanks before items
 			l, ok := b.peekLine()
 			if !ok {
@@ -386,11 +380,6 @@ states:
 			switch {
 			case len(state) == 1 && state[0].rule() == 0 && state[0].dot() == 2:
 			default:
-				// dbg("---- %d", bisonState)
-				// for _, item := range state {
-				// 	dbg("rule %d dot %d", item.rule(), item.dot())
-				// 	dbg("not found: %s", item.dump(y))
-				// }
 				return nil, fmt.Errorf("bison report: state %d not found", bisonState)
 			}
 		}
@@ -457,7 +446,6 @@ states:
 
 			l = b.mustLine()
 			//TODO process action
-			//dbg("action %q", l)
 		}
 
 		bisonState++
@@ -722,61 +710,37 @@ Factor:
 	// /*
 	// 	Reject empty file
 	// */
+	// 0
 	// "invalid empty source file"
 	//
-	// // state set: [0]
-	//  error
-	// "syntax error: expected Expression or one of ['+' '-' NUMBER]"
+	// 1 // NUMBER
+	// 15 // NUMBER '-' NUMBER
+	// 16 // NUMBER '+' NUMBER
+	// error "expected $end"
 	//
-	// // state set: [5]
-	// '+' error
-	// "syntax error: expected NUMBER"
+	// 0
+	// error "expected Expression or one of ['+' '-' NUMBER]"
 	//
-	// // state set: [8]
-	// '+' NUMBER error
-	// "syntax error: expected one of [$end '*' '+' '-' '/']"
+	// 9 // NUMBER '*'
+	// 10 // NUMBER '/'
+	// error "expected Factor or one of ['+' '-' NUMBER]"
 	//
-	// // state set: [6]
-	// '-' error
-	// "syntax error: expected NUMBER"
+	// 5 // '+'
+	// 6 // '-'
+	// error "expected NUMBER"
 	//
-	// // state set: [7]
-	// '-' NUMBER error
-	// "syntax error: expected one of [$end '*' '+' '-' '/']"
+	// 13 // NUMBER '+'
+	// 14 // NUMBER '-'
+	// error "expected Term or one of ['+' '-' NUMBER]"
 	//
-	// // state set: [1 2 3 4]
-	// NUMBER error
-	// "syntax error: expected one of [$end '*' '+' '-' '/']"
+	// 3 // NUMBER
+	// 4 // NUMBER
+	// 7 // '-' NUMBER
+	// 8 // '+' NUMBER
+	// error "expected one of [$end '*' '+' '-' '/']"
 	//
-	// // state set: [9]
-	// NUMBER '*' error
-	// "syntax error: expected Factor or one of ['+' '-' NUMBER]"
-	//
-	// // state set: [12]
-	// NUMBER '*' NUMBER error
-	// "syntax error: expected one of [$end '+' '-']"
-	//
-	// // state set: [13]
-	// NUMBER '+' error
-	// "syntax error: expected Term or one of ['+' '-' NUMBER]"
-	//
-	// // state set: [16]
-	// NUMBER '+' NUMBER error
-	// "syntax error: expected $end"
-	//
-	// // state set: [14]
-	// NUMBER '-' error
-	// "syntax error: expected Term or one of ['+' '-' NUMBER]"
-	//
-	// // state set: [15]
-	// NUMBER '-' NUMBER error
-	// "syntax error: expected $end"
-	//
-	// // state set: [10]
-	// NUMBER '/' error
-	// "syntax error: expected Factor or one of ['+' '-' NUMBER]"
-	//
-	// // state set: [11]
-	// NUMBER '/' NUMBER error
-	// "syntax error: expected one of [$end '+' '-']"
+	// 2 // NUMBER
+	// 11 // NUMBER '/' NUMBER
+	// 12 // NUMBER '*' NUMBER
+	// error "expected one of [$end '+' '-']"
 }

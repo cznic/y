@@ -1747,12 +1747,29 @@ func (y *y) xerrors() error {
 		0, // Ignore comments
 	)
 
+	var stateSet []int
+	var stateSets [][]int
 	var example []string
 	var examples [][]string
+	acceptInt := true
 examples:
 	for {
 		switch pos, tok, lit := s.Scan(); tok {
+		case token.INT:
+			if !acceptInt {
+				y.err(pos, "state number not accepted here")
+				break
+			}
+
+			n, err := strconv.ParseUint(lit, 10, 31)
+			if err != nil {
+				y.err(pos, "%v", err)
+				break
+			}
+
+			stateSet = append(stateSet, int(n))
 		case token.IDENT:
+			acceptInt = false
 			sym, ok := y.Syms[lit]
 			if !ok {
 				y.err(pos, "undefined symbol %s", lit)
@@ -1769,6 +1786,7 @@ examples:
 			}
 			example = append(example, lit)
 		case token.CHAR:
+			acceptInt = false
 			t, err := strconv.Unquote(lit)
 			if err != nil {
 				y.err(pos, "%v", err)
@@ -1781,9 +1799,12 @@ examples:
 			}
 			example = append(example, nm)
 		case token.OR: // '|'
+			stateSets = append(stateSets, stateSet)
+			stateSet = nil
 			examples = append(examples, example)
 			example = nil
 		case token.STRING:
+			acceptInt = true
 			parse := func(toks []string) (stack []int, la *Symbol, ok bool) {
 				lex := func() *Symbol {
 					if la != nil {
@@ -1827,7 +1848,22 @@ examples:
 				}
 			}
 			lit := lit[1 : len(lit)-1]
-			for _, example := range append(examples, example) {
+			stateSets = append(stateSets, stateSet)
+			for i, example := range append(examples, example) {
+				stateSet := stateSets[i]
+				if len(stateSet) != 0 {
+					if len(example) == 0 {
+						example = []string{"$end"}
+					}
+
+					last := example[len(example)-1]
+					la := y.Syms[last]
+					for _, state := range stateSet {
+						y.XErrors = append(y.XErrors, XError{[]int{state}, la, lit})
+					}
+					continue
+				}
+
 				stack, la, ok := parse(example)
 				if !ok {
 					y.err(pos, "parser unexpectedly accepts xerror example: %v %s", example, lit)
@@ -1838,6 +1874,8 @@ examples:
 			}
 			example = example[:0]
 			examples = examples[:0]
+			stateSet = stateSet[:0]
+			stateSets = stateSets[:0]
 		case token.EOF:
 			break examples
 		case token.ILLEGAL:

@@ -61,7 +61,7 @@ type Action struct {
 //
 //	For 'a' arg is not used.
 //	For 's' arg is the state number to shift to.
-//	For 'r' arg is the rule number which is to be reduced.
+//	For 'r' arg is the rule number to reduce.
 //	For 'g' arg is the state number to goto.
 func (a Action) Kind() (typ, arg int) {
 	if !a.Sym.IsTerminal {
@@ -103,16 +103,46 @@ type AssocDef struct {
 // XErrorSrc is a sequence of Go tokens separated by white space using the same
 // rules as valid Go source code except that semicolon injection is not used.
 // Comments of both short and long form are equal to white space. An example
-// consists of zero or more token specifiers followed by an error message.
-// Token specifier is a valid Go identifier or a Go character literal. The
-// error message is a Go string literal. The identifiers used in XErrorsSrc
-// must be those defined as tokens in the yacc file. An implicit $end token is
-// inserted at the end of the example input. For example:
+// consists of an optional state set prefix followed by zero or more token
+// specifiers followed by an error message.  A state set is zero or more
+// integer literals.  Token specifier is a valid Go identifier or a Go
+// character literal. The error message is a Go string literal. The EBNF is
+//
+//	ErrorExamples = { { INT_LIT } { IDENTIFIER | CHAR_LIT } STRING_LIT } .
+//
+// The identifiers used in XErrorsSrc must be those defined as tokens in the
+// yacc file. An implicit $end token is inserted at the end of the example
+// input if no state set is given for that example. Examples with a state set
+// are assumed to always specify the error-triggering lookahead token as the
+// last example token, which is usually, but not necessarily  the reserved
+// error terminal symbol. If an example has a state set but no example tokens,
+// a $end is used as an example. For example:
 //
 //	/*
 //		Reject empty file
 //	*/
-//	"invalid empty source file"
+//	/* $end inserted here*/ "invalid empty source file"
+//
+//	PACKAGE /* $end inserted here */
+//	"Unexpected EOF"
+//
+//	PACKAGE ';' /* $end inserted here even though parsing stops at ';' */
+//	`Missing package name or newline after "package"`
+//
+// vs
+//
+//
+//	/*
+//		Reject empty file
+//	*/
+//	0
+//	/* $end inserted here */ "invalid empty source file"
+//
+//	2
+//	PACKAGE error /* no $end inserted here */
+//	`Missing package name or newline after "package"`
+//
+// Other examples
 //
 //	PACKAGE IDENT ';'
 //	IMPORT STRING_LIT ','
@@ -151,6 +181,15 @@ type AssocDef struct {
 //
 // It's an error if the example token sequence is accepted by the parser, ie.
 // if it does not produce an error.
+//
+// Note: In the case of example with a state set, the example tokens, except for
+// the last one, serve only documentation purposes. Only the combination of a state and a particular
+// lookahead is actually considered by the parser.
+//
+// Examples without a state set are processed differently and all the example
+// tokens matter. An attempt is made to find the applicable state set
+// automatically, but this computation is not yet completely functional and
+// possibly only a subset of the real error states are produced.
 type Options struct {
 	AllowConflicts  bool      // Do not report unresolved conflicts as errors.
 	AllowTypeErrors bool      // Continue even if type checks fail.
@@ -213,13 +252,11 @@ stack:
 		}
 
 		yyS = append(yyS, yystate)
-		//dbg("yyS %v", yyS)
 		if yychar == nil {
 			yychar = lex()
 			if yychar == nil {
 				yychar = eof
 			}
-			//dbg("--------> LEX %s", yychar)
 		}
 		for _, act := range p.Table[yystate] {
 			if act.Sym != yychar {
@@ -228,12 +265,10 @@ stack:
 
 			switch typ, arg := act.Kind(); typ {
 			case 'a':
-				//dbg("accept")
 				return yystate, nil
 			case 's':
 				yychar = nil
 				yystate = arg
-				//dbg("shift and goto state %d", yystate)
 			case 'r':
 				rule := p.Rules[arg]
 				n := len(yyS)
@@ -242,7 +277,6 @@ stack:
 				n -= m
 				tos := yyS[n-1]
 				yystate = p.States[tos].gotos[rule.Sym].arg
-				//dbg("reduce rule %d and goto state %d", rule.RuleNum, yystate)
 			}
 			continue stack
 		}
@@ -258,6 +292,34 @@ func (p *Parser) AcceptsEmptyInput() bool {
 	return len(toks) == 0 && la == p.y.endSym
 }
 
+func (s *State) skeletonXErrors(y *y) (nonTerminals, terminals map[*Symbol]struct{}) {
+	for _, item := range s.kernel {
+		if sym := item.next(y); sym != nil && !sym.IsTerminal {
+			if nonTerminals == nil {
+				nonTerminals = map[*Symbol]struct{}{}
+			}
+			nonTerminals[sym] = struct{}{}
+		}
+	}
+	for _, item := range s.xitems {
+		if sym := item.next(y); sym != nil && !sym.IsTerminal {
+			if nonTerminals == nil {
+				nonTerminals = map[*Symbol]struct{}{}
+			}
+			nonTerminals[sym] = struct{}{}
+		}
+	}
+	terminals = map[*Symbol]struct{}{}
+	for k := range s.actions {
+		if k == y.errSym {
+			continue
+		}
+
+		terminals[k] = struct{}{}
+	}
+	return nonTerminals, terminals
+}
+
 // SkeletonXErrors writes an automatically generated errors by example file to
 // w.
 func (p *Parser) SkeletonXErrors(w io.Writer) error {
@@ -265,65 +327,78 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 		if _, err := fmt.Fprintf(w, `/*
 	Reject empty file
 */
+0
 "invalid empty source file"
-
 `); err != nil {
 			return err
 		}
 	}
 
-	errs := map[string][]int{}
-	for si, state := range p.States {
-		toks, _ := state.Syms0()
-		s := fmt.Sprintf("%v", toks)
-		s = strings.TrimSpace(s[1 : len(s)-1])
-		errs[s] = append(errs[s], si)
+	type t struct {
+		states []int
+		syms   []string
 	}
+
+	errs := map[string]t{}
+	for _, state := range p.States {
+		nt, t := state.skeletonXErrors(p.y)
+		var nta, ta []string
+
+		for k := range nt {
+			nta = append(nta, k.Name)
+		}
+
+		sort.Strings(nta)
+		for k := range t {
+			ta = append(ta, k.Name)
+		}
+		sort.Strings(ta)
+
+		snt := strings.Join(nta, " or ")
+		if len(nta) != 0 {
+			snt += " or "
+		}
+
+		st := strings.Join(ta, " ")
+		if len(ta) > 1 {
+			st = "one of [" + st + "]"
+		}
+
+		s := fmt.Sprintf("expected %s%s", snt, st)
+		v := errs[s]
+		v.states = append(v.states, state.id)
+		syms0, _ := state.Syms0()
+		syms := fmt.Sprintf("%v", syms0)
+		syms = syms[1 : len(syms)-1]
+		v.syms = append(v.syms, syms)
+		errs[s] = v
+	}
+
 	var a []string
 	for k := range errs {
 		a = append(a, k)
 	}
 	sort.Strings(a)
-	for _, k := range a {
-		nts := map[*Symbol]struct{}{}
-		ts := map[*Symbol]struct{}{}
-		sis := errs[k]
-		for _, si := range sis {
-			state := p.States[si]
-			n, t := state.skeletonXErrors(p.y)
-			for k, v := range n {
-				nts[k] = v
+
+	for _, msg := range a {
+		if _, err := fmt.Fprintln(w); err != nil {
+			return err
+		}
+
+		v := errs[msg]
+		for i, state := range v.states {
+			syms := v.syms[i]
+			if syms != "" {
+				syms = " // " + syms
 			}
-			for k, v := range t {
-				ts[k] = v
+			if _, err := fmt.Fprintf(w, "%d%s\n", state, syms); err != nil {
+				return err
 			}
 		}
-		var nta, ta []string
-		for k := range nts {
-			nta = append(nta, k.Name)
-		}
-		sort.Strings(nta)
-		for k := range ts {
-			ta = append(ta, k.Name)
-		}
-		sort.Strings(ta)
-		snt := strings.Join(nta, " or ")
-		if len(nta) != 0 {
-			snt += " or "
-		}
-		st := strings.Join(ta, " ")
-		if len(ta) > 1 {
-			st = "one of [" + st + "]"
-		}
-		if _, err := fmt.Fprintf(
-			w,
-			"// state set: %v\n%s error\n\"syntax error: expected %s%s\"\n\n",
-			sis, k, snt, st,
-		); err != nil {
+		if _, err := fmt.Fprintf(w, "error %q\n", msg); err != nil {
 			return err
 		}
 	}
-
 	return nil
 }
 
@@ -487,30 +562,6 @@ func newState(y *y, s itemSet) *State {
 	}
 }
 
-func (s *State) skeletonXErrors(y *y) (nonTerminals, terminals map[*Symbol]struct{}) {
-	for _, item := range s.kernel {
-		if sym := item.next(y); sym != nil && !sym.IsTerminal {
-			if nonTerminals == nil {
-				nonTerminals = map[*Symbol]struct{}{}
-			}
-			nonTerminals[sym] = struct{}{}
-		}
-	}
-	for _, item := range s.xitems {
-		if sym := item.next(y); sym != nil && !sym.IsTerminal {
-			if nonTerminals == nil {
-				nonTerminals = map[*Symbol]struct{}{}
-			}
-			nonTerminals[sym] = struct{}{}
-		}
-	}
-	terminals = map[*Symbol]struct{}{}
-	for k := range s.actions {
-		terminals[k] = struct{}{}
-	}
-	return nonTerminals, terminals
-}
-
 func (s *State) zpath() []int {
 	if s == nil {
 		return nil
@@ -574,7 +625,6 @@ func (s *State) Syms0() ([]*Symbol, *Symbol) {
 		}
 	}
 	if len(a) == 0 {
-		//dbg("state %d.Syms0: failed to determine lookahead", s.id)
 		return str0, nil
 	}
 
@@ -725,8 +775,6 @@ func (s *Symbol) MinString() (r []*Symbol) {
 }
 
 func (s *Symbol) minString(m map[*Symbol]int) (r []*Symbol, ok bool) {
-	//dbg("%s.minString ENTER", s)
-	//defer func() { dbg("--------------> %s.minString returns %v, %v", s, r, ok) }()
 	if str := s.minStr; str != nil {
 		return str, s.minStrOk
 	}
@@ -798,7 +846,7 @@ func (s *Symbol) String() string {
 
 // XError describes the parser state for an error by example. See [1].
 type XError struct {
-	Stack     []int   // Parser states of the error event. TOS is Stack[len(Stack)-1].
-	Lookahead *Symbol // LA of the error event. Nil if LA is the reserved error symbol.
+	Stack     []int   // Parser states stack, potentially partial, of the error event. TOS is Stack[len(Stack)-1].
+	Lookahead *Symbol // Error lookahead symbol. Nil if LA is the reserved error symbol.
 	Msg       string  // Textual representation of the error condition.
 }
