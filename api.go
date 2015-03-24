@@ -121,7 +121,7 @@ type AssocDef struct {
 //	/*
 //		Reject empty file
 //	*/
-//	/* $end inserted here*/ "invalid empty source file"
+//	/* $end inserted here*/ "invalid empty input"
 //
 //	PACKAGE /* $end inserted here */
 //	"Unexpected EOF"
@@ -136,7 +136,7 @@ type AssocDef struct {
 //		Reject empty file
 //	*/
 //	0
-//	/* $end inserted here */ "invalid empty source file"
+//	/* $end inserted here */ "invalid empty input"
 //
 //	2
 //	PACKAGE error /* no $end inserted here */
@@ -294,11 +294,22 @@ func (p *Parser) AcceptsEmptyInput() bool {
 
 func (s *State) skeletonXErrors(y *y) (nonTerminals, terminals map[*Symbol]struct{}) {
 	for _, item := range s.kernel {
-		if sym := item.next(y); sym != nil && !sym.IsTerminal {
+		for {
+			sym := item.next(y)
+			if sym == nil || sym.IsTerminal {
+				break
+			}
+
 			if nonTerminals == nil {
 				nonTerminals = map[*Symbol]struct{}{}
 			}
 			nonTerminals[sym] = struct{}{}
+
+			if !sym.DerivesEmpty() {
+				break
+			}
+
+			item = newItem(item.rule(), item.dot()+1)
 		}
 	}
 	for _, item := range s.xitems {
@@ -325,10 +336,10 @@ func (s *State) skeletonXErrors(y *y) (nonTerminals, terminals map[*Symbol]struc
 func (p *Parser) SkeletonXErrors(w io.Writer) error {
 	if !p.AcceptsEmptyInput() {
 		if _, err := fmt.Fprintf(w, `/*
-	Reject empty file
+	Reject empty input
 */
 0
-"invalid empty source file"
+"invalid empty input"
 `); err != nil {
 			return err
 		}

@@ -708,10 +708,10 @@ Factor:
 	p.SkeletonXErrors(os.Stdout)
 	// Output:
 	// /*
-	// 	Reject empty file
+	// 	Reject empty input
 	// */
 	// 0
-	// "invalid empty source file"
+	// "invalid empty input"
 	//
 	// 1 // NUMBER
 	// 15 // NUMBER '-' NUMBER
