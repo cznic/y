@@ -300,6 +300,11 @@ func (s *State) skeletonXErrors(y *y) (nonTerminals, terminals map[*Symbol]struc
 				break
 			}
 
+			if sym.IsEmpty() {
+				item = newItem(item.rule(), item.dot()+1)
+				continue
+			}
+
 			if nonTerminals == nil {
 				nonTerminals = map[*Symbol]struct{}{}
 			}
@@ -690,6 +695,11 @@ type Symbol struct {
 	id               int       // Index into y.syms
 	minStr           []*Symbol //
 	minStrOk         bool      //
+}
+
+// IsEmpty reports whether s derives only ε.
+func (s *Symbol) IsEmpty() bool {
+	return len(s.Rules) == 1 && len(s.Rules[0].Components) == 0
 }
 
 func (s *Symbol) derivesEmpty(m map[*Symbol]bool) bool {
