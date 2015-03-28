@@ -1751,6 +1751,8 @@ func (y *y) xerrors() error {
 	var stateSets [][]int
 	var example []string
 	var examples [][]string
+	m := map[string]string{}
+	var list []XError
 	acceptInt := true
 examples:
 	for {
@@ -1859,7 +1861,9 @@ examples:
 					last := example[len(example)-1]
 					la := y.Syms[last]
 					for _, state := range stateSet {
-						y.XErrors = append(y.XErrors, XError{[]int{state}, la, lit})
+						xe := XError{[]int{state}, la, lit}
+						list = append(list, xe)
+						m[xe.mapKey()] = lit
 					}
 					continue
 				}
@@ -1870,7 +1874,9 @@ examples:
 					continue
 				}
 
-				y.XErrors = append(y.XErrors, XError{stack, la, lit})
+				xe := XError{stack, la, lit}
+				list = append(list, xe)
+				m[xe.mapKey()] = lit
 			}
 			example = example[:0]
 			examples = examples[:0]
@@ -1890,6 +1896,11 @@ examples:
 		default:
 			y.err(pos, "unexpected token %s (%q)", tok, lit)
 			break examples
+		}
+	}
+	for _, v := range list {
+		if m[v.mapKey()] == v.Msg {
+			y.XErrors = append(y.XErrors, v)
 		}
 	}
 	return y.error()

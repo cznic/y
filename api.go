@@ -871,3 +871,7 @@ type XError struct {
 	Lookahead *Symbol // Error lookahead symbol. Nil if LA is the reserved error symbol.
 	Msg       string  // Textual representation of the error condition.
 }
+
+func (x *XError) mapKey() string {
+	return fmt.Sprintf("%v %v", x.Stack, x.Lookahead)
+}
