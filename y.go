@@ -94,7 +94,7 @@ func (a action) String() string {
 	case 's':
 		return fmt.Sprintf("shift, and goto state %d", a.arg)
 	default:
-		panic("internal error 008")
+		panic("y: internal error 008")
 	}
 }
 
@@ -222,7 +222,7 @@ func (s itemSet) mustFind(i item) int {
 		return m
 	}
 
-	panic("internal error 011")
+	panic("y: internal error 011")
 }
 
 func (s itemSet) state(y *y) (int, bool) {
@@ -475,7 +475,7 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 			case 'r':
 				a = append(a, Action{sym, -act.arg})
 			default:
-				panic("internal error 005")
+				panic("y: internal error 005")
 			}
 		}
 		for sym, act := range state.gotos {
@@ -506,7 +506,7 @@ func (y *y) allocValue() (n int) {
 	case n == 0xffffd:
 		n = 0x100000 // Supplemental Private Use Area-B.
 	case n == 0x10fffd:
-		panic("internal error 012")
+		panic("y: internal error 012")
 	default:
 		n++
 	}
@@ -585,11 +585,11 @@ func (y *y) conflicts() error {
 				case 'r':
 					r = append(r, act)
 				default:
-					panic("internal error 006")
+					panic("y: internal error 006")
 				}
 			}
 			if len(s) > 1 {
-				panic("internal error 007")
+				panic("y: internal error 007")
 			}
 
 			var in, out [][2]action
@@ -772,7 +772,7 @@ func (y *y) defs() error {
 				case string:
 					name = x
 				default:
-					panic("internal error 002")
+					panic("y: internal error 002")
 				}
 
 				t := &Symbol{
@@ -907,7 +907,7 @@ func (y *y) defs() error {
 				}
 			}
 		default:
-			panic("internal error 001")
+			panic("y: internal error 001")
 		}
 	}
 	return y.error()
@@ -1401,7 +1401,7 @@ func (y *y) resolve(s *State, si int, sym *Symbol, conflict [2]action) (resolved
 	case 'r':
 		// nop
 	default:
-		panic("internal error 009")
+		panic("y: internal error 009")
 	}
 	return false, false
 }
@@ -1444,7 +1444,7 @@ func (y *y) rules0() error {
 			case string:
 				nm = x
 			default:
-				panic("internal error 003")
+				panic("y: internal error 003")
 			}
 
 			s, ok := y.Syms[nm]
@@ -1543,7 +1543,7 @@ func (y *y) rules0() error {
 				s = &Symbol{Name: nm, IsTerminal: true, Precedence: -1, Value: x}
 				y.Syms[nm] = s
 			default:
-				panic("internal error 004")
+				panic("y: internal error 004")
 			}
 		}
 		r.Action = finalAct
@@ -1845,7 +1845,7 @@ examples:
 						stack = stack[:len(stack)-len(rule.Components)]
 						stack = append(stack, y.States[stack[len(stack)-1]].gotos[rule.Sym].arg)
 					default:
-						panic("internal error 010")
+						panic("y: internal error 010")
 					}
 				}
 			}

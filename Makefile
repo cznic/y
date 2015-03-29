@@ -32,7 +32,7 @@ editor:
 	go install
 
 internalError:
-	egrep -ho '"internal error.*"' *.go | sort | cat -n
+	egrep -ho '".*internal error.*"' *.go | sort | cat -n
 
 later:
 	@grep -n $(grep) LATER * || true

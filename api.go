@@ -328,7 +328,7 @@ func (s *State) skeletonXErrors(y *y) (nonTerminals, terminals map[*Symbol]struc
 	terminals = map[*Symbol]struct{}{}
 	for k := range s.actions {
 		if k == y.errSym {
-			continue
+			return nil, nil
 		}
 
 		terminals[k] = struct{}{}
@@ -358,6 +358,10 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 	errs := map[string]t{}
 	for _, state := range p.States {
 		nt, t := state.skeletonXErrors(p.y)
+		if nt == nil && t == nil {
+			continue
+		}
+
 		var nta, ta []string
 
 		for k := range nt {
