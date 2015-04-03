@@ -827,10 +827,15 @@ func (s *Symbol) minString(m map[*Symbol]int) (r []*Symbol, ok bool) {
 	m[s]++
 	defer func() { m[s]-- }()
 	var best []*Symbol
+	var bestHasError bool
 nextRule:
 	for _, rule := range s.Rules {
 		var current []*Symbol
+		hasError := false
 		for _, sym := range rule.syms {
+			if sym.Name == "error" {
+				hasError = true
+			}
 			str, ok := sym.minString(m)
 			if !ok {
 				continue nextRule
@@ -842,6 +847,12 @@ nextRule:
 		switch {
 		case best == nil:
 			best = current
+			bestHasError = hasError
+		case best != nil && bestHasError && !hasError:
+			best = current
+			bestHasError = false
+		case best != nil && !bestHasError && hasError:
+			// nop
 		case len(current) < len(best):
 			best = current
 		case len(current) == len(best):
