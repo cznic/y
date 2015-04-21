@@ -65,6 +65,7 @@ var (
 	oDev       = flag.String("dev", "", "Process testdata/dev/regex file(s).")
 	oLA        = flag.Bool("la", false, "Report all lookahead sets.")
 	oNoErr     = flag.Bool("noerr", false, "Disable errors for 'make cpu'.")
+	oRE        = flag.String("re", "", "Regexp filter.")
 )
 
 func (s itemSet) dump(y *y) string {
@@ -87,6 +88,14 @@ func (s itemSet1) dump(y *y) string {
 
 func test0(t *testing.T, root string, filter func(pth string) bool, opts *Options, xerrors bool) {
 	const cc = "testdata/ok/cc.y"
+	var re *regexp.Regexp
+	if s := *oRE; s != "" {
+		var err error
+		re, err = regexp.CompilePOSIX(s)
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
 	if err := filepath.Walk(root, func(pth string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -102,6 +111,10 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 		}
 
 		if !ok || filter != nil && !filter(pth) {
+			return nil
+		}
+
+		if re != nil && !re.MatchString(pth) {
 			return nil
 		}
 

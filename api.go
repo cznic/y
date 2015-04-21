@@ -38,7 +38,6 @@ import (
 	"strings"
 
 	yparser "github.com/cznic/parser/yacc"
-	yscanner "github.com/cznic/scanner/yacc"
 )
 
 // Values of {AssocDef,Rule,Sym}.Associativity
@@ -442,7 +441,7 @@ func (p *Parser) Reductions() map[int][]int {
 
 // ProcessAST processes yacc source code parsed in ast. It returns a *Parser or
 // an error, if any.
-func ProcessAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*Parser, error) {
+func ProcessAST(fset *token.FileSet, ast *yparser.Specification, opts *Options) (*Parser, error) {
 	y, err := processAST(fset, ast, opts)
 	if y == nil {
 		return nil, err
@@ -519,16 +518,16 @@ func ProcessSource(fset *token.FileSet, fname string, src []byte, opts *Options)
 // parent values not yet shifted to the parse stack as well as to compute the
 // position of the $n thing on the parse stack. See also [4].
 type Rule struct {
-	Action          []*yparser.Act // Parts of the semantic action associated with the rule, if any.
-	Associativity   int            // One of the assoc* constants.
-	Components      []string       // Textual forms of the rule components, for example []string{"IDENT", "';'"}
-	ExplicitPrecSym *Symbol        // Symbol used in the optional %prec sym clause, if present.
-	MaxParentDlr    int            // See the Rule type docs for details.
-	Parent          *Rule          // Non nil if a synthetic rule.
-	PrecSym         *Symbol        // Effective %prec symbol used, if any.
-	Precedence      int            // -1 if no precedence assigned.
-	RuleNum         int            // Zero based rule number. Rule #0 is synthetic.
-	Sym             *Symbol        // LHS of the rule.
+	Action          *yparser.Action // The semantic action associated with the rule, if any.
+	Associativity   int             // One of the assoc* constants.
+	Components      []string        // Textual forms of the rule components, for example []string{"IDENT", "';'"}
+	ExplicitPrecSym *Symbol         // Symbol used in the optional %prec sym clause, if present.
+	MaxParentDlr    int             // See the Rule type docs for details.
+	Parent          *Rule           // Non nil if a synthetic rule.
+	PrecSym         *Symbol         // Effective %prec symbol used, if any.
+	Precedence      int             // -1 if no precedence assigned.
+	RuleNum         int             // Zero based rule number. Rule #0 is synthetic.
+	Sym             *Symbol         // LHS of the rule.
 	maxDlr          int
 	pos             token.Pos
 	syms            []*Symbol
@@ -537,17 +536,18 @@ type Rule struct {
 // Actions returns the textual representation of r.Actions combined.
 func (r *Rule) Actions() string {
 	var buf bytes.Buffer
-	for _, v := range r.Action {
-		buf.WriteString(v.Src)
-		switch v.Tok {
-		case yscanner.DLR_DLR:
+	for _, v := range r.Action.Values {
+		switch v.Type {
+		case yparser.ActionValueDlrDlr:
 			buf.WriteString("$$")
-		case yscanner.DLR_NUM:
+		case yparser.ActionValueDlrNum:
 			buf.WriteString(fmt.Sprintf("$%d", v.Num))
-		case yscanner.DLR_TAG_DLR:
-			buf.WriteString(fmt.Sprintf("$<%s>", v.Tag))
-		case yscanner.DLR_TAG_NUM:
+		case yparser.ActionValueDlrTagDlr:
+			buf.WriteString(fmt.Sprintf("$<%s>$", v.Tag))
+		case yparser.ActionValueDlrTagNum:
 			buf.WriteString(fmt.Sprintf("$<%s>%d", v.Tag, v.Num))
+		default:
+			buf.WriteString(v.Src)
 		}
 	}
 	return buf.String()

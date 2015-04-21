@@ -19,7 +19,6 @@ import (
 
 	"github.com/cznic/mathutil"
 	yparser "github.com/cznic/parser/yacc"
-	yscanner "github.com/cznic/scanner/yacc"
 	"github.com/cznic/strutil"
 )
 
@@ -350,7 +349,7 @@ type y struct {
 	*Parser
 	acceptSym      *Symbol
 	allocVal       int
-	ast            *yparser.AST
+	ast            *yparser.Specification
 	clsCache       map[item]map[item]symSet
 	clsQueue       []item1   // Non reentrant item1.closure todo list.
 	clsSyms        []*Symbol // Non reentrant item1.closure buffer.
@@ -381,7 +380,7 @@ type y struct {
 	zeroPathsValid bool // States paths to state 0 determined.
 }
 
-func newY(fset *token.FileSet, ast *yparser.AST, opts *Options) *y {
+func newY(fset *token.FileSet, ast *yparser.Specification, opts *Options) *y {
 	r := &y{
 		Parser:       newParser(),
 		acceptSym:    &Symbol{Name: "$accept"},
@@ -414,7 +413,7 @@ func newY(fset *token.FileSet, ast *yparser.AST, opts *Options) *y {
 	return r
 }
 
-func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error) {
+func processAST(fset *token.FileSet, ast *yparser.Specification, opts *Options) (*y, error) {
 	var err error
 	if opts, err = opts.boot(fset); err != nil {
 		return nil, err
@@ -425,7 +424,9 @@ func processAST(fset *token.FileSet, ast *yparser.AST, opts *Options) (*y, error
 		return nil, err
 	}
 
-	y.Tail = ast.Tail
+	if t := ast.Tail; t != nil {
+		y.Tail = t.Value
+	}
 	if err := y.rules0(); err != nil {
 		return nil, err
 	}
@@ -585,11 +586,11 @@ func (y *y) conflicts() error {
 				case 'r':
 					r = append(r, act)
 				default:
-					panic("y: internal error 006")
+					panic("internal error")
 				}
 			}
 			if len(s) > 1 {
-				panic("y: internal error 007")
+				panic("internal error")
 			}
 
 			var in, out [][2]action
@@ -729,156 +730,20 @@ func (y *y) defs() error {
 
 	for _, def := range y.ast.Defs {
 		isAssoc := false
-		switch def.Rword {
-		case yparser.Copy:
-			buf.WriteString(def.Tag)
-		case yparser.ErrVerbose:
-			y.ErrorVerbose = true
-		case yparser.Start:
-			nm := def.Tag
+		switch def.Case {
+		case 0: // START IDENTIFIER
+			nm := def.Token2.Val
 			y.Start = nm
-			y.nonTerminals[nm] = def.Pos
-			y.useSym(nm, def.Pos)
-		case yparser.Left, yparser.Right, yparser.Nonassoc, yparser.Precedence:
-			y.precedence++
-			isAssoc = true
-			fallthrough
-		case yparser.Token:
-			typ := def.Tag
-			y.useType(def.Pos, typ)
-			assoc := AssocNotSpecified
-			switch def.Rword {
-			case yparser.Left:
-				assoc = AssocLeft
-			case yparser.Right:
-				assoc = AssocRight
-			case yparser.Nonassoc:
-				assoc = AssocNone
-			case yparser.Precedence:
-				assoc = AssocPrecedence
-			}
-			var assocDef AssocDef
-			assocDef.Associativity = assoc
-			for _, nmno := range def.Nlist {
-				var name string
-				num := nmno.Number
-
-				switch x := nmno.Identifier.(type) {
-				case int:
-					name = fmt.Sprintf("%q", x)
-					if num < 0 {
-						num = x
-					}
-				case string:
-					name = x
-				default:
-					panic("y: internal error 002")
-				}
-
-				t := &Symbol{
-					Associativity: assoc,
-					IsTerminal:    true,
-					Name:          name,
-					Pos:           nmno.Pos,
-					Precedence:    -1,
-					Type:          typ,
-					Value:         num,
-				}
-				if isAssoc {
-					assocDef.Syms = append(assocDef.Syms, t)
-				}
-
-				switch def.Rword {
-				case yparser.Left, yparser.Right, yparser.Nonassoc, yparser.Precedence:
-					t.Precedence = y.precedence
-				}
-
-				ex, ok := y.Syms[name]
-				if !ok {
-					if t.Value < 0 {
-						t.Value = y.allocValue()
-					}
-					y.Syms[name] = t
-					continue
-				}
-
-				// Merge the declarations, if possible.
-				if n := t.Associativity; n != AssocNotSpecified {
-					switch o := ex.Associativity; {
-					case o == AssocNotSpecified:
-						ex.Associativity = n
-					case n != o:
-						y.err(
-							t.Pos,
-							"%s: conflict with previous associativity declaration at %v",
-							name, y.pos(ex.Pos),
-						)
-					}
-				}
-
-				if n := t.Precedence; n >= 0 {
-					switch o := ex.Precedence; {
-					case o < 0:
-						ex.Precedence = n
-					case n != o:
-						y.err(
-							t.Pos,
-							"%s: conflict with previous precedence declaration at %v",
-							name, y.pos(ex.Pos),
-						)
-					}
-				}
-
-				if n := t.Type; n != "" {
-					switch o := ex.Type; {
-					case o == "":
-						ex.Type = n
-					case n != o:
-						y.err(
-							t.Pos,
-							"%s: conflict with previous type declaration at %v",
-							name, y.pos(ex.Pos),
-						)
-					}
-				}
-
-				if n := t.Value; n >= 0 {
-					switch o := ex.Value; {
-					case o < 0:
-						ex.Value = n
-					case n != o:
-						y.err(
-							t.Pos,
-							"%s: conflict with previous value declaration at %v",
-							name, y.pos(ex.Pos),
-						)
-					}
-				}
-			}
-			if isAssoc {
-				y.AssocDefs = append(y.AssocDefs, &assocDef)
-			}
-		case yparser.Type:
-			typ := def.Tag
-			y.useType(def.Pos, typ)
-			for _, nmno := range def.Nlist {
-				nm := nmno.Identifier.(string)
-				if ex, ok := types[nm]; ok {
-					y.err(nmno.Pos, "%%type: previous declaration at %v", y.pos(ex.Pos))
-					break
-				}
-
-				types[nm] = typeDecl{nmno.Pos, typ}
-				y.useSym(nm, def.Pos)
-			}
-		case yparser.Union:
+			y.nonTerminals[nm] = def.Token2.Pos()
+			y.useSym(nm, def.Token2.Pos())
+		case 1: // UNION
 			if ex := y.unionPos; ex != 0 {
-				y.err(def.Pos, "duplicate %%union: previous at %v", y.pos(ex))
+				y.err(def.Token.Pos(), "duplicate %%union: previous at %v", y.pos(ex))
 				break
 			}
 
 			y.unionPos = def.Pos
-			src := def.Tag
+			src := def.Value
 			for len(src) != 0 && src[0] != '{' {
 				src = src[1:]
 			}
@@ -902,12 +767,169 @@ func (y *y) defs() error {
 					case !ok:
 						y.types[nm.Name] = def.Pos
 					default:
-						y.err(def.Pos, "union field %s lalready declared: %s", nm, y.pos(ex))
+						y.err(def.Pos, "union field %s already declared: %s", nm, y.pos(ex))
 					}
 				}
 			}
+		case 2: // LCURL RCURL
+			buf.WriteString(def.Value)
+		case 3: // ReservedWord Tag NameList
+			switch def.ReservedWord.Case {
+			case
+				1, // LEFT
+				2, // RIGHT
+				3, // NONASSOC
+				5: // PRECEDENCE
+				y.precedence++
+				isAssoc = true
+				fallthrough
+			case 0: // TOKEN
+				var typ string
+				if tag := def.Tag; tag != nil {
+					typ = def.Tag.Token2.Val
+					y.useType(def.Tag.Token2.Pos(), typ)
+				}
+				assoc := AssocNotSpecified
+				switch def.ReservedWord.Token.Char.Rune {
+				case yparser.LEFT:
+					assoc = AssocLeft
+				case yparser.RIGHT:
+					assoc = AssocRight
+				case yparser.NONASSOC:
+					assoc = AssocNone
+				case yparser.PRECEDENCE:
+					assoc = AssocPrecedence
+				}
+				var assocDef AssocDef
+				assocDef.Associativity = assoc
+				for _, nmno := range def.Nlist {
+					var name string
+					num := nmno.Number
+
+					switch x := nmno.Identifier.(type) {
+					case int:
+						name = fmt.Sprintf("%q", x)
+						if name == "\n" {
+							panic("TODO")
+						}
+						if num < 0 {
+							num = x
+						}
+					case string:
+						name = x
+						if name == "\n" {
+							panic("TODO")
+						}
+					default:
+						panic("internal error")
+					}
+
+					t := &Symbol{
+						Associativity: assoc,
+						IsTerminal:    true,
+						Name:          name,
+						Pos:           nmno.Token.Pos(),
+						Precedence:    -1,
+						Type:          typ,
+						Value:         num,
+					}
+					if isAssoc {
+						assocDef.Syms = append(assocDef.Syms, t)
+					}
+
+					switch def.ReservedWord.Token.Char.Rune {
+					case yparser.LEFT, yparser.RIGHT, yparser.NONASSOC, yparser.PRECEDENCE:
+						t.Precedence = y.precedence
+					}
+
+					ex, ok := y.Syms[name]
+					if !ok {
+						if t.Value < 0 {
+							t.Value = y.allocValue()
+						}
+						if name == "\n" {
+							panic("TODO")
+						}
+						y.Syms[name] = t
+						continue
+					}
+
+					// Merge the declarations, if possible.
+					if n := t.Associativity; n != AssocNotSpecified {
+						switch o := ex.Associativity; {
+						case o == AssocNotSpecified:
+							ex.Associativity = n
+						case n != o:
+							y.err(
+								t.Pos,
+								"%s: conflict with previous associativity declaration at %v",
+								name, y.pos(ex.Pos),
+							)
+						}
+					}
+
+					if n := t.Precedence; n >= 0 {
+						switch o := ex.Precedence; {
+						case o < 0:
+							ex.Precedence = n
+						case n != o:
+							y.err(
+								t.Pos,
+								"%s: conflict with previous precedence declaration at %v",
+								name, y.pos(ex.Pos),
+							)
+						}
+					}
+
+					if n := t.Type; n != "" {
+						switch o := ex.Type; {
+						case o == "":
+							ex.Type = n
+						case n != o:
+							y.err(
+								t.Pos,
+								"%s: conflict with previous type declaration at %v",
+								name, y.pos(ex.Pos),
+							)
+						}
+					}
+
+					if n := t.Value; n >= 0 {
+						switch o := ex.Value; {
+						case o < 0:
+							ex.Value = n
+						case n != o:
+							y.err(
+								t.Pos,
+								"%s: conflict with previous value declaration at %v",
+								name, y.pos(ex.Pos),
+							)
+						}
+					}
+				}
+				if isAssoc {
+					y.AssocDefs = append(y.AssocDefs, &assocDef)
+				}
+			case 4: // TYPE
+				typ := def.Tag.Token2.Val
+				y.useType(def.Tag.Token2.Pos(), typ)
+				for _, nmno := range def.Nlist {
+					nm := nmno.Identifier.(string)
+					if ex, ok := types[nm]; ok {
+						y.err(nmno.Token.Pos(), "%%type: previous declaration at %v", y.pos(ex.Pos))
+						break
+					}
+
+					types[nm] = typeDecl{nmno.Token.Pos(), typ}
+					y.useSym(nm, nmno.Token.Pos())
+				}
+			default:
+				panic("internal error")
+			}
+		case 4: // ERROR_VERBOSE
+			y.ErrorVerbose = true
 		default:
-			panic("y: internal error 001")
+			panic("internal error")
 		}
 	}
 	return y.error()
@@ -1415,65 +1437,70 @@ func (y *y) rules0() error {
 	post := map[string]token.Pos{}
 
 	for _, prule := range y.ast.Rules {
-		if prule.Name == "error" {
-			y.err(prule.Pos, "a rule cannot use the reserved name error")
+		if prule.Name.Val == "error" {
+			y.err(prule.Name.Pos(), "a rule cannot use the reserved name error")
 			continue
 		}
 
-		ruleSym := y.Syms[prule.Name]
+		ruleSym := y.Syms[prule.Name.Val]
 		if ruleSym == nil {
-			ruleSym = &Symbol{Name: prule.Name, Pos: prule.Pos, Value: -1}
-			y.Syms[prule.Name] = ruleSym
+			ruleSym = &Symbol{Name: prule.Name.Val, Pos: prule.Name.Pos(), Value: -1}
+			y.Syms[prule.Name.Val] = ruleSym
 		}
 		ruleSym.Type = y.symTypes[ruleSym.Name].typeName
 		r := &Rule{
 			MaxParentDlr: -1,
 			Sym:          ruleSym,
-			pos:          prule.Pos,
+			pos:          prule.Name.Pos(),
 			Precedence:   -1,
 		}
 
 		// Make $n have index n.
 		pcomponents := append([]interface{}{nil}, prule.Body...)
-
-		if pr := prule.Prec; pr != nil {
-			var nm string
-			switch x := pr.Identifier.(type) {
-			case int:
-				nm = fmt.Sprintf("%q", x)
-			case string:
-				nm = x
-			default:
-				panic("y: internal error 003")
+		if pr := prule.Precedence; pr != nil {
+			for pr != nil && pr.Case == 3 { // Precedence ';'
+				pr = pr.Precedence
 			}
 
-			s, ok := y.Syms[nm]
-			if !ok {
-				y.err(pr.Pos, "%%prec: undefined symbol %s", nm)
-				continue
-			}
+			if pr != nil {
+				var nm string
+				switch x := pr.Identifier.(type) {
+				case int:
+					nm = fmt.Sprintf("%q", x)
+				case string:
+					nm = x
+				default:
+					panic("internal error")
+				}
 
-			if !s.IsTerminal {
-				y.err(pr.Pos, "must be a terminal: %s", nm)
-				continue
-			}
+				s, ok := y.Syms[nm]
+				if !ok {
+					y.err(pr.Token2.Pos(), "%%prec: undefined symbol (1) %s", nm) //TODO -(1)
+					continue
+				}
 
-			r.Associativity, r.Precedence = s.Associativity, s.Precedence
-			r.PrecSym = s
-			r.ExplicitPrecSym = s
-			if len(pr.Act) != 0 {
-				pcomponents = append(pcomponents, pr.Act)
+				if !s.IsTerminal {
+					y.err(pr.Token2.Pos(), "must be a terminal: %s", nm)
+					continue
+				}
+
+				r.Associativity, r.Precedence = s.Associativity, s.Precedence
+				r.PrecSym = s
+				r.ExplicitPrecSym = s
+				if pr.Action != nil {
+					pcomponents = append(pcomponents, pr.Action)
+				}
 			}
 		}
 
-		var finalAct []*yparser.Act
+		var finalAct *yparser.Action
 		var components []string
 		for i, item := range pcomponents {
 			switch x := item.(type) {
 			case nil:
 				// no $0 component
 			case string:
-				y.useSym(x, prule.Pos)
+				y.useSym(x, prule.Name.Pos())
 				if len(components) == 0 && x == r.Sym.Name {
 					r.Sym.IsLeftRecursive = true
 				}
@@ -1484,27 +1511,27 @@ func (y *y) rules0() error {
 				}
 
 				sym.Type = y.symTypes[x].typeName
-			case []*yparser.Act:
-				for _, v := range x {
+			case *yparser.Action:
+				for _, v := range x.Values {
 					n := v.Num
 					tag := v.Tag
-					if v.Tok == yscanner.DLR_DLR && ruleSym.Type == "" && !y.opts.AllowTypeErrors {
+					if v.Type == yparser.ActionValueDlrDlr && ruleSym.Type == "" && !y.opts.AllowTypeErrors {
 						y.err(v.Pos, "$$ of %s has no declared type", ruleSym)
 					}
-					if v.Tok == yscanner.DLR_NUM || v.Tok == yscanner.DLR_TAG_NUM {
+					if v.Type == yparser.ActionValueDlrNum || v.Type == yparser.ActionValueDlrTagNum {
 						switch {
 						case n < 1 || n >= len(pcomponents):
 							y.err(v.Pos, "undefined: $%d", n)
 						case n >= i:
 							y.err(v.Pos, "not accessible here: $%d", n)
-						case v.Tok == yscanner.DLR_NUM:
+						case v.Type == yparser.ActionValueDlrNum:
 							csym := components[n-1]
 							if _, ok := post[csym]; !ok {
 								post[csym] = v.Pos
 							}
 						}
 					}
-					if v.Tok == yscanner.DLR_TAG_DLR || v.Tok == yscanner.DLR_TAG_NUM {
+					if v.Type == yparser.ActionValueDlrTagDlr || v.Type == yparser.ActionValueDlrTagNum {
 						switch _, ok := y.types[tag]; {
 						case ok:
 							y.useType(v.Pos, tag)
@@ -1543,7 +1570,7 @@ func (y *y) rules0() error {
 				s = &Symbol{Name: nm, IsTerminal: true, Precedence: -1, Value: x}
 				y.Syms[nm] = s
 			default:
-				panic("y: internal error 004")
+				panic("internal error")
 			}
 		}
 		r.Action = finalAct
@@ -1553,8 +1580,8 @@ func (y *y) rules0() error {
 			r.Sym.IsRightRecursive = true
 		}
 		y.addRule(r)
-		if r.Sym.Type != "" && len(r.Action) == 0 && len(components) == 0 {
-			y.err(prule.Pos, "empty rule for typed nonterminal, and no action")
+		if r.Sym.Type != "" && r.Action == nil && len(components) == 0 {
+			y.err(prule.Token.Pos(), "empty rule for typed nonterminal, and no action")
 		}
 
 		if y.firstRule == 0 {
@@ -1565,7 +1592,7 @@ func (y *y) rules0() error {
 	if y.Start == "" {
 		y.Start = y.Rules[y.firstRule].Sym.Name
 	}
-	y.useSym(y.Start, y.ast.Rules[0].Pos)
+	y.useSym(y.Start, y.ast.Rules[0].Token.Pos())
 	y.Rules[0].Components[0] = y.Start
 
 	for _, rule := range y.Rules {
@@ -1610,7 +1637,7 @@ func (y *y) rules0() error {
 
 	for nm, pos := range y.symsUsed {
 		if _, ok := y.Syms[nm]; !ok {
-			y.err(pos, "undefined symbol %s", nm)
+			y.err(pos, "undefined symbol (2) %s", nm) //TODO- (2)
 		}
 	}
 
@@ -1655,7 +1682,7 @@ func (y *y) rules0() error {
 		for i, v := range rule.Components {
 			rule.syms[i] = y.Syms[v]
 		}
-		if e := rule.Sym.Type; e != "" && len(rule.Action) == 0 && len(rule.Components) != 0 {
+		if e := rule.Sym.Type; e != "" && rule.Action == nil && len(rule.Components) != 0 {
 			if g := y.Syms[rule.Components[0]].Type; g != e {
 				y.err(rule.pos, "type clash on default action: <%s> != <%s>", e, g)
 			}
@@ -1774,7 +1801,7 @@ examples:
 			acceptInt = false
 			sym, ok := y.Syms[lit]
 			if !ok {
-				y.err(pos, "undefined symbol %s", lit)
+				y.err(pos, "undefined symbol (3) %s", lit) //TODO -(3)
 				break
 			}
 
