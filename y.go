@@ -1449,6 +1449,7 @@ func (y *y) rules0() error {
 		}
 		ruleSym.Type = y.symTypes[ruleSym.Name].typeName
 		r := &Rule{
+			Body:         prule.Body,
 			MaxParentDlr: -1,
 			Sym:          ruleSym,
 			pos:          prule.Name.Pos(),

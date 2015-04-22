@@ -518,8 +518,9 @@ func ProcessSource(fset *token.FileSet, fname string, src []byte, opts *Options)
 // parent values not yet shifted to the parse stack as well as to compute the
 // position of the $n thing on the parse stack. See also [4].
 type Rule struct {
-	Action          *yparser.Action // The semantic action associated with the rule, if any.
+	Action          *yparser.Action // The semantic action associated with the rule, if any. If present then also the last element of Body.
 	Associativity   int             // One of the assoc* constants.
+	Body            []interface{}   // Rule components - int, string or *yparser.Action
 	Components      []string        // Textual forms of the rule components, for example []string{"IDENT", "';'"}
 	ExplicitPrecSym *Symbol         // Symbol used in the optional %prec sym clause, if present.
 	MaxParentDlr    int             // See the Rule type docs for details.
