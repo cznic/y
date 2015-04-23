@@ -524,6 +524,7 @@ type Rule struct {
 	Components      []string        // Textual forms of the rule components, for example []string{"IDENT", "';'"}
 	ExplicitPrecSym *Symbol         // Symbol used in the optional %prec sym clause, if present.
 	MaxParentDlr    int             // See the Rule type docs for details.
+	Name            *yparser.Token  // The rule name token, if any (otherwise the rule starts with "|").
 	Parent          *Rule           // Non nil if a synthetic rule.
 	PrecSym         *Symbol         // Effective %prec symbol used, if any.
 	Precedence      int             // -1 if no precedence assigned.

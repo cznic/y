@@ -1455,6 +1455,9 @@ func (y *y) rules0() error {
 			pos:          prule.Name.Pos(),
 			Precedence:   -1,
 		}
+		if prule.Case == 0 {
+			r.Name = prule.Name
+		}
 
 		// Make $n have index n.
 		pcomponents := append([]interface{}{nil}, prule.Body...)
