@@ -25,6 +25,7 @@
 //  [3]: http://dinosaur.compilertools.net/lex/index.html
 //  [4]: https://www.gnu.org/software/bison/manual/html_node/Using-Mid_002dRule-Actions.html
 //  [5]: http://www.gnu.org/software/bison/manual/html_node/Precedence-Only.html#Precedence-Only
+//  [6]: http://www.gnu.org/software/bison/manual/html_node/Token-Decl.html#Token-Decl
 package y
 
 import (
@@ -218,21 +219,22 @@ func (o *Options) boot(fset *token.FileSet) (*Options, error) {
 // Parser describes the resulting parser. The intended client is a parser
 // generator (like eg. [0]) producing the final Go source code.
 type Parser struct {
-	AssocDefs    []*AssocDef        // %left, %right, %nonassoc definitions in the order of appearance in the source code.
-	ConflictsRR  int                // Number of reduce/reduce conflicts.
-	ConflictsSR  int                // Number of shift/reduce conflicts.
-	ErrorVerbose bool               // %error-verbose is present.
-	Prologue     string             // Collected prologue between the %{ and %} marks.
-	Rules        []*Rule            // Rules indexed by rule number.
-	Start        string             // Name of the start production.
-	States       []*State           // Parser states indexed by state number.
-	Syms         map[string]*Symbol // Symbols indexed by name, eg. "IDENT", "Expression" or "';'".
-	Table        [][]Action         // Indexed by state number.
-	Tail         string             // Everyting after the second %%, if present.
-	Union        *ast.StructType    // %union as Go AST.
-	UnionSrc     string             // %union as Go source form.
-	XErrors      []XError           // Errors by example[1] descriptions.
-	y            *y
+	AssocDefs      []*AssocDef        // %left, %right, %nonassoc definitions in the order of appearance in the source code.
+	ConflictsRR    int                // Number of reduce/reduce conflicts.
+	ConflictsSR    int                // Number of shift/reduce conflicts.
+	ErrorVerbose   bool               // %error-verbose is present.
+	LiteralStrings map[string]*Symbol // See Symbol.LiteralString field.
+	Prologue       string             // Collected prologue between the %{ and %} marks.
+	Rules          []*Rule            // Rules indexed by rule number.
+	Start          string             // Name of the start production.
+	States         []*State           // Parser states indexed by state number.
+	Syms           map[string]*Symbol // Symbols indexed by name, eg. "IDENT", "Expression" or "';'".
+	Table          [][]Action         // Indexed by state number.
+	Tail           string             // Everyting after the second %%, if present.
+	Union          *ast.StructType    // %union as Go AST.
+	UnionSrc       string             // %union as Go source form.
+	XErrors        []XError           // Errors by example[1] descriptions.
+	y              *y                 //
 }
 
 func newParser() *Parser {
@@ -682,11 +684,48 @@ func (s *State) Reduce0(r *Rule) []*Symbol {
 
 // Symbol represents a terminal or non terminal symbol. A special end symbol
 // has Name "$end" and represents the EOF token.
+//
+// LiteralString field
+//
+// Some parser generators accept an optional literal string token associated
+// with a token definition. From [6]:
+//
+//	You can associate a literal string token with a token type name by
+//	writing the literal string at the end of a %token declaration which
+//	declares the name. For example:
+//
+//		%token arrow "=>"
+//
+//	For example, a grammar for the C language might specify these names
+//	with equivalent literal string tokens:
+//
+//		%token  <operator>  OR      "||"
+//		%token  <operator>  LE 134  "<="
+//		%left  OR  "<="
+//
+//	Once you equate the literal string and the token name, you can use them
+//	interchangeably in further declarations or the grammar rules. The yylex
+//	function can use the token name or the literal string to obtain the
+//	token type code number (see Calling Convention). Syntax error messages
+//	passed to yyerror from the parser will reference the literal string
+//	instead of the token name.
+//
+// The LiteralString captures the value of other definitions as well, namely
+// also for %type definitions.
+//
+//	%type CommaOpt "optional comma"
+//
+//	%%
+//
+//	CommaOpt:
+//		/* empty */
+//	|	','
 type Symbol struct {
 	Associativity    int       // One of the assoc* constants.
 	IsLeftRecursive  bool      // S: S ... ;
 	IsRightRecursive bool      // S: ... S ;
 	IsTerminal       bool      // Whether this is a terminal symbol.
+	LiteralString    string    // See the "LiteralString field" part of the Symbol godocs.
 	Name             string    // Textual value of the symbol, for example "IDENT" or "';'".
 	Pos              token.Pos // Position where the symbol was firstly introduced.
 	Precedence       int       // -1 of no precedence assigned.
