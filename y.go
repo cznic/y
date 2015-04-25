@@ -738,6 +738,7 @@ func (y *y) defs() error {
 		y.symTypes = types
 	}()
 
+	y.Definitions = y.ast.Defs
 	for _, def := range y.ast.Defs {
 		isAssoc := false
 		switch def.Case {

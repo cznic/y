@@ -219,22 +219,23 @@ func (o *Options) boot(fset *token.FileSet) (*Options, error) {
 // Parser describes the resulting parser. The intended client is a parser
 // generator (like eg. [0]) producing the final Go source code.
 type Parser struct {
-	AssocDefs      []*AssocDef        // %left, %right, %nonassoc definitions in the order of appearance in the source code.
-	ConflictsRR    int                // Number of reduce/reduce conflicts.
-	ConflictsSR    int                // Number of shift/reduce conflicts.
-	ErrorVerbose   bool               // %error-verbose is present.
-	LiteralStrings map[string]*Symbol // See Symbol.LiteralString field.
-	Prologue       string             // Collected prologue between the %{ and %} marks.
-	Rules          []*Rule            // Rules indexed by rule number.
-	Start          string             // Name of the start production.
-	States         []*State           // Parser states indexed by state number.
-	Syms           map[string]*Symbol // Symbols indexed by name, eg. "IDENT", "Expression" or "';'".
-	Table          [][]Action         // Indexed by state number.
-	Tail           string             // Everyting after the second %%, if present.
-	Union          *ast.StructType    // %union as Go AST.
-	UnionSrc       string             // %union as Go source form.
-	XErrors        []XError           // Errors by example[1] descriptions.
-	y              *y                 //
+	AssocDefs      []*AssocDef           // %left, %right, %nonassoc definitions in the order of appearance in the source code.
+	ConflictsRR    int                   // Number of reduce/reduce conflicts.
+	ConflictsSR    int                   // Number of shift/reduce conflicts.
+	Definitions    []*yparser.Definition // All definitions.
+	ErrorVerbose   bool                  // %error-verbose is present.
+	LiteralStrings map[string]*Symbol    // See Symbol.LiteralString field.
+	Prologue       string                // Collected prologue between the %{ and %} marks.
+	Rules          []*Rule               // Rules indexed by rule number.
+	Start          string                // Name of the start production.
+	States         []*State              // Parser states indexed by state number.
+	Syms           map[string]*Symbol    // Symbols indexed by name, eg. "IDENT", "Expression" or "';'".
+	Table          [][]Action            // Indexed by state number.
+	Tail           string                // Everyting after the second %%, if present.
+	Union          *ast.StructType       // %union as Go AST.
+	UnionSrc       string                // %union as Go source form.
+	XErrors        []XError              // Errors by example[1] descriptions.
+	y              *y                    //
 }
 
 func newParser() *Parser {
