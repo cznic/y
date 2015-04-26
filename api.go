@@ -533,6 +533,7 @@ type Rule struct {
 	Precedence      int             // -1 if no precedence assigned.
 	RuleNum         int             // Zero based rule number. Rule #0 is synthetic.
 	Sym             *Symbol         // LHS of the rule.
+	Token           *yparser.Token  // yparser.IDENT or "|"
 	maxDlr          int
 	pos             token.Pos
 	syms            []*Symbol

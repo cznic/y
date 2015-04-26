@@ -1494,9 +1494,10 @@ func (y *y) rules0() error {
 		r := &Rule{
 			Body:         prule.Body,
 			MaxParentDlr: -1,
-			Sym:          ruleSym,
-			pos:          prule.Name.Pos(),
 			Precedence:   -1,
+			Sym:          ruleSym,
+			Token:        prule.Token,
+			pos:          prule.Name.Pos(),
 		}
 		if prule.Case == 0 {
 			r.Name = prule.Name
