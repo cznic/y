@@ -510,8 +510,12 @@ func (s itemSet) state0(y *y) (int, bool) {
 }
 
 func TestAllocValue(t *testing.T) {
-	var y y
+	y := newY(nil, nil, nil)
 	for e := 0xe000; e <= 0xf8ff; e++ {
+		if y.allocatedValues[e] {
+			continue
+		}
+
 		if g := y.allocValue(); g != e {
 			t.Fatal(g, e)
 		}

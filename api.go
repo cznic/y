@@ -741,6 +741,7 @@ func (s *State) Reduce0(r *Rule) []*Symbol {
 //	|	','
 type Symbol struct {
 	Associativity    int       // One of the assoc* constants.
+	ExplicitValue    int       // Explicit numeric value of the symbol or -1 if none.
 	IsLeftRecursive  bool      // S: S ... ;
 	IsRightRecursive bool      // S: ... S ;
 	IsTerminal       bool      // Whether this is a terminal symbol.
@@ -750,7 +751,7 @@ type Symbol struct {
 	Precedence       int       // -1 of no precedence assigned.
 	Rules            []*Rule   // Productions associated with this symbol.
 	Type             string    // For example "int", "float64" or "foo", but possibly also "".
-	Value            int       // Numeric value of the symbol.
+	Value            int       // Assigned numeric value of the symbol.
 	derivesE         bool      // Non terminal sym derives ε.
 	derivesEValid    bool      //
 	first1           symSet    //

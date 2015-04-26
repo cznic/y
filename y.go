@@ -352,61 +352,63 @@ type percTypeLit struct {
 
 type y struct {
 	*Parser
-	acceptSym      *Symbol                  //
-	allocVal       int                      //
-	ast            *yparser.Specification   //
-	clsCache       map[item]map[item]symSet //
-	clsQueue       []item1                  // Non reentrant item1.closure todo list.
-	clsSyms        []*Symbol                // Non reentrant item1.closure buffer.
-	dummySym       *Symbol                  //
-	emptySym       *Symbol                  //
-	endSym         *Symbol                  //
-	entries        int                      // Number of used cells in the parse table.
-	errSym         *Symbol                  //
-	errors         scanner.ErrorList        //
-	firstRule      int                      //
-	fset           *token.FileSet           //
-	idBuf          []byte                   // Non reentrant id() buffer.
-	isPool         []itemSet                //
-	itemSets       map[string]int           //
-	noSym          *Symbol                  //
-	nonTerminals   map[string]token.Pos     //
-	opts           *Options                 //
-	percTypeLits   map[string]*percTypeLit  // nm: *percTypeLit
-	percTypeLitPos map[string]token.Pos     // lit: *percTypeLit
-	precedence     int                      //
-	ssPool         []symSet                 //
-	symSetCap      int                      //
-	symTypes       map[string]typeDecl      //
-	syms           []*Symbol                //
-	symsUsed       map[string]token.Pos     //
-	synthRule      int                      //
-	types          map[string]token.Pos     // %union fields
-	typesUsed      map[string]token.Pos     //
-	unionPos       token.Pos                //
-	zeroPathsValid bool                     // States paths to state 0 determined.
+	acceptSym       *Symbol                  //
+	allocVal        int                      //
+	allocatedValues map[int]bool             //
+	ast             *yparser.Specification   //
+	clsCache        map[item]map[item]symSet //
+	clsQueue        []item1                  // Non reentrant item1.closure todo list.
+	clsSyms         []*Symbol                // Non reentrant item1.closure buffer.
+	dummySym        *Symbol                  //
+	emptySym        *Symbol                  //
+	endSym          *Symbol                  //
+	entries         int                      // Number of used cells in the parse table.
+	errSym          *Symbol                  //
+	errors          scanner.ErrorList        //
+	firstRule       int                      //
+	fset            *token.FileSet           //
+	idBuf           []byte                   // Non reentrant id() buffer.
+	isPool          []itemSet                //
+	itemSets        map[string]int           //
+	noSym           *Symbol                  //
+	nonTerminals    map[string]token.Pos     //
+	opts            *Options                 //
+	percTypeLits    map[string]*percTypeLit  // nm: *percTypeLit
+	percTypeLitPos  map[string]token.Pos     // lit: *percTypeLit
+	precedence      int                      //
+	ssPool          []symSet                 //
+	symSetCap       int                      //
+	symTypes        map[string]typeDecl      //
+	syms            []*Symbol                //
+	symsUsed        map[string]token.Pos     //
+	synthRule       int                      //
+	types           map[string]token.Pos     // %union fields
+	typesUsed       map[string]token.Pos     //
+	unionPos        token.Pos                //
+	zeroPathsValid  bool                     // States paths to state 0 determined.
 }
 
 func newY(fset *token.FileSet, ast *yparser.Specification, opts *Options) *y {
 	r := &y{
-		Parser:         newParser(),
-		acceptSym:      &Symbol{Name: "$accept"},
-		ast:            ast,
-		clsCache:       map[item]map[item]symSet{},
-		dummySym:       &Symbol{Name: "#", IsTerminal: true},
-		emptySym:       &Symbol{Name: empty, IsTerminal: true},
-		endSym:         &Symbol{Name: "$end", IsTerminal: true, Precedence: -1},
-		errSym:         &Symbol{Name: "error", IsTerminal: true},
-		fset:           fset,
-		idBuf:          make([]byte, 1024),
-		itemSets:       map[string]int{},
-		noSym:          &Symbol{Name: "$default", Value: -1},
-		nonTerminals:   map[string]token.Pos{},
-		opts:           opts,
-		percTypeLits:   map[string]*percTypeLit{},
-		percTypeLitPos: map[string]token.Pos{},
-		types:          map[string]token.Pos{},
-		typesUsed:      map[string]token.Pos{},
+		Parser:          newParser(),
+		acceptSym:       &Symbol{Name: "$accept"},
+		allocatedValues: map[int]bool{},
+		ast:             ast,
+		clsCache:        map[item]map[item]symSet{},
+		dummySym:        &Symbol{Name: "#", IsTerminal: true},
+		emptySym:        &Symbol{Name: empty, IsTerminal: true},
+		endSym:          &Symbol{Name: "$end", IsTerminal: true, Precedence: -1},
+		errSym:          &Symbol{Name: "error", IsTerminal: true},
+		fset:            fset,
+		idBuf:           make([]byte, 1024),
+		itemSets:        map[string]int{},
+		noSym:           &Symbol{Name: "$default", Value: -1},
+		nonTerminals:    map[string]token.Pos{},
+		opts:            opts,
+		percTypeLitPos:  map[string]token.Pos{},
+		percTypeLits:    map[string]*percTypeLit{},
+		types:           map[string]token.Pos{},
+		typesUsed:       map[string]token.Pos{},
 	}
 	r.symsUsed = map[string]token.Pos{r.errSym.Name: 0, r.noSym.Name: 0}
 	r.endSym.Value = r.allocValue()
@@ -447,22 +449,31 @@ func processAST(fset *token.FileSet, ast *yparser.Specification, opts *Options) 
 		a = append(a, nm)
 	}
 	sort.Strings(a)
+	for _, sym := range y.Syms {
+		nm := sym.Name
+		if v := sym.Value; v >= 0 {
+			ex := m[v]
+			if ex != nil && ex != sym {
+				y.err(sym.Pos, "symbol %s has the same value (%d) as symbol %s at %s.", sym, v, ex, y.pos(ex.Pos))
+				continue
+			}
+
+			if nm == "#" || nm == "ε" || nm == "$accept" {
+				continue
+			}
+
+			m[v] = sym
+		}
+	}
 	for _, nm := range a {
 		sym := y.Syms[nm]
-		if nm == "" || nm == "#" || nm[0] == '$' && nm[1] != '@' && sym != y.noSym { // internal symbols
+		if nm == "" || nm == "ε" || nm == "#" || nm[0] == '$' && nm[1] != '@' && sym != y.noSym { // internal symbols
 			continue
 		}
 
 		if sym.Value < 0 {
 			sym.Value = y.allocValue()
 		}
-
-		ex, ok := m[sym.Value]
-		if ok {
-			y.err(sym.Pos, "symbol %s has the same value (%d) as symbol %s at %s.", sym, sym.Value, ex, y.pos(ex.Pos))
-		}
-
-		m[sym.Value] = sym
 	}
 	if err := y.error(); err != nil {
 		return nil, y.error()
@@ -509,20 +520,25 @@ func (y *y) addRule(r *Rule) *Rule {
 }
 
 func (y *y) allocValue() (n int) {
-	switch n = y.allocVal; {
-	case n == 0:
-		n = 0xe000 // Private Use Area.
-	case n == 0xf8ff:
-		n = 0xf0000 // Supplemental Private Use Area-A.
-	case n == 0xffffd:
-		n = 0x100000 // Supplemental Private Use Area-B.
-	case n == 0x10fffd:
-		panic("y: internal error 012")
-	default:
-		n++
+	for {
+		switch n = y.allocVal; {
+		case n == 0:
+			n = 0xe000 // Private Use Area.
+		case n == 0xf8ff:
+			n = 0xf0000 // Supplemental Private Use Area-A.
+		case n == 0xffffd:
+			n = 0x100000 // Supplemental Private Use Area-B.
+		case n == 0x10fffd:
+			panic("y: internal error 012")
+		default:
+			n++
+		}
+		y.allocVal = n
+		if !y.allocatedValues[n] {
+			y.allocatedValues[n] = true
+			return n
+		}
 	}
-	y.allocVal = n
-	return n
 }
 
 func (y *y) closure(i item) (r map[item]symSet) { // Result symSets must not be mutated.
@@ -831,6 +847,7 @@ func (y *y) defs() error {
 
 					t := &Symbol{
 						Associativity: assoc,
+						ExplicitValue: num,
 						IsTerminal:    true,
 						Name:          name,
 						Pos:           nmno.Token.Pos(),
@@ -862,6 +879,8 @@ func (y *y) defs() error {
 					if !ok {
 						if t.Value < 0 {
 							t.Value = y.allocValue()
+						} else {
+							y.allocatedValues[t.Value] = true
 						}
 						y.Syms[name] = t
 						continue
@@ -1734,8 +1753,14 @@ func (y *y) rules0() error {
 		for i, v := range rule.Components {
 			rule.syms[i] = y.Syms[v]
 		}
+		if y.opts.AllowTypeErrors {
+			continue
+		}
+
 		if e := rule.Sym.Type; e != "" && rule.Action == nil && len(rule.Components) != 0 {
-			if g := y.Syms[rule.Components[0]].Type; g != e && !y.opts.AllowTypeErrors {
+			nm := rule.Components[0]
+			println(nm, y.Syms[nm])
+			if g := y.Syms[rule.Components[0]].Type; g != e {
 				y.err(rule.pos, "type clash on default action: <%s> != <%s>", e, g)
 			}
 		}
