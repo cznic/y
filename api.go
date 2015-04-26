@@ -36,6 +36,7 @@ import (
 	"io"
 	"io/ioutil"
 	"sort"
+	"strconv"
 	"strings"
 
 	yparser "github.com/cznic/parser/yacc"
@@ -367,12 +368,28 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 		var nta, ta []string
 
 		for k := range nt {
-			nta = append(nta, k.Name)
+			nm := k.Name
+			if s := k.LiteralString; s != "" {
+				s, err := strconv.Unquote(s)
+				if err != nil {
+					p.y.err(k.Pos, "unquote %s: %v", s, err)
+				}
+				nm = s
+			}
+			nta = append(nta, nm)
 		}
 
 		sort.Strings(nta)
 		for k := range t {
-			ta = append(ta, k.Name)
+			nm := k.Name
+			if s := k.LiteralString; s != "" {
+				s, err := strconv.Unquote(s)
+				if err != nil {
+					p.y.err(k.Pos, "unquote %s: %v", s, err)
+				}
+				nm = s
+			}
+			ta = append(ta, nm)
 		}
 		sort.Strings(ta)
 
@@ -381,7 +398,7 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 			snt += " or "
 		}
 
-		st := strings.Join(ta, " ")
+		st := strings.Join(ta, ", ")
 		if len(ta) > 1 {
 			st = "one of [" + st + "]"
 		}

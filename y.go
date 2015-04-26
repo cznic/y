@@ -1473,22 +1473,22 @@ func (y *y) rules0() error {
 	post := map[string]token.Pos{}
 
 	for _, prule := range y.ast.Rules {
-		if prule.Name.Val == "error" {
+		nm := prule.Name.Val
+		if nm == "error" {
 			y.err(prule.Name.Pos(), "a rule cannot use the reserved name error")
 			continue
 		}
 
-		ruleSym := y.Syms[prule.Name.Val]
+		ruleSym := y.Syms[nm]
 		if ruleSym == nil {
-			nm := prule.Name.Val
 			ruleSym = &Symbol{Name: nm, Pos: prule.Name.Pos(), Value: -1}
 			y.Syms[nm] = ruleSym
-			lit := y.percTypeLits[nm]
-			if lit != nil {
-				ls := lit.lit
-				y.LiteralStrings[ls] = ruleSym
-				ruleSym.LiteralString = ls
-			}
+		}
+		lit := y.percTypeLits[nm]
+		if lit != nil {
+			ls := lit.lit
+			y.LiteralStrings[ls] = ruleSym
+			ruleSym.LiteralString = ls
 		}
 		ruleSym.Type = y.symTypes[ruleSym.Name].typeName
 		r := &Rule{

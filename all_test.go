@@ -732,11 +732,11 @@ Factor:
 	// error "expected $end"
 	//
 	// 0
-	// error "expected Expression or one of ['+' '-' NUMBER]"
+	// error "expected Expression or one of ['+', '-', NUMBER]"
 	//
 	// 9 // NUMBER '*'
 	// 10 // NUMBER '/'
-	// error "expected Factor or one of ['+' '-' NUMBER]"
+	// error "expected Factor or one of ['+', '-', NUMBER]"
 	//
 	// 5 // '+'
 	// 6 // '-'
@@ -744,16 +744,16 @@ Factor:
 	//
 	// 13 // NUMBER '+'
 	// 14 // NUMBER '-'
-	// error "expected Term or one of ['+' '-' NUMBER]"
+	// error "expected Term or one of ['+', '-', NUMBER]"
 	//
 	// 3 // NUMBER
 	// 4 // NUMBER
 	// 7 // '-' NUMBER
 	// 8 // '+' NUMBER
-	// error "expected one of [$end '*' '+' '-' '/']"
+	// error "expected one of [$end, '*', '+', '-', '/']"
 	//
 	// 2 // NUMBER
 	// 11 // NUMBER '/' NUMBER
 	// 12 // NUMBER '*' NUMBER
-	// error "expected one of [$end '+' '-']"
+	// error "expected one of [$end, '+', '-']"
 }
