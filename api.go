@@ -370,11 +370,11 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 		for k := range nt {
 			nm := k.Name
 			if s := k.LiteralString; s != "" {
-				s, err := strconv.Unquote(s)
+				s2, err := strconv.Unquote(s)
 				if err != nil {
 					p.y.err(k.Pos, "unquote %s: %v", s, err)
 				}
-				nm = s
+				nm = s2
 			}
 			nta = append(nta, nm)
 		}
@@ -383,11 +383,11 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 		for k := range t {
 			nm := k.Name
 			if s := k.LiteralString; s != "" {
-				s, err := strconv.Unquote(s)
+				s2, err := strconv.Unquote(s)
 				if err != nil {
 					p.y.err(k.Pos, "unquote %s: %v", s, err)
 				}
-				nm = s
+				nm = s2
 			}
 			ta = append(ta, nm)
 		}

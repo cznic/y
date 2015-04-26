@@ -924,8 +924,11 @@ func (y *y) defs() error {
 					y.AssocDefs = append(y.AssocDefs, &assocDef)
 				}
 			case 4: // TYPE
-				typ := def.Tag.Token2.Val
-				y.useType(def.Tag.Token2.Pos(), typ)
+				typ := ""
+				if tag := def.Tag; tag != nil {
+					typ = tag.Token2.Val
+					y.useType(def.Tag.Token2.Pos(), typ)
+				}
 				for _, nmno := range def.Nlist {
 					nm := nmno.Identifier.(string)
 					if ex, ok := types[nm]; ok {
