@@ -1758,8 +1758,6 @@ func (y *y) rules0() error {
 		}
 
 		if e := rule.Sym.Type; e != "" && rule.Action == nil && len(rule.Components) != 0 {
-			nm := rule.Components[0]
-			println(nm, y.Syms[nm])
 			if g := y.Syms[rule.Components[0]].Type; g != e {
 				y.err(rule.pos, "type clash on default action: <%s> != <%s>", e, g)
 			}
