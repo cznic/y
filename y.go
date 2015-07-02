@@ -508,7 +508,9 @@ func processAST(fset *token.FileSet, ast *yparser.Specification, opts *Options) 
 	if w := opts.Report; w != nil {
 		y.report(w)
 	}
-	y.reducible()
+	if y.opts.Reducible {
+		y.reducible()
+	}
 	return y, y.xerrors()
 }
 
@@ -949,6 +951,102 @@ func (y *y) defs() error {
 					y.useType(def.Tag.Token2.Pos(), typ)
 				}
 				for _, nmno := range def.Nlist {
+					if x, ok := nmno.Identifier.(int); ok {
+						var name string
+						num := nmno.Number
+
+						name = fmt.Sprintf("%q", x)
+						if num < 0 {
+							num = x
+						}
+
+						t := &Symbol{
+							Associativity: AssocNotSpecified,
+							ExplicitValue: num,
+							IsTerminal:    true,
+							Name:          name,
+							Pos:           nmno.Token.Pos(),
+							Precedence:    -1,
+							Type:          typ,
+							Value:         num,
+						}
+						ls := ""
+						if n := nmno.LiteralStringOpt; n != nil {
+							ls = n.Token.Val
+							if ex, ok := y.LiteralStrings[ls]; ok {
+								y.err(n.Token.Pos(), "literal strings must be unique, previous association with name at %v: %s", y.fset.Position(ex.Pos), ls)
+							} else {
+								y.LiteralStrings[ls] = t
+								y.percTypeLitPos[ls] = t.Pos
+								t.LiteralString = ls
+							}
+						}
+						ex, ok := y.Syms[name]
+						if !ok {
+							if t.Value < 0 {
+								t.Value = y.allocValue()
+							} else {
+								y.allocatedValues[t.Value] = true
+							}
+							y.Syms[name] = t
+							continue
+						}
+
+						// Merge the declarations, if possible.
+						if n := t.Associativity; n != AssocNotSpecified {
+							switch o := ex.Associativity; {
+							case o == AssocNotSpecified:
+								ex.Associativity = n
+							case n != o:
+								y.err(
+									t.Pos,
+									"%s: conflict with previous associativity declaration at %v",
+									name, y.pos(ex.Pos),
+								)
+							}
+						}
+
+						if n := t.Precedence; n >= 0 {
+							switch o := ex.Precedence; {
+							case o < 0:
+								ex.Precedence = n
+							case n != o:
+								y.err(
+									t.Pos,
+									"%s: conflict with previous precedence declaration at %v",
+									name, y.pos(ex.Pos),
+								)
+							}
+						}
+
+						if n := t.Type; n != "" {
+							switch o := ex.Type; {
+							case o == "":
+								ex.Type = n
+							case n != o:
+								y.err(
+									t.Pos,
+									"%s: conflict with previous type declaration at %v",
+									name, y.pos(ex.Pos),
+								)
+							}
+						}
+
+						if n := t.Value; n >= 0 {
+							switch o := ex.Value; {
+							case o < 0:
+								ex.Value = n
+							case n != o:
+								y.err(
+									t.Pos,
+									"%s: conflict with previous value declaration at %v",
+									name, y.pos(ex.Pos),
+								)
+							}
+						}
+						continue
+					}
+
 					nm := nmno.Identifier.(string)
 					if ex, ok := types[nm]; ok {
 						y.err(nmno.Token.Pos(), "%%type: previous declaration at %v", y.pos(ex.Pos))
@@ -971,9 +1069,11 @@ func (y *y) defs() error {
 			default:
 				panic("internal error")
 			}
-		case 4: // ERROR_VERBOSE
+		case 4: // ReservedWord Tag (No NameList)
+		case 5: // ERROR_VERBOSE
 			y.ErrorVerbose = true
 		default:
+			fmt.Println(def.Case)
 			panic("internal error")
 		}
 	}

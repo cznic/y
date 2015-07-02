@@ -198,6 +198,7 @@ type Options struct {
 	LA              bool      // Report all lookahead sets.
 	Report          io.Writer // If non nil, write a grammar report to Report.
 	Resolved        bool      // Explain how conflicts were resolved.
+	Reducible       bool      // Check if all states are reducible. (Expensive)
 	XErrorsName     string    // Name used to report errors in XErrorsSrc, defaults to <xerrors>.
 	XErrorsSrc      []byte    // Used to produce errors by example[1].
 

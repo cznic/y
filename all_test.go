@@ -87,7 +87,10 @@ func (s itemSet1) dump(y *y) string {
 }
 
 func test0(t *testing.T, root string, filter func(pth string) bool, opts *Options, xerrors bool) {
-	const cc = "testdata/ok/cc.y"
+	const (
+		cc    = "testdata/ok/cc.y"
+		mysql = "testdata/ok/mysql.y"
+	)
 	var re *regexp.Regexp
 	if s := *oRE; s != "" {
 		var err error
@@ -121,7 +124,7 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 		t0 := time.Now()
 		p, err := ProcessFile(token.NewFileSet(), pth, opts)
 		t.Log(pth, time.Since(t0))
-		if pth == cc && err == nil {
+		if (pth == cc || pth == mysql) && err == nil {
 			t.Errorf("%s: should have produced error", cc)
 		}
 		if err != nil {
@@ -130,6 +133,20 @@ func test0(t *testing.T, root string, filter func(pth string) bool, opts *Option
 				if pth == cc && len(x) == 1 && strings.Contains(x[0].Error(), " 3 shift/reduce") {
 					t.Log(err)
 					break
+				}
+
+				if pth == mysql {
+					a := []string{}
+					for _, v := range x {
+						a = append(a, v.Error())
+					}
+					s := strings.Join(a, "\n")
+					if len(x) == 2 &&
+						strings.Contains(s, "conflicts: 145 shift/reduce") &&
+						strings.Contains(s, "conflicts: 2 reduce/reduce") {
+						t.Log(err)
+						break
+					}
 				}
 
 				for _, v := range x {
