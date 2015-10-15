@@ -771,7 +771,7 @@ func (y *y) defs() error {
 				break
 			}
 
-			y.unionPos = def.Pos
+			y.unionPos = def.Pos()
 			src := def.Value
 			for len(src) != 0 && src[0] != '{' {
 				src = src[1:]
@@ -785,7 +785,7 @@ func (y *y) defs() error {
 			src = fmt.Sprintf("struct {\n\tyys    int\n%s{}", src)
 			expr, err := parser.ParseExpr(src)
 			if err != nil {
-				y.err(def.Pos, "invalid %%union:\n%s\n%v", src, err)
+				y.err(def.Pos(), "invalid %%union:\n%s\n%v", src, err)
 				break
 			}
 
@@ -794,9 +794,9 @@ func (y *y) defs() error {
 				for _, nm := range fields.Names {
 					switch ex, ok := y.types[nm.Name]; {
 					case !ok:
-						y.types[nm.Name] = def.Pos
+						y.types[nm.Name] = def.Pos()
 					default:
-						y.err(def.Pos, "union field %s already declared: %s", nm, y.pos(ex))
+						y.err(def.Pos(), "union field %s already declared: %s", nm, y.pos(ex))
 					}
 				}
 			}
@@ -1657,9 +1657,6 @@ func (y *y) rules0() error {
 				r.Associativity, r.Precedence = s.Associativity, s.Precedence
 				r.PrecSym = s
 				r.ExplicitPrecSym = s
-				if pr.Action != nil {
-					pcomponents = append(pcomponents, pr.Action)
-				}
 			}
 		}
 
