@@ -2115,7 +2115,7 @@ func (y *y) zeroPaths() {
 	m := make([]bool, len(y.States))
 	h.add(y, s0)
 	m[0] = true
-	for n := len(y.States) - 1; n != 0; {
+	for n := len(y.States) - 1; n != 0 && h.Len() != 0; {
 		e := heap.Pop(&h).(*zpElem)
 		d := e.dest
 		if d.psym == nil {
