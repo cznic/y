@@ -367,7 +367,7 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 		}
 
 		var nta, ta []string
-
+		m := map[string]bool{}
 		for k := range nt {
 			nm := k.Name
 			if s := k.LiteralString; s != "" {
@@ -377,6 +377,12 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 				}
 				nm = s2
 			}
+			nm = strings.TrimSpace(nm)
+			if m[nm] {
+				continue
+			}
+
+			m[nm] = true
 			nta = append(nta, nm)
 		}
 
@@ -390,6 +396,12 @@ func (p *Parser) SkeletonXErrors(w io.Writer) error {
 				}
 				nm = s2
 			}
+			nm = strings.TrimSpace(nm)
+			if m[nm] {
+				continue
+			}
+
+			m[nm] = true
 			ta = append(ta, nm)
 		}
 		sort.Strings(ta)
