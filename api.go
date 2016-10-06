@@ -40,6 +40,7 @@ import (
 	"strings"
 
 	yparser "github.com/cznic/parser/yacc"
+	"github.com/cznic/sortutil"
 )
 
 // Values of {AssocDef,Rule,Sym}.Associativity
@@ -466,8 +467,7 @@ func (p *Parser) Reductions() map[int][]int {
 		}
 	}
 	for k, v := range m {
-		sort.Ints(v)
-		m[k] = v
+		m[k] = v[:sortutil.Dedupe(sort.IntSlice(v))]
 	}
 	return m
 }
