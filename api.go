@@ -65,7 +65,11 @@ type Action struct {
 //	For 's' arg is the state number to shift to.
 //	For 'r' arg is the rule number to reduce.
 //	For 'g' arg is the state number to goto.
-func (a Action) Kind() (typ, arg int) {
+func (a *Action) Kind() (typ, arg int) {
+	if a == nil {
+		return -1, -1
+	}
+
 	if !a.Sym.IsTerminal {
 		return 'g', a.arg
 	}
